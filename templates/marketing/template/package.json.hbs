@@ -1,0 +1,13 @@
+{
+  "name": "{{projectName}}",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --filter site dev",
+    "dev:runtime": "pnpm --filter site dev:runtime",
+    "build": "pnpm --filter foundation build && pnpm --filter site build",
+    "build:foundation": "pnpm --filter foundation build",
+    "build:site": "pnpm --filter site build",
+    "preview": "pnpm --filter site preview"
+  }
+}

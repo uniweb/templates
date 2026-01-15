@@ -1,0 +1,56 @@
+# {{projectName}}
+
+A marketing site built with [Uniweb](https://uniweb.io).
+
+## Getting Started
+
+```bash
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm dev
+
+# Build for production
+pnpm build
+```
+
+## Project Structure
+
+```
+{{projectName}}/
+├── foundation/     # Component library
+│   └── src/
+│       └── components/
+│           ├── Hero/
+│           ├── Features/
+│           ├── Pricing/
+│           ├── Testimonials/
+│           └── CTA/
+└── site/          # Marketing site
+    └── pages/
+        └── home/
+            ├── 1-hero.md
+            ├── 2-features.md
+            ├── 3-pricing.md
+            ├── 4-testimonials.md
+            └── 5-cta.md
+```
+
+## Components
+
+- **Hero** - Eye-catching header with headline, description, and call-to-action
+- **Features** - Showcase product features with icons and descriptions
+- **Pricing** - Pricing table with multiple tiers
+- **Testimonials** - Customer quotes and social proof
+- **CTA** - Call-to-action section to drive conversions
+
+## Customization
+
+Edit the markdown files in `site/pages/` to update content. Each section file has YAML frontmatter for configuration and markdown body for content.
+
+Edit component styles in `foundation/src/components/*/index.jsx`.
+
+---
+
+Created with the Uniweb Marketing Template

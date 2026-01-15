@@ -1,0 +1,42 @@
+import { defineConfig } from 'vite'
+import { readFileSync, existsSync } from 'fs'
+import yaml from 'js-yaml'
+import react from '@vitejs/plugin-react'
+import svgr from 'vite-plugin-svgr'
+import { siteContentPlugin, foundationPlugin } from '@uniweb/runtime/vite'
+
+// Read foundation from site.yml
+const siteConfig = yaml.load(readFileSync('./site.yml', 'utf8'))
+const foundation = siteConfig.foundation || 'foundation'
+
+// Check if foundation is a workspace sibling or npm package
+const isWorkspaceFoundation = existsSync(`../${foundation}`)
+const foundationPath = isWorkspaceFoundation ? `../${foundation}` : `./node_modules/${foundation}`
+
+const useRuntimeLoading = process.env.VITE_FOUNDATION_MODE === 'runtime'
+
+export default defineConfig({
+  resolve: {
+    alias: {
+      '#foundation': foundation,
+    },
+  },
+  plugins: [
+    react(),
+    svgr(),
+    siteContentPlugin({
+      sitePath: './',
+      inject: true,
+    }),
+    useRuntimeLoading && foundationPlugin({
+      name: foundation,
+      path: foundationPath,
+      serve: '/foundation',
+      watch: true,
+    }),
+  ].filter(Boolean),
+  server: {
+    fs: { allow: ['..'] },
+    port: 3000,
+  },
+})

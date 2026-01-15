@@ -1,0 +1,32 @@
+{
+  "name": "@uniweb/templates",
+  "version": "0.1.0",
+  "description": "Template processing engine and official templates for Uniweb",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./templates/*": "./templates/*"
+  },
+  "files": [
+    "src",
+    "templates"
+  ],
+  "keywords": [
+    "uniweb",
+    "templates",
+    "scaffolding"
+  ],
+  "author": "Uniweb",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uniweb/templates.git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.8"
+  }
+}
