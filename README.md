@@ -264,6 +264,35 @@ Key testing points:
 - Content sections are in correct order
 - Handlebars variables are properly substituted
 
+## Troubleshooting
+
+### "createRoot" export not found error
+
+If you see an error like:
+```
+The requested module 'react-dom/client.js' does not provide an export named 'createRoot'
+```
+
+This is a Vite CJS/ESM interop issue. **React's npm packages (both 18 and 19) use CommonJS internally**, and Vite needs to pre-bundle them to convert to ESM for the browser.
+
+**Solution:** Ensure your `vite.config.js` includes:
+
+```javascript
+export default defineConfig({
+  // ... other config
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-dom/client', 'react-router-dom'],
+  },
+})
+```
+
+This forces Vite to pre-bundle these packages, ensuring proper CJS→ESM conversion. This is particularly important in:
+- pnpm monorepos with nested `node_modules` structures
+- Projects with linked/workspace dependencies
+- Fresh installs before Vite's dependency discovery runs
+
+**Why does React use CommonJS?** React's npm package exports CommonJS for Node.js compatibility. The ESM-only change in React 19 only affects UMD builds (for CDN script tags), not the npm package.
+
 ## Checklist for New Templates
 
 - [ ] Create `templates/<name>/template.json` with required `name` field
