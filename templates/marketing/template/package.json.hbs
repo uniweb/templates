@@ -1,13 +1,21 @@
 {
   "name": "{{projectName}}",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "pnpm --filter site dev",
-    "dev:runtime": "pnpm --filter site dev:runtime",
-    "build": "pnpm --filter foundation build && pnpm --filter site build",
-    "build:foundation": "pnpm --filter foundation build",
-    "build:site": "pnpm --filter site build",
+    "dev:runtime": "VITE_FOUNDATION_MODE=runtime pnpm --filter site dev",
+    "build": "pnpm -r build",
     "preview": "pnpm --filter site preview"
+  },
+  "workspaces": [
+    "site",
+    "foundation",
+    "sites/*",
+    "foundations/*"
+  ],
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild", "sharp"]
   }
 }

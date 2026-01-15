@@ -158,6 +158,38 @@ This `"foundation": "file:../foundation"` entry is essential because:
 - Foundation: `"name": "foundation"` (not `{{projectName}}-foundation`)
 - Site: `"name": "site"` (not `{{projectName}}-site`)
 
+### Root package.json Requirements
+
+The root `package.json.hbs` must include workspace configuration for both npm and pnpm:
+
+```json
+{
+  "name": "{{projectName}}",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --filter site dev",
+    "dev:runtime": "VITE_FOUNDATION_MODE=runtime pnpm --filter site dev",
+    "build": "pnpm -r build",
+    "preview": "pnpm --filter site preview"
+  },
+  "workspaces": [
+    "site",
+    "foundation",
+    "sites/*",
+    "foundations/*"
+  ],
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild", "sharp"]
+  }
+}
+```
+
+**Required fields:**
+- `workspaces` - Enables npm workspace linking (required for `file:` dependencies to work)
+- `pnpm.onlyBuiltDependencies` - Prevents pnpm from rebuilding native modules on every install
+
 This matches how the CLI's built-in templates work and ensures the workspace linking functions correctly.
 
 ### Workspace Configuration
@@ -236,10 +268,11 @@ Key testing points:
 
 - [ ] Create `templates/<name>/template.json` with required `name` field
 - [ ] Create `templates/<name>/template/` directory structure
-- [ ] Include both `foundation/` and `site/` packages
-- [ ] Add `"foundation": "workspace:*"` to site's dependencies
-- [ ] Use fixed names: `"name": "foundation"` and `"name": "site"`
+- [ ] Include root `package.json.hbs` with `workspaces` array and `pnpm.onlyBuiltDependencies`
 - [ ] Include `pnpm-workspace.yaml` with workspace packages
+- [ ] Include both `foundation/` and `site/` packages
+- [ ] Add `"foundation": "file:../foundation"` to site's dependencies (not `workspace:*`)
+- [ ] Use fixed names: `"name": "foundation"` and `"name": "site"`
 - [ ] Add `.hbs` extension to files needing variable substitution
 - [ ] Include sample content in `site/pages/`
 - [ ] Create meaningful component metadata in `foundation/src/components/*/meta.js`
