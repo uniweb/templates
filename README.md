@@ -134,7 +134,7 @@ Binary files (images, fonts, etc.) are copied as-is.
 
 ### Critical: Package Dependencies
 
-**The site package MUST include the foundation as a workspace dependency:**
+**The site package MUST include the foundation as a local dependency:**
 
 ```json
 // site/package.json.hbs
@@ -142,15 +142,17 @@ Binary files (images, fonts, etc.) are copied as-is.
   "name": "site",
   "dependencies": {
     "@uniweb/runtime": "^0.1.0",
-    "foundation": "workspace:*"
+    "foundation": "file:../foundation"
   }
 }
 ```
 
-This `"foundation": "workspace:*"` entry is essential because:
-1. pnpm creates a symlink at `site/node_modules/foundation` pointing to the workspace foundation
+This `"foundation": "file:../foundation"` entry is essential because:
+1. Both npm and pnpm create a symlink at `site/node_modules/foundation` pointing to the sibling foundation
 2. Vite's `#foundation` alias resolves to the `foundation` module
 3. Without this, the site build will fail with "Could not load foundation"
+
+**Important:** Use `file:` protocol, not `workspace:*`. The `workspace:*` protocol is pnpm-specific and will fail with npm.
 
 **Use fixed package names:**
 - Foundation: `"name": "foundation"` (not `{{projectName}}-foundation`)
