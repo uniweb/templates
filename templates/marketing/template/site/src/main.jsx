@@ -1,4 +1,4 @@
-import { initRuntime } from '@uniweb/runtime'
+import initRuntime from '@uniweb/runtime'
 
 const useRuntimeLoading = import.meta.env.VITE_FOUNDATION_MODE === 'runtime'
 
