@@ -3,7 +3,8 @@ import { readFileSync, existsSync } from 'fs'
 import yaml from 'js-yaml'
 import react from '@vitejs/plugin-react'
 import svgr from 'vite-plugin-svgr'
-import { siteContentPlugin, foundationPlugin } from '@uniweb/runtime/vite'
+import { siteContentPlugin } from '@uniweb/build/site'
+import { foundationDevPlugin } from '@uniweb/build/dev'
 
 // Read foundation from site.yml
 const siteConfig = yaml.load(readFileSync('./site.yml', 'utf8'))
@@ -28,7 +29,7 @@ export default defineConfig({
       sitePath: './',
       inject: true,
     }),
-    useRuntimeLoading && foundationPlugin({
+    useRuntimeLoading && foundationDevPlugin({
       name: foundation,
       path: foundationPath,
       serve: '/foundation',
