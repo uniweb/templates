@@ -1,5 +1,5 @@
 ---
-component: Features
+type: Features
 theme: light
 columns: 3
 ---

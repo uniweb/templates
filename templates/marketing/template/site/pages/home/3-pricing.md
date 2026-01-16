@@ -1,5 +1,5 @@
 ---
-component: Pricing
+type: Pricing
 theme: light
 ---
 

@@ -1,5 +1,5 @@
 ---
-component: CTA
+type: CTA
 theme: gradient
 alignment: center
 ---

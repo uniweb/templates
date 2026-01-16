@@ -1,5 +1,5 @@
 ---
-component: Hero
+type: Hero
 theme: gradient
 alignment: center
 ---
