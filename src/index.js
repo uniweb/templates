@@ -8,7 +8,7 @@
 import path from 'node:path'
 import { existsSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
-import { copyTemplateDirectory, clearCache } from './processor.js'
+import { copyTemplateDirectory, clearCache, registerVersions, getMissingVersions, clearMissingVersions } from './processor.js'
 import {
   validateTemplate,
   listTemplates,
@@ -77,6 +77,11 @@ export async function applyTemplate(templatePath, targetPath, data = {}, options
   // Validate the template
   const metadata = await validateTemplate(templatePath, { uniwebVersion })
 
+  // Register versions for the {{version}} helper
+  if (data.versions) {
+    registerVersions(data.versions)
+  }
+
   // Apply default variables
   const templateData = {
     year: new Date().getFullYear(),
@@ -90,6 +95,13 @@ export async function applyTemplate(templatePath, targetPath, data = {}, options
     templateData,
     { variant, onWarning, onProgress }
   )
+
+  // Check for missing versions and warn
+  const missingVersions = getMissingVersions()
+  if (missingVersions.length > 0 && onWarning) {
+    onWarning(`Missing version data for packages: ${missingVersions.join(', ')}. Using fallback version.`)
+  }
+  clearMissingVersions()
 
   return metadata
 }
@@ -112,6 +124,9 @@ export async function applyBuiltinTemplate(name, targetPath, data = {}, options 
 export {
   copyTemplateDirectory,
   clearCache,
+  registerVersions,
+  getMissingVersions,
+  clearMissingVersions,
   validateTemplate,
   listTemplates,
   satisfiesVersion,

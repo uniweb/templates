@@ -11,6 +11,61 @@ import Handlebars from 'handlebars'
 // Cache for compiled templates
 const templateCache = new Map()
 
+// Store for version data (set by registerVersions)
+let versionData = {}
+
+// Track missing versions during processing
+const missingVersions = new Set()
+
+// Default fallback version when a package version is unknown
+const DEFAULT_FALLBACK_VERSION = '^0.1.0'
+
+/**
+ * Register version data for the {{version}} helper
+ *
+ * @param {Object} versions - Map of package names to version specs
+ */
+export function registerVersions(versions) {
+  versionData = versions || {}
+  missingVersions.clear()
+}
+
+/**
+ * Get the list of missing versions encountered during processing
+ *
+ * @returns {string[]} Array of package names that were missing versions
+ */
+export function getMissingVersions() {
+  return [...missingVersions]
+}
+
+/**
+ * Clear the missing versions set
+ */
+export function clearMissingVersions() {
+  missingVersions.clear()
+}
+
+/**
+ * Handlebars helper to get a package version
+ * Usage: {{version "@uniweb/build"}} or {{version "build"}}
+ */
+Handlebars.registerHelper('version', function(packageName) {
+  // Try exact match first
+  if (versionData[packageName]) {
+    return versionData[packageName]
+  }
+
+  // Try with @uniweb/ prefix
+  if (!packageName.startsWith('@') && versionData[`@uniweb/${packageName}`]) {
+    return versionData[`@uniweb/${packageName}`]
+  }
+
+  // Track the missing version and return a fallback
+  missingVersions.add(packageName)
+  return DEFAULT_FALLBACK_VERSION
+})
+
 // Text file extensions that should be processed for variables
 const TEXT_EXTENSIONS = new Set([
   '.js', '.jsx', '.ts', '.tsx', '.mjs', '.cjs',
