@@ -1,8 +1,8 @@
 # {{projectName}}
 
-A marketing site built with [Uniweb](https://uniweb.io).
+A marketing site built with [Uniweb](https://github.com/uniweb/uniweb) — a component web platform that separates content from code.
 
-## Getting Started
+## Quick Start
 
 ```bash
 # Install dependencies
@@ -15,51 +15,266 @@ pnpm dev
 pnpm build
 ```
 
+Visit `http://localhost:5173` to see your site.
+
 ## Project Structure
+
+This project has two packages that work together:
 
 ```
 {{projectName}}/
-├── foundation/     # Component library
-│   └── src/
-│       └── components/
-│           ├── Hero/
-│           ├── Features/
-│           ├── Pricing/
-│           ├── Testimonials/
-│           └── CTA/
-└── site/          # Marketing site
-    └── pages/
-        └── home/
-            ├── 1-hero.md
-            ├── 2-features.md
-            ├── 3-pricing.md
-            ├── 4-testimonials.md
-            └── 5-cta.md
+├── foundation/          # Component library (React + Tailwind)
+│   ├── src/
+│   │   ├── components/  # Exposed components
+│   │   │   ├── Hero/
+│   │   │   ├── Features/
+│   │   │   ├── Pricing/
+│   │   │   ├── Testimonials/
+│   │   │   └── CTA/
+│   │   └── styles.css   # Tailwind configuration
+│   └── dist/            # Built output (after build)
+│       └── schema.json  # Component documentation
+│
+├── site/                # Content site (markdown + config)
+│   ├── pages/           # Content pages
+│   │   └── home/
+│   │       ├── page.yml       # Page metadata
+│   │       ├── 1-hero.md      # Section content
+│   │       ├── 2-features.md
+│   │       └── ...
+│   └── site.yml         # Site configuration
+│
+├── CLAUDE.md            # AI assistant instructions
+└── README.md            # This file
 ```
+
+### Foundation vs Site
+
+| Foundation | Site |
+|------------|------|
+| React components | Markdown content |
+| Styled with Tailwind | Configured with YAML |
+| Built once, used everywhere | Content changes don't need rebuild |
+| Can be published separately | Uses foundation as dependency |
+
+## Content Authoring
+
+Content lives in markdown files under `site/pages/`. Each section has:
+
+```markdown
+---
+type: Hero              # Component to use
+theme: gradient         # Component parameter
+layout: center          # Component parameter
+---
+
+### Eyebrow Text        # Small heading before title (optional)
+
+# Main Headline         # H1 becomes the title
+
+Description paragraph with supporting text.
+
+[Primary CTA](#link)    # First link = primary button
+[Secondary CTA](#link)  # Second link = secondary button
+
+![Image](image.jpg)     # Optional image
+```
+
+### Adding a New Page
+
+1. Create a folder: `site/pages/my-page/`
+2. Add `page.yml` with page metadata:
+   ```yaml
+   title: My Page
+   path: /my-page
+   ```
+3. Add section files: `1-hero.md`, `2-content.md`, etc.
+
+### Section Naming
+
+Files are sorted alphabetically, so prefix with numbers: `1-`, `2-`, `3-`
 
 ## Components
 
-- **Hero** - Eye-catching header with headline, description, and call-to-action
-- **Features** - Showcase product features with icons and descriptions
-- **Pricing** - Pricing table with multiple tiers
-- **Testimonials** - Customer quotes and social proof
-- **CTA** - Call-to-action section to drive conversions
+This foundation includes these components:
 
-## Customization
+| Component | Description | Key Parameters |
+|-----------|-------------|----------------|
+| **Hero** | Header with headline, CTA buttons | `theme`, `layout` |
+| **Features** | Feature grid with icons | `theme`, `columns` |
+| **Pricing** | Pricing tiers comparison | `theme` |
+| **Testimonials** | Customer quotes | `theme`, `columns` |
+| **CTA** | Call-to-action banner | `theme`, `alignment` |
 
-Edit the markdown files in `site/pages/` to update content. Each section file has YAML frontmatter for configuration and markdown body for content.
+### Component Documentation
 
-Edit component styles in `foundation/src/components/*/index.jsx`.
+After building the foundation, detailed component docs are in `foundation/dist/schema.json`.
 
-## AI Assistant Instructions
+To generate readable documentation:
 
-If you're an AI assistant working on this project, see [CLAUDE.md](./CLAUDE.md) for detailed guidance on:
-- Project architecture and conventions
-- Content authoring in the site package
-- Component development in the foundation package
-- Using @uniweb/kit components
-- Best practices and troubleshooting
+```bash
+cd foundation && pnpm build
+# schema.json contains all component metadata
+```
+
+## Development
+
+### Creating a New Component
+
+1. Create folder: `foundation/src/components/MyComponent/`
+
+2. Add `index.jsx`:
+   ```jsx
+   import { H1, P, cn } from '@uniweb/kit'
+
+   export function MyComponent({ content, params }) {
+     const { title } = content.main?.header || {}
+     const { theme = 'light' } = params || {}
+
+     return (
+       <section className={cn('py-20', theme === 'dark' && 'bg-gray-900')}>
+         <H1 text={title} />
+       </section>
+     )
+   }
+
+   export default MyComponent
+   ```
+
+3. Add `meta.js`:
+   ```javascript
+   export default {
+     title: 'My Component',
+     description: 'Description of what it does',
+     category: 'Content',
+
+     elements: {
+       title: { label: 'Title', required: true },
+       paragraphs: { label: 'Description' },
+     },
+
+     properties: {
+       theme: {
+         type: 'select',
+         label: 'Theme',
+         options: [
+           { value: 'light', label: 'Light' },
+           { value: 'dark', label: 'Dark' },
+         ],
+         default: 'light',
+       },
+     },
+   }
+   ```
+
+4. Rebuild: `cd foundation && pnpm build`
+
+### Styling
+
+This project uses **Tailwind CSS v4**. Customize colors in `foundation/src/styles.css`:
+
+```css
+@theme {
+  --color-primary: #3b82f6;
+  --color-secondary: #64748b;
+}
+```
+
+## AI Assistance
+
+This project includes AI-optimized documentation. If you're using an AI assistant:
+
+- **[CLAUDE.md](./CLAUDE.md)** — Detailed instructions for AI assistants covering:
+  - Project architecture and conventions
+  - Content authoring patterns
+  - Component development guidelines
+  - @uniweb/kit usage
+  - Troubleshooting tips
+
+AI assistants can help with:
+- Writing new content sections
+- Creating new components
+- Debugging build issues
+- Optimizing for SEO
+
+## Deployment
+
+### Static Hosting
+
+Build and deploy the `site/dist` folder:
+
+```bash
+pnpm build
+# Deploy site/dist/ to your host
+```
+
+**Supported platforms:**
+- **Vercel**: `cd site && vercel`
+- **Netlify**: Set build command to `pnpm build`, publish directory to `site/dist`
+- **GitHub Pages**: Use GitHub Actions to build and deploy
+- **Cloudflare Pages**: Connect repo, set `pnpm build` and `site/dist`
+
+### Preview Production Build
+
+```bash
+pnpm preview
+```
+
+## Foundation Reuse
+
+The foundation is a standalone component library that can be:
+
+### Published to npm
+
+```bash
+cd foundation
+pnpm build
+npm publish --access public
+```
+
+Then use in other projects:
+```bash
+pnpm add your-foundation-name
+```
+
+### Used in Multiple Sites
+
+The foundation can power multiple sites. Each site references the foundation:
+
+```json
+// site/package.json
+{
+  "dependencies": {
+    "foundation": "file:../foundation"  // Local
+    // OR
+    "foundation": "^1.0.0"              // Published
+  }
+}
+```
+
+### Versioning
+
+Consider semantic versioning for your foundation:
+- **Patch** (0.0.x): Bug fixes, style tweaks
+- **Minor** (0.x.0): New components, new features
+- **Major** (x.0.0): Breaking changes to component interfaces
+
+## Scripts Reference
+
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Start development server |
+| `pnpm build` | Build foundation and site |
+| `pnpm preview` | Preview production build |
+| `pnpm --filter foundation dev` | Foundation dev server only |
+| `pnpm --filter site dev` | Site dev server only |
+
+## Learn More
+
+- [Uniweb Documentation](https://github.com/uniweb/uniweb)
+- [@uniweb/kit Components](https://www.npmjs.com/package/@uniweb/kit)
+- [Tailwind CSS](https://tailwindcss.com)
 
 ---
 
-Created with the Uniweb Marketing Template
+Built with the [Uniweb Marketing Template](https://github.com/uniweb/templates)
