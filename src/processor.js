@@ -175,10 +175,21 @@ export async function copyTemplateDirectory(sourcePath, targetPath, data, option
   await fs.mkdir(targetPath, { recursive: true })
   const entries = await fs.readdir(sourcePath, { withFileTypes: true })
 
+  // Build a set of base names that have variant-specific directories
+  const variantBases = new Set()
+  for (const entry of entries) {
+    if (entry.isDirectory()) {
+      const variantMatch = entry.name.match(/^(.+)\.([^.]+)$/)
+      if (variantMatch) {
+        variantBases.add(variantMatch[1]) // e.g., 'foundation' from 'foundation.tailwind4'
+      }
+    }
+  }
+
   for (const entry of entries) {
     const sourceName = entry.name
 
-    // Check if this is a variant-specific item (e.g., "dir.variant" or "file.variant.ext")
+    // Check if this is a variant-specific item (e.g., "dir.variant")
     const variantMatch = entry.isDirectory()
       ? sourceName.match(/^(.+)\.([^.]+)$/)
       : null
@@ -187,8 +198,13 @@ export async function copyTemplateDirectory(sourcePath, targetPath, data, option
       if (variantMatch) {
         const [, baseName, dirVariant] = variantMatch
 
-        // Skip directories that don't match our variant
-        if (variant && dirVariant !== variant) {
+        // When no variant is specified, skip all variant directories
+        if (!variant) {
+          continue
+        }
+
+        // When variant is specified, skip directories that don't match
+        if (dirVariant !== variant) {
           continue
         }
 
@@ -198,7 +214,12 @@ export async function copyTemplateDirectory(sourcePath, targetPath, data, option
 
         await copyTemplateDirectory(sourceFullPath, targetFullPath, data, options)
       } else {
-        // Regular directory
+        // Regular directory - skip if a variant override exists and we're using that variant
+        if (variant && variantBases.has(sourceName)) {
+          // Skip this directory because a variant-specific version exists
+          continue
+        }
+
         const sourceFullPath = path.join(sourcePath, sourceName)
         const targetFullPath = path.join(targetPath, sourceName)
 

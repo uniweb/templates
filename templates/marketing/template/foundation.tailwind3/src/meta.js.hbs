@@ -1,0 +1,28 @@
+/**
+ * {{projectName}} Foundation Metadata
+ */
+export default {
+  name: '{{projectName}}',
+  description: 'A marketing-focused Uniweb foundation',
+
+  // Runtime props (available at render time)
+  props: {
+    themeToggleEnabled: true,
+  },
+
+  // Style configuration for the editor
+  styleFields: [
+    {
+      id: 'primary-color',
+      type: 'color',
+      label: 'Primary Color',
+      default: '#3b82f6',
+    },
+    {
+      id: 'secondary-color',
+      type: 'color',
+      label: 'Secondary Color',
+      default: '#64748b',
+    },
+  ],
+}
