@@ -65,10 +65,10 @@ jobs:
 
             ```bash
             # Use the marketing template (default: Tailwind v4)
-            uniweb create myproject --template marketing
+            npx uniweb@latest create myproject --template marketing
 
             # Use with Tailwind v3 (legacy)
-            uniweb create myproject --template marketing --variant tailwind3
+            npx uniweb@latest create myproject --template marketing --variant tailwind3
             ```
 
             ### Installation

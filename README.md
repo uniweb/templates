@@ -15,10 +15,10 @@ When users run `uniweb create my-project --template marketing`, the CLI:
 
 ```bash
 # Use an official template (Tailwind v4 by default)
-npx uniweb create my-project --template marketing
+npx uniweb@latest create my-project --template marketing
 
 # Use with Tailwind v3 (legacy)
-npx uniweb create my-project --template marketing --variant tailwind3
+npx uniweb@latest create my-project --template marketing --variant tailwind3
 
 # Templates are resolved in order:
 # 1. Built-in (single, multi) - in CLI
