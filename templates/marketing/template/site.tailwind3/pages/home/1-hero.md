@@ -1,8 +1,10 @@
 ---
 type: Hero
 theme: gradient
-alignment: center
+layout: center
 ---
+
+### New in 2025
 
 # Build Beautiful Websites Without the Complexity
 
