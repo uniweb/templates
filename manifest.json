@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "templates": {
+    "marketing": {
+      "name": "Marketing Starter",
+      "description": "Landing pages and marketing sites with Tailwind CSS v4",
+      "variants": ["tailwind3"],
+      "tags": ["marketing", "landing-page", "tailwind"]
+    }
+  }
+}

@@ -1,0 +1,60 @@
+name: Release Templates
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create template tarballs
+        run: |
+          # Create dist directory for artifacts
+          mkdir -p dist
+
+          # Get list of templates (directories with template.json)
+          for template_dir in templates/*/; do
+            template_name=$(basename "$template_dir")
+
+            # Check if this is a valid template (has template.json)
+            if [ -f "${template_dir}template.json" ]; then
+              echo "Creating tarball for: $template_name"
+
+              # Create tarball of the template directory
+              # The tarball contains template.json and template/ directory
+              tar -czf "dist/${template_name}.tar.gz" -C templates "$template_name"
+
+              echo "Created: dist/${template_name}.tar.gz"
+            fi
+          done
+
+          # List created tarballs
+          echo "Created tarballs:"
+          ls -la dist/
+
+      - name: Update manifest version
+        run: |
+          # Update manifest.json with release version
+          VERSION="${{ github.event.release.tag_name }}"
+
+          # Use jq to update the version field
+          jq --arg version "$VERSION" '.version = $version' manifest.json > dist/manifest.json
+
+          echo "Updated manifest.json with version: $VERSION"
+          cat dist/manifest.json
+
+      - name: Upload release assets
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            dist/manifest.json
+            dist/*.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
