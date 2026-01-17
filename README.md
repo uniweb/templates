@@ -1,46 +1,30 @@
 # @uniweb/templates
 
-Template processing engine and official templates for the Uniweb CLI.
+Official templates for the Uniweb CLI.
 
 ## Overview
 
-This package provides:
-1. **Template processing engine** - Handlebars-based file processing with variable substitution
-2. **Official templates** - Showcase templates like `marketing`, `docs`, `learning`
-3. **Validation utilities** - Version checking and template structure validation
+This repository contains the official templates for the Uniweb CLI. Templates are distributed via **GitHub Releases**, not npm.
+
+When users run `uniweb create my-project --template marketing`, the CLI:
+1. Fetches the `manifest.json` from the latest GitHub release
+2. Downloads the template tarball (e.g., `marketing.tar.gz`)
+3. Extracts and applies the template with Handlebars processing
 
 ## Usage
 
-### From CLI
-
 ```bash
-# Use an official template
+# Use an official template (Tailwind v4 by default)
 npx uniweb create my-project --template marketing
+
+# Use with Tailwind v3 (legacy)
+npx uniweb create my-project --template marketing --variant tailwind3
 
 # Templates are resolved in order:
 # 1. Built-in (single, multi) - in CLI
-# 2. Official (@uniweb/templates) - marketing, docs, learning
+# 2. Official (this repo) - marketing, docs, learning
 # 3. npm packages - @scope/template-name
 # 4. GitHub repos - github:user/repo
-```
-
-### Programmatic API
-
-```javascript
-import { applyBuiltinTemplate, hasTemplate, listBuiltinTemplates } from '@uniweb/templates'
-
-// Check if a template exists
-if (hasTemplate('marketing')) {
-  // Apply template to a directory
-  await applyBuiltinTemplate('marketing', './my-project', {
-    projectName: 'my-project',
-    year: new Date().getFullYear()
-  })
-}
-
-// List available templates
-const templates = await listBuiltinTemplates()
-// [{ id: 'marketing', name: 'Marketing Starter', ... }]
 ```
 
 ## Creating Templates
@@ -264,6 +248,73 @@ Key testing points:
 - Content sections are in correct order
 - Handlebars variables are properly substituted
 
+## Releasing Templates
+
+Templates are released via GitHub Releases. The release workflow is automated via GitHub Actions.
+
+### Release Process
+
+1. **Make your changes** to templates in `templates/`
+
+2. **Commit your changes**:
+   ```bash
+   git add .
+   git commit -m "feat: add new component to marketing template"
+   ```
+
+3. **Bump the version** (this creates a git tag):
+   ```bash
+   pnpm version patch   # 0.1.7 → 0.1.8
+   # or
+   pnpm version minor   # 0.1.7 → 0.2.0
+   # or
+   pnpm version major   # 0.1.7 → 1.0.0
+   ```
+
+4. **Push the commit and tag**:
+   ```bash
+   git push && git push --tags
+   ```
+
+5. **GitHub Actions automatically**:
+   - Creates tarballs for each template (e.g., `marketing.tar.gz`)
+   - Updates `manifest.json` with the new version
+   - Creates a GitHub Release with all assets
+
+### What Gets Released
+
+The workflow creates:
+- `manifest.json` - Template metadata with version
+- `<template-name>.tar.gz` - One tarball per template
+
+Each tarball contains the full template directory structure that the CLI extracts and processes.
+
+### Manifest Structure
+
+The `manifest.json` file lists all available templates:
+
+```json
+{
+  "version": "v0.1.8",
+  "templates": {
+    "marketing": {
+      "name": "Marketing Starter",
+      "description": "Landing pages and marketing sites with Tailwind CSS v4",
+      "variants": ["tailwind3"],
+      "tags": ["marketing", "landing-page", "tailwind"]
+    }
+  }
+}
+```
+
+### Adding a New Template
+
+1. Create the template directory: `templates/<name>/`
+2. Add `template.json` and `template/` directory
+3. Add the template to `manifest.json`
+4. Test locally with the CLI
+5. Follow the release process above
+
 ## Troubleshooting
 
 ### "createRoot" export not found error
@@ -307,32 +358,6 @@ This forces Vite to pre-bundle these packages, ensuring proper CJS→ESM convers
 - [ ] Create meaningful component metadata in `foundation/src/components/*/meta.js`
 - [ ] Add E2E tests in the main workspace
 - [ ] Test the full flow: create, install, build foundation, build site
-
-## API Reference
-
-### `applyTemplate(templatePath, targetPath, data, options)`
-
-Apply a template from any path.
-
-### `applyBuiltinTemplate(name, targetPath, data, options)`
-
-Apply one of the official templates by name.
-
-### `hasTemplate(name)`
-
-Check if an official template exists.
-
-### `listBuiltinTemplates()`
-
-Get list of all official templates with metadata.
-
-### `validateTemplate(templateRoot, options)`
-
-Validate a template's structure and compatibility.
-
-### `copyTemplateDirectory(sourcePath, targetPath, data, options)`
-
-Low-level directory copying with Handlebars processing.
 
 ## License
 
