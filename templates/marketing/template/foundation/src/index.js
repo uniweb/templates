@@ -10,8 +10,26 @@ import Features from './components/Features/index.jsx'
 import Pricing from './components/Pricing/index.jsx'
 import Testimonials from './components/Testimonials/index.jsx'
 import CTA from './components/CTA/index.jsx'
+import Stats from './components/Stats/index.jsx'
+import Gallery from './components/Gallery/index.jsx'
+import Video from './components/Video/index.jsx'
+import FAQ from './components/FAQ/index.jsx'
+import Team from './components/Team/index.jsx'
+import LogoCloud from './components/LogoCloud/index.jsx'
 
-const components = { Hero, Features, Pricing, Testimonials, CTA }
+const components = {
+  Hero,
+  Features,
+  Pricing,
+  Testimonials,
+  CTA,
+  Stats,
+  Gallery,
+  Video,
+  FAQ,
+  Team,
+  LogoCloud,
+}
 
 export function getComponent(name) {
   return components[name]
@@ -33,5 +51,5 @@ export function getAllSchemas() {
   return schemas
 }
 
-export { Hero, Features, Pricing, Testimonials, CTA }
+export { Hero, Features, Pricing, Testimonials, CTA, Stats, Gallery, Video, FAQ, Team, LogoCloud }
 export default { getComponent, listComponents, getSchema, getAllSchemas, components }

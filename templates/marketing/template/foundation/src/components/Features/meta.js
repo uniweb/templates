@@ -3,7 +3,7 @@
  */
 export default {
   title: 'Features Grid',
-  description: 'Showcase product features in a responsive grid layout',
+  description: 'Showcase product features in a responsive grid layout with icons',
   category: 'Content',
 
   elements: {
@@ -17,7 +17,7 @@ export default {
     },
     subsections: {
       label: 'Features',
-      description: 'Each H3 with its content becomes a feature card',
+      description: 'Each H3 with its content becomes a feature card. Add "icon:name" before H3 for icons (zap, file, palette, mobile, search, rocket, shield, clock, globe, users, chart, settings).',
     },
   },
 
@@ -41,6 +41,34 @@ export default {
         { value: 'dark', label: 'Dark' },
       ],
       default: 'light',
+    },
+    style: {
+      type: 'select',
+      label: 'Style',
+      options: [
+        { value: 'cards', label: 'Cards' },
+        { value: 'minimal', label: 'Minimal' },
+        { value: 'list', label: 'List' },
+      ],
+      default: 'cards',
+    },
+  },
+
+  presets: {
+    default: {
+      label: 'Feature Cards',
+      description: 'Features in card containers',
+      properties: { style: 'cards', columns: 3 },
+    },
+    minimal: {
+      label: 'Minimal Centered',
+      description: 'Clean centered layout',
+      properties: { style: 'minimal', columns: 3 },
+    },
+    list: {
+      label: 'Icon List',
+      description: 'Compact list with icons',
+      properties: { style: 'list', columns: 2 },
     },
   },
 }
