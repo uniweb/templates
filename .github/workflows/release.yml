@@ -1,11 +1,12 @@
 name: Release Templates
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - 'v*'
 
 jobs:
-  build-and-upload:
+  build-and-release:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -14,47 +15,68 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Extract version from tag
+        id: version
+        run: |
+          VERSION="${GITHUB_REF#refs/tags/}"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Version: $VERSION"
+
       - name: Create template tarballs
         run: |
-          # Create dist directory for artifacts
           mkdir -p dist
 
-          # Get list of templates (directories with template.json)
           for template_dir in templates/*/; do
             template_name=$(basename "$template_dir")
 
-            # Check if this is a valid template (has template.json)
             if [ -f "${template_dir}template.json" ]; then
               echo "Creating tarball for: $template_name"
-
-              # Create tarball of the template directory
-              # The tarball contains template.json and template/ directory
               tar -czf "dist/${template_name}.tar.gz" -C templates "$template_name"
-
               echo "Created: dist/${template_name}.tar.gz"
             fi
           done
 
-          # List created tarballs
           echo "Created tarballs:"
           ls -la dist/
 
       - name: Update manifest version
         run: |
-          # Update manifest.json with release version
-          VERSION="${{ github.event.release.tag_name }}"
-
-          # Use jq to update the version field
+          VERSION="${{ steps.version.outputs.version }}"
           jq --arg version "$VERSION" '.version = $version' manifest.json > dist/manifest.json
-
-          echo "Updated manifest.json with version: $VERSION"
+          echo "Updated manifest.json:"
           cat dist/manifest.json
 
-      - name: Upload release assets
-        uses: softprops/action-gh-release@v1
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
         with:
+          name: "Uniweb Templates ${{ steps.version.outputs.version }}"
+          body: |
+            ## Official Uniweb Templates
+
+            This release contains the official templates for the Uniweb CLI.
+
+            ### Available Templates
+
+            | Template | Description |
+            |----------|-------------|
+            | `marketing` | Landing pages and marketing sites with Tailwind CSS v4 |
+
+            ### Usage
+
+            ```bash
+            # Use the marketing template (default: Tailwind v4)
+            uniweb create myproject --template marketing
+
+            # Use with Tailwind v3 (legacy)
+            uniweb create myproject --template marketing --variant tailwind3
+            ```
+
+            ### Installation
+
+            Templates are automatically fetched by the CLI. No manual installation required.
           files: |
             dist/manifest.json
             dist/*.tar.gz
+          generate_release_notes: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
