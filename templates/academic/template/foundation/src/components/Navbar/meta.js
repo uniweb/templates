@@ -51,6 +51,17 @@ export default {
       ],
       default: 'auto',
     },
+    showSearch: {
+      type: 'select',
+      label: 'Search',
+      description: 'When to show the search button (requires fuse.js)',
+      options: [
+        { value: 'auto', label: 'Auto (if search enabled)' },
+        { value: 'always', label: 'Always' },
+        { value: 'never', label: 'Never' },
+      ],
+      default: 'auto',
+    },
     logoPosition: {
       type: 'select',
       label: 'Logo Position',

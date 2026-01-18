@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useWebsite, cn } from '@uniweb/kit'
+import { SearchModal, SearchButton, useSearchShortcut } from '../SearchModal'
 
 /**
  * Navbar Component
@@ -12,6 +13,7 @@ import { Link, useWebsite, cn } from '@uniweb/kit'
  * - Locale switcher (appears automatically if multiple locales)
  * - Mobile-responsive with hamburger menu
  * - Sticky positioning option
+ * - Integrated search (when fuse.js is installed)
  */
 export function Navbar({ content, params, website: websiteProp }) {
   const { website: contextWebsite, localize } = useWebsite()
@@ -19,6 +21,7 @@ export function Navbar({ content, params, website: websiteProp }) {
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [localeMenuOpen, setLocaleMenuOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
 
   const { title } = content?.main?.header || {}
   const { links = [], imgs = [] } = content?.main?.body || {}
@@ -26,8 +29,16 @@ export function Navbar({ content, params, website: websiteProp }) {
     mode = 'auto',
     sticky = true,
     showLocale = 'auto',
+    showSearch = 'auto',
     logoPosition = 'left',
   } = params || {}
+
+  // Search keyboard shortcut (Cmd/Ctrl+K)
+  useSearchShortcut(() => setSearchOpen(true))
+
+  // Determine if search should be shown
+  const searchEnabled = website?.isSearchEnabled()
+  const shouldShowSearch = showSearch === 'always' || (showSearch === 'auto' && searchEnabled)
 
   // Get navigation items based on mode
   const navItems = mode === 'auto' && website
@@ -157,11 +168,23 @@ export function Navbar({ content, params, website: websiteProp }) {
               className="flex items-center gap-6"
               itemClassName="text-sm font-medium transition-colors"
             />
+            {shouldShowSearch && (
+              <SearchButton onClick={() => setSearchOpen(true)} />
+            )}
             <LocaleSwitcher />
           </div>
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-2 md:hidden">
+            {shouldShowSearch && (
+              <button
+                onClick={() => setSearchOpen(true)}
+                className="p-2 text-slate-600 hover:text-primary rounded-md hover:bg-slate-100"
+                aria-label="Search"
+              >
+                <SearchIcon className="w-5 h-5" />
+              </button>
+            )}
             <LocaleSwitcher />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -188,6 +211,15 @@ export function Navbar({ content, params, website: websiteProp }) {
           </div>
         )}
       </div>
+
+      {/* Search Modal */}
+      {shouldShowSearch && (
+        <SearchModal
+          isOpen={searchOpen}
+          onClose={() => setSearchOpen(false)}
+          website={website}
+        />
+      )}
     </header>
   )
 }
@@ -214,6 +246,12 @@ const GlobeIcon = ({ className }) => (
 const ChevronIcon = ({ className }) => (
   <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+  </svg>
+)
+
+const SearchIcon = ({ className }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
   </svg>
 )
 

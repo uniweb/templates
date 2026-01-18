@@ -1,0 +1,224 @@
+# {{projectName}}
+
+An academic site built with [Uniweb](https://github.com/uniweb/uniweb) — a component web platform that separates content from code. Designed for researchers, labs, and academic departments.
+
+## Quick Start
+
+```bash
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm dev
+
+# Build for production
+pnpm build
+```
+
+Visit `http://localhost:5173` to see your site.
+
+## Project Structure
+
+This project has two packages that work together:
+
+```
+{{projectName}}/
+├── foundation/          # Academic component library (React + Tailwind)
+│   ├── src/
+│   │   ├── components/  # Academic-focused components
+│   │   │   ├── ProfileHero/
+│   │   │   ├── PublicationList/
+│   │   │   ├── ResearchAreas/
+│   │   │   ├── TeamGrid/
+│   │   │   ├── Timeline/
+│   │   │   ├── ContactCard/
+│   │   │   ├── Navbar/
+│   │   │   ├── Footer/
+│   │   │   └── SearchModal/
+│   │   └── styles.css   # Tailwind configuration
+│   └── dist/            # Built output (after build)
+│
+├── site/                # Content site (markdown + config)
+│   ├── pages/           # Content pages
+│   │   ├── @header/     # Global header (Navbar)
+│   │   ├── @footer/     # Global footer
+│   │   ├── home/
+│   │   ├── publications/
+│   │   ├── research/
+│   │   └── team/
+│   └── site.yml         # Site configuration
+│
+├── CLAUDE.md            # AI assistant instructions
+└── README.md            # This file
+```
+
+## Components
+
+### Academic Components
+
+| Component | Description | Key Parameters |
+|-----------|-------------|----------------|
+| **ProfileHero** | Researcher/lab/department profiles | `variant`, `photoPosition` |
+| **PublicationList** | Academic publications with citations | `citationStyle`, `groupBy`, `showSearch` |
+| **ResearchAreas** | Research focus areas | `layout`, `showNumbers` |
+| **TeamGrid** | Team members by role | `groupByRole`, `cardStyle` |
+| **Timeline** | Education/career milestones | `orientation`, `datePosition` |
+| **ContactCard** | Contact information | `layout`, `showIcon` |
+
+### Navigation Components
+
+| Component | Description | Key Parameters |
+|-----------|-------------|----------------|
+| **Navbar** | Site navigation with search | `mode`, `sticky`, `showSearch` |
+| **Footer** | Multi-column footer | `mode`, `columns`, `background` |
+
+## Content Authoring
+
+Content is written in markdown with YAML frontmatter:
+
+```markdown
+---
+type: ProfileHero
+variant: researcher
+photoPosition: left
+---
+
+# Dr. Sarah Chen
+
+## Associate Professor of Computer Science
+
+Bio text here...
+
+![Photo](photo.jpg)
+
+[Email](mailto:sarah@university.edu)
+[Google Scholar](https://scholar.google.com)
+```
+
+### Markdown Conventions
+
+- **H1 (#)** — Main title (person name, page title)
+- **H2 (##)** — Subtitle (position, tagline)
+- **H3 (###)** — Item titles (paper titles, member names)
+- **H4 (####)** — Group headers (years, roles)
+
+### Adding Publications
+
+```markdown
+---
+type: PublicationList
+citationStyle: detailed
+groupBy: year
+---
+
+## Publications
+
+#### 2024
+
+### Paper Title Here
+
+**First Author**, Second Author, Third Author
+
+*Nature Machine Intelligence*
+
+Abstract or description text.
+
+[PDF](paper.pdf)
+[arXiv](https://arxiv.org)
+[Code](https://github.com)
+```
+
+### Adding Team Members
+
+```markdown
+---
+type: TeamGrid
+groupByRole: true
+columns: 3
+---
+
+## Team
+
+#### Faculty
+
+### Dr. Sarah Chen
+
+Principal Investigator
+
+Bio text...
+
+![Photo](photo.jpg)
+
+[Website](https://...)
+
+#### PhD Student
+
+### James Kim
+
+PhD Student (2nd year)
+
+Research focus...
+
+![Photo](photo.jpg)
+```
+
+{{> search-docs}}
+
+## Development
+
+### Running Individual Packages
+
+```bash
+# Foundation dev server (component development)
+pnpm --filter foundation dev
+
+# Site dev server (content development)
+pnpm --filter site dev
+```
+
+### Creating New Components
+
+1. Create folder: `foundation/src/components/MyComponent/`
+2. Add `index.jsx` with the React component
+3. Add `meta.js` with metadata and parameters
+4. Export from `foundation/src/index.js`
+5. Rebuild: `cd foundation && pnpm build`
+
+See `CLAUDE.md` for detailed component development guidelines.
+
+## Deployment
+
+Build and deploy the `site/dist` folder:
+
+```bash
+pnpm build
+# Deploy site/dist/ to your host
+```
+
+**Supported platforms:**
+- **Vercel**: `cd site && vercel`
+- **Netlify**: Build command `pnpm build`, publish `site/dist`
+- **GitHub Pages**: Use GitHub Actions
+- **Cloudflare Pages**: Connect repo, set `pnpm build` and `site/dist`
+
+## AI Assistance
+
+This project includes AI-optimized documentation:
+
+- **[CLAUDE.md](./CLAUDE.md)** — Detailed component reference and content patterns
+
+AI assistants can help with:
+- Writing publication entries
+- Adding team member profiles
+- Creating research area descriptions
+- Customizing component parameters
+
+## Learn More
+
+- [Uniweb Documentation](https://github.com/uniweb/uniweb)
+- [@uniweb/kit Components](https://www.npmjs.com/package/@uniweb/kit)
+- [Tailwind CSS](https://tailwindcss.com)
+
+---
+
+Built with the [Uniweb Academic Template](https://github.com/uniweb/templates)
