@@ -6,7 +6,7 @@ export function Testimonials({ content, params }) {
   const { theme = 'light', columns = 3 } = params || {}
 
   // Extract testimonials from subsections
-  const testimonials = content.subsections || []
+  const testimonials = content.items || []
 
   const themeStyles = {
     light: 'bg-white',

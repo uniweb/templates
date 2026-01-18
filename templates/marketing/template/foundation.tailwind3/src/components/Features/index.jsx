@@ -56,7 +56,7 @@ export function Features({ content, params }) {
   const { paragraphs = [] } = content.main?.body || {}
   const { columns = 3, theme = 'light', style = 'cards' } = params || {}
 
-  const features = content.subsections || []
+  const features = content.items || []
 
   const themes = {
     light: {

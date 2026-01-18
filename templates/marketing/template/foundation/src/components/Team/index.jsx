@@ -35,7 +35,8 @@ export function Team({ content, params }) {
     style = 'cards',
   } = params || {}
 
-  const members = content.subsections || []
+  // Extract members from semantic groups (H3 patterns)
+  const members = content.items || []
 
   const themes = {
     light: {

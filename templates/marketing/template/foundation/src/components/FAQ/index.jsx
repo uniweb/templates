@@ -17,7 +17,8 @@ export function FAQ({ content, params }) {
     expandFirst = true,
   } = params || {}
 
-  const questions = content.subsections || []
+  // Extract questions from semantic groups (H3 patterns)
+  const questions = content.items || []
   const [openItems, setOpenItems] = useState(
     expandFirst ? [0] : []
   )

@@ -33,7 +33,8 @@ export function Stats({ content, params }) {
     style = 'simple',
   } = params || {}
 
-  const stats = content.subsections || []
+  // Extract stats from semantic groups (H3 patterns)
+  const stats = content.items || []
 
   const themes = {
     light: {

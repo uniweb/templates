@@ -17,7 +17,7 @@ export function FAQ({ content, params }) {
     expandFirst = true,
   } = params || {}
 
-  const questions = content.subsections || []
+  const questions = content.items || []
   const [openItems, setOpenItems] = useState(
     expandFirst ? [0] : []
   )

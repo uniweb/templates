@@ -86,8 +86,8 @@ Description paragraph goes here.
 The semantic parser extracts content into a structured format:
 
 - **`content.main.header`**: title, pretitle (eyebrow), subtitle
-- **`content.main.body`**: paragraphs, links, imgs, list
-- **`content.subsections`**: Content groups from H2/H3 headings
+- **`content.main.body`**: paragraphs, links, imgs, lists
+- **`content.items`**: Content groups from H3 headings (each with header and body)
 
 ### Adding Eyebrow/Kicker Text
 

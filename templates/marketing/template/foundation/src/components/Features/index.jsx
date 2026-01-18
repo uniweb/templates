@@ -56,7 +56,8 @@ export function Features({ content, params }) {
   const { paragraphs = [] } = content.main?.body || {}
   const { columns = 3, theme = 'light', style = 'cards' } = params || {}
 
-  const features = content.subsections || []
+  // Items come from semantic-parser groups (H4 pretitle + H3 title patterns)
+  const features = content.items || []
 
   const themes = {
     light: {

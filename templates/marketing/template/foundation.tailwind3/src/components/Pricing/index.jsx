@@ -5,8 +5,8 @@ export function Pricing({ content, params }) {
   const { paragraphs = [] } = content.main?.body || {}
   const { theme = 'light' } = params || {}
 
-  // Extract pricing tiers from subsections
-  const tiers = content.subsections || []
+  // Extract pricing tiers from semantic groups (H3 patterns)
+  const tiers = content.items || []
 
   const themeStyles = {
     light: 'bg-gray-50',
@@ -73,14 +73,20 @@ export function Pricing({ content, params }) {
 
                 {features.length > 0 && (
                   <ul className="space-y-3 mb-8">
-                    {features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <svg className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span className={descStyles[theme]}>{feature}</span>
-                      </li>
-                    ))}
+                    {features.map((feature, i) => {
+                      // List items from semantic parser are objects with paragraphs array
+                      const featureText = typeof feature === 'string'
+                        ? feature
+                        : feature?.paragraphs?.[0] || ''
+                      return (
+                        <li key={i} className="flex items-start gap-3">
+                          <svg className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span className={descStyles[theme]}>{featureText}</span>
+                        </li>
+                      )
+                    })}
                   </ul>
                 )}
 

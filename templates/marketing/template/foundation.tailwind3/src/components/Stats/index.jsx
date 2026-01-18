@@ -33,7 +33,7 @@ export function Stats({ content, params }) {
     style = 'simple',
   } = params || {}
 
-  const stats = content.subsections || []
+  const stats = content.items || []
 
   const themes = {
     light: {

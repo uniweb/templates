@@ -35,7 +35,7 @@ export function Team({ content, params }) {
     style = 'cards',
   } = params || {}
 
-  const members = content.subsections || []
+  const members = content.items || []
 
   const themes = {
     light: {
