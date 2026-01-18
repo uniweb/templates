@@ -142,6 +142,30 @@ This `"foundation": "file:../foundation"` entry is essential because:
 - Foundation: `"name": "foundation"` (not `{{projectName}}-foundation`)
 - Site: `"name": "site"` (not `{{projectName}}-site`)
 
+**The foundation package MUST include `@uniweb/core` as a direct dependency:**
+
+```json
+// foundation/package.json.hbs
+{
+  "name": "foundation",
+  "dependencies": {
+    "@uniweb/core": "{{version "@uniweb/core"}}",
+    "@uniweb/kit": "{{version "@uniweb/kit"}}"
+  }
+}
+```
+
+This is required because:
+1. The foundation build externalizes `@uniweb/core` (it's not bundled into `foundation.js`)
+2. When the site's prerender (SSG) loads `foundation/dist/foundation.js` in Node.js, it needs to resolve `import ... from '@uniweb/core'`
+3. pnpm uses strict module resolution - each package can only see its own dependencies
+4. Even though `@uniweb/kit` depends on `@uniweb/core`, the foundation's direct imports won't resolve through transitive dependencies
+
+Without this, prerendering will fail with:
+```
+Cannot find package '@uniweb/core' imported from foundation/dist/foundation.js
+```
+
 ### Root package.json Requirements
 
 The root `package.json.hbs` must include workspace configuration for both npm and pnpm:
@@ -352,6 +376,7 @@ This forces Vite to pre-bundle these packages, ensuring proper CJS→ESM convers
 - [ ] Include `pnpm-workspace.yaml` with workspace packages
 - [ ] Include both `foundation/` and `site/` packages
 - [ ] Add `"foundation": "file:../foundation"` to site's dependencies (not `workspace:*`)
+- [ ] Add `"@uniweb/core"` to foundation's dependencies (required for prerender/SSG)
 - [ ] Use fixed names: `"name": "foundation"` and `"name": "site"`
 - [ ] Add `.hbs` extension to files needing variable substitution
 - [ ] Include sample content in `site/pages/`
