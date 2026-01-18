@@ -23,6 +23,103 @@ cd foundation && pnpm build  # Build foundation
 cd site && pnpm build        # Build site
 ```
 
+## Navigation Components
+
+### Navbar
+
+Site navigation header with automatic page detection and locale switcher.
+
+**Parameters:**
+- `mode`: auto | manual (auto builds from site pages, manual uses content links)
+- `sticky`: true | false (sticky header)
+- `showLocale`: auto | always | never (locale switcher visibility)
+- `logoPosition`: left | center
+
+```markdown
+---
+type: Navbar
+mode: auto
+sticky: true
+showLocale: auto
+---
+
+# Site Name
+
+![Logo](logo.png)
+```
+
+In **auto mode**, the navbar automatically shows all pages from your site that are visible in header navigation (respects `hideInHeader` page option).
+
+In **manual mode**, provide links in the content:
+
+```markdown
+---
+type: Navbar
+mode: manual
+---
+
+# Site Name
+
+[Home](/)
+[Research](/research)
+[Publications](/publications)
+```
+
+### Footer
+
+Site footer with navigation, contact info, and copyright.
+
+**Parameters:**
+- `mode`: auto | manual (auto builds from site pages)
+- `columns`: auto | 2 | 3 | 4
+- `background`: dark | light | primary | white
+- `showCopyright`: true | false
+- `copyrightText`: custom copyright (uses site name + year if not set)
+
+```markdown
+---
+type: Footer
+mode: auto
+background: dark
+---
+
+# Site Name
+
+Research Lab Description
+
+[GitHub](https://github.com)
+[Google Scholar](https://scholar.google.com)
+[LinkedIn](https://linkedin.com)
+```
+
+**Multi-column footer** (use H3 for column headings):
+
+```markdown
+---
+type: Footer
+mode: manual
+columns: 4
+---
+
+# Site Name
+
+### Quick Links
+
+[Home](/)
+[Research](/research)
+[Publications](/publications)
+
+### Contact
+
+email@university.edu
+Building 123, Room 456
+
+### Social
+
+[GitHub](https://github.com)
+[Twitter](https://twitter.com)
+```
+
 ## Academic Components
 
 ### ProfileHero

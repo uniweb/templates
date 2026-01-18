@@ -13,6 +13,8 @@ import Timeline from './components/Timeline/index.jsx'
 import ContactCard from './components/ContactCard/index.jsx'
 import Text from './components/Text/index.jsx'
 import Section from './components/Section/index.jsx'
+import Navbar from './components/Navbar/index.jsx'
+import Footer from './components/Footer/index.jsx'
 
 const components = {
   ProfileHero,
@@ -23,6 +25,8 @@ const components = {
   ContactCard,
   Text,
   Section,
+  Navbar,
+  Footer,
 }
 
 export function getComponent(name) {
@@ -54,6 +58,8 @@ export {
   ContactCard,
   Text,
   Section,
+  Navbar,
+  Footer,
 }
 
 export default { getComponent, listComponents, getSchema, getAllSchemas, components }
