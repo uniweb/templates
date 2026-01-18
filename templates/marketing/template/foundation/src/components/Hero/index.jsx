@@ -256,4 +256,12 @@ export function Hero({ content, params }) {
   )
 }
 
+// Static context for cross-block communication
+// Header reads this to know Hero supports translucent/floating navbar
+Hero.block = {
+  context: {
+    allowTranslucentTop: true
+  }
+}
+
 export default Hero
