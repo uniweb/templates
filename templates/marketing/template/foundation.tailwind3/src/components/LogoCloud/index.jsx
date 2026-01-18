@@ -43,7 +43,7 @@ export function LogoCloud({ content, params }) {
   const logos = imgs.map((img, i) => ({
     src: img.url || img.src,
     alt: img.alt || '',
-    link: links[i]?.url,
+    link: links[i]?.href,
   }))
 
   const LogoImage = ({ logo }) => (

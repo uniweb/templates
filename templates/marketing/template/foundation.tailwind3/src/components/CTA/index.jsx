@@ -51,18 +51,18 @@ export function CTA({ content, params }) {
           <div className={`flex gap-4 ${alignment === 'center' ? 'justify-center' : ''} flex-wrap`}>
             {cta && (
               <a
-                href={cta.url}
+                href={cta.href}
                 className={`inline-block px-8 py-4 font-semibold rounded-lg transition-colors ${buttonStyles[theme]}`}
               >
-                {cta.text}
+                {cta.label}
               </a>
             )}
             {secondaryCta && (
               <a
-                href={secondaryCta.url}
+                href={secondaryCta.href}
                 className={`inline-block px-8 py-4 font-semibold rounded-lg transition-colors ${secondaryStyles[theme]}`}
               >
-                {secondaryCta.text}
+                {secondaryCta.label}
               </a>
             )}
           </div>

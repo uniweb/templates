@@ -136,13 +136,13 @@ export function Hero({ content, params }) {
         <div className={cn('flex gap-4 flex-wrap', getButtonAlignment())}>
           {cta && (
             <Link
-              href={cta.url}
+              href={cta.href}
               className={cn(
                 'inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all duration-200',
                 t.primaryBtn
               )}
             >
-              {cta.text}
+              {cta.label}
               <svg
                 className="ml-2 w-5 h-5"
                 fill="none"
@@ -160,13 +160,13 @@ export function Hero({ content, params }) {
           )}
           {secondaryCta && (
             <Link
-              href={secondaryCta.url}
+              href={secondaryCta.href}
               className={cn(
                 'inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all duration-200',
                 t.secondaryBtn
               )}
             >
-              {secondaryCta.text}
+              {secondaryCta.label}
             </Link>
           )}
         </div>

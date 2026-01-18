@@ -123,10 +123,10 @@ export function Team({ content, params }) {
                   {socialLinks.length > 0 && (
                     <div className="flex justify-center gap-3 mt-3">
                       {socialLinks.map((link, i) => {
-                        const type = getSocialType(link.url)
+                        const type = getSocialType(link.href)
                         const Icon = type ? socialIcons[type] : null
                         return Icon ? (
-                          <Link key={i} href={link.url} className={t.social}>
+                          <Link key={i} href={link.href} className={t.social}>
                             <Icon className="w-5 h-5" />
                           </Link>
                         ) : null
@@ -170,10 +170,10 @@ export function Team({ content, params }) {
                   {socialLinks.length > 0 && (
                     <div className="flex gap-3">
                       {socialLinks.map((link, i) => {
-                        const type = getSocialType(link.url)
+                        const type = getSocialType(link.href)
                         const Icon = type ? socialIcons[type] : null
                         return Icon ? (
-                          <Link key={i} href={link.url} className={t.social}>
+                          <Link key={i} href={link.href} className={t.social}>
                             <Icon className="w-5 h-5" />
                           </Link>
                         ) : null

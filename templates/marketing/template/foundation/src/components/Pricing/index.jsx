@@ -86,14 +86,14 @@ export function Pricing({ content, params }) {
 
                 {link && (
                   <a
-                    href={link.url}
+                    href={link.href}
                     className={`block w-full py-3 text-center font-semibold rounded-lg transition-colors ${
                       isPopular
                         ? 'bg-primary text-white hover:bg-blue-700'
                         : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
                     }`}
                   >
-                    {link.text}
+                    {link.label}
                   </a>
                 )}
               </div>

@@ -2,7 +2,7 @@ import React from 'react'
 import { H1, P, Link, cn } from '@uniweb/kit'
 
 /**
- * Hero Component (Tailwind v3)
+ * Hero Component
  *
  * A modern hero section with multiple layout options, glassmorphism effects,
  * and support for eyebrow text (kicker).
@@ -37,27 +37,27 @@ export function Hero({ content, params }) {
   const isSplit = layout === 'split-left' || layout === 'split-right'
   const isImageLeft = layout === 'split-left'
 
-  // Theme configurations (Tailwind v3 compatible)
+  // Theme configurations
   const themes = {
     gradient: {
       section: 'bg-gradient-to-br from-primary via-blue-600 to-indigo-700 text-white',
-      eyebrow: 'bg-white bg-opacity-20 text-white border border-white border-opacity-20',
+      eyebrow: 'bg-white/20 text-white backdrop-blur-sm border border-white/20',
       description: 'text-blue-100',
-      primaryBtn: 'bg-white text-primary hover:bg-blue-50 shadow-lg',
-      secondaryBtn: 'border-2 border-white border-opacity-30 text-white hover:bg-white hover:bg-opacity-10',
+      primaryBtn: 'bg-white text-primary hover:bg-blue-50 shadow-lg shadow-blue-900/20',
+      secondaryBtn: 'border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm',
       pattern: 'opacity-10',
     },
     glass: {
       section: 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white',
-      eyebrow: 'bg-primary bg-opacity-20 text-blue-200 border border-primary border-opacity-30',
+      eyebrow: 'bg-primary/20 text-primary-200 backdrop-blur-sm border border-primary/30',
       description: 'text-slate-300',
-      primaryBtn: 'bg-primary text-white hover:bg-blue-600 shadow-lg',
-      secondaryBtn: 'border border-white border-opacity-20 text-white hover:bg-white hover:bg-opacity-10',
+      primaryBtn: 'bg-primary text-white hover:bg-blue-600 shadow-lg shadow-primary/30',
+      secondaryBtn: 'border border-white/20 text-white hover:bg-white/10 backdrop-blur-sm',
       pattern: 'opacity-5',
     },
     dark: {
       section: 'bg-gray-900 text-white',
-      eyebrow: 'bg-primary bg-opacity-20 text-blue-300 border border-primary border-opacity-30',
+      eyebrow: 'bg-primary/20 text-primary-300 border border-primary/30',
       description: 'text-gray-400',
       primaryBtn: 'bg-primary text-white hover:bg-blue-600',
       secondaryBtn: 'border-2 border-gray-700 text-gray-300 hover:bg-gray-800',
@@ -65,11 +65,11 @@ export function Hero({ content, params }) {
     },
     light: {
       section: 'bg-gray-50 text-gray-900',
-      eyebrow: 'bg-primary bg-opacity-10 text-primary border border-primary border-opacity-20',
+      eyebrow: 'bg-primary/10 text-primary border border-primary/20',
       description: 'text-gray-600',
-      primaryBtn: 'bg-primary text-white hover:bg-blue-700 shadow-lg',
+      primaryBtn: 'bg-primary text-white hover:bg-blue-700 shadow-lg shadow-primary/20',
       secondaryBtn: 'border-2 border-gray-300 text-gray-700 hover:bg-gray-100',
-      pattern: 'opacity-5',
+      pattern: 'opacity-[0.03]',
     },
   }
 
@@ -136,13 +136,13 @@ export function Hero({ content, params }) {
         <div className={cn('flex gap-4 flex-wrap', getButtonAlignment())}>
           {cta && (
             <Link
-              href={cta.url}
+              href={cta.href}
               className={cn(
                 'inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all duration-200',
                 t.primaryBtn
               )}
             >
-              {cta.text}
+              {cta.label}
               <svg
                 className="ml-2 w-5 h-5"
                 fill="none"
@@ -160,13 +160,13 @@ export function Hero({ content, params }) {
           )}
           {secondaryCta && (
             <Link
-              href={secondaryCta.url}
+              href={secondaryCta.href}
               className={cn(
                 'inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all duration-200',
                 t.secondaryBtn
               )}
             >
-              {secondaryCta.text}
+              {secondaryCta.label}
             </Link>
           )}
         </div>
@@ -180,10 +180,7 @@ export function Hero({ content, params }) {
     return (
       <div className="relative">
         {/* Glassmorphism card behind image */}
-        <div
-          className="absolute -inset-4 bg-white bg-opacity-10 rounded-3xl border border-white border-opacity-20"
-          style={{ backdropFilter: 'blur(24px)' }}
-        />
+        <div className="absolute -inset-4 bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20" />
         <img
           src={heroImage.url || heroImage.src}
           alt={heroImage.alt || title || ''}
@@ -217,14 +214,8 @@ export function Hero({ content, params }) {
       {/* Gradient Orbs for glass theme */}
       {theme === 'glass' && (
         <>
-          <div
-            className="absolute top-0 left-1/4 w-96 h-96 bg-primary bg-opacity-30 rounded-full"
-            style={{ filter: 'blur(100px)' }}
-          />
-          <div
-            className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-500 bg-opacity-20 rounded-full"
-            style={{ filter: 'blur(100px)' }}
-          />
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/30 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl" />
         </>
       )}
 
@@ -250,10 +241,7 @@ export function Hero({ content, params }) {
             <ContentBlock />
             {heroImage && (
               <div className="mt-12 relative">
-                <div
-                  className="absolute -inset-4 bg-white bg-opacity-10 rounded-3xl border border-white border-opacity-20"
-                  style={{ backdropFilter: 'blur(24px)' }}
-                />
+                <div className="absolute -inset-4 bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20" />
                 <img
                   src={heroImage.url || heroImage.src}
                   alt={heroImage.alt || title || ''}

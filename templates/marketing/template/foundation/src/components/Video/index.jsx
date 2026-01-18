@@ -42,11 +42,12 @@ export function Video({ content, params }) {
 
   // Get video URL from first link
   const videoLink = links[0]
-  const videoUrl = videoLink?.url
+  const videoUrl = videoLink?.href
   const videoInfo = extractVideoId(videoUrl)
 
   // Get thumbnail from first image or generate from video
-  const thumbnail = content.main?.body?.imgs?.[0]?.url ||
+  const thumbImg = content.main?.body?.imgs?.[0]
+  const thumbnail = thumbImg?.url || thumbImg?.src ||
     (videoInfo?.type === 'youtube'
       ? `https://img.youtube.com/vi/${videoInfo.id}/maxresdefault.jpg`
       : null)
