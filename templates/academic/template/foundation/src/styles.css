@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@source "./components/**/*.{js,jsx}";
+
+@theme {
+  /* Academic color palette - professional blues and warm accents */
+  --color-primary: #1e40af;      /* Deep blue - institutional */
+  --color-accent: #b45309;       /* Warm amber - for highlights */
+  --color-muted: #64748b;        /* Slate gray - secondary text */
+
+  /* Semantic colors for publication types */
+  --color-journal: #1e40af;
+  --color-conference: #7c3aed;
+  --color-book: #059669;
+  --color-preprint: #d97706;
+}
+
+/* Academic typography enhancements */
+.prose-academic {
+  font-feature-settings: 'liga' 1, 'kern' 1;
+}
+
+.prose-academic h1,
+.prose-academic h2,
+.prose-academic h3 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Publication citation styling */
+.citation {
+  padding-left: 2em;
+  text-indent: -2em;
+}
+
+.citation-authors {
+  font-weight: 500;
+}
+
+.citation-title {
+  font-style: italic;
+}
+
+.citation-venue {
+  color: var(--color-muted);
+}
