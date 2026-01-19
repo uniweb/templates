@@ -1,0 +1,115 @@
+# {{projectName}}
+
+A documentation site built with [Uniweb](https://github.com/uniweb/uniweb) — a component web platform that separates content from code.
+
+## Quick Start
+
+```bash
+pnpm install    # Install dependencies
+pnpm dev        # Start development server
+```
+
+Visit `http://localhost:5173` to see your site.
+
+## Project Structure
+
+```
+{{projectName}}/
+├── foundation/          # Documentation components (React + Tailwind CSS v4)
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Header/
+│   │   │   ├── LeftPanel/
+│   │   │   ├── DocSection/
+│   │   │   └── Footer/
+│   │   └── styles.css   # Tailwind theme
+│   ├── vite.config.js   # 3-line config: defineFoundationConfig()
+│   └── dist/            # Built output
+│
+├── site/                # Documentation content (markdown)
+│   ├── pages/
+│   │   ├── @header/     # Global header
+│   │   ├── @footer/     # Global footer
+│   │   ├── @left/       # Left sidebar navigation
+│   │   ├── getting-started/
+│   │   ├── guide/
+│   │   └── api/
+│   ├── site.yml         # Site configuration
+│   ├── src/main.jsx     # 1-line entry
+│   └── vite.config.js   # 3-line config: defineSiteConfig()
+│
+├── CLAUDE.md            # AI assistant instructions
+└── README.md            # This file
+```
+
+## Navigation Levels
+
+This template supports navigation levels where:
+
+1. **Header** shows root-level pages as tabs (when `site_navigation: true`)
+2. **LeftPanel** shows pages under the current root section
+
+This creates a GitBook-like experience.
+
+## Components
+
+| Component | Description | Key Parameters |
+|-----------|-------------|----------------|
+| **Header** | Navigation header with tabs | `sticky`, `site_navigation` |
+| **LeftPanel** | Sidebar navigation | `collapsible`, `site_navigation` |
+| **DocSection** | Main content renderer | `show_navigation`, `max_width` |
+| **Footer** | Simple site footer | - |
+
+## Content Authoring
+
+Documentation pages use markdown with YAML frontmatter:
+
+```markdown
+---
+type: DocSection
+---
+
+### Category Name
+
+# Page Title
+
+## Subtitle
+
+Content goes here...
+```
+
+### Adding a New Page
+
+1. Create folder: `site/pages/guide/my-topic/`
+2. Add `page.yml`:
+   ```yaml
+   title: My Topic
+   order: 3
+   ```
+3. Add `1-content.md` with your documentation
+
+## Building
+
+```bash
+# Build foundation
+cd foundation && pnpm build
+
+# Build site for production
+cd site && pnpm build
+```
+
+Deploy `site/dist/` to any static host.
+
+## AI Assistance
+
+See [CLAUDE.md](./CLAUDE.md) for detailed instructions that AI assistants can use.
+
+## Learn More
+
+- [Uniweb Documentation](https://github.com/uniweb/uniweb)
+- [@uniweb/kit Components](https://www.npmjs.com/package/@uniweb/kit)
+- [Tailwind CSS v4](https://tailwindcss.com)
+
+---
+
+Built with the [Uniweb Docs Template](https://github.com/uniweb/templates)

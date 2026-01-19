@@ -23,26 +23,25 @@ This project has two packages that work together:
 
 ```
 {{projectName}}/
-├── foundation/          # Component library (React + Tailwind)
+├── foundation/          # Component library (React + Tailwind CSS v4)
 │   ├── src/
-│   │   ├── components/  # Exposed components
+│   │   ├── components/  # Marketing components
 │   │   │   ├── Hero/
 │   │   │   ├── Features/
 │   │   │   ├── Pricing/
-│   │   │   ├── Testimonials/
-│   │   │   └── CTA/
-│   │   └── styles.css   # Tailwind configuration
-│   └── dist/            # Built output (after build)
-│       └── schema.json  # Component documentation
+│   │   │   └── ...
+│   │   └── styles.css   # Tailwind theme
+│   ├── vite.config.js   # 3-line config: defineFoundationConfig()
+│   └── dist/            # Built output
 │
-├── site/                # Content site (markdown + config)
+├── site/                # Content site (markdown)
 │   ├── pages/           # Content pages
-│   │   └── home/
-│   │       ├── page.yml       # Page metadata
-│   │       ├── 1-hero.md      # Section content
-│   │       ├── 2-features.md
-│   │       └── ...
-│   └── site.yml         # Site configuration
+│   │   ├── home/
+│   │   ├── about/
+│   │   └── features/
+│   ├── site.yml         # Site configuration
+│   ├── src/main.jsx     # 1-line entry
+│   └── vite.config.js   # 3-line config: defineSiteConfig()
 │
 ├── CLAUDE.md            # AI assistant instructions
 └── README.md            # This file
@@ -96,26 +95,23 @@ Files are sorted alphabetically, so prefix with numbers: `1-`, `2-`, `3-`
 
 ## Components
 
-This foundation includes these components:
+This foundation includes marketing components:
 
 | Component | Description | Key Parameters |
 |-----------|-------------|----------------|
 | **Hero** | Header with headline, CTA buttons | `theme`, `layout` |
 | **Features** | Feature grid with icons | `theme`, `columns` |
 | **Pricing** | Pricing tiers comparison | `theme` |
-| **Testimonials** | Customer quotes | `theme`, `columns` |
+| **Testimonials** | Customer quotes carousel | `theme`, `columns` |
 | **CTA** | Call-to-action banner | `theme`, `alignment` |
+| **FAQ** | Expandable FAQ accordion | `theme` |
+| **Stats** | Statistics/metrics display | `theme` |
+| **LogoCloud** | Client/partner logos | `theme` |
+| **Video** | Video embed with lightbox | `theme` |
+| **Gallery** | Image gallery grid | `theme`, `columns` |
+| **Team** | Team member cards | `theme`, `columns` |
 
-### Component Documentation
-
-After building the foundation, detailed component docs are in `foundation/dist/schema.json`.
-
-To generate readable documentation:
-
-```bash
-cd foundation && pnpm build
-# schema.json contains all component metadata
-```
+After building, component metadata is in `foundation/dist/schema.json`.
 
 ## Development
 
