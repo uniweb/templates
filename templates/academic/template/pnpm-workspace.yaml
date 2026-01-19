@@ -1,3 +1,5 @@
 packages:
-  - 'foundation'
-  - 'site'
+  - foundation
+  - site
+  - foundations/*
+  - sites/*
