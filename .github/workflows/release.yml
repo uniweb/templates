@@ -60,15 +60,23 @@ jobs:
             | Template | Description |
             |----------|-------------|
             | `marketing` | Landing pages and marketing sites with Tailwind CSS v4 |
+            | `academic` | Academic sites for researchers, labs, and departments |
+            | `docs` | Documentation sites with navigation levels |
 
             ### Usage
 
             ```bash
-            # Use the marketing template (default: Tailwind v4)
+            # Marketing template (default: Tailwind v4)
             npx uniweb@latest create myproject --template marketing
 
-            # Use with Tailwind v3 (legacy)
+            # Marketing with Tailwind v3
             npx uniweb@latest create myproject --template marketing --variant tailwind3
+
+            # Academic template
+            npx uniweb@latest create myproject --template academic
+
+            # Documentation template
+            npx uniweb@latest create myproject --template docs
             ```
 
             ### Installation

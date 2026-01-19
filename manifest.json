@@ -6,6 +6,16 @@
       "description": "Landing pages and marketing sites with Tailwind CSS v4",
       "variants": ["tailwind3"],
       "tags": ["marketing", "landing-page", "tailwind"]
+    },
+    "academic": {
+      "name": "Academic",
+      "description": "Academic sites for researchers, labs, and departments",
+      "tags": ["academic", "research", "portfolio"]
+    },
+    "docs": {
+      "name": "Documentation",
+      "description": "Documentation sites with navigation levels",
+      "tags": ["docs", "documentation", "technical"]
     }
   }
 }
