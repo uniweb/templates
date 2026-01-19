@@ -57,8 +57,7 @@ templates/
             ├── package.json.hbs
             ├── site.yml.hbs
             ├── vite.config.js
-            ├── src/
-            │   └── main.jsx
+            ├── loader.js
             └── pages/
                 └── home/
                     ├── page.yml
