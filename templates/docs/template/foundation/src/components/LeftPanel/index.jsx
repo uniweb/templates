@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from 'react'
-import { Link, cn } from '@uniweb/kit'
-import { useLocation } from 'react-router-dom'
+import { Link, cn, useRouting } from '@uniweb/kit'
 
 /**
  * LeftPanel Component for Documentation Sites
@@ -25,7 +24,8 @@ export function LeftPanel({ content, params, block, website }) {
   // Get navigation data
   const pages = website?.getPageHierarchy?.({ for: 'header' }) || []
 
-  // Use useLocation for reactive route updates during client-side navigation
+  // Use SSG-safe useLocation for reactive route updates during client-side navigation
+  const { useLocation } = useRouting()
   const location = useLocation()
   const activeRoute = location?.pathname?.replace(/^\//, '').replace(/\/$/, '') || ''
   const firstSegment = activeRoute.split('/')[0]
