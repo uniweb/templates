@@ -1,37 +1,18 @@
 # {{projectName}}
 
-A marketing site built with [Uniweb](https://github.com/uniweb/uniweb) — a component web platform that separates content from code.
+A marketing site built with [Uniweb](https://github.com/uniweb/cli) — a component web platform that separates content from code.
 
-## Quick Start
-
-```bash
-# Install dependencies
-pnpm install
-
-# Start development server
-pnpm dev
-
-# Build for production
-pnpm build
-```
-
-Visit `http://localhost:5173` to see your site.
+{{> quick-start}}
 
 ## Project Structure
-
-This project has two packages that work together:
 
 ```
 {{projectName}}/
 ├── foundation/          # Component library (React + Tailwind CSS v4)
 │   ├── src/
-│   │   ├── components/  # Marketing components
-│   │   │   ├── Hero/
-│   │   │   ├── Features/
-│   │   │   ├── Pricing/
-│   │   │   └── ...
+│   │   ├── components/  # Marketing components (Hero, Features, Pricing, etc.)
 │   │   └── styles.css   # Tailwind theme
-│   ├── vite.config.js   # 3-line config: defineFoundationConfig()
+│   ├── vite.config.js   # defineFoundationConfig()
 │   └── dist/            # Built output
 │
 ├── site/                # Content site (markdown)
@@ -40,21 +21,13 @@ This project has two packages that work together:
 │   │   ├── about/
 │   │   └── features/
 │   ├── site.yml         # Site configuration
-│   ├── main.js        # 1-line entry
-│   └── vite.config.js   # 3-line config: defineSiteConfig()
+│   └── vite.config.js   # defineSiteConfig()
 │
 ├── CLAUDE.md            # AI assistant instructions
 └── README.md            # This file
 ```
 
-### Foundation vs Site
-
-| Foundation | Site |
-|------------|------|
-| React components | Markdown content |
-| Styled with Tailwind | Configured with YAML |
-| Built once, used everywhere | Content changes don't need rebuild |
-| Can be published separately | Uses foundation as dependency |
+{{> components-docs}}
 
 ## Content Authoring
 
@@ -85,169 +58,35 @@ Description paragraph with supporting text.
 2. Add `page.yml` with page metadata:
    ```yaml
    title: My Page
-   path: /my-page
    ```
 3. Add section files: `1-hero.md`, `2-content.md`, etc.
 
-### Section Naming
-
-Files are sorted alphabetically, so prefix with numbers: `1-`, `2-`, `3-`
-
-{{> components-docs}}
+{{> search-docs}}
 
 ## Development
 
-### Creating a New Component
+### Running Individual Packages
+
+```bash
+# Foundation dev server (component development)
+pnpm --filter foundation dev
+
+# Site dev server (content development)
+pnpm --filter site dev
+```
+
+### Creating New Components
 
 1. Create folder: `foundation/src/components/MyComponent/`
-
-2. Add `index.jsx`:
-   ```jsx
-   import { H1, P, cn } from '@uniweb/kit'
-
-   export function MyComponent({ content, params }) {
-     const { title } = content.main?.header || {}
-     const { theme = 'light' } = params || {}
-
-     return (
-       <section className={cn('py-20', theme === 'dark' && 'bg-gray-900')}>
-         <H1 text={title} />
-       </section>
-     )
-   }
-
-   export default MyComponent
-   ```
-
-3. Add `meta.js`:
-   ```javascript
-   export default {
-     title: 'My Component',
-     description: 'Description of what it does',
-     category: 'Content',
-
-     elements: {
-       title: { label: 'Title', required: true },
-       paragraphs: { label: 'Description' },
-     },
-
-     properties: {
-       theme: {
-         type: 'select',
-         label: 'Theme',
-         options: [
-           { value: 'light', label: 'Light' },
-           { value: 'dark', label: 'Dark' },
-         ],
-         default: 'light',
-       },
-     },
-   }
-   ```
-
+2. Add `index.jsx` with the React component
+3. Add `meta.js` with metadata and parameters
 4. Rebuild: `cd foundation && pnpm build`
 
-### Styling
+See `CLAUDE.md` for detailed component development guidelines.
 
-This project uses **Tailwind CSS v4**. Customize colors in `foundation/src/styles.css`:
+{{> deployment}}
 
-```css
-@theme {
-  --color-primary: #3b82f6;
-  --color-secondary: #64748b;
-}
-```
-
-{{> search-docs}}
-
-## AI Assistance
-
-This project includes AI-optimized documentation. If you're using an AI assistant:
-
-- **[CLAUDE.md](./CLAUDE.md)** — Detailed instructions for AI assistants covering:
-  - Project architecture and conventions
-  - Content authoring patterns
-  - Component development guidelines
-  - @uniweb/kit usage
-  - Troubleshooting tips
-
-AI assistants can help with:
-- Writing new content sections
-- Creating new components
-- Debugging build issues
-- Optimizing for SEO
-
-## Deployment
-
-### Static Hosting
-
-Build and deploy the `site/dist` folder:
-
-```bash
-pnpm build
-# Deploy site/dist/ to your host
-```
-
-**Supported platforms:**
-- **Vercel**: `cd site && vercel`
-- **Netlify**: Set build command to `pnpm build`, publish directory to `site/dist`
-- **GitHub Pages**: Use GitHub Actions to build and deploy
-- **Cloudflare Pages**: Connect repo, set `pnpm build` and `site/dist`
-
-### Preview Production Build
-
-```bash
-pnpm preview
-```
-
-## Foundation Reuse
-
-The foundation is a standalone component library that can be:
-
-### Published to npm
-
-```bash
-cd foundation
-pnpm build
-npm publish --access public
-```
-
-Then use in other projects:
-```bash
-pnpm add your-foundation-name
-```
-
-### Used in Multiple Sites
-
-The foundation can power multiple sites. Each site references the foundation:
-
-```json
-// site/package.json
-{
-  "dependencies": {
-    "foundation": "file:../foundation"  // Local
-    // OR
-    "foundation": "^1.0.0"              // Published
-  }
-}
-```
-
-### Versioning
-
-Consider semantic versioning for your foundation:
-- **Patch** (0.0.x): Bug fixes, style tweaks
-- **Minor** (0.x.0): New components, new features
-- **Major** (x.0.0): Breaking changes to component interfaces
-
-## Scripts Reference
-
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start development server |
-| `pnpm build` | Build foundation and site |
-| `pnpm preview` | Preview production build |
-| `pnpm --filter foundation dev` | Foundation dev server only |
-| `pnpm --filter site dev` | Site dev server only |
+{{> ai-assistance}}
 
 {{> learn-more}}
 
