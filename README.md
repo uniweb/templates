@@ -111,6 +111,7 @@ The CLI provides shared partials that remote templates can use in `.hbs` files:
 |---------|---------|
 | `{{> claude-md}}` | Complete CLAUDE.md for AI assistants |
 | `{{> search-docs}}` | Search feature documentation |
+| `{{> exports-js}}` | JSDoc header for foundation exports.js |
 
 **Example: CLAUDE.md.hbs**
 
