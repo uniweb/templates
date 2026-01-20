@@ -166,20 +166,7 @@ pnpm --filter site dev
 
 See `CLAUDE.md` for detailed component development guidelines.
 
-## Deployment
-
-Build and deploy the `site/dist` folder:
-
-```bash
-pnpm build
-# Deploy site/dist/ to your host
-```
-
-**Supported platforms:**
-- **Vercel**: `cd site && vercel`
-- **Netlify**: Build command `pnpm build`, publish `site/dist`
-- **GitHub Pages**: Use GitHub Actions
-- **Cloudflare Pages**: Connect repo, set `pnpm build` and `site/dist`
+{{> deployment}}
 
 ## AI Assistance
 
@@ -193,11 +180,7 @@ AI assistants can help with:
 - Creating research area descriptions
 - Customizing component parameters
 
-## Learn More
-
-- [Uniweb Documentation](https://github.com/uniweb/uniweb)
-- [@uniweb/kit Components](https://www.npmjs.com/package/@uniweb/kit)
-- [Tailwind CSS](https://tailwindcss.com)
+{{> learn-more}}
 
 ---
 
