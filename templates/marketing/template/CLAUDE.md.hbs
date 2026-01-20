@@ -1,0 +1,69 @@
+# CLAUDE.md - AI Assistant Instructions
+
+This file provides guidance for AI assistants working with this Uniweb marketing project.
+
+{{> project-overview}}
+
+{{> quick-commands}}
+
+{{> key-files}}
+
+{{> content-authoring}}
+
+## Marketing Components
+
+This foundation includes these marketing-focused components:
+
+- **Hero** - Landing page hero with headline and CTA
+- **Features** - Feature grid with icons
+- **Pricing** - Pricing table with tiers
+- **Testimonials** - Customer quotes
+- **CTA** - Call-to-action sections
+
+### Semantic Parameters
+
+Design parameters that describe **intent**, not implementation:
+
+| Good (Semantic) | Bad (Implementation) |
+|-----------------|---------------------|
+| `theme: "dark"` | `backgroundColor: "#1a1a1a"` |
+| `layout: "split-right"` | `gridTemplateColumns: "1fr 1fr"` |
+| `size: "large"` | `fontSize: "2rem"` |
+| `emphasis: "high"` | `fontWeight: 700` |
+
+This allows:
+- Content creators to make meaningful choices
+- Designers to change implementations without breaking content
+- Consistent design language across components
+
+{{> component-interface}}
+
+{{> tailwind-setup}}
+
+## Best Practices
+
+### For Content (Site)
+
+1. Use semantic markdown structure
+2. Keep sections focused on one purpose
+3. Use H3 for eyebrow text before H1
+4. Provide alt text for images
+
+### For Components (Foundation)
+
+1. Always handle missing content gracefully
+2. Use kit components for typography and media
+3. Define semantic parameters, not CSS values
+4. Document elements and properties in meta.js
+5. Use `cn()` for conditional class merging
+
+### Avoid
+
+- Don't hardcode content in components
+- Don't create parameters for every CSS property
+- Don't skip the meta.js file
+- Don't import @uniweb/core directly (use @uniweb/kit)
+
+{{> troubleshooting}}
+
+{{> resources}}

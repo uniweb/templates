@@ -2,49 +2,19 @@
 
 This file provides guidance for AI assistants working with this Uniweb documentation project.
 
-## Project Overview
+{{> project-overview}}
 
-This is a **Uniweb** documentation project with navigation levels support. The project has two main packages:
+{{> quick-commands}}
 
-```
-{{projectName}}/
-├── foundation/     # React component library (code)
-├── site/           # Content and pages (markdown)
-├── package.json    # Root workspace config
-└── pnpm-workspace.yaml
-```
+## Documentation Components
 
-### Quick Commands
+This foundation contains documentation-focused React components:
 
-```bash
-# Install dependencies
-pnpm install
-
-# Start development server
-pnpm dev
-
-# Build the foundation
-cd foundation && pnpm build
-
-# Build the site for production
-cd site && pnpm build
-```
-
-## Architecture
-
-### Foundation Package (`/foundation`)
-
-The **foundation** contains documentation-focused React components:
-
-- `Header` - Navigation header with optional site navigation tabs
-- `LeftPanel` - Sidebar navigation with collapsible sections
-- `DocSection` - Main documentation content renderer
-- `CodeBlock` - Code snippets with copy button
-- `Footer` - Simple site footer
-
-### Site Package (`/site`)
-
-The **site** contains documentation content in Markdown with YAML frontmatter.
+- **Header** - Navigation header with optional site navigation tabs
+- **LeftPanel** - Sidebar navigation with collapsible sections
+- **DocSection** - Main documentation content renderer
+- **CodeBlock** - Code snippets with copy button
+- **Footer** - Simple site footer
 
 **Key directories:**
 - `pages/@header/` - Header configuration
@@ -147,7 +117,6 @@ order: 1  # Controls navigation order
 3. **Consistent structure** - Use H3 for category, H1 for title, H2 for subtitle
 4. **Keep pages focused** - One topic per page
 
-## Resources
+{{> troubleshooting}}
 
-- [Uniweb Documentation](https://github.com/uniweb/uniweb)
-- [Tailwind CSS v4](https://tailwindcss.com/docs)
+{{> resources}}

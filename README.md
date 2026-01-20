@@ -97,6 +97,54 @@ Files ending in `.hbs` are processed through Handlebars. The `.hbs` extension is
 - `{{year}}` - Current year
 - Custom variables can be passed via the API
 
+**Version helper:**
+```handlebars
+{{version "@uniweb/build"}}    → "^0.2.0" (current published version)
+{{version "build"}}            → same, @uniweb/ prefix auto-added
+```
+
+**Available partials:**
+
+The CLI provides shared documentation partials that remote templates can use in `.hbs` files:
+
+| Partial | Purpose | Parameters |
+|---------|---------|------------|
+| `{{> project-overview}}` | Foundation/site explanation | `isMulti` |
+| `{{> quick-commands}}` | Common pnpm commands | `isMulti` |
+| `{{> key-files}}` | Key file paths | `isMulti` |
+| `{{> content-authoring}}` | Section format, frontmatter | `isMulti` |
+| `{{> component-interface}}` | Component props, @uniweb/kit | - |
+| `{{> tailwind-setup}}` | Tailwind v4 configuration | `isMulti` |
+| `{{> troubleshooting}}` | Common issues and fixes | `isMulti` |
+| `{{> resources}}` | Documentation links | - |
+| `{{> search-docs}}` | Search feature documentation | - |
+
+**Using partials with parameters:**
+```handlebars
+{{! For single-site templates (default) }}
+{{> project-overview}}
+{{> quick-commands}}
+
+{{! For multi-site templates }}
+{{> project-overview isMulti=true}}
+{{> quick-commands isMulti=true}}
+```
+
+**Example: CLAUDE.md.hbs**
+```handlebars
+# CLAUDE.md
+
+{{> project-overview}}
+{{> quick-commands}}
+
+## Custom Template Content
+
+Your template-specific documentation here...
+
+{{> troubleshooting}}
+{{> resources}}
+```
+
 **Example: package.json.hbs**
 ```json
 {
