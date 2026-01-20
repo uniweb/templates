@@ -39,7 +39,10 @@ export default defineConfig({
     }),
   ].filter(Boolean),
   server: {
-    fs: { allow: ['..'] },
+    fs: {
+      // Allow parent (for foundation sibling) and node_modules (for pnpm)
+      allow: ['..', 'node_modules']
+    },
     port: 3000,
   },
   optimizeDeps: {
