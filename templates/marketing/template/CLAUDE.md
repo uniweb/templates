@@ -34,15 +34,20 @@ cd site && pnpm build
 
 ### Foundation Package (`/foundation`)
 
-The **foundation** is a React component library that defines what content creators can build. Each component is an "exposed component" that:
+The **foundation** is a React component library. It can contain any React components, but only **exposed components** are available to content creators:
 
-1. Receives structured content parsed from markdown
-2. Has configurable parameters (theme, layout, etc.)
-3. Renders the content according to its design
+- **Exposed components**: Have a `meta.js` file and can be selected via `type:` in markdown frontmatter
+- **Internal components**: Regular React components used within exposed components
+
+Exposed components follow the `{ content, params, block }` interface:
+
+1. Receive structured content parsed from markdown
+2. Have configurable parameters (theme, layout, etc.)
+3. Render content according to their design
 
 **Key directories:**
 - `src/components/*/` - Component implementations
-- `src/components/*/meta.js` - Component metadata and schema
+- `src/components/*/meta.js` - Component metadata (makes component "exposed")
 - `src/styles.css` - Global Tailwind styles
 
 ### Site Package (`/site`)
@@ -144,7 +149,7 @@ function Hero({ content, params }) {
 
 ### Component Metadata (`meta.js`)
 
-Each component needs a `meta.js` file:
+Exposed components need a `meta.js` file to define their interface:
 
 ```javascript
 export default {
