@@ -11,6 +11,7 @@
   },
   "files": ["dist", "src"],
   "scripts": {
+    "postinstall": "node scripts/generate-entry.js",
     "dev": "vite",
     "build": "uniweb build",
     "build:vite": "vite build",
@@ -22,7 +23,8 @@
   },
   "dependencies": {
     "@uniweb/core": "{{version "@uniweb/core"}}",
-    "@uniweb/kit": "{{version "@uniweb/kit"}}"
+    "@uniweb/kit": "{{version "@uniweb/kit"}}",
+    "react-router-dom": "^7.0.0"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.0",
