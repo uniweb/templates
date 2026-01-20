@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, cn } from '@uniweb/kit'
+import { useLocation } from 'react-router-dom'
 
 /**
  * Header Component for Documentation Sites
@@ -32,8 +33,10 @@ export function Header({ content, params, block, website }) {
 
   // Get page hierarchy for site navigation
   const pages = website?.getPageHierarchy?.({ for: 'header' }) || []
-  const activePage = website?.activePage
-  const activeRoute = activePage?.route || ''
+
+  // Use useLocation for reactive route updates during client-side navigation
+  const location = useLocation()
+  const activeRoute = location?.pathname?.replace(/^\//, '').replace(/\/$/, '') || ''
   const firstSegment = activeRoute.split('/')[0]
 
   // Handle scroll for sticky behavior
@@ -63,9 +66,15 @@ export function Header({ content, params, block, website }) {
     return page.route
   }
 
+  // Normalize route by removing leading/trailing slashes
+  const normalizeRoute = (route) => {
+    return (route || '').replace(/^\//, '').replace(/\/$/, '')
+  }
+
   // Determine if a root page is active
   const isRootActive = (page) => {
-    return firstSegment === page.route || activeRoute.startsWith(page.route + '/')
+    const pageRoute = normalizeRoute(page.route)
+    return firstSegment === pageRoute || activeRoute.startsWith(pageRoute + '/')
   }
 
   // Header styles based on scroll state

@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import { Link, cn } from '@uniweb/kit'
+import { useLocation } from 'react-router-dom'
 
 /**
  * LeftPanel Component for Documentation Sites
@@ -23,8 +24,10 @@ export function LeftPanel({ content, params, block, website }) {
 
   // Get navigation data
   const pages = website?.getPageHierarchy?.({ for: 'header' }) || []
-  const activePage = website?.activePage
-  const activeRoute = activePage?.route || ''
+
+  // Use useLocation for reactive route updates during client-side navigation
+  const location = useLocation()
+  const activeRoute = location?.pathname?.replace(/^\//, '').replace(/\/$/, '') || ''
   const firstSegment = activeRoute.split('/')[0]
 
   // Initialize open state for collapsible sections
@@ -53,32 +56,38 @@ export function LeftPanel({ content, params, block, website }) {
     }))
   }, [])
 
+  // Normalize route by removing leading/trailing slashes
+  const normalizeRoute = (route) => {
+    return (route || '').replace(/^\//, '').replace(/\/$/, '')
+  }
+
   // Filter navigation based on site_navigation mode
   let navigation = pages
   if (site_navigation) {
     // Find the root section that matches the current route
-    const match = pages.find((p) => p.route === firstSegment)
-    if (match) {
-      // If the root has no content but has children, show children
-      // Otherwise show the root with its children
-      navigation = !match.hasContent && match.children?.length
-        ? match.children
-        : [match]
+    const match = pages.find((p) => normalizeRoute(p.route) === firstSegment)
+    if (match?.children?.length) {
+      // Show children of the matched root section
+      navigation = match.children
+    } else if (match) {
+      // No children, show the root itself
+      navigation = [match]
     }
   }
 
   // Check if a page is active
   const isActive = (page) => {
-    return page.route === activeRoute
+    return normalizeRoute(page.route) === activeRoute
   }
 
   // Check if a page is in the active path
   const isInActivePath = (page) => {
-    return activeRoute.startsWith(page.route + '/') || page.route === activeRoute
+    const pageRoute = normalizeRoute(page.route)
+    return activeRoute.startsWith(pageRoute + '/') || pageRoute === activeRoute
   }
 
   return (
-    <aside className="h-full bg-sidebar-bg border-r border-sidebar-border">
+    <aside className="h-full border-r border-sidebar-border">
       <div className="h-full overflow-y-auto py-6 px-4">
         <nav>
           <NavigationTree
