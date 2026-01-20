@@ -105,45 +105,22 @@ Files ending in `.hbs` are processed through Handlebars. The `.hbs` extension is
 
 **Available partials:**
 
-The CLI provides shared documentation partials that remote templates can use in `.hbs` files:
+The CLI provides shared partials that remote templates can use in `.hbs` files:
 
-| Partial | Purpose | Parameters |
-|---------|---------|------------|
-| `{{> project-overview}}` | Foundation/site explanation | `isMulti` |
-| `{{> quick-commands}}` | Common pnpm commands | `isMulti` |
-| `{{> key-files}}` | Key file paths | `isMulti` |
-| `{{> content-authoring}}` | Section format, frontmatter | `isMulti` |
-| `{{> component-interface}}` | Component props, @uniweb/kit | - |
-| `{{> tailwind-setup}}` | Tailwind v4 configuration | `isMulti` |
-| `{{> troubleshooting}}` | Common issues and fixes | `isMulti` |
-| `{{> resources}}` | Documentation links | - |
-| `{{> search-docs}}` | Search feature documentation | - |
-
-**Using partials with parameters:**
-```handlebars
-{{! For single-site templates (default) }}
-{{> project-overview}}
-{{> quick-commands}}
-
-{{! For multi-site templates }}
-{{> project-overview isMulti=true}}
-{{> quick-commands isMulti=true}}
-```
+| Partial | Purpose |
+|---------|---------|
+| `{{> claude-md}}` | Complete CLAUDE.md for AI assistants |
+| `{{> search-docs}}` | Search feature documentation |
 
 **Example: CLAUDE.md.hbs**
+
+The `claude-md` partial generates a complete AI assistant guide covering project structure (both single and multi-site), component discovery, content authoring, and troubleshooting:
+
 ```handlebars
-# CLAUDE.md
-
-{{> project-overview}}
-{{> quick-commands}}
-
-## Custom Template Content
-
-Your template-specific documentation here...
-
-{{> troubleshooting}}
-{{> resources}}
+{{> claude-md}}
 ```
+
+This teaches Claude how to explore the codebase rather than listing specific components, so the documentation never becomes outdated as the project evolves.
 
 **Example: package.json.hbs**
 ```json
