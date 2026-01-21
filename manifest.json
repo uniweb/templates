@@ -16,6 +16,11 @@
       "name": "Documentation",
       "description": "Documentation sites with navigation levels",
       "tags": ["docs", "documentation", "technical"]
+    },
+    "international": {
+      "name": "International Business",
+      "description": "Multilingual corporate website with English, Spanish, and French",
+      "tags": ["i18n", "multilingual", "corporate", "business", "localization"]
     }
   }
 }

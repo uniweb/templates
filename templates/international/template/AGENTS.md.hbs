@@ -1,0 +1,156 @@
+# AGENTS.md
+
+This file provides guidance to AI assistants working with this codebase.
+
+## Project Overview
+
+This is a multilingual business website built with [Uniweb](https://github.com/uniweb). It demonstrates internationalization (i18n) capabilities with English, Spanish, and French translations.
+
+## Quick Start
+
+```bash
+pnpm install
+pnpm dev
+```
+
+## Project Structure
+
+```
+{{projectName}}/
+├── foundation/           # React component library
+│   └── src/components/   # Hero, Features, Team, CTA, Header, Footer
+├── site/                 # Content and configuration
+│   ├── pages/            # Page content (markdown + YAML)
+│   ├── locales/          # Translation files
+│   │   ├── manifest.json # Extracted translatable strings
+│   │   ├── es.json       # Spanish translations
+│   │   └── fr.json       # French translations
+│   └── site.yml          # Site configuration with i18n settings
+└── package.json          # Workspace configuration
+```
+
+## Internationalization (i18n)
+
+This template showcases Uniweb's content localization system. Here's how it works:
+
+### Configuration
+
+The `site/site.yml` configures which locales are active:
+
+```yaml
+i18n:
+  locales: [es, fr]      # Spanish and French
+  localesDir: locales    # Where translation files live
+```
+
+### Translation Workflow
+
+1. **Extract strings** - Run `pnpm uniweb i18n extract` to scan all page content and generate `locales/manifest.json` with translatable strings.
+
+2. **Check status** - Run `pnpm uniweb i18n status` to see translation coverage per locale.
+
+3. **Translate** - Create/update `locales/{locale}.json` files with translations. Each key is a hash of the source content.
+
+4. **Build** - Run `pnpm build` to generate locale-specific output in `dist/{locale}/`.
+
+### Translation File Format
+
+The manifest (`locales/manifest.json`) contains extracted strings:
+
+```json
+{
+  "a1b2c3d4": {
+    "source": "Transform Your Business",
+    "field": "title",
+    "contexts": [{"page": "/", "section": "hero"}]
+  }
+}
+```
+
+Translation files (`locales/es.json`) map hashes to translations:
+
+```json
+{
+  "a1b2c3d4": "Transforme Su Negocio"
+}
+```
+
+### Adding a New Language
+
+1. Add the locale code to `site.yml`:
+   ```yaml
+   i18n:
+     locales: [es, fr, de]  # Added German
+   ```
+
+2. Create the translation file `locales/de.json` with translations for each hash in the manifest.
+
+3. Build the site - German pages will be generated at `/de/`.
+
+### URL Structure
+
+- Default locale (English): `/`, `/about`, `/services`, `/contact`
+- Spanish: `/es/`, `/es/about`, `/es/services`, `/es/contact`
+- French: `/fr/`, `/fr/about`, `/fr/services`, `/fr/contact`
+
+### Language Switcher
+
+The Header and Footer components include a language switcher that:
+- Displays available locales from the website configuration
+- Highlights the currently active locale
+- Links to the same page in different languages
+
+## Common Tasks
+
+### Updating Content
+
+Edit markdown files in `site/pages/`. After changes:
+
+```bash
+pnpm uniweb i18n sync    # Detect changed strings
+pnpm uniweb i18n status  # Check what needs translation
+```
+
+### Adding a New Page
+
+1. Create a folder in `site/pages/` with `page.yml` and section markdown files
+2. Run `pnpm uniweb i18n extract` to add new strings to the manifest
+3. Add translations to each locale file
+
+### Testing Locally
+
+```bash
+pnpm dev      # Start development server
+pnpm build    # Build with all locales
+pnpm preview  # Preview production build
+```
+
+## Component Reference
+
+| Component | Purpose |
+|-----------|---------|
+| Header | Navigation with language switcher |
+| Hero | Landing page hero sections |
+| Section | General content sections |
+| Features | Service/feature grids |
+| Team | Team member display |
+| CTA | Call-to-action sections |
+| Footer | Site footer with language links |
+
+## Build Output
+
+After `pnpm build`, the `site/dist/` folder contains:
+
+```
+dist/
+├── index.html           # English (default)
+├── site-content.json    # English content
+├── es/
+│   ├── index.html       # Spanish
+│   └── site-content.json
+└── fr/
+    ├── index.html       # French
+    └── site-content.json
+```
+
+Each locale has its own prerendered HTML with proper `lang` attribute and `hreflang` tags for SEO.

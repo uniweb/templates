@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+@source "./components/**/*.{js,jsx}";
+
+@theme {
+  --color-primary: #2563eb;
+  --color-secondary: #64748b;
+}

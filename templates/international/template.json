@@ -1,0 +1,7 @@
+{
+  "name": "International Business",
+  "description": "A multilingual corporate website demonstrating Uniweb's i18n capabilities. Includes English, Spanish, and French translations with a complete business site structure (home, about, services, contact).",
+  "uniweb": ">=0.2.0",
+  "tags": ["i18n", "multilingual", "corporate", "business", "localization"],
+  "components": ["Hero", "Features", "Team", "CTA", "Header", "Footer"]
+}

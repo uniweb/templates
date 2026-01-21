@@ -1,0 +1,61 @@
+# {{projectName}}
+
+A multilingual business website built with [Uniweb](https://github.com/uniweb).
+
+## Features
+
+- **Multilingual support** - English, Spanish, and French out of the box
+- **Language switcher** - Header and footer components with locale navigation
+- **SEO-friendly** - Proper `hreflang` tags and prerendered HTML per locale
+- **Corporate structure** - Home, About, Services, and Contact pages
+
+## Getting Started
+
+```bash
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm dev
+
+# Build for production (generates all locales)
+pnpm build
+
+# Preview production build
+pnpm preview
+```
+
+## i18n Commands
+
+```bash
+# Extract translatable strings from content
+pnpm uniweb i18n extract
+
+# Check translation coverage
+pnpm uniweb i18n status
+
+# Sync after content changes
+pnpm uniweb i18n sync
+```
+
+## Adding Translations
+
+1. Edit `site/site.yml` to add new locales
+2. Create `site/locales/{locale}.json` with translations
+3. Run `pnpm build` to generate locale-specific pages
+
+## Project Structure
+
+```
+├── foundation/       # Component library
+├── site/
+│   ├── pages/        # Content (markdown)
+│   ├── locales/      # Translation files
+│   └── site.yml      # Site configuration
+└── package.json
+```
+
+## Learn More
+
+- [Uniweb Documentation](https://github.com/uniweb)
+- See `AGENTS.md` for detailed i18n workflow documentation
