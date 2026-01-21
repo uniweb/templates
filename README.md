@@ -109,16 +109,16 @@ The CLI provides shared partials that remote templates can use in `.hbs` files:
 
 | Partial | Purpose |
 |---------|---------|
-| `{{> claude-md}}` | Complete CLAUDE.md for AI assistants |
+| `{{> agents-md}}` | Complete AGENTS.md for AI assistants |
 | `{{> search-docs}}` | Search feature documentation |
 | `{{> exports-js}}` | JSDoc header for foundation exports.js |
 
-**Example: CLAUDE.md.hbs**
+**Example: AGENTS.md.hbs**
 
-The `claude-md` partial generates a complete AI assistant guide covering project structure (both single and multi-site), component discovery, content authoring, and troubleshooting:
+The `agents-md` partial generates a complete AI assistant guide covering project structure (both single and multi-site), component discovery, content authoring, and troubleshooting:
 
 ```handlebars
-{{> claude-md}}
+{{> agents-md}}
 ```
 
 This teaches Claude how to explore the codebase rather than listing specific components, so the documentation never becomes outdated as the project evolves.
