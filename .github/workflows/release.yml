@@ -46,42 +46,54 @@ jobs:
           echo "Updated manifest.json:"
           cat dist/manifest.json
 
+      - name: Generate release body
+        id: release_body
+        run: |
+          # Generate template table from manifest.json
+          TABLE=$(jq -r '.templates | to_entries | map("| `\(.key)` | \(.value.description) |") | join("\n")' manifest.json)
+
+          # Generate usage examples
+          EXAMPLES=$(jq -r '.templates | keys | map("npx uniweb@latest create myproject --template \(.)") | join("\n")' manifest.json)
+
+          # Create release body
+          cat > release_body.md << 'ENDOFBODY'
+          ## Official Uniweb Templates
+
+          This release contains the official templates for the Uniweb CLI.
+
+          ### Available Templates
+
+          | Template | Description |
+          |----------|-------------|
+          ENDOFBODY
+
+          echo "$TABLE" >> release_body.md
+
+          cat >> release_body.md << 'ENDOFBODY'
+
+          ### Usage
+
+          ```bash
+          ENDOFBODY
+
+          echo "$EXAMPLES" >> release_body.md
+
+          cat >> release_body.md << 'ENDOFBODY'
+          ```
+
+          ### Installation
+
+          Templates are automatically fetched by the CLI. No manual installation required.
+          ENDOFBODY
+
+          echo "Generated release body:"
+          cat release_body.md
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           name: "Uniweb Templates ${{ steps.version.outputs.version }}"
-          body: |
-            ## Official Uniweb Templates
-
-            This release contains the official templates for the Uniweb CLI.
-
-            ### Available Templates
-
-            | Template | Description |
-            |----------|-------------|
-            | `marketing` | Landing pages and marketing sites with Tailwind CSS v4 |
-            | `academic` | Academic sites for researchers, labs, and departments |
-            | `docs` | Documentation sites with navigation levels |
-
-            ### Usage
-
-            ```bash
-            # Marketing template (default: Tailwind v4)
-            npx uniweb@latest create myproject --template marketing
-
-            # Marketing with Tailwind v3
-            npx uniweb@latest create myproject --template marketing --variant tailwind3
-
-            # Academic template
-            npx uniweb@latest create myproject --template academic
-
-            # Documentation template
-            npx uniweb@latest create myproject --template docs
-            ```
-
-            ### Installation
-
-            Templates are automatically fetched by the CLI. No manual installation required.
+          body_path: release_body.md
           files: |
             dist/manifest.json
             dist/*.tar.gz
