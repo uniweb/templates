@@ -3,97 +3,97 @@
   "defaultLocale": "en",
   "extracted": "2025-01-01T00:00:00.000Z",
   "units": {
-    "a1b2c3d4": {
+    "feba750f": {
       "source": "Transform Your Business With Our Expertise",
       "field": "title",
       "contexts": [{"page": "/", "section": "hero"}]
     },
-    "e5f6g7h8": {
+    "9b84c69c": {
       "source": "Welcome to Global Solutions",
       "field": "pretitle",
       "contexts": [{"page": "/", "section": "hero"}]
     },
-    "i9j0k1l2": {
+    "6e72c6bf": {
       "source": "We help companies around the world achieve their goals through innovative solutions and personalized support.",
       "field": "paragraph",
       "contexts": [{"page": "/", "section": "hero"}]
     },
-    "m3n4o5p6": {
+    "983f3110": {
       "source": "Get Started",
       "field": "link.label",
       "contexts": [{"page": "/", "section": "hero"}]
     },
-    "q7r8s9t0": {
+    "8d8cd546": {
       "source": "Learn More",
       "field": "link.label",
       "contexts": [{"page": "/", "section": "hero"}]
     },
-    "u1v2w3x4": {
+    "3b7388ca": {
       "source": "Our Services",
       "field": "title",
       "contexts": [{"page": "/", "section": "services"}, {"page": "/services", "section": "hero"}]
     },
-    "y5z6a7b8": {
+    "9e8c0948": {
       "source": "Consulting",
       "field": "item.title",
       "contexts": [{"page": "/", "section": "services"}]
     },
-    "c9d0e1f2": {
+    "ebcb7683": {
       "source": "Strategic guidance to help you make informed decisions and achieve your business objectives.",
       "field": "item.paragraph",
       "contexts": [{"page": "/", "section": "services"}]
     },
-    "g3h4i5j6": {
+    "21b6a798": {
       "source": "Development",
       "field": "item.title",
       "contexts": [{"page": "/", "section": "services"}]
     },
-    "k7l8m9n0": {
+    "b65f0392": {
       "source": "Custom solutions built with the latest technologies to meet your unique requirements.",
       "field": "item.paragraph",
       "contexts": [{"page": "/", "section": "services"}]
     },
-    "o1p2q3r4": {
+    "be91940b": {
       "source": "Support",
       "field": "item.title",
       "contexts": [{"page": "/", "section": "services"}]
     },
-    "s5t6u7v8": {
+    "990b3077": {
       "source": "Dedicated support team available around the clock to ensure your success.",
       "field": "item.paragraph",
       "contexts": [{"page": "/", "section": "services"}]
     },
-    "w9x0y1z2": {
+    "9d1eae45": {
       "source": "Ready to Get Started?",
       "field": "title",
       "contexts": [{"page": "/", "section": "cta"}]
     },
-    "a3b4c5d6": {
+    "ee65849e": {
       "source": "Contact us today and discover how we can help transform your business.",
       "field": "paragraph",
       "contexts": [{"page": "/", "section": "cta"}]
     },
-    "e7f8g9h0": {
+    "98b67063": {
       "source": "Contact Us",
       "field": "link.label",
       "contexts": [{"page": "/", "section": "cta"}, {"page": "/contact", "section": "hero"}]
     },
-    "i1j2k3l4": {
+    "604dd317": {
       "source": "About Global Solutions",
       "field": "title",
       "contexts": [{"page": "/about", "section": "hero"}]
     },
-    "m5n6o7p8": {
+    "3fb76449": {
       "source": "Our Story",
       "field": "title",
       "contexts": [{"page": "/about", "section": "story"}]
     },
-    "q9r0s1t2": {
+    "c300c945": {
       "source": "Our Team",
       "field": "title",
       "contexts": [{"page": "/about", "section": "team"}]
     },
-    "u3v4w5x6": {
+    "5e1622a2": {
       "source": "Global Solutions Inc.",
       "field": "title",
       "contexts": [{"page": "@header", "section": "header"}, {"page": "@footer", "section": "footer"}]
