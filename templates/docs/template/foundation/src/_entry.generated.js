@@ -15,5 +15,5 @@ export { CodeBlock, DocSection, Footer, Header, Layout, LeftPanel }
 
 export const capabilities = null
 
-// Runtime schema (per-component metadata)
-export const schema = {}
+// Per-component runtime metadata (from meta.js)
+export const meta = {}
