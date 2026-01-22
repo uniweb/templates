@@ -7,14 +7,18 @@ import { Link, cn } from '@uniweb/kit'
  * A simple footer with navigation and language switcher.
  */
 export function Footer({ content, params, website }) {
-  const siteName = content.main?.header?.title || website?.name || 'Site'
-  const description = content.main?.body?.paragraphs?.[0]
-  const navPages = website?.getFooterPages() || []
+  // Runtime guarantees: content.main.header/body exist
+  const { title } = content.main.header
+  const { paragraphs } = content.main.body
+
+  const siteName = title || website.name || 'Site'
+  const description = paragraphs[0]
+  const navPages = website.getFooterPages()
 
   // Locale info
-  const hasMultipleLocales = website?.hasMultipleLocales?.() || false
-  const locales = website?.getLocales?.() || []
-  const activeLocale = website?.getActiveLocale?.() || 'en'
+  const hasMultipleLocales = website.hasMultipleLocales()
+  const locales = website.getLocales()
+  const activeLocale = website.getActiveLocale()
 
   const year = new Date().getFullYear()
 

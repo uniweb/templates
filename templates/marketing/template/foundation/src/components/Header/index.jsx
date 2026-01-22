@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { Link, cn } from '@uniweb/kit'
+import React, { useRef } from 'react'
+import { Link, cn, useScrolled, useMobileMenu } from '@uniweb/kit'
 
 /**
  * Header Component
@@ -15,9 +15,11 @@ import { Link, cn } from '@uniweb/kit'
  * - Theme-aware (adapts to next section's theme)
  */
 export function Header({ content, params, block, website }) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
   const headerRef = useRef(null)
+
+  // Kit hooks for common patterns
+  const scrolled = useScrolled(20)
+  const { isOpen: mobileMenuOpen, toggle: toggleMobileMenu, close: closeMobileMenu } = useMobileMenu()
 
   // Get context from the next block (first body section)
   const nextBlockInfo = block.getNextBlockInfo()
@@ -30,29 +32,16 @@ export function Header({ content, params, block, website }) {
   // Determine text color based on next block's theme (when floating)
   const isDarkBackground = isFloating && ['gradient', 'glass', 'dark'].includes(nextBlockTheme)
 
+  // Runtime guarantees: content.main.header/body exist
+  const { title } = content.main.header
+  const { imgs, links } = content.main.body
+
   // Get navigation links from website page hierarchy
-  const navPages = website?.getHeaderPages() || []
+  const navPages = website.getPageHierarchy({ for: 'header' })
 
   // Get logo from content (if provided in markdown)
-  const logo = content.main?.body?.imgs?.[0]
-  const siteName = content.main?.header?.title || website?.name || 'Site'
-
-  // Handle scroll for sticky behavior
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll() // Check initial state
-
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMobileMenuOpen(false)
-  }, [website?.activePage?.route])
+  const logo = imgs[0]
+  const siteName = title || website.name || 'Site'
 
   // Style configurations
   const getHeaderStyles = () => {
@@ -109,7 +98,7 @@ export function Header({ content, params, block, website }) {
               {navPages.map((page) => (
                 <Link
                   key={page.route}
-                  href={page.route}
+                  href={page.navigableRoute}
                   className={cn(
                     'text-sm font-medium transition-colors',
                     getLinkStyles()
@@ -121,10 +110,10 @@ export function Header({ content, params, block, website }) {
             </div>
 
             {/* Desktop CTA (if provided in content) */}
-            {content.main?.body?.links?.[0] && (
+            {links[0] && (
               <div className="hidden lg:flex lg:items-center">
                 <Link
-                  href={content.main.body.links[0].href}
+                  href={links[0].href}
                   className={cn(
                     'inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-colors',
                     isFloating && !scrolled && isDarkBackground
@@ -132,7 +121,7 @@ export function Header({ content, params, block, website }) {
                       : 'bg-primary text-white hover:bg-blue-700'
                   )}
                 >
-                  {content.main.body.links[0].label}
+                  {links[0].label}
                 </Link>
               </div>
             )}
@@ -141,7 +130,7 @@ export function Header({ content, params, block, website }) {
             <div className="lg:hidden">
               <button
                 type="button"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                onClick={toggleMobileMenu}
                 className={cn(
                   'inline-flex items-center justify-center p-2 rounded-md transition-colors',
                   getLinkStyles()
@@ -170,20 +159,20 @@ export function Header({ content, params, block, website }) {
               {navPages.map((page) => (
                 <Link
                   key={page.route}
-                  href={page.route}
+                  href={page.navigableRoute}
                   className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md"
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={closeMobileMenu}
                 >
                   {page.label || page.title}
                 </Link>
               ))}
-              {content.main?.body?.links?.[0] && (
+              {links[0] && (
                 <Link
-                  href={content.main.body.links[0].href}
+                  href={links[0].href}
                   className="block px-3 py-2 text-base font-medium text-white bg-primary hover:bg-blue-700 rounded-md text-center mt-4"
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={closeMobileMenu}
                 >
-                  {content.main.body.links[0].label}
+                  {links[0].label}
                 </Link>
               )}
             </div>

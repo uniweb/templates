@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { Link, cn } from '@uniweb/kit'
+import React from 'react'
+import { Link, cn, useScrolled, useMobileMenu } from '@uniweb/kit'
 
 /**
  * Header Component
@@ -7,8 +7,9 @@ import { Link, cn } from '@uniweb/kit'
  * A responsive navigation header with language switcher for multilingual sites.
  */
 export function Header({ content, params, block, website }) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+  // Kit hooks for common patterns
+  const scrolled = useScrolled(20)
+  const { isOpen: mobileMenuOpen, toggle: toggleMobileMenu, close: closeMobileMenu } = useMobileMenu()
 
   // Get context from the next block
   const nextBlockInfo = block.getNextBlockInfo()
@@ -17,25 +18,18 @@ export function Header({ content, params, block, website }) {
   const isFloating = allowTranslucentTop
   const isDarkBackground = isFloating && ['gradient', 'dark'].includes(nextBlockTheme)
 
+  // Runtime guarantees: content.main.header/body exist
+  const { title } = content.main.header
+  const { links } = content.main.body
+
   // Get navigation from website
-  const navPages = website?.getHeaderPages() || []
-  const siteName = content.main?.header?.title || website?.name || 'Site'
+  const navPages = website.getPageHierarchy({ for: 'header' })
+  const siteName = title || website.name || 'Site'
 
   // Locale info for language switcher
-  const hasMultipleLocales = website?.hasMultipleLocales?.() || false
-  const locales = website?.getLocales?.() || []
-  const activeLocale = website?.getActiveLocale?.() || 'en'
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll()
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  useEffect(() => {
-    setMobileMenuOpen(false)
-  }, [website?.activePage?.route])
+  const hasMultipleLocales = website.hasMultipleLocales()
+  const locales = website.getLocales()
+  const activeLocale = website.getActiveLocale()
 
   const getHeaderStyles = () => {
     if (isFloating) {
@@ -77,7 +71,7 @@ export function Header({ content, params, block, website }) {
               {navPages.map((page) => (
                 <Link
                   key={page.route}
-                  href={page.route}
+                  href={page.navigableRoute}
                   className={cn('text-sm font-medium transition-colors', getLinkStyles())}
                 >
                   {page.label || page.title}
@@ -107,9 +101,9 @@ export function Header({ content, params, block, website }) {
                   ))}
                 </div>
               )}
-              {content.main?.body?.links?.[0] && (
+              {links[0] && (
                 <Link
-                  href={content.main.body.links[0].href}
+                  href={links[0].href}
                   className={cn(
                     'inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-colors',
                     isFloating && !scrolled && isDarkBackground
@@ -117,7 +111,7 @@ export function Header({ content, params, block, website }) {
                       : 'bg-primary text-white hover:bg-blue-700'
                   )}
                 >
-                  {content.main.body.links[0].label}
+                  {links[0].label}
                 </Link>
               )}
             </div>
@@ -126,7 +120,7 @@ export function Header({ content, params, block, website }) {
             <div className="lg:hidden">
               <button
                 type="button"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                onClick={toggleMobileMenu}
                 className={cn('p-2 rounded-md', getLinkStyles())}
               >
                 <span className="sr-only">Toggle menu</span>
@@ -151,9 +145,9 @@ export function Header({ content, params, block, website }) {
               {navPages.map((page) => (
                 <Link
                   key={page.route}
-                  href={page.route}
+                  href={page.navigableRoute}
                   className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md"
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={closeMobileMenu}
                 >
                   {page.label || page.title}
                 </Link>

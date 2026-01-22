@@ -7,10 +7,11 @@ import { H2, P, cn } from '@uniweb/kit'
  * Display features/services in a grid layout.
  */
 export function Features({ content, params }) {
-  const { title, subtitle } = content.main?.header || {}
-  const { paragraphs = [] } = content.main?.body || {}
-  const items = content.items || []
-  const { theme = 'light', columns = '3' } = params || {}
+  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
+  const { title, subtitle } = content.main.header
+  const { paragraphs } = content.main.body
+  const items = content.items
+  const { theme, columns } = params
 
   const themes = {
     light: { section: 'bg-white', title: 'text-gray-900', text: 'text-gray-600' },

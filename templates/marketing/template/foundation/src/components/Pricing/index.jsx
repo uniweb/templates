@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link, cn } from '@uniweb/kit'
 
 export function Pricing({ content, params }) {
   // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
@@ -28,7 +29,7 @@ export function Pricing({ content, params }) {
   }
 
   return (
-    <section className={`py-20 px-6 ${themeStyles[theme]}`}>
+    <section className={cn('py-20 px-6', themeStyles[theme])}>
       <div className="max-w-6xl mx-auto">
         {(title || paragraphs[0]) && (
           <div className="text-center mb-16">
@@ -36,7 +37,7 @@ export function Pricing({ content, params }) {
               <h2 className="text-3xl md:text-4xl font-bold mb-4">{title}</h2>
             )}
             {paragraphs[0] && (
-              <p className={`text-lg max-w-2xl mx-auto ${descStyles[theme]}`}>
+              <p className={cn('text-lg max-w-2xl mx-auto', descStyles[theme])}>
                 {paragraphs[0]}
               </p>
             )}
@@ -54,9 +55,11 @@ export function Pricing({ content, params }) {
             return (
               <div
                 key={index}
-                className={`rounded-2xl p-8 ${cardStyles[theme]} ${
-                  isPopular ? 'ring-2 ring-primary scale-105' : ''
-                }`}
+                className={cn(
+                  'rounded-2xl p-8',
+                  cardStyles[theme],
+                  isPopular && 'ring-2 ring-primary scale-105'
+                )}
               >
                 {isPopular && (
                   <div className="text-center mb-4">
@@ -69,7 +72,7 @@ export function Pricing({ content, params }) {
                   <h3 className="text-2xl font-bold text-center mb-2">{tierTitle}</h3>
                 )}
                 {tierDesc && (
-                  <p className={`text-center mb-6 ${descStyles[theme]}`}>{tierDesc}</p>
+                  <p className={cn('text-center mb-6', descStyles[theme])}>{tierDesc}</p>
                 )}
 
                 {features.length > 0 && (
@@ -92,16 +95,17 @@ export function Pricing({ content, params }) {
                 )}
 
                 {link && (
-                  <a
+                  <Link
                     href={link.href}
-                    className={`block w-full py-3 text-center font-semibold rounded-lg transition-colors ${
+                    className={cn(
+                      'block w-full py-3 text-center font-semibold rounded-lg transition-colors',
                       isPopular
                         ? 'bg-primary text-white hover:bg-blue-700'
                         : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
-                    }`}
+                    )}
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 )}
               </div>
             )

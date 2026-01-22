@@ -1,6 +1,5 @@
 import React from 'react'
-import { cn, Link } from '@uniweb/kit'
-import { Linkedin, Twitter, Github, Mail } from 'lucide-react'
+import { cn, Link, SocialIcon, isSocialLink } from '@uniweb/kit'
 
 /**
  * Team Component
@@ -8,23 +7,6 @@ import { Linkedin, Twitter, Github, Mail } from 'lucide-react'
  * Display team member profiles with photos, names, roles, and social links.
  * Each subsection becomes a team member card.
  */
-
-const socialIcons = {
-  linkedin: Linkedin,
-  twitter: Twitter,
-  github: Github,
-  email: Mail,
-  mail: Mail,
-}
-
-function getSocialType(url) {
-  if (!url) return null
-  if (url.includes('linkedin.com')) return 'linkedin'
-  if (url.includes('twitter.com') || url.includes('x.com')) return 'twitter'
-  if (url.includes('github.com')) return 'github'
-  if (url.startsWith('mailto:')) return 'email'
-  return null
-}
 
 export function Team({ content, params }) {
   // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
@@ -120,15 +102,11 @@ export function Team({ content, params }) {
                   )}
                   {socialLinks.length > 0 && (
                     <div className="flex justify-center gap-3 mt-3">
-                      {socialLinks.map((link, i) => {
-                        const type = getSocialType(link.href)
-                        const Icon = type ? socialIcons[type] : null
-                        return Icon ? (
-                          <Link key={i} href={link.href} className={t.social}>
-                            <Icon className="w-5 h-5" />
-                          </Link>
-                        ) : null
-                      })}
+                      {socialLinks.filter(link => isSocialLink(link.href)).map((link, i) => (
+                        <Link key={i} href={link.href} className={t.social}>
+                          <SocialIcon url={link.href} className="w-5 h-5" />
+                        </Link>
+                      ))}
                     </div>
                   )}
                 </div>
@@ -167,15 +145,11 @@ export function Team({ content, params }) {
                   )}
                   {socialLinks.length > 0 && (
                     <div className="flex gap-3">
-                      {socialLinks.map((link, i) => {
-                        const type = getSocialType(link.href)
-                        const Icon = type ? socialIcons[type] : null
-                        return Icon ? (
-                          <Link key={i} href={link.href} className={t.social}>
-                            <Icon className="w-5 h-5" />
-                          </Link>
-                        ) : null
-                      })}
+                      {socialLinks.filter(link => isSocialLink(link.href)).map((link, i) => (
+                        <Link key={i} href={link.href} className={t.social}>
+                          <SocialIcon url={link.href} className="w-5 h-5" />
+                        </Link>
+                      ))}
                     </div>
                   )}
                 </div>

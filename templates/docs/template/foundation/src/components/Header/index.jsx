@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { Link, cn, useActiveRoute } from '@uniweb/kit'
+import React from 'react'
+import { Link, cn, useActiveRoute, useScrolled, useMobileMenu } from '@uniweb/kit'
 
 /**
  * Header Component for Documentation Sites
@@ -15,8 +15,10 @@ import { Link, cn, useActiveRoute } from '@uniweb/kit'
  * - Search toggle
  */
 export function Header({ content, params, block, website }) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+  // Kit hooks for common patterns
+  const scrolled = useScrolled(0)
+  const { isOpen: mobileMenuOpen, toggle: toggleMobileMenu, close: closeMobileMenu } = useMobileMenu()
+  const { isActiveOrAncestor } = useActiveRoute()
 
   // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
   const { sticky, site_navigation, transparency } = params
@@ -30,26 +32,6 @@ export function Header({ content, params, block, website }) {
 
   // Get page hierarchy for site navigation
   const pages = website.getPageHierarchy({ for: 'header' })
-
-  // SSG-safe active route detection
-  const { route: activeRoute, isActiveOrAncestor } = useActiveRoute()
-
-  // Handle scroll for sticky behavior
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 0)
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll()
-
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMobileMenuOpen(false)
-  }, [activeRoute])
 
   // Header styles based on scroll state
   const getHeaderStyles = () => {
@@ -123,7 +105,7 @@ export function Header({ content, params, block, website }) {
               {/* Mobile menu button */}
               <button
                 type="button"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                onClick={toggleMobileMenu}
                 className="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                 aria-expanded={mobileMenuOpen}
               >
@@ -176,7 +158,7 @@ export function Header({ content, params, block, website }) {
                       ? 'text-primary bg-primary/5'
                       : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
                   )}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={closeMobileMenu}
                 >
                   {page.label || page.title}
                 </Link>
@@ -185,7 +167,7 @@ export function Header({ content, params, block, website }) {
                 <Link
                   href={ctaLink.href}
                   className="block px-3 py-2 text-base font-medium text-white bg-primary hover:bg-primary-dark rounded-md text-center mt-4"
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={closeMobileMenu}
                 >
                   {ctaLink.label}
                 </Link>

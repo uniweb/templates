@@ -7,9 +7,10 @@ import { H1, P, Link, cn } from '@uniweb/kit'
  * A hero section for landing pages with headline, description, and CTAs.
  */
 export function Hero({ content, params }) {
-  const { title, pretitle, subtitle } = content.main?.header || {}
-  const { paragraphs = [], links = [] } = content.main?.body || {}
-  const { theme = 'gradient' } = params || {}
+  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
+  const { title, pretitle, subtitle } = content.main.header
+  const { paragraphs, links } = content.main.body
+  const { theme } = params
 
   const cta = links[0]
   const secondaryCta = links[1]

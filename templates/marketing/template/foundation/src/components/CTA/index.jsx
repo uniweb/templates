@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link, cn } from '@uniweb/kit'
 
 export function CTA({ content, params }) {
   // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
@@ -38,33 +39,33 @@ export function CTA({ content, params }) {
   }
 
   return (
-    <section className={`py-20 px-6 ${themeStyles[theme]}`}>
-      <div className={`max-w-4xl mx-auto ${alignment === 'center' ? 'text-center' : ''}`}>
+    <section className={cn('py-20 px-6', themeStyles[theme])}>
+      <div className={cn('max-w-4xl mx-auto', alignment === 'center' && 'text-center')}>
         {title && (
           <h2 className="text-3xl md:text-4xl font-bold mb-4">{title}</h2>
         )}
         {paragraphs[0] && (
-          <p className={`text-lg mb-8 max-w-2xl ${alignment === 'center' ? 'mx-auto' : ''} ${descStyles[theme]}`}>
+          <p className={cn('text-lg mb-8 max-w-2xl', alignment === 'center' && 'mx-auto', descStyles[theme])}>
             {paragraphs[0]}
           </p>
         )}
         {(cta || secondaryCta) && (
-          <div className={`flex gap-4 ${alignment === 'center' ? 'justify-center' : ''} flex-wrap`}>
+          <div className={cn('flex gap-4 flex-wrap', alignment === 'center' && 'justify-center')}>
             {cta && (
-              <a
+              <Link
                 href={cta.href}
-                className={`inline-block px-8 py-4 font-semibold rounded-lg transition-colors ${buttonStyles[theme]}`}
+                className={cn('inline-block px-8 py-4 font-semibold rounded-lg transition-colors', buttonStyles[theme])}
               >
                 {cta.label}
-              </a>
+              </Link>
             )}
             {secondaryCta && (
-              <a
+              <Link
                 href={secondaryCta.href}
-                className={`inline-block px-8 py-4 font-semibold rounded-lg transition-colors ${secondaryStyles[theme]}`}
+                className={cn('inline-block px-8 py-4 font-semibold rounded-lg transition-colors', secondaryStyles[theme])}
               >
                 {secondaryCta.label}
-              </a>
+              </Link>
             )}
           </div>
         )}
