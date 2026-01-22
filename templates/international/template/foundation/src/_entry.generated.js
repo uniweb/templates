@@ -14,6 +14,16 @@ export const components = { CTA, Features, Footer, Header, Hero, Section, Team }
 
 export { CTA, Features, Footer, Header, Hero, Section, Team }
 
-export const runtime = null
+export const capabilities = null
 
-export const meta = {}
+// Runtime schema (per-component metadata)
+export const schema = {
+  "Hero": {
+    "context": {
+      "allowTranslucentTop": true
+    },
+    "defaults": {
+      "theme": "gradient"
+    }
+  }
+}

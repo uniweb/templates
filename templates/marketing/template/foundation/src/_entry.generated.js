@@ -19,6 +19,18 @@ export const components = { CTA, FAQ, Features, Gallery, Header, Hero, LogoCloud
 
 export { CTA, FAQ, Features, Gallery, Header, Hero, LogoCloud, Pricing, Stats, Team, Testimonials, Video }
 
-export const runtime = null
+export const capabilities = null
 
-export const meta = {}
+// Runtime schema (per-component metadata)
+export const schema = {
+  "Hero": {
+    "context": {
+      "allowTranslucentTop": true
+    },
+    "defaults": {
+      "theme": "gradient",
+      "layout": "center",
+      "showPattern": true
+    }
+  }
+}

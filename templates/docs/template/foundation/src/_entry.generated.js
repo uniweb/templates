@@ -2,7 +2,6 @@
 // DO NOT EDIT - This file is regenerated during build
 
 import './styles.css'
-import runtime from './runtime'
 import CodeBlock from './components/CodeBlock/index.jsx'
 import DocSection from './components/DocSection/index.jsx'
 import Footer from './components/Footer/index.jsx'
@@ -14,6 +13,7 @@ export const components = { CodeBlock, DocSection, Footer, Header, Layout, LeftP
 
 export { CodeBlock, DocSection, Footer, Header, Layout, LeftPanel }
 
-export { runtime }
+export const capabilities = null
 
-export const meta = {}
+// Runtime schema (per-component metadata)
+export const schema = {}
