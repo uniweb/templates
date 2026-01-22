@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, cn, useRouting } from '@uniweb/kit'
+import { Link, cn, useActiveRoute } from '@uniweb/kit'
 
 /**
  * Header Component for Documentation Sites
@@ -18,26 +18,21 @@ export function Header({ content, params, block, website }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
-  // Get params with defaults
-  const {
-    sticky = true,
-    site_navigation = false,
-    transparency = true,
-  } = params || {}
+  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
+  const { sticky, site_navigation, transparency } = params
+  const { title } = content.main.header
+  const { imgs, links } = content.main.body
 
-  // Get logo from content
-  const logo = content.main?.body?.imgs?.[0]
-  const siteName = content.main?.header?.title || website?.name || 'Docs'
-  const ctaLink = content.main?.body?.links?.[0]
+  // Get logo and CTA from content
+  const logo = imgs[0]
+  const siteName = title || website.name || 'Docs'
+  const ctaLink = links[0]
 
   // Get page hierarchy for site navigation
-  const pages = website?.getPageHierarchy?.({ for: 'header' }) || []
+  const pages = website.getPageHierarchy({ for: 'header' })
 
-  // Use SSG-safe useLocation for reactive route updates during client-side navigation
-  const { useLocation } = useRouting()
-  const location = useLocation()
-  const activeRoute = location?.pathname?.replace(/^\//, '').replace(/\/$/, '') || ''
-  const firstSegment = activeRoute.split('/')[0]
+  // SSG-safe active route detection
+  const { route: activeRoute, isActiveOrAncestor } = useActiveRoute()
 
   // Handle scroll for sticky behavior
   useEffect(() => {
@@ -55,27 +50,6 @@ export function Header({ content, params, block, website }) {
   useEffect(() => {
     setMobileMenuOpen(false)
   }, [activeRoute])
-
-  // Find the first navigable route for a page (in case it's a category without content)
-  const findNavigableRoute = (page) => {
-    if (page.hasContent) return page.route
-    for (const child of page.children || []) {
-      const route = findNavigableRoute(child)
-      if (route) return route
-    }
-    return page.route
-  }
-
-  // Normalize route by removing leading/trailing slashes
-  const normalizeRoute = (route) => {
-    return (route || '').replace(/^\//, '').replace(/\/$/, '')
-  }
-
-  // Determine if a root page is active
-  const isRootActive = (page) => {
-    const pageRoute = normalizeRoute(page.route)
-    return firstSegment === pageRoute || activeRoute.startsWith(pageRoute + '/')
-  }
 
   // Header styles based on scroll state
   const getHeaderStyles = () => {
@@ -121,10 +95,10 @@ export function Header({ content, params, block, website }) {
                 {pages.map((page) => (
                   <Link
                     key={page.route}
-                    href={findNavigableRoute(page)}
+                    href={page.navigableRoute}
                     className={cn(
                       'text-sm font-medium transition-colors',
-                      isRootActive(page)
+                      isActiveOrAncestor(page)
                         ? 'text-primary'
                         : 'text-gray-600 hover:text-gray-900'
                     )}
@@ -173,10 +147,10 @@ export function Header({ content, params, block, website }) {
               {pages.map((page) => (
                 <Link
                   key={page.route}
-                  href={findNavigableRoute(page)}
+                  href={page.navigableRoute}
                   className={cn(
                     'px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap',
-                    isRootActive(page)
+                    isActiveOrAncestor(page)
                       ? 'border-primary text-primary'
                       : 'border-transparent text-gray-600 hover:text-gray-900 hover:border-gray-300'
                   )}
@@ -195,10 +169,10 @@ export function Header({ content, params, block, website }) {
               {pages.map((page) => (
                 <Link
                   key={page.route}
-                  href={findNavigableRoute(page)}
+                  href={page.navigableRoute}
                   className={cn(
                     'block px-3 py-2 text-base font-medium rounded-md',
-                    isRootActive(page)
+                    isActiveOrAncestor(page)
                       ? 'text-primary bg-primary/5'
                       : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
                   )}
