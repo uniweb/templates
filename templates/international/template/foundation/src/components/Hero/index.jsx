@@ -96,10 +96,4 @@ export function Hero({ content, params }) {
   )
 }
 
-Hero.block = {
-  context: {
-    allowTranslucentTop: true
-  }
-}
-
 export default Hero

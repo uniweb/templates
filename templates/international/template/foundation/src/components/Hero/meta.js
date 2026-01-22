@@ -3,6 +3,12 @@ export default {
   description: 'A bold hero section with headline, description, and call-to-action buttons.',
   category: 'Headers',
 
+  // Static capabilities for cross-block coordination
+  // Header reads this to know Hero supports translucent/floating navbar
+  context: {
+    allowTranslucentTop: true,
+  },
+
   elements: {
     pretitle: {
       label: 'Eyebrow',

@@ -11,6 +11,12 @@ export default {
   purpose: 'Impress',
   background: true,
 
+  // Static capabilities for cross-block coordination
+  // Header reads this to know Hero supports translucent/floating navbar
+  context: {
+    allowTranslucentTop: true,
+  },
+
   content: {
     pretitle: 'Eyebrow',
     title: 'Headline',

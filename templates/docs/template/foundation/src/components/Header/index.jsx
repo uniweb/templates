@@ -184,11 +184,4 @@ export function Header({ content, params, block }) {
   )
 }
 
-// Static block configuration
-Header.block = {
-  context: {
-    siteNavigation: false, // Will be set based on params
-  },
-}
-
 export default Header
