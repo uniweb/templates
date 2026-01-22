@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @source "./components/**/*.{js,jsx}";
+@source "../node_modules/@uniweb/kit/src/**/*.{js,jsx}";
 
 @theme {
   /* Academic color palette - professional blues and warm accents */
