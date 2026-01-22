@@ -13,9 +13,8 @@ import { Link, useWebsite, cn } from '@uniweb/kit'
  * - Highlighted search matches
  * - Mobile-responsive
  */
-export function SearchModal({ isOpen, onClose, website: websiteProp }) {
-  const { website: contextWebsite } = useWebsite()
-  const website = websiteProp || contextWebsite
+export function SearchModal({ isOpen, onClose }) {
+  const { website } = useWebsite()
 
   const [query, setQuery] = useState('')
   const [results, setResults] = useState([])
@@ -28,7 +27,7 @@ export function SearchModal({ isOpen, onClose, website: websiteProp }) {
 
   // Initialize search client
   useEffect(() => {
-    if (!website?.isSearchEnabled()) return
+    if (!website.isSearchEnabled()) return
 
     async function initSearch() {
       try {
@@ -127,7 +126,7 @@ export function SearchModal({ isOpen, onClose, website: websiteProp }) {
 
   if (!isOpen) return null
 
-  const searchEnabled = website?.isSearchEnabled()
+  const searchEnabled = website.isSearchEnabled()
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">

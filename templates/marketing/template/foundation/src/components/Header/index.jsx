@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Link, cn, useScrolled, useMobileMenu } from '@uniweb/kit'
+import { Link, cn, useScrolled, useMobileMenu, useWebsite } from '@uniweb/kit'
 
 /**
  * Header Component
@@ -14,7 +14,8 @@ import { Link, cn, useScrolled, useMobileMenu } from '@uniweb/kit'
  * - Responsive mobile menu
  * - Theme-aware (adapts to next section's theme)
  */
-export function Header({ content, params, block, website }) {
+export function Header({ content, params, block }) {
+  const { website } = useWebsite()
   const headerRef = useRef(null)
 
   // Kit hooks for common patterns

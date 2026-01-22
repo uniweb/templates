@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, cn, useActiveRoute, useScrolled, useMobileMenu } from '@uniweb/kit'
+import { Link, cn, useActiveRoute, useScrolled, useMobileMenu, useWebsite } from '@uniweb/kit'
 
 /**
  * Header Component for Documentation Sites
@@ -14,7 +14,8 @@ import { Link, cn, useActiveRoute, useScrolled, useMobileMenu } from '@uniweb/ki
  * - Responsive mobile menu
  * - Search toggle
  */
-export function Header({ content, params, block, website }) {
+export function Header({ content, params, block }) {
+  const { website } = useWebsite()
   // Kit hooks for common patterns
   const scrolled = useScrolled(0)
   const { isOpen: mobileMenuOpen, toggle: toggleMobileMenu, close: closeMobileMenu } = useMobileMenu()

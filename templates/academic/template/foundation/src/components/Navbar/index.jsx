@@ -15,33 +15,27 @@ import { SearchModal, SearchButton, useSearchShortcut } from '../SearchModal'
  * - Sticky positioning option
  * - Integrated search (when fuse.js is installed)
  */
-export function Navbar({ content, params, website: websiteProp }) {
-  const { website: contextWebsite, localize } = useWebsite()
-  const website = websiteProp || contextWebsite
+export function Navbar({ content, params }) {
+  const { website, localize } = useWebsite()
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [localeMenuOpen, setLocaleMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
 
-  const { title } = content?.main?.header || {}
-  const { links = [], imgs = [] } = content?.main?.body || {}
-  const {
-    mode = 'auto',
-    sticky = true,
-    showLocale = 'auto',
-    showSearch = 'auto',
-    logoPosition = 'left',
-  } = params || {}
+  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
+  const { title } = content.main.header
+  const { links, imgs } = content.main.body
+  const { mode, sticky, showLocale, showSearch, logoPosition } = params
 
   // Search keyboard shortcut (Cmd/Ctrl+K)
   useSearchShortcut(() => setSearchOpen(true))
 
   // Determine if search should be shown
-  const searchEnabled = website?.isSearchEnabled()
+  const searchEnabled = website.isSearchEnabled()
   const shouldShowSearch = showSearch === 'always' || (showSearch === 'auto' && searchEnabled)
 
   // Get navigation items based on mode
-  const navItems = mode === 'auto' && website
+  const navItems = mode === 'auto'
     ? website.getHeaderPages()
     : links.map(link => ({
         route: link.url,
@@ -50,17 +44,17 @@ export function Navbar({ content, params, website: websiteProp }) {
       }))
 
   // Site branding
-  const siteName = title || website?.name || ''
+  const siteName = title || website.name || ''
   const logo = imgs[0]
 
   // Locale handling
-  const locales = website?.getLocales() || []
-  const activeLocale = website?.getActiveLocale()
-  const hasMultipleLocales = website?.hasMultipleLocales()
+  const locales = website.getLocales()
+  const activeLocale = website.getActiveLocale()
+  const hasMultipleLocales = website.hasMultipleLocales()
   const shouldShowLocale = showLocale === 'always' || (showLocale === 'auto' && hasMultipleLocales)
 
   // Get current route for active state
-  const currentRoute = website?.activePage?.route || '/'
+  const currentRoute = website.activePage?.route || '/'
 
   const isActive = (route) => {
     if (route === '' || route === '/') {
@@ -116,7 +110,7 @@ export function Navbar({ content, params, website: websiteProp }) {
               {locales.map(locale => (
                 <a
                   key={locale.code}
-                  href={website?.getLocaleUrl(locale.code)}
+                  href={website.getLocaleUrl(locale.code)}
                   className={cn(
                     'block px-4 py-2 text-sm transition-colors',
                     locale.code === activeLocale
@@ -217,7 +211,6 @@ export function Navbar({ content, params, website: websiteProp }) {
         <SearchModal
           isOpen={searchOpen}
           onClose={() => setSearchOpen(false)}
-          website={website}
         />
       )}
     </header>

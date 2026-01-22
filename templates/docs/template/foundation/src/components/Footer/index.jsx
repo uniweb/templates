@@ -1,18 +1,19 @@
 import React from 'react'
-import { Link, cn } from '@uniweb/kit'
+import { Link, cn, useWebsite } from '@uniweb/kit'
 
 /**
  * Footer Component for Documentation Sites
  *
  * A simple footer with copyright, links, and optional branding.
  */
-export function Footer({ content, params, website }) {
-  const { title } = content.main?.header || {}
-  const { paragraphs = [], links = [] } = content.main?.body || {}
+export function Footer({ content, params }) {
+  const { website } = useWebsite()
 
-  const {
-    layout = 'simple',
-  } = params || {}
+  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
+  const { title } = content.main.header
+  const { paragraphs, links } = content.main.body
+
+  const { layout } = params
 
   const siteName = title || website?.name || 'Documentation'
   const copyright = paragraphs[0] || `${new Date().getFullYear()} ${siteName}. All rights reserved.`

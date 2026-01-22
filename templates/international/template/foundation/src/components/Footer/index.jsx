@@ -1,12 +1,14 @@
 import React from 'react'
-import { Link, cn } from '@uniweb/kit'
+import { Link, cn, useWebsite } from '@uniweb/kit'
 
 /**
  * Footer Component
  *
  * A simple footer with navigation and language switcher.
  */
-export function Footer({ content, params, website }) {
+export function Footer({ content, params }) {
+  const { website } = useWebsite()
+
   // Runtime guarantees: content.main.header/body exist
   const { title } = content.main.header
   const { paragraphs } = content.main.body

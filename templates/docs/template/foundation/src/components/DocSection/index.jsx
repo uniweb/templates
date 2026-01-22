@@ -1,5 +1,5 @@
 import React from 'react'
-import { H1, H2, H3, P, Link, cn } from '@uniweb/kit'
+import { H1, H2, H3, P, Link, cn, useWebsite } from '@uniweb/kit'
 
 /**
  * DocSection Component
@@ -13,19 +13,19 @@ import { H1, H2, H3, P, Link, cn } from '@uniweb/kit'
  * - Previous/Next page navigation
  * - Responsive design
  */
-export function DocSection({ content, params, block, website }) {
-  const { title, pretitle, subtitle } = content.main?.header || {}
-  const { paragraphs = [], links = [], lists = [], codeBlocks = [] } = content.main?.body || {}
-  const items = content.items || []
+export function DocSection({ content, params, block }) {
+  const { website } = useWebsite()
 
-  const {
-    show_navigation = true,
-    max_width = 'prose',
-  } = params || {}
+  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
+  const { title, pretitle, subtitle } = content.main.header
+  const { paragraphs, links, lists } = content.main.body
+  const items = content.items
+
+  const { show_navigation, max_width } = params
 
   // Get adjacent pages for navigation
-  const allPages = website?.getPageHierarchy?.({ nested: false }) || []
-  const currentRoute = website?.activePage?.route || ''
+  const allPages = website.getPageHierarchy({ nested: false })
+  const currentRoute = website.activePage?.route || ''
   const currentIndex = allPages.findIndex((p) => p.route === currentRoute)
   const prevPage = currentIndex > 0 ? allPages[currentIndex - 1] : null
   const nextPage = currentIndex < allPages.length - 1 ? allPages[currentIndex + 1] : null

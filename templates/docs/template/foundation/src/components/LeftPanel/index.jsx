@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react'
-import { Link, cn, useRouting } from '@uniweb/kit'
+import { Link, cn, useRouting, useWebsite } from '@uniweb/kit'
 
 /**
  * LeftPanel Component for Documentation Sites
@@ -13,16 +13,14 @@ import { Link, cn, useRouting } from '@uniweb/kit'
  * - Section filtering (when site_navigation is enabled)
  * - Responsive design (hidden on mobile, shown in drawer)
  */
-export function LeftPanel({ content, params, block, website }) {
-  // Get params with defaults
-  const {
-    collapsible = true,
-    site_navigation = false,
-    default_open = true,
-  } = params || {}
+export function LeftPanel({ content, params, block }) {
+  const { website } = useWebsite()
 
-  // Get navigation data
-  const pages = website?.getPageHierarchy?.({ for: 'header' }) || []
+  // Runtime guarantees: params have defaults from meta.js
+  const { collapsible, site_navigation, default_open } = params
+
+  // Get navigation data from website
+  const pages = website.getPageHierarchy({ for: 'header' })
 
   // Use SSG-safe useLocation for reactive route updates during client-side navigation
   const { useLocation } = useRouting()

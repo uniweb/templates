@@ -1,12 +1,14 @@
 import React from 'react'
-import { Link, cn, useScrolled, useMobileMenu } from '@uniweb/kit'
+import { Link, cn, useScrolled, useMobileMenu, useWebsite } from '@uniweb/kit'
 
 /**
  * Header Component
  *
  * A responsive navigation header with language switcher for multilingual sites.
  */
-export function Header({ content, params, block, website }) {
+export function Header({ content, params, block }) {
+  const { website } = useWebsite()
+
   // Kit hooks for common patterns
   const scrolled = useScrolled(20)
   const { isOpen: mobileMenuOpen, toggle: toggleMobileMenu, close: closeMobileMenu } = useMobileMenu()
