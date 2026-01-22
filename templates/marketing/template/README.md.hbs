@@ -29,6 +29,8 @@ A marketing site built with [Uniweb](https://github.com/uniweb/cli) — a compon
 
 {{> components-docs}}
 
+{{> config-reference}}
+
 ## Content Authoring
 
 Content lives in markdown files under `site/pages/`. Each section has:
@@ -72,8 +74,10 @@ pnpm --filter site dev
 
 1. Create folder: `foundation/src/components/MyComponent/`
 2. Add `index.jsx` with the React component
-3. Add `meta.js` with metadata and parameters
+3. Add `meta.js` with metadata and parameters (see [meta.js guide](https://github.com/uniweb/cli/blob/main/docs/meta/README.md))
 4. Rebuild: `cd foundation && pnpm build`
+
+The `meta.js` file defines component parameters and content expectations. The runtime uses this metadata to apply defaults and guarantee content structure, eliminating defensive null checks in your component code.
 
 See `AGENTS.md` for detailed component development guidelines.
 

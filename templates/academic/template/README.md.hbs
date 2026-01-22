@@ -39,6 +39,8 @@ This project has two packages that work together:
 
 {{> components-docs}}
 
+{{> config-reference}}
+
 ## Content Authoring
 
 Content is written in markdown with YAML frontmatter:
@@ -149,9 +151,11 @@ pnpm --filter site dev
 
 1. Create folder: `foundation/src/components/MyComponent/`
 2. Add `index.jsx` with the React component
-3. Add `meta.js` with metadata and parameters
+3. Add `meta.js` with metadata and parameters (see [meta.js guide](https://github.com/uniweb/cli/blob/main/docs/meta/README.md))
 4. Export from `foundation/src/index.js`
 5. Rebuild: `cd foundation && pnpm build`
+
+The `meta.js` file defines component parameters and content expectations. The runtime uses this metadata to apply defaults and guarantee content structure.
 
 See `AGENTS.md` for detailed component development guidelines.
 
