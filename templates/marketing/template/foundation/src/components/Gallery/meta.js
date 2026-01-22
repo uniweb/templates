@@ -1,46 +1,29 @@
 /**
- * Gallery Component Metadata
+ * Gallery Component Metadata (v2)
  */
 export default {
   title: 'Image Gallery',
   description: 'Display images in grid, masonry, or carousel layouts',
-  category: 'Media',
+  category: 'showcase',
+  purpose: 'Display',
 
-  elements: {
-    title: {
-      label: 'Section Title',
-      description: 'Optional heading for the gallery',
-    },
-    paragraphs: {
-      label: 'Section Description',
-      description: 'Introductory text above the gallery',
-    },
-    imgs: {
-      label: 'Images',
-      required: true,
-      description: 'Images from markdown ![alt](url) syntax',
-    },
+  content: {
+    title: 'Section title',
+    paragraphs: 'Intro text [1]',
+    image: 'Gallery images [3+]',
   },
 
-  properties: {
+  params: {
     theme: {
       type: 'select',
       label: 'Theme',
-      options: [
-        { value: 'light', label: 'Light' },
-        { value: 'gray', label: 'Gray' },
-        { value: 'dark', label: 'Dark' },
-      ],
+      options: ['light', 'gray', 'dark'],
       default: 'light',
     },
     layout: {
       type: 'select',
       label: 'Layout',
-      options: [
-        { value: 'grid', label: 'Grid' },
-        { value: 'masonry', label: 'Masonry' },
-        { value: 'carousel', label: 'Carousel' },
-      ],
+      options: ['grid', 'masonry', 'carousel'],
       default: 'grid',
     },
     columns: {
@@ -58,18 +41,15 @@ export default {
   presets: {
     default: {
       label: 'Standard Grid',
-      description: 'Images in a uniform grid',
-      properties: { layout: 'grid', columns: 3 },
+      params: { layout: 'grid', columns: 3 },
     },
     masonry: {
       label: 'Masonry',
-      description: 'Pinterest-style masonry layout',
-      properties: { layout: 'masonry', columns: 3 },
+      params: { layout: 'masonry', columns: 3 },
     },
     carousel: {
       label: 'Carousel',
-      description: 'Horizontal scrolling gallery',
-      properties: { layout: 'carousel' },
+      params: { layout: 'carousel' },
     },
   },
 }

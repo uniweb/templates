@@ -1,34 +1,26 @@
 /**
- * Testimonials Component Metadata
+ * Testimonials Component Metadata (v2)
  */
 export default {
   title: 'Testimonials',
   description: 'Display customer quotes and social proof',
-  category: 'Social Proof',
+  category: 'showcase',
+  purpose: 'Persuade',
 
-  elements: {
-    title: {
-      label: 'Section Title',
-      description: 'From H2 in markdown',
-    },
-    paragraphs: {
-      label: 'Section Description',
-    },
-    subsections: {
-      label: 'Testimonials',
-      description: 'Each H3 (name) with paragraphs (quote, role) becomes a testimonial',
+  content: {
+    title: 'Section title',
+    paragraphs: 'Intro text [1]',
+    items: {
+      label: 'Testimonials [3-6]',
+      hint: 'Each H3 (name) with paragraphs (quote, role) becomes a testimonial',
     },
   },
 
-  properties: {
+  params: {
     theme: {
       type: 'select',
       label: 'Theme',
-      options: [
-        { value: 'light', label: 'Light' },
-        { value: 'gray', label: 'Gray' },
-        { value: 'dark', label: 'Dark' },
-      ],
+      options: ['light', 'gray', 'dark'],
       default: 'light',
     },
     columns: {

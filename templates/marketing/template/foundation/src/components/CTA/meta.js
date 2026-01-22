@@ -1,45 +1,29 @@
 /**
- * CTA Component Metadata
+ * CTA Component Metadata (v2)
  */
 export default {
   title: 'Call to Action',
-  description: 'A conversion-focused section with headline and action buttons',
-  category: 'Conversion',
+  description: 'Conversion-focused section with headline and action buttons',
+  category: 'impact',
+  purpose: 'Convert',
 
-  elements: {
-    title: {
-      label: 'Headline',
-      description: 'From H2 in markdown',
-      required: true,
-    },
-    paragraphs: {
-      label: 'Description',
-    },
-    links: {
-      label: 'Action Buttons',
-      description: 'Primary and secondary CTAs',
-    },
+  content: {
+    title: 'Headline',
+    paragraphs: 'Description [1]',
+    links: 'Action buttons [1-2]',
   },
 
-  properties: {
+  params: {
     theme: {
       type: 'select',
       label: 'Theme',
-      options: [
-        { value: 'primary', label: 'Primary' },
-        { value: 'gradient', label: 'Gradient' },
-        { value: 'dark', label: 'Dark' },
-        { value: 'light', label: 'Light' },
-      ],
+      options: ['primary', 'gradient', 'dark', 'light'],
       default: 'primary',
     },
     alignment: {
       type: 'select',
       label: 'Alignment',
-      options: [
-        { value: 'center', label: 'Center' },
-        { value: 'left', label: 'Left' },
-      ],
+      options: ['center', 'left'],
       default: 'center',
     },
   },

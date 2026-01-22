@@ -1,35 +1,26 @@
 /**
- * Pricing Component Metadata
+ * Pricing Component Metadata (v2)
  */
 export default {
   title: 'Pricing Table',
   description: 'Display pricing tiers with features and call-to-action',
-  category: 'Commerce',
+  category: 'showcase',
+  purpose: 'Compare',
 
-  elements: {
-    title: {
-      label: 'Section Title',
-      description: 'From H2 in markdown',
-    },
-    paragraphs: {
-      label: 'Section Description',
-      description: 'Introductory text',
-    },
-    subsections: {
-      label: 'Pricing Tiers',
-      description: 'Each H3 becomes a pricing card. Use lists for features.',
+  content: {
+    title: 'Section title',
+    paragraphs: 'Intro text [1]',
+    items: {
+      label: 'Pricing tiers [2-4]',
+      hint: 'Each H3 becomes a pricing card. Use lists for features.',
     },
   },
 
-  properties: {
+  params: {
     theme: {
       type: 'select',
       label: 'Theme',
-      options: [
-        { value: 'light', label: 'Light' },
-        { value: 'white', label: 'White' },
-        { value: 'dark', label: 'Dark' },
-      ],
+      options: ['light', 'white', 'dark'],
       default: 'light',
     },
   },

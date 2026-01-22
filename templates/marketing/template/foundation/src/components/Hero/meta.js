@@ -1,60 +1,38 @@
 /**
- * Hero Component Metadata
+ * Hero Component Metadata (v2)
  *
  * A modern hero section with multiple layout options, glassmorphism effects,
  * and support for eyebrow text (kicker/pretitle).
  */
 export default {
   title: 'Hero Banner',
-  description: 'A bold hero section with headline, eyebrow, description, and call-to-action buttons. Supports multiple layouts and themes.',
-  category: 'Headers',
+  description: 'Bold hero section with headline, eyebrow, description, and CTA buttons',
+  category: 'impact',
+  purpose: 'Impress',
+  background: true,
 
-  elements: {
-    pretitle: {
-      label: 'Eyebrow',
-      description: 'Small text above the headline (e.g., "New Release", "Coming Soon")',
-    },
-    title: {
-      label: 'Headline',
-      description: 'Main H1 headline',
-      required: true,
-    },
-    subtitle: {
-      label: 'Subtitle',
-      description: 'Secondary headline below the main title',
-    },
-    paragraphs: {
-      label: 'Description',
-      description: 'Supporting text paragraphs',
-    },
-    links: {
-      label: 'Call to Action',
-      description: 'Primary and secondary CTA buttons from links',
-    },
-    imgs: {
-      label: 'Hero Image',
-      description: 'Optional image for split layouts or below content',
-    },
+  content: {
+    pretitle: 'Eyebrow',
+    title: 'Headline',
+    subtitle: 'Subtitle',
+    paragraphs: 'Description [1-2]',
+    links: 'CTA buttons [1-2]',
+    image: 'Hero image [1]',
   },
 
-  properties: {
+  params: {
     theme: {
       type: 'select',
       label: 'Theme',
-      options: [
-        { value: 'gradient', label: 'Gradient' },
-        { value: 'glass', label: 'Glassmorphism' },
-        { value: 'dark', label: 'Dark' },
-        { value: 'light', label: 'Light' },
-      ],
+      options: ['gradient', 'glass', 'dark', 'light'],
       default: 'gradient',
     },
     layout: {
       type: 'select',
       label: 'Layout',
       options: [
-        { value: 'center', label: 'Center' },
-        { value: 'left', label: 'Left-aligned' },
+        'center',
+        'left',
         { value: 'split-right', label: 'Split (image right)' },
         { value: 'split-left', label: 'Split (image left)' },
       ],
@@ -67,26 +45,22 @@ export default {
     },
   },
 
-  presets: [
-    {
-      name: 'default',
+  presets: {
+    default: {
       label: 'Centered Hero',
-      settings: { theme: 'gradient', layout: 'center' },
+      params: { theme: 'gradient', layout: 'center' },
     },
-    {
-      name: 'glass',
+    glass: {
       label: 'Glassmorphism',
-      settings: { theme: 'glass', layout: 'center' },
+      params: { theme: 'glass', layout: 'center' },
     },
-    {
-      name: 'split',
+    split: {
       label: 'Split Layout',
-      settings: { theme: 'gradient', layout: 'split-right' },
+      params: { theme: 'gradient', layout: 'split-right' },
     },
-    {
-      name: 'minimal',
+    minimal: {
       label: 'Minimal Light',
-      settings: { theme: 'light', layout: 'left', showPattern: false },
+      params: { theme: 'light', layout: 'left', showPattern: false },
     },
-  ],
+  },
 }

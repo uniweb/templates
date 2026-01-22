@@ -1,36 +1,26 @@
 /**
- * Stats Component Metadata
+ * Stats Component Metadata (v2)
  */
 export default {
   title: 'Stats Section',
   description: 'Display key metrics and statistics in a grid layout',
-  category: 'Content',
+  category: 'showcase',
+  purpose: 'Quantify',
 
-  elements: {
-    title: {
-      label: 'Section Title',
-      description: 'Optional heading for the stats section',
-    },
-    paragraphs: {
-      label: 'Section Description',
-      description: 'Introductory text for the stats',
-    },
-    subsections: {
-      label: 'Stats',
-      description: 'Each H3 is the stat value, first paragraph is the label. Add "icon:name" before H3 for icons.',
+  content: {
+    title: 'Section title',
+    paragraphs: 'Intro text [1]',
+    items: {
+      label: 'Stats [3-6]',
+      hint: 'Each H3 is the stat value, first paragraph is the label. Add icon: for icons.',
     },
   },
 
-  properties: {
+  params: {
     theme: {
       type: 'select',
       label: 'Theme',
-      options: [
-        { value: 'light', label: 'Light' },
-        { value: 'gray', label: 'Gray' },
-        { value: 'dark', label: 'Dark' },
-        { value: 'primary', label: 'Primary' },
-      ],
+      options: ['light', 'gray', 'dark', 'primary'],
       default: 'light',
     },
     columns: {
@@ -46,11 +36,7 @@ export default {
     style: {
       type: 'select',
       label: 'Style',
-      options: [
-        { value: 'simple', label: 'Simple' },
-        { value: 'cards', label: 'Cards' },
-        { value: 'bordered', label: 'Bordered' },
-      ],
+      options: ['simple', 'cards', 'bordered'],
       default: 'simple',
     },
   },
@@ -58,18 +44,15 @@ export default {
   presets: {
     default: {
       label: 'Default Stats',
-      description: 'Simple centered stats',
-      properties: { theme: 'light', style: 'simple' },
+      params: { theme: 'light', style: 'simple' },
     },
     cards: {
       label: 'Card Stats',
-      description: 'Stats in card containers',
-      properties: { theme: 'gray', style: 'cards' },
+      params: { theme: 'gray', style: 'cards' },
     },
     primary: {
       label: 'Primary Background',
-      description: 'Stats on primary color background',
-      properties: { theme: 'primary', style: 'simple' },
+      params: { theme: 'primary', style: 'simple' },
     },
   },
 }
