@@ -25,16 +25,13 @@ const iconMap = {
 }
 
 export function Stats({ content, params }) {
-  const { title } = content.main?.header || {}
-  const { paragraphs = [] } = content.main?.body || {}
-  const {
-    theme = 'light',
-    columns = 4,
-    style = 'simple',
-  } = params || {}
+  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
+  const { title } = content.main.header
+  const { paragraphs } = content.main.body
+  const { theme, columns, style } = params
 
   // Extract stats from semantic groups (H3 patterns)
-  const stats = content.items || []
+  const stats = content.items
 
   const themes = {
     light: {

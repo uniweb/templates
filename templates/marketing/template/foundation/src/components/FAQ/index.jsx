@@ -9,16 +9,13 @@ import { ChevronDown, MessageCircle } from 'lucide-react'
  * Each subsection (H3) becomes a question, with paragraphs as the answer.
  */
 export function FAQ({ content, params }) {
-  const { title } = content.main?.header || {}
-  const { paragraphs = [] } = content.main?.body || {}
-  const {
-    theme = 'light',
-    layout = 'single',
-    expandFirst = true,
-  } = params || {}
+  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
+  const { title } = content.main.header
+  const { paragraphs } = content.main.body
+  const { theme, layout, expandFirst } = params
 
   // Extract questions from semantic groups (H3 patterns)
-  const questions = content.items || []
+  const questions = content.items
   const [openItems, setOpenItems] = useState(
     expandFirst ? [0] : []
   )

@@ -1,12 +1,13 @@
 import React from 'react'
 
 export function Testimonials({ content, params }) {
-  const { title } = content.main?.header || {}
-  const { paragraphs = [] } = content.main?.body || {}
-  const { theme = 'light', columns = 3 } = params || {}
+  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
+  const { title } = content.main.header
+  const { paragraphs } = content.main.body
+  const { theme, columns } = params
 
   // Extract testimonials from semantic groups (H3 patterns)
-  const testimonials = content.items || []
+  const testimonials = content.items
 
   const themeStyles = {
     light: 'bg-white',

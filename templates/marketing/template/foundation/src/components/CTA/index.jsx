@@ -1,9 +1,10 @@
 import React from 'react'
 
 export function CTA({ content, params }) {
-  const { title } = content.main?.header || {}
-  const { paragraphs = [], links = [] } = content.main?.body || {}
-  const { theme = 'primary', alignment = 'center' } = params || {}
+  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
+  const { title } = content.main.header
+  const { paragraphs, links } = content.main.body
+  const { theme, alignment } = params
 
   const cta = links[0]
   const secondaryCta = links[1]

@@ -52,12 +52,13 @@ const iconMap = {
 }
 
 export function Features({ content, params }) {
-  const { title } = content.main?.header || {}
-  const { paragraphs = [] } = content.main?.body || {}
-  const { columns = 3, theme = 'light', style = 'cards' } = params || {}
+  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
+  const { title } = content.main.header
+  const { paragraphs } = content.main.body
+  const { columns, theme, style } = params
 
   // Items come from semantic-parser groups (H4 pretitle + H3 title patterns)
-  const features = content.items || []
+  const features = content.items
 
   const themes = {
     light: {

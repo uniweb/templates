@@ -1,12 +1,13 @@
 import React from 'react'
 
 export function Pricing({ content, params }) {
-  const { title } = content.main?.header || {}
-  const { paragraphs = [] } = content.main?.body || {}
-  const { theme = 'light' } = params || {}
+  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
+  const { title } = content.main.header
+  const { paragraphs } = content.main.body
+  const { theme } = params
 
   // Extract pricing tiers from semantic groups (H3 patterns)
-  const tiers = content.items || []
+  const tiers = content.items
 
   const themeStyles = {
     light: 'bg-gray-50',

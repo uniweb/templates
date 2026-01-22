@@ -27,16 +27,13 @@ function getSocialType(url) {
 }
 
 export function Team({ content, params }) {
-  const { title } = content.main?.header || {}
-  const { paragraphs = [] } = content.main?.body || {}
-  const {
-    theme = 'light',
-    columns = 3,
-    style = 'cards',
-  } = params || {}
+  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
+  const { title } = content.main.header
+  const { paragraphs } = content.main.body
+  const { theme, columns, style } = params
 
   // Extract members from semantic groups (H3 patterns)
-  const members = content.items || []
+  const members = content.items
 
   const themes = {
     light: {

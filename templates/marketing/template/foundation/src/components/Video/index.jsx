@@ -30,13 +30,10 @@ function extractVideoId(url) {
 }
 
 export function Video({ content, params }) {
-  const { title, pretitle } = content.main?.header || {}
-  const { paragraphs = [], links = [] } = content.main?.body || {}
-  const {
-    theme = 'light',
-    layout = 'center',
-    autoplay = false,
-  } = params || {}
+  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
+  const { title, pretitle } = content.main.header
+  const { paragraphs, links, imgs } = content.main.body
+  const { theme, layout, autoplay } = params
 
   const [isPlaying, setIsPlaying] = useState(autoplay)
 
@@ -46,7 +43,7 @@ export function Video({ content, params }) {
   const videoInfo = extractVideoId(videoUrl)
 
   // Get thumbnail from first image or generate from video
-  const thumbImg = content.main?.body?.imgs?.[0]
+  const thumbImg = imgs[0]
   const thumbnail = thumbImg?.url || thumbImg?.src ||
     (videoInfo?.type === 'youtube'
       ? `https://img.youtube.com/vi/${videoInfo.id}/maxresdefault.jpg`
