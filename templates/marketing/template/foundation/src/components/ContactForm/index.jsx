@@ -11,12 +11,12 @@ export function ContactForm({ content, params }) {
   const { title, paragraphs } = content
   const { theme, layout } = params
 
-  // Form config from dataBlock
-  const formConfig = content.data?.form || {}
-  const fields = formConfig.fields || []
-  const submitLabel = formConfig.submitLabel || 'Submit'
-  const successMessage = formConfig.successMessage || 'Thank you for your message!'
-  const actionUrl = formConfig.action
+  // Form config from dataBlock (schema provides defaults, but be safe for edge cases)
+  const form = content.data?.form || {}
+  const fields = form.fields || []
+  const submitLabel = form.submitLabel || 'Submit'
+  const successMessage = form.successMessage || 'Thank you for your message!'
+  const action = form.action
 
   const [formData, setFormData] = useState({})
   const [errors, setErrors] = useState({})
@@ -65,9 +65,9 @@ export function ContactForm({ content, params }) {
 
     setSubmitting(true)
 
-    if (actionUrl) {
+    if (action) {
       try {
-        await fetch(actionUrl, {
+        await fetch(action, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData),

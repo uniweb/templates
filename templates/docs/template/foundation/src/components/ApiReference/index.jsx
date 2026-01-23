@@ -16,16 +16,14 @@ export function ApiReference({ content, params }) {
   const { title, paragraphs } = content
   const { show_try_it, compact } = params
 
-  // API config from dataBlock
+  // API config from dataBlock (schema provides defaults, but be safe for edge cases)
   const api = content.data?.api || {}
-  const {
-    method = 'GET',
-    path = '',
-    parameters = [],
-    requestBody,
-    response,
-    responses = [],
-  } = api
+  const method = api.method || 'GET'
+  const path = api.path || ''
+  const parameters = api.parameters || []
+  const requestBody = api.requestBody
+  const response = api.response
+  const responses = api.responses || []
 
   // Method color mapping
   const methodColors = {
