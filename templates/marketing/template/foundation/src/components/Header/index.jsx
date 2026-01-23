@@ -33,9 +33,8 @@ export function Header({ content, params, block }) {
   // Determine text color based on next block's theme (when floating)
   const isDarkBackground = isFloating && ['gradient', 'glass', 'dark'].includes(nextBlockTheme)
 
-  // Runtime guarantees: content.main.header/body exist
-  const { title } = content.main.header
-  const { imgs, links } = content.main.body
+  // Runtime guarantees: content fields exist
+  const { title, imgs, links } = content
 
   // Get navigation links from website page hierarchy
   const navPages = website.getPageHierarchy({ for: 'header' })

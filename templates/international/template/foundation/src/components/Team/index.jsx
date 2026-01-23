@@ -7,10 +7,8 @@ import { H2, P, cn } from '@uniweb/kit'
  * Display team members in a grid.
  */
 export function Team({ content, params }) {
-  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
-  const { title, subtitle } = content.main.header
-  const { paragraphs } = content.main.body
-  const items = content.items
+  // Runtime guarantees: content is flat, params have defaults from meta.js
+  const { title, subtitle, paragraphs, items } = content
   const { theme } = params
 
   const themes = {

@@ -16,10 +16,8 @@ import { Link, useWebsite, cn, SocialIcon, filterSocialLinks } from '@uniweb/kit
 export function Footer({ content, params }) {
   const { website, localize } = useWebsite()
 
-  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
-  const { title, subtitle } = content.main.header
-  const { paragraphs, links, imgs } = content.main.body
-  const items = content.items
+  // Runtime guarantees: content fields exist, params have defaults from meta.js
+  const { title, subtitle, paragraphs, links, imgs, items } = content
 
   const {
     mode,

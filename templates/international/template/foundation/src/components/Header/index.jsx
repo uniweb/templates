@@ -20,9 +20,8 @@ export function Header({ content, params, block }) {
   const isFloating = allowTranslucentTop
   const isDarkBackground = isFloating && ['gradient', 'dark'].includes(nextBlockTheme)
 
-  // Runtime guarantees: content.main.header/body exist
-  const { title } = content.main.header
-  const { links } = content.main.body
+  // Runtime guarantees: content is flat
+  const { title, links } = content
 
   // Get navigation from website
   const navPages = website.getPageHierarchy({ for: 'header' })

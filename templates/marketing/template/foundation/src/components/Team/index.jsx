@@ -9,9 +9,8 @@ import { cn, Link, SocialIcon, isSocialLink } from '@uniweb/kit'
  */
 
 export function Team({ content, params }) {
-  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
-  const { title } = content.main.header
-  const { paragraphs } = content.main.body
+  // Runtime guarantees: content fields exist, params have defaults from meta.js
+  const { title, paragraphs } = content
   const { theme, columns, style } = params
 
   // Extract members from semantic groups (H3 patterns)
@@ -78,11 +77,11 @@ export function Team({ content, params }) {
 
         <div className={cn('grid gap-8', gridCols[columns] || 'sm:grid-cols-3')}>
           {members.map((member, index) => {
-            const name = member.header?.title
-            const role = member.body?.paragraphs?.[0]
-            const bio = member.body?.paragraphs?.[1]
-            const photo = member.body?.imgs?.[0]
-            const socialLinks = member.body?.links || []
+            const name = member.title
+            const role = member.paragraphs?.[0]
+            const bio = member.paragraphs?.[1]
+            const photo = member.imgs?.[0]
+            const socialLinks = member.links || []
 
             if (style === 'simple') {
               return (

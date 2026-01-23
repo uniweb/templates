@@ -7,9 +7,8 @@ import { H2, P, Link, cn } from '@uniweb/kit'
  * A call-to-action section.
  */
 export function CTA({ content, params }) {
-  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
-  const { title, subtitle } = content.main.header
-  const { paragraphs, links } = content.main.body
+  // Runtime guarantees: content is flat, params have defaults from meta.js
+  const { title, subtitle, paragraphs, links } = content
   const { theme } = params
 
   const cta = links[0]

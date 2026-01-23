@@ -52,9 +52,8 @@ const iconMap = {
 }
 
 export function Features({ content, params }) {
-  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
-  const { title } = content.main.header
-  const { paragraphs } = content.main.body
+  // Runtime guarantees: content fields exist, params have defaults from meta.js
+  const { title, paragraphs } = content
   const { columns, theme, style } = params
 
   // Items come from semantic-parser groups (H4 pretitle + H3 title patterns)
@@ -138,11 +137,11 @@ export function Features({ content, params }) {
 
         <div className={cn('grid gap-8', gridCols[columns] || 'md:grid-cols-3')}>
           {features.map((feature, index) => {
-            const featureTitle = feature.header?.title
-            const featureDesc = feature.body?.paragraphs?.[0]
+            const featureTitle = feature.title
+            const featureDesc = feature.paragraphs?.[0]
 
             // Check for icon in pretitle (e.g., "icon:zap")
-            const pretitle = feature.header?.pretitle
+            const pretitle = feature.pretitle
             const iconName = pretitle?.startsWith('icon:') ? pretitle.slice(5) : null
             const IconComponent = iconName ? iconMap[iconName] : Check
 

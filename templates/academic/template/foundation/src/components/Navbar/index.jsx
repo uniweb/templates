@@ -22,9 +22,8 @@ export function Navbar({ content, params }) {
   const [localeMenuOpen, setLocaleMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
 
-  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
-  const { title } = content.main.header
-  const { links, imgs } = content.main.body
+  // Runtime guarantees: content fields exist, params have defaults from meta.js
+  const { title, links, imgs } = content
   const { mode, sticky, showLocale, showSearch, logoPosition } = params
 
   // Search keyboard shortcut (Cmd/Ctrl+K)

@@ -16,10 +16,8 @@ import { H1, H2, H3, P, Link, cn, useWebsite } from '@uniweb/kit'
 export function DocSection({ content, params, block }) {
   const { website } = useWebsite()
 
-  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
-  const { title, pretitle, subtitle } = content.main.header
-  const { paragraphs, links, lists } = content.main.body
-  const items = content.items
+  // Runtime guarantees: content fields exist, params have defaults from meta.js
+  const { title, pretitle, subtitle, paragraphs, links, lists, items } = content
 
   const { show_navigation, max_width } = params
 
@@ -103,20 +101,20 @@ export function DocSection({ content, params, block }) {
         {/* Items (H3 sections) */}
         {items.map((item, index) => (
           <section key={index} className="mt-10">
-            {item.header?.title && (
+            {item.title && (
               <H3
-                text={item.header.title}
+                text={item.title}
                 className="text-xl font-semibold text-gray-900 mb-4"
               />
             )}
-            {item.body?.paragraphs?.map((para, pIndex) => (
+            {item.paragraphs?.map((para, pIndex) => (
               <P
                 key={pIndex}
                 text={para}
                 className="text-gray-700 leading-relaxed mb-4"
               />
             ))}
-            {item.body?.lists?.map((list, lIndex) => (
+            {item.lists?.map((list, lIndex) => (
               <RenderList key={lIndex} list={list} />
             ))}
           </section>

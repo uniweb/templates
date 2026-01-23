@@ -9,9 +9,8 @@ import { Link, cn, useWebsite } from '@uniweb/kit'
 export function Footer({ content, params }) {
   const { website } = useWebsite()
 
-  // Runtime guarantees: content.main.header/body exist
-  const { title } = content.main.header
-  const { paragraphs } = content.main.body
+  // Runtime guarantees: content is flat
+  const { title, paragraphs } = content
 
   const siteName = title || website.name || 'Site'
   const description = paragraphs[0]

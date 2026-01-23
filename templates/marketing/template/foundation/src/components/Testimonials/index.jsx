@@ -2,9 +2,8 @@ import React from 'react'
 import { cn } from '@uniweb/kit'
 
 export function Testimonials({ content, params }) {
-  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
-  const { title } = content.main.header
-  const { paragraphs } = content.main.body
+  // Runtime guarantees: content fields exist, params have defaults from meta.js
+  const { title, paragraphs } = content
   const { theme, columns } = params
 
   // Extract testimonials from semantic groups (H3 patterns)
@@ -63,9 +62,9 @@ export function Testimonials({ content, params }) {
 
         <div className={cn('grid gap-8', gridCols[columns] || 'md:grid-cols-3')}>
           {testimonials.map((testimonial, index) => {
-            const name = testimonial.header?.title
-            const quote = testimonial.body?.paragraphs?.[0]
-            const role = testimonial.body?.paragraphs?.[1]
+            const name = testimonial.title
+            const quote = testimonial.paragraphs?.[0]
+            const role = testimonial.paragraphs?.[1]
 
             return (
               <div

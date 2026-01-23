@@ -2,9 +2,8 @@ import React from 'react'
 import { Link, cn } from '@uniweb/kit'
 
 export function CTA({ content, params }) {
-  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
-  const { title } = content.main.header
-  const { paragraphs, links } = content.main.body
+  // Runtime guarantees: content fields exist, params have defaults from meta.js
+  const { title, paragraphs, links } = content
   const { theme, alignment } = params
 
   const cta = links[0]

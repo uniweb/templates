@@ -9,9 +9,8 @@ import { Link, cn, useWebsite } from '@uniweb/kit'
 export function Footer({ content, params }) {
   const { website } = useWebsite()
 
-  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
-  const { title } = content.main.header
-  const { paragraphs, links } = content.main.body
+  // Runtime guarantees: content fields exist, params have defaults from meta.js
+  const { title, paragraphs, links } = content
 
   const { layout } = params
 

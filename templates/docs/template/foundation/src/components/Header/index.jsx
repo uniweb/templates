@@ -21,10 +21,9 @@ export function Header({ content, params, block }) {
   const { isOpen: mobileMenuOpen, toggle: toggleMobileMenu, close: closeMobileMenu } = useMobileMenu()
   const { isActiveOrAncestor } = useActiveRoute()
 
-  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
+  // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { sticky, site_navigation, transparency } = params
-  const { title } = content.main.header
-  const { imgs, links } = content.main.body
+  const { title, imgs, links } = content
 
   // Get logo and CTA from content
   const logo = imgs[0]

@@ -20,9 +20,8 @@ import { H1, P, Link, cn } from '@uniweb/kit'
  * - light: Light background
  */
 export function Hero({ content, params }) {
-  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
-  const { title, pretitle, subtitle } = content.main.header
-  const { paragraphs, links, imgs } = content.main.body
+  // Runtime guarantees: content fields exist, params have defaults from meta.js
+  const { title, pretitle, subtitle, paragraphs, links, imgs } = content
   const { theme, layout, showPattern } = params
 
   const cta = links[0]

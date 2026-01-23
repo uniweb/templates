@@ -30,9 +30,8 @@ function extractVideoId(url) {
 }
 
 export function Video({ content, params }) {
-  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
-  const { title, pretitle } = content.main.header
-  const { paragraphs, links, imgs } = content.main.body
+  // Runtime guarantees: content fields exist, params have defaults from meta.js
+  const { title, pretitle, paragraphs, links, imgs } = content
   const { theme, layout, autoplay } = params
 
   const [isPlaying, setIsPlaying] = useState(autoplay)

@@ -2,9 +2,8 @@ import React from 'react'
 import { Link, cn } from '@uniweb/kit'
 
 export function Pricing({ content, params }) {
-  // Runtime guarantees: content.main.header/body exist, params have defaults from meta.js
-  const { title } = content.main.header
-  const { paragraphs } = content.main.body
+  // Runtime guarantees: content fields exist, params have defaults from meta.js
+  const { title, paragraphs } = content
   const { theme } = params
 
   // Extract pricing tiers from semantic groups (H3 patterns)
@@ -46,10 +45,10 @@ export function Pricing({ content, params }) {
 
         <div className="grid md:grid-cols-3 gap-8">
           {tiers.map((tier, index) => {
-            const tierTitle = tier.header?.title
-            const tierDesc = tier.body?.paragraphs?.[0]
-            const features = tier.body?.lists?.[0] || []
-            const link = tier.body?.links?.[0]
+            const tierTitle = tier.title
+            const tierDesc = tier.paragraphs?.[0]
+            const features = tier.lists?.[0] || []
+            const link = tier.links?.[0]
             const isPopular = index === 1 // Middle tier is popular
 
             return (
