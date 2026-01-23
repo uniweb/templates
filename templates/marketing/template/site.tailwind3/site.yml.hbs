@@ -4,6 +4,13 @@ defaultLanguage: en
 # Foundation to use for this site
 foundation: foundation
 
+# Content collections
+# Markdown files in content/ are processed into JSON at build time
+collections:
+  articles:
+    path: content/articles
+    sort: date desc
+
 # Build options
 build:
   prerender: true
