@@ -43,10 +43,10 @@ export default {
   schemas: {
     api: {
       method: {
-        type: 'string',
+        type: 'select',
         default: 'GET',
         label: 'HTTP Method',
-        description: 'GET, POST, PUT, PATCH, DELETE',
+        options: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
       },
       path: {
         type: 'string',
