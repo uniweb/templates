@@ -7,12 +7,33 @@ export default {
   category: 'showcase',
   purpose: 'Introduce',
 
+  // Accept cascaded data from page/site level fetches
+  inheritData: ['team'],
+
+  // Schema for team member data (from fetch or tagged blocks)
+  schemas: {
+    team: {
+      name: { type: 'string', default: '' },
+      role: { type: 'string', default: '' },
+      bio: { type: 'string', default: '' },
+      avatar: { type: 'string', default: '' },
+      social: {
+        type: 'object',
+        schema: {
+          linkedin: 'string',
+          twitter: 'string',
+          github: 'string',
+        },
+      },
+    },
+  },
+
   content: {
     title: 'Section title',
     paragraphs: 'Intro text [1]',
     items: {
       label: 'Team members [3-8]',
-      hint: 'Each H3 is a name. Paragraphs: role, bio. Image: photo. Links: social profiles.',
+      hint: 'Each H3 is a name. Or use fetch: /data/team.json for external data.',
     },
   },
 

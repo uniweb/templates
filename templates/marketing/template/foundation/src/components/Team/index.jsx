@@ -5,7 +5,10 @@ import { cn, Link, SocialIcon, isSocialLink } from '@uniweb/kit'
  * Team Component
  *
  * Display team member profiles with photos, names, roles, and social links.
- * Each subsection becomes a team member card.
+ *
+ * Data sources (in order of precedence):
+ * 1. content.data.team - From fetch (page/site level) or tagged code blocks
+ * 2. content.items - From markdown H3 patterns
  */
 
 export function Team({ content, params }) {
@@ -13,8 +16,41 @@ export function Team({ content, params }) {
   const { title, paragraphs } = content
   const { theme, columns, style } = params
 
-  // Extract members from semantic groups (H3 patterns)
-  const members = content.items
+  // Support both fetched data and markdown items
+  // Fetched data: { name, role, bio, avatar, social: { linkedin, twitter, github } }
+  // Markdown items: { title, paragraphs, imgs, links }
+  const rawMembers = content.data?.team || content.items || []
+
+  // Normalize to consistent shape
+  const members = rawMembers.map((member) => {
+    // Check if it's fetched data format (has 'name' property)
+    if (member.name !== undefined) {
+      // Convert social object to links array
+      const socialLinks = []
+      if (member.social) {
+        for (const [platform, url] of Object.entries(member.social)) {
+          if (url) {
+            socialLinks.push({ href: url, text: platform })
+          }
+        }
+      }
+      return {
+        name: member.name,
+        role: member.role,
+        bio: member.bio,
+        photo: member.avatar ? { url: member.avatar } : null,
+        socialLinks,
+      }
+    }
+    // Markdown items format
+    return {
+      name: member.title,
+      role: member.paragraphs?.[0],
+      bio: member.paragraphs?.[1],
+      photo: member.imgs?.[0],
+      socialLinks: member.links || [],
+    }
+  })
 
   const themes = {
     light: {
@@ -77,11 +113,7 @@ export function Team({ content, params }) {
 
         <div className={cn('grid gap-8', gridCols[columns] || 'sm:grid-cols-3')}>
           {members.map((member, index) => {
-            const name = member.title
-            const role = member.paragraphs?.[0]
-            const bio = member.paragraphs?.[1]
-            const photo = member.imgs?.[0]
-            const socialLinks = member.links || []
+            const { name, role, bio, photo, socialLinks } = member
 
             if (style === 'simple') {
               return (
