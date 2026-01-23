@@ -1,6 +1,6 @@
 {
   "name": "@uniweb/templates",
-  "version": "0.1.40",
+  "version": "0.1.41",
   "description": "Template processing engine and official templates for Uniweb",
   "type": "module",
   "main": "src/index.js",
