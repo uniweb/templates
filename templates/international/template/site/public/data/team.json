@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Maria Garcia",
+    "role": "CEO & Founder",
+    "bio": "Leading our vision with over 20 years of industry experience.",
+    "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop"
+  },
+  {
+    "name": "James Chen",
+    "role": "Technical Director",
+    "bio": "Driving innovation and technical excellence across all projects.",
+    "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop"
+  },
+  {
+    "name": "Sophie Martin",
+    "role": "Client Relations",
+    "bio": "Ensuring exceptional service and client satisfaction.",
+    "avatar": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&fit=crop"
+  },
+  {
+    "name": "David Kim",
+    "role": "Lead Developer",
+    "bio": "Building robust solutions with cutting-edge technologies.",
+    "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop"
+  }
+]
