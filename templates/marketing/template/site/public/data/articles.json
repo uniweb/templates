@@ -1,0 +1,41 @@
+[
+  {
+    "slug": "getting-started-with-uniweb",
+    "title": "Getting Started with Uniweb",
+    "excerpt": "Learn how to build your first Uniweb site in minutes with our comprehensive getting started guide.",
+    "date": "2025-01-15",
+    "author": {
+      "name": "Sarah Chen",
+      "avatar": "https://randomuser.me/api/portraits/women/44.jpg"
+    },
+    "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800",
+    "tags": ["tutorial", "getting-started"],
+    "body": "## Introduction\n\nUniweb makes it easy to build beautiful, content-driven websites. In this guide, we'll walk through the basics of creating your first site.\n\n## Prerequisites\n\nBefore you begin, make sure you have Node.js 20 or later installed on your system.\n\n## Creating Your Project\n\nRun the following command to create a new Uniweb project:\n\n```bash\nnpx uniweb create my-site --template marketing\n```\n\n## Next Steps\n\nOnce your project is created, explore the foundation components and start customizing your site!"
+  },
+  {
+    "slug": "component-design-patterns",
+    "title": "Component Design Patterns",
+    "excerpt": "Explore best practices for designing reusable components in Uniweb foundations.",
+    "date": "2025-01-12",
+    "author": {
+      "name": "Marcus Johnson",
+      "avatar": "https://randomuser.me/api/portraits/men/32.jpg"
+    },
+    "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800",
+    "tags": ["components", "best-practices"],
+    "body": "## Overview\n\nGood component design is key to building maintainable Uniweb sites. Let's explore patterns that work well.\n\n## The Single Responsibility Principle\n\nEach component should do one thing well. This makes components easier to understand, test, and reuse.\n\n## Using Content Structure\n\nUniweb provides a guaranteed content structure. Take advantage of this to write cleaner component code without defensive null checks."
+  },
+  {
+    "slug": "data-fetching-guide",
+    "title": "Dynamic Data Fetching Guide",
+    "excerpt": "Learn how to fetch external data and use it in your Uniweb components.",
+    "date": "2025-01-10",
+    "author": {
+      "name": "Elena Rodriguez",
+      "avatar": "https://randomuser.me/api/portraits/women/67.jpg"
+    },
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800",
+    "tags": ["data", "advanced"],
+    "body": "## Introduction\n\nUniweb supports fetching data from local JSON files or remote APIs. This guide covers the basics.\n\n## Fetch at Section Level\n\nAdd a `fetch` property to your section frontmatter:\n\n```yaml\n---\ntype: Team\nfetch: /data/team.json\n---\n```\n\n## Cascading Data\n\nData can cascade from site to page to section levels. Components opt into inherited data using `inheritData` in their meta.js."
+  }
+]
