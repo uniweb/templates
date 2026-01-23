@@ -8,8 +8,7 @@ import { cn } from '@uniweb/kit'
  * Used to wrap other components or provide visual separation.
  */
 export function Section({ content, params }) {
-  const { title } = content.main?.header || {}
-  const { paragraphs = [] } = content.main?.body || {}
+  const { title, paragraphs = [] } = content || {}
   const {
     background = 'white',
     padding = 'lg',

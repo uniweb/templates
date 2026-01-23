@@ -8,8 +8,7 @@ import { cn, Link } from '@uniweb/kit'
  * Supports different member types (faculty, students, alumni).
  */
 export function TeamGrid({ content, params }) {
-  const { title } = content.main?.header || {}
-  const { paragraphs = [] } = content.main?.body || {}
+  const { title, paragraphs = [] } = content || {}
   const {
     groupByRole = true,
     cardStyle = 'photo',
@@ -20,18 +19,14 @@ export function TeamGrid({ content, params }) {
 
   // Parse member data from subsections
   const parsedMembers = members.map(member => {
-    const name = member.header?.title
-    const role = member.header?.pretitle // e.g., "PhD Student", "Postdoc"
-    const paras = member.body?.paragraphs || []
-    const photo = member.body?.imgs?.[0]
-    const links = member.body?.links || []
+    const { title: name, pretitle, paragraphs = [], imgs = [], links = [] } = member || {}
 
     return {
       name,
-      role: role || 'Member',
-      bio: paras[0],
-      email: paras[1],
-      photo,
+      role: pretitle || 'Member', // e.g., "PhD Student", "Postdoc"
+      bio: paragraphs[0],
+      email: paragraphs[1],
+      photo: imgs[0],
       links,
     }
   })

@@ -8,8 +8,7 @@ import { cn, Link } from '@uniweb/kit'
  * Office location, email, phone, office hours.
  */
 export function ContactCard({ content, params }) {
-  const { title } = content.main?.header || {}
-  const { paragraphs = [], links = [] } = content.main?.body || {}
+  const { title, paragraphs = [], links = [] } = content || {}
   const {
     layout = 'sidebar',
     showIcon = true,

@@ -30,8 +30,7 @@ function extractVideoId(url) {
 }
 
 export function Video({ content, params }) {
-  const { title, pretitle } = content.main?.header || {}
-  const { paragraphs = [], links = [] } = content.main?.body || {}
+  const { title, pretitle, paragraphs = [], links = [], imgs = [] } = content || {}
   const {
     theme = 'light',
     layout = 'center',
@@ -46,7 +45,7 @@ export function Video({ content, params }) {
   const videoInfo = extractVideoId(videoUrl)
 
   // Get thumbnail from first image or generate from video
-  const thumbImg = content.main?.body?.imgs?.[0]
+  const thumbImg = imgs[0]
   const thumbnail = thumbImg?.url || thumbImg?.src ||
     (videoInfo?.type === 'youtube'
       ? `https://img.youtube.com/vi/${videoInfo.id}/maxresdefault.jpg`

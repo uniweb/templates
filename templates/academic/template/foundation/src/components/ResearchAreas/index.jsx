@@ -8,8 +8,7 @@ import { cn, Link } from '@uniweb/kit'
  * Each subsection represents a research area with description.
  */
 export function ResearchAreas({ content, params }) {
-  const { title } = content.main?.header || {}
-  const { paragraphs = [] } = content.main?.body || {}
+  const { title, paragraphs = [] } = content || {}
   const {
     layout = 'cards',
     showNumbers = false,
@@ -57,9 +56,9 @@ export function ResearchAreas({ content, params }) {
 
         <div className={l.container}>
           {areas.map((area, index) => {
-            const areaTitle = area.header?.title
-            const areaDesc = area.body?.paragraphs?.[0]
-            const areaLinks = area.body?.links || []
+            const areaTitle = area.title
+            const areaDesc = area.paragraphs?.[0]
+            const areaLinks = area.links || []
 
             if (layout === 'compact') {
               return (

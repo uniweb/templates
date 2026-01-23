@@ -1,12 +1,8 @@
 import React from 'react'
 
 export function Pricing({ content, params }) {
-  const { title } = content.main?.header || {}
-  const { paragraphs = [] } = content.main?.body || {}
+  const { title, paragraphs = [], items: tiers = [] } = content || {}
   const { theme = 'light' } = params || {}
-
-  // Extract pricing tiers from semantic groups (H3 patterns)
-  const tiers = content.items || []
 
   const themeStyles = {
     light: 'bg-gray-50',
@@ -44,10 +40,10 @@ export function Pricing({ content, params }) {
 
         <div className="grid md:grid-cols-3 gap-8">
           {tiers.map((tier, index) => {
-            const tierTitle = tier.header?.title
-            const tierDesc = tier.body?.paragraphs?.[0]
-            const features = tier.body?.lists?.[0] || []
-            const link = tier.body?.links?.[0]
+            const tierTitle = tier.title
+            const tierDesc = tier.paragraphs?.[0]
+            const features = tier.lists?.[0] || []
+            const link = tier.links?.[0]
             const isPopular = index === 1 // Middle tier is popular
 
             return (

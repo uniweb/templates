@@ -25,15 +25,12 @@ const iconMap = {
 }
 
 export function Stats({ content, params }) {
-  const { title } = content.main?.header || {}
-  const { paragraphs = [] } = content.main?.body || {}
+  const { title, paragraphs = [], items: stats = [] } = content || {}
   const {
     theme = 'light',
     columns = 4,
     style = 'simple',
   } = params || {}
-
-  const stats = content.items || []
 
   const themes = {
     light: {
@@ -130,12 +127,12 @@ export function Stats({ content, params }) {
 
         <div className={cn('grid gap-8', gridCols[columns] || 'sm:grid-cols-4')}>
           {stats.map((stat, index) => {
-            const value = stat.header?.title
-            const label = stat.body?.paragraphs?.[0]
-            const description = stat.body?.paragraphs?.[1]
+            const value = stat.title
+            const label = stat.paragraphs?.[0]
+            const description = stat.paragraphs?.[1]
 
             // Check for icon in the pretitle (e.g., "icon:users")
-            const pretitle = stat.header?.pretitle
+            const pretitle = stat.pretitle
             const iconName = pretitle?.startsWith('icon:') ? pretitle.slice(5) : null
             const IconComponent = iconName ? iconMap[iconName] : null
 

@@ -8,8 +8,7 @@ import { cn, Link } from '@uniweb/kit'
  * Images from markdown become the logos.
  */
 export function LogoCloud({ content, params }) {
-  const { title } = content.main?.header || {}
-  const { paragraphs = [], imgs = [], links = [] } = content.main?.body || {}
+  const { title, paragraphs = [], imgs = [], links = [] } = content || {}
   const {
     theme = 'light',
     layout = 'grid',

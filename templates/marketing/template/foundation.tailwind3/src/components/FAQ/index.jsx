@@ -9,15 +9,12 @@ import { ChevronDown, MessageCircle } from 'lucide-react'
  * Each subsection (H3) becomes a question, with paragraphs as the answer.
  */
 export function FAQ({ content, params }) {
-  const { title } = content.main?.header || {}
-  const { paragraphs = [] } = content.main?.body || {}
+  const { title, paragraphs = [], items: questions = [] } = content || {}
   const {
     theme = 'light',
     layout = 'single',
     expandFirst = true,
   } = params || {}
-
-  const questions = content.items || []
   const [openItems, setOpenItems] = useState(
     expandFirst ? [0] : []
   )
@@ -66,8 +63,8 @@ export function FAQ({ content, params }) {
   const t = themes[theme] || themes.light
 
   const FAQItem = ({ question, index }) => {
-    const questionText = question.header?.title
-    const answerParagraphs = question.body?.paragraphs || []
+    const questionText = question.title
+    const answerParagraphs = question.paragraphs || []
     const isOpen = openItems.includes(index)
 
     return (

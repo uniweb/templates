@@ -12,8 +12,7 @@ import { H1, H2, P, cn } from '@uniweb/kit'
  * - Width constraints (readability)
  */
 export function Text({ content, params }) {
-  const { title, pretitle, subtitle } = content.main?.header || {}
-  const { paragraphs = [], links = [] } = content.main?.body || {}
+  const { title, pretitle, subtitle, paragraphs = [], links = [] } = content || {}
   const {
     textScale = 'normal',
     textDensity = 'normal',

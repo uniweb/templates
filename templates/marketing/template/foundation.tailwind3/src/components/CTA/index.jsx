@@ -1,8 +1,7 @@
 import React from 'react'
 
 export function CTA({ content, params }) {
-  const { title } = content.main?.header || {}
-  const { paragraphs = [], links = [] } = content.main?.body || {}
+  const { title, paragraphs = [], links = [] } = content || {}
   const { theme = 'primary', alignment = 'center' } = params || {}
 
   const cta = links[0]

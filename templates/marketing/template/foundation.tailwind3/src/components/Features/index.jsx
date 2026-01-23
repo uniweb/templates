@@ -52,11 +52,8 @@ const iconMap = {
 }
 
 export function Features({ content, params }) {
-  const { title } = content.main?.header || {}
-  const { paragraphs = [] } = content.main?.body || {}
+  const { title, paragraphs = [], items: features = [] } = content || {}
   const { columns = 3, theme = 'light', style = 'cards' } = params || {}
-
-  const features = content.items || []
 
   const themes = {
     light: {
@@ -136,11 +133,11 @@ export function Features({ content, params }) {
 
         <div className={cn('grid gap-8', gridCols[columns] || 'md:grid-cols-3')}>
           {features.map((feature, index) => {
-            const featureTitle = feature.header?.title
-            const featureDesc = feature.body?.paragraphs?.[0]
+            const featureTitle = feature.title
+            const featureDesc = feature.paragraphs?.[0]
 
             // Check for icon in pretitle (e.g., "icon:zap")
-            const pretitle = feature.header?.pretitle
+            const pretitle = feature.pretitle
             const iconName = pretitle?.startsWith('icon:') ? pretitle.slice(5) : null
             const IconComponent = iconName ? iconMap[iconName] : Check
 

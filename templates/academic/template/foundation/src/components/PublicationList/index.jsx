@@ -22,18 +22,15 @@ const PUBLICATION_TYPES = {
   preprint: { label: 'Preprint', color: 'bg-preprint' },
 }
 
-function parsePublication(subsection) {
-  const title = subsection.header?.title
-  const paras = subsection.body?.paragraphs || []
-  const links = subsection.body?.links || []
-  const pretitle = subsection.header?.pretitle // Used for publication type
+function parsePublication(item) {
+  const { title, pretitle, paragraphs = [], links = [] } = item || {}
 
   return {
     title,
-    authors: paras[0] || '',
-    venue: paras[1] || '',
-    year: paras[2] || '',
-    type: pretitle || 'journal',
+    authors: paragraphs[0] || '',
+    venue: paragraphs[1] || '',
+    year: paragraphs[2] || '',
+    type: pretitle || 'journal', // Used for publication type
     links,
   }
 }
@@ -105,8 +102,7 @@ function PublicationCard({ pub, citationStyle, showType }) {
 }
 
 export function PublicationList({ content, params }) {
-  const { title } = content.main?.header || {}
-  const { paragraphs = [] } = content.main?.body || {}
+  const { title, paragraphs = [] } = content || {}
   const {
     citationStyle = 'detailed',
     groupBy = 'none',

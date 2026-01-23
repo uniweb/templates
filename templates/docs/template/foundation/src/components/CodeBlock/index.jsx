@@ -10,8 +10,7 @@ import { cn } from '@uniweb/kit'
 export function CodeBlock({ content, params }) {
   const [copied, setCopied] = useState(false)
 
-  const { paragraphs = [] } = content.main?.body || {}
-  const { title } = content.main?.header || {}
+  const { title, paragraphs = [] } = content || {}
 
   const {
     language = 'javascript',

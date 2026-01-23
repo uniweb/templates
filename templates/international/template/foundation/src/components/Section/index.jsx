@@ -7,9 +7,7 @@ import { H2, P, cn } from '@uniweb/kit'
  * A general-purpose content section with title, description, and items.
  */
 export function Section({ content, params }) {
-  const { title, subtitle } = content.main?.header || {}
-  const { paragraphs = [] } = content.main?.body || {}
-  const items = content.items || []
+  const { title, subtitle, paragraphs = [], items = [] } = content || {}
   const { theme = 'light' } = params || {}
 
   const themes = {

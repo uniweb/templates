@@ -8,8 +8,7 @@ import { cn } from '@uniweb/kit'
  * Each subsection is a timeline entry with date and description.
  */
 export function Timeline({ content, params }) {
-  const { title } = content.main?.header || {}
-  const { paragraphs = [] } = content.main?.body || {}
+  const { title, paragraphs = [] } = content || {}
   const {
     orientation = 'vertical',
     showLine = true,
@@ -20,15 +19,13 @@ export function Timeline({ content, params }) {
 
   // Parse entries
   const parsedEntries = entries.map(entry => {
-    const entryTitle = entry.header?.title
-    const date = entry.header?.pretitle // e.g., "2020-2024" or "2023"
-    const paras = entry.body?.paragraphs || []
+    const { title: entryTitle, pretitle, paragraphs = [] } = entry || {}
 
     return {
       title: entryTitle,
-      date,
-      institution: paras[0],
-      description: paras[1],
+      date: pretitle, // e.g., "2020-2024" or "2023"
+      institution: paragraphs[0],
+      description: paragraphs[1],
     }
   })
 

@@ -8,8 +8,7 @@ import { cn, Image } from '@uniweb/kit'
  * Images come from markdown ![alt](url) syntax.
  */
 export function Gallery({ content, params }) {
-  const { title } = content.main?.header || {}
-  const { paragraphs = [], imgs = [] } = content.main?.body || {}
+  const { title, paragraphs = [], imgs = [] } = content || {}
   const {
     theme = 'light',
     layout = 'grid',

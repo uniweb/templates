@@ -20,8 +20,7 @@ import { H1, P, Link, cn } from '@uniweb/kit'
  * - light: Light background
  */
 export function Hero({ content, params }) {
-  const { title, pretitle, subtitle } = content.main?.header || {}
-  const { paragraphs = [], links = [], imgs = [] } = content.main?.body || {}
+  const { title, pretitle, subtitle, paragraphs = [], links = [], imgs = [] } = content || {}
   const {
     theme = 'gradient',
     layout = 'center',

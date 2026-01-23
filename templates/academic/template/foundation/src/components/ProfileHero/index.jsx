@@ -12,8 +12,7 @@ import { H1, P, Link, cn } from '@uniweb/kit'
  * - Key metrics (citations, h-index, etc.)
  */
 export function ProfileHero({ content, params }) {
-  const { title, pretitle, subtitle } = content.main?.header || {}
-  const { paragraphs = [], links = [], imgs = [] } = content.main?.body || {}
+  const { title, pretitle, subtitle, paragraphs = [], links = [], imgs = [] } = content || {}
   const {
     variant = 'researcher',
     photoPosition = 'right',
