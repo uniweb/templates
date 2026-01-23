@@ -4,4 +4,7 @@ type: Header
 
 # {{projectName}}
 
-[Get Started](/features)
+[Home](/)
+[Features](/features)
+[About](/about)
+[Contact](/contact)
