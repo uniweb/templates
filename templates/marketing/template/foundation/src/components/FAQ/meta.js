@@ -38,6 +38,12 @@ export default {
       hint: 'Start with first question expanded',
       default: true,
     },
+    autoClose: {
+      type: 'boolean',
+      label: 'Auto Close',
+      hint: 'Close other answers when opening a new one',
+      default: true,
+    },
   },
 
   presets: {

@@ -11,7 +11,7 @@ import { ChevronDown, MessageCircle } from 'lucide-react'
 export function FAQ({ content, params }) {
   // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { title, paragraphs } = content
-  const { theme, layout, expandFirst } = params
+  const { theme, layout, expandFirst, autoClose } = params
 
   // Extract questions from semantic groups (H3 patterns)
   const questions = content.items
@@ -20,11 +20,14 @@ export function FAQ({ content, params }) {
   )
 
   const toggleItem = (index) => {
-    setOpenItems(prev =>
-      prev.includes(index)
-        ? prev.filter(i => i !== index)
-        : [...prev, index]
-    )
+    setOpenItems(prev => {
+      const isOpen = prev.includes(index)
+      if (isOpen) {
+        return prev.filter(i => i !== index)
+      }
+      // Opening: either replace all (autoClose) or add to list
+      return autoClose ? [index] : [...prev, index]
+    })
   }
 
   const themes = {
