@@ -1,4 +1,4 @@
-import { SafeHtml } from '@uniweb/kit'
+import { Render } from '@uniweb/kit/styled'
 
 /**
  * Article Component
@@ -20,7 +20,8 @@ export function Article({ content, params }) {
     )
   }
 
-  const { title, excerpt, date, image, body, author, tags } = article
+  // content is ProseMirror JSON from the collection processor
+  const { title, excerpt, date, image, content: articleContent, author, tags } = article
 
   // Format date
   const formattedDate = date
@@ -94,56 +95,15 @@ export function Article({ content, params }) {
           </div>
         )}
 
-        {/* Body Content */}
-        {body && (
+        {/* Body Content - rendered from ProseMirror JSON */}
+        {articleContent && (
           <div className="prose prose-lg max-w-none">
-            <SafeHtml html={markdownToHtml(body)} />
+            <Render content={articleContent.content || articleContent} />
           </div>
         )}
       </div>
     </article>
   )
-}
-
-/**
- * Simple markdown to HTML converter
- * Handles headings, paragraphs, code blocks, and basic formatting
- */
-function markdownToHtml(markdown) {
-  if (!markdown) return ''
-
-  let html = markdown
-    // Code blocks (must be before other transformations)
-    .replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>')
-    // Inline code
-    .replace(/`([^`]+)`/g, '<code>$1</code>')
-    // Headings
-    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
-    .replace(/^# (.+)$/gm, '<h1>$1</h1>')
-    // Bold
-    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-    // Italic
-    .replace(/\*([^*]+)\*/g, '<em>$1</em>')
-    // Links
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
-    // Paragraphs - split by double newlines
-    .split(/\n\n+/)
-    .map((block) => {
-      // Don't wrap headings, pre, or already wrapped content
-      if (
-        block.startsWith('<h') ||
-        block.startsWith('<pre') ||
-        block.startsWith('<ul') ||
-        block.startsWith('<ol')
-      ) {
-        return block
-      }
-      return `<p>${block.replace(/\n/g, '<br>')}</p>`
-    })
-    .join('\n')
-
-  return html
 }
 
 export default Article
