@@ -8,11 +8,11 @@ import { Link } from '@uniweb/kit'
  */
 export function BlogList({ content, params, block }) {
   const { title, subtitle, paragraphs } = content
-  const articles = content.data?.articles || []
+  const articles = content.data.articles || []
   const { columns, showExcerpt, showAuthor, showDate } = params
 
-  // Get the current page route to build article links
-  const pageRoute = block?.page?.route || '/blog'
+  // Fallback route for articles without a route property
+  const fallbackRoute = block.page.route
 
   const gridCols = {
     2: 'md:grid-cols-2',
@@ -46,7 +46,7 @@ export function BlogList({ content, params, block }) {
               <ArticleCard
                 key={article.slug || i}
                 article={article}
-                baseRoute={pageRoute}
+                fallbackRoute={fallbackRoute}
                 showExcerpt={showExcerpt}
                 showAuthor={showAuthor}
                 showDate={showDate}
@@ -64,11 +64,11 @@ export function BlogList({ content, params, block }) {
 /**
  * Individual article card
  */
-function ArticleCard({ article, baseRoute, showExcerpt, showAuthor, showDate }) {
-  const { slug, title, excerpt, date, image, author, tags } = article
+function ArticleCard({ article, fallbackRoute, showExcerpt, showAuthor, showDate }) {
+  const { slug, title, excerpt, date, image, author, tags, route } = article
 
-  // Build link to article page: /blog → /blog/my-slug
-  const articleUrl = `${baseRoute}/${slug}`
+  // Use article's route if available (from collection config), otherwise build from fallback
+  const articleUrl = route || `${fallbackRoute}/${slug}`
 
   // Format date
   const formattedDate = date
