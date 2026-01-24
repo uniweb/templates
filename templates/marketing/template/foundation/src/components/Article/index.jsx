@@ -1,10 +1,12 @@
-import { Render } from '@uniweb/kit/styled'
+import { Article as ArticleBody } from '@uniweb/kit/styled'
 
 /**
  * Article Component
  *
  * Renders a full article from inherited data. Used on dynamic routes
  * where the parent page fetches articles and this page gets one article.
+ *
+ * Uses kit's Article component for the body content rendering.
  */
 export function Article({ content, params }) {
   const article = content.data.article
@@ -97,9 +99,7 @@ export function Article({ content, params }) {
 
         {/* Body Content - rendered from ProseMirror JSON */}
         {articleContent && (
-          <div className="prose prose-lg max-w-none">
-            <Render content={articleContent.content || articleContent} />
-          </div>
+          <ArticleBody content={articleContent} />
         )}
       </div>
     </article>
