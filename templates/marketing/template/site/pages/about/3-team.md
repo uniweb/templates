@@ -1,11 +1,11 @@
 ---
-type: Team
+type: CTA
 theme: gray
-columns: 3
-style: cards
-fetch: /data/team.json
+layout: center
 ---
 
-## Meet the Team
+## Meet the People Behind the Platform
 
-The passionate people behind the platform.
+Our diverse team brings together expertise in engineering, design, and business to build the future of web publishing.
+
+[Meet Our Team](/team)

@@ -2,6 +2,8 @@
 
 A marketing site built with [Uniweb](https://github.com/uniweb/cli) — a component web platform that separates content from code.
 
+This template demonstrates key Uniweb patterns including content collections, dynamic routes, and multiple approaches to structured data.
+
 {{> quick-start}}
 
 ## Project Structure
@@ -19,8 +21,13 @@ A marketing site built with [Uniweb](https://github.com/uniweb/cli) — a compon
 │   ├── pages/           # Content pages
 │   │   ├── home/
 │   │   ├── about/
-│   │   └── features/
-│   ├── site.yml         # Site configuration
+│   │   ├── team/        # Team page with 3 data approaches
+│   │   ├── blog/        # Dynamic routes for articles
+│   │   └── ...
+│   ├── library/         # Content collections
+│   │   ├── articles/    # Blog posts
+│   │   └── team/        # Team member profiles
+│   ├── site.yml         # Site configuration + collections
 │   └── vite.config.js   # defineSiteConfig()
 │
 ├── AGENTS.md            # AI assistant instructions
@@ -28,6 +35,117 @@ A marketing site built with [Uniweb](https://github.com/uniweb/cli) — a compon
 ```
 
 {{> components-docs}}
+
+## Content Patterns
+
+This template showcases several content authoring patterns. Explore these files to understand how they work.
+
+### Content Collections
+
+Collections turn folders of markdown files into queryable data. Each file has frontmatter (metadata) and optional body content.
+
+**Configuration** (`site/site.yml`):
+```yaml
+collections:
+  articles:
+    path: library/articles
+    route: /blog           # Enables dynamic routes
+    sort: date desc
+  team:
+    path: library/team
+    sort: order asc
+```
+
+**Example collection item** (`library/team/sarah-chen.md`):
+```markdown
+---
+name: Sarah Chen
+role: CEO & Co-founder
+avatar: https://example.com/photo.jpg
+order: 1
+social:
+  linkedin: https://linkedin.com
+---
+
+Leading our mission to simplify web publishing.
+```
+
+Collections are processed at build time into JSON files (`public/data/team.json`), which components can fetch.
+
+### Three Ways to Provide Structured Data
+
+The **Team page** (`pages/team/`) demonstrates three approaches to the same component:
+
+| Section | Approach | Best For |
+|---------|----------|----------|
+| Leadership | **Collection** — `fetch: /data/team.json` | Substantial data, reusable across pages |
+| Engineering | **Tagged YAML** — inline `yaml:team` block | Quick structured data, schema-validated |
+| Advisors | **Markdown items** — H3 headings | Simplest approach, pure markdown |
+
+**1. Collection fetch** (`1-leadership.md`):
+```markdown
+---
+type: Team
+fetch: /data/team.json
+---
+## Leadership
+```
+
+**2. Tagged YAML block** (`2-engineering.md`):
+```markdown
+---
+type: Team
+---
+## Engineering
+
+\`\`\`yaml:team
+- name: Alex Rivera
+  role: Lead Engineer
+  avatar: https://...
+\`\`\`
+```
+
+**3. Markdown items** (`3-advisors.md`):
+```markdown
+---
+type: Team
+---
+## Advisors
+
+### Dr. Emily Watson
+Strategic Advisor
+Bio paragraph here.
+![](photo.jpg)
+[LinkedIn](https://...)
+```
+
+### Component Parameters
+
+The same component can render differently based on parameters. The Team page also demonstrates layout variants:
+
+| Section | Theme | Style | Columns |
+|---------|-------|-------|---------|
+| Leadership | `gray` | `cards` | 3 |
+| Engineering | `light` | `simple` | 4 |
+| Advisors | `dark` | `cards` | 2 |
+
+Parameters are set in frontmatter and have defaults defined in `meta.js`.
+
+### Dynamic Routes
+
+The **Blog** uses dynamic routes to generate pages from collection data:
+
+```
+pages/blog/
+├── page.yml           # fetch: /data/articles.json
+├── 1-list.md          # BlogList component
+└── [slug]/            # Dynamic segment
+    └── 1-article.md   # Article component
+```
+
+The `[slug]` folder creates one page per article. Each article page receives:
+- `content.data.article` — the current item
+- `content.data.articles` — all items (for related posts)
 
 {{> config-reference}}
 
