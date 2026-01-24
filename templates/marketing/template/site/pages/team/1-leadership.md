@@ -3,8 +3,7 @@ type: Team
 theme: gray
 columns: 3
 style: cards
-fetch:
-  collection: team
+data: team
 ---
 
 ## Leadership

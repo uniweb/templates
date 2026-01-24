@@ -78,7 +78,7 @@ The **Team page** (`pages/team/`) demonstrates three approaches to the same comp
 
 | Section | Approach | Best For |
 |---------|----------|----------|
-| Leadership | **Collection** — `fetch: { collection: team }` | Substantial data, reusable across pages |
+| Leadership | **Collection** — `data: team` | Substantial data, reusable across pages |
 | Engineering | **Tagged YAML** — inline `yaml:team` block | Quick structured data, schema-validated |
 | Advisors | **Markdown items** — H3 headings | Simplest approach, pure markdown |
 
@@ -86,8 +86,7 @@ The **Team page** (`pages/team/`) demonstrates three approaches to the same comp
 ```markdown
 ---
 type: Team
-fetch:
-  collection: team
+data: team
 ---
 ## Leadership
 ```
