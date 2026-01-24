@@ -3,7 +3,8 @@ type: Team
 theme: gray
 columns: 3
 style: cards
-fetch: /data/team.json
+fetch:
+  collection: team
 ---
 
 ## Leadership
