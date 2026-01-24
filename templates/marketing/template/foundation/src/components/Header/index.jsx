@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Link, cn, useScrolled, useMobileMenu, useWebsite } from '@uniweb/kit'
+import { Link, cn, useScrolled, useMobileMenu, useWebsite, useActiveRoute } from '@uniweb/kit'
 
 /**
  * Header Component
@@ -21,6 +21,7 @@ export function Header({ content, params, block }) {
   // Kit hooks for common patterns
   const scrolled = useScrolled(20)
   const { isOpen: mobileMenuOpen, toggle: toggleMobileMenu, close: closeMobileMenu } = useMobileMenu()
+  const { isActiveOrAncestor } = useActiveRoute()
 
   // Get context from the next block (first body section)
   const nextBlockInfo = block.getNextBlockInfo()
@@ -60,11 +61,12 @@ export function Header({ content, params, block }) {
       : 'bg-white text-gray-900'
   }
 
-  const getLinkStyles = () => {
+  const getLinkStyles = (page) => {
+    const isActive = page ? isActiveOrAncestor(page) : false
     if (isFloating && !scrolled && isDarkBackground) {
-      return 'text-white/90 hover:text-white'
+      return isActive ? 'text-white font-semibold' : 'text-white/90 hover:text-white'
     }
-    return 'text-gray-600 hover:text-gray-900'
+    return isActive ? 'text-primary font-semibold' : 'text-gray-600 hover:text-gray-900'
   }
 
   return (
@@ -79,7 +81,7 @@ export function Header({ content, params, block }) {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo / Site Name */}
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               <Link href="/" className="flex items-center gap-2">
                 {logo ? (
                   <img
@@ -88,7 +90,30 @@ export function Header({ content, params, block }) {
                     className="h-8 w-auto"
                   />
                 ) : (
-                  <span className="text-xl font-bold">{siteName}</span>
+                  <>
+                    {/* Default logo mark */}
+                    <svg
+                      className="h-8 w-8"
+                      viewBox="0 0 32 32"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <rect width="32" height="32" rx="8" className="fill-primary" />
+                      <path
+                        d="M8 12L16 8L24 12V20L16 24L8 20V12Z"
+                        className="stroke-white"
+                        strokeWidth="2"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M16 8V24M8 12L24 20M24 12L8 20"
+                        className="stroke-white/60"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                    <span className="text-xl font-bold">{siteName}</span>
+                  </>
                 )}
               </Link>
             </div>
@@ -101,7 +126,7 @@ export function Header({ content, params, block }) {
                   href={page.navigableRoute}
                   className={cn(
                     'text-sm font-medium transition-colors',
-                    getLinkStyles()
+                    getLinkStyles(page)
                   )}
                 >
                   {page.label || page.title}
@@ -109,20 +134,35 @@ export function Header({ content, params, block }) {
               ))}
             </div>
 
-            {/* Desktop CTA (if provided in content) */}
-            {links[0] && (
-              <div className="hidden lg:flex lg:items-center">
-                <Link
-                  href={links[0].href}
-                  className={cn(
-                    'inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-colors',
-                    isFloating && !scrolled && isDarkBackground
-                      ? 'bg-white text-gray-900 hover:bg-gray-100'
-                      : 'bg-primary text-white hover:bg-blue-700'
-                  )}
-                >
-                  {links[0].label}
-                </Link>
+            {/* Desktop CTAs (login/signup if provided in content) */}
+            {links.length > 0 && (
+              <div className="hidden lg:flex lg:items-center lg:gap-4">
+                {/* First link as text link (e.g., "Log in") */}
+                {links[0] && (
+                  <Link
+                    href={links[0].href}
+                    className={cn(
+                      'text-sm font-medium transition-colors',
+                      getLinkStyles(null)
+                    )}
+                  >
+                    {links[0].label}
+                  </Link>
+                )}
+                {/* Second link as primary button (e.g., "Sign up") */}
+                {links[1] && (
+                  <Link
+                    href={links[1].href}
+                    className={cn(
+                      'inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-colors',
+                      isFloating && !scrolled && isDarkBackground
+                        ? 'bg-white text-gray-900 hover:bg-gray-100'
+                        : 'bg-primary text-white hover:bg-blue-700'
+                    )}
+                  >
+                    {links[1].label}
+                  </Link>
+                )}
               </div>
             )}
 
@@ -133,7 +173,7 @@ export function Header({ content, params, block }) {
                 onClick={toggleMobileMenu}
                 className={cn(
                   'inline-flex items-center justify-center p-2 rounded-md transition-colors',
-                  getLinkStyles()
+                  getLinkStyles(null)
                 )}
                 aria-expanded={mobileMenuOpen}
               >
@@ -160,20 +200,38 @@ export function Header({ content, params, block }) {
                 <Link
                   key={page.route}
                   href={page.navigableRoute}
-                  className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md"
+                  className={cn(
+                    'block px-3 py-2 text-base font-medium rounded-md',
+                    isActiveOrAncestor(page)
+                      ? 'text-primary bg-primary/5'
+                      : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
+                  )}
                   onClick={closeMobileMenu}
                 >
                   {page.label || page.title}
                 </Link>
               ))}
-              {links[0] && (
-                <Link
-                  href={links[0].href}
-                  className="block px-3 py-2 text-base font-medium text-white bg-primary hover:bg-blue-700 rounded-md text-center mt-4"
-                  onClick={closeMobileMenu}
-                >
-                  {links[0].label}
-                </Link>
+              {links.length > 0 && (
+                <div className="mt-4 pt-4 border-t border-gray-200 space-y-2">
+                  {links[0] && (
+                    <Link
+                      href={links[0].href}
+                      className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md text-center"
+                      onClick={closeMobileMenu}
+                    >
+                      {links[0].label}
+                    </Link>
+                  )}
+                  {links[1] && (
+                    <Link
+                      href={links[1].href}
+                      className="block px-3 py-2 text-base font-medium text-white bg-primary hover:bg-blue-700 rounded-md text-center"
+                      onClick={closeMobileMenu}
+                    >
+                      {links[1].label}
+                    </Link>
+                  )}
+                </div>
               )}
             </div>
           </div>

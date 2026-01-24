@@ -1,43 +1,12 @@
 ---
-type: Pricing
+type: CTA
 theme: light
+layout: center
 ---
 
-## Simple, Transparent Pricing
+## Ready to Get Started?
 
-Choose the plan that works for you. All plans include core features.
+Simple, transparent pricing with no hidden fees. Choose from our free Starter plan or unlock powerful features with Professional.
 
-### Starter
-
-Perfect for personal projects and small sites.
-
-- Up to 5 pages
-- 1 custom domain
-- Basic analytics
-- Community support
-
-[Start Free](#)
-
-### Professional
-
-For growing businesses and teams.
-
-- Unlimited pages
-- 3 custom domains
-- Advanced analytics
-- Priority support
-- Custom components
-
-[Start Trial](#)
-
-### Enterprise
-
-For large organizations with custom needs.
-
-- Everything in Pro
-- Unlimited domains
-- Dedicated support
-- Custom integrations
-- SLA guarantee
-
-[Contact Sales](#)
+[View Pricing](/pricing)
+[Start Free Trial](#)
