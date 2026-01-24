@@ -33,7 +33,7 @@ export default {
     paragraphs: 'Intro text [1]',
     items: {
       label: 'Team members [3-8]',
-      hint: 'Each H3 is a name. Or use fetch: /data/team.json for external data.',
+      hint: 'Use a team collection in library/team/ or inline H3 patterns.',
     },
   },
 

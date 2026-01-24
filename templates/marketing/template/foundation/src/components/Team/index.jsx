@@ -37,7 +37,7 @@ export function Team({ content, params }) {
       return {
         name: member.name,
         role: member.role,
-        bio: member.bio,
+        bio: member.bio || member.body,  // 'body' for collection data, 'bio' for legacy JSON
         photo: member.avatar ? { url: member.avatar } : null,
         socialLinks,
       }
