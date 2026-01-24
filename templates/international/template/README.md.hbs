@@ -2,12 +2,16 @@
 
 A multilingual business website built with [Uniweb](https://github.com/uniweb/cli) — a component web platform that separates content from code.
 
+This template demonstrates internationalization (i18n), nested navigation with dropdowns, and active state highlighting.
+
 ## Features
 
 - **Multilingual support** — English, Spanish, and French out of the box
 - **Language switcher** — Header and footer components with locale navigation
+- **Dropdown navigation** — Nested pages appear in dropdown menus
+- **Active state highlighting** — Current page and parent pages are highlighted
 - **SEO-friendly** — Proper `hreflang` tags and prerendered HTML per locale
-- **Corporate structure** — Home, About, Services, and Contact pages
+- **Corporate structure** — Home, About, Services (with subpages), and Contact
 
 {{> quick-start}}
 
@@ -28,7 +32,9 @@ A multilingual business website built with [Uniweb](https://github.com/uniweb/cl
 │   │   ├── @footer/     # Global footer with locale links
 │   │   ├── home/
 │   │   ├── about/
-│   │   ├── services/
+│   │   ├── services/    # Parent page with nested children
+│   │   │   ├── consulting/   # Child page
+│   │   │   └── development/  # Child page
 │   │   └── contact/
 │   ├── locales/         # Translation files (en.json, es.json, fr.json)
 │   ├── site.yml         # Site configuration with i18n settings
@@ -39,6 +45,88 @@ A multilingual business website built with [Uniweb](https://github.com/uniweb/cl
 ```
 
 {{> components-docs}}
+
+## Navigation Patterns
+
+This template demonstrates several navigation features.
+
+### Automatic Navigation Discovery
+
+The Header component automatically discovers pages using `website.getPageHierarchy()`:
+
+```jsx
+const navPages = website.getPageHierarchy({ for: 'header' })
+// Returns: [{ route, title, label, children: [...] }, ...]
+```
+
+Pages are included in navigation by default. Use `page.yml` to control visibility:
+
+```yaml
+# Hide from all navigation
+hidden: true
+
+# Hide from specific navigation areas
+hideInHeader: true
+hideInFooter: true
+```
+
+### Nested Pages and Dropdowns
+
+Create nested pages by placing folders inside page folders:
+
+```
+pages/services/           # Parent: /services
+├── page.yml
+├── 1-hero.md
+├── consulting/           # Child: /services/consulting
+│   ├── page.yml
+│   └── 1-hero.md
+└── development/          # Child: /services/development
+    ├── page.yml
+    └── 1-hero.md
+```
+
+The Header automatically renders dropdowns for pages with children:
+- **Desktop**: Hover to reveal dropdown menu
+- **Mobile**: Expandable accordion for child pages
+
+### Active State Highlighting
+
+The Header uses `useActiveRoute()` from `@uniweb/kit` to highlight active pages:
+
+```jsx
+import { useActiveRoute } from '@uniweb/kit'
+
+function NavItem({ page }) {
+  const { isActive, isActiveOrAncestor } = useActiveRoute()
+
+  // Exact match - highlights only current page
+  const isCurrent = isActive(page)
+
+  // Ancestor match - highlights parent when child is active
+  const isInSection = isActiveOrAncestor(page)
+
+  return (
+    <Link className={isInSection ? 'text-primary font-semibold' : ''}>
+      {page.title}
+    </Link>
+  )
+}
+```
+
+**Active state behavior:**
+- When on `/services/consulting`, both "Services" (parent) and "Consulting" (child) are highlighted
+- Parent uses `isActiveOrAncestor()` to detect when any child is active
+- Child uses `isActive()` for exact page match
+
+### Page Labels
+
+Use `label` in `page.yml` for shorter navigation text:
+
+```yaml
+title: Consulting Services    # Full title (used in <title> tag)
+label: Consulting             # Short label (used in navigation)
+```
 
 {{> config-reference}}
 

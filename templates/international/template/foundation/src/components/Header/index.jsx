@@ -1,17 +1,25 @@
-import React from 'react'
-import { Link, cn, useScrolled, useMobileMenu, useWebsite } from '@uniweb/kit'
+import React, { useState } from 'react'
+import { Link, cn, useScrolled, useMobileMenu, useWebsite, useActiveRoute } from '@uniweb/kit'
+import { ChevronDown } from 'lucide-react'
 
 /**
  * Header Component
  *
- * A responsive navigation header with language switcher for multilingual sites.
+ * A responsive navigation header with:
+ * - Dropdown menus for nested pages
+ * - Active state highlighting for current page and ancestors
+ * - Language switcher for multilingual sites
  */
 export function Header({ content, params, block }) {
   const { website } = useWebsite()
+  const { isActive, isActiveOrAncestor } = useActiveRoute()
 
   // Kit hooks for common patterns
   const scrolled = useScrolled(20)
   const { isOpen: mobileMenuOpen, toggle: toggleMobileMenu, close: closeMobileMenu } = useMobileMenu()
+
+  // Track which dropdown is open (for hover/click)
+  const [openDropdown, setOpenDropdown] = useState(null)
 
   // Get context from the next block
   const nextBlockInfo = block.getNextBlockInfo()
@@ -23,7 +31,7 @@ export function Header({ content, params, block }) {
   // Runtime guarantees: content is flat
   const { title, links } = content
 
-  // Get navigation from website
+  // Get navigation from website (includes nested children)
   const navPages = website.getPageHierarchy({ for: 'header' })
   const siteName = title || website.name || 'Site'
 
@@ -45,11 +53,139 @@ export function Header({ content, params, block }) {
       : 'bg-white text-gray-900'
   }
 
-  const getLinkStyles = () => {
+  const getLinkStyles = (isActiveLink = false) => {
+    if (isActiveLink) {
+      if (isFloating && !scrolled && isDarkBackground) {
+        return 'text-white font-semibold'
+      }
+      return 'text-primary font-semibold'
+    }
     if (isFloating && !scrolled && isDarkBackground) {
       return 'text-white/90 hover:text-white'
     }
     return 'text-gray-600 hover:text-gray-900'
+  }
+
+  // Render a nav item (with or without dropdown)
+  const NavItem = ({ page }) => {
+    const hasChildren = page.children && page.children.length > 0
+    const isPageActive = isActiveOrAncestor(page)
+    const isDropdownOpen = openDropdown === page.route
+
+    if (!hasChildren) {
+      return (
+        <Link
+          href={page.navigableRoute}
+          className={cn('text-sm font-medium transition-colors', getLinkStyles(isPageActive))}
+        >
+          {page.label || page.title}
+        </Link>
+      )
+    }
+
+    // Page with children - render dropdown
+    return (
+      <div
+        className="relative"
+        onMouseEnter={() => setOpenDropdown(page.route)}
+        onMouseLeave={() => setOpenDropdown(null)}
+      >
+        <button
+          className={cn(
+            'flex items-center gap-1 text-sm font-medium transition-colors',
+            getLinkStyles(isPageActive)
+          )}
+          onClick={() => setOpenDropdown(isDropdownOpen ? null : page.route)}
+        >
+          {page.label || page.title}
+          <ChevronDown className={cn(
+            'w-4 h-4 transition-transform',
+            isDropdownOpen && 'rotate-180'
+          )} />
+        </button>
+
+        {/* Dropdown menu */}
+        {isDropdownOpen && (
+          <div className="absolute top-full left-0 pt-2">
+            <div className="bg-white rounded-lg shadow-lg border border-gray-100 py-2 min-w-[200px]">
+              {/* Link to parent page */}
+              <Link
+                href={page.navigableRoute}
+                className={cn(
+                  'block px-4 py-2 text-sm transition-colors',
+                  isActive(page)
+                    ? 'text-primary font-semibold bg-primary/5'
+                    : 'text-gray-700 hover:bg-gray-50'
+                )}
+              >
+                All {page.label || page.title}
+              </Link>
+              <div className="border-t border-gray-100 my-1" />
+              {/* Child pages */}
+              {page.children.map((child) => (
+                <Link
+                  key={child.route}
+                  href={child.navigableRoute}
+                  className={cn(
+                    'block px-4 py-2 text-sm transition-colors',
+                    isActive(child)
+                      ? 'text-primary font-semibold bg-primary/5'
+                      : 'text-gray-700 hover:bg-gray-50'
+                  )}
+                >
+                  {child.label || child.title}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  // Mobile nav item (expandable for children)
+  const MobileNavItem = ({ page, depth = 0 }) => {
+    const hasChildren = page.children && page.children.length > 0
+    const isPageActive = isActiveOrAncestor(page)
+    const [isExpanded, setIsExpanded] = useState(isPageActive && hasChildren)
+
+    return (
+      <div>
+        <div className="flex items-center">
+          <Link
+            href={page.navigableRoute}
+            className={cn(
+              'flex-1 block px-3 py-2 text-base font-medium rounded-md',
+              depth > 0 && 'pl-6 text-sm',
+              isActive(page)
+                ? 'text-primary bg-primary/5'
+                : 'text-gray-700 hover:bg-gray-50'
+            )}
+            onClick={closeMobileMenu}
+          >
+            {page.label || page.title}
+          </Link>
+          {hasChildren && (
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="p-2 text-gray-500"
+            >
+              <ChevronDown className={cn(
+                'w-4 h-4 transition-transform',
+                isExpanded && 'rotate-180'
+              )} />
+            </button>
+          )}
+        </div>
+        {hasChildren && isExpanded && (
+          <div className="ml-2 border-l border-gray-200">
+            {page.children.map((child) => (
+              <MobileNavItem key={child.route} page={child} depth={depth + 1} />
+            ))}
+          </div>
+        )}
+      </div>
+    )
   }
 
   return (
@@ -70,13 +206,7 @@ export function Header({ content, params, block }) {
             {/* Desktop Navigation */}
             <div className="hidden lg:flex lg:items-center lg:gap-8">
               {navPages.map((page) => (
-                <Link
-                  key={page.route}
-                  href={page.navigableRoute}
-                  className={cn('text-sm font-medium transition-colors', getLinkStyles())}
-                >
-                  {page.label || page.title}
-                </Link>
+                <NavItem key={page.route} page={page} />
               ))}
             </div>
 
@@ -142,16 +272,9 @@ export function Header({ content, params, block }) {
         {/* Mobile menu */}
         {mobileMenuOpen && (
           <div className="lg:hidden bg-white border-t">
-            <div className="px-4 py-4 space-y-2">
+            <div className="px-4 py-4 space-y-1">
               {navPages.map((page) => (
-                <Link
-                  key={page.route}
-                  href={page.navigableRoute}
-                  className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md"
-                  onClick={closeMobileMenu}
-                >
-                  {page.label || page.title}
-                </Link>
+                <MobileNavItem key={page.route} page={page} />
               ))}
               {hasMultipleLocales && (
                 <div className="flex items-center gap-2 px-3 py-2 border-t mt-2 pt-4">
