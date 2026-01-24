@@ -7,7 +7,7 @@ import { SafeHtml } from '@uniweb/kit'
  * where the parent page fetches articles and this page gets one article.
  */
 export function Article({ content, params }) {
-  const article = content.data?.article
+  const article = content.data.article
   const { showImage, showAuthor, showDate, showTags } = params
 
   if (!article) {

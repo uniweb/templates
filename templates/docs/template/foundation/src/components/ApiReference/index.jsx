@@ -16,8 +16,8 @@ export function ApiReference({ content, params }) {
   const { title, paragraphs } = content
   const { show_try_it, compact } = params
 
-  // API config from dataBlock (schema provides defaults, but be safe for edge cases)
-  const api = content.data?.api || {}
+  // API config from dataBlock
+  const api = content.data.api || {}
   const method = api.method || 'GET'
   const path = api.path || ''
   const parameters = api.parameters || []

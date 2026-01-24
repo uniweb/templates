@@ -10,7 +10,7 @@ export function Pricing({ content, params }) {
   const [billing, setBilling] = useState(defaultBilling)
 
   // Get pricing data from tagged YAML or fall back to markdown items
-  const pricingData = content.data?.pricing
+  const pricingData = content.data.pricing
 
   // Determine if we have structured data (with prices) or markdown items
   const hasStructuredData = pricingData && Array.isArray(pricingData) && pricingData.length > 0

@@ -11,8 +11,8 @@ export function ContactForm({ content, params }) {
   const { title, paragraphs } = content
   const { theme, layout } = params
 
-  // Form config from dataBlock (schema provides defaults, but be safe for edge cases)
-  const form = content.data?.form || {}
+  // Form config from dataBlock
+  const form = content.data.form || {}
   const fields = form.fields || []
   const submitLabel = form.submitLabel || 'Submit'
   const successMessage = form.successMessage || 'Thank you for your message!'

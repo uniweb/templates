@@ -18,7 +18,7 @@ export function Team({ content, params }) {
   // Support both fetched data and markdown items
   // Fetched data: { name, role, bio, avatar }
   // Markdown items: { title, subtitle, paragraphs, imgs }
-  const rawMembers = content.data?.team || content.items || []
+  const rawMembers = content.data.team || content.items || []
 
   // Normalize to consistent shape
   const members = rawMembers.map((member) => {
