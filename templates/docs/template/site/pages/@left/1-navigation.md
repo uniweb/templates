@@ -1,6 +1,6 @@
 ---
 type: LeftPanel
 collapsible: true
-site_navigation: true
+categories: true
 default_open: true
 ---

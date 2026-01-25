@@ -1,7 +1,7 @@
 ---
 type: Header
 sticky: true
-site_navigation: true
+categories: true
 ---
 
 # {{projectName}}

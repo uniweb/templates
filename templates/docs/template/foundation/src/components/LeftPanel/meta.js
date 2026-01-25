@@ -1,11 +1,11 @@
 /**
  * LeftPanel Component Metadata (v2)
  *
- * Sidebar navigation with collapsible sections.
+ * Sidebar navigation with collapsible sections and category filtering.
  */
 export default {
   title: 'Left Panel',
-  description: 'Sidebar navigation with collapsible sections',
+  description: 'Sidebar navigation with collapsible sections and category filtering',
   category: 'navigation',
   purpose: 'Navigate',
 
@@ -19,10 +19,10 @@ export default {
       description: 'Allow sections to be collapsed/expanded',
       default: true,
     },
-    site_navigation: {
+    categories: {
       type: 'boolean',
-      label: 'Filter to Section',
-      description: 'Show only pages under current root section',
+      label: 'Category Filtering',
+      description: 'Show only pages within the current category (pairs with Header categories)',
       default: false,
     },
     default_open: {
@@ -35,12 +35,12 @@ export default {
 
   presets: {
     default: {
-      label: 'Collapsible Nav',
+      label: 'Full Navigation',
       params: { collapsible: true, default_open: true },
     },
-    sectioned: {
-      label: 'Section Filtered',
-      params: { collapsible: true, site_navigation: true },
+    categories: {
+      label: 'Category Filtered',
+      params: { collapsible: true, categories: true, default_open: true },
     },
   },
 }

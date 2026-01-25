@@ -4,13 +4,13 @@ import { Link, cn, useActiveRoute, useScrolled, useMobileMenu, useWebsite } from
 /**
  * Header Component for Documentation Sites
  *
- * A responsive navigation header with navigation levels support.
- * When `site_navigation` is enabled, shows root-level pages as tabs
- * and coordinates with LeftPanel to filter navigation.
+ * A responsive navigation header with optional category tabs.
+ * When `categories` is enabled, shows top-level pages as tabs
+ * and coordinates with LeftPanel to show category-specific navigation.
  *
  * Features:
  * - Sticky header with scroll effects
- * - Optional site navigation tabs (root-level pages)
+ * - Optional category tabs (top-level pages as chapters)
  * - Responsive mobile menu
  * - Search toggle
  */
@@ -22,7 +22,7 @@ export function Header({ content, params, block }) {
   const { isActiveOrAncestor } = useActiveRoute()
 
   // Runtime guarantees: content fields exist, params have defaults from meta.js
-  const { sticky, site_navigation, transparency } = params
+  const { sticky, categories, transparency } = params
   const { title, imgs, links } = content
 
   // Get logo and CTA from content
@@ -71,8 +71,8 @@ export function Header({ content, params, block }) {
               </Link>
             </div>
 
-            {/* Desktop Navigation (when site_navigation is disabled) */}
-            {!site_navigation && pages.length > 0 && (
+            {/* Desktop Navigation (when categories is disabled) */}
+            {!categories && pages.length > 0 && (
               <nav className="hidden lg:flex lg:items-center lg:gap-6">
                 {pages.map((page) => (
                   <Link
@@ -124,7 +124,7 @@ export function Header({ content, params, block }) {
           </div>
 
           {/* Site Navigation Tabs (when enabled) */}
-          {site_navigation && pages.length > 0 && (
+          {categories && pages.length > 0 && (
             <div className="hidden lg:flex items-center gap-1 -mb-px overflow-x-auto">
               {pages.map((page) => (
                 <Link
@@ -178,7 +178,7 @@ export function Header({ content, params, block }) {
       </header>
 
       {/* Spacer for fixed header */}
-      <div className={site_navigation ? 'h-24' : 'h-16'} />
+      <div className={categories ? 'h-24' : 'h-16'} />
     </>
   )
 }

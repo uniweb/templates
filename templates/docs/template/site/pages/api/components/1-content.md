@@ -22,7 +22,7 @@ The main documentation content component.
 Site navigation header component.
 
 - sticky (boolean): Keep header fixed on scroll
-- site_navigation (boolean): Show root pages as tabs
+- categories (boolean): Show top-level pages as category tabs
 - transparency (boolean): Use blur effect when scrolled
 
 ### LeftPanel
@@ -30,7 +30,7 @@ Site navigation header component.
 Sidebar navigation component.
 
 - collapsible (boolean): Allow sections to collapse
-- site_navigation (boolean): Filter to current section
+- categories (boolean): Filter navigation to current category
 - default_open (boolean): Start with sections expanded
 
 ### Footer

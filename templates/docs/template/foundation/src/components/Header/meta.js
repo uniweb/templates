@@ -1,11 +1,11 @@
 /**
  * Header Component Metadata (v2)
  *
- * Documentation header with navigation levels support.
+ * Documentation header with optional category tabs.
  */
 export default {
   title: 'Header',
-  description: 'Documentation header with navigation levels support',
+  description: 'Documentation header with optional category tabs',
   category: 'navigation',
   purpose: 'Navigate',
 
@@ -22,10 +22,10 @@ export default {
       description: 'Header stays fixed at top while scrolling',
       default: true,
     },
-    site_navigation: {
+    categories: {
       type: 'boolean',
-      label: 'Site Navigation',
-      description: 'Show root-level pages as tabs',
+      label: 'Category Tabs',
+      description: 'Show top-level pages as category tabs (pairs with LeftPanel categories)',
       default: false,
     },
     transparency: {
@@ -38,12 +38,12 @@ export default {
 
   presets: {
     default: {
-      label: 'Sticky Header',
+      label: 'Simple Header',
       params: { sticky: true, transparency: true },
     },
-    tabs: {
-      label: 'With Site Tabs',
-      params: { sticky: true, site_navigation: true },
+    categories: {
+      label: 'With Category Tabs',
+      params: { sticky: true, categories: true },
     },
   },
 }

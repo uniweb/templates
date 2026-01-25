@@ -4,20 +4,20 @@ import { Link, cn, useRouting, useWebsite } from '@uniweb/kit'
 /**
  * LeftPanel Component for Documentation Sites
  *
- * A sidebar navigation component with collapsible sections and support
- * for navigation levels (filtering to current root section).
+ * A sidebar navigation component with collapsible sections and
+ * category filtering support.
  *
  * Features:
  * - Collapsible navigation tree
  * - Active page highlighting
- * - Section filtering (when site_navigation is enabled)
+ * - Category filtering (shows only pages within current category)
  * - Responsive design (hidden on mobile, shown in drawer)
  */
 export function LeftPanel({ content, params, block }) {
   const { website } = useWebsite()
 
   // Runtime guarantees: params have defaults from meta.js
-  const { collapsible, site_navigation, default_open } = params
+  const { collapsible, categories, default_open } = params
 
   // Get navigation data from website
   const pages = website.getPageHierarchy({ for: 'header' })
@@ -59,9 +59,9 @@ export function LeftPanel({ content, params, block }) {
     return (route || '').replace(/^\//, '').replace(/\/$/, '')
   }
 
-  // Filter navigation based on site_navigation mode
+  // Filter navigation based on categories mode
   let navigation = pages
-  if (site_navigation) {
+  if (categories) {
     // Find the root section that matches the current route
     const match = pages.find((p) => normalizeRoute(p.route) === firstSegment)
     if (match?.children?.length) {

@@ -11,13 +11,13 @@ A documentation site built with [Uniweb](https://github.com/uniweb/cli) — a co
 ├── foundation/          # Documentation components (React + Tailwind CSS v4)
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── Header/
-│   │   │   ├── LeftPanel/
-│   │   │   ├── DocSection/
+│   │   │   ├── Header/      # Site header with optional category tabs
+│   │   │   ├── LeftPanel/   # Sidebar navigation
+│   │   │   ├── DocSection/  # Documentation content sections
 │   │   │   └── Footer/
-│   │   └── styles.css   # Tailwind theme
-│   ├── vite.config.js   # 3-line config: defineFoundationConfig()
-│   └── dist/            # Built output
+│   │   └── styles.css       # Tailwind theme
+│   ├── vite.config.js       # 3-line config: defineFoundationConfig()
+│   └── dist/                # Built output
 │
 ├── site/                # Documentation content (markdown)
 │   ├── pages/
@@ -28,21 +28,131 @@ A documentation site built with [Uniweb](https://github.com/uniweb/cli) — a co
 │   │   ├── guide/
 │   │   └── api/
 │   ├── site.yml         # Site configuration
-│   ├── main.js        # 1-line entry
+│   ├── main.js          # 1-line entry
 │   └── vite.config.js   # 3-line config: defineSiteConfig()
 │
 ├── AGENTS.md            # AI assistant instructions
 └── README.md            # This file
 ```
 
-## Navigation Levels
+---
 
-This template supports navigation levels where:
+## Categories: Two-Level Navigation
 
-1. **Header** shows root-level pages as tabs (when `site_navigation: true`)
-2. **LeftPanel** shows pages under the current root section
+This template supports **categories** — a two-level organization system ideal for large documentation sites with distinct topics or deep page hierarchies.
 
-This creates a GitBook-like experience.
+### How It Works
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  Header                                                         │
+│  ┌─────────────────────────────────────────────────────────────┐│
+│  │ Logo    [Getting Started]  [Guide]  [API Reference]         ││
+│  │              ▲ active                                       ││
+│  └─────────────────────────────────────────────────────────────┘│
+├─────────────────────────────────────────────────────────────────┤
+│  ┌──────────────┐  ┌────────────────────────────────────────┐  │
+│  │  LeftPanel   │  │  Content                               │  │
+│  │              │  │                                        │  │
+│  │  Introduction│  │  # Installation                        │  │
+│  │  ▸ Installation│ │                                        │  │
+│  │  ▸ Configuration│ │  Get started by installing...         │  │
+│  │              │  │                                        │  │
+│  │  (shows only │  │                                        │  │
+│  │   pages in   │  │                                        │  │
+│  │   current    │  │                                        │  │
+│  │   category)  │  │                                        │  │
+│  └──────────────┘  └────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+- **Header** shows top-level pages as category tabs
+- **LeftPanel** shows only pages within the selected category
+- Clicking a tab switches both the content and the sidebar navigation
+
+### Page Structure
+
+Categories are simply your top-level page folders:
+
+```
+site/pages/
+├── getting-started/     ← Category: "Getting Started"
+│   ├── page.yml         # title: Getting Started
+│   ├── 1-introduction.md
+│   ├── installation/
+│   │   └── 1-content.md
+│   └── configuration/
+│       └── 1-content.md
+│
+├── guide/               ← Category: "Guide"
+│   ├── page.yml         # title: Guide
+│   ├── 1-overview.md
+│   ├── content/
+│   └── components/
+│
+└── api/                 ← Category: "API Reference"
+    ├── page.yml         # title: API Reference
+    ├── 1-overview.md
+    ├── configuration/
+    ├── components/
+    └── rest/
+```
+
+### Enabling Categories
+
+Categories are enabled by default in this template. Both Header and LeftPanel must have `categories: true`:
+
+**`@header/1-header.md`**
+```yaml
+---
+type: Header
+categories: true
+---
+```
+
+**`@left/1-navigation.md`**
+```yaml
+---
+type: LeftPanel
+categories: true
+---
+```
+
+### Disabling Categories (Flat Navigation)
+
+For smaller sites, you may prefer flat navigation where the sidebar shows the entire page tree:
+
+**`@header/1-header.md`**
+```yaml
+---
+type: Header
+categories: false
+---
+```
+
+**`@left/1-navigation.md`**
+```yaml
+---
+type: LeftPanel
+categories: false
+---
+```
+
+With flat navigation:
+- Header shows top-level pages as regular links
+- LeftPanel shows the complete page hierarchy
+
+### When to Use Categories
+
+| Scenario | Recommendation |
+|----------|---------------|
+| Large docs with 50+ pages | Categories |
+| Multiple distinct topics (tutorials, API, reference) | Categories |
+| Deep hierarchy (3+ levels) | Categories |
+| Small docs with < 20 pages | Flat navigation |
+| Single linear topic | Flat navigation |
+
+---
 
 {{> components-docs}}
 
@@ -57,13 +167,33 @@ Documentation pages use markdown with YAML frontmatter:
 type: DocSection
 ---
 
-### Category Name
-
 # Page Title
 
-## Subtitle
+Content goes here with **markdown** formatting.
 
-Content goes here...
+## Code Examples
+
+\`\`\`javascript
+const hello = 'world'
+\`\`\`
+
+## Lists
+
+- First item
+- Second item
+- Third item
+```
+
+### Page Metadata
+
+Each page folder has a `page.yml` defining its metadata:
+
+```yaml
+# pages/guide/page.yml
+title: Guide
+description: Learn how to use the platform
+label: Guide          # Short label for nav (optional, defaults to title)
+order: 2              # Sort order in navigation
 ```
 
 {{> adding-pages}}
