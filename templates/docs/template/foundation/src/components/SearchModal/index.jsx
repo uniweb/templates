@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { Link, useWebsite, cn } from '@uniweb/kit'
 
 /**
@@ -131,7 +132,8 @@ export function SearchModal({ isOpen, onClose, searchClient }) {
 
   const searchEnabled = website.isSearchEnabled()
 
-  return (
+  // Use portal to render at document body level, escaping any parent stacking contexts
+  const modalContent = (
     <div className="fixed inset-0 z-[100] overflow-y-auto">
       {/* Backdrop */}
       <div
@@ -245,6 +247,14 @@ export function SearchModal({ isOpen, onClose, searchClient }) {
       </div>
     </div>
   )
+
+  // Render via portal to escape parent stacking contexts
+  // During SSR, render inline (portal target doesn't exist)
+  if (typeof document === 'undefined') {
+    return modalContent
+  }
+
+  return createPortal(modalContent, document.body)
 }
 
 /**

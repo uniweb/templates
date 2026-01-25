@@ -15,7 +15,7 @@ export function Footer({ content, params }) {
   const { layout } = params
 
   const siteName = title || website?.name || 'Documentation'
-  const copyright = paragraphs[0] || `${new Date().getFullYear()} ${siteName}. All rights reserved.`
+  const copyright = paragraphs[0] || `© ${new Date().getFullYear()} ${siteName}. All rights reserved.`
 
   return (
     <footer className="bg-gray-50 border-t border-gray-200">
