@@ -1,28 +1,21 @@
 /**
- * FAQ Component Metadata
+ * FAQ Component Metadata (v2)
+ *
+ * Collapsible frequently asked questions.
  */
 export default {
   title: 'FAQ Section',
   description: 'Collapsible frequently asked questions',
-  category: 'Content',
+  category: 'content',
+  purpose: 'Inform',
 
-  elements: {
-    title: {
-      label: 'Section Title',
-      description: 'Heading for the FAQ section',
-    },
-    paragraphs: {
-      label: 'Section Description',
-      description: 'Introductory text above the questions',
-    },
-    subsections: {
-      label: 'Questions',
-      required: true,
-      description: 'Each H3 is a question, paragraphs below are the answer',
-    },
+  content: {
+    title: 'Section heading',
+    paragraphs: 'Introductory text above the questions',
+    items: 'Questions (H3 = question, paragraphs = answer)',
   },
 
-  properties: {
+  params: {
     theme: {
       type: 'select',
       label: 'Theme',
@@ -53,13 +46,11 @@ export default {
   presets: {
     default: {
       label: 'Standard FAQ',
-      description: 'Single column with first expanded',
-      properties: { layout: 'single', expandFirst: true },
+      params: { layout: 'single', expandFirst: true },
     },
     compact: {
       label: 'Two Column',
-      description: 'Questions in two columns',
-      properties: { layout: 'two-column', expandFirst: false },
+      params: { layout: 'two-column', expandFirst: false },
     },
   },
 }

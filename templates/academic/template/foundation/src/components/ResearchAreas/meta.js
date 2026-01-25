@@ -1,26 +1,21 @@
 /**
- * ResearchAreas Component Metadata
+ * ResearchAreas Component Metadata (v2)
+ *
+ * Display research focus areas, topics, or expertise.
  */
 export default {
   title: 'Research Areas',
   description: 'Display research focus areas, topics, or expertise',
-  category: 'Content',
+  category: 'content',
+  purpose: 'Inform',
 
-  elements: {
-    title: {
-      label: 'Section Title',
-    },
-    paragraphs: {
-      label: 'Description',
-    },
-    subsections: {
-      label: 'Research Areas',
-      required: true,
-      description: 'Each H3 is an area name. First paragraph is description. Links for related pages.',
-    },
+  content: {
+    title: 'Section heading',
+    paragraphs: 'Introductory description',
+    items: 'Research areas (H3 = area name, paragraph = description, links = related pages)',
   },
 
-  properties: {
+  params: {
     layout: {
       type: 'select',
       label: 'Layout',
@@ -54,18 +49,15 @@ export default {
   presets: {
     cards: {
       label: 'Research Cards',
-      description: 'Areas displayed as cards in a grid',
-      properties: { layout: 'cards', accentPosition: 'left' },
+      params: { layout: 'cards', accentPosition: 'left' },
     },
     numbered: {
       label: 'Numbered List',
-      description: 'Areas as a numbered list',
-      properties: { layout: 'list', showNumbers: true },
+      params: { layout: 'list', showNumbers: true },
     },
     tags: {
       label: 'Topic Tags',
-      description: 'Compact inline tags for keywords',
-      properties: { layout: 'compact' },
+      params: { layout: 'compact' },
     },
   },
 }

@@ -1,26 +1,21 @@
 /**
- * Testimonials Component Metadata
+ * Testimonials Component Metadata (v2)
+ *
+ * Display customer quotes and social proof.
  */
 export default {
   title: 'Testimonials',
   description: 'Display customer quotes and social proof',
-  category: 'Social Proof',
+  category: 'showcase',
+  purpose: 'Trust',
 
-  elements: {
-    title: {
-      label: 'Section Title',
-      description: 'From H2 in markdown',
-    },
-    paragraphs: {
-      label: 'Section Description',
-    },
-    subsections: {
-      label: 'Testimonials',
-      description: 'Each H3 (name) with paragraphs (quote, role) becomes a testimonial',
-    },
+  content: {
+    title: 'Section heading',
+    paragraphs: 'Introductory text',
+    items: 'Testimonials (H3 = name, paragraphs = quote/role, image = avatar)',
   },
 
-  properties: {
+  params: {
     theme: {
       type: 'select',
       label: 'Theme',
@@ -39,6 +34,21 @@ export default {
         { value: 3, label: '3 Columns' },
       ],
       default: 3,
+    },
+  },
+
+  presets: {
+    default: {
+      label: '3 Columns',
+      params: { theme: 'light', columns: 3 },
+    },
+    twoColumn: {
+      label: '2 Columns',
+      params: { theme: 'light', columns: 2 },
+    },
+    dark: {
+      label: 'Dark Background',
+      params: { theme: 'dark', columns: 3 },
     },
   },
 }

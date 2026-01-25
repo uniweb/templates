@@ -1,31 +1,21 @@
 /**
- * PublicationList Component Metadata
+ * PublicationList Component Metadata (v2)
  *
  * Domain-specific component for academic publications.
- * Parameters focused on citation formatting and organization, not generic styling.
  */
 export default {
   title: 'Publication List',
   description: 'Display academic publications with citation formatting',
-  category: 'Content',
+  category: 'content',
+  purpose: 'Inform',
 
-  elements: {
-    title: {
-      label: 'Section Title',
-      description: 'Optional heading for the publications section',
-    },
-    paragraphs: {
-      label: 'Description',
-      description: 'Introductory text about the publications',
-    },
-    subsections: {
-      label: 'Publications',
-      required: true,
-      description: 'Each H3 is a publication title. Paragraphs: authors, venue, year. Add type as H4 before H3 (journal, conference, book, preprint).',
-    },
+  content: {
+    title: 'Section heading',
+    paragraphs: 'Introductory text about the publications',
+    items: 'Publications (H3 = title, paragraphs = authors/venue/year, H4 before = type)',
   },
 
-  properties: {
+  params: {
     citationStyle: {
       type: 'select',
       label: 'Citation Style',
@@ -74,29 +64,15 @@ export default {
   presets: {
     full: {
       label: 'Full List',
-      description: 'All publications grouped by year with search',
-      properties: {
-        groupBy: 'year',
-        showSearch: true,
-        showType: true,
-      },
+      params: { groupBy: 'year', showSearch: true, showType: true },
     },
     recent: {
       label: 'Recent Publications',
-      description: 'Latest 5 publications without grouping',
-      properties: {
-        limit: 5,
-        groupBy: 'none',
-        showSearch: false,
-      },
+      params: { limit: 5, groupBy: 'none', showSearch: false },
     },
     apa: {
       label: 'APA Citations',
-      description: 'Publications formatted as APA citations',
-      properties: {
-        citationStyle: 'apa',
-        showType: false,
-      },
+      params: { citationStyle: 'apa', showType: false },
     },
   },
 }

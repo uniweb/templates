@@ -1,28 +1,21 @@
 /**
- * Team Component Metadata
+ * Team Component Metadata (v2)
+ *
+ * Display team member profiles with photos and social links.
  */
 export default {
   title: 'Team Section',
   description: 'Display team member profiles with photos and social links',
-  category: 'Content',
+  category: 'showcase',
+  purpose: 'Introduce',
 
-  elements: {
-    title: {
-      label: 'Section Title',
-      description: 'Heading for the team section',
-    },
-    paragraphs: {
-      label: 'Section Description',
-      description: 'Introductory text about the team',
-    },
-    subsections: {
-      label: 'Team Members',
-      required: true,
-      description: 'Each H3 is a name. Paragraphs: role, bio. Image: photo. Links: social profiles.',
-    },
+  content: {
+    title: 'Section heading',
+    paragraphs: 'Introductory text about the team',
+    items: 'Team members (H3 = name, paragraphs = role/bio, image = photo, links = social)',
   },
 
-  properties: {
+  params: {
     theme: {
       type: 'select',
       label: 'Theme',
@@ -57,13 +50,11 @@ export default {
   presets: {
     default: {
       label: 'Team Cards',
-      description: 'Team members in card format',
-      properties: { style: 'cards', columns: 3 },
+      params: { style: 'cards', columns: 3 },
     },
     simple: {
       label: 'Simple Avatars',
-      description: 'Compact avatar-based layout',
-      properties: { style: 'simple', columns: 4 },
+      params: { style: 'simple', columns: 4 },
     },
   },
 }

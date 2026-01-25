@@ -1,29 +1,21 @@
 /**
- * Navbar Component Metadata
+ * Navbar Component Metadata (v2)
  *
  * Navigation header with auto/manual modes and locale support.
  */
 export default {
   title: 'Navbar',
   description: 'Site navigation header with automatic page detection and locale switcher',
-  category: 'Navigation',
+  category: 'navigation',
+  purpose: 'Navigate',
 
-  elements: {
-    title: {
-      label: 'Site Name',
-      description: 'Site or brand name (uses site config name if not provided)',
-    },
-    imgs: {
-      label: 'Logo',
-      description: 'Site logo image',
-    },
-    links: {
-      label: 'Navigation Links',
-      description: 'Manual navigation links (only used in manual mode)',
-    },
+  content: {
+    title: 'Site name (uses site config if not provided)',
+    image: 'Site logo',
+    links: 'Navigation links (only used in manual mode)',
   },
 
-  properties: {
+  params: {
     mode: {
       type: 'select',
       label: 'Navigation Mode',
@@ -77,18 +69,15 @@ export default {
   presets: {
     default: {
       label: 'Auto Navigation',
-      description: 'Automatic navigation from site pages',
-      properties: { mode: 'auto', sticky: true },
+      params: { mode: 'auto', sticky: true },
     },
     manual: {
       label: 'Manual Navigation',
-      description: 'Custom navigation links from content',
-      properties: { mode: 'manual', sticky: true },
+      params: { mode: 'manual', sticky: true },
     },
     centered: {
       label: 'Centered Logo',
-      description: 'Logo in center with navigation on sides',
-      properties: { mode: 'auto', logoPosition: 'center' },
+      params: { mode: 'auto', logoPosition: 'center' },
     },
   },
 }

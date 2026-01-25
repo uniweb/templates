@@ -1,32 +1,22 @@
 /**
- * LogoCloud Component Metadata
+ * LogoCloud Component Metadata (v2)
+ *
+ * Display partner or client logos in a grid or marquee.
  */
 export default {
   title: 'Logo Cloud',
   description: 'Display partner or client logos in a grid or marquee',
-  category: 'Social Proof',
+  category: 'showcase',
+  purpose: 'Trust',
 
-  elements: {
-    title: {
-      label: 'Section Title',
-      description: 'Optional heading (e.g., "Trusted by")',
-    },
-    paragraphs: {
-      label: 'Section Description',
-      description: 'Optional subtitle',
-    },
-    imgs: {
-      label: 'Logos',
-      required: true,
-      description: 'Logo images from markdown ![alt](url)',
-    },
-    links: {
-      label: 'Logo Links',
-      description: 'Optional links for each logo (same order as images)',
-    },
+  content: {
+    title: 'Section heading (e.g., "Trusted by")',
+    paragraphs: 'Optional subtitle',
+    images: 'Logo images',
+    links: 'Optional links for each logo',
   },
 
-  properties: {
+  params: {
     theme: {
       type: 'select',
       label: 'Theme',
@@ -57,18 +47,15 @@ export default {
   presets: {
     default: {
       label: 'Standard Grid',
-      description: 'Logos in a centered grid',
-      properties: { layout: 'grid', grayscale: true },
+      params: { layout: 'grid', grayscale: true },
     },
     marquee: {
       label: 'Scrolling Marquee',
-      description: 'Infinite scrolling logo display',
-      properties: { layout: 'marquee', grayscale: true },
+      params: { layout: 'marquee', grayscale: true },
     },
     colorful: {
       label: 'Full Color',
-      description: 'Logos in full color',
-      properties: { layout: 'grid', grayscale: false },
+      params: { layout: 'grid', grayscale: false },
     },
   },
 }

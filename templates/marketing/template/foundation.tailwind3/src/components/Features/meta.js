@@ -1,27 +1,21 @@
 /**
- * Features Component Metadata
+ * Features Component Metadata (v2)
+ *
+ * Showcase product features in a responsive grid layout with icons.
  */
 export default {
   title: 'Features Grid',
   description: 'Showcase product features in a responsive grid layout with icons',
-  category: 'Content',
+  category: 'showcase',
+  purpose: 'Explain',
 
-  elements: {
-    title: {
-      label: 'Section Title',
-      description: 'From H2 in markdown',
-    },
-    paragraphs: {
-      label: 'Section Description',
-      description: 'Introductory text for the features section',
-    },
-    subsections: {
-      label: 'Features',
-      description: 'Each H3 with its content becomes a feature card. Add "icon:name" before H3 for icons (zap, file, palette, mobile, search, rocket, shield, clock, globe, users, chart, settings).',
-    },
+  content: {
+    title: 'Section heading',
+    paragraphs: 'Introductory text [1]',
+    items: 'Feature cards (H3 = title, paragraph = description, icon: before H3 for icons)',
   },
 
-  properties: {
+  params: {
     columns: {
       type: 'select',
       label: 'Columns',
@@ -57,18 +51,15 @@ export default {
   presets: {
     default: {
       label: 'Feature Cards',
-      description: 'Features in card containers',
-      properties: { style: 'cards', columns: 3 },
+      params: { style: 'cards', columns: 3 },
     },
     minimal: {
       label: 'Minimal Centered',
-      description: 'Clean centered layout',
-      properties: { style: 'minimal', columns: 3 },
+      params: { style: 'minimal', columns: 3 },
     },
     list: {
       label: 'Icon List',
-      description: 'Compact list with icons',
-      properties: { style: 'list', columns: 2 },
+      params: { style: 'list', columns: 2 },
     },
   },
 }

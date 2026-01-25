@@ -1,18 +1,25 @@
+/**
+ * Header Component Metadata (v2)
+ *
+ * Responsive navigation header with language switcher.
+ */
 export default {
   title: 'Header',
   description: 'Responsive navigation header with language switcher',
-  category: 'Navigation',
+  category: 'navigation',
+  purpose: 'Navigate',
 
-  elements: {
-    title: {
-      label: 'Site Name',
-      description: 'Shown as the logo text',
-    },
-    links: {
-      label: 'CTA Button',
-      description: 'Optional call-to-action button',
-    },
+  content: {
+    title: 'Site name (shown as logo text)',
+    links: 'Optional call-to-action button',
   },
 
-  properties: {},
+  params: {},
+
+  presets: {
+    default: {
+      label: 'Standard',
+      params: {},
+    },
+  },
 }

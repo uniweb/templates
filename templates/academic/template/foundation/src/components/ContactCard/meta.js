@@ -1,28 +1,21 @@
 /**
- * ContactCard Component Metadata
+ * ContactCard Component Metadata (v2)
+ *
+ * Contact information block for academic profiles.
  */
 export default {
   title: 'Contact Card',
   description: 'Contact information block for academic profiles',
-  category: 'Content',
+  category: 'content',
+  purpose: 'Connect',
 
-  elements: {
-    title: {
-      label: 'Title',
-      description: 'Optional heading (e.g., "Contact")',
-    },
-    paragraphs: {
-      label: 'Contact Items',
-      required: true,
-      description: 'Each paragraph is "Label: Value" format. E.g., "Email: prof@university.edu", "Office: Room 123"',
-    },
-    links: {
-      label: 'Links',
-      description: 'Additional links (calendar, map, etc.)',
-    },
+  content: {
+    title: 'Optional heading (e.g., "Contact")',
+    paragraphs: 'Contact items in "Label: Value" format',
+    links: 'Additional links (calendar, map, etc.)',
   },
 
-  properties: {
+  params: {
     layout: {
       type: 'select',
       label: 'Layout',
@@ -44,18 +37,15 @@ export default {
   presets: {
     sidebar: {
       label: 'Sidebar Contact',
-      description: 'Compact contact for page sidebars',
-      properties: { layout: 'sidebar', showIcon: true },
+      params: { layout: 'sidebar', showIcon: true },
     },
     footer: {
       label: 'Footer Contact',
-      description: 'Inline contact for footers',
-      properties: { layout: 'inline', showIcon: true },
+      params: { layout: 'inline', showIcon: true },
     },
     prominent: {
       label: 'Contact Card',
-      description: 'Prominent contact information',
-      properties: { layout: 'card', showIcon: true },
+      params: { layout: 'card', showIcon: true },
     },
   },
 }

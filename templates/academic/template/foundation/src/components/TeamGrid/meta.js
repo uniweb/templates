@@ -1,26 +1,21 @@
 /**
- * TeamGrid Component Metadata
+ * TeamGrid Component Metadata (v2)
+ *
+ * Display lab members, collaborators, or team with academic roles.
  */
 export default {
   title: 'Team Grid',
   description: 'Display lab members, collaborators, or team with academic roles',
-  category: 'Content',
+  category: 'content',
+  purpose: 'Inform',
 
-  elements: {
-    title: {
-      label: 'Section Title',
-    },
-    paragraphs: {
-      label: 'Description',
-    },
-    subsections: {
-      label: 'Team Members',
-      required: true,
-      description: 'Each H3 is member name. H4 before H3 is role. Paragraphs: bio, email. Image: photo. Links: website, profiles.',
-    },
+  content: {
+    title: 'Section heading',
+    paragraphs: 'Introductory description',
+    items: 'Team members (H3 = name, H4 before = role, paragraph = bio/email, image = photo, links = profiles)',
   },
 
-  properties: {
+  params: {
     groupByRole: {
       type: 'boolean',
       label: 'Group by Role',
@@ -54,18 +49,15 @@ export default {
   presets: {
     labMembers: {
       label: 'Lab Members',
-      description: 'Photos centered, grouped by role',
-      properties: { cardStyle: 'photo', groupByRole: true, columns: 3 },
+      params: { cardStyle: 'photo', groupByRole: true, columns: 3 },
     },
     alumni: {
       label: 'Alumni List',
-      description: 'Compact list without grouping',
-      properties: { cardStyle: 'compact', groupByRole: false, columns: 2 },
+      params: { cardStyle: 'compact', groupByRole: false, columns: 2 },
     },
     faculty: {
       label: 'Faculty Directory',
-      description: 'Detailed cards with bios',
-      properties: { cardStyle: 'detailed', groupByRole: false, columns: 2 },
+      params: { cardStyle: 'detailed', groupByRole: false, columns: 2 },
     },
   },
 }

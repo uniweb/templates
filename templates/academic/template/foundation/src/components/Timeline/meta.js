@@ -1,26 +1,21 @@
 /**
- * Timeline Component Metadata
+ * Timeline Component Metadata (v2)
+ *
+ * Academic career timeline - education, positions, awards.
  */
 export default {
   title: 'Timeline',
   description: 'Academic career timeline - education, positions, awards',
-  category: 'Content',
+  category: 'content',
+  purpose: 'Inform',
 
-  elements: {
-    title: {
-      label: 'Section Title',
-    },
-    paragraphs: {
-      label: 'Description',
-    },
-    subsections: {
-      label: 'Timeline Entries',
-      required: true,
-      description: 'Each H3 is event title. H4 before H3 is date/period. Paragraphs: institution, description.',
-    },
+  content: {
+    title: 'Section heading',
+    paragraphs: 'Introductory description',
+    items: 'Timeline entries (H3 = event title, H4 before = date/period, paragraphs = institution/description)',
   },
 
-  properties: {
+  params: {
     orientation: {
       type: 'select',
       label: 'Orientation',
@@ -51,18 +46,15 @@ export default {
   presets: {
     education: {
       label: 'Education History',
-      description: 'Vertical timeline with dates above',
-      properties: { orientation: 'vertical', datePosition: 'left' },
+      params: { orientation: 'vertical', datePosition: 'left' },
     },
     career: {
       label: 'Career Timeline',
-      description: 'Vertical with inline dates',
-      properties: { orientation: 'vertical', datePosition: 'inline' },
+      params: { orientation: 'vertical', datePosition: 'inline' },
     },
     milestones: {
       label: 'Milestone Overview',
-      description: 'Horizontal timeline for key events',
-      properties: { orientation: 'horizontal' },
+      params: { orientation: 'horizontal' },
     },
   },
 }

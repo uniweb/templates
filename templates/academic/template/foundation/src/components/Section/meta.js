@@ -1,21 +1,20 @@
 /**
- * Section Component Metadata
+ * Section Component Metadata (v2)
+ *
+ * Layout container with background and spacing options.
  */
 export default {
   title: 'Section',
   description: 'Layout container with background and spacing options',
-  category: 'Layout',
+  category: 'layout',
+  purpose: 'Inform',
 
-  elements: {
-    title: {
-      label: 'Section Title',
-    },
-    paragraphs: {
-      label: 'Description',
-    },
+  content: {
+    title: 'Section heading',
+    paragraphs: 'Introductory description',
   },
 
-  properties: {
+  params: {
     background: {
       type: 'select',
       label: 'Background',
@@ -50,6 +49,21 @@ export default {
         { value: 'full', label: 'Full Width' },
       ],
       default: 'regular',
+    },
+  },
+
+  presets: {
+    default: {
+      label: 'Standard',
+      params: { background: 'white', padding: 'lg', maxWidth: 'regular' },
+    },
+    highlight: {
+      label: 'Highlighted',
+      params: { background: 'gray', padding: 'lg', maxWidth: 'regular' },
+    },
+    dark: {
+      label: 'Dark',
+      params: { background: 'dark', padding: 'lg', maxWidth: 'regular' },
     },
   },
 }

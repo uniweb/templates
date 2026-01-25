@@ -1,27 +1,21 @@
 /**
- * Stats Component Metadata
+ * Stats Component Metadata (v2)
+ *
+ * Display key metrics and statistics in a grid layout.
  */
 export default {
   title: 'Stats Section',
   description: 'Display key metrics and statistics in a grid layout',
-  category: 'Content',
+  category: 'showcase',
+  purpose: 'Impress',
 
-  elements: {
-    title: {
-      label: 'Section Title',
-      description: 'Optional heading for the stats section',
-    },
-    paragraphs: {
-      label: 'Section Description',
-      description: 'Introductory text for the stats',
-    },
-    subsections: {
-      label: 'Stats',
-      description: 'Each H3 is the stat value, first paragraph is the label. Add "icon:name" before H3 for icons.',
-    },
+  content: {
+    title: 'Section heading',
+    paragraphs: 'Introductory text',
+    items: 'Statistics (H3 = value, paragraph = label, icon: before H3 for icons)',
   },
 
-  properties: {
+  params: {
     theme: {
       type: 'select',
       label: 'Theme',
@@ -58,18 +52,15 @@ export default {
   presets: {
     default: {
       label: 'Default Stats',
-      description: 'Simple centered stats',
-      properties: { theme: 'light', style: 'simple' },
+      params: { theme: 'light', style: 'simple' },
     },
     cards: {
       label: 'Card Stats',
-      description: 'Stats in card containers',
-      properties: { theme: 'gray', style: 'cards' },
+      params: { theme: 'gray', style: 'cards' },
     },
     primary: {
       label: 'Primary Background',
-      description: 'Stats on primary color background',
-      properties: { theme: 'primary', style: 'simple' },
+      params: { theme: 'primary', style: 'simple' },
     },
   },
 }

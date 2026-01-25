@@ -1,43 +1,24 @@
 /**
- * ProfileHero Component Metadata
+ * ProfileHero Component Metadata (v2)
  *
  * Purpose-driven hero for academic profiles.
- * Parameters are specific to academic contexts, not generic theme/style.
  */
 export default {
   title: 'Profile Hero',
   description: 'Hero section for researcher, lab, or department profiles',
-  category: 'Headers',
+  category: 'impact',
+  purpose: 'Impress',
 
-  elements: {
-    pretitle: {
-      label: 'Affiliation',
-      description: 'Institutional affiliation (H3 before H1) - e.g., "Department of Computer Science"',
-    },
-    title: {
-      label: 'Name',
-      required: true,
-      description: 'Person or lab name',
-    },
-    subtitle: {
-      label: 'Role/Title',
-      description: 'Academic role (H2 after H1) - e.g., "Associate Professor"',
-    },
-    paragraphs: {
-      label: 'Bio',
-      description: 'Brief biography or description',
-    },
-    links: {
-      label: 'Actions',
-      description: 'Contact, CV download, lab website links',
-    },
-    imgs: {
-      label: 'Photo',
-      description: 'Profile photo or lab image',
-    },
+  content: {
+    pretitle: 'Institutional affiliation',
+    title: 'Person or lab name',
+    subtitle: 'Academic role or title',
+    paragraphs: 'Brief biography or description',
+    links: 'Contact, CV download, lab website links',
+    image: 'Profile photo or lab image',
   },
 
-  properties: {
+  params: {
     variant: {
       type: 'select',
       label: 'Profile Type',
@@ -70,23 +51,19 @@ export default {
   presets: {
     researcher: {
       label: 'Researcher Profile',
-      description: 'Individual researcher with circular photo',
-      properties: { variant: 'researcher', photoPosition: 'right' },
+      params: { variant: 'researcher', photoPosition: 'right' },
     },
     labDirector: {
       label: 'Lab Director',
-      description: 'Researcher with photo on left',
-      properties: { variant: 'researcher', photoPosition: 'left' },
+      params: { variant: 'researcher', photoPosition: 'left' },
     },
     lab: {
       label: 'Research Lab',
-      description: 'Lab profile with prominent branding',
-      properties: { variant: 'lab', photoPosition: 'right' },
+      params: { variant: 'lab', photoPosition: 'right' },
     },
     department: {
       label: 'Department',
-      description: 'Department with banner image',
-      properties: { variant: 'department' },
+      params: { variant: 'department' },
     },
   },
 }

@@ -1,28 +1,21 @@
 /**
- * Gallery Component Metadata
+ * Gallery Component Metadata (v2)
+ *
+ * Display images in grid, masonry, or carousel layouts.
  */
 export default {
   title: 'Image Gallery',
   description: 'Display images in grid, masonry, or carousel layouts',
-  category: 'Media',
+  category: 'media',
+  purpose: 'Showcase',
 
-  elements: {
-    title: {
-      label: 'Section Title',
-      description: 'Optional heading for the gallery',
-    },
-    paragraphs: {
-      label: 'Section Description',
-      description: 'Introductory text above the gallery',
-    },
-    imgs: {
-      label: 'Images',
-      required: true,
-      description: 'Images from markdown ![alt](url) syntax',
-    },
+  content: {
+    title: 'Section heading',
+    paragraphs: 'Introductory text',
+    images: 'Gallery images',
   },
 
-  properties: {
+  params: {
     theme: {
       type: 'select',
       label: 'Theme',
@@ -58,18 +51,15 @@ export default {
   presets: {
     default: {
       label: 'Standard Grid',
-      description: 'Images in a uniform grid',
-      properties: { layout: 'grid', columns: 3 },
+      params: { layout: 'grid', columns: 3 },
     },
     masonry: {
       label: 'Masonry',
-      description: 'Pinterest-style masonry layout',
-      properties: { layout: 'masonry', columns: 3 },
+      params: { layout: 'masonry', columns: 3 },
     },
     carousel: {
       label: 'Carousel',
-      description: 'Horizontal scrolling gallery',
-      properties: { layout: 'carousel' },
+      params: { layout: 'carousel' },
     },
   },
 }

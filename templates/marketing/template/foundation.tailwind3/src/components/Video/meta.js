@@ -1,36 +1,23 @@
 /**
- * Video Component Metadata
+ * Video Component Metadata (v2)
+ *
+ * Embed YouTube or Vimeo videos with optional thumbnail facade.
  */
 export default {
   title: 'Video Section',
   description: 'Embed YouTube or Vimeo videos with optional thumbnail facade',
-  category: 'Media',
+  category: 'media',
+  purpose: 'Engage',
 
-  elements: {
-    pretitle: {
-      label: 'Eyebrow',
-      description: 'Small text above the title (H3 before H2)',
-    },
-    title: {
-      label: 'Section Title',
-      description: 'Heading for the video section',
-    },
-    paragraphs: {
-      label: 'Description',
-      description: 'Text description of the video',
-    },
-    links: {
-      label: 'Video URL',
-      required: true,
-      description: 'YouTube or Vimeo URL as a markdown link',
-    },
-    imgs: {
-      label: 'Custom Thumbnail',
-      description: 'Optional custom thumbnail image',
-    },
+  content: {
+    pretitle: 'Eyebrow text',
+    title: 'Section heading',
+    paragraphs: 'Description of the video',
+    links: 'Video URL (YouTube or Vimeo)',
+    image: 'Custom thumbnail image',
   },
 
-  properties: {
+  params: {
     theme: {
       type: 'select',
       label: 'Theme',
@@ -61,13 +48,11 @@ export default {
   presets: {
     default: {
       label: 'Centered Video',
-      description: 'Full-width centered video',
-      properties: { layout: 'center' },
+      params: { layout: 'center' },
     },
     split: {
       label: 'Split Layout',
-      description: 'Video alongside description',
-      properties: { layout: 'split' },
+      params: { layout: 'split' },
     },
   },
 }

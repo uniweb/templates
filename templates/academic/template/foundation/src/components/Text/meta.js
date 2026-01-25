@@ -1,35 +1,23 @@
 /**
- * Text Component Metadata
+ * Text Component Metadata (v2)
  *
  * Rich text with academic typography options.
- * Parameters follow the professional A2 pattern: scale, density, style.
  */
 export default {
   title: 'Text Block',
   description: 'Rich text content with academic typography options',
-  category: 'Content',
+  category: 'content',
+  purpose: 'Inform',
 
-  elements: {
-    pretitle: {
-      label: 'Eyebrow',
-      description: 'Small text above title',
-    },
-    title: {
-      label: 'Title',
-    },
-    subtitle: {
-      label: 'Subtitle',
-    },
-    paragraphs: {
-      label: 'Content',
-      description: 'Body paragraphs',
-    },
-    links: {
-      label: 'Links',
-    },
+  content: {
+    pretitle: 'Eyebrow text',
+    title: 'Main heading',
+    subtitle: 'Secondary heading',
+    paragraphs: 'Body content',
+    links: 'Related links',
   },
 
-  properties: {
+  params: {
     textScale: {
       type: 'select',
       label: 'Size Scale',
@@ -92,23 +80,19 @@ export default {
   presets: {
     body: {
       label: 'Body Text',
-      description: 'Standard body content',
-      properties: { textScale: 'normal', textDensity: 'normal', textWidth: 'regular' },
+      params: { textScale: 'normal', textDensity: 'normal', textWidth: 'regular' },
     },
     intro: {
       label: 'Introduction',
-      description: 'Large intro paragraph',
-      properties: { textScale: 'large', textDensity: 'spacious', textWidth: 'regular' },
+      params: { textScale: 'large', textDensity: 'spacious', textWidth: 'regular' },
     },
     hero: {
       label: 'Hero Text',
-      description: 'Extra large centered text',
-      properties: { textScale: 'xlarge', textAlign: 'center', textWidth: 'wide' },
+      params: { textScale: 'xlarge', textAlign: 'center', textWidth: 'wide' },
     },
     compact: {
       label: 'Compact',
-      description: 'Condensed text block',
-      properties: { textScale: 'small', textDensity: 'compact', textWidth: 'narrow' },
+      params: { textScale: 'small', textDensity: 'compact', textWidth: 'narrow' },
     },
   },
 }

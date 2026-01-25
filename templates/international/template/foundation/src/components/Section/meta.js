@@ -1,15 +1,21 @@
+/**
+ * Section Component Metadata (v2)
+ *
+ * A general content section with title, text, and optional items grid.
+ */
 export default {
   title: 'Content Section',
-  description: 'A general content section with title, text, and optional items grid.',
-  category: 'Content',
+  description: 'A general content section with title, text, and optional items grid',
+  category: 'content',
+  purpose: 'Inform',
 
-  elements: {
-    title: { label: 'Title', required: true },
-    subtitle: { label: 'Subtitle' },
-    paragraphs: { label: 'Description' },
+  content: {
+    title: 'Section heading',
+    subtitle: 'Secondary heading',
+    paragraphs: 'Description text',
   },
 
-  properties: {
+  params: {
     theme: {
       type: 'select',
       label: 'Theme',
@@ -19,6 +25,21 @@ export default {
         { value: 'dark', label: 'Dark' },
       ],
       default: 'light',
+    },
+  },
+
+  presets: {
+    default: {
+      label: 'Light',
+      params: { theme: 'light' },
+    },
+    gray: {
+      label: 'Gray Background',
+      params: { theme: 'gray' },
+    },
+    dark: {
+      label: 'Dark',
+      params: { theme: 'dark' },
     },
   },
 }

@@ -1,7 +1,13 @@
+/**
+ * Hero Component Metadata (v2)
+ *
+ * A bold hero section with headline, description, and call-to-action buttons.
+ */
 export default {
   title: 'Hero Banner',
-  description: 'A bold hero section with headline, description, and call-to-action buttons.',
-  category: 'Headers',
+  description: 'A bold hero section with headline, description, and call-to-action buttons',
+  category: 'impact',
+  purpose: 'Impress',
 
   // Static capabilities for cross-block coordination
   // Header reads this to know Hero supports translucent/floating navbar
@@ -9,31 +15,15 @@ export default {
     allowTranslucentTop: true,
   },
 
-  elements: {
-    pretitle: {
-      label: 'Eyebrow',
-      description: 'Small text above the headline',
-    },
-    title: {
-      label: 'Headline',
-      description: 'Main H1 headline',
-      required: true,
-    },
-    subtitle: {
-      label: 'Subtitle',
-      description: 'Secondary headline below the main title',
-    },
-    paragraphs: {
-      label: 'Description',
-      description: 'Supporting text',
-    },
-    links: {
-      label: 'Call to Action',
-      description: 'Primary and secondary CTA buttons',
-    },
+  content: {
+    pretitle: 'Eyebrow text',
+    title: 'Main headline',
+    subtitle: 'Secondary headline',
+    paragraphs: 'Supporting description',
+    links: 'Call-to-action buttons [1-2]',
   },
 
-  properties: {
+  params: {
     theme: {
       type: 'select',
       label: 'Theme',
@@ -46,9 +36,18 @@ export default {
     },
   },
 
-  presets: [
-    { name: 'default', label: 'Gradient', settings: { theme: 'gradient' } },
-    { name: 'dark', label: 'Dark', settings: { theme: 'dark' } },
-    { name: 'light', label: 'Light', settings: { theme: 'light' } },
-  ],
+  presets: {
+    default: {
+      label: 'Gradient',
+      params: { theme: 'gradient' },
+    },
+    dark: {
+      label: 'Dark',
+      params: { theme: 'dark' },
+    },
+    light: {
+      label: 'Light',
+      params: { theme: 'light' },
+    },
+  },
 }
