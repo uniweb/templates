@@ -1,11 +1,11 @@
 /**
  * Header Component Metadata (v2)
  *
- * Documentation header with optional category tabs.
+ * Documentation header with category tabs, search, and locale switcher.
  */
 export default {
   title: 'Header',
-  description: 'Documentation header with optional category tabs',
+  description: 'Documentation header with category tabs, search, and locale switcher',
   category: 'navigation',
   purpose: 'Navigate',
 
@@ -33,6 +33,20 @@ export default {
       label: 'Transparency Effect',
       description: 'Use blur transparency when scrolled',
       default: true,
+    },
+    showSearch: {
+      type: 'select',
+      label: 'Show Search',
+      description: 'When to show the search button',
+      options: ['auto', 'always', 'never'],
+      default: 'auto',
+    },
+    showLocale: {
+      type: 'select',
+      label: 'Show Locale Switcher',
+      description: 'When to show the language switcher',
+      options: ['auto', 'always', 'never'],
+      default: 'auto',
     },
   },
 

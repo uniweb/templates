@@ -11,8 +11,9 @@ A documentation site built with [Uniweb](https://github.com/uniweb/cli) — a co
 ├── foundation/          # Documentation components (React + Tailwind CSS v4)
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── Header/      # Site header with optional category tabs
+│   │   │   ├── Header/      # Header with search, locale, categories
 │   │   │   ├── LeftPanel/   # Sidebar navigation
+│   │   │   ├── SearchModal/ # Full-text search modal
 │   │   │   ├── DocSection/  # Documentation content sections
 │   │   │   └── Footer/
 │   │   └── styles.css       # Tailwind theme
@@ -151,6 +152,89 @@ With flat navigation:
 | Deep hierarchy (3+ levels) | Categories |
 | Small docs with < 20 pages | Flat navigation |
 | Single linear topic | Flat navigation |
+
+---
+
+## Search
+
+Full-text search is enabled by default. Users can search with:
+- Click the search button in the header
+- Press `Cmd/Ctrl + K` anywhere on the site
+
+Search is powered by [Fuse.js](https://fusejs.io/) and indexes all page content at build time.
+
+### Configuration
+
+Search settings in `site.yml`:
+
+```yaml
+search:
+  enabled: true      # Enable/disable search (default: true)
+  include:
+    pages: true      # Index page titles
+    sections: true   # Index section content
+    headings: true   # Index heading text
+```
+
+### Header Control
+
+Control search visibility per-header:
+
+```yaml
+---
+type: Header
+showSearch: auto    # 'auto' | 'always' | 'never'
+---
+```
+
+- `auto` (default): Shows search when enabled in site.yml
+- `always`: Always show search button
+- `never`: Hide search button
+
+---
+
+## Multi-Language Support
+
+The locale switcher appears automatically when your site has multiple languages configured.
+
+### Adding Locales
+
+1. Configure locales in `site.yml`:
+
+```yaml
+i18n:
+  defaultLocale: en
+  locales:
+    - code: en
+      label: English
+    - code: es
+      label: Español
+```
+
+2. Add translation files in `site/locales/`:
+
+```
+site/locales/
+├── en.json
+└── es.json
+```
+
+3. The locale switcher will appear in the header automatically.
+
+### Header Control
+
+Control locale switcher visibility:
+
+```yaml
+---
+type: Header
+showLocale: auto    # 'auto' | 'always' | 'never'
+---
+```
+
+- `auto` (default): Shows when multiple locales are configured
+- `always`: Always show locale switcher
+- `never`: Hide locale switcher
 
 ---
 
