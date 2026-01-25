@@ -9,40 +9,44 @@ import { Link, useWebsite, cn } from '@uniweb/kit'
  *
  * Features:
  * - Keyboard navigation (↑↓ to navigate, Enter to select, Escape to close)
- * - Cmd/Ctrl+K shortcut to open
+ * - Cmd/Ctrl+K shortcut to open (via useSearchShortcut hook)
  * - Highlighted search matches
  * - Mobile-responsive
+ * - Intent-based index preloading (via useSearchWithIntent hook)
  */
-export function SearchModal({ isOpen, onClose }) {
+export function SearchModal({ isOpen, onClose, searchClient }) {
   const { website } = useWebsite()
 
   const [query, setQuery] = useState('')
   const [results, setResults] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const [searchClient, setSearchClient] = useState(null)
+  const [client, setClient] = useState(searchClient || null)
 
   const inputRef = useRef(null)
   const resultsRef = useRef(null)
 
-  // Initialize search client
+  // Initialize search client if not provided via props
   useEffect(() => {
+    if (searchClient) {
+      setClient(searchClient)
+      return
+    }
+
     if (!website.isSearchEnabled()) return
 
     async function initSearch() {
       try {
         const { createSearchClient } = await import('@uniweb/kit/search')
-        const client = createSearchClient(website)
-        setSearchClient(client)
-        // Preload the index
-        client.preload()
+        setClient(createSearchClient(website))
+        // Note: No preload here - use useSearchWithIntent in parent for intent-based loading
       } catch (err) {
         console.warn('Search not available:', err.message)
       }
     }
 
     initSearch()
-  }, [website])
+  }, [website, searchClient])
 
   // Focus input when modal opens
   useEffect(() => {
@@ -56,14 +60,14 @@ export function SearchModal({ isOpen, onClose }) {
 
   // Perform search
   const performSearch = useCallback(async (searchQuery) => {
-    if (!searchClient || !searchQuery.trim()) {
+    if (!client || !searchQuery.trim()) {
       setResults([])
       return
     }
 
     setIsLoading(true)
     try {
-      const searchResults = await searchClient.query(searchQuery, { limit: 8 })
+      const searchResults = await client.query(searchQuery, { limit: 8 })
       setResults(searchResults)
       setSelectedIndex(0)
     } catch (err) {
@@ -72,7 +76,7 @@ export function SearchModal({ isOpen, onClose }) {
     } finally {
       setIsLoading(false)
     }
-  }, [searchClient])
+  }, [client])
 
   // Debounced search
   useEffect(() => {
@@ -234,11 +238,14 @@ export function SearchModal({ isOpen, onClose }) {
  *
  * A button that opens the search modal.
  * Shows Cmd/Ctrl+K keyboard shortcut hint.
+ * Accepts onMouseEnter/onFocus for intent-based preloading.
  */
-export function SearchButton({ onClick, className }) {
+export function SearchButton({ onClick, onMouseEnter, onFocus, className }) {
   return (
     <button
       onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onFocus={onFocus}
       className={cn(
         'flex items-center gap-2 px-3 py-1.5 text-sm text-slate-500 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors',
         className
@@ -254,24 +261,8 @@ export function SearchButton({ onClick, className }) {
   )
 }
 
-/**
- * useSearchShortcut Hook
- *
- * Registers Cmd/Ctrl+K keyboard shortcut to open search.
- */
-export function useSearchShortcut(onOpen) {
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault()
-        onOpen()
-      }
-    }
-
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [onOpen])
-}
+// Re-export useSearchShortcut from kit for convenience
+export { useSearchShortcut } from '@uniweb/kit/search'
 
 // Search icon
 const SearchIcon = ({ className }) => (

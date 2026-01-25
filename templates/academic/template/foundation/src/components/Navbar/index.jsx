@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Link, useWebsite, cn } from '@uniweb/kit'
-import { SearchModal, SearchButton, useSearchShortcut } from '../SearchModal'
+import { SearchModal, SearchButton } from '../SearchModal'
+import { useSearchShortcut, useSearchWithIntent } from '@uniweb/kit/search'
 
 /**
  * Navbar Component
@@ -26,12 +27,18 @@ export function Navbar({ content, params }) {
   const { title, links, imgs } = content
   const { mode, sticky, showLocale, showSearch, logoPosition } = params
 
-  // Search keyboard shortcut (Cmd/Ctrl+K)
-  useSearchShortcut(() => setSearchOpen(true))
-
   // Determine if search should be shown
   const searchEnabled = website.isSearchEnabled()
   const shouldShowSearch = showSearch === 'always' || (showSearch === 'auto' && searchEnabled)
+
+  // Intent-based search preloading (only loads index on hover/focus/shortcut)
+  const { triggerPreload, client: searchClient } = useSearchWithIntent(website)
+
+  // Search keyboard shortcut (Cmd/Ctrl+K) - triggers preload immediately
+  useSearchShortcut({
+    onOpen: () => setSearchOpen(true),
+    onPreload: triggerPreload,
+  })
 
   // Get navigation items based on mode
   const navItems = mode === 'auto'
@@ -162,7 +169,11 @@ export function Navbar({ content, params }) {
               itemClassName="text-sm font-medium transition-colors"
             />
             {shouldShowSearch && (
-              <SearchButton onClick={() => setSearchOpen(true)} />
+              <SearchButton
+                onClick={() => setSearchOpen(true)}
+                onMouseEnter={triggerPreload}
+                onFocus={triggerPreload}
+              />
             )}
             <LocaleSwitcher />
           </div>
@@ -172,6 +183,8 @@ export function Navbar({ content, params }) {
             {shouldShowSearch && (
               <button
                 onClick={() => setSearchOpen(true)}
+                onMouseEnter={triggerPreload}
+                onFocus={triggerPreload}
                 className="p-2 text-slate-600 hover:text-primary rounded-md hover:bg-slate-100"
                 aria-label="Search"
               >
@@ -210,6 +223,7 @@ export function Navbar({ content, params }) {
         <SearchModal
           isOpen={searchOpen}
           onClose={() => setSearchOpen(false)}
+          searchClient={searchClient}
         />
       )}
     </header>
