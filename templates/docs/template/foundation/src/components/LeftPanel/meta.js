@@ -1,14 +1,18 @@
+/**
+ * LeftPanel Component Metadata (v2)
+ *
+ * Sidebar navigation with collapsible sections.
+ */
 export default {
   title: 'Left Panel',
   description: 'Sidebar navigation with collapsible sections',
-  category: 'Navigation',
+  category: 'navigation',
+  purpose: 'Navigate',
 
-  elements: {
-    // LeftPanel primarily uses website.getPageHierarchy()
-    // No direct content elements needed
-  },
+  // LeftPanel uses website.getPageHierarchy() for navigation
+  content: {},
 
-  properties: {
+  params: {
     collapsible: {
       type: 'boolean',
       label: 'Collapsible Sections',
@@ -18,7 +22,7 @@ export default {
     site_navigation: {
       type: 'boolean',
       label: 'Filter to Section',
-      description: 'When enabled, shows only pages under the current root section. Use with Header site_navigation.',
+      description: 'Show only pages under current root section',
       default: false,
     },
     default_open: {
@@ -26,6 +30,17 @@ export default {
       label: 'Default Open',
       description: 'Start with all sections expanded',
       default: true,
+    },
+  },
+
+  presets: {
+    default: {
+      label: 'Collapsible Nav',
+      params: { collapsible: true, default_open: true },
+    },
+    sectioned: {
+      label: 'Section Filtered',
+      params: { collapsible: true, site_navigation: true },
     },
   },
 }

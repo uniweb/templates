@@ -1,38 +1,37 @@
+/**
+ * CodeBlock Component Metadata (v2)
+ *
+ * Display code snippets with syntax highlighting and copy button.
+ */
 export default {
   title: 'Code Block',
   description: 'Display code snippets with syntax highlighting and copy button',
-  category: 'Content',
+  category: 'content',
+  purpose: 'Inform',
 
-  elements: {
-    title: {
-      label: 'Filename',
-      description: 'Optional filename or description',
-    },
-    paragraphs: {
-      label: 'Code',
-      description: 'The code to display',
-      required: true,
-    },
+  content: {
+    title: 'Optional filename or description',
+    paragraphs: 'The code to display',
   },
 
-  properties: {
+  params: {
     language: {
       type: 'select',
       label: 'Language',
       options: [
-        { value: 'javascript', label: 'JavaScript' },
-        { value: 'typescript', label: 'TypeScript' },
-        { value: 'jsx', label: 'JSX' },
-        { value: 'tsx', label: 'TSX' },
-        { value: 'html', label: 'HTML' },
-        { value: 'css', label: 'CSS' },
-        { value: 'json', label: 'JSON' },
-        { value: 'yaml', label: 'YAML' },
-        { value: 'markdown', label: 'Markdown' },
-        { value: 'bash', label: 'Bash' },
-        { value: 'python', label: 'Python' },
-        { value: 'go', label: 'Go' },
-        { value: 'rust', label: 'Rust' },
+        'javascript',
+        'typescript',
+        'jsx',
+        'tsx',
+        'html',
+        'css',
+        'json',
+        'yaml',
+        'markdown',
+        'bash',
+        'python',
+        'go',
+        'rust',
       ],
       default: 'javascript',
     },
@@ -45,6 +44,17 @@ export default {
       type: 'boolean',
       label: 'Show Language Label',
       default: true,
+    },
+  },
+
+  presets: {
+    default: {
+      label: 'JavaScript',
+      params: { language: 'javascript', show_copy: true },
+    },
+    bash: {
+      label: 'Terminal',
+      params: { language: 'bash', show_copy: true },
     },
   },
 }

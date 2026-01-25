@@ -1,36 +1,24 @@
+/**
+ * DocSection Component Metadata (v2)
+ *
+ * Main documentation content section with typography and navigation.
+ */
 export default {
   title: 'Doc Section',
   description: 'Main documentation content section with typography and navigation',
-  category: 'Content',
+  category: 'content',
+  purpose: 'Inform',
 
-  elements: {
-    pretitle: {
-      label: 'Category',
-      description: 'Small text above the title (H3 before H1)',
-    },
-    title: {
-      label: 'Page Title',
-      required: true,
-    },
-    subtitle: {
-      label: 'Description',
-      description: 'Brief description below the title (H2 after H1)',
-    },
-    paragraphs: {
-      label: 'Content',
-      description: 'Main documentation text',
-    },
-    lists: {
-      label: 'Lists',
-      description: 'Bullet or numbered lists',
-    },
-    links: {
-      label: 'Links',
-      description: 'External or internal links',
-    },
+  content: {
+    pretitle: 'Category label',
+    title: 'Page title',
+    subtitle: 'Brief description',
+    paragraphs: 'Documentation text',
+    lists: 'Bullet or numbered lists',
+    links: 'External or internal links',
   },
 
-  properties: {
+  params: {
     show_navigation: {
       type: 'boolean',
       label: 'Show Navigation',
@@ -42,11 +30,22 @@ export default {
       label: 'Content Width',
       options: [
         { value: 'prose', label: 'Prose (65ch)' },
-        { value: 'lg', label: 'Large' },
-        { value: 'xl', label: 'Extra Large' },
+        'lg',
+        'xl',
         { value: 'full', label: 'Full Width' },
       ],
       default: 'prose',
+    },
+  },
+
+  presets: {
+    default: {
+      label: 'Standard Docs',
+      params: { show_navigation: true, max_width: 'prose' },
+    },
+    wide: {
+      label: 'Wide Content',
+      params: { show_navigation: true, max_width: 'xl' },
     },
   },
 }

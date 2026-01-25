@@ -1,34 +1,26 @@
 /**
- * ApiReference Component Metadata
+ * ApiReference Component Metadata (v2)
  *
- * Displays API endpoint documentation with method, path, parameters,
- * and request/response examples. Uses dataBlock for structured API definition.
+ * API endpoint documentation with method, parameters, and examples.
+ * Uses tagged YAML blocks for structured API definitions.
  */
 export default {
   title: 'API Reference',
   description: 'API endpoint documentation with method, parameters, and examples',
-  category: 'Content',
+  category: 'content',
+  purpose: 'Inform',
 
-  elements: {
-    title: {
-      label: 'Endpoint Name',
-      description: 'Name of the API endpoint (H1)',
-      required: true,
-    },
-    paragraphs: {
-      label: 'Description',
-      description: 'Endpoint description text',
-    },
-    data: {
-      api: 'API definition (yaml:api or json:api block)',
-    },
+  content: {
+    title: 'Endpoint name',
+    paragraphs: 'Endpoint description',
+    data: 'API definition (yaml:api block)',
   },
 
-  properties: {
+  params: {
     show_try_it: {
       type: 'boolean',
       label: 'Show Try It',
-      description: 'Display a "Try it" button (visual only)',
+      description: 'Display a "Try it" button',
       default: false,
     },
     compact: {
@@ -39,7 +31,18 @@ export default {
     },
   },
 
-  // Schema for dataBlocks - applied at runtime to ensure defaults and types
+  presets: {
+    default: {
+      label: 'Standard',
+      params: { show_try_it: false, compact: false },
+    },
+    interactive: {
+      label: 'Interactive',
+      params: { show_try_it: true, compact: false },
+    },
+  },
+
+  // Schema for tagged data blocks
   schemas: {
     api: {
       method: {
@@ -58,38 +61,35 @@ export default {
         type: 'array',
         default: [],
         label: 'Parameters',
-        description: 'Path, query, header, or body parameters',
         of: {
           name: { type: 'string', label: 'Parameter name' },
-          in: { type: 'string', default: 'query', label: 'Location (path, query, header, body)' },
+          in: { type: 'string', default: 'query', label: 'Location' },
           type: { type: 'string', default: 'string', label: 'Data type' },
-          required: { type: 'boolean', default: false, label: 'Required parameter' },
-          description: { type: 'string', default: '', label: 'Parameter description' },
+          required: { type: 'boolean', default: false, label: 'Required' },
+          description: { type: 'string', default: '', label: 'Description' },
         },
       },
       requestBody: {
         type: 'string',
         label: 'Request Body',
-        description: 'Example request body (JSON string)',
+        description: 'Example request body (JSON)',
       },
       response: {
         type: 'object',
-        label: 'Single Response',
-        description: 'Simple response definition',
+        label: 'Response',
         schema: {
-          status: { type: 'number', default: 200, label: 'HTTP status code' },
-          body: { type: 'string', default: '', label: 'Response body example' },
+          status: { type: 'number', default: 200, label: 'Status code' },
+          body: { type: 'string', default: '', label: 'Response body' },
         },
       },
       responses: {
         type: 'array',
         default: [],
         label: 'Multiple Responses',
-        description: 'Array of possible responses',
         of: {
-          status: { type: 'number', default: 200, label: 'HTTP status code' },
-          description: { type: 'string', default: '', label: 'Response description' },
-          body: { type: 'string', default: '', label: 'Response body example' },
+          status: { type: 'number', default: 200, label: 'Status code' },
+          description: { type: 'string', default: '', label: 'Description' },
+          body: { type: 'string', default: '', label: 'Response body' },
         },
       },
     },

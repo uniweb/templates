@@ -1,32 +1,40 @@
+/**
+ * Footer Component Metadata (v2)
+ *
+ * Simple documentation footer with copyright and links.
+ */
 export default {
   title: 'Footer',
   description: 'Simple documentation footer with copyright and links',
-  category: 'Navigation',
+  category: 'navigation',
+  purpose: 'Navigate',
 
-  elements: {
-    title: {
-      label: 'Site Name',
-      description: 'Used in copyright if no custom text provided',
-    },
-    paragraphs: {
-      label: 'Copyright Text',
-      description: 'Custom copyright notice',
-    },
-    links: {
-      label: 'Footer Links',
-      description: 'Links like Privacy Policy, Terms, etc.',
-    },
+  content: {
+    title: 'Site name (for copyright)',
+    paragraphs: 'Custom copyright notice',
+    links: 'Footer links (Privacy, Terms, etc.)',
   },
 
-  properties: {
+  params: {
     layout: {
       type: 'select',
       label: 'Layout',
       options: [
         { value: 'simple', label: 'Simple (left/right)' },
-        { value: 'centered', label: 'Centered' },
+        'centered',
       ],
       default: 'simple',
+    },
+  },
+
+  presets: {
+    default: {
+      label: 'Simple Footer',
+      params: { layout: 'simple' },
+    },
+    centered: {
+      label: 'Centered Footer',
+      params: { layout: 'centered' },
     },
   },
 }
