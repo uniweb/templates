@@ -11,7 +11,77 @@ export default {
     themeToggleEnabled: true,
   },
 
-  // Style configuration for the editor
+  // Foundation-level CSS variables that sites can override in theme.yml
+  // These become --foundation-* custom properties
+  themeVars: {
+    // Layout
+    'header-height': {
+      default: '4rem',
+      description: 'Fixed header height',
+    },
+    'max-content-width': {
+      default: '80rem',
+      description: 'Maximum content width (1280px)',
+    },
+    'section-padding-y': {
+      default: '5rem',
+      description: 'Vertical padding for sections',
+    },
+    'section-padding-x': {
+      default: '1.5rem',
+      description: 'Horizontal padding for sections',
+    },
+    // Typography
+    'heading-font': {
+      default: 'inherit',
+      description: 'Font family for headings',
+    },
+    'body-font': {
+      default: 'inherit',
+      description: 'Font family for body text',
+    },
+    // Border radius
+    'radius-sm': {
+      default: '0.375rem',
+      description: 'Small border radius (6px)',
+    },
+    'radius-md': {
+      default: '0.5rem',
+      description: 'Medium border radius (8px)',
+    },
+    'radius-lg': {
+      default: '0.75rem',
+      description: 'Large border radius (12px)',
+    },
+    'radius-xl': {
+      default: '1rem',
+      description: 'Extra large border radius (16px)',
+    },
+    // Transitions
+    'transition-fast': {
+      default: '150ms',
+      description: 'Fast transition duration',
+    },
+    'transition-normal': {
+      default: '200ms',
+      description: 'Normal transition duration',
+    },
+    // Shadows
+    'shadow-sm': {
+      default: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+      description: 'Small shadow',
+    },
+    'shadow-md': {
+      default: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+      description: 'Medium shadow',
+    },
+    'shadow-lg': {
+      default: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+      description: 'Large shadow',
+    },
+  },
+
+  // Style configuration for the editor (deprecated - use theme.yml colors instead)
   styles: {
     primary: {
       type: 'color',

@@ -1,0 +1,60 @@
+# Site Theme Configuration
+#
+# This file defines color palettes, semantic tokens, and appearance settings.
+# Generated CSS variables are injected at build time.
+
+# Color palettes
+# Define brand colors - shades are auto-generated from a single base color
+colors:
+  # Primary brand color (blue by default)
+  primary: "#3b82f6"
+
+  # Secondary/accent color (slate by default)
+  secondary: "#64748b"
+
+  # Neutral gray scale (for text, backgrounds, borders)
+  neutral: "#737373"
+
+# Semantic tokens for color contexts (section backgrounds)
+# Each context maps to palette colors for consistent theming
+contexts:
+  light:
+    bg: white
+    fg: neutral-900
+    muted: neutral-500
+    border: neutral-200
+
+  medium:
+    bg: neutral-100
+    fg: neutral-900
+    muted: neutral-600
+    border: neutral-300
+
+  dark:
+    bg: neutral-900
+    fg: white
+    muted: neutral-400
+    border: neutral-700
+
+# Appearance settings (light/dark mode)
+appearance:
+  # Default color scheme
+  default: light
+
+  # Available schemes for this site
+  schemes: [light]
+
+  # Set to true to allow visitors to toggle dark mode
+  allowToggle: false
+
+  # Respect visitor's system preference
+  respectSystemPreference: false
+
+# Foundation variable overrides
+# Override foundation-defined CSS variables for this site
+foundation:
+  vars:
+    # Uncomment to customize:
+    # header-height: 5rem
+    # max-content-width: 72rem
+    # section-padding-y: 6rem

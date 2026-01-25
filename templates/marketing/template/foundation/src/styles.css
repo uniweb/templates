@@ -3,9 +3,85 @@
 @source "./components/**/*.{js,jsx}";
 @source "../node_modules/@uniweb/kit/src/**/*.{js,jsx}";
 
-@theme {
-  --color-primary: #3b82f6;
-  --color-secondary: #64748b;
+/* Theme colors from theme.yml are injected as CSS custom properties */
+/* Foundation vars are available as --foundation-* */
+
+@theme inline {
+  /* Map theme palette colors to Tailwind */
+  --color-primary-50: var(--primary-50);
+  --color-primary-100: var(--primary-100);
+  --color-primary-200: var(--primary-200);
+  --color-primary-300: var(--primary-300);
+  --color-primary-400: var(--primary-400);
+  --color-primary-500: var(--primary-500);
+  --color-primary-600: var(--primary-600);
+  --color-primary-700: var(--primary-700);
+  --color-primary-800: var(--primary-800);
+  --color-primary-900: var(--primary-900);
+  --color-primary-950: var(--primary-950);
+
+  --color-secondary-50: var(--secondary-50);
+  --color-secondary-100: var(--secondary-100);
+  --color-secondary-200: var(--secondary-200);
+  --color-secondary-300: var(--secondary-300);
+  --color-secondary-400: var(--secondary-400);
+  --color-secondary-500: var(--secondary-500);
+  --color-secondary-600: var(--secondary-600);
+  --color-secondary-700: var(--secondary-700);
+  --color-secondary-800: var(--secondary-800);
+  --color-secondary-900: var(--secondary-900);
+  --color-secondary-950: var(--secondary-950);
+
+  /* Semantic color aliases */
+  --color-primary: var(--primary-500);
+  --color-secondary: var(--secondary-500);
+
+  /* Foundation layout vars */
+  --header-height: var(--foundation-header-height, 4rem);
+  --max-content-width: var(--foundation-max-content-width, 80rem);
+  --section-padding-y: var(--foundation-section-padding-y, 5rem);
+  --section-padding-x: var(--foundation-section-padding-x, 1.5rem);
+
+  /* Foundation typography vars */
+  --font-heading: var(--foundation-heading-font, inherit);
+  --font-body: var(--foundation-body-font, inherit);
+
+  /* Foundation border radius */
+  --radius-sm: var(--foundation-radius-sm, 0.375rem);
+  --radius-md: var(--foundation-radius-md, 0.5rem);
+  --radius-lg: var(--foundation-radius-lg, 0.75rem);
+  --radius-xl: var(--foundation-radius-xl, 1rem);
+
+  /* Foundation transitions */
+  --transition-fast: var(--foundation-transition-fast, 150ms);
+  --transition-normal: var(--foundation-transition-normal, 200ms);
+
+  /* Foundation shadows */
+  --shadow-sm: var(--foundation-shadow-sm, 0 1px 2px 0 rgb(0 0 0 / 0.05));
+  --shadow-md: var(--foundation-shadow-md, 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1));
+  --shadow-lg: var(--foundation-shadow-lg, 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1));
+}
+
+/* Context-based color tokens (for section theming) */
+.context-light {
+  --context-bg: var(--light-bg, #ffffff);
+  --context-fg: var(--light-fg, var(--neutral-900, #171717));
+  --context-muted: var(--light-muted, var(--neutral-500, #737373));
+  --context-border: var(--light-border, var(--neutral-200, #e5e5e5));
+}
+
+.context-medium {
+  --context-bg: var(--medium-bg, var(--neutral-100, #f5f5f5));
+  --context-fg: var(--medium-fg, var(--neutral-900, #171717));
+  --context-muted: var(--medium-muted, var(--neutral-600, #525252));
+  --context-border: var(--medium-border, var(--neutral-300, #d4d4d4));
+}
+
+.context-dark {
+  --context-bg: var(--dark-bg, var(--neutral-900, #171717));
+  --context-fg: var(--dark-fg, #ffffff);
+  --context-muted: var(--dark-muted, var(--neutral-400, #a3a3a3));
+  --context-border: var(--dark-border, var(--neutral-700, #404040));
 }
 
 /* Marquee animation for LogoCloud */
