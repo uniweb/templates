@@ -1,11 +1,11 @@
 /**
  * Header Component Metadata (v2)
  *
- * Documentation header with category tabs, search, and locale switcher.
+ * Documentation header with category tabs, search, version, and locale switchers.
  */
 export default {
   title: 'Header',
-  description: 'Documentation header with category tabs, search, and locale switcher',
+  description: 'Documentation header with category tabs, search, version, and locale switchers',
   category: 'navigation',
   purpose: 'Navigate',
 
@@ -45,6 +45,13 @@ export default {
       type: 'select',
       label: 'Show Locale Switcher',
       description: 'When to show the language switcher',
+      options: ['auto', 'always', 'never'],
+      default: 'auto',
+    },
+    showVersion: {
+      type: 'select',
+      label: 'Show Version Switcher',
+      description: 'When to show the version switcher (auto shows only when page is in versioned content)',
       options: ['auto', 'always', 'never'],
       default: 'auto',
     },

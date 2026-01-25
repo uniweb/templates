@@ -1,0 +1,12 @@
+title: Documentation
+description: Complete documentation for the project
+order: 1
+
+# Version configuration for this documentation scope
+versions:
+  v2:
+    label: "v2.0 (Current)"
+    latest: true
+  v1:
+    label: "v1.0"
+    deprecated: true

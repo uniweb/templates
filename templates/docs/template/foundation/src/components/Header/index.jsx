@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, cn, useActiveRoute, useScrolled, useMobileMenu, useWebsite } from '@uniweb/kit'
+import { Link, cn, useActiveRoute, useScrolled, useMobileMenu, useWebsite, useVersion } from '@uniweb/kit'
 import { useSearchShortcut, useSearchWithIntent } from '@uniweb/kit/search'
 import { SearchModal, SearchButton } from '../SearchModal'
 
@@ -28,9 +28,10 @@ export function Header({ content, params, block }) {
   // Local state
   const [searchOpen, setSearchOpen] = useState(false)
   const [localeMenuOpen, setLocaleMenuOpen] = useState(false)
+  const [versionMenuOpen, setVersionMenuOpen] = useState(false)
 
   // Runtime guarantees: content fields exist, params have defaults from meta.js
-  const { sticky, categories, transparency, showSearch, showLocale } = params
+  const { sticky, categories, transparency, showSearch, showLocale, showVersion } = params
   const { title, imgs, links } = content
 
   // Get logo and CTA from content
@@ -60,6 +61,10 @@ export function Header({ content, params, block }) {
   const hasMultipleLocales = website.hasMultipleLocales()
   const shouldShowLocale = showLocale === 'always' || (showLocale === 'auto' && hasMultipleLocales)
 
+  // Version configuration
+  const { isVersioned, currentVersion, versions, getVersionUrl } = useVersion()
+  const shouldShowVersion = showVersion === 'always' || (showVersion === 'auto' && isVersioned && versions.length > 1)
+
   // Header styles based on scroll state
   const getHeaderStyles = () => {
     const base = 'transition-all duration-300'
@@ -70,6 +75,57 @@ export function Header({ content, params, block }) {
       return cn(base, 'bg-white shadow-sm')
     }
     return cn(base, 'bg-white border-b border-gray-200')
+  }
+
+  // Version Switcher Component
+  const VersionSwitcher = () => {
+    if (!shouldShowVersion) return null
+
+    return (
+      <div className="relative">
+        <button
+          onClick={() => setVersionMenuOpen(!versionMenuOpen)}
+          className="flex items-center gap-1.5 px-2 py-1.5 text-sm text-gray-600 hover:text-gray-900 rounded-md hover:bg-gray-100 transition-colors"
+          aria-label="Change version"
+        >
+          <TagIcon className="w-4 h-4" />
+          <span className="hidden sm:inline">{currentVersion?.label || currentVersion?.id}</span>
+          <ChevronIcon className={cn('w-3 h-3 transition-transform', versionMenuOpen && 'rotate-180')} />
+        </button>
+
+        {versionMenuOpen && (
+          <>
+            <div
+              className="fixed inset-0 z-40"
+              onClick={() => setVersionMenuOpen(false)}
+            />
+            <div className="absolute right-0 top-full mt-1 z-50 bg-white rounded-lg shadow-lg border border-gray-200 py-1 min-w-[160px]">
+              {versions.map(version => (
+                <a
+                  key={version.id}
+                  href={getVersionUrl(version.id)}
+                  className={cn(
+                    'block px-4 py-2 text-sm transition-colors',
+                    version.id === currentVersion?.id
+                      ? 'bg-primary/5 text-primary font-medium'
+                      : 'text-gray-700 hover:bg-gray-50'
+                  )}
+                  onClick={() => setVersionMenuOpen(false)}
+                >
+                  <span>{version.label || version.id}</span>
+                  {version.latest && (
+                    <span className="ml-2 text-xs text-green-600">(latest)</span>
+                  )}
+                  {version.deprecated && (
+                    <span className="ml-2 text-xs text-amber-600">(deprecated)</span>
+                  )}
+                </a>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+    )
   }
 
   // Locale Switcher Component
@@ -177,6 +233,9 @@ export function Header({ content, params, block }) {
                 />
               )}
 
+              {/* Version switcher */}
+              <VersionSwitcher />
+
               {/* Locale switcher */}
               <LocaleSwitcher />
 
@@ -263,6 +322,32 @@ export function Header({ content, params, block }) {
                 </Link>
               ))}
 
+              {/* Mobile version switcher */}
+              {shouldShowVersion && versions.length > 1 && (
+                <div className="pt-2 mt-2 border-t border-gray-200">
+                  <div className="px-3 py-2 text-xs font-medium text-gray-500 uppercase tracking-wide">
+                    Version
+                  </div>
+                  {versions.map(version => (
+                    <a
+                      key={version.id}
+                      href={getVersionUrl(version.id)}
+                      className={cn(
+                        'block px-3 py-2 text-base rounded-md',
+                        version.id === currentVersion?.id
+                          ? 'text-primary font-medium bg-primary/5'
+                          : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
+                      )}
+                      onClick={closeMobileMenu}
+                    >
+                      {version.label || version.id}
+                      {version.latest && <span className="ml-2 text-xs text-green-600">(latest)</span>}
+                      {version.deprecated && <span className="ml-2 text-xs text-amber-600">(deprecated)</span>}
+                    </a>
+                  ))}
+                </div>
+              )}
+
               {/* Mobile locale switcher */}
               {shouldShowLocale && locales.length > 1 && (
                 <div className="pt-2 mt-2 border-t border-gray-200">
@@ -339,6 +424,12 @@ const SearchIcon = ({ className }) => (
 const GlobeIcon = ({ className }) => (
   <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+  </svg>
+)
+
+const TagIcon = ({ className }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
   </svg>
 )
 
