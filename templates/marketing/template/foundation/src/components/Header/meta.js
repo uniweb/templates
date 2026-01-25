@@ -4,7 +4,7 @@
 export default {
   title: 'Header',
   description: 'Responsive navigation header with intelligent context awareness',
-  category: 'structure',
+  category: 'navigation',
   purpose: 'Navigate',
 
   content: {
