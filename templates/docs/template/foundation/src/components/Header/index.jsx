@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, cn, useActiveRoute, useScrolled, useMobileMenu, useWebsite, useVersion } from '@uniweb/kit'
+import { Link, cn, useActiveRoute, useScrolled, useMobileMenu, useWebsite, useVersion, getLocaleLabel } from '@uniweb/kit'
 import { useSearchShortcut, useSearchWithIntent } from '@uniweb/kit/search'
 import { SearchModal, SearchButton } from '../SearchModal'
 
@@ -142,7 +142,7 @@ export function Header({ content, params, block }) {
           aria-label="Change language"
         >
           <GlobeIcon className="w-4 h-4" />
-          <span className="hidden sm:inline">{currentLocale?.label || activeLocale}</span>
+          <span className="hidden sm:inline">{getLocaleLabel(currentLocale || activeLocale)}</span>
           <ChevronIcon className={cn('w-3 h-3 transition-transform', localeMenuOpen && 'rotate-180')} />
         </button>
 
@@ -165,7 +165,7 @@ export function Header({ content, params, block }) {
                   )}
                   onClick={() => setLocaleMenuOpen(false)}
                 >
-                  {locale.label}
+                  {getLocaleLabel(locale)}
                 </a>
               ))}
             </div>
@@ -366,7 +366,7 @@ export function Header({ content, params, block }) {
                       )}
                       onClick={closeMobileMenu}
                     >
-                      {locale.label}
+                      {getLocaleLabel(locale)}
                     </a>
                   ))}
                 </div>

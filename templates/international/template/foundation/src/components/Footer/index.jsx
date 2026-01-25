@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, cn, useWebsite } from '@uniweb/kit'
+import { Link, cn, useWebsite, getLocaleLabel } from '@uniweb/kit'
 
 /**
  * Footer Component
@@ -63,7 +63,7 @@ export function Footer({ content, params }) {
                           : 'text-gray-400 hover:text-white'
                       )}
                     >
-                      {locale.label}
+                      {getLocaleLabel(locale)}
                     </a>
                   </li>
                 ))}
