@@ -65,7 +65,7 @@ jobs:
 
             # Use local processor to create project from template
             node -e "
-              import { processTemplate, registerVersions } from './src/processor.js';
+              import { copyTemplateDirectory, registerVersions } from './src/processor.js';
               import { execSync } from 'child_process';
 
               // Get latest versions from npm for dependencies
@@ -85,7 +85,7 @@ jobs:
                 '@uniweb/kit': getVersion('@uniweb/kit'),
               });
 
-              await processTemplate('$template', '$WORK_DIR', {
+              await copyTemplateDirectory('$TEMPLATE_DIR', '$WORK_DIR', {
                 projectName: '$template-demo',
                 description: 'Demo of the $template template'
               });
