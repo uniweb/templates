@@ -11,6 +11,17 @@ When users run `uniweb create my-project --template marketing`, the CLI:
 2. Downloads the template tarball (e.g., `marketing.tar.gz`)
 3. Extracts and applies the template with Handlebars processing
 
+## Live Demos
+
+See the templates in action: **[View all demos](https://uniweb.github.io/templates/)**
+
+| Template | Demo | Description |
+|----------|------|-------------|
+| marketing | [Live Demo](https://uniweb.github.io/templates/marketing/) | Landing pages and marketing sites |
+| academic | [Live Demo](https://uniweb.github.io/templates/academic/) | Research labs and academic portfolios |
+| docs | [Live Demo](https://uniweb.github.io/templates/docs/) | Documentation sites with versioning |
+| international | [Live Demo](https://uniweb.github.io/templates/international/) | Multi-language sites with i18n |
+
 ## Usage
 
 ```bash
