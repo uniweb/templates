@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { cn } from '@uniweb/kit'
+import { Code } from '@uniweb/kit/styled'
 
 /**
  * CodeBlock Component
  *
- * Displays code snippets with optional language label and copy button.
+ * Displays syntax-highlighted code snippets with optional language label and copy button.
+ * Uses Shiki via kit's Code component for syntax highlighting.
  * Designed for documentation sites that need to show code examples.
  */
 export function CodeBlock({ content, params }) {
@@ -32,7 +34,7 @@ export function CodeBlock({ content, params }) {
   }
 
   return (
-    <div className="my-6 rounded-lg overflow-hidden bg-code-bg">
+    <div className="my-6 rounded-lg overflow-hidden">
       {/* Header with language and copy button */}
       {(show_language || show_copy || title) && (
         <div className="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-gray-700">
@@ -71,12 +73,12 @@ export function CodeBlock({ content, params }) {
         </div>
       )}
 
-      {/* Code content */}
-      <pre className="p-4 overflow-x-auto">
-        <code className="text-sm font-mono text-code-text whitespace-pre">
-          {code}
-        </code>
-      </pre>
+      {/* Syntax-highlighted code content */}
+      <Code
+        content={code}
+        language={language}
+        className="rounded-none"
+      />
     </div>
   )
 }

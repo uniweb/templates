@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { cn } from '@uniweb/kit'
+import { Code } from '@uniweb/kit/styled'
 
 /**
  * ApiReference Component
@@ -8,7 +9,7 @@ import { cn } from '@uniweb/kit'
  * - HTTP method badge (GET, POST, PUT, DELETE, PATCH)
  * - Endpoint path with parameter highlighting
  * - Parameters table (path, query, header, body)
- * - Request/response examples with copy functionality
+ * - Request/response examples with syntax highlighting
  *
  * Uses dataBlock (yaml:api or json:api) for structured definition.
  */
@@ -214,7 +215,7 @@ export function ApiReference({ content, params }) {
 }
 
 /**
- * CodeExample - Inline code block with copy button
+ * CodeExample - Code block with header and copy button, using Shiki for syntax highlighting
  */
 function CodeExample({ code, language = 'json' }) {
   const [copied, setCopied] = useState(false)
@@ -230,7 +231,7 @@ function CodeExample({ code, language = 'json' }) {
   }
 
   return (
-    <div className="rounded-lg overflow-hidden bg-code-bg">
+    <div className="rounded-lg overflow-hidden">
       <div className="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-gray-700">
         <span className="text-xs font-mono text-gray-400 uppercase">
           {language}
@@ -256,11 +257,7 @@ function CodeExample({ code, language = 'json' }) {
           )}
         </button>
       </div>
-      <pre className="p-4 overflow-x-auto">
-        <code className="text-sm font-mono text-code-text whitespace-pre">
-          {code}
-        </code>
-      </pre>
+      <Code content={code} language={language} className="rounded-none" />
     </div>
   )
 }
