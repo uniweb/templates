@@ -6,6 +6,8 @@ on:
     branches: [main]
     paths:
       - 'templates/**'
+      - 'src/**'
+      - 'partials/**'
       - '.github/workflows/deploy-demos.yml'
   # Allow manual trigger
   workflow_dispatch:
@@ -38,6 +40,9 @@ jobs:
         with:
           version: 9
 
+      - name: Install template processor dependencies
+        run: pnpm install
+
       - name: Build all template demos
         run: |
           mkdir -p demos
@@ -50,10 +55,48 @@ jobs:
             echo "Building demo: $template"
             echo "=========================================="
 
-            # Create project using npx uniweb
-            npx uniweb@latest create "demo-$template" --template "$template" --yes
+            TEMPLATE_DIR="templates/$template/template"
+            WORK_DIR="demo-$template"
 
-            cd "demo-$template"
+            if [ ! -d "$TEMPLATE_DIR" ]; then
+              echo "Template directory not found: $TEMPLATE_DIR, skipping"
+              continue
+            fi
+
+            # Use local processor to create project from template
+            node -e "
+              import { processTemplate, registerVersions } from './src/processor.js';
+              import { execSync } from 'child_process';
+
+              // Get latest versions from npm for dependencies
+              const getVersion = (pkg) => {
+                try {
+                  return execSync('npm view ' + pkg + ' version', { encoding: 'utf8' }).trim();
+                } catch {
+                  return '0.1.0';
+                }
+              };
+
+              // Register versions for template processing
+              registerVersions({
+                '@uniweb/build': getVersion('@uniweb/build'),
+                '@uniweb/runtime': getVersion('@uniweb/runtime'),
+                '@uniweb/core': getVersion('@uniweb/core'),
+                '@uniweb/kit': getVersion('@uniweb/kit'),
+              });
+
+              await processTemplate('$template', '$WORK_DIR', {
+                projectName: '$template-demo',
+                description: 'Demo of the $template template'
+              });
+
+              console.log('Created project from local template');
+            "
+
+            cd "$WORK_DIR"
+
+            # Install dependencies
+            pnpm install
 
             # Build foundation first (if exists)
             if [ -d "foundation" ]; then
@@ -82,8 +125,8 @@ jobs:
 
             cd ..
 
-            # Clean up project
-            rm -rf "demo-$template"
+            # Clean up project directory
+            rm -rf "$WORK_DIR"
           done
 
           echo "=========================================="
