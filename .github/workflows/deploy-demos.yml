@@ -1,0 +1,244 @@
+name: Deploy Template Demos
+
+on:
+  # Run on pushes to main
+  push:
+    branches: [main]
+    paths:
+      - 'templates/**'
+      - '.github/workflows/deploy-demos.yml'
+  # Allow manual trigger
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Build all template demos
+        run: |
+          mkdir -p demos
+
+          # Get list of templates from manifest
+          TEMPLATES=$(jq -r '.templates | keys[]' manifest.json)
+
+          for template in $TEMPLATES; do
+            echo "=========================================="
+            echo "Building demo: $template"
+            echo "=========================================="
+
+            # Create project using npx uniweb
+            npx uniweb@latest create "demo-$template" --template "$template" --yes
+
+            cd "demo-$template"
+
+            # Build foundation first (if exists)
+            if [ -d "foundation" ]; then
+              echo "Building foundation..."
+              cd foundation
+              pnpm build
+              cd ..
+            fi
+
+            # Build site with base path for GitHub Pages
+            if [ -d "site" ]; then
+              echo "Building site with base: /templates/$template/"
+
+              # Add base path to site.yml
+              echo "" >> site/site.yml
+              echo "base: /templates/$template/" >> site/site.yml
+
+              cd site
+              pnpm build
+              cd ..
+
+              # Copy built site to demos folder
+              cp -r site/dist "../demos/$template"
+              echo "Copied to demos/$template"
+            fi
+
+            cd ..
+
+            # Clean up project
+            rm -rf "demo-$template"
+          done
+
+          echo "=========================================="
+          echo "All demos built:"
+          ls -la demos/
+
+      - name: Generate index page
+        run: |
+          cat > demos/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Uniweb Template Demos</title>
+            <style>
+              * { box-sizing: border-box; margin: 0; padding: 0; }
+              body {
+                font-family: system-ui, -apple-system, sans-serif;
+                line-height: 1.6;
+                color: #1a1a1a;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                min-height: 100vh;
+                padding: 2rem;
+              }
+              .container {
+                max-width: 900px;
+                margin: 0 auto;
+              }
+              header {
+                text-align: center;
+                padding: 3rem 0;
+                color: white;
+              }
+              header h1 {
+                font-size: 2.5rem;
+                margin-bottom: 0.5rem;
+              }
+              header p {
+                opacity: 0.9;
+                font-size: 1.1rem;
+              }
+              .templates {
+                display: grid;
+                gap: 1.5rem;
+                margin-top: 2rem;
+              }
+              .template-card {
+                background: white;
+                border-radius: 12px;
+                padding: 1.5rem;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                transition: transform 0.2s, box-shadow 0.2s;
+              }
+              .template-card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+              }
+              .template-info h2 {
+                font-size: 1.25rem;
+                margin-bottom: 0.25rem;
+              }
+              .template-info p {
+                color: #666;
+                font-size: 0.9rem;
+              }
+              .btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.6rem 1.2rem;
+                border-radius: 8px;
+                font-size: 0.9rem;
+                font-weight: 500;
+                text-decoration: none;
+                transition: background 0.2s;
+              }
+              .btn-primary {
+                background: #667eea;
+                color: white;
+              }
+              .btn-primary:hover {
+                background: #5a6fd6;
+              }
+              footer {
+                text-align: center;
+                padding: 2rem;
+                color: rgba(255,255,255,0.8);
+                font-size: 0.9rem;
+              }
+              footer a { color: white; }
+              code {
+                background: rgba(0,0,0,0.1);
+                padding: 0.2rem 0.4rem;
+                border-radius: 4px;
+                font-size: 0.85rem;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <header>
+                <h1>Uniweb Template Demos</h1>
+                <p>Live demos of official Uniweb templates</p>
+              </header>
+              <div class="templates">
+          EOF
+
+          # Add each template card
+          jq -r '.templates | to_entries[] | "\(.key)|\(.value.name)|\(.value.description)"' manifest.json | while IFS='|' read -r key name desc; do
+            cat >> demos/index.html << CARD
+                <div class="template-card">
+                  <div class="template-info">
+                    <h2>$name</h2>
+                    <p>$desc</p>
+                  </div>
+                  <div class="template-actions">
+                    <a href="./$key/" class="btn btn-primary">View Demo</a>
+                  </div>
+                </div>
+          CARD
+          done
+
+          cat >> demos/index.html << 'EOF'
+              </div>
+              <footer>
+                <p>Create your own: <code>npx uniweb create myproject --template [name]</code></p>
+                <p style="margin-top: 0.5rem;">
+                  <a href="https://github.com/uniweb/templates">GitHub</a> ·
+                  <a href="https://www.npmjs.com/package/uniweb">npm</a>
+                </p>
+              </footer>
+            </div>
+          </body>
+          </html>
+          EOF
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: demos
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
