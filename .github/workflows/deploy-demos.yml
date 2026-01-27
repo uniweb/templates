@@ -86,6 +86,8 @@ jobs:
                 '@uniweb/runtime': getVersion('@uniweb/runtime'),
                 '@uniweb/core': getVersion('@uniweb/core'),
                 '@uniweb/kit': getVersion('@uniweb/kit'),
+                '@uniweb/scholar': getVersion('@uniweb/scholar'),
+                'uniweb': getVersion('uniweb'),
               });
 
               await copyTemplateDirectory('$TEMPLATE_DIR', '$WORK_DIR', {
