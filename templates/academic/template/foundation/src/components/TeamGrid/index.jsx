@@ -15,9 +15,9 @@ export function TeamGrid({ content, params }) {
     columns = 3,
   } = params || {}
 
-  const members = content.subsections || []
+  const members = content.items || []
 
-  // Parse member data from subsections
+  // Parse member data from content items
   const parsedMembers = members.map(member => {
     const { title: name, pretitle, paragraphs = [], imgs = [], links = [] } = member || {}
 

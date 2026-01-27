@@ -5,7 +5,7 @@ import { cn } from '@uniweb/kit'
  * Timeline Component
  *
  * Academic career timeline - education, positions, awards.
- * Each subsection is a timeline entry with date and description.
+ * Each item is a timeline entry with date and description.
  */
 export function Timeline({ content, params }) {
   const { title, paragraphs = [] } = content || {}
@@ -15,7 +15,7 @@ export function Timeline({ content, params }) {
     datePosition = 'left',
   } = params || {}
 
-  const entries = content.subsections || []
+  const entries = content.items || []
 
   // Parse entries
   const parsedEntries = entries.map(entry => {

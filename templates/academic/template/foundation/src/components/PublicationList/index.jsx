@@ -1,18 +1,21 @@
 import React, { useState, useMemo } from 'react'
 import { cn, Link } from '@uniweb/kit'
+import { formatReference, CiteButton, DoiLink, AuthorList } from '@uniweb/scholar'
 
 /**
  * PublicationList Component
  *
  * Display academic publications with proper citation formatting.
  * Supports filtering by year, type, and keyword search.
+ * Uses @uniweb/scholar for professional citation formatting.
  *
- * Each subsection represents a publication:
+ * Each item (content group) represents a publication:
  * - H3: Publication title
  * - First paragraph: Authors
  * - Second paragraph: Venue (journal/conference name)
  * - Third paragraph: Year
- * - Links: DOI, PDF, etc.
+ * - Fourth paragraph (optional): DOI
+ * - Links: PDF, code, etc.
  */
 
 const PUBLICATION_TYPES = {
@@ -25,66 +28,111 @@ const PUBLICATION_TYPES = {
 function parsePublication(item) {
   const { title, pretitle, paragraphs = [], links = [] } = item || {}
 
+  // Parse authors into structured format if possible
+  const authorsStr = paragraphs[0] || ''
+  const authors = authorsStr
+    .split(/,\s*(?:and\s+)?|(?:\s+and\s+)/)
+    .filter(Boolean)
+    .map((name) => {
+      const parts = name.trim().split(/\s+/)
+      if (parts.length === 1) {
+        return { family: parts[0], given: '' }
+      }
+      // Assume "First Last" format
+      return {
+        given: parts.slice(0, -1).join(' '),
+        family: parts[parts.length - 1],
+      }
+    })
+
   return {
+    id: title?.toLowerCase().replace(/\s+/g, '-').slice(0, 30) || 'pub',
     title,
-    authors: paragraphs[0] || '',
+    authors,
+    authorsStr,
+    journal: paragraphs[1] || '',
     venue: paragraphs[1] || '',
-    year: paragraphs[2] || '',
-    type: pretitle || 'journal', // Used for publication type
+    year: parseInt(paragraphs[2], 10) || paragraphs[2] || '',
+    doi: paragraphs[3] || '',
+    type: pretitle || 'journal',
     links,
   }
 }
 
-function PublicationCard({ pub, citationStyle, showType }) {
+function PublicationCard({ pub, citationStyle, showType, showCiteButton }) {
   const typeInfo = PUBLICATION_TYPES[pub.type] || PUBLICATION_TYPES.journal
+
+  // Build publication object for scholar formatters
+  const scholarPub = useMemo(
+    () => ({
+      id: pub.id,
+      type: pub.type === 'conference' ? 'inproceedings' : pub.type,
+      title: pub.title,
+      authors: pub.authors,
+      journal: pub.journal,
+      year: pub.year,
+      doi: pub.doi,
+    }),
+    [pub]
+  )
+
+  // Format citation using scholar
+  const formattedCitation = useMemo(() => {
+    if (citationStyle === 'detailed') return null
+    try {
+      return formatReference(scholarPub, { style: citationStyle })
+    } catch {
+      return null
+    }
+  }, [scholarPub, citationStyle])
 
   return (
     <article className="py-4 border-b border-slate-200 last:border-b-0">
       <div className="flex gap-4">
         {showType && (
           <div className="flex-shrink-0 pt-1">
-            <span className={cn(
-              'inline-block w-2 h-2 rounded-full',
-              typeInfo.color
-            )} />
+            <span
+              className={cn(
+                'inline-block w-2 h-2 rounded-full',
+                typeInfo.color
+              )}
+              title={typeInfo.label}
+            />
           </div>
         )}
 
         <div className="flex-1 min-w-0">
-          {citationStyle === 'apa' ? (
-            // APA-style citation
-            <div className="citation">
-              {pub.authors && (
-                <span className="citation-authors">{pub.authors} </span>
-              )}
-              {pub.year && <span>({pub.year}). </span>}
-              {pub.title && (
-                <span className="citation-title">{pub.title}. </span>
-              )}
-              {pub.venue && (
-                <span className="citation-venue">{pub.venue}.</span>
-              )}
+          {formattedCitation ? (
+            // Scholar-formatted citation (APA, MLA, Chicago, IEEE)
+            <div className="citation text-slate-700 leading-relaxed">
+              {formattedCitation}
             </div>
           ) : (
-            // Detailed format
+            // Detailed format (title prominent)
             <>
               <h3 className="text-lg font-semibold text-slate-900 mb-1">
                 {pub.title}
               </h3>
-              {pub.authors && (
-                <p className="text-slate-600 mb-1">{pub.authors}</p>
+              {pub.authors.length > 0 && (
+                <p className="text-slate-600 mb-1">
+                  <AuthorList authors={pub.authors} style="apa" />
+                </p>
               )}
               <div className="flex flex-wrap items-center gap-2 text-sm text-muted">
-                {pub.venue && <span>{pub.venue}</span>}
+                {pub.venue && <span className="italic">{pub.venue}</span>}
                 {pub.venue && pub.year && <span>•</span>}
                 {pub.year && <span>{pub.year}</span>}
               </div>
             </>
           )}
 
-          {pub.links.length > 0 && (
-            <div className="flex gap-3 mt-2">
-              {pub.links.map((link, i) => (
+          {/* Links row: DOI, PDF, etc. */}
+          <div className="flex flex-wrap items-center gap-3 mt-2">
+            {pub.doi && <DoiLink doi={pub.doi} format="short" showIcon />}
+
+            {pub.links
+              .filter((link) => link.url && !link.url.includes('doi.org'))
+              .map((link, i) => (
                 <Link
                   key={i}
                   href={link.url}
@@ -93,8 +141,15 @@ function PublicationCard({ pub, citationStyle, showType }) {
                   {link.text}
                 </Link>
               ))}
-            </div>
-          )}
+
+            {showCiteButton && (
+              <CiteButton
+                publication={scholarPub}
+                styles={['apa', 'mla', 'chicago', 'bibtex']}
+                label="Cite"
+              />
+            )}
+          </div>
         </div>
       </div>
     </article>
@@ -108,23 +163,26 @@ export function PublicationList({ content, params }) {
     groupBy = 'none',
     showType = true,
     showSearch = false,
+    showCiteButton = true,
     limit = 0,
   } = params || {}
 
   const [searchQuery, setSearchQuery] = useState('')
 
   const publications = useMemo(() => {
-    return (content.subsections || []).map(parsePublication)
-  }, [content.subsections])
+    // Publications come from content.items (semantic groups parsed from markdown)
+    return (content.items || []).map(parsePublication)
+  }, [content.items])
 
   // Filter by search
   const filtered = useMemo(() => {
     if (!searchQuery) return publications
     const q = searchQuery.toLowerCase()
-    return publications.filter(pub =>
-      pub.title?.toLowerCase().includes(q) ||
-      pub.authors?.toLowerCase().includes(q) ||
-      pub.venue?.toLowerCase().includes(q)
+    return publications.filter(
+      (pub) =>
+        pub.title?.toLowerCase().includes(q) ||
+        pub.authorsStr?.toLowerCase().includes(q) ||
+        pub.venue?.toLowerCase().includes(q)
     )
   }, [publications, searchQuery])
 
@@ -155,7 +213,9 @@ export function PublicationList({ content, params }) {
         {(title || paragraphs[0]) && (
           <div className="mb-8">
             {title && (
-              <h2 className="text-2xl font-bold text-slate-900 mb-2">{title}</h2>
+              <h2 className="text-2xl font-bold text-slate-900 mb-2">
+                {title}
+              </h2>
             )}
             {paragraphs[0] && (
               <p className="text-slate-600">{paragraphs[0]}</p>
@@ -186,7 +246,7 @@ export function PublicationList({ content, params }) {
           </div>
         )}
 
-        {sortedGroups.map(group => (
+        {sortedGroups.map((group) => (
           <div key={group} className="mb-8 last:mb-0">
             {group && groupBy === 'year' && (
               <h3 className="text-lg font-semibold text-slate-700 mb-4 pb-2 border-b border-slate-200">
@@ -196,10 +256,11 @@ export function PublicationList({ content, params }) {
             <div>
               {grouped[group].map((pub, i) => (
                 <PublicationCard
-                  key={i}
+                  key={pub.id + i}
                   pub={pub}
                   citationStyle={citationStyle}
                   showType={showType}
+                  showCiteButton={showCiteButton}
                 />
               ))}
             </div>
@@ -207,7 +268,9 @@ export function PublicationList({ content, params }) {
         ))}
 
         {displayed.length === 0 && (
-          <p className="text-slate-500 text-center py-8">No publications found.</p>
+          <p className="text-slate-500 text-center py-8">
+            No publications found.
+          </p>
         )}
       </div>
     </section>

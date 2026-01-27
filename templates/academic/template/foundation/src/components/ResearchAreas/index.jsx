@@ -5,7 +5,7 @@ import { cn, Link } from '@uniweb/kit'
  * ResearchAreas Component
  *
  * Display research focus areas, topics, or expertise.
- * Each subsection represents a research area with description.
+ * Each item represents a research area with description.
  */
 export function ResearchAreas({ content, params }) {
   const { title, paragraphs = [] } = content || {}
@@ -15,7 +15,7 @@ export function ResearchAreas({ content, params }) {
     accentPosition = 'left',
   } = params || {}
 
-  const areas = content.subsections || []
+  const areas = content.items || []
 
   const layouts = {
     cards: {
