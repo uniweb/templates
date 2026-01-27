@@ -1,1 +1,260 @@
 {{> agents-md}}
+
+## Academic Template Features
+
+This template includes specialized components and integrations for academic websites.
+
+### @uniweb/scholar Integration
+
+The foundation includes `@uniweb/scholar` for professional academic content:
+
+```javascript
+// Available imports in components
+import { formatReference, CiteButton, DoiLink, AuthorList } from '@uniweb/scholar'
+import { Math, Equation, EquationProvider } from '@uniweb/scholar/math'
+import { CitationProvider, Citation, Bibliography } from '@uniweb/scholar/citations'
+```
+
+### Academic Components
+
+#### PublicationList
+
+Display publications with professional citation formatting.
+
+```markdown
+---
+type: PublicationList
+citationStyle: detailed    # detailed | apa | mla | chicago | ieee
+groupBy: year              # none | year
+showType: true             # Color-coded publication types
+showCiteButton: true       # Copy citation button
+showSearch: false
+---
+
+## Publications
+
+#### journal
+
+### Paper Title
+
+Author One, Author Two, Author Three
+
+Journal Name, Volume(Issue), Pages
+
+2024
+
+10.1234/doi.here
+
+[PDF](#)
+[Code](https://github.com)
+```
+
+**Content structure per publication:**
+- H4 (####) before H3: Publication type (journal, conference, book, preprint)
+- H3 (###): Paper title
+- Paragraph 1: Authors
+- Paragraph 2: Venue/Journal
+- Paragraph 3: Year
+- Paragraph 4: DOI (optional, just the identifier like `10.1234/example`)
+- Links: PDF, code, slides, etc.
+
+**Citation styles:**
+| Style | Format |
+|-------|--------|
+| `detailed` | Title prominent, structured display |
+| `apa` | APA 7th Edition |
+| `mla` | MLA 9th Edition |
+| `chicago` | Chicago Author-Date |
+| `ieee` | IEEE numeric |
+
+#### MathBlock
+
+Display LaTeX equations with KaTeX rendering.
+
+```markdown
+---
+type: MathBlock
+showNumbers: true
+background: white    # white | gray | dark
+---
+
+### Mathematical Foundations
+
+# Section Title
+
+Text with inline math like $E = mc^2$ and display math:
+
+$$\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}$$
+
+### Equation Name
+
+\mathcal{L} = -\sum_{c=1}^{C} y_c \log(\hat{y}_c)
+
+Description of the equation.
+```
+
+**Math syntax:**
+- Inline: `$...$` within paragraphs
+- Display: `$$...$$` for block equations
+- Named equations: H3 heading + LaTeX in first paragraph
+
+#### ProfileHero
+
+Researcher/lab/department profile display.
+
+```markdown
+---
+type: ProfileHero
+variant: researcher    # researcher | lab | department
+photoPosition: left    # left | right | top
+---
+
+# Dr. Jane Smith
+
+## Associate Professor of Computer Science
+
+Bio text describing research interests and background.
+
+![Photo](profile.jpg)
+
+[Email](mailto:jane@university.edu)
+[Google Scholar](https://scholar.google.com/...)
+[ORCID](https://orcid.org/0000-0001-2345-6789)
+```
+
+#### TeamGrid
+
+Display lab members with role grouping.
+
+```markdown
+---
+type: TeamGrid
+groupByRole: true
+cardStyle: photo       # photo | compact | detailed | minimal
+columns: 3
+---
+
+## Team Members
+
+#### Faculty
+
+### Dr. Jane Smith
+
+Principal Investigator
+
+Research interests and bio.
+
+![Photo](photo.jpg)
+
+[Website](https://...)
+
+#### PhD Students
+
+### John Doe
+
+PhD Candidate (3rd year)
+
+Research focus description.
+
+![Photo](photo.jpg)
+```
+
+#### ResearchAreas
+
+Showcase research focus areas.
+
+```markdown
+---
+type: ResearchAreas
+layout: grid           # grid | list | compact
+showNumbers: true
+---
+
+## Research Areas
+
+### Machine Learning
+
+Description of ML research focus.
+
+[Learn more](#)
+
+### Natural Language Processing
+
+Description of NLP research.
+
+[Publications](#)
+```
+
+#### Timeline
+
+Academic career timeline.
+
+```markdown
+---
+type: Timeline
+orientation: vertical  # vertical | horizontal
+showDates: true
+---
+
+## Academic History
+
+### Associate Professor
+
+University Name
+
+2020 - Present
+
+Description of role and achievements.
+
+### PhD in Computer Science
+
+Another University
+
+2015 - 2020
+
+Dissertation title and advisor information.
+```
+
+### Publication Type Colors
+
+The template defines semantic colors for publication types in `foundation/src/styles.css`:
+
+```css
+@theme {
+  --color-journal: #3b82f6;     /* Blue */
+  --color-conference: #8b5cf6;  /* Purple */
+  --color-book: #22c55e;        /* Green */
+  --color-preprint: #f59e0b;    /* Amber */
+}
+```
+
+Use in components: `bg-journal`, `bg-conference`, `bg-book`, `bg-preprint`
+
+### Adding Publications
+
+1. Publications live in `site/pages/publications/` or inline on other pages
+2. Each H3 section is one publication
+3. Use H4 before H3 to set publication type
+4. DOI is the 4th paragraph (just the identifier, not full URL)
+5. The CiteButton lets visitors copy citations in any format
+
+### Adding Math Content
+
+1. Use the `MathBlock` component for equation-heavy sections
+2. Inline math works in any paragraph with `$...$`
+3. Named equations use H3 headings followed by LaTeX
+4. Equations are numbered automatically within an `EquationProvider`
+
+### Search
+
+Search is enabled by default and indexes all content including:
+- Page titles and headings
+- Publication titles and authors
+- Research area descriptions
+
+Configure in `site/site.yml`:
+
+```yaml
+search:
+  enabled: true
+```

@@ -1,0 +1,287 @@
+# AGENTS.md
+
+Instructions for AI assistants working with this Uniweb project.
+
+## Project Overview
+
+This is a **Uniweb** project — a component web platform that separates content from code. The project consists of:
+
+- **Foundation** (`foundation/`) — React component library built with Vite
+- **Site** (`site/`) — Content site using markdown files
+
+Content authors write markdown. Components render it. Neither can break each other.
+
+## Exploring the Codebase
+
+### Finding Components
+
+Components are auto-discovered from `foundation/src/components/*/meta.js`:
+
+```bash
+# List all components
+ls foundation/src/components/
+
+# Read component metadata
+cat foundation/src/components/ComponentName/meta.js
+
+# Read component implementation
+cat foundation/src/components/ComponentName/index.jsx
+```
+
+### Understanding Content Structure
+
+```bash
+# See all pages
+ls site/pages/
+
+# Read page configuration
+cat site/pages/pagename/page.yml
+
+# Read page sections
+cat site/pages/pagename/*.md
+```
+
+### Site Configuration
+
+```bash
+cat site/site.yml    # Site-wide settings (locales, index page, search)
+```
+
+## Component Metadata (meta.js)
+
+Each component has a `meta.js` that defines its interface:
+
+```javascript
+export default {
+  title: 'Component Name',
+  description: 'What it does',
+  category: 'content',
+
+  // Content expectations
+  content: {
+    title: 'Main heading',
+    paragraphs: 'Body text',
+    items: 'List items from H3 headings',
+  },
+
+  // Configurable parameters
+  params: {
+    variant: {
+      type: 'select',
+      options: [{ value: 'default', label: 'Default' }],
+      default: 'default',
+    },
+  },
+
+  // Pre-configured combinations
+  presets: {
+    compact: {
+      label: 'Compact',
+      params: { variant: 'compact' },
+    },
+  },
+}
+```
+
+## Content Authoring
+
+### Section Files
+
+Each markdown file in a page folder becomes a section:
+
+```
+site/pages/about/
+├── page.yml          # Page config (title, layout)
+├── 1-intro.md        # First section
+├── 2-team.md         # Second section
+└── 3-contact.md      # Third section
+```
+
+Files are ordered by filename prefix (1-, 2-, etc.).
+
+### Markdown to Props
+
+```markdown
+---
+type: ComponentName
+paramName: value
+---
+
+### Eyebrow Text
+
+# Main Title
+
+## Subtitle
+
+First paragraph becomes paragraphs[0].
+
+Second paragraph becomes paragraphs[1].
+
+### Item Title
+
+Item paragraph.
+
+![Image alt](image.jpg)
+
+[Link text](url)
+```
+
+Maps to component props:
+
+| Markdown | Props |
+|----------|-------|
+| H4 (####) before H3 | `pretitle` |
+| H1 (#) | `title` |
+| H2 (##) | `subtitle` |
+| Paragraphs | `paragraphs[]` |
+| H3 (###) sections | `subsections[]` or `items[]` |
+| Images | `imgs[]` |
+| Links | `links[]` |
+
+### Special Pages
+
+- `@header/` — Global header (appears on all pages)
+- `@footer/` — Global footer (appears on all pages)
+
+## Creating Components
+
+### 1. Create the folder
+
+```bash
+mkdir -p foundation/src/components/MyComponent
+```
+
+### 2. Create meta.js
+
+```javascript
+// foundation/src/components/MyComponent/meta.js
+export default {
+  title: 'My Component',
+  description: 'Does something useful',
+  category: 'content',
+  content: {
+    title: 'Heading',
+    paragraphs: 'Body text',
+  },
+  params: {},
+  presets: {},
+}
+```
+
+### 3. Create index.jsx
+
+```jsx
+// foundation/src/components/MyComponent/index.jsx
+import React from 'react'
+
+export function MyComponent({ content, params }) {
+  const { title, paragraphs = [] } = content || {}
+
+  return (
+    <section className="py-12 px-6">
+      {title && <h2>{title}</h2>}
+      {paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+    </section>
+  )
+}
+
+export default MyComponent
+```
+
+### 4. Rebuild foundation
+
+```bash
+cd foundation && pnpm build
+```
+
+Components are auto-discovered from `meta.js` — no manual registration needed.
+
+## Common Tasks
+
+### Add a new page
+
+```bash
+mkdir -p site/pages/newpage
+echo "title: New Page" > site/pages/newpage/page.yml
+```
+
+### Add content to a page
+
+Create a numbered markdown file:
+
+```bash
+cat > site/pages/newpage/1-content.md << 'EOF'
+---
+type: Text
+---
+
+# Page Title
+
+Content here.
+EOF
+```
+
+### Change site homepage
+
+Edit `site/site.yml`:
+
+```yaml
+index: home  # Folder name that becomes /
+```
+
+### Enable search
+
+Edit `site/site.yml`:
+
+```yaml
+search:
+  enabled: true
+```
+
+## Imports
+
+Components can import from these packages:
+
+```javascript
+// UI utilities and hooks
+import { cn, Link, useWebsite } from '@uniweb/kit'
+
+// Core classes (Website, Page, Block)
+import { getUniweb } from '@uniweb/core'
+```
+
+## Development Commands
+
+```bash
+# Install dependencies
+pnpm install
+
+# Start dev server (both foundation + site)
+pnpm dev
+
+# Build for production
+pnpm build
+
+# Preview production build
+pnpm preview
+```
+
+## Troubleshooting
+
+### Component not appearing
+
+1. Check `meta.js` exists in component folder
+2. Rebuild foundation: `cd foundation && pnpm build`
+3. Check browser console for errors
+
+### Content not rendering
+
+1. Verify `type:` in frontmatter matches component name exactly
+2. Check markdown structure matches component's content expectations
+3. Look at `meta.js` to understand expected content format
+
+### Styles not working
+
+1. Foundation uses Tailwind CSS v4
+2. Check `foundation/src/styles.css` for theme configuration
+3. Rebuild after CSS changes

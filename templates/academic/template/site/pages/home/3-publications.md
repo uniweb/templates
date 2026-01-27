@@ -4,6 +4,7 @@ citationStyle: detailed
 groupBy: none
 showType: true
 showSearch: false
+showCiteButton: true
 limit: 5
 ---
 
@@ -21,8 +22,9 @@ Nature Machine Intelligence
 
 2024
 
+10.1038/s42256-024-00234
+
 [PDF](#)
-[DOI](https://doi.org/10.1234/example)
 
 #### conference
 
@@ -33,6 +35,8 @@ Chen, S., Patel, A., Kim, J.
 Proceedings of NeurIPS 2024
 
 2024
+
+10.5555/neurips.2024.1234
 
 [PDF](#)
 [Code](https://github.com)
@@ -47,8 +51,9 @@ Communications of the ACM
 
 2023
 
+10.1145/3571234
+
 [PDF](#)
-[DOI](https://doi.org/10.1234/example2)
 
 #### preprint
 
@@ -71,6 +76,8 @@ Chen, S., Brown, T., Davis, M.
 Proceedings of ACL 2023
 
 2023
+
+10.18653/v1/2023.acl-long.123
 
 [PDF](#)
 [Slides](#)

@@ -15,6 +15,7 @@ This project has two packages that work together:
 │   │   ├── components/  # Academic-focused components
 │   │   │   ├── ProfileHero/
 │   │   │   ├── PublicationList/
+│   │   │   ├── MathBlock/
 │   │   │   ├── TeamGrid/
 │   │   │   └── ...
 │   │   └── styles.css   # Tailwind theme
@@ -69,35 +70,79 @@ Bio text here...
 - **H1 (#)** — Main title (person name, page title)
 - **H2 (##)** — Subtitle (position, tagline)
 - **H3 (###)** — Item titles (paper titles, member names)
-- **H4 (####)** — Group headers (years, roles)
+- **H4 (####)** — Group headers (years, roles, publication types)
 
 {{> adding-pages}}
 
 ### Adding Publications
 
+Publications support professional citation formatting with copy-to-clipboard functionality:
+
 ```markdown
 ---
 type: PublicationList
-citationStyle: detailed
+citationStyle: detailed   # detailed | apa | mla | chicago | ieee
 groupBy: year
+showCiteButton: true      # Adds "Cite" dropdown button
 ---
 
 ## Publications
 
-#### 2024
+#### journal
 
 ### Paper Title Here
 
-**First Author**, Second Author, Third Author
+First Author, Second Author, Third Author
 
-*Nature Machine Intelligence*
+Nature Machine Intelligence, 6(3), 234-251
 
-Abstract or description text.
+2024
+
+10.1038/s42256-024-00234
 
 [PDF](paper.pdf)
-[arXiv](https://arxiv.org)
 [Code](https://github.com)
 ```
+
+**Citation Styles:**
+- `detailed` — Title prominent with structured metadata
+- `apa` — APA 7th Edition format
+- `mla` — MLA 9th Edition format
+- `chicago` — Chicago Author-Date
+- `ieee` — IEEE numeric style
+
+The **Cite button** lets visitors copy citations in APA, MLA, Chicago, or BibTeX format.
+
+### Adding Math Equations
+
+Use the MathBlock component for LaTeX equations:
+
+```markdown
+---
+type: MathBlock
+showNumbers: true
+background: gray
+---
+
+### Mathematical Foundations
+
+# Core Methods
+
+Text with inline math $E = mc^2$ and display equations:
+
+$$\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}$$
+
+### Cross-Entropy Loss
+
+\mathcal{L}_{CE} = -\sum_{c=1}^{C} y_c \log(\hat{y}_c)
+
+The cross-entropy loss measures divergence between distributions.
+```
+
+**Math Syntax:**
+- Inline: `$...$` within paragraphs
+- Display: `$$...$$` for block equations
+- Named equations: H3 heading followed by LaTeX
 
 ### Adding Team Members
 
@@ -152,10 +197,24 @@ pnpm --filter site dev
 1. Create folder: `foundation/src/components/MyComponent/`
 2. Add `index.jsx` with the React component
 3. Add `meta.js` with metadata and parameters (see [meta.js guide](https://github.com/uniweb/cli/blob/main/docs/meta/README.md))
-4. Export from `foundation/src/index.js`
-5. Rebuild: `cd foundation && pnpm build`
+4. Rebuild: `cd foundation && pnpm build`
 
-The `meta.js` file defines component parameters and content expectations. The runtime uses this metadata to apply defaults and guarantee content structure.
+Components are auto-discovered from `meta.js` — no manual registration needed.
+
+### Using @uniweb/scholar
+
+The foundation includes `@uniweb/scholar` for academic content:
+
+```jsx
+// Citation formatting
+import { formatReference, CiteButton, DoiLink } from '@uniweb/scholar'
+
+// Math rendering (KaTeX, lazy-loaded)
+import { Math, Equation, EquationProvider } from '@uniweb/scholar/math'
+
+// Bibliography management
+import { CitationProvider, Citation, Bibliography } from '@uniweb/scholar/citations'
+```
 
 See `AGENTS.md` for detailed component development guidelines.
 

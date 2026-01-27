@@ -4,6 +4,7 @@ citationStyle: detailed
 groupBy: year
 showType: true
 showSearch: true
+showCiteButton: true
 ---
 
 #### journal
@@ -16,8 +17,9 @@ Nature Machine Intelligence, 6(3), 234-251
 
 2024
 
+10.1038/s42256-024-00234
+
 [PDF](#)
-[DOI](https://doi.org/10.1234/example)
 
 #### conference
 
@@ -28,6 +30,8 @@ Chen, S., Patel, A., Kim, J.
 Proceedings of NeurIPS 2024
 
 2024
+
+10.5555/neurips.2024.1234
 
 [PDF](#)
 [Code](https://github.com)
@@ -42,7 +46,7 @@ arXiv preprint arXiv:2024.12345
 
 2024
 
-[arXiv](https://arxiv.org)
+[arXiv](https://arxiv.org/abs/2024.12345)
 
 #### journal
 
@@ -54,8 +58,9 @@ Communications of the ACM, 66(8), 78-89
 
 2023
 
+10.1145/3571234
+
 [PDF](#)
-[DOI](https://doi.org/10.1234/example2)
 
 #### conference
 
@@ -66,6 +71,8 @@ Chen, S., Brown, T., Davis, M.
 Proceedings of ACL 2023
 
 2023
+
+10.18653/v1/2023.acl-long.123
 
 [PDF](#)
 [Slides](#)
@@ -80,8 +87,9 @@ IEEE Transactions on Medical Imaging, 42(5), 1123-1145
 
 2022
 
+10.1109/TMI.2022.1234567
+
 [PDF](#)
-[DOI](https://doi.org/10.1234/example3)
 
 #### book
 
@@ -92,6 +100,8 @@ Chen, S., Patel, A.
 Cambridge University Press
 
 2022
+
+10.1017/9781234567890
 
 [Publisher](https://cambridge.org)
 
@@ -118,5 +128,6 @@ Journal of Biomedical Informatics, 115, 103682
 
 2021
 
+10.1016/j.jbi.2021.103682
+
 [PDF](#)
-[DOI](https://doi.org/10.1234/example4)
