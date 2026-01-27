@@ -1,5 +1,6 @@
 import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
+import typography from '@tailwindcss/typography'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -13,5 +14,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [typography],
 }

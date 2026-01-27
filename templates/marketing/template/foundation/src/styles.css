@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @source "./components/**/*.{js,jsx}";
 @source "../node_modules/@uniweb/kit/src/**/*.{js,jsx}";
