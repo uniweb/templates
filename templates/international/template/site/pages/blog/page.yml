@@ -1,0 +1,7 @@
+title: Blog
+description: Latest news and research updates from PandaWatch.
+label: Blog
+order: 4
+
+# Fetch articles data - cascades to child pages including [slug]
+fetch: /data/articles.json

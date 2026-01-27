@@ -7,4 +7,4 @@ fetch: /data/team.json
 
 # Our Team
 
-Meet the dedicated professionals behind Global Solutions.
+Meet the researchers and conservationists working to protect giant pandas.

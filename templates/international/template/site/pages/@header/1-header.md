@@ -2,6 +2,6 @@
 type: Header
 ---
 
-# Global Solutions Inc.
+# PandaWatch
 
-[Contact Us](/contact)
+[Support Us](/contact)

@@ -1,7 +1,7 @@
 {
-  "name": "International Business",
-  "description": "A multilingual corporate website demonstrating Uniweb's i18n capabilities. Includes English, Spanish, and French translations with a complete business site structure (home, about, services, contact).",
+  "name": "PandaWatch - International",
+  "description": "A multilingual conservation organization website demonstrating Uniweb's i18n capabilities with blog, search, and collections. Includes English, Spanish, and French translations with dynamic article pages.",
   "uniweb": ">=0.2.0",
-  "tags": ["i18n", "multilingual", "corporate", "business", "localization"],
-  "components": ["Hero", "Features", "Team", "CTA", "Header", "Footer"]
+  "tags": ["i18n", "multilingual", "blog", "collections", "search", "localization", "conservation"],
+  "components": ["Hero", "Features", "Team", "CTA", "Header", "Footer", "ArticleList", "Article"]
 }

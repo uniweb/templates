@@ -1,0 +1,44 @@
+{
+  "version": "1.0",
+  "defaultLocale": "en",
+  "extracted": "2024-01-15T00:00:00.000Z",
+  "collections": ["articles"],
+  "units": {
+    "art1_title": {
+      "source": "Protecting Panda Habitats in Sichuan",
+      "field": "title",
+      "collection": "articles",
+      "item": "habitat-protection"
+    },
+    "art1_excerpt": {
+      "source": "New corridors connect fragmented bamboo forests across mountain ranges.",
+      "field": "excerpt",
+      "collection": "articles",
+      "item": "habitat-protection"
+    },
+    "art2_title": {
+      "source": "Understanding Bamboo Cycles",
+      "field": "title",
+      "collection": "articles",
+      "item": "bamboo-research"
+    },
+    "art2_excerpt": {
+      "source": "How climate change affects panda food sources and what we can do about it.",
+      "field": "excerpt",
+      "collection": "articles",
+      "item": "bamboo-research"
+    },
+    "art3_title": {
+      "source": "Community-Led Conservation Success",
+      "field": "title",
+      "collection": "articles",
+      "item": "community-conservation"
+    },
+    "art3_excerpt": {
+      "source": "Local communities driving panda protection through sustainable partnerships.",
+      "field": "excerpt",
+      "collection": "articles",
+      "item": "community-conservation"
+    }
+  }
+}

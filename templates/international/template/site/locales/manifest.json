@@ -1,102 +1,142 @@
 {
   "version": "1.0",
   "defaultLocale": "en",
-  "extracted": "2025-01-01T00:00:00.000Z",
+  "extracted": "2024-01-15T00:00:00.000Z",
   "units": {
-    "feba750f": {
-      "source": "Transform Your Business With Our Expertise",
+    "a1b2c3d4": {
+      "source": "Protecting Pandas for Future Generations",
       "field": "title",
       "contexts": [{"page": "/", "section": "hero"}]
     },
-    "9b84c69c": {
-      "source": "Welcome to Global Solutions",
+    "e5f6g7h8": {
+      "source": "Giant Panda Conservation",
       "field": "pretitle",
       "contexts": [{"page": "/", "section": "hero"}]
     },
-    "6e72c6bf": {
-      "source": "We help companies around the world achieve their goals through innovative solutions and personalized support.",
+    "i9j0k1l2": {
+      "source": "We conduct research, restore habitats, and partner with communities worldwide to ensure the survival of giant pandas in the wild.",
       "field": "paragraph",
       "contexts": [{"page": "/", "section": "hero"}]
     },
-    "983f3110": {
-      "source": "Get Started",
+    "m3n4o5p6": {
+      "source": "Support Our Work",
       "field": "link.label",
       "contexts": [{"page": "/", "section": "hero"}]
     },
-    "8d8cd546": {
+    "q7r8s9t0": {
       "source": "Learn More",
       "field": "link.label",
-      "contexts": [{"page": "/", "section": "hero"}]
+      "contexts": [{"page": "/", "section": "hero"}, {"page": "/about", "section": "hero"}]
     },
-    "3b7388ca": {
-      "source": "Our Services",
+    "u1v2w3x4": {
+      "source": "Our Focus Areas",
       "field": "title",
-      "contexts": [{"page": "/", "section": "services"}, {"page": "/services", "section": "hero"}]
+      "contexts": [{"page": "/", "section": "features"}]
     },
-    "9e8c0948": {
-      "source": "Consulting",
+    "y5z6a7b8": {
+      "source": "We address the key challenges facing giant pandas through integrated conservation programs.",
+      "field": "paragraph",
+      "contexts": [{"page": "/", "section": "features"}]
+    },
+    "c9d0e1f2": {
+      "source": "Habitat Protection",
       "field": "item.title",
-      "contexts": [{"page": "/", "section": "services"}]
+      "contexts": [{"page": "/", "section": "features"}, {"page": "/research/habitat", "section": "hero"}]
     },
-    "ebcb7683": {
-      "source": "Strategic guidance to help you make informed decisions and achieve your business objectives.",
+    "g3h4i5j6": {
+      "source": "Establishing and expanding protected corridors to connect fragmented bamboo forests across panda ranges.",
       "field": "item.paragraph",
-      "contexts": [{"page": "/", "section": "services"}]
+      "contexts": [{"page": "/", "section": "features"}]
     },
-    "21b6a798": {
-      "source": "Development",
+    "k7l8m9n0": {
+      "source": "Scientific Research",
       "field": "item.title",
-      "contexts": [{"page": "/", "section": "services"}]
+      "contexts": [{"page": "/", "section": "features"}]
     },
-    "b65f0392": {
-      "source": "Custom solutions built with the latest technologies to meet your unique requirements.",
+    "o1p2q3r4": {
+      "source": "Studying panda behavior, genetics, and ecology to inform effective conservation strategies.",
       "field": "item.paragraph",
-      "contexts": [{"page": "/", "section": "services"}]
+      "contexts": [{"page": "/", "section": "features"}]
     },
-    "be91940b": {
-      "source": "Support",
+    "s5t6u7v8": {
+      "source": "Community Programs",
       "field": "item.title",
-      "contexts": [{"page": "/", "section": "services"}]
+      "contexts": [{"page": "/", "section": "features"}]
     },
-    "990b3077": {
-      "source": "Dedicated support team available around the clock to ensure your success.",
+    "w9x0y1z2": {
+      "source": "Working with local villages to create sustainable livelihoods that support panda conservation.",
       "field": "item.paragraph",
-      "contexts": [{"page": "/", "section": "services"}]
+      "contexts": [{"page": "/", "section": "features"}]
     },
-    "9d1eae45": {
-      "source": "Ready to Get Started?",
+    "a3b4c5d6": {
+      "source": "Join Our Conservation Efforts",
       "field": "title",
       "contexts": [{"page": "/", "section": "cta"}]
     },
-    "ee65849e": {
-      "source": "Contact us today and discover how we can help transform your business.",
+    "e7f8g9h0": {
+      "source": "Support our research and help protect giant pandas and their mountain forest homes.",
       "field": "paragraph",
       "contexts": [{"page": "/", "section": "cta"}]
     },
-    "98b67063": {
-      "source": "Contact Us",
+    "i1j2k3l4": {
+      "source": "Support Us",
       "field": "link.label",
       "contexts": [{"page": "/", "section": "cta"}, {"page": "/contact", "section": "hero"}]
     },
-    "604dd317": {
-      "source": "About Global Solutions",
+    "m5n6o7p8": {
+      "source": "About PandaWatch",
       "field": "title",
       "contexts": [{"page": "/about", "section": "hero"}]
     },
-    "3fb76449": {
-      "source": "Our Story",
+    "q9r0s1t2": {
+      "source": "Dedicated to the conservation and protection of giant pandas since 2008.",
+      "field": "paragraph",
+      "contexts": [{"page": "/about", "section": "hero"}]
+    },
+    "u3v4w5x6": {
+      "source": "Our Mission",
       "field": "title",
       "contexts": [{"page": "/about", "section": "story"}]
     },
-    "c300c945": {
+    "y7z8a9b0": {
       "source": "Our Team",
       "field": "title",
       "contexts": [{"page": "/about", "section": "team"}]
     },
-    "5e1622a2": {
-      "source": "Global Solutions Inc.",
+    "c1d2e3f4": {
+      "source": "Meet the researchers and conservationists working to protect giant pandas.",
+      "field": "paragraph",
+      "contexts": [{"page": "/about", "section": "team"}]
+    },
+    "g5h6i7j8": {
+      "source": "PandaWatch",
       "field": "title",
       "contexts": [{"page": "@header", "section": "header"}, {"page": "@footer", "section": "footer"}]
+    },
+    "k9l0m1n2": {
+      "source": "Protecting giant pandas through research, conservation, and community partnerships worldwide.",
+      "field": "paragraph",
+      "contexts": [{"page": "@footer", "section": "footer"}]
+    },
+    "o3p4q5r6": {
+      "source": "Research Programs",
+      "field": "title",
+      "contexts": [{"page": "/research", "section": "hero"}]
+    },
+    "s7t8u9v0": {
+      "source": "Advancing panda conservation through rigorous scientific research.",
+      "field": "paragraph",
+      "contexts": [{"page": "/research", "section": "hero"}]
+    },
+    "w1x2y3z4": {
+      "source": "Research Updates",
+      "field": "title",
+      "contexts": [{"page": "/blog", "section": "list"}]
+    },
+    "a5b6c7d8": {
+      "source": "Latest findings and news from our conservation efforts.",
+      "field": "paragraph",
+      "contexts": [{"page": "/blog", "section": "list"}]
     }
   }
 }

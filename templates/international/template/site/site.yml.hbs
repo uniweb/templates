@@ -1,4 +1,5 @@
 name: {{projectName}}
+description: Global Panda Conservation Research
 defaultLanguage: en
 
 # Foundation to use for this site
@@ -12,6 +13,17 @@ index: home
 i18n:
   locales: [es, fr]
   localesDir: locales
+
+# Enable search functionality
+search: true
+
+# Content collections
+# Markdown files in library/ are processed into JSON at build time
+collections:
+  articles:
+    path: library/articles
+    route: /blog
+    sort: date desc
 
 # Build options
 build:

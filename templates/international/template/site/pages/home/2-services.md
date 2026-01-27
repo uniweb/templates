@@ -4,18 +4,18 @@ theme: gray
 columns: 3
 ---
 
-# Our Services
+# Our Focus Areas
 
-We offer a comprehensive range of services to help your business succeed.
+We address the key challenges facing giant pandas through integrated conservation programs.
 
-### Consulting
+### Habitat Protection
 
-Strategic guidance to help you make informed decisions and achieve your business objectives.
+Establishing and expanding protected corridors to connect fragmented bamboo forests across panda ranges.
 
-### Development
+### Scientific Research
 
-Custom solutions built with the latest technologies to meet your unique requirements.
+Studying panda behavior, genetics, and ecology to inform effective conservation strategies.
 
-### Support
+### Community Programs
 
-Dedicated support team available around the clock to ensure your success.
+Working with local villages to create sustainable livelihoods that support panda conservation.

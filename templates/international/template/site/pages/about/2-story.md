@@ -3,10 +3,10 @@ type: Section
 theme: light
 ---
 
-# Our Story
+# Our Mission
 
-## Building Success Together
+## Protecting Pandas in Their Natural Habitat
 
-Founded in 2010, Global Solutions has grown from a small consulting firm to a trusted partner for businesses worldwide. Our journey has been defined by our commitment to excellence and our dedication to helping our clients succeed.
+PandaWatch was founded in 2008 by a team of wildlife biologists and conservationists dedicated to ensuring the survival of giant pandas in the wild. Based in Chengdu, China, with research stations across Sichuan, Shaanxi, and Gansu provinces, we work at the heart of panda country.
 
-We believe that every business has unique challenges and opportunities. That's why we take a personalized approach to every engagement, working closely with our clients to understand their needs and deliver solutions that drive real results.
+Our approach combines rigorous scientific research with community-based conservation. We believe that lasting protection for pandas requires understanding their ecology, restoring their habitats, and creating sustainable partnerships with the local communities who share their mountain homes.

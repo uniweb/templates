@@ -3,11 +3,11 @@ type: Hero
 theme: gradient
 ---
 
-### Welcome to Global Solutions
+### Giant Panda Conservation
 
-# Transform Your Business With Our Expertise
+# Protecting Pandas for Future Generations
 
-We help companies around the world achieve their goals through innovative solutions and personalized support.
+We conduct research, restore habitats, and partner with communities worldwide to ensure the survival of giant pandas in the wild.
 
-[Get Started](/contact)
+[Support Our Work](/contact)
 [Learn More](/about)

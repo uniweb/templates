@@ -1,26 +1,26 @@
 [
   {
-    "name": "Maria Garcia",
-    "role": "CEO & Founder",
-    "bio": "Leading our vision with over 20 years of industry experience.",
-    "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop"
-  },
-  {
-    "name": "James Chen",
-    "role": "Technical Director",
-    "bio": "Driving innovation and technical excellence across all projects.",
+    "name": "Dr. Wei Zhang",
+    "role": "Director & Lead Researcher",
+    "bio": "Wildlife biologist with 25 years of panda research experience.",
     "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop"
   },
   {
-    "name": "Sophie Martin",
-    "role": "Client Relations",
-    "bio": "Ensuring exceptional service and client satisfaction.",
+    "name": "Dr. Lin Chen",
+    "role": "Conservation Ecologist",
+    "bio": "Specializing in habitat restoration and bamboo forest ecology.",
+    "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop"
+  },
+  {
+    "name": "Marie Dubois",
+    "role": "Community Programs Director",
+    "bio": "Building sustainable partnerships with local communities.",
     "avatar": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&fit=crop"
   },
   {
-    "name": "David Kim",
-    "role": "Lead Developer",
-    "bio": "Building robust solutions with cutting-edge technologies.",
+    "name": "Dr. Carlos Rodriguez",
+    "role": "Field Research Coordinator",
+    "bio": "Leading GPS tracking and population monitoring efforts.",
     "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop"
   }
 ]

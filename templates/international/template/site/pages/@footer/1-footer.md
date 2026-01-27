@@ -2,6 +2,6 @@
 type: Footer
 ---
 
-# Global Solutions Inc.
+# PandaWatch
 
-Empowering businesses worldwide with innovative solutions and dedicated support.
+Protecting giant pandas through research, conservation, and community partnerships worldwide.

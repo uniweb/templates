@@ -3,6 +3,6 @@ type: Hero
 theme: dark
 ---
 
-# About Global Solutions
+# About PandaWatch
 
-Learn about our mission, values, and the team behind our success.
+Dedicated to the conservation and protection of giant pandas since 2008.

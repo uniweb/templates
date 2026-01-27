@@ -3,6 +3,6 @@ type: Hero
 theme: light
 ---
 
-# Contact Us
+# Support Us
 
-We'd love to hear from you. Reach out to our team today.
+Help protect giant pandas by supporting our conservation work.

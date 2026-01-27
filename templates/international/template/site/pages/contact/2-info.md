@@ -5,18 +5,18 @@ theme: gray
 
 # Get in Touch
 
-## How to Reach Us
+## Ways to Help
 
-Whether you have a question about our services, need support, or want to discuss a potential project, our team is here to help.
+Your support makes our conservation work possible. Join us in protecting giant pandas.
 
-### Email
+### Donate
 
-Send us a message at contact@globalsolutions.com and we'll respond within 24 hours.
+Make a contribution at donate@pandawatch.org to support habitat protection and research programs.
 
-### Phone
+### Volunteer
 
-Call us at +1 (555) 123-4567. Our team is available Monday through Friday, 9am to 6pm.
+Join our field research teams or help with outreach. Contact volunteer@pandawatch.org for opportunities.
 
-### Office
+### Partner
 
-Visit us at 123 Business Avenue, Suite 456, San Francisco, CA 94102.
+Organizations interested in collaboration can reach us at partnerships@pandawatch.org.

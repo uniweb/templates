@@ -3,8 +3,8 @@ type: CTA
 theme: primary
 ---
 
-# Ready to Get Started?
+# Join Our Conservation Efforts
 
-Contact us today and discover how we can help transform your business.
+Support our research and help protect giant pandas and their mountain forest homes.
 
-[Contact Us](/contact)
+[Support Us](/contact)

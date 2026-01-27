@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link, cn, useScrolled, useMobileMenu, useWebsite, useActiveRoute } from '@uniweb/kit'
-import { ChevronDown } from 'lucide-react'
+import { useSearchShortcut, useSearchWithIntent } from '@uniweb/kit/search'
+import { ChevronDown, Search, X } from 'lucide-react'
 
 /**
  * Header Component
@@ -9,6 +10,7 @@ import { ChevronDown } from 'lucide-react'
  * - Dropdown menus for nested pages
  * - Active state highlighting for current page and ancestors
  * - Language switcher for multilingual sites
+ * - Search functionality (Cmd/Ctrl+K)
  */
 export function Header({ content, params, block }) {
   const { website } = useWebsite()
@@ -20,6 +22,51 @@ export function Header({ content, params, block }) {
 
   // Track which dropdown is open (for hover/click)
   const [openDropdown, setOpenDropdown] = useState(null)
+
+  // Search state
+  const [searchOpen, setSearchOpen] = useState(false)
+  const { query, results, isLoading, clear, triggerPreload, intentProps } = useSearchWithIntent(website)
+  const [searchQuery, setSearchQuery] = useState('')
+  const searchInputRef = useRef(null)
+
+  // Keyboard shortcut to open search (Cmd/Ctrl+K)
+  useSearchShortcut({
+    onOpen: () => setSearchOpen(true),
+    onPreload: triggerPreload,
+  })
+
+  // Focus input when search modal opens, handle Escape key
+  useEffect(() => {
+    if (searchOpen) {
+      if (searchInputRef.current) {
+        searchInputRef.current.focus()
+      }
+      const handleEscape = (e) => {
+        if (e.key === 'Escape') {
+          closeSearch()
+        }
+      }
+      window.addEventListener('keydown', handleEscape)
+      return () => window.removeEventListener('keydown', handleEscape)
+    }
+  }, [searchOpen])
+
+  // Handle search input changes
+  const handleSearchChange = (e) => {
+    const value = e.target.value
+    setSearchQuery(value)
+    query(value)
+  }
+
+  // Close search modal
+  const closeSearch = () => {
+    setSearchOpen(false)
+    setSearchQuery('')
+    clear()
+  }
+
+  // Check if search is enabled
+  const searchEnabled = website.isSearchEnabled()
 
   // Get context from the next block
   const nextBlockInfo = block.getNextBlockInfo()
@@ -210,8 +257,22 @@ export function Header({ content, params, block }) {
               ))}
             </div>
 
-            {/* Language Switcher + CTA */}
+            {/* Search + Language Switcher + CTA */}
             <div className="hidden lg:flex lg:items-center lg:gap-4">
+              {/* Search Button */}
+              {searchEnabled && (
+                <button
+                  onClick={() => setSearchOpen(true)}
+                  {...intentProps}
+                  className={cn(
+                    'p-2 rounded-lg transition-colors',
+                    getLinkStyles()
+                  )}
+                  aria-label="Search (Cmd+K)"
+                >
+                  <Search className="w-5 h-5" />
+                </button>
+              )}
               {hasMultipleLocales && (
                 <div className="flex items-center gap-1 text-sm">
                   {locales.map((locale, i) => (
@@ -301,6 +362,95 @@ export function Header({ content, params, block }) {
       </header>
 
       {!isFloating && <div className="h-16 lg:h-20" />}
+
+      {/* Search Modal */}
+      {searchOpen && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm"
+          onClick={closeSearch}
+        >
+          <div
+            className="max-w-2xl mx-auto mt-20 px-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
+              {/* Search Input */}
+              <div className="flex items-center border-b border-gray-200 px-4">
+                <Search className="w-5 h-5 text-gray-400" />
+                <input
+                  ref={searchInputRef}
+                  type="text"
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                  placeholder="Search..."
+                  className="flex-1 px-3 py-4 text-lg outline-none"
+                />
+                <button
+                  onClick={closeSearch}
+                  className="p-1 text-gray-400 hover:text-gray-600"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Search Results */}
+              <div className="max-h-96 overflow-y-auto">
+                {isLoading && (
+                  <div className="p-4 text-center text-gray-500">
+                    Searching...
+                  </div>
+                )}
+
+                {!isLoading && searchQuery && results.length === 0 && (
+                  <div className="p-4 text-center text-gray-500">
+                    No results found.
+                  </div>
+                )}
+
+                {!isLoading && results.length > 0 && (
+                  <ul className="py-2">
+                    {results.map((result, i) => (
+                      <li key={result.id || i}>
+                        <Link
+                          href={result.route || result.href}
+                          onClick={closeSearch}
+                          className="block px-4 py-3 hover:bg-gray-50 transition-colors"
+                        >
+                          <div className="font-medium text-gray-900">
+                            {result.title}
+                          </div>
+                          {result.snippetHtml ? (
+                            <div
+                              className="text-sm text-gray-500 mt-1 line-clamp-2"
+                              dangerouslySetInnerHTML={{ __html: result.snippetHtml }}
+                            />
+                          ) : result.description ? (
+                            <div className="text-sm text-gray-500 mt-1 line-clamp-2">
+                              {result.description}
+                            </div>
+                          ) : null}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                {!isLoading && !searchQuery && (
+                  <div className="p-4 text-center text-gray-400 text-sm">
+                    Type to search...
+                  </div>
+                )}
+              </div>
+
+              {/* Keyboard hint */}
+              <div className="px-4 py-2 border-t border-gray-100 text-xs text-gray-400 flex items-center justify-end gap-2">
+                <kbd className="px-1.5 py-0.5 bg-gray-100 rounded text-gray-500">Esc</kbd>
+                <span>to close</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }

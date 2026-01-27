@@ -1,0 +1,9 @@
+# Dynamic article page
+# The [slug] folder name makes this a dynamic route.
+# Routes are generated for each item in parent's fetched data.
+# Each instance receives:
+#   - content.data.article (singular) - the current article
+#   - content.data.articles (plural) - all articles
+
+title: Article
+description: Blog article
