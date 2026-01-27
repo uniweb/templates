@@ -13,6 +13,8 @@ tags: [components, best-practices]
 
 Good component design is key to building maintainable Uniweb sites. In this article, we'll explore patterns that make components **flexible**, *reusable*, and easy to maintain.
 
+![Component Architecture Diagram](./component-architecture.svg "How Foundation, Site, and Runtime work together")
+
 ## The Single Responsibility Principle
 
 Each component should do **one thing well**. This makes components:
