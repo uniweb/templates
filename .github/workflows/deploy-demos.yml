@@ -43,6 +43,9 @@ jobs:
       - name: Install template processor dependencies
         run: pnpm install
 
+      - name: Install Uniweb CLI
+        run: npm install -g uniweb@latest
+
       - name: Build all template demos
         run: |
           mkdir -p demos
