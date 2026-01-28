@@ -9,37 +9,37 @@ style: cards
 
 Our platform provides all the tools to create professional websites quickly.
 
-#### icon:zap
+![](lu-zap)
 
 ### Lightning Fast
 
 Built on modern web technologies for blazing fast performance. Your pages load in milliseconds, not seconds.
 
-#### icon:file
+![](lu-file-text)
 
 ### Content First
 
 Write in markdown, see results instantly. Focus on your content while we handle the presentation.
 
-#### icon:palette
+![](lu-palette)
 
 ### Fully Customizable
 
 Every component is designed to be extended. Create your own foundation or customize existing ones.
 
-#### icon:mobile
+![](lu-smartphone)
 
 ### Mobile Ready
 
 Responsive by default. Your site looks great on every device, from phones to desktops.
 
-#### icon:search
+![](lu-search)
 
 ### SEO Optimized
 
 Built-in SEO best practices. Your content gets discovered by search engines automatically.
 
-#### icon:rocket
+![](lu-rocket)
 
 ### Easy to Deploy
 
