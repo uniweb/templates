@@ -38,8 +38,8 @@ jobs:
         with:
           version: 9
 
-      - name: Install Uniweb CLI
-        run: npm install -g uniweb@latest
+      - name: Install Uniweb CLI (local, for processor import)
+        run: npm install uniweb@latest
 
       - name: Build all template demos
         run: |
