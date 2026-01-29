@@ -1,62 +1,19 @@
 import React from 'react'
-import { cn } from '@uniweb/kit'
-import {
-  Zap,
-  FileText,
-  Palette,
-  Smartphone,
-  Search,
-  Rocket,
-  Shield,
-  Clock,
-  Globe,
-  Users,
-  BarChart3,
-  Settings,
-  Check,
-} from 'lucide-react'
+import { cn, Icon } from '@uniweb/kit'
 
 /**
  * Features Component
  *
  * Showcase product features in a responsive grid layout.
- * Supports icons via pretitle (e.g., ### icon:zap)
+ * Icons are specified via markdown image syntax: ![](lu-zap)
  */
-
-// Icon mapping - content authors can specify icon by name in pretitle
-const iconMap = {
-  zap: Zap,
-  file: FileText,
-  document: FileText,
-  palette: Palette,
-  design: Palette,
-  mobile: Smartphone,
-  phone: Smartphone,
-  search: Search,
-  seo: Search,
-  rocket: Rocket,
-  deploy: Rocket,
-  shield: Shield,
-  security: Shield,
-  clock: Clock,
-  fast: Clock,
-  globe: Globe,
-  global: Globe,
-  users: Users,
-  team: Users,
-  chart: BarChart3,
-  analytics: BarChart3,
-  settings: Settings,
-  config: Settings,
-  check: Check,
-}
 
 export function Features({ content, params }) {
   // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { title, paragraphs } = content
   const { columns, theme, style } = params
 
-  // Items come from semantic-parser groups (H4 pretitle + H3 title patterns)
+  // Items come from semantic-parser groups (icon + H3 title patterns)
   const features = content.items
 
   const themes = {
@@ -140,16 +97,21 @@ export function Features({ content, params }) {
             const featureTitle = feature.title
             const featureDesc = feature.paragraphs?.[0]
 
-            // Check for icon in pretitle (e.g., "icon:zap")
-            const pretitle = feature.pretitle
-            const iconName = pretitle?.startsWith('icon:') ? pretitle.slice(5) : null
-            const IconComponent = iconName ? iconMap[iconName] : Check
+            // Get icon from feature's icons array (parsed from ![](lu-zap) syntax)
+            const icon = feature.icons?.[0]
 
             return (
               <div key={index} className={s.container}>
-                <div className={s.iconWrapper}>
-                  <IconComponent className={cn('w-6 h-6', t.icon)} />
-                </div>
+                {icon && (
+                  <div className={s.iconWrapper}>
+                    <Icon
+                      library={icon.library}
+                      name={icon.name}
+                      size={24}
+                      className={t.icon}
+                    />
+                  </div>
+                )}
                 {style === 'list' ? (
                   <div>
                     {featureTitle && (
