@@ -1,17 +1,11 @@
 {
   "name": "@uniweb/templates",
   "version": "0.6.2",
-  "description": "Template processing engine and official templates for Uniweb",
+  "description": "Official templates for the Uniweb CLI",
   "type": "module",
-  "main": "src/index.js",
-  "exports": {
-    ".": "./src/index.js",
-    "./templates/*": "./templates/*"
-  },
   "files": [
-    "src",
     "templates",
-    "partials"
+    "manifest.json"
   ],
   "keywords": [
     "uniweb",
@@ -26,8 +20,5 @@
   },
   "engines": {
     "node": ">=20.19"
-  },
-  "dependencies": {
-    "handlebars": "^4.7.8"
   }
 }
