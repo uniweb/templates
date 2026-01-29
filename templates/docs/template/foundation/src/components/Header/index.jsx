@@ -49,7 +49,7 @@ export function Header({ content, params, block }) {
   const externalLinks = links.filter(l => l.href?.startsWith('http'))
 
   // Get page hierarchy for navigation
-  const pages = website.getPageHierarchy({ for: 'header' })
+  const allPages = website.getPageHierarchy({ for: 'header' })
 
   // Search configuration
   const searchEnabled = website.isSearchEnabled()
@@ -75,6 +75,12 @@ export function Header({ content, params, block }) {
   // Version configuration
   const { isVersioned, currentVersion, versions, getVersionUrl, hasVersionedContent } = useVersion()
   const shouldShowVersion = showVersion === 'always' || (showVersion === 'auto' && isVersioned && versions.length > 1)
+
+  // When using category tabs on a versioned site, filter pages to only show
+  // those matching the current version (otherwise both v1 and v2 pages appear)
+  const pages = (categories && isVersioned && currentVersion)
+    ? allPages.filter(p => p.version?.id === currentVersion.id)
+    : allPages
 
   // Auto-navigate to first page on root route if no content at root
   useEffect(() => {
