@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Link, cn, useScrolled, useMobileMenu, useWebsite, useActiveRoute } from '@uniweb/kit'
+import { Link, cn, useScrolled, useMobileMenu, useWebsite, useActiveRoute, useRouting } from '@uniweb/kit'
 import { useSearchShortcut, useSearchWithIntent } from '@uniweb/kit/search'
 import { ChevronDown, Search, X } from 'lucide-react'
 
@@ -15,6 +15,8 @@ import { ChevronDown, Search, X } from 'lucide-react'
 export function Header({ content, params, block }) {
   const { website } = useWebsite()
   const { isActive, isActiveOrAncestor } = useActiveRoute()
+  const { useLocation } = useRouting()
+  const location = useLocation()
 
   // Kit hooks for common patterns
   const scrolled = useScrolled(20)
@@ -279,7 +281,7 @@ export function Header({ content, params, block }) {
                     <React.Fragment key={locale.code}>
                       {i > 0 && <span className={getLinkStyles()}>|</span>}
                       <a
-                        href={website.getLocaleUrl(locale.code)}
+                        href={website.getLocaleUrl(locale.code, location.pathname)}
                         className={cn(
                           'px-1 transition-colors',
                           locale.code === activeLocale
@@ -343,7 +345,7 @@ export function Header({ content, params, block }) {
                   {locales.map((locale) => (
                     <a
                       key={locale.code}
-                      href={website.getLocaleUrl(locale.code)}
+                      href={website.getLocaleUrl(locale.code, location.pathname)}
                       className={cn(
                         'px-2 py-1 text-sm rounded',
                         locale.code === activeLocale

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, cn, useWebsite, getLocaleLabel } from '@uniweb/kit'
+import { Link, cn, useWebsite, useRouting, getLocaleLabel } from '@uniweb/kit'
 
 /**
  * Footer Component
@@ -8,6 +8,8 @@ import { Link, cn, useWebsite, getLocaleLabel } from '@uniweb/kit'
  */
 export function Footer({ content, params }) {
   const { website } = useWebsite()
+  const { useLocation } = useRouting()
+  const location = useLocation()
 
   // Runtime guarantees: content is flat
   const { title, paragraphs } = content
@@ -55,7 +57,7 @@ export function Footer({ content, params }) {
                 {locales.map((locale) => (
                   <li key={locale.code}>
                     <a
-                      href={website.getLocaleUrl(locale.code)}
+                      href={website.getLocaleUrl(locale.code, location.pathname)}
                       className={cn(
                         'transition-colors',
                         locale.code === activeLocale
