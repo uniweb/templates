@@ -1,6 +1,7 @@
 colors:
   primary: "#047857"
   secondary: "#78716c"
+  accent: "#d97706"
   neutral: "#57534e"
 
 fonts:
