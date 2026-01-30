@@ -9,7 +9,6 @@ export default {
   description: 'A bold hero section with headline, eyebrow, description, and call-to-action buttons',
   category: 'impact',
   purpose: 'Impress',
-  background: true,
 
   content: {
     pretitle: 'Eyebrow text (e.g., "New Release", "Coming Soon")',

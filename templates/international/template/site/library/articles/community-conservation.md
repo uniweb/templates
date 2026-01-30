@@ -4,7 +4,7 @@ slug: community-conservation
 excerpt: Local communities driving panda protection through sustainable partnerships.
 date: 2024-01-05
 tags: [community, partnerships, sustainable]
-image: https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&h=400&fit=crop
+image: /images/researcher-showing-panda-research-poster.png
 ---
 
 # Community-Led Conservation Success

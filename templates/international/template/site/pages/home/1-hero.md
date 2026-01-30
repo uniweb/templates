@@ -1,6 +1,14 @@
 ---
 type: Hero
-theme: gradient
+theme: dark
+background:
+  image:
+    src: /images/giant-panda-looking-forward.jpg
+    position: center top
+  overlay:
+    enabled: true
+    type: dark
+    opacity: 0.55
 ---
 
 ### Giant Panda Conservation

@@ -9,7 +9,6 @@ export default {
   description: 'Bold hero section with headline, eyebrow, description, and CTA buttons',
   category: 'impact',
   purpose: 'Impress',
-  background: true,
 
   // Static capabilities for cross-block coordination
   // Header reads this to know Hero supports translucent/floating navbar
