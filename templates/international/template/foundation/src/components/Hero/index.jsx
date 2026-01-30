@@ -9,7 +9,7 @@ import { H1, P, Link, cn } from '@uniweb/kit'
 export function Hero({ content, params }) {
   // Runtime guarantees: content is flat, params have defaults from meta.js
   const { title, pretitle, subtitle, paragraphs, links } = content
-  const { theme } = params
+  const { theme, _hasBackground } = params
 
   const cta = links[0]
   const secondaryCta = links[1]
@@ -41,8 +41,12 @@ export function Hero({ content, params }) {
 
   const t = themes[theme] || themes.gradient
 
+  // When the author set a background image/video, skip our opaque bg color
+  // so the engine-rendered background shows through
+  const sectionBg = _hasBackground ? 'text-white' : t.section
+
   return (
-    <section className={cn('relative py-20 sm:py-28 lg:py-32 px-6', t.section)}>
+    <section className={cn('relative py-20 sm:py-28 lg:py-32 px-6', sectionBg)}>
       <div className="relative max-w-4xl mx-auto text-center">
         {pretitle && (
           <span className={cn('inline-block px-4 py-1.5 rounded-full text-sm font-medium mb-6', t.eyebrow)}>
