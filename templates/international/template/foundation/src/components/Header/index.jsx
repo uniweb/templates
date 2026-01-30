@@ -280,7 +280,8 @@ export function Header({ content, params, block }) {
                   {locales.map((locale, i) => (
                     <React.Fragment key={locale.code}>
                       {i > 0 && <span className={getLinkStyles()}>|</span>}
-                      <a
+                      <Link
+                        reload
                         href={website.getLocaleUrl(locale.code, location.pathname)}
                         className={cn(
                           'px-1 transition-colors',
@@ -290,7 +291,7 @@ export function Header({ content, params, block }) {
                         )}
                       >
                         {locale.code.toUpperCase()}
-                      </a>
+                      </Link>
                     </React.Fragment>
                   ))}
                 </div>
@@ -343,8 +344,9 @@ export function Header({ content, params, block }) {
                 <div className="flex items-center gap-2 px-3 py-2 border-t mt-2 pt-4">
                   <span className="text-sm text-gray-500">Language:</span>
                   {locales.map((locale) => (
-                    <a
+                    <Link
                       key={locale.code}
+                      reload
                       href={website.getLocaleUrl(locale.code, location.pathname)}
                       className={cn(
                         'px-2 py-1 text-sm rounded',
@@ -354,7 +356,7 @@ export function Header({ content, params, block }) {
                       )}
                     >
                       {locale.code.toUpperCase()}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               )}

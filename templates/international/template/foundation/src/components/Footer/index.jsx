@@ -56,7 +56,8 @@ export function Footer({ content, params }) {
               <ul className="space-y-2">
                 {locales.map((locale) => (
                   <li key={locale.code}>
-                    <a
+                    <Link
+                      reload
                       href={website.getLocaleUrl(locale.code, location.pathname)}
                       className={cn(
                         'transition-colors',
@@ -66,7 +67,7 @@ export function Footer({ content, params }) {
                       )}
                     >
                       {getLocaleLabel(locale)}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
