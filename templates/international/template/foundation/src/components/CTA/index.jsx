@@ -1,57 +1,46 @@
 import React from 'react'
-import { H2, P, Link, cn } from '@uniweb/kit'
+import { H2, P, Link } from '@uniweb/kit'
 
 /**
  * CTA Component
  *
  * A call-to-action section.
  */
-export function CTA({ content, params }) {
+export function CTA({ content }) {
   // Runtime guarantees: content is flat, params have defaults from meta.js
   const { title, subtitle, paragraphs, links } = content
-  const { theme } = params
 
   const cta = links[0]
-
-  const themes = {
-    primary: {
-      section: 'bg-primary',
-      title: 'text-white',
-      text: 'text-blue-100',
-      btn: 'bg-white text-primary hover:bg-blue-50',
-    },
-    dark: {
-      section: 'bg-gray-900',
-      title: 'text-white',
-      text: 'text-gray-300',
-      btn: 'bg-primary text-white hover:bg-blue-600',
-    },
-    light: {
-      section: 'bg-gray-100',
-      title: 'text-gray-900',
-      text: 'text-gray-600',
-      btn: 'bg-primary text-white hover:bg-blue-700',
-    },
-  }
-
-  const t = themes[theme] || themes.primary
+  const secondaryCta = links[1]
 
   return (
-    <section className={cn('py-16 sm:py-20 px-6', t.section)}>
+    <div className="py-16 sm:py-20 px-6">
       <div className="max-w-3xl mx-auto text-center">
-        {title && <H2 text={title} className={cn('text-3xl sm:text-4xl font-bold mb-4', t.title)} />}
-        {subtitle && <p className={cn('text-xl mb-4', t.text)}>{subtitle}</p>}
-        {paragraphs[0] && <P text={paragraphs[0]} className={cn('text-lg mb-8', t.text)} />}
-        {cta && (
-          <Link
-            href={cta.href}
-            className={cn('inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all', t.btn)}
-          >
-            {cta.label}
-          </Link>
+        {title && <H2 text={title} className="text-3xl sm:text-4xl font-bold mb-4 text-heading" />}
+        {subtitle && <p className="text-xl mb-4 text-muted">{subtitle}</p>}
+        {paragraphs[0] && <P text={paragraphs[0]} className="text-lg mb-8 text-muted" />}
+        {(cta || secondaryCta) && (
+          <div className="flex gap-4 flex-wrap justify-center">
+            {cta && (
+              <Link
+                href={cta.href}
+                className="inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all bg-btn-primary text-btn-primary-text hover:bg-btn-primary-hover"
+              >
+                {cta.label}
+              </Link>
+            )}
+            {secondaryCta && (
+              <Link
+                href={secondaryCta.href}
+                className="inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all bg-btn-secondary text-btn-secondary-text hover:bg-btn-secondary-hover"
+              >
+                {secondaryCta.label}
+              </Link>
+            )}
+          </div>
         )}
       </div>
-    </section>
+    </div>
   )
 }
 

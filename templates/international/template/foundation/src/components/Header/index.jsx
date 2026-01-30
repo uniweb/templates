@@ -89,6 +89,7 @@ export function Header({ content, params, block }) {
   const locales = website.getLocales()
   const activeLocale = website.getActiveLocale()
 
+  // Header styles — keep hardcoded for floating/scroll states (absolute visual effects)
   const getHeaderStyles = () => {
     if (isFloating) {
       return scrolled
@@ -102,17 +103,18 @@ export function Header({ content, params, block }) {
       : 'bg-white text-gray-900'
   }
 
+  // Link styles — semantic for normal state, hardcoded for floating-over-dark
   const getLinkStyles = (isActiveLink = false) => {
     if (isActiveLink) {
       if (isFloating && !scrolled && isDarkBackground) {
         return 'text-white font-semibold'
       }
-      return 'text-primary font-semibold'
+      return 'text-primary-600 font-semibold'
     }
     if (isFloating && !scrolled && isDarkBackground) {
       return 'text-white/90 hover:text-white'
     }
-    return 'text-gray-600 hover:text-gray-900'
+    return 'text-muted hover:text-body'
   }
 
   // Render a nav item (with or without dropdown)
@@ -153,7 +155,7 @@ export function Header({ content, params, block }) {
           )} />
         </button>
 
-        {/* Dropdown menu */}
+        {/* Dropdown menu — always light, overlay context */}
         {isDropdownOpen && (
           <div className="absolute top-full left-0 pt-2">
             <div className="bg-white rounded-lg shadow-lg border border-gray-100 py-2 min-w-[200px]">
@@ -163,7 +165,7 @@ export function Header({ content, params, block }) {
                 className={cn(
                   'block px-4 py-2 text-sm transition-colors',
                   isActive(page)
-                    ? 'text-primary font-semibold bg-primary/5'
+                    ? 'text-primary-600 font-semibold bg-primary-50'
                     : 'text-gray-700 hover:bg-gray-50'
                 )}
               >
@@ -178,7 +180,7 @@ export function Header({ content, params, block }) {
                   className={cn(
                     'block px-4 py-2 text-sm transition-colors',
                     isActive(child)
-                      ? 'text-primary font-semibold bg-primary/5'
+                      ? 'text-primary-600 font-semibold bg-primary-50'
                       : 'text-gray-700 hover:bg-gray-50'
                   )}
                 >
@@ -207,7 +209,7 @@ export function Header({ content, params, block }) {
               'flex-1 block px-3 py-2 text-base font-medium rounded-md',
               depth > 0 && 'pl-6 text-sm',
               isActive(page)
-                ? 'text-primary bg-primary/5'
+                ? 'text-primary-600 bg-primary-50'
                 : 'text-gray-700 hover:bg-gray-50'
             )}
             onClick={closeMobileMenu}
@@ -303,7 +305,7 @@ export function Header({ content, params, block }) {
                     'inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-colors',
                     isFloating && !scrolled && isDarkBackground
                       ? 'bg-white text-gray-900 hover:bg-gray-100'
-                      : 'bg-primary text-white hover:bg-blue-700'
+                      : 'bg-btn-primary text-btn-primary-text hover:bg-btn-primary-hover'
                   )}
                 >
                   {links[0].label}
@@ -333,7 +335,7 @@ export function Header({ content, params, block }) {
           </div>
         </nav>
 
-        {/* Mobile menu */}
+        {/* Mobile menu — always light overlay */}
         {mobileMenuOpen && (
           <div className="lg:hidden bg-white border-t">
             <div className="px-4 py-4 space-y-1">
@@ -351,7 +353,7 @@ export function Header({ content, params, block }) {
                       className={cn(
                         'px-2 py-1 text-sm rounded',
                         locale.code === activeLocale
-                          ? 'bg-primary text-white'
+                          ? 'bg-primary-600 text-white'
                           : 'text-gray-600 hover:bg-gray-100'
                       )}
                     >
@@ -367,7 +369,7 @@ export function Header({ content, params, block }) {
 
       {!isFloating && <div className="h-16 lg:h-20" />}
 
-      {/* Search Modal */}
+      {/* Search Modal — always light overlay */}
       {searchOpen && (
         <div
           className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm"

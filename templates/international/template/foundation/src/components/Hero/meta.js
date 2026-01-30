@@ -24,13 +24,12 @@ export default {
   },
 
   params: {
-    theme: {
+    variant: {
       type: 'select',
-      label: 'Theme',
+      label: 'Variant',
       options: [
         { value: 'gradient', label: 'Gradient' },
-        { value: 'dark', label: 'Dark' },
-        { value: 'light', label: 'Light' },
+        { value: 'default', label: 'Default' },
       ],
       default: 'gradient',
     },
@@ -39,15 +38,11 @@ export default {
   presets: {
     default: {
       label: 'Gradient',
-      params: { theme: 'gradient' },
+      params: { variant: 'gradient' },
     },
-    dark: {
-      label: 'Dark',
-      params: { theme: 'dark' },
-    },
-    light: {
-      label: 'Light',
-      params: { theme: 'light' },
+    minimal: {
+      label: 'Default',
+      params: { variant: 'default' },
     },
   },
 }

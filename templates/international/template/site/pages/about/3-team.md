@@ -1,6 +1,6 @@
 ---
 type: Team
-theme: gray
+theme: medium
 columns: 4
 fetch: /data/team.json
 ---

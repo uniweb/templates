@@ -16,11 +16,11 @@ export function Article({ content, params }) {
 
   if (!article) {
     return (
-      <section className="py-16 px-4">
-        <div className="max-w-3xl mx-auto text-center text-gray-500">
+      <div className="py-16 px-4">
+        <div className="max-w-3xl mx-auto text-center text-subtle">
           No article data available.
         </div>
-      </section>
+      </div>
     )
   }
 
@@ -56,7 +56,7 @@ export function Article({ content, params }) {
               {tags.map((tag, i) => (
                 <span
                   key={i}
-                  className="px-3 py-1 text-sm bg-green-100 text-green-800 rounded-full"
+                  className="px-3 py-1 text-sm bg-primary-100 text-primary-700 rounded-full"
                 >
                   {tag}
                 </span>
@@ -65,16 +65,16 @@ export function Article({ content, params }) {
           )}
 
           {/* Title */}
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">{title}</h1>
+          <h1 className="text-4xl font-bold text-heading mb-4">{title}</h1>
 
           {/* Excerpt */}
           {excerpt && (
-            <p className="text-xl text-gray-600 mb-6">{excerpt}</p>
+            <p className="text-xl text-muted mb-6">{excerpt}</p>
           )}
 
           {/* Date */}
           {showDate && formattedDate && (
-            <div className="text-gray-600">
+            <div className="text-muted">
               <time dateTime={date}>{formattedDate}</time>
             </div>
           )}

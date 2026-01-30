@@ -1,6 +1,8 @@
 ---
 type: CTA
 theme: dark
+background:
+  color: var(--primary-700)
 ---
 
 # Support Our Research

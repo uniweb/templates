@@ -1,6 +1,6 @@
 ---
 type: Hero
-theme: gradient
+theme: dark
 ---
 
 # Research Programs

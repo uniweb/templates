@@ -9,24 +9,18 @@ import { H2, P, cn } from '@uniweb/kit'
 export function Features({ content, params }) {
   // Runtime guarantees: content is flat, params have defaults from meta.js
   const { title, subtitle, paragraphs, items } = content
-  const { theme, columns } = params
+  const { columns } = params
 
-  const themes = {
-    light: { section: 'bg-white', title: 'text-gray-900', text: 'text-gray-600' },
-    gray: { section: 'bg-gray-50', title: 'text-gray-900', text: 'text-gray-600' },
-  }
-
-  const t = themes[theme] || themes.light
   const cols = { '2': 'md:grid-cols-2', '3': 'md:grid-cols-2 lg:grid-cols-3', '4': 'md:grid-cols-2 lg:grid-cols-4' }
 
   return (
-    <section className={cn('py-16 sm:py-20 px-6', t.section)}>
+    <div className="py-16 sm:py-20 px-6">
       <div className="max-w-6xl mx-auto">
         {(title || subtitle) && (
           <div className="text-center mb-12">
-            {title && <H2 text={title} className={cn('text-3xl sm:text-4xl font-bold mb-4', t.title)} />}
-            {subtitle && <p className={cn('text-lg', t.text)}>{subtitle}</p>}
-            {paragraphs[0] && <P text={paragraphs[0]} className={cn('text-lg mt-4 max-w-2xl mx-auto', t.text)} />}
+            {title && <H2 text={title} className="text-3xl sm:text-4xl font-bold mb-4 text-heading" />}
+            {subtitle && <p className="text-lg text-muted">{subtitle}</p>}
+            {paragraphs[0] && <P text={paragraphs[0]} className="text-lg mt-4 max-w-2xl mx-auto text-muted" />}
           </div>
         )}
 
@@ -35,18 +29,18 @@ export function Features({ content, params }) {
             {items.map((item, i) => (
               <div key={i} className="text-center p-6">
                 {item.icons?.[0] && (
-                  <div className="w-12 h-12 mx-auto mb-4 bg-primary/10 text-primary rounded-xl flex items-center justify-center">
+                  <div className="w-12 h-12 mx-auto mb-4 bg-primary-100/50 text-primary-600 rounded-xl flex items-center justify-center">
                     <span className="text-2xl">{item.icons[0]}</span>
                   </div>
                 )}
-                {item.title && <h3 className="text-xl font-semibold mb-2 text-gray-900">{item.title}</h3>}
-                {item.paragraphs?.[0] && <P text={item.paragraphs[0]} className="text-gray-600" />}
+                {item.title && <h3 className="text-xl font-semibold mb-2 text-heading">{item.title}</h3>}
+                {item.paragraphs?.[0] && <P text={item.paragraphs[0]} className="text-muted" />}
               </div>
             ))}
           </div>
         )}
       </div>
-    </section>
+    </div>
   )
 }
 

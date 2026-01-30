@@ -1,6 +1,6 @@
 ---
 type: Section
-theme: gray
+theme: medium
 ---
 
 # Get in Touch

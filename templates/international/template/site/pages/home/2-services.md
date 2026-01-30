@@ -1,6 +1,6 @@
 ---
 type: Features
-theme: gray
+theme: medium
 columns: 3
 ---
 

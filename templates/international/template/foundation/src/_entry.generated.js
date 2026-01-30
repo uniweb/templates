@@ -23,7 +23,7 @@ export const meta = {
       "allowTranslucentTop": true
     },
     "defaults": {
-      "theme": "gradient"
+      "variant": "gradient"
     }
   }
 }

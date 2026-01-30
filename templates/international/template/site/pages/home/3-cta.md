@@ -1,6 +1,8 @@
 ---
 type: CTA
-theme: primary
+theme: dark
+background:
+  color: var(--primary-600)
 ---
 
 # Join Our Conservation Efforts

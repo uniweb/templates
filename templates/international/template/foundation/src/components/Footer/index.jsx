@@ -26,13 +26,13 @@ export function Footer({ content, params }) {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="bg-gray-900 text-white py-12 px-6">
+    <footer className="bg-surface py-12 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div className="md:col-span-2">
-            <h3 className="text-xl font-bold mb-4">{siteName}</h3>
-            {description && <p className="text-gray-400 max-w-md">{description}</p>}
+            <h3 className="text-xl font-bold mb-4 text-body">{siteName}</h3>
+            {description && <p className="text-muted max-w-md">{description}</p>}
           </div>
 
           {/* Navigation */}
@@ -41,7 +41,7 @@ export function Footer({ content, params }) {
             <ul className="space-y-2">
               {navPages.map((page) => (
                 <li key={page.route}>
-                  <Link href={page.route} className="text-gray-400 hover:text-white transition-colors">
+                  <Link href={page.route} className="text-muted hover:text-body transition-colors">
                     {page.label || page.title}
                   </Link>
                 </li>
@@ -62,8 +62,8 @@ export function Footer({ content, params }) {
                       className={cn(
                         'transition-colors',
                         locale.code === activeLocale
-                          ? 'text-white font-medium'
-                          : 'text-gray-400 hover:text-white'
+                          ? 'text-body font-medium'
+                          : 'text-muted hover:text-body'
                       )}
                     >
                       {getLocaleLabel(locale)}
@@ -75,7 +75,7 @@ export function Footer({ content, params }) {
           )}
         </div>
 
-        <div className="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
+        <div className="border-t border-edge pt-8 text-center text-subtle text-sm">
           <p>&copy; {year} {siteName}. All rights reserved.</p>
         </div>
       </div>
