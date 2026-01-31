@@ -5,17 +5,17 @@
  * During build, _entry.generated.js is created automatically.
  */
 
-import Hero from './components/Hero/index.jsx'
-import Features from './components/Features/index.jsx'
-import Pricing from './components/Pricing/index.jsx'
-import Testimonials from './components/Testimonials/index.jsx'
-import CTA from './components/CTA/index.jsx'
-import Stats from './components/Stats/index.jsx'
-import Gallery from './components/Gallery/index.jsx'
-import Video from './components/Video/index.jsx'
-import FAQ from './components/FAQ/index.jsx'
-import Team from './components/Team/index.jsx'
-import LogoCloud from './components/LogoCloud/index.jsx'
+import Hero from './sections/Hero/index.jsx'
+import Features from './sections/Features/index.jsx'
+import Pricing from './sections/Pricing/index.jsx'
+import Testimonials from './sections/Testimonials/index.jsx'
+import CTA from './sections/CTA/index.jsx'
+import Stats from './sections/Stats/index.jsx'
+import Gallery from './sections/Gallery/index.jsx'
+import Video from './sections/Video/index.jsx'
+import FAQ from './sections/FAQ/index.jsx'
+import Team from './sections/Team/index.jsx'
+import LogoCloud from './sections/LogoCloud/index.jsx'
 
 const components = {
   Hero,
