@@ -74,7 +74,7 @@ export function Footer({ content, params }) {
     : parseInt(columns)
 
   return (
-    <footer className={cn('py-12 px-6', bgClass)}>
+    <div className={cn('py-12 px-6', bgClass)}>
       <div className="max-w-6xl mx-auto">
         {/* Main Footer Content */}
         <div className={cn(
@@ -195,7 +195,7 @@ export function Footer({ content, params }) {
           </div>
         )}
       </div>
-    </footer>
+    </div>
   )
 }
 

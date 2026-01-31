@@ -18,7 +18,7 @@ export function Footer({ content, params }) {
   const copyright = paragraphs[0] || `© ${new Date().getFullYear()} ${siteName}. All rights reserved.`
 
   return (
-    <footer className="bg-gray-50 border-t border-gray-200">
+    <div className="bg-gray-50 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {layout === 'simple' ? (
           // Simple layout: copyright left, links right
@@ -58,7 +58,7 @@ export function Footer({ content, params }) {
           </div>
         )}
       </div>
-    </footer>
+    </div>
   )
 }
 

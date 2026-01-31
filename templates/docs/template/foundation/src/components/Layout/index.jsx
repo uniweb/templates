@@ -156,9 +156,9 @@ export default function Layout({
 
               {/* Footer (prev/next navigation) */}
               {footer && (
-                <div className="mt-12 pt-8 border-t border-gray-200">
+                <footer className="mt-12 pt-8 border-t border-gray-200">
                   {footer}
-                </div>
+                </footer>
               )}
             </div>
           </main>

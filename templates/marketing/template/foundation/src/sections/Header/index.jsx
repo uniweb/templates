@@ -71,7 +71,7 @@ export function Header({ content, params, block }) {
 
   return (
     <>
-      <header
+      <div
         ref={headerRef}
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
@@ -236,7 +236,7 @@ export function Header({ content, params, block }) {
             </div>
           </div>
         )}
-      </header>
+      </div>
 
       {/* Spacer for non-floating headers */}
       {!isFloating && <div className="h-16 lg:h-20" />}

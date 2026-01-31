@@ -47,7 +47,7 @@ export function Footer({ content, params }) {
   // Simple layout: single row with logo, nav, social
   if (layout === 'simple') {
     return (
-      <footer className={cn('py-12 px-6', styles.bg)}>
+      <div className={cn('py-12 px-6', styles.bg)}>
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             {/* Logo / Site Name */}
@@ -109,13 +109,13 @@ export function Footer({ content, params }) {
             </div>
           </div>
         </div>
-      </footer>
+      </div>
     )
   }
 
   // Columns layout: multi-column with items
   return (
-    <footer className={cn('py-16 px-6', styles.bg)}>
+    <div className={cn('py-16 px-6', styles.bg)}>
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
           {/* Brand column */}
@@ -209,7 +209,7 @@ export function Footer({ content, params }) {
           </div>
         </div>
       </div>
-    </footer>
+    </div>
   )
 }
 

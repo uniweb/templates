@@ -308,7 +308,7 @@ export function Header({ content, params, block }) {
 
   return (
     <>
-      <header
+      <div
         className={cn(
           'fixed top-0 left-0 right-0 z-50',
           getHeaderStyles()
@@ -542,7 +542,7 @@ export function Header({ content, params, block }) {
             </div>
           </div>
         )}
-      </header>
+      </div>
 
       {/* Spacer for fixed header - always uses height for tabs since we show tabs by default now */}
       <div className={pages.length > 0 ? 'h-[104px]' : 'h-16'} />
