@@ -5,7 +5,7 @@
 
 @theme inline {
   /* Surfaces (backgrounds) */
-  --color-surface: var(--bg);
+  --color-surface: var(--primary-50);
   --color-surface-subtle: var(--bg-subtle);
   --color-surface-muted: var(--bg-muted);
 
