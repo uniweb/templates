@@ -1,6 +1,7 @@
 ---
 type: Hero
 theme: light
+variant: default
 ---
 
 # Support Us

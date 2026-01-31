@@ -1,7 +1,524 @@
 {
   "version": "1.0",
   "defaultLocale": "en",
+  "extracted": "2026-01-31T05:35:22.865Z",
   "units": {
+    "73922133": {
+      "source": "Advancing panda conservation through rigorous scientific research.",
+      "field": "paragraph",
+      "contexts": [
+        {
+          "page": "/research",
+          "section": "1"
+        }
+      ]
+    },
+    "5d8c71ab": {
+      "source": "About Us",
+      "field": "page.title",
+      "contexts": [
+        {
+          "page": "/about",
+          "section": "_meta"
+        }
+      ]
+    },
+    "4efca0d1": {
+      "source": "About",
+      "field": "page.label",
+      "contexts": [
+        {
+          "page": "/about",
+          "section": "_meta"
+        }
+      ]
+    },
+    "c3a4a08a": {
+      "source": "Learn about PandaWatch's mission to protect giant pandas through research and conservation.",
+      "field": "page.description",
+      "contexts": [
+        {
+          "page": "/about",
+          "section": "_meta"
+        }
+      ]
+    },
+    "f7cbe851": {
+      "source": "About PandaWatch",
+      "field": "title",
+      "contexts": [
+        {
+          "page": "/about",
+          "section": "1"
+        }
+      ]
+    },
+    "7b83fb95": {
+      "source": "Dedicated to the conservation and protection of giant pandas since 2008.",
+      "field": "paragraph",
+      "contexts": [
+        {
+          "page": "/about",
+          "section": "1"
+        }
+      ]
+    },
+    "15071e06": {
+      "source": "Our Mission",
+      "field": "title",
+      "contexts": [
+        {
+          "page": "/about",
+          "section": "2"
+        }
+      ]
+    },
+    "94fbd470": {
+      "source": "Protecting Pandas in Their Natural Habitat",
+      "field": "subtitle",
+      "contexts": [
+        {
+          "page": "/about",
+          "section": "2"
+        }
+      ]
+    },
+    "ade50be5": {
+      "source": "PandaWatch was founded in 2008 by a team of wildlife biologists and conservationists dedicated to ensuring the survival of giant pandas in the wild. Based in Chengdu, China, with research stations across Sichuan, Shaanxi, and Gansu provinces, we work at the heart of panda country.",
+      "field": "paragraph",
+      "contexts": [
+        {
+          "page": "/about",
+          "section": "2"
+        }
+      ]
+    },
+    "213964b0": {
+      "source": "Our approach combines rigorous scientific research with community-based conservation. We believe that lasting protection for pandas requires understanding their ecology, restoring their habitats, and creating sustainable partnerships with the local communities who share their mountain homes.",
+      "field": "paragraph.1",
+      "contexts": [
+        {
+          "page": "/about",
+          "section": "2"
+        }
+      ]
+    },
+    "c300c945": {
+      "source": "Our Team",
+      "field": "title",
+      "contexts": [
+        {
+          "page": "/about",
+          "section": "3"
+        }
+      ]
+    },
+    "a9626b0d": {
+      "source": "Meet the researchers and conservationists working to protect giant pandas.",
+      "field": "paragraph",
+      "contexts": [
+        {
+          "page": "/about",
+          "section": "3"
+        }
+      ]
+    },
+    "3e91a568": {
+      "source": "Research Programs",
+      "field": "page.title",
+      "contexts": [
+        {
+          "page": "/research",
+          "section": "_meta"
+        },
+        {
+          "page": "/research",
+          "section": "1"
+        }
+      ]
+    },
+    "979d6300": {
+      "source": "Research",
+      "field": "page.label",
+      "contexts": [
+        {
+          "page": "/research",
+          "section": "_meta"
+        }
+      ]
+    },
+    "c94c482e": {
+      "source": "Our scientific research programs studying panda ecology, behavior, and conservation.",
+      "field": "page.description",
+      "contexts": [
+        {
+          "page": "/research",
+          "section": "_meta"
+        }
+      ]
+    },
+    "7067d2ad": {
+      "source": "Active Research Areas",
+      "field": "title",
+      "contexts": [
+        {
+          "page": "/research",
+          "section": "2"
+        }
+      ]
+    },
+    "219b5763": {
+      "source": "Our team of scientists works across multiple disciplines to understand and protect giant pandas.",
+      "field": "paragraph",
+      "contexts": [
+        {
+          "page": "/research",
+          "section": "2"
+        }
+      ]
+    },
+    "57b3e0cb": {
+      "source": "Population Monitoring",
+      "field": "heading.h3.0",
+      "contexts": [
+        {
+          "page": "/research",
+          "section": "2"
+        }
+      ]
+    },
+    "9369646e": {
+      "source": "Using camera traps, GPS collars, and genetic sampling to track panda populations across their range. Our data informs protected area management decisions.",
+      "field": "paragraph.1",
+      "contexts": [
+        {
+          "page": "/research",
+          "section": "2"
+        }
+      ]
+    },
+    "38e2dd00": {
+      "source": "Habitat Analysis",
+      "field": "heading.h3.1",
+      "contexts": [
+        {
+          "page": "/research",
+          "section": "2"
+        }
+      ]
+    },
+    "3f431d15": {
+      "source": "Mapping bamboo distribution, forest connectivity, and climate impacts to identify critical conservation priorities and restoration opportunities.",
+      "field": "paragraph.2",
+      "contexts": [
+        {
+          "page": "/research",
+          "section": "2"
+        }
+      ]
+    },
+    "828e259e": {
+      "source": "Behavioral Ecology",
+      "field": "heading.h3.2",
+      "contexts": [
+        {
+          "page": "/research",
+          "section": "2"
+        }
+      ]
+    },
+    "c2ec89f3": {
+      "source": "Studying panda feeding patterns, territorial behavior, and reproduction to understand their ecological needs and support breeding programs.",
+      "field": "paragraph.3",
+      "contexts": [
+        {
+          "page": "/research",
+          "section": "2"
+        }
+      ]
+    },
+    "e5bb8cb6": {
+      "source": "Climate Adaptation",
+      "field": "heading.h3.3",
+      "contexts": [
+        {
+          "page": "/research",
+          "section": "2"
+        }
+      ]
+    },
+    "ec29e8af": {
+      "source": "Researching how climate change affects bamboo forests and panda habitats to develop long-term conservation strategies.",
+      "field": "paragraph.4",
+      "contexts": [
+        {
+          "page": "/research",
+          "section": "2"
+        }
+      ]
+    },
+    "14a98817": {
+      "source": "Support Our Research",
+      "field": "title",
+      "contexts": [
+        {
+          "page": "/research",
+          "section": "3"
+        }
+      ]
+    },
+    "cd5ab8e2": {
+      "source": "Your contribution helps fund vital research that protects pandas in the wild.",
+      "field": "paragraph",
+      "contexts": [
+        {
+          "page": "/research",
+          "section": "3"
+        }
+      ]
+    },
+    "86e867be": {
+      "source": "Donate Now",
+      "field": "link.label",
+      "contexts": [
+        {
+          "page": "/research",
+          "section": "3"
+        }
+      ]
+    },
+    "8c6bc099": {
+      "source": "Blog",
+      "field": "page.title",
+      "contexts": [
+        {
+          "page": "/blog",
+          "section": "_meta"
+        }
+      ]
+    },
+    "6e97ff69": {
+      "source": "Latest news and research updates from PandaWatch.",
+      "field": "page.description",
+      "contexts": [
+        {
+          "page": "/blog",
+          "section": "_meta"
+        }
+      ]
+    },
+    "77d362fd": {
+      "source": "Research Updates",
+      "field": "title",
+      "contexts": [
+        {
+          "page": "/blog",
+          "section": "1"
+        }
+      ]
+    },
+    "f348cbbe": {
+      "source": "Latest findings and news from our conservation efforts.",
+      "field": "paragraph",
+      "contexts": [
+        {
+          "page": "/blog",
+          "section": "1"
+        }
+      ]
+    },
+    "29d94922": {
+      "source": "Article",
+      "field": "page.title",
+      "contexts": [
+        {
+          "page": "/blog/:slug",
+          "section": "_meta"
+        }
+      ]
+    },
+    "36a9cd0f": {
+      "source": "Blog article",
+      "field": "page.description",
+      "contexts": [
+        {
+          "page": "/blog/:slug",
+          "section": "_meta"
+        }
+      ]
+    },
+    "b833f637": {
+      "source": "Support Us",
+      "field": "page.title",
+      "contexts": [
+        {
+          "page": "/contact",
+          "section": "_meta"
+        },
+        {
+          "page": "/contact",
+          "section": "1"
+        },
+        {
+          "page": "/",
+          "section": "3"
+        },
+        {
+          "page": "/@header",
+          "section": "1"
+        }
+      ]
+    },
+    "be91940b": {
+      "source": "Support",
+      "field": "page.label",
+      "contexts": [
+        {
+          "page": "/contact",
+          "section": "_meta"
+        }
+      ]
+    },
+    "2701197d": {
+      "source": "Support panda conservation or get in touch with our team.",
+      "field": "page.description",
+      "contexts": [
+        {
+          "page": "/contact",
+          "section": "_meta"
+        }
+      ]
+    },
+    "05a3278d": {
+      "source": "Help protect giant pandas by supporting our conservation work.",
+      "field": "paragraph",
+      "contexts": [
+        {
+          "page": "/contact",
+          "section": "1"
+        }
+      ]
+    },
+    "727fa290": {
+      "source": "Get in Touch",
+      "field": "title",
+      "contexts": [
+        {
+          "page": "/contact",
+          "section": "2"
+        }
+      ]
+    },
+    "c99b5afa": {
+      "source": "Ways to Help",
+      "field": "subtitle",
+      "contexts": [
+        {
+          "page": "/contact",
+          "section": "2"
+        }
+      ]
+    },
+    "6213b6f8": {
+      "source": "Your support makes our conservation work possible. Join us in protecting giant pandas.",
+      "field": "paragraph",
+      "contexts": [
+        {
+          "page": "/contact",
+          "section": "2"
+        }
+      ]
+    },
+    "c91ee0f2": {
+      "source": "Donate",
+      "field": "heading.h3.0",
+      "contexts": [
+        {
+          "page": "/contact",
+          "section": "2"
+        }
+      ]
+    },
+    "397b179a": {
+      "source": "donate@pandawatch.org",
+      "field": "link.label",
+      "contexts": [
+        {
+          "page": "/contact",
+          "section": "2"
+        }
+      ]
+    },
+    "b40f47ce": {
+      "source": "Make a contribution at  to support habitat protection and research programs.",
+      "field": "paragraph.1",
+      "contexts": [
+        {
+          "page": "/contact",
+          "section": "2"
+        }
+      ]
+    },
+    "ef4683c3": {
+      "source": "Volunteer",
+      "field": "heading.h3.1",
+      "contexts": [
+        {
+          "page": "/contact",
+          "section": "2"
+        }
+      ]
+    },
+    "4ec51d0f": {
+      "source": "volunteer@pandawatch.org",
+      "field": "link.1.label",
+      "contexts": [
+        {
+          "page": "/contact",
+          "section": "2"
+        }
+      ]
+    },
+    "c8e1fffc": {
+      "source": "Join our field research teams or help with outreach. Contact  for opportunities.",
+      "field": "paragraph.2",
+      "contexts": [
+        {
+          "page": "/contact",
+          "section": "2"
+        }
+      ]
+    },
+    "29035e78": {
+      "source": "Partner",
+      "field": "heading.h3.2",
+      "contexts": [
+        {
+          "page": "/contact",
+          "section": "2"
+        }
+      ]
+    },
+    "6bd869af": {
+      "source": "partnerships@pandawatch.org",
+      "field": "link.2.label",
+      "contexts": [
+        {
+          "page": "/contact",
+          "section": "2"
+        }
+      ]
+    },
+    "03aa4174": {
+      "source": "Organizations interested in collaboration can reach us at .",
+      "field": "paragraph.3",
+      "contexts": [
+        {
+          "page": "/contact",
+          "section": "2"
+        }
+      ]
+    },
     "3a786953": {
       "source": "Home",
       "field": "page.title",
@@ -172,485 +689,57 @@
         }
       ]
     },
-    "b833f637": {
-      "source": "Support Us",
+    "cb2f00d1": {
+      "source": "Page Not Found",
       "field": "page.title",
       "contexts": [
         {
-          "page": "/contact",
+          "page": "/404",
           "section": "_meta"
         },
         {
-          "page": "/contact",
+          "page": "/404",
           "section": "1"
-        },
-        {
-          "page": "/",
-          "section": "3"
         }
       ]
     },
-    "5d8c71ab": {
-      "source": "About Us",
-      "field": "page.title",
-      "contexts": [
-        {
-          "page": "/about",
-          "section": "_meta"
-        }
-      ]
-    },
-    "c3a4a08a": {
-      "source": "Learn about PandaWatch's mission to protect giant pandas through research and conservation.",
+    "8cbce4bb": {
+      "source": "The page you're looking for doesn't exist.",
       "field": "page.description",
       "contexts": [
         {
-          "page": "/about",
+          "page": "/404",
           "section": "_meta"
         }
       ]
     },
-    "f7cbe851": {
-      "source": "About PandaWatch",
+    "6b3c238e": {
+      "source": "404",
       "field": "title",
       "contexts": [
         {
-          "page": "/about",
+          "page": "/404",
           "section": "1"
         }
       ]
     },
-    "7b83fb95": {
-      "source": "Dedicated to the conservation and protection of giant pandas since 2008.",
+    "f2882177": {
+      "source": "The page you're looking for doesn't exist or has been moved.",
       "field": "paragraph",
       "contexts": [
         {
-          "page": "/about",
+          "page": "/404",
           "section": "1"
         }
       ]
     },
-    "15071e06": {
-      "source": "Our Mission",
-      "field": "title",
-      "contexts": [
-        {
-          "page": "/about",
-          "section": "2"
-        }
-      ]
-    },
-    "94fbd470": {
-      "source": "Protecting Pandas in Their Natural Habitat",
-      "field": "subtitle",
-      "contexts": [
-        {
-          "page": "/about",
-          "section": "2"
-        }
-      ]
-    },
-    "ade50be5": {
-      "source": "PandaWatch was founded in 2008 by a team of wildlife biologists and conservationists dedicated to ensuring the survival of giant pandas in the wild. Based in Chengdu, China, with research stations across Sichuan, Shaanxi, and Gansu provinces, we work at the heart of panda country.",
-      "field": "paragraph",
-      "contexts": [
-        {
-          "page": "/about",
-          "section": "2"
-        }
-      ]
-    },
-    "213964b0": {
-      "source": "Our approach combines rigorous scientific research with community-based conservation. We believe that lasting protection for pandas requires understanding their ecology, restoring their habitats, and creating sustainable partnerships with the local communities who share their mountain homes.",
-      "field": "paragraph.1",
-      "contexts": [
-        {
-          "page": "/about",
-          "section": "2"
-        }
-      ]
-    },
-    "c300c945": {
-      "source": "Our Team",
-      "field": "title",
-      "contexts": [
-        {
-          "page": "/about",
-          "section": "3"
-        }
-      ]
-    },
-    "a9626b0d": {
-      "source": "Meet the researchers and conservationists working to protect giant pandas.",
-      "field": "paragraph",
-      "contexts": [
-        {
-          "page": "/about",
-          "section": "3"
-        }
-      ]
-    },
-    "3e91a568": {
-      "source": "Research Programs",
-      "field": "page.title",
-      "contexts": [
-        {
-          "page": "/research",
-          "section": "_meta"
-        },
-        {
-          "page": "/research",
-          "section": "1"
-        }
-      ]
-    },
-    "c94c482e": {
-      "source": "Our scientific research programs studying panda ecology, behavior, and conservation.",
-      "field": "page.description",
-      "contexts": [
-        {
-          "page": "/research",
-          "section": "_meta"
-        }
-      ]
-    },
-    "73922133": {
-      "source": "Advancing panda conservation through rigorous scientific research.",
-      "field": "paragraph",
-      "contexts": [
-        {
-          "page": "/research",
-          "section": "1"
-        }
-      ]
-    },
-    "7067d2ad": {
-      "source": "Active Research Areas",
-      "field": "title",
-      "contexts": [
-        {
-          "page": "/research",
-          "section": "2"
-        }
-      ]
-    },
-    "219b5763": {
-      "source": "Our team of scientists works across multiple disciplines to understand and protect giant pandas.",
-      "field": "paragraph",
-      "contexts": [
-        {
-          "page": "/research",
-          "section": "2"
-        }
-      ]
-    },
-    "57b3e0cb": {
-      "source": "Population Monitoring",
-      "field": "heading.h3.0",
-      "contexts": [
-        {
-          "page": "/research",
-          "section": "2"
-        }
-      ]
-    },
-    "9369646e": {
-      "source": "Using camera traps, GPS collars, and genetic sampling to track panda populations across their range. Our data informs protected area management decisions.",
-      "field": "paragraph.1",
-      "contexts": [
-        {
-          "page": "/research",
-          "section": "2"
-        }
-      ]
-    },
-    "38e2dd00": {
-      "source": "Habitat Analysis",
-      "field": "heading.h3.1",
-      "contexts": [
-        {
-          "page": "/research",
-          "section": "2"
-        }
-      ]
-    },
-    "3f431d15": {
-      "source": "Mapping bamboo distribution, forest connectivity, and climate impacts to identify critical conservation priorities and restoration opportunities.",
-      "field": "paragraph.2",
-      "contexts": [
-        {
-          "page": "/research",
-          "section": "2"
-        }
-      ]
-    },
-    "828e259e": {
-      "source": "Behavioral Ecology",
-      "field": "heading.h3.2",
-      "contexts": [
-        {
-          "page": "/research",
-          "section": "2"
-        }
-      ]
-    },
-    "c2ec89f3": {
-      "source": "Studying panda feeding patterns, territorial behavior, and reproduction to understand their ecological needs and support breeding programs.",
-      "field": "paragraph.3",
-      "contexts": [
-        {
-          "page": "/research",
-          "section": "2"
-        }
-      ]
-    },
-    "e5bb8cb6": {
-      "source": "Climate Adaptation",
-      "field": "heading.h3.3",
-      "contexts": [
-        {
-          "page": "/research",
-          "section": "2"
-        }
-      ]
-    },
-    "ec29e8af": {
-      "source": "Researching how climate change affects bamboo forests and panda habitats to develop long-term conservation strategies.",
-      "field": "paragraph.4",
-      "contexts": [
-        {
-          "page": "/research",
-          "section": "2"
-        }
-      ]
-    },
-    "14a98817": {
-      "source": "Support Our Research",
-      "field": "title",
-      "contexts": [
-        {
-          "page": "/research",
-          "section": "3"
-        }
-      ]
-    },
-    "cd5ab8e2": {
-      "source": "Your contribution helps fund vital research that protects pandas in the wild.",
-      "field": "paragraph",
-      "contexts": [
-        {
-          "page": "/research",
-          "section": "3"
-        }
-      ]
-    },
-    "86e867be": {
-      "source": "Donate Now",
+    "82bc39f6": {
+      "source": "Go Home",
       "field": "link.label",
       "contexts": [
         {
-          "page": "/research",
-          "section": "3"
-        }
-      ]
-    },
-    "2701197d": {
-      "source": "Support panda conservation or get in touch with our team.",
-      "field": "page.description",
-      "contexts": [
-        {
-          "page": "/contact",
-          "section": "_meta"
-        }
-      ]
-    },
-    "05a3278d": {
-      "source": "Help protect giant pandas by supporting our conservation work.",
-      "field": "paragraph",
-      "contexts": [
-        {
-          "page": "/contact",
+          "page": "/404",
           "section": "1"
-        }
-      ]
-    },
-    "727fa290": {
-      "source": "Get in Touch",
-      "field": "title",
-      "contexts": [
-        {
-          "page": "/contact",
-          "section": "2"
-        }
-      ]
-    },
-    "c99b5afa": {
-      "source": "Ways to Help",
-      "field": "subtitle",
-      "contexts": [
-        {
-          "page": "/contact",
-          "section": "2"
-        }
-      ]
-    },
-    "6213b6f8": {
-      "source": "Your support makes our conservation work possible. Join us in protecting giant pandas.",
-      "field": "paragraph",
-      "contexts": [
-        {
-          "page": "/contact",
-          "section": "2"
-        }
-      ]
-    },
-    "c91ee0f2": {
-      "source": "Donate",
-      "field": "heading.h3.0",
-      "contexts": [
-        {
-          "page": "/contact",
-          "section": "2"
-        }
-      ]
-    },
-    "397b179a": {
-      "source": "donate@pandawatch.org",
-      "field": "link.label",
-      "contexts": [
-        {
-          "page": "/contact",
-          "section": "2"
-        }
-      ]
-    },
-    "b40f47ce": {
-      "source": "Make a contribution at  to support habitat protection and research programs.",
-      "field": "paragraph.1",
-      "contexts": [
-        {
-          "page": "/contact",
-          "section": "2"
-        }
-      ]
-    },
-    "ef4683c3": {
-      "source": "Volunteer",
-      "field": "heading.h3.1",
-      "contexts": [
-        {
-          "page": "/contact",
-          "section": "2"
-        }
-      ]
-    },
-    "4ec51d0f": {
-      "source": "volunteer@pandawatch.org",
-      "field": "link.1.label",
-      "contexts": [
-        {
-          "page": "/contact",
-          "section": "2"
-        }
-      ]
-    },
-    "c8e1fffc": {
-      "source": "Join our field research teams or help with outreach. Contact  for opportunities.",
-      "field": "paragraph.2",
-      "contexts": [
-        {
-          "page": "/contact",
-          "section": "2"
-        }
-      ]
-    },
-    "29035e78": {
-      "source": "Partner",
-      "field": "heading.h3.2",
-      "contexts": [
-        {
-          "page": "/contact",
-          "section": "2"
-        }
-      ]
-    },
-    "6bd869af": {
-      "source": "partnerships@pandawatch.org",
-      "field": "link.2.label",
-      "contexts": [
-        {
-          "page": "/contact",
-          "section": "2"
-        }
-      ]
-    },
-    "03aa4174": {
-      "source": "Organizations interested in collaboration can reach us at .",
-      "field": "paragraph.3",
-      "contexts": [
-        {
-          "page": "/contact",
-          "section": "2"
-        }
-      ]
-    },
-    "8c6bc099": {
-      "source": "Blog",
-      "field": "page.title",
-      "contexts": [
-        {
-          "page": "/blog",
-          "section": "_meta"
-        }
-      ]
-    },
-    "6e97ff69": {
-      "source": "Latest news and research updates from PandaWatch.",
-      "field": "page.description",
-      "contexts": [
-        {
-          "page": "/blog",
-          "section": "_meta"
-        }
-      ]
-    },
-    "77d362fd": {
-      "source": "Research Updates",
-      "field": "title",
-      "contexts": [
-        {
-          "page": "/blog",
-          "section": "1"
-        }
-      ]
-    },
-    "f348cbbe": {
-      "source": "Latest findings and news from our conservation efforts.",
-      "field": "paragraph",
-      "contexts": [
-        {
-          "page": "/blog",
-          "section": "1"
-        }
-      ]
-    },
-    "29d94922": {
-      "source": "Article",
-      "field": "page.title",
-      "contexts": [
-        {
-          "page": "/blog/:slug",
-          "section": "_meta"
-        }
-      ]
-    },
-    "36a9cd0f": {
-      "source": "Blog article",
-      "field": "page.description",
-      "contexts": [
-        {
-          "page": "/blog/:slug",
-          "section": "_meta"
         }
       ]
     },
@@ -661,12 +750,46 @@
         {
           "page": "/@header",
           "section": "1"
+        },
+        {
+          "page": "/@footer",
+          "section": "1"
         }
       ]
     },
     "0b4d39cb": {
       "source": "Protecting giant pandas through research, conservation, and community partnerships worldwide.",
       "field": "paragraph",
+      "contexts": [
+        {
+          "page": "/@footer",
+          "section": "1"
+        }
+      ]
+    },
+    "9046da16": {
+      "source": "Pages",
+      "field": "heading.h3.0",
+      "contexts": [
+        {
+          "page": "/@footer",
+          "section": "1"
+        }
+      ]
+    },
+    "a4fe6526": {
+      "source": "Language",
+      "field": "heading.h3.1",
+      "contexts": [
+        {
+          "page": "/@footer",
+          "section": "1"
+        }
+      ]
+    },
+    "21f29224": {
+      "source": "All rights reserved.",
+      "field": "heading.h3.2",
       "contexts": [
         {
           "page": "/@footer",

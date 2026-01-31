@@ -1,5 +1,5 @@
 import React from 'react'
-import { H2, P, cn } from '@uniweb/kit'
+import { H2, P, Icon, cn } from '@uniweb/kit'
 
 /**
  * Section Component
@@ -22,12 +22,20 @@ export function Section({ content }) {
 
         {items.length > 0 && (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {items.map((item, i) => (
-              <div key={i} className="p-6 rounded-xl bg-surface-subtle shadow-sm border border-edge-muted">
-                {item.title && <h3 className="text-xl font-semibold mb-2 text-heading">{item.title}</h3>}
-                {item.paragraphs?.[0] && <P text={item.paragraphs[0]} className="text-muted" />}
-              </div>
-            ))}
+            {items.map((item, i) => {
+              const icon = item.icons?.[0]
+              return (
+                <div key={i} className="p-6 rounded-xl bg-surface shadow-sm border border-edge-muted border-t-2 border-t-primary-500">
+                  {icon && (
+                    <div className="w-10 h-10 rounded-lg bg-primary-100/50 text-primary-600 flex items-center justify-center mb-4">
+                      <Icon icon={icon} size={20} />
+                    </div>
+                  )}
+                  {item.title && <h3 className="text-xl font-semibold mb-2 text-heading">{item.title}</h3>}
+                  {item.paragraphs?.[0] && <P text={item.paragraphs[0]} className="text-muted" />}
+                </div>
+              )
+            })}
           </div>
         )}
       </div>

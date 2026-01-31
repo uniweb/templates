@@ -12,11 +12,16 @@ export function Footer({ content, params }) {
   const location = useLocation()
 
   // Runtime guarantees: content is flat
-  const { title, paragraphs } = content
+  const { title, paragraphs, items } = content
 
   const siteName = title || website.name || 'Site'
   const description = paragraphs[0]
   const navPages = website.getFooterPages()
+
+  // Labels from content items — translatable via i18n
+  const pagesLabel = items[0]?.title || 'Pages'
+  const languageLabel = items[1]?.title || 'Language'
+  const copyrightText = items[2]?.title || 'All rights reserved.'
 
   // Locale info
   const hasMultipleLocales = website.hasMultipleLocales()
@@ -31,13 +36,13 @@ export function Footer({ content, params }) {
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div className="md:col-span-2">
-            <h3 className="text-xl font-bold mb-4 text-body">{siteName}</h3>
+            <h3 className="text-xl font-bold mb-4 text-heading">{siteName}</h3>
             {description && <p className="text-muted max-w-md">{description}</p>}
           </div>
 
           {/* Navigation */}
           <div>
-            <h4 className="font-semibold mb-4">Pages</h4>
+            <h4 className="font-semibold mb-4 text-heading">{pagesLabel}</h4>
             <ul className="space-y-2">
               {navPages.map((page) => (
                 <li key={page.route}>
@@ -52,7 +57,7 @@ export function Footer({ content, params }) {
           {/* Language */}
           {hasMultipleLocales && (
             <div>
-              <h4 className="font-semibold mb-4">Language</h4>
+              <h4 className="font-semibold mb-4 text-heading">{languageLabel}</h4>
               <ul className="space-y-2">
                 {locales.map((locale) => (
                   <li key={locale.code}>
@@ -76,7 +81,7 @@ export function Footer({ content, params }) {
         </div>
 
         <div className="border-t border-edge pt-8 text-center text-subtle text-sm">
-          <p>&copy; {year} {siteName}. All rights reserved.</p>
+          <p>&copy; {year} {siteName}. {copyrightText}</p>
         </div>
       </div>
     </footer>
