@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-@source "./components/**/*.{js,jsx}";
+@source "./sections/**/*.{js,jsx}";
 @source "../node_modules/@uniweb/kit/src/**/*.{js,jsx}";
 
 /* Theme colors from theme.yml are injected as CSS custom properties */
