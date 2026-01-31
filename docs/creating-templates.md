@@ -376,6 +376,6 @@ This forces Vite to pre-bundle these packages, ensuring proper CJS-to-ESM conver
 - [ ] Use fixed names: `"name": "foundation"` and `"name": "site"`
 - [ ] Add `.hbs` extension to files needing variable substitution
 - [ ] Include sample content in `site/pages/`
-- [ ] Create meaningful component metadata in `foundation/src/components/*/meta.js`
+- [ ] Create section types in `foundation/src/sections/` (with optional `meta.js` for params/presets)
 - [ ] Add E2E tests in the main workspace
 - [ ] Test the full flow: create, install, build foundation, build site
