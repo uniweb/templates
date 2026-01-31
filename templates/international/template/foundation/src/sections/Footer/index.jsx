@@ -31,7 +31,7 @@ export function Footer({ content, params }) {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="bg-surface py-12 px-6">
+    <div className="py-12 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
@@ -84,7 +84,7 @@ export function Footer({ content, params }) {
           <p>&copy; {year} {siteName}. {copyrightText}</p>
         </div>
       </div>
-    </footer>
+    </div>
   )
 }
 
