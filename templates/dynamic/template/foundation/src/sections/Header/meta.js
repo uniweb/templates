@@ -9,12 +9,23 @@ export default {
     links: 'Optional call-to-action button',
   },
 
-  params: {},
+  params: {
+    floating: {
+      type: 'boolean',
+      label: 'Floating header',
+      description: 'Overlay the header on top of the next section (transparent until scrolled)',
+      default: false,
+    },
+  },
 
   presets: {
     default: {
       label: 'Standard',
-      params: {},
+      params: { floating: false },
+    },
+    floating: {
+      label: 'Floating',
+      params: { floating: true },
     },
   },
 }

@@ -20,10 +20,10 @@ export function VideoGallery({ content, params, block }) {
   const loading = block.dataLoading
 
   return (
-    <div className="py-16 sm:py-20 px-6">
-      <div className="max-w-6xl mx-auto">
+    <div className="py-12">
+      <div className="max-w-6xl mx-auto px-4">
         {(title || paragraphs[0]) && (
-          <div className="mb-10">
+          <div className="mb-8">
             {title && <H2 text={title} className="text-2xl sm:text-3xl font-bold text-heading mb-2" />}
             {paragraphs[0] && <P text={paragraphs[0]} className="text-muted max-w-2xl" />}
           </div>

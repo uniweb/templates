@@ -13,8 +13,8 @@ export function Hero({ content, params, block }) {
   const description = paragraphs[0]
 
   return (
-    <div className="relative py-20 sm:py-28 lg:py-32 px-6">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <div className="bg-white py-16 md:py-24 border-b border-edge">
+      <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
         <div className="space-y-6">
           {pretitle && (
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-100 text-primary-800 text-xs font-bold uppercase tracking-wide">

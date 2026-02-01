@@ -21,10 +21,8 @@ export function Header({ content, params, block }) {
   const manualNav = content.data?.nav
   const autoPages = website.getPageHierarchy({ for: 'header' })
 
-  const nextBlockInfo = block.getNextBlockInfo()
-  const allowTranslucentTop = nextBlockInfo?.context?.allowTranslucentTop || false
-  const nextBlockTheme = nextBlockInfo?.theme || 'light'
-  const isFloating = allowTranslucentTop
+  const isFloating = params.floating
+  const nextBlockTheme = isFloating ? (block.getNextBlockInfo()?.theme || 'light') : 'light'
   const isDarkBackground = isFloating && ['gradient', 'dark'].includes(nextBlockTheme)
 
   const getHeaderStyles = () => {
@@ -42,11 +40,11 @@ export function Header({ content, params, block }) {
 
   const getLinkStyles = (isActiveLink = false) => {
     if (isActiveLink) {
-      if (isFloating && !scrolled && isDarkBackground) return 'text-white font-semibold'
-      return 'text-primary-600 font-semibold'
+      if (isFloating && !scrolled && isDarkBackground) return 'bg-white/10 text-white font-medium'
+      return 'bg-primary-50 text-primary-700 font-medium'
     }
-    if (isFloating && !scrolled && isDarkBackground) return 'text-white/90 hover:text-white'
-    return 'text-muted hover:text-body'
+    if (isFloating && !scrolled && isDarkBackground) return 'text-white/90 hover:text-white hover:bg-white/5'
+    return 'text-muted hover:text-primary-600 hover:bg-surface-subtle'
   }
 
   // Render a nav item (works for both manual and auto nav)
@@ -65,7 +63,7 @@ export function Header({ content, params, block }) {
         key={item.route || item.href || index}
         href={href}
         className={cn(
-          'inline-flex items-center gap-1.5 text-sm font-medium transition-colors',
+          'inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
           getLinkStyles(active)
         )}
       >
@@ -80,10 +78,12 @@ export function Header({ content, params, block }) {
   return (
     <>
       <div className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        isFloating
+          ? 'fixed top-0 left-0 right-0 z-50 transition-all duration-300'
+          : 'sticky top-0 z-50 transition-all duration-300',
         getHeaderStyles()
       )}>
-        <nav className="max-w-6xl mx-auto px-4 sm:px-6">
+        <nav className="max-w-6xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2">
@@ -94,7 +94,7 @@ export function Header({ content, params, block }) {
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-6">
+            <div className="hidden md:flex items-center gap-2">
               {navItems.map((item, i) => renderNavItem(item, i))}
             </div>
 
@@ -169,7 +169,7 @@ export function Header({ content, params, block }) {
         )}
       </div>
 
-      {!isFloating && <div className="h-16" />}
+      {isFloating && <div className="h-16" />}
     </>
   )
 }

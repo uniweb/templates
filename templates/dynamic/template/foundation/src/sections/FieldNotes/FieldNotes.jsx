@@ -28,13 +28,13 @@ export function FieldNotes({ content, params, block }) {
   const ctaLink = links[0]
 
   return (
-    <div className="py-16 sm:py-20 px-6">
-      <div className="max-w-6xl mx-auto">
+    <div className="py-10">
+      <div className="max-w-6xl mx-auto px-4">
         {title && (
-          <div className="flex items-center justify-between mb-10">
-            <div className="flex items-center gap-3">
-              <ClipboardList className="w-6 h-6 text-primary-500" />
-              <H2 text={title} className="text-2xl sm:text-3xl font-bold text-heading" />
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-2">
+              <ClipboardList className="w-6 h-6 text-primary-600" />
+              <H2 text={title} className="text-2xl font-bold text-heading" />
             </div>
             <button
               onClick={() => block.refetch?.()}

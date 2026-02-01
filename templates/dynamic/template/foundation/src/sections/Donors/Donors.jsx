@@ -17,8 +17,8 @@ export function Donors({ content, params, block }) {
   const loading = block.dataLoading
 
   return (
-    <div className="py-16 sm:py-20 px-6">
-      <div className="max-w-6xl mx-auto">
+    <div className="py-10">
+      <div className="max-w-6xl mx-auto px-4">
         <div className="bg-primary-50 rounded-2xl p-8 text-center relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
             <div className="w-32 h-32 bg-primary-400 rounded-full absolute -top-10 -left-10 blur-3xl"></div>

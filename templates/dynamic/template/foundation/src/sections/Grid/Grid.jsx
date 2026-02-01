@@ -7,10 +7,10 @@ export function Grid({ content, block }) {
   const children = block.childBlocks || []
 
   return (
-    <div className="py-16 sm:py-20 px-6">
-      <div className="max-w-6xl mx-auto">
+    <div className="py-12">
+      <div className="max-w-6xl mx-auto px-4">
         {(title || paragraphs[0]) && (
-          <div className="mb-10">
+          <div className="mb-12">
             {title && <H1 text={title} className="text-3xl font-extrabold text-heading mb-2" />}
             {paragraphs[0] && <P text={paragraphs[0]} className="text-muted max-w-2xl" />}
           </div>
