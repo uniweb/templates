@@ -4,9 +4,9 @@ export default {
   category: 'content',
   purpose: 'Inform',
 
-  // Data configuration: inherit article data from parent page
+  // Data configuration: articles entity (singular item auto-resolved on dynamic routes)
   data: {
-    inherit: ['article', 'articles'],
+    entity: 'articles',
     schemas: {
       article: {
         slug: { type: 'string', default: '' },

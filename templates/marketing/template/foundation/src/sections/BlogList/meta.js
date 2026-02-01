@@ -4,9 +4,9 @@ export default {
   category: 'content',
   purpose: 'Organize',
 
-  // Data configuration: inherit articles data from page-level fetch
+  // Data configuration: articles entity with schema for type safety
   data: {
-    inherit: ['articles'],
+    entity: 'articles',
     schemas: {
       articles: {
         slug: { type: 'string', default: '' },

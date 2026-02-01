@@ -7,9 +7,9 @@ export default {
   category: 'showcase',
   purpose: 'Introduce',
 
-  // Data configuration: cascading and schema for team member data
+  // Data configuration: team entity with schema for type safety
   data: {
-    inherit: ['team'],
+    entity: 'team',
     schemas: {
       team: {
         name: { type: 'string', default: '' },
