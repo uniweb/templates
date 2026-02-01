@@ -13,9 +13,7 @@ export function Footer({ content }) {
     <div className="py-12 px-6">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
         <Link href="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
-            <Leaf className="text-white w-5 h-5" />
-          </div>
+          <Leaf className="w-6 h-6 text-primary-500" />
           <span className="font-bold text-lg text-heading">{siteName}</span>
         </Link>
         {copyright ? (

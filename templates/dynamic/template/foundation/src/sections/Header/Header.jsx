@@ -36,8 +36,8 @@ export function Header({ content, params, block }) {
           : 'bg-transparent text-gray-900'
     }
     return scrolled
-      ? 'bg-white shadow-sm border-b border-edge-muted text-gray-900'
-      : 'bg-white border-b border-edge-muted text-gray-900'
+      ? 'bg-white shadow-sm border-b border-edge text-gray-900'
+      : 'bg-white border-b border-edge text-gray-900'
   }
 
   const getLinkStyles = (isActiveLink = false) => {

@@ -17,7 +17,7 @@ export function Hero({ content, params, block }) {
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div className="space-y-6">
           {pretitle && (
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-100/20 text-body text-xs font-bold uppercase tracking-wide border border-edge-muted">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-100 text-primary-800 text-xs font-bold uppercase tracking-wide">
               <Activity className="w-3 h-3" />
               {pretitle}
             </span>

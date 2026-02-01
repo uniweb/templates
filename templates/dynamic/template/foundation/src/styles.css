@@ -66,6 +66,11 @@
   --color-accent: var(--accent-500);
 }
 
+/* Page background - slightly tinted like the original design */
+body {
+  background-color: var(--neutral-100);
+}
+
 /* Inline text formatting classes */
 .accent {
   color: var(--primary-600);

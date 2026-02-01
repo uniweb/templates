@@ -8,5 +8,3 @@ fetch:
 ---
 
 # Recent Publications
-
-Real-time feeds from open science initiatives, demonstrating list-based data from CrossRef.

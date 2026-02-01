@@ -8,5 +8,3 @@ fetch:
 ---
 
 # Occurrence Records
-
-Biodiversity occurrence data from the Global Biodiversity Information Facility.
