@@ -1,0 +1,11 @@
+colors:
+  primary: "#059669"
+  secondary: "#475569"
+  accent: "#d97706"
+  neutral: "#475569"
+
+fonts:
+  import:
+    - url: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+  heading: "Inter, system-ui, sans-serif"
+  body: "Inter, system-ui, sans-serif"

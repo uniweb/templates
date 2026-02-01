@@ -21,6 +21,11 @@
       "name": "International Business",
       "description": "Multilingual corporate website with English, Spanish, and French",
       "tags": ["i18n", "multilingual", "corporate", "business", "localization"]
+    },
+    "dynamic": {
+      "name": "Dynamic Data",
+      "description": "Live API data fetching with loading states, transforms, and the portable data pattern",
+      "tags": ["data", "api", "fetch", "loading-states", "dynamic"]
     }
   }
 }

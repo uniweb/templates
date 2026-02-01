@@ -1,0 +1,7 @@
+{
+  "name": "PandaWatch - Dynamic Data",
+  "description": "A conservation site demonstrating live API data fetching with loading states, transforms, and the portable data pattern. Includes weather, blog posts, wildlife sightings, research papers, and video gallery sections.",
+  "uniweb": ">=0.2.0",
+  "tags": ["data", "api", "fetch", "loading-states", "transform", "dynamic", "conservation"],
+  "components": ["Hero", "FieldNotes", "Sightings", "Donors", "Publications", "OccurrenceRecords", "VideoGallery", "Header", "Footer"]
+}
