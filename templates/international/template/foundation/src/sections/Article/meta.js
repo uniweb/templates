@@ -4,18 +4,19 @@ export default {
   category: 'content',
   purpose: 'Inform',
 
-  // Inherit article data from parent page
-  inheritData: ['article', 'articles'],
-
-  schemas: {
-    article: {
-      slug: { type: 'string', default: '' },
-      title: { type: 'string', default: '' },
-      excerpt: { type: 'string', default: '' },
-      date: { type: 'string', default: '' },
-      image: { type: 'string', default: '' },
-      body: { type: 'string', default: '' },
-      tags: { type: 'array', default: [] },
+  // Data configuration: inherit article data from parent page
+  data: {
+    inherit: ['article', 'articles'],
+    schemas: {
+      article: {
+        slug: { type: 'string', default: '' },
+        title: { type: 'string', default: '' },
+        excerpt: { type: 'string', default: '' },
+        date: { type: 'string', default: '' },
+        image: { type: 'string', default: '' },
+        body: { type: 'string', default: '' },
+        tags: { type: 'array', default: [] },
+      },
     },
   },
 

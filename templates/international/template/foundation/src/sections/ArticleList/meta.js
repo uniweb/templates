@@ -4,17 +4,18 @@ export default {
   category: 'content',
   purpose: 'Organize',
 
-  // Inherit articles data from page-level fetch
-  inheritData: ['articles'],
-
-  schemas: {
-    articles: {
-      slug: { type: 'string', default: '' },
-      title: { type: 'string', default: '' },
-      excerpt: { type: 'string', default: '' },
-      date: { type: 'string', default: '' },
-      image: { type: 'string', default: '' },
-      tags: { type: 'array', default: [] },
+  // Data configuration: inherit articles data from page-level fetch
+  data: {
+    inherit: ['articles'],
+    schemas: {
+      articles: {
+        slug: { type: 'string', default: '' },
+        title: { type: 'string', default: '' },
+        excerpt: { type: 'string', default: '' },
+        date: { type: 'string', default: '' },
+        image: { type: 'string', default: '' },
+        tags: { type: 'array', default: [] },
+      },
     },
   },
 

@@ -42,54 +42,56 @@ export default {
     },
   },
 
-  // Schema for tagged data blocks
-  schemas: {
-    api: {
-      method: {
-        type: 'select',
-        default: 'GET',
-        label: 'HTTP Method',
-        options: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-      },
-      path: {
-        type: 'string',
-        default: '',
-        label: 'Endpoint Path',
-        description: 'URL path with optional {param} placeholders',
-      },
-      parameters: {
-        type: 'array',
-        default: [],
-        label: 'Parameters',
-        of: {
-          name: { type: 'string', label: 'Parameter name' },
-          in: { type: 'string', default: 'query', label: 'Location' },
-          type: { type: 'string', default: 'string', label: 'Data type' },
-          required: { type: 'boolean', default: false, label: 'Required' },
-          description: { type: 'string', default: '', label: 'Description' },
+  // Data configuration: schema for tagged data blocks
+  data: {
+    schemas: {
+      api: {
+        method: {
+          type: 'select',
+          default: 'GET',
+          label: 'HTTP Method',
+          options: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
         },
-      },
-      requestBody: {
-        type: 'string',
-        label: 'Request Body',
-        description: 'Example request body (JSON)',
-      },
-      response: {
-        type: 'object',
-        label: 'Response',
-        schema: {
-          status: { type: 'number', default: 200, label: 'Status code' },
-          body: { type: 'string', default: '', label: 'Response body' },
+        path: {
+          type: 'string',
+          default: '',
+          label: 'Endpoint Path',
+          description: 'URL path with optional {param} placeholders',
         },
-      },
-      responses: {
-        type: 'array',
-        default: [],
-        label: 'Multiple Responses',
-        of: {
-          status: { type: 'number', default: 200, label: 'Status code' },
-          description: { type: 'string', default: '', label: 'Description' },
-          body: { type: 'string', default: '', label: 'Response body' },
+        parameters: {
+          type: 'array',
+          default: [],
+          label: 'Parameters',
+          of: {
+            name: { type: 'string', label: 'Parameter name' },
+            in: { type: 'string', default: 'query', label: 'Location' },
+            type: { type: 'string', default: 'string', label: 'Data type' },
+            required: { type: 'boolean', default: false, label: 'Required' },
+            description: { type: 'string', default: '', label: 'Description' },
+          },
+        },
+        requestBody: {
+          type: 'string',
+          label: 'Request Body',
+          description: 'Example request body (JSON)',
+        },
+        response: {
+          type: 'object',
+          label: 'Response',
+          schema: {
+            status: { type: 'number', default: 200, label: 'Status code' },
+            body: { type: 'string', default: '', label: 'Response body' },
+          },
+        },
+        responses: {
+          type: 'array',
+          default: [],
+          label: 'Multiple Responses',
+          of: {
+            status: { type: 'number', default: 200, label: 'Status code' },
+            description: { type: 'string', default: '', label: 'Description' },
+            body: { type: 'string', default: '', label: 'Response body' },
+          },
         },
       },
     },

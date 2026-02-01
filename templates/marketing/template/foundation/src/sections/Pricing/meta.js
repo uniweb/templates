@@ -16,8 +16,10 @@ export default {
     },
   },
 
-  // Accept tagged YAML pricing data
-  inheritData: ['pricing'],
+  // Data configuration: accept tagged YAML pricing data
+  data: {
+    inherit: ['pricing'],
+  },
 
   params: {
     theme: {

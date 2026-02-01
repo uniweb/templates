@@ -7,16 +7,16 @@ export default {
   category: 'showcase',
   purpose: 'Introduce',
 
-  // Accept cascaded data from page/site level fetches
-  inheritData: ['team'],
-
-  // Schema for team member data (from fetch or tagged blocks)
-  schemas: {
-    team: {
-      name: { type: 'string', default: '' },
-      role: { type: 'string', default: '' },
-      bio: { type: 'string', default: '' },
-      avatar: { type: 'string', default: '' },
+  // Data configuration: cascading and schema for team member data
+  data: {
+    inherit: ['team'],
+    schemas: {
+      team: {
+        name: { type: 'string', default: '' },
+        role: { type: 'string', default: '' },
+        bio: { type: 'string', default: '' },
+        avatar: { type: 'string', default: '' },
+      },
     },
   },
 
