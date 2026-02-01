@@ -66,6 +66,11 @@
   --color-accent: var(--accent-500);
 }
 
+/* Inline text formatting classes */
+.accent {
+  color: var(--primary-600);
+}
+
 /* Custom animations for loading states and data appearance */
 @keyframes fade-in-up {
   from { opacity: 0; transform: translateY(10px); }

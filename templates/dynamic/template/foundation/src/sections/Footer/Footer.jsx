@@ -7,33 +7,24 @@ export function Footer({ content }) {
 
   const { title, paragraphs } = content
   const siteName = title || website.name || 'PandaWatch'
-  const description = paragraphs[0]
-  const navPages = website.getFooterPages()
-  const year = new Date().getFullYear()
+  const copyright = paragraphs[0]
 
   return (
     <div className="py-12 px-6">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-        <div className="flex items-center gap-2">
-          <Leaf className="w-6 h-6 text-primary-500" />
-          <span className="font-bold text-lg text-heading">{siteName}</span>
-        </div>
-        {navPages.length > 0 && (
-          <div className="flex items-center gap-6">
-            {navPages.map((page) => (
-              <Link
-                key={page.route}
-                href={page.route}
-                className="text-sm text-muted hover:text-body transition-colors"
-              >
-                {page.label || page.title}
-              </Link>
-            ))}
+        <Link href="/" className="flex items-center gap-2">
+          <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+            <Leaf className="text-white w-5 h-5" />
           </div>
+          <span className="font-bold text-lg text-heading">{siteName}</span>
+        </Link>
+        {copyright ? (
+          <p className="text-sm text-subtle">{copyright}</p>
+        ) : (
+          <p className="text-sm text-subtle">
+            &copy; {new Date().getFullYear()} Uniweb Demo Templates.
+          </p>
         )}
-        <p className="text-sm text-subtle">
-          &copy; {year} {siteName}. All rights reserved.
-        </p>
       </div>
     </div>
   )

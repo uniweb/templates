@@ -42,7 +42,7 @@ export function Hero({ content, params, block }) {
               {cta && (
                 <Link
                   href={cta.href}
-                  className="inline-flex items-center px-6 py-3 rounded-xl font-bold transition-all bg-btn-primary text-btn-primary-text hover:bg-btn-primary-hover shadow-lg"
+                  className="inline-flex items-center px-6 py-3 rounded-xl font-bold transition-all bg-btn-primary text-btn-primary-text hover:bg-btn-primary-hover shadow-lg shadow-primary-300/50"
                 >
                   {cta.label}
                 </Link>

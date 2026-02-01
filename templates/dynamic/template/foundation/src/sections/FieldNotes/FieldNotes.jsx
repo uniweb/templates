@@ -1,5 +1,6 @@
 import React from 'react'
-import { H2, P } from '@uniweb/kit'
+import { H2, Link } from '@uniweb/kit'
+import { ClipboardList, RefreshCw, ArrowRight } from 'lucide-react'
 import NoteCard from './NoteCard.jsx'
 
 function Skeleton({ count }) {
@@ -20,17 +21,28 @@ function Skeleton({ count }) {
 }
 
 export function FieldNotes({ content, params, block }) {
-  const { title, paragraphs } = content
+  const { title, links } = content
   const posts = content.data?.posts || []
   const loading = block.dataLoading
+
+  const ctaLink = links[0]
 
   return (
     <div className="py-16 sm:py-20 px-6">
       <div className="max-w-6xl mx-auto">
-        {(title || paragraphs[0]) && (
-          <div className="mb-10">
-            {title && <H2 text={title} className="text-2xl sm:text-3xl font-bold text-heading mb-2" />}
-            {paragraphs[0] && <P text={paragraphs[0]} className="text-muted max-w-2xl" />}
+        {title && (
+          <div className="flex items-center justify-between mb-10">
+            <div className="flex items-center gap-3">
+              <ClipboardList className="w-6 h-6 text-primary-500" />
+              <H2 text={title} className="text-2xl sm:text-3xl font-bold text-heading" />
+            </div>
+            <button
+              onClick={() => block.refetch?.()}
+              className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-body transition-colors"
+            >
+              <RefreshCw className="w-4 h-4" />
+              Refresh
+            </button>
           </div>
         )}
 
@@ -45,6 +57,18 @@ export function FieldNotes({ content, params, block }) {
             posts.map((note) => <NoteCard key={note.id} note={note} />)
           )}
         </div>
+
+        {ctaLink && (
+          <div className="mt-8 text-center">
+            <Link
+              href={ctaLink.href}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-edge-muted text-body font-medium hover:bg-surface-subtle transition-colors"
+            >
+              {ctaLink.label}
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   )

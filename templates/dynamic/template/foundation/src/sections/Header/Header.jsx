@@ -1,6 +1,12 @@
-import React, { useState } from 'react'
-import { Link, cn, useScrolled, useMobileMenu, useWebsite, useActiveRoute } from '@uniweb/kit'
+import React from 'react'
+import { Icon, Link, cn, useScrolled, useMobileMenu, useWebsite, useActiveRoute } from '@uniweb/kit'
 import { Leaf } from 'lucide-react'
+
+function parseIconRef(ref) {
+  if (!ref) return null
+  const [library, name] = ref.includes(':') ? ref.split(':', 2) : [null, ref]
+  return library && name ? { library, name } : null
+}
 
 export function Header({ content, params, block }) {
   const { website } = useWebsite()
@@ -9,8 +15,11 @@ export function Header({ content, params, block }) {
   const { isOpen: mobileMenuOpen, toggle: toggleMobileMenu, close: closeMobileMenu } = useMobileMenu()
 
   const { title, links } = content
-  const navPages = website.getPageHierarchy({ for: 'header' })
   const siteName = title || website.name || 'PandaWatch'
+
+  // Prefer manual nav from content data, fall back to automatic page hierarchy
+  const manualNav = content.data?.nav
+  const autoPages = website.getPageHierarchy({ for: 'header' })
 
   const nextBlockInfo = block.getNextBlockInfo()
   const allowTranslucentTop = nextBlockInfo?.context?.allowTranslucentTop || false
@@ -27,8 +36,8 @@ export function Header({ content, params, block }) {
           : 'bg-transparent text-gray-900'
     }
     return scrolled
-      ? 'bg-white shadow-sm text-gray-900'
-      : 'bg-white text-gray-900'
+      ? 'bg-white shadow-sm border-b border-edge-muted text-gray-900'
+      : 'bg-white border-b border-edge-muted text-gray-900'
   }
 
   const getLinkStyles = (isActiveLink = false) => {
@@ -39,6 +48,34 @@ export function Header({ content, params, block }) {
     if (isFloating && !scrolled && isDarkBackground) return 'text-white/90 hover:text-white'
     return 'text-muted hover:text-body'
   }
+
+  // Render a nav item (works for both manual and auto nav)
+  const renderNavItem = (item, index) => {
+    const href = item.href || item.navigableRoute
+    const label = item.label || item.title
+    const icon = parseIconRef(item.icon)
+    const active = item.route
+      ? isActiveOrAncestor(item)
+      : item.href === '/'
+        ? isActive({ route: '/' })
+        : website.activePage?.route?.startsWith(item.href)
+
+    return (
+      <Link
+        key={item.route || item.href || index}
+        href={href}
+        className={cn(
+          'inline-flex items-center gap-1.5 text-sm font-medium transition-colors',
+          getLinkStyles(active)
+        )}
+      >
+        {icon && <Icon library={icon.library} name={icon.name} size="16" className="opacity-80" />}
+        {label}
+      </Link>
+    )
+  }
+
+  const navItems = manualNav || autoPages
 
   return (
     <>
@@ -58,18 +95,7 @@ export function Header({ content, params, block }) {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-6">
-              {navPages.map((page) => (
-                <Link
-                  key={page.route}
-                  href={page.navigableRoute}
-                  className={cn(
-                    'text-sm font-medium transition-colors',
-                    getLinkStyles(isActiveOrAncestor(page))
-                  )}
-                >
-                  {page.label || page.title}
-                </Link>
-              ))}
+              {navItems.map((item, i) => renderNavItem(item, i))}
             </div>
 
             {/* CTA */}
@@ -115,21 +141,29 @@ export function Header({ content, params, block }) {
         {mobileMenuOpen && (
           <div className="md:hidden bg-white border-t">
             <div className="px-4 py-4 space-y-1">
-              {navPages.map((page) => (
-                <Link
-                  key={page.route}
-                  href={page.navigableRoute}
-                  className={cn(
-                    'block px-3 py-2 text-base font-medium rounded-md',
-                    isActive(page)
-                      ? 'text-primary-600 bg-primary-50'
-                      : 'text-gray-700 hover:bg-gray-50'
-                  )}
-                  onClick={closeMobileMenu}
-                >
-                  {page.label || page.title}
-                </Link>
-              ))}
+              {navItems.map((item, i) => {
+                const href = item.href || item.navigableRoute
+                const label = item.label || item.title
+                const icon = parseIconRef(item.icon)
+                const active = item.route ? isActive(item) : false
+
+                return (
+                  <Link
+                    key={item.route || item.href || i}
+                    href={href}
+                    className={cn(
+                      'flex items-center gap-2 px-3 py-2 text-base font-medium rounded-md',
+                      active
+                        ? 'text-primary-600 bg-primary-50'
+                        : 'text-gray-700 hover:bg-gray-50'
+                    )}
+                    onClick={closeMobileMenu}
+                  >
+                    {icon && <Icon library={icon.library} name={icon.name} size="18" className="opacity-70" />}
+                    {label}
+                  </Link>
+                )
+              })}
             </div>
           </div>
         )}

@@ -8,4 +8,4 @@ fetch:
 
 # Recent Field Notes
 
-Updates from the field, researcher diaries, and conservation news.
+[Read All Field Notes](/blog)

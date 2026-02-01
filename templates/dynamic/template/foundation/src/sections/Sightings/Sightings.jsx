@@ -1,6 +1,6 @@
 import React from 'react'
-import { H2, P } from '@uniweb/kit'
-import { MapPin } from 'lucide-react'
+import { H2 } from '@uniweb/kit'
+import { MapPin, RefreshCw } from 'lucide-react'
 
 function Skeleton() {
   return [1, 2, 3].map((n) => (
@@ -19,17 +19,26 @@ function Skeleton() {
 }
 
 export function Sightings({ content, params, block }) {
-  const { title, paragraphs } = content
+  const { title } = content
   const sightings = content.data?.sightings || []
   const loading = block.dataLoading
 
   return (
     <div className="py-16 sm:py-20 px-6">
       <div className="max-w-6xl mx-auto">
-        {(title || paragraphs[0]) && (
-          <div className="mb-10">
-            {title && <H2 text={title} className="text-2xl sm:text-3xl font-bold text-heading mb-2" />}
-            {paragraphs[0] && <P text={paragraphs[0]} className="text-muted max-w-2xl" />}
+        {title && (
+          <div className="flex items-center justify-between mb-10">
+            <div className="flex items-center gap-3">
+              <MapPin className="w-6 h-6 text-primary-500" />
+              <H2 text={title} className="text-2xl sm:text-3xl font-bold text-heading" />
+            </div>
+            <button
+              onClick={() => block.refetch?.()}
+              className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-body transition-colors"
+            >
+              <RefreshCw className="w-4 h-4" />
+              Refresh
+            </button>
           </div>
         )}
 
