@@ -1,5 +1,5 @@
 import React from 'react'
-import { H2, Link } from '@uniweb/kit'
+import { H1, H2, P, Link } from '@uniweb/kit'
 import { ClipboardList, RefreshCw, ArrowRight } from 'lucide-react'
 import NoteCard from './NoteCard.jsx'
 
@@ -21,7 +21,8 @@ function Skeleton({ count }) {
 }
 
 export function FieldNotes({ content, params, block }) {
-  const { title, links } = content
+  const { title, paragraphs, links } = content
+  const description = paragraphs[0]
   const posts = content.data?.posts || []
   const loading = block.dataLoading
 
@@ -29,7 +30,12 @@ export function FieldNotes({ content, params, block }) {
 
   return (
     <div className="max-w-6xl mx-auto px-4">
-      {title && (
+      {title && description ? (
+        <div className="mb-12">
+          <H1 text={title} className="text-3xl font-extrabold text-heading mb-2" />
+          <P text={description} className="text-muted max-w-2xl" />
+        </div>
+      ) : title ? (
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
             <ClipboardList className="w-6 h-6 text-primary-600" />
@@ -43,7 +49,7 @@ export function FieldNotes({ content, params, block }) {
             Refresh
           </button>
         </div>
-      )}
+      ) : null}
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {loading ? (
