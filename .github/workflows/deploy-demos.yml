@@ -1,12 +1,9 @@
 name: Deploy Template Demos
 
 on:
-  # Run on pushes to main
+  # Run on tagged version commits only
   push:
-    branches: [main]
-    paths:
-      - 'templates/**'
-      - '.github/workflows/deploy-demos.yml'
+    tags: ['v*']
   # Allow manual trigger
   workflow_dispatch:
 
