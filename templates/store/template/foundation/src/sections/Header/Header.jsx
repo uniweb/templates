@@ -108,11 +108,19 @@ export function Header({ content, block }) {
             <div className="flex items-center gap-4">
               <button
                 onClick={openCart}
-                className="relative p-2.5 text-neutral-700 hover:bg-neutral-100 rounded-2xl transition-all"
+                className={cn(
+                  'relative p-2.5 rounded-2xl transition-all',
+                  isFloating && !scrolled && isDarkBg
+                    ? 'text-white/90 hover:text-primary-400'
+                    : 'text-neutral-700 hover:bg-neutral-100'
+                )}
               >
                 <ShoppingBag size={24} />
                 {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-primary-600 text-white text-[10px] font-black w-6 h-6 flex items-center justify-center rounded-full border-4 border-white">
+                  <span className={cn(
+                    'absolute -top-1 -right-1 bg-primary-600 text-white text-[10px] font-black w-6 h-6 flex items-center justify-center rounded-full border-4',
+                    isFloating && !scrolled && isDarkBg ? 'border-transparent' : 'border-white'
+                  )}>
                     {cartCount}
                   </span>
                 )}
