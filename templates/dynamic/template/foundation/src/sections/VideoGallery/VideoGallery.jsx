@@ -20,29 +20,29 @@ export function VideoGallery({ content, params, block }) {
   const loading = block.dataLoading
 
   return (
-    <div className="py-12">
-      <div className="max-w-6xl mx-auto px-4">
-        {(title || paragraphs[0]) && (
-          <div className="mb-8">
-            {title && <H2 text={title} className="text-2xl sm:text-3xl font-bold text-heading mb-2" />}
-            {paragraphs[0] && <P text={paragraphs[0]} className="text-muted max-w-2xl" />}
-          </div>
-        )}
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {loading ? (
-            <Skeleton />
-          ) : videos.length === 0 ? (
-            <div className="col-span-full bg-surface-subtle p-8 rounded-xl text-center text-muted">
-              No videos available.
-            </div>
-          ) : (
-            videos.map((video) => <VideoCard key={video.id} video={video} />)
-          )}
+    <div className="max-w-6xl mx-auto px-4">
+      {(title || paragraphs[0]) && (
+        <div className="mb-8">
+          {title && <H2 text={title} className="text-2xl sm:text-3xl font-bold text-heading mb-2" />}
+          {paragraphs[0] && <P text={paragraphs[0]} className="text-muted max-w-2xl" />}
         </div>
+      )}
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {loading ? (
+          <Skeleton />
+        ) : videos.length === 0 ? (
+          <div className="col-span-full bg-surface-subtle p-8 rounded-xl text-center text-muted">
+            No videos available.
+          </div>
+        ) : (
+          videos.map((video) => <VideoCard key={video.id} video={video} />)
+        )}
       </div>
     </div>
   )
 }
+
+VideoGallery.className = 'py-12'
 
 export default VideoGallery

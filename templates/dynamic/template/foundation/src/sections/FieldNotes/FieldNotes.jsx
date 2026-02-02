@@ -28,50 +28,50 @@ export function FieldNotes({ content, params, block }) {
   const ctaLink = links[0]
 
   return (
-    <div className="py-10">
-      <div className="max-w-6xl mx-auto px-4">
-        {title && (
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-2">
-              <ClipboardList className="w-6 h-6 text-primary-600" />
-              <H2 text={title} className="text-2xl font-bold text-heading" />
-            </div>
-            <button
-              onClick={() => block.refetch?.()}
-              className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-body transition-colors"
-            >
-              <RefreshCw className="w-4 h-4" />
-              Refresh
-            </button>
+    <div className="max-w-6xl mx-auto px-4">
+      {title && (
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-2">
+            <ClipboardList className="w-6 h-6 text-primary-600" />
+            <H2 text={title} className="text-2xl font-bold text-heading" />
           </div>
-        )}
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {loading ? (
-            <Skeleton count={posts.length || 3} />
-          ) : posts.length === 0 ? (
-            <div className="col-span-full bg-surface-subtle p-8 rounded-xl text-center text-muted">
-              No field notes available.
-            </div>
-          ) : (
-            posts.map((note) => <NoteCard key={note.id} note={note} />)
-          )}
+          <button
+            onClick={() => block.refetch?.()}
+            className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-body transition-colors"
+          >
+            <RefreshCw className="w-4 h-4" />
+            Refresh
+          </button>
         </div>
+      )}
 
-        {ctaLink && (
-          <div className="mt-8 text-center">
-            <Link
-              href={ctaLink.href}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-edge-muted text-body font-medium hover:bg-surface-subtle transition-colors"
-            >
-              {ctaLink.label}
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {loading ? (
+          <Skeleton count={posts.length || 3} />
+        ) : posts.length === 0 ? (
+          <div className="col-span-full bg-surface-subtle p-8 rounded-xl text-center text-muted">
+            No field notes available.
           </div>
+        ) : (
+          posts.map((note) => <NoteCard key={note.id} note={note} />)
         )}
       </div>
+
+      {ctaLink && (
+        <div className="mt-8 text-center">
+          <Link
+            href={ctaLink.href}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-edge-muted text-body font-medium hover:bg-surface-subtle transition-colors"
+          >
+            {ctaLink.label}
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      )}
     </div>
   )
 }
+
+FieldNotes.className = 'py-10'
 
 export default FieldNotes

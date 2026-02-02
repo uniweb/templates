@@ -2,12 +2,6 @@ import React from 'react'
 import { Icon, Link, cn, useScrolled, useMobileMenu, useWebsite, useActiveRoute } from '@uniweb/kit'
 import { Leaf } from 'lucide-react'
 
-function parseIconRef(ref) {
-  if (!ref) return null
-  const [library, name] = ref.includes(':') ? ref.split(':', 2) : [null, ref]
-  return library && name ? { library, name } : null
-}
-
 export function Header({ content, params, block }) {
   const { website } = useWebsite()
   const { isActive, isActiveOrAncestor } = useActiveRoute()
@@ -51,12 +45,11 @@ export function Header({ content, params, block }) {
   const renderNavItem = (item, index) => {
     const href = item.href || item.navigableRoute
     const label = item.label || item.title
-    const icon = parseIconRef(item.icon)
     const active = item.route
       ? isActiveOrAncestor(item)
       : item.href === '/'
-        ? isActive({ route: '/' })
-        : website.activePage?.route?.startsWith(item.href)
+        ? isActive(item.href)
+        : isActiveOrAncestor(item.href)
 
     return (
       <Link
@@ -67,7 +60,7 @@ export function Header({ content, params, block }) {
           getLinkStyles(active)
         )}
       >
-        {icon && <Icon library={icon.library} name={icon.name} size="16" className="opacity-80" />}
+        {item.icon && <Icon icon={item.icon} size="16" className="opacity-80" />}
         {label}
       </Link>
     )
@@ -144,8 +137,11 @@ export function Header({ content, params, block }) {
               {navItems.map((item, i) => {
                 const href = item.href || item.navigableRoute
                 const label = item.label || item.title
-                const icon = parseIconRef(item.icon)
-                const active = item.route ? isActive(item) : false
+                const active = item.route
+                  ? isActive(item)
+                  : item.href === '/'
+                    ? isActive(item.href)
+                    : isActiveOrAncestor(item.href)
 
                 return (
                   <Link
@@ -159,7 +155,7 @@ export function Header({ content, params, block }) {
                     )}
                     onClick={closeMobileMenu}
                   >
-                    {icon && <Icon library={icon.library} name={icon.name} size="18" className="opacity-70" />}
+                    {item.icon && <Icon icon={item.icon} size="18" className="opacity-70" />}
                     {label}
                   </Link>
                 )
@@ -173,5 +169,7 @@ export function Header({ content, params, block }) {
     </>
   )
 }
+
+Header.as = 'nav'
 
 export default Header
