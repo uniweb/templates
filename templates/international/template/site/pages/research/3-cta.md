@@ -2,7 +2,7 @@
 type: CTA
 theme: dark
 background:
-  color: var(--color-primary-700)
+  color: var(--primary-700)
 ---
 
 # Support Our Research

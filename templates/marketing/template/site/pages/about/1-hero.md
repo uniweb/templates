@@ -3,7 +3,7 @@ type: Hero
 theme: dark
 layout: center
 background:
-  gradient: linear-gradient(135deg, var(--color-primary-600), var(--color-primary-800))
+  gradient: linear-gradient(135deg, var(--primary-600), var(--primary-800))
   overlay: 0.3
 ---
 

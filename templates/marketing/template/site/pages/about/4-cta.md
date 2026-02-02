@@ -3,7 +3,7 @@ type: CTA
 theme: dark
 alignment: center
 background:
-  color: var(--color-primary-600)
+  color: var(--primary-600)
 ---
 
 ## Join Our Journey

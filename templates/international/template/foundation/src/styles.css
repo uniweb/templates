@@ -6,5 +6,5 @@
 
 @theme inline {
   /* Foundation-specific: use primary-50 instead of bg for surface */
-  --color-surface: var(--color-primary-50);
+  --color-surface: var(--primary-50);
 }

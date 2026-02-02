@@ -6,17 +6,17 @@
 
 @theme inline {
   /* Foundation-specific: use primary-50 instead of bg for surface */
-  --color-surface: var(--color-primary-50);
+  --color-surface: var(--primary-50);
 }
 
 /* Page background - slightly tinted like the original design */
 body {
-  background-color: var(--color-neutral-100);
+  background-color: var(--neutral-100);
 }
 
 /* Inline text formatting classes */
 .accent {
-  color: var(--color-primary-600);
+  color: var(--primary-600);
 }
 
 /* Custom animations for loading states and data appearance */
