@@ -25,7 +25,7 @@ export function Hero({ content, params, block }) {
         {title && (
           <H1
             text={title}
-            className="text-4xl md:text-5xl font-extrabold leading-tight text-heading"
+            className="text-4xl md:text-5xl font-extrabold leading-none text-heading"
           />
         )}
 
