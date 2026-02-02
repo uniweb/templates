@@ -32,7 +32,10 @@ export function FieldNotes({ content, params, block }) {
     <div className="max-w-6xl mx-auto px-4">
       {title && description ? (
         <div className="mb-12">
-          <H1 text={title} className="text-3xl font-extrabold text-heading mb-2" />
+          <H1
+            text={title}
+            className="text-3xl font-extrabold text-heading mb-2"
+          />
           <P text={description} className="text-muted max-w-2xl" />
         </div>
       ) : title ? (
@@ -78,6 +81,6 @@ export function FieldNotes({ content, params, block }) {
   )
 }
 
-FieldNotes.className = 'py-10'
+FieldNotes.className = 'py-12'
 
 export default FieldNotes
