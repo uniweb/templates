@@ -1,6 +1,5 @@
 ---
 type: ContactForm
-theme: light
 layout: split
 ---
 

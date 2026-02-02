@@ -17,19 +17,19 @@ export function Header({ content, params, block }) {
 
   const isFloating = params.floating
   const nextBlockTheme = isFloating ? (block.getNextBlockInfo()?.theme || 'light') : 'light'
-  const isDarkBackground = isFloating && ['gradient', 'dark'].includes(nextBlockTheme)
+  const isDarkBackground = isFloating && ['dark'].includes(nextBlockTheme)
 
   const getHeaderStyles = () => {
     if (isFloating) {
       return scrolled
-        ? 'bg-white/95 backdrop-blur-lg shadow-sm text-gray-900'
+        ? 'bg-surface/95 backdrop-blur-lg shadow-sm text-heading'
         : isDarkBackground
           ? 'bg-transparent text-white'
-          : 'bg-transparent text-gray-900'
+          : 'bg-transparent text-heading'
     }
     return scrolled
-      ? 'bg-white shadow-sm border-b border-edge text-gray-900'
-      : 'bg-white border-b border-edge text-gray-900'
+      ? 'bg-surface shadow-sm border-b border-edge text-heading'
+      : 'bg-surface border-b border-edge text-heading'
   }
 
   const getLinkStyles = (isActiveLink = false) => {
@@ -97,7 +97,7 @@ export function Header({ content, params, block }) {
                   className={cn(
                     'inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-colors',
                     isFloating && !scrolled && isDarkBackground
-                      ? 'bg-white text-gray-900 hover:bg-gray-100'
+                      ? 'bg-white text-neutral-900 hover:bg-neutral-100'
                       : 'bg-btn-primary text-btn-primary-text hover:bg-btn-primary-hover'
                   )}
                 >
@@ -130,7 +130,7 @@ export function Header({ content, params, block }) {
 
         {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-white border-t">
+          <div className="md:hidden bg-surface border-t border-edge">
             <div className="px-4 py-4 space-y-1">
               {navItems.map((item, i) => {
                 const href = item.href || item.navigableRoute
@@ -149,7 +149,7 @@ export function Header({ content, params, block }) {
                       'flex items-center gap-2 px-3 py-2 text-base font-medium rounded-md',
                       active
                         ? 'text-primary-600 bg-primary-50'
-                        : 'text-gray-700 hover:bg-gray-50'
+                        : 'text-muted hover:text-heading hover:bg-surface-subtle'
                     )}
                     onClick={closeMobileMenu}
                   >

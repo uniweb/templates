@@ -1,6 +1,5 @@
 ---
 type: FAQ
-theme: white
 layout: single
 expandFirst: true
 ---

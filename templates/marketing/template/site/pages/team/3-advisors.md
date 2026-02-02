@@ -2,6 +2,8 @@
 type: Team
 theme: dark
 columns: 2
+background:
+  color: '#111827'
 style: cards
 ---
 

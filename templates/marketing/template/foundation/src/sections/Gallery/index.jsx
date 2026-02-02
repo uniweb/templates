@@ -10,30 +10,7 @@ import { cn, Image } from '@uniweb/kit'
 export function Gallery({ content, params }) {
   // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { title, paragraphs, imgs } = content
-  const { theme, layout, columns } = params
-
-  const themes = {
-    light: {
-      section: 'bg-white',
-      title: 'text-gray-900',
-      description: 'text-gray-600',
-      caption: 'text-gray-600',
-    },
-    gray: {
-      section: 'bg-gray-50',
-      title: 'text-gray-900',
-      description: 'text-gray-600',
-      caption: 'text-gray-600',
-    },
-    dark: {
-      section: 'bg-gray-900',
-      title: 'text-white',
-      description: 'text-gray-400',
-      caption: 'text-gray-400',
-    },
-  }
-
-  const t = themes[theme] || themes.light
+  const { layout, columns } = params
 
   const gridCols = {
     2: 'sm:grid-cols-2',
@@ -41,7 +18,6 @@ export function Gallery({ content, params }) {
     4: 'sm:grid-cols-2 lg:grid-cols-4',
   }
 
-  // Masonry layout uses CSS columns
   const masonryCols = {
     2: 'sm:columns-2',
     3: 'sm:columns-2 lg:columns-3',
@@ -49,17 +25,17 @@ export function Gallery({ content, params }) {
   }
 
   return (
-    <section className={cn('py-16 px-6', t.section)}>
+    <section className="py-16 px-6">
       <div className="max-w-6xl mx-auto">
         {(title || paragraphs[0]) && (
           <div className="text-center mb-12">
             {title && (
-              <h2 className={cn('text-3xl font-bold mb-4', t.title)}>
+              <h2 className="text-3xl font-bold mb-4 text-heading">
                 {title}
               </h2>
             )}
             {paragraphs[0] && (
-              <p className={cn('text-lg max-w-2xl mx-auto', t.description)}>
+              <p className="text-lg max-w-2xl mx-auto text-muted">
                 {paragraphs[0]}
               </p>
             )}
@@ -67,7 +43,6 @@ export function Gallery({ content, params }) {
         )}
 
         {layout === 'masonry' ? (
-          // Masonry layout using CSS columns
           <div className={cn('gap-4', masonryCols[columns] || 'sm:columns-3')}>
             {imgs.map((img, index) => (
               <div key={index} className="break-inside-avoid mb-4">
@@ -89,7 +64,6 @@ export function Gallery({ content, params }) {
             ))}
           </div>
         ) : layout === 'carousel' ? (
-          // Horizontal scrolling carousel
           <div className="overflow-x-auto pb-4 -mx-6 px-6 scrollbar-thin scrollbar-thumb-gray-300">
             <div className="flex gap-4" style={{ width: 'max-content' }}>
               {imgs.map((img, index) => (
@@ -114,7 +88,6 @@ export function Gallery({ content, params }) {
             </div>
           </div>
         ) : (
-          // Standard grid layout
           <div className={cn('grid gap-4', gridCols[columns] || 'sm:grid-cols-3')}>
             {imgs.map((img, index) => (
               <div

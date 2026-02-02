@@ -75,7 +75,7 @@ export function Header({ content, params, block }) {
   const allowTranslucentTop = nextBlockInfo?.context?.allowTranslucentTop || false
   const nextBlockTheme = nextBlockInfo?.theme || 'light'
   const isFloating = allowTranslucentTop
-  const isDarkBackground = isFloating && ['gradient', 'dark'].includes(nextBlockTheme)
+  const isDarkBackground = isFloating && ['dark'].includes(nextBlockTheme)
 
   // Runtime guarantees: content is flat
   const { title, links } = content
@@ -89,21 +89,21 @@ export function Header({ content, params, block }) {
   const locales = website.getLocales()
   const activeLocale = website.getActiveLocale()
 
-  // Header styles — keep hardcoded for floating/scroll states (absolute visual effects)
+  // Header styles
   const getHeaderStyles = () => {
     if (isFloating) {
       return scrolled
-        ? 'bg-white/95 backdrop-blur-lg shadow-sm text-gray-900'
+        ? 'bg-surface/95 backdrop-blur-lg shadow-sm text-heading'
         : isDarkBackground
           ? 'bg-transparent text-white'
-          : 'bg-transparent text-gray-900'
+          : 'bg-transparent text-heading'
     }
     return scrolled
-      ? 'bg-white shadow-sm text-gray-900'
-      : 'bg-white text-gray-900'
+      ? 'bg-surface shadow-sm text-heading'
+      : 'bg-surface text-heading'
   }
 
-  // Link styles — semantic for normal state, hardcoded for floating-over-dark
+  // Link styles
   const getLinkStyles = (isActiveLink = false) => {
     if (isActiveLink) {
       if (isFloating && !scrolled && isDarkBackground) {
@@ -304,7 +304,7 @@ export function Header({ content, params, block }) {
                   className={cn(
                     'inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-colors',
                     isFloating && !scrolled && isDarkBackground
-                      ? 'bg-white text-gray-900 hover:bg-gray-100'
+                      ? 'bg-white text-neutral-900 hover:bg-neutral-100'
                       : 'bg-btn-primary text-btn-primary-text hover:bg-btn-primary-hover'
                   )}
                 >

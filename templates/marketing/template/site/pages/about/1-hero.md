@@ -1,7 +1,10 @@
 ---
 type: Hero
-theme: glass
+theme: dark
 layout: center
+background:
+  gradient: linear-gradient(135deg, var(--color-primary-600), var(--color-primary-800))
+  overlay: 0.3
 ---
 
 ### Our Story

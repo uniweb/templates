@@ -1,50 +1,28 @@
 import React from 'react'
 import { Link, cn } from '@uniweb/kit'
 
+/**
+ * CTA Component
+ *
+ * Conversion-focused section. Background color/gradient is controlled
+ * via frontmatter `background:` and `theme:` — component uses semantic tokens.
+ */
 export function CTA({ content, params }) {
   // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { title, paragraphs, links } = content
-  const { theme, alignment } = params
+  const { alignment } = params
 
   const cta = links[0]
   const secondaryCta = links[1]
 
-  const themeStyles = {
-    primary: 'bg-primary text-white',
-    gradient: 'bg-gradient-to-r from-primary to-blue-700 text-white',
-    dark: 'bg-gray-900 text-white',
-    light: 'bg-gray-100 text-gray-900',
-  }
-
-  const buttonStyles = {
-    primary: 'bg-white text-primary hover:bg-blue-50',
-    gradient: 'bg-white text-primary hover:bg-blue-50',
-    dark: 'bg-white text-gray-900 hover:bg-gray-100',
-    light: 'bg-primary text-white hover:bg-blue-700',
-  }
-
-  const secondaryStyles = {
-    primary: 'border-2 border-white text-white hover:bg-white/10',
-    gradient: 'border-2 border-white text-white hover:bg-white/10',
-    dark: 'border-2 border-gray-600 text-white hover:bg-gray-800',
-    light: 'border-2 border-gray-300 text-gray-700 hover:bg-gray-200',
-  }
-
-  const descStyles = {
-    primary: 'text-blue-100',
-    gradient: 'text-blue-100',
-    dark: 'text-gray-400',
-    light: 'text-gray-600',
-  }
-
   return (
-    <section className={cn('py-20 px-6', themeStyles[theme])}>
+    <section className="py-20 px-6">
       <div className={cn('max-w-4xl mx-auto', alignment === 'center' && 'text-center')}>
         {title && (
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">{title}</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-heading">{title}</h2>
         )}
         {paragraphs[0] && (
-          <p className={cn('text-lg mb-8 max-w-2xl', alignment === 'center' && 'mx-auto', descStyles[theme])}>
+          <p className={cn('text-lg mb-8 max-w-2xl text-muted', alignment === 'center' && 'mx-auto')}>
             {paragraphs[0]}
           </p>
         )}
@@ -53,7 +31,7 @@ export function CTA({ content, params }) {
             {cta && (
               <Link
                 href={cta.href}
-                className={cn('inline-block px-8 py-4 font-semibold rounded-lg transition-colors', buttonStyles[theme])}
+                className="inline-block px-8 py-4 font-semibold rounded-lg transition-colors bg-btn-primary text-btn-primary-text hover:bg-btn-primary-hover"
               >
                 {cta.label}
               </Link>
@@ -61,7 +39,7 @@ export function CTA({ content, params }) {
             {secondaryCta && (
               <Link
                 href={secondaryCta.href}
-                className={cn('inline-block px-8 py-4 font-semibold rounded-lg transition-colors', secondaryStyles[theme])}
+                className="inline-block px-8 py-4 font-semibold rounded-lg transition-colors border-2 border-edge text-heading hover:bg-surface-subtle"
               >
                 {secondaryCta.label}
               </Link>

@@ -11,45 +11,10 @@ import { cn, Icon } from '@uniweb/kit'
 export function Features({ content, params }) {
   // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { title, paragraphs } = content
-  const { columns, theme, style } = params
+  const { columns, style } = params
 
   // Items come from semantic-parser groups (icon + H3 title patterns)
   const features = content.items
-
-  const themes = {
-    light: {
-      section: 'bg-white',
-      title: 'text-gray-900',
-      description: 'text-gray-600',
-      featureTitle: 'text-gray-900',
-      featureDesc: 'text-gray-600',
-      card: 'bg-gray-50',
-      iconBg: 'bg-primary/10',
-      icon: 'text-primary',
-    },
-    gray: {
-      section: 'bg-gray-50',
-      title: 'text-gray-900',
-      description: 'text-gray-600',
-      featureTitle: 'text-gray-900',
-      featureDesc: 'text-gray-600',
-      card: 'bg-white shadow-sm',
-      iconBg: 'bg-primary/10',
-      icon: 'text-primary',
-    },
-    dark: {
-      section: 'bg-gray-900',
-      title: 'text-white',
-      description: 'text-gray-400',
-      featureTitle: 'text-white',
-      featureDesc: 'text-gray-400',
-      card: 'bg-gray-800',
-      iconBg: 'bg-primary/20',
-      icon: 'text-primary',
-    },
-  }
-
-  const t = themes[theme] || themes.light
 
   const gridCols = {
     2: 'md:grid-cols-2',
@@ -59,33 +24,33 @@ export function Features({ content, params }) {
 
   const styles = {
     cards: {
-      container: cn('p-6 rounded-xl', t.card),
-      iconWrapper: cn('w-12 h-12 rounded-lg flex items-center justify-center mb-4', t.iconBg),
+      container: 'p-6 rounded-xl bg-surface-subtle',
+      iconWrapper: 'w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-primary/10',
     },
     minimal: {
       container: 'text-center',
-      iconWrapper: cn('w-14 h-14 rounded-xl flex items-center justify-center mb-4 mx-auto', t.iconBg),
+      iconWrapper: 'w-14 h-14 rounded-xl flex items-center justify-center mb-4 mx-auto bg-primary/10',
     },
     list: {
       container: 'flex gap-4',
-      iconWrapper: cn('w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0', t.iconBg),
+      iconWrapper: 'w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-primary/10',
     },
   }
 
   const s = styles[style] || styles.cards
 
   return (
-    <section className={cn('py-20 px-6', t.section)}>
+    <section className="py-20 px-6">
       <div className="max-w-6xl mx-auto">
         {(title || paragraphs[0]) && (
           <div className="text-center mb-16">
             {title && (
-              <h2 className={cn('text-3xl md:text-4xl font-bold mb-4', t.title)}>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-heading">
                 {title}
               </h2>
             )}
             {paragraphs[0] && (
-              <p className={cn('text-lg max-w-2xl mx-auto', t.description)}>
+              <p className="text-lg max-w-2xl mx-auto text-muted">
                 {paragraphs[0]}
               </p>
             )}
@@ -108,30 +73,30 @@ export function Features({ content, params }) {
                       library={icon.library}
                       name={icon.name}
                       size={24}
-                      className={t.icon}
+                      className="text-primary"
                     />
                   </div>
                 )}
                 {style === 'list' ? (
                   <div>
                     {featureTitle && (
-                      <h3 className={cn('text-lg font-semibold mb-1', t.featureTitle)}>
+                      <h3 className="text-lg font-semibold mb-1 text-heading">
                         {featureTitle}
                       </h3>
                     )}
                     {featureDesc && (
-                      <p className={cn('text-sm', t.featureDesc)}>{featureDesc}</p>
+                      <p className="text-sm text-muted">{featureDesc}</p>
                     )}
                   </div>
                 ) : (
                   <>
                     {featureTitle && (
-                      <h3 className={cn('text-xl font-semibold mb-2', t.featureTitle)}>
+                      <h3 className="text-xl font-semibold mb-2 text-heading">
                         {featureTitle}
                       </h3>
                     )}
                     {featureDesc && (
-                      <p className={t.featureDesc}>{featureDesc}</p>
+                      <p className="text-muted">{featureDesc}</p>
                     )}
                   </>
                 )}

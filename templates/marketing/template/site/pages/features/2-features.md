@@ -1,6 +1,5 @@
 ---
 type: Features
-theme: light
 columns: 2
 style: list
 ---

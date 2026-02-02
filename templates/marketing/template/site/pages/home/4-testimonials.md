@@ -1,6 +1,6 @@
 ---
 component: Testimonials
-theme: gray
+theme: medium
 columns: 3
 ---
 

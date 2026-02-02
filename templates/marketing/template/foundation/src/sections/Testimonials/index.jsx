@@ -4,40 +4,10 @@ import { cn } from '@uniweb/kit'
 export function Testimonials({ content, params }) {
   // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { title, paragraphs } = content
-  const { theme, columns } = params
+  const { columns } = params
 
   // Extract testimonials from semantic groups (H3 patterns)
   const testimonials = content.items
-
-  const themeStyles = {
-    light: 'bg-white',
-    gray: 'bg-gray-50',
-    dark: 'bg-gray-900 text-white',
-  }
-
-  const cardStyles = {
-    light: 'bg-gray-50',
-    gray: 'bg-white shadow-sm',
-    dark: 'bg-gray-800',
-  }
-
-  const quoteStyles = {
-    light: 'text-gray-700',
-    gray: 'text-gray-700',
-    dark: 'text-gray-300',
-  }
-
-  const nameStyles = {
-    light: 'text-gray-900',
-    gray: 'text-gray-900',
-    dark: 'text-white',
-  }
-
-  const roleStyles = {
-    light: 'text-gray-500',
-    gray: 'text-gray-500',
-    dark: 'text-gray-400',
-  }
 
   const gridCols = {
     2: 'md:grid-cols-2',
@@ -45,15 +15,15 @@ export function Testimonials({ content, params }) {
   }
 
   return (
-    <section className={cn('py-20 px-6', themeStyles[theme])}>
+    <section className="py-20 px-6">
       <div className="max-w-6xl mx-auto">
         {(title || paragraphs[0]) && (
           <div className="text-center mb-16">
             {title && (
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">{title}</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-heading">{title}</h2>
             )}
             {paragraphs[0] && (
-              <p className={cn('text-lg max-w-2xl mx-auto', roleStyles[theme])}>
+              <p className="text-lg max-w-2xl mx-auto text-muted">
                 {paragraphs[0]}
               </p>
             )}
@@ -69,20 +39,20 @@ export function Testimonials({ content, params }) {
             return (
               <div
                 key={index}
-                className={cn('p-6 rounded-xl', cardStyles[theme])}
+                className="p-6 rounded-xl bg-surface-subtle"
               >
                 <svg className="w-8 h-8 text-primary/30 mb-4" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                 </svg>
                 {quote && (
-                  <p className={cn('text-lg mb-4', quoteStyles[theme])}>"{quote}"</p>
+                  <p className="text-lg mb-4 text-body">"{quote}"</p>
                 )}
                 <div>
                   {name && (
-                    <p className={cn('font-semibold', nameStyles[theme])}>{name}</p>
+                    <p className="font-semibold text-heading">{name}</p>
                   )}
                   {role && (
-                    <p className={cn('text-sm', roleStyles[theme])}>{role}</p>
+                    <p className="text-sm text-subtle">{role}</p>
                   )}
                 </div>
               </div>

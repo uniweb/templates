@@ -27,12 +27,6 @@ export default {
       ],
       default: 3,
     },
-    theme: {
-      type: 'select',
-      label: 'Theme',
-      options: ['light', 'gray', 'dark'],
-      default: 'light',
-    },
     style: {
       type: 'select',
       label: 'Style',

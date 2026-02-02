@@ -1,6 +1,5 @@
 ---
 type: CTA
-theme: light
 layout: center
 ---
 

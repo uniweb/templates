@@ -1,6 +1,5 @@
 ---
 type: Features
-theme: light
 columns: 3
 style: cards
 ---

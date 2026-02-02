@@ -3,6 +3,8 @@ type: Footer
 theme: dark
 layout: simple
 showNav: true
+background:
+  color: '#111827'
 ---
 
 # {{projectName}}

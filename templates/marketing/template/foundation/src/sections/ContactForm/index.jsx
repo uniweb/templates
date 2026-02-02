@@ -9,7 +9,7 @@ import { cn } from '@uniweb/kit'
  */
 export function ContactForm({ content, params }) {
   const { title, paragraphs } = content
-  const { theme, layout } = params
+  const { layout } = params
 
   // Form config from dataBlock
   const form = content.data.form || {}
@@ -22,28 +22,6 @@ export function ContactForm({ content, params }) {
   const [errors, setErrors] = useState({})
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
-
-  const themes = {
-    light: {
-      bg: 'bg-white',
-      text: 'text-gray-900',
-      muted: 'text-gray-600',
-      input: 'bg-white border-gray-300 text-gray-900 placeholder-gray-400',
-      inputFocus: 'focus:border-primary focus:ring-primary',
-      button: 'bg-primary text-white hover:bg-primary/90',
-      error: 'text-red-600',
-    },
-    dark: {
-      bg: 'bg-gray-900',
-      text: 'text-white',
-      muted: 'text-gray-400',
-      input: 'bg-gray-800 border-gray-700 text-white placeholder-gray-500',
-      inputFocus: 'focus:border-primary focus:ring-primary',
-      button: 'bg-primary text-white hover:bg-primary/90',
-      error: 'text-red-400',
-    },
-  }
-  const t = themes[theme] || themes.light
 
   const validate = () => {
     const newErrors = {}
@@ -77,7 +55,6 @@ export function ContactForm({ content, params }) {
       }
     }
 
-    // Simulate brief delay
     await new Promise(r => setTimeout(r, 500))
     setSubmitting(false)
     setSubmitted(true)
@@ -96,15 +73,13 @@ export function ContactForm({ content, params }) {
     const error = errors[name]
 
     const baseInputClass = cn(
-      'w-full px-4 py-3 rounded-lg border transition-colors',
-      t.input,
-      t.inputFocus,
+      'w-full px-4 py-3 rounded-lg border transition-colors bg-surface border-edge text-heading placeholder-subtle focus:border-primary focus:ring-primary',
       error && 'border-red-500'
     )
 
     return (
       <div key={name} className={type === 'textarea' ? 'col-span-full' : ''}>
-        <label className={cn('block text-sm font-medium mb-2', t.text)}>
+        <label className="block text-sm font-medium mb-2 text-heading">
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
         </label>
@@ -127,7 +102,7 @@ export function ContactForm({ content, params }) {
             className={baseInputClass}
           />
         )}
-        {error && <p className={cn('text-sm mt-1', t.error)}>{error}</p>}
+        {error && <p className="text-sm mt-1 text-red-600">{error}</p>}
       </div>
     )
   }
@@ -135,27 +110,27 @@ export function ContactForm({ content, params }) {
   // Success state
   if (submitted) {
     return (
-      <section className={cn('py-20 px-6', t.bg)}>
+      <section className="py-20 px-6">
         <div className="max-w-2xl mx-auto text-center">
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h2 className={cn('text-2xl font-bold mb-4', t.text)}>{successMessage}</h2>
+          <h2 className="text-2xl font-bold mb-4 text-heading">{successMessage}</h2>
         </div>
       </section>
     )
   }
 
-  // Split layout: info on left, form on right
+  // Split layout
   if (layout === 'split') {
     return (
-      <section className={cn('py-20 px-6', t.bg)}>
+      <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20">
           <div>
-            {title && <h2 className={cn('text-3xl sm:text-4xl font-bold mb-6', t.text)}>{title}</h2>}
-            {paragraphs[0] && <p className={cn('text-lg', t.muted)}>{paragraphs[0]}</p>}
+            {title && <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-heading">{title}</h2>}
+            {paragraphs[0] && <p className="text-lg text-muted">{paragraphs[0]}</p>}
           </div>
           <form onSubmit={handleSubmit} className="grid gap-6">
             {fields.map(renderField)}
@@ -163,8 +138,7 @@ export function ContactForm({ content, params }) {
               type="submit"
               disabled={submitting}
               className={cn(
-                'w-full py-3 px-6 rounded-lg font-medium transition-colors',
-                t.button,
+                'w-full py-3 px-6 rounded-lg font-medium transition-colors bg-btn-primary text-btn-primary-text hover:bg-btn-primary-hover',
                 submitting && 'opacity-70 cursor-not-allowed'
               )}
             >
@@ -178,12 +152,12 @@ export function ContactForm({ content, params }) {
 
   // Centered layout (default)
   return (
-    <section className={cn('py-20 px-6', t.bg)}>
+    <section className="py-20 px-6">
       <div className="max-w-2xl mx-auto">
         {(title || paragraphs[0]) && (
           <div className="text-center mb-12">
-            {title && <h2 className={cn('text-3xl sm:text-4xl font-bold mb-4', t.text)}>{title}</h2>}
-            {paragraphs[0] && <p className={cn('text-lg', t.muted)}>{paragraphs[0]}</p>}
+            {title && <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-heading">{title}</h2>}
+            {paragraphs[0] && <p className="text-lg text-muted">{paragraphs[0]}</p>}
           </div>
         )}
         <form onSubmit={handleSubmit} className="grid sm:grid-cols-2 gap-6">
@@ -193,8 +167,7 @@ export function ContactForm({ content, params }) {
               type="submit"
               disabled={submitting}
               className={cn(
-                'w-full py-3 px-6 rounded-lg font-medium transition-colors',
-                t.button,
+                'w-full py-3 px-6 rounded-lg font-medium transition-colors bg-btn-primary text-btn-primary-text hover:bg-btn-primary-hover',
                 submitting && 'opacity-70 cursor-not-allowed'
               )}
             >

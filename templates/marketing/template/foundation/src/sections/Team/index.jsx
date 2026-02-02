@@ -14,18 +14,14 @@ import { cn, Link, SocialIcon, isSocialLink } from '@uniweb/kit'
 export function Team({ content, params }) {
   // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { title, paragraphs } = content
-  const { theme, columns, style } = params
+  const { columns, style } = params
 
   // Support both fetched data and markdown items
-  // Fetched data: { name, role, bio, avatar, social: { linkedin, twitter, github } }
-  // Markdown items: { title, paragraphs, imgs, links }
   const rawMembers = content.data.team || content.items || []
 
   // Normalize to consistent shape
   const members = rawMembers.map((member) => {
-    // Check if it's fetched data format (has 'name' property)
     if (member.name !== undefined) {
-      // Convert social object to links array
       const socialLinks = []
       if (member.social) {
         for (const [platform, url] of Object.entries(member.social)) {
@@ -37,12 +33,11 @@ export function Team({ content, params }) {
       return {
         name: member.name,
         role: member.role,
-        bio: member.bio || member.body,  // 'body' for collection data, 'bio' for legacy JSON
+        bio: member.bio || member.body,
         photo: member.avatar ? { url: member.avatar } : null,
         socialLinks,
       }
     }
-    // Markdown items format
     return {
       name: member.title,
       role: member.paragraphs?.[0],
@@ -52,41 +47,6 @@ export function Team({ content, params }) {
     }
   })
 
-  const themes = {
-    light: {
-      section: 'bg-white',
-      title: 'text-gray-900',
-      description: 'text-gray-600',
-      name: 'text-gray-900',
-      role: 'text-gray-500',
-      bio: 'text-gray-600',
-      card: 'bg-gray-50 hover:shadow-lg',
-      social: 'text-gray-400 hover:text-primary',
-    },
-    gray: {
-      section: 'bg-gray-50',
-      title: 'text-gray-900',
-      description: 'text-gray-600',
-      name: 'text-gray-900',
-      role: 'text-gray-500',
-      bio: 'text-gray-600',
-      card: 'bg-white shadow-sm hover:shadow-lg',
-      social: 'text-gray-400 hover:text-primary',
-    },
-    dark: {
-      section: 'bg-gray-900',
-      title: 'text-white',
-      description: 'text-gray-400',
-      name: 'text-white',
-      role: 'text-gray-400',
-      bio: 'text-gray-400',
-      card: 'bg-gray-800 hover:bg-gray-750',
-      social: 'text-gray-500 hover:text-primary',
-    },
-  }
-
-  const t = themes[theme] || themes.light
-
   const gridCols = {
     2: 'sm:grid-cols-2',
     3: 'sm:grid-cols-2 lg:grid-cols-3',
@@ -94,17 +54,17 @@ export function Team({ content, params }) {
   }
 
   return (
-    <section className={cn('py-20 px-6', t.section)}>
+    <section className="py-20 px-6">
       <div className="max-w-6xl mx-auto">
         {(title || paragraphs[0]) && (
           <div className="text-center mb-16">
             {title && (
-              <h2 className={cn('text-3xl sm:text-4xl font-bold mb-4', t.title)}>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-heading">
                 {title}
               </h2>
             )}
             {paragraphs[0] && (
-              <p className={cn('text-lg max-w-2xl mx-auto', t.description)}>
+              <p className="text-lg max-w-2xl mx-auto text-muted">
                 {paragraphs[0]}
               </p>
             )}
@@ -126,15 +86,15 @@ export function Team({ content, params }) {
                     />
                   )}
                   {name && (
-                    <h3 className={cn('text-lg font-semibold', t.name)}>{name}</h3>
+                    <h3 className="text-lg font-semibold text-heading">{name}</h3>
                   )}
                   {role && (
-                    <p className={cn('text-sm', t.role)}>{role}</p>
+                    <p className="text-sm text-subtle">{role}</p>
                   )}
                   {socialLinks.length > 0 && (
                     <div className="flex justify-center gap-3 mt-3">
                       {socialLinks.filter(link => isSocialLink(link.href)).map((link, i) => (
-                        <Link key={i} href={link.href} className={t.social}>
+                        <Link key={i} href={link.href} className="text-subtle hover:text-primary">
                           <SocialIcon url={link.href} className="w-5 h-5" />
                         </Link>
                       ))}
@@ -148,10 +108,7 @@ export function Team({ content, params }) {
             return (
               <div
                 key={index}
-                className={cn(
-                  'rounded-2xl overflow-hidden transition-all duration-300',
-                  t.card
-                )}
+                className="rounded-2xl overflow-hidden transition-all duration-300 bg-surface-subtle hover:shadow-lg"
               >
                 {photo && (
                   <div className="aspect-square">
@@ -164,20 +121,20 @@ export function Team({ content, params }) {
                 )}
                 <div className="p-6">
                   {name && (
-                    <h3 className={cn('text-xl font-semibold mb-1', t.name)}>
+                    <h3 className="text-xl font-semibold mb-1 text-heading">
                       {name}
                     </h3>
                   )}
                   {role && (
-                    <p className={cn('text-sm mb-3', t.role)}>{role}</p>
+                    <p className="text-sm mb-3 text-subtle">{role}</p>
                   )}
                   {bio && (
-                    <p className={cn('text-sm mb-4', t.bio)}>{bio}</p>
+                    <p className="text-sm mb-4 text-muted">{bio}</p>
                   )}
                   {socialLinks.length > 0 && (
                     <div className="flex gap-3">
                       {socialLinks.filter(link => isSocialLink(link.href)).map((link, i) => (
-                        <Link key={i} href={link.href} className={t.social}>
+                        <Link key={i} href={link.href} className="text-subtle hover:text-primary">
                           <SocialIcon url={link.href} className="w-5 h-5" />
                         </Link>
                       ))}

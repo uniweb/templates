@@ -18,12 +18,6 @@ export default {
   },
 
   params: {
-    theme: {
-      type: 'select',
-      label: 'Theme',
-      options: ['dark', 'light'],
-      default: 'dark',
-    },
     layout: {
       type: 'select',
       label: 'Layout',

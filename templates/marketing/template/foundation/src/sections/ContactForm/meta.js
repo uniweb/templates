@@ -16,12 +16,6 @@ export default {
   },
 
   params: {
-    theme: {
-      type: 'select',
-      label: 'Theme',
-      options: ['light', 'dark'],
-      default: 'light',
-    },
     layout: {
       type: 'select',
       label: 'Layout',
@@ -32,20 +26,15 @@ export default {
 
   presets: {
     default: {
-      label: 'Centered Light',
-      params: { theme: 'light', layout: 'centered' },
-    },
-    dark: {
-      label: 'Centered Dark',
-      params: { theme: 'dark', layout: 'centered' },
+      label: 'Centered',
+      params: { layout: 'centered' },
     },
     split: {
       label: 'Split Layout',
-      params: { theme: 'light', layout: 'split' },
+      params: { layout: 'split' },
     },
   },
 
-  // Data configuration: schema for dataBlocks, applied at runtime for defaults and types
   data: {
     schemas: {
       form: {

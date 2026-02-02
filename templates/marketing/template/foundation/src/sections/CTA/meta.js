@@ -14,12 +14,6 @@ export default {
   },
 
   params: {
-    theme: {
-      type: 'select',
-      label: 'Theme',
-      options: ['primary', 'gradient', 'dark', 'light'],
-      default: 'primary',
-    },
     alignment: {
       type: 'select',
       label: 'Alignment',

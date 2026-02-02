@@ -16,18 +16,11 @@ export default {
     },
   },
 
-  // Data configuration: accept tagged YAML pricing data
   data: {
     inherit: ['pricing'],
   },
 
   params: {
-    theme: {
-      type: 'select',
-      label: 'Theme',
-      options: ['light', 'white', 'dark'],
-      default: 'light',
-    },
     showToggle: {
       type: 'boolean',
       label: 'Show Billing Toggle',

@@ -13,7 +13,7 @@ export function OccurrenceRecords({ content, params, block }) {
   const loading = block.dataLoading
 
   return (
-    <div className="bg-white rounded-2xl border border-edge-muted p-6 shadow-sm h-full">
+    <div className="bg-surface rounded-2xl border border-edge-muted p-6 shadow-sm h-full">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
           <Database className="text-accent-600 w-5 h-5" />

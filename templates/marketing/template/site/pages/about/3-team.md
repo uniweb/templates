@@ -1,6 +1,6 @@
 ---
 type: CTA
-theme: gray
+theme: medium
 layout: center
 ---
 

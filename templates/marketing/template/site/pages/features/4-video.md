@@ -1,6 +1,5 @@
 ---
 type: Video
-theme: light
 layout: center
 ---
 

@@ -1,7 +1,9 @@
 ---
 type: Hero
-theme: gradient
+theme: dark
 layout: split-right
+background:
+  gradient: linear-gradient(135deg, var(--color-primary-600), var(--color-primary-800))
 ---
 
 ### Platform Features

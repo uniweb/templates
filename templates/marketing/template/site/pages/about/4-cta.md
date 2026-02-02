@@ -1,7 +1,9 @@
 ---
 type: CTA
-theme: primary
+theme: dark
 alignment: center
+background:
+  color: var(--color-primary-600)
 ---
 
 ## Join Our Journey

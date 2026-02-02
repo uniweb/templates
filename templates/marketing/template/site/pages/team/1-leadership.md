@@ -1,6 +1,6 @@
 ---
 type: Team
-theme: gray
+theme: medium
 columns: 3
 style: cards
 data: team

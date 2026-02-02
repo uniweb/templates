@@ -26,13 +26,13 @@ export function BlogList({ content, params, block }) {
         {(title || subtitle || paragraphs.length > 0) && (
           <header className="text-center mb-12">
             {title && (
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">{title}</h2>
+              <h2 className="text-3xl font-bold text-heading mb-4">{title}</h2>
             )}
             {subtitle && (
-              <p className="text-xl text-gray-600 mb-4">{subtitle}</p>
+              <p className="text-xl text-muted mb-4">{subtitle}</p>
             )}
             {paragraphs.map((p, i) => (
-              <p key={i} className="text-gray-600 max-w-2xl mx-auto">
+              <p key={i} className="text-muted max-w-2xl mx-auto">
                 {p}
               </p>
             ))}
@@ -54,7 +54,7 @@ export function BlogList({ content, params, block }) {
             ))}
           </div>
         ) : (
-          <p className="text-center text-gray-500">No articles found.</p>
+          <p className="text-center text-subtle">No articles found.</p>
         )}
       </div>
     </section>
@@ -80,7 +80,7 @@ function ArticleCard({ article, fallbackRoute, showExcerpt, showAuthor, showDate
     : null
 
   return (
-    <article className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+    <article className="bg-surface-subtle rounded-xl shadow-sm border border-edge-muted overflow-hidden hover:shadow-md transition-shadow">
       {/* Image */}
       {image && (
         <Link href={articleUrl} className="block">
@@ -99,7 +99,7 @@ function ArticleCard({ article, fallbackRoute, showExcerpt, showAuthor, showDate
             {tags.slice(0, 2).map((tag, i) => (
               <span
                 key={i}
-                className="px-2 py-1 text-xs bg-blue-50 text-blue-600 rounded"
+                className="px-2 py-1 text-xs bg-primary/10 text-primary rounded"
               >
                 {tag}
               </span>
@@ -108,20 +108,20 @@ function ArticleCard({ article, fallbackRoute, showExcerpt, showAuthor, showDate
         )}
 
         {/* Title */}
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">
-          <Link href={articleUrl} className="hover:text-blue-600">
+        <h3 className="text-xl font-semibold text-heading mb-2">
+          <Link href={articleUrl} className="hover:text-primary">
             {title}
           </Link>
         </h3>
 
         {/* Excerpt */}
         {showExcerpt && excerpt && (
-          <p className="text-gray-600 mb-4 line-clamp-2">{excerpt}</p>
+          <p className="text-muted mb-4 line-clamp-2">{excerpt}</p>
         )}
 
         {/* Meta */}
         {(showAuthor || showDate) && (
-          <div className="flex items-center gap-3 text-sm text-gray-500">
+          <div className="flex items-center gap-3 text-sm text-subtle">
             {showAuthor && author && (
               <div className="flex items-center gap-2">
                 {author.avatar && (
@@ -135,7 +135,7 @@ function ArticleCard({ article, fallbackRoute, showExcerpt, showAuthor, showDate
               </div>
             )}
             {showAuthor && showDate && author && formattedDate && (
-              <span className="text-gray-300">|</span>
+              <span className="text-edge">|</span>
             )}
             {showDate && formattedDate && (
               <time dateTime={date}>{formattedDate}</time>

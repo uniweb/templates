@@ -1,6 +1,5 @@
 ---
 type: Team
-theme: light
 columns: 4
 style: simple
 ---

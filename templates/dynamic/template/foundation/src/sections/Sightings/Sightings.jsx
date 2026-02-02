@@ -57,7 +57,7 @@ export function Sightings({ content, params, block }) {
                 href={obs.uri}
                 target="_blank"
                 rel="noreferrer"
-                className="bg-white rounded-xl border border-edge-muted shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col overflow-hidden group h-full animate-fade-in-up"
+                className="bg-surface rounded-xl border border-edge-muted shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col overflow-hidden group h-full animate-fade-in-up"
               >
                 <div className="h-48 overflow-hidden bg-surface-subtle relative">
                   {photoUrl ? (

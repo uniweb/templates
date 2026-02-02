@@ -1,6 +1,6 @@
 ---
 type: Gallery
-theme: gray
+theme: medium
 layout: grid
 columns: 3
 ---

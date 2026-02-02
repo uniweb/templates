@@ -17,12 +17,6 @@ export default {
   },
 
   params: {
-    theme: {
-      type: 'select',
-      label: 'Theme',
-      options: ['light', 'gray', 'dark'],
-      default: 'light',
-    },
     columns: {
       type: 'select',
       label: 'Columns',

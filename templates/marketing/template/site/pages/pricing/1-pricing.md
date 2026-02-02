@@ -1,6 +1,5 @@
 ---
 type: Pricing
-theme: light
 showToggle: true
 defaultBilling: annual
 ---

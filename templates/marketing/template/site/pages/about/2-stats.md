@@ -1,6 +1,5 @@
 ---
 type: Stats
-theme: light
 columns: 3
 style: cards
 ---

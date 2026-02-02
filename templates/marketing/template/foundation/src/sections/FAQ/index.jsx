@@ -11,7 +11,7 @@ import { ChevronDown, MessageCircle } from 'lucide-react'
 export function FAQ({ content, params }) {
   // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { title, paragraphs } = content
-  const { theme, layout, expandFirst, autoClose } = params
+  const { layout, expandFirst, autoClose } = params
 
   // Extract questions from semantic groups (H3 patterns)
   const questions = content.items
@@ -25,45 +25,9 @@ export function FAQ({ content, params }) {
       if (isOpen) {
         return prev.filter(i => i !== index)
       }
-      // Opening: either replace all (autoClose) or add to list
       return autoClose ? [index] : [...prev, index]
     })
   }
-
-  const themes = {
-    light: {
-      section: 'bg-white',
-      title: 'text-gray-900',
-      description: 'text-gray-600',
-      question: 'text-gray-900 hover:text-primary',
-      answer: 'text-gray-600',
-      border: 'border-gray-200',
-      iconBg: 'bg-primary/10',
-      icon: 'text-primary',
-    },
-    gray: {
-      section: 'bg-gray-50',
-      title: 'text-gray-900',
-      description: 'text-gray-600',
-      question: 'text-gray-900 hover:text-primary',
-      answer: 'text-gray-600',
-      border: 'border-gray-200',
-      iconBg: 'bg-primary/10',
-      icon: 'text-primary',
-    },
-    dark: {
-      section: 'bg-gray-900',
-      title: 'text-white',
-      description: 'text-gray-400',
-      question: 'text-white hover:text-primary',
-      answer: 'text-gray-400',
-      border: 'border-gray-700',
-      iconBg: 'bg-primary/20',
-      icon: 'text-primary',
-    },
-  }
-
-  const t = themes[theme] || themes.light
 
   const FAQItem = ({ question, index }) => {
     const questionText = question.title
@@ -71,13 +35,10 @@ export function FAQ({ content, params }) {
     const isOpen = openItems.includes(index)
 
     return (
-      <div className={cn('border-b last:border-b-0', t.border)}>
+      <div className="border-b last:border-b-0 border-edge">
         <button
           onClick={() => toggleItem(index)}
-          className={cn(
-            'flex items-center justify-between w-full py-5 text-left transition-colors',
-            t.question
-          )}
+          className="flex items-center justify-between w-full py-5 text-left transition-colors text-heading hover:text-primary"
           aria-expanded={isOpen}
         >
           <span className="text-lg font-medium pr-4">{questionText}</span>
@@ -96,7 +57,7 @@ export function FAQ({ content, params }) {
         >
           <div className="overflow-hidden">
             {answerParagraphs.map((para, i) => (
-              <p key={i} className={cn('mb-3 last:mb-0', t.answer)}>
+              <p key={i} className="mb-3 last:mb-0 text-muted">
                 {para}
               </p>
             ))}
@@ -110,20 +71,20 @@ export function FAQ({ content, params }) {
   const midpoint = Math.ceil(questions.length / 2)
 
   return (
-    <section className={cn('py-20 px-6', t.section)}>
+    <section className="py-20 px-6">
       <div className="max-w-4xl mx-auto">
         {(title || paragraphs[0]) && (
           <div className="text-center mb-12">
-            <div className={cn('w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4', t.iconBg)}>
-              <MessageCircle className={cn('w-6 h-6', t.icon)} />
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 bg-primary/10">
+              <MessageCircle className="w-6 h-6 text-primary" />
             </div>
             {title && (
-              <h2 className={cn('text-3xl sm:text-4xl font-bold mb-4', t.title)}>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-heading">
                 {title}
               </h2>
             )}
             {paragraphs[0] && (
-              <p className={cn('text-lg max-w-2xl mx-auto', t.description)}>
+              <p className="text-lg max-w-2xl mx-auto text-muted">
                 {paragraphs[0]}
               </p>
             )}

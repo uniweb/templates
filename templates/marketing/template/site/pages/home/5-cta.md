@@ -1,7 +1,9 @@
 ---
 type: CTA
-theme: gradient
+theme: dark
 alignment: center
+background:
+  gradient: linear-gradient(135deg, var(--color-primary-600), var(--color-primary-800))
 ---
 
 ## Ready to Get Started?

@@ -12,7 +12,6 @@ import { Play } from 'lucide-react'
 function extractVideoId(url) {
   if (!url) return null
 
-  // YouTube patterns
   const ytPatterns = [
     /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\s?]+)/,
     /youtube\.com\/shorts\/([^&\s?]+)/,
@@ -22,7 +21,6 @@ function extractVideoId(url) {
     if (match) return { type: 'youtube', id: match[1] }
   }
 
-  // Vimeo patterns
   const vimeoMatch = url.match(/vimeo\.com\/(?:video\/)?(\d+)/)
   if (vimeoMatch) return { type: 'vimeo', id: vimeoMatch[1] }
 
@@ -32,44 +30,19 @@ function extractVideoId(url) {
 export function Video({ content, params }) {
   // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { title, pretitle, paragraphs, links, imgs } = content
-  const { theme, layout, autoplay } = params
+  const { layout, autoplay } = params
 
   const [isPlaying, setIsPlaying] = useState(autoplay)
 
-  // Get video URL from first link
   const videoLink = links[0]
   const videoUrl = videoLink?.href
   const videoInfo = extractVideoId(videoUrl)
 
-  // Get thumbnail from first image or generate from video
   const thumbImg = imgs[0]
   const thumbnail = thumbImg?.url || thumbImg?.src ||
     (videoInfo?.type === 'youtube'
       ? `https://img.youtube.com/vi/${videoInfo.id}/maxresdefault.jpg`
       : null)
-
-  const themes = {
-    light: {
-      section: 'bg-white',
-      title: 'text-gray-900',
-      pretitle: 'text-primary',
-      description: 'text-gray-600',
-    },
-    gray: {
-      section: 'bg-gray-50',
-      title: 'text-gray-900',
-      pretitle: 'text-primary',
-      description: 'text-gray-600',
-    },
-    dark: {
-      section: 'bg-gray-900',
-      title: 'text-white',
-      pretitle: 'text-primary',
-      description: 'text-gray-400',
-    },
-  }
-
-  const t = themes[theme] || themes.light
 
   const isSplit = layout === 'split'
 
@@ -104,7 +77,7 @@ export function Video({ content, params }) {
   }
 
   const VideoPlayer = () => (
-    <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl bg-gray-900">
+    <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl bg-neutral-900">
       {isPlaying ? (
         renderVideoEmbed()
       ) : (
@@ -122,7 +95,6 @@ export function Video({ content, params }) {
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-primary to-indigo-600" />
           )}
-          {/* Play button overlay */}
           <div className="absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity group-hover:bg-black/40">
             <div className="w-20 h-20 bg-white/95 rounded-full flex items-center justify-center shadow-lg transition-transform group-hover:scale-110">
               <Play className="w-8 h-8 text-primary ml-1" fill="currentColor" />
@@ -136,17 +108,17 @@ export function Video({ content, params }) {
   const ContentBlock = () => (
     <div className={cn(isSplit ? 'text-left' : 'text-center')}>
       {pretitle && (
-        <span className={cn('text-sm font-semibold uppercase tracking-wide mb-2 block', t.pretitle)}>
+        <span className="text-sm font-semibold uppercase tracking-wide mb-2 block text-primary">
           {pretitle}
         </span>
       )}
       {title && (
-        <h2 className={cn('text-3xl sm:text-4xl font-bold mb-4', t.title)}>
+        <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-heading">
           {title}
         </h2>
       )}
       {paragraphs[0] && (
-        <p className={cn('text-lg', t.description, !isSplit && 'max-w-2xl mx-auto')}>
+        <p className={cn('text-lg text-muted', !isSplit && 'max-w-2xl mx-auto')}>
           {paragraphs[0]}
         </p>
       )}
@@ -154,7 +126,7 @@ export function Video({ content, params }) {
   )
 
   return (
-    <section className={cn('py-20 px-6', t.section)}>
+    <section className="py-20 px-6">
       <div className="max-w-6xl mx-auto">
         {isSplit ? (
           <div className="grid lg:grid-cols-2 gap-12 items-center">
