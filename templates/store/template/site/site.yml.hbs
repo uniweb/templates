@@ -1,0 +1,22 @@
+name: {{projectName}}
+defaultLanguage: en
+
+# Foundation to use for this site
+foundation: foundation
+
+# Homepage - specifies which page folder becomes the root route (/)
+index: home
+
+# Content collections
+collections:
+  products:
+    path: library/products
+    sort: order asc
+  articles:
+    path: library/articles
+    route: /journal
+    sort: date desc
+
+# Build options
+build:
+  prerender: true

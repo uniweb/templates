@@ -2,7 +2,7 @@
 type: Team
 theme: medium
 columns: 4
-fetch: /data/team.json
+data: team
 ---
 
 # Our Team

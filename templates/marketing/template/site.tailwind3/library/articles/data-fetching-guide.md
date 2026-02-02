@@ -23,14 +23,14 @@ Data can be fetched at three levels:
 | Page | Single page | Page-specific data |
 | Section | Single section | Component data |
 
-## Section-Level Fetch
+## Section-Level Data
 
-Add a `fetch` property to your section frontmatter:
+Add a `data` property to your section frontmatter to pull from a collection:
 
 ```yaml
 ---
 type: Team
-fetch: /data/team.json
+data: team
 ---
 
 # Our Team
@@ -54,14 +54,13 @@ export function Team({ content }) {
 }
 ```
 
-## Page-Level Fetch
+## Page-Level Data
 
 Configure in the page's `page.yml`:
 
 ```yaml
 title: Blog
-fetch:
-  articles: /data/articles.json
+data: articles
 ```
 
 All sections on the page can access this data through **data cascading**.
@@ -91,16 +90,11 @@ Uniweb supports multiple data sources:
 - **Collection data**: Markdown files in `site/library/`
 
 ```yaml
-# Local file
-fetch: /data/team.json
+# Collection shorthand (recommended)
+data: team
 
 # Remote API
 fetch: https://api.example.com/products
-
-# Collection (built-in)
-collections:
-  articles:
-    path: library/articles
 ```
 
 ## Working with Collections

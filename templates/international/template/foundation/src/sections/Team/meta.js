@@ -26,7 +26,7 @@ export default {
     paragraphs: 'Description [1]',
     items: {
       label: 'Team members [2-8]',
-      hint: 'Each H3 is a name, H2 is role. Or use fetch: /data/team.json',
+      hint: 'Each H3 is a name, H2 is role. Or use data: team',
     },
   },
 

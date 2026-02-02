@@ -3,5 +3,5 @@ description: Latest news and research updates from PandaWatch.
 label: Blog
 order: 3
 
-# Fetch articles data - cascades to child pages including [slug]
-fetch: /data/articles.json
+# Articles collection data - cascades to child pages including [slug]
+data: articles

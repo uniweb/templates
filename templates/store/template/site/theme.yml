@@ -1,0 +1,37 @@
+# Solis Artisans Theme
+# Stone-amber palette: warm, artisan, luxury
+
+colors:
+  # Amber accents for warmth and solar branding
+  primary: "#d97706"
+
+  # Stone neutrals for text, backgrounds, borders
+  neutral: "#78716c"
+
+contexts:
+  light:
+    bg: white
+    fg: neutral-900
+    muted: neutral-500
+    border: neutral-200
+
+  medium:
+    bg: neutral-100
+    fg: neutral-900
+    muted: neutral-600
+    border: neutral-300
+
+  dark:
+    bg: neutral-900
+    fg: white
+    muted: neutral-400
+    border: neutral-700
+
+appearance:
+  default: light
+  schemes: [light]
+  allowToggle: false
+  respectSystemPreference: false
+
+foundation:
+  vars: {}

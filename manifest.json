@@ -26,6 +26,11 @@
       "name": "Dynamic Data",
       "description": "Live API data fetching with loading states, transforms, and the portable data pattern",
       "tags": ["data", "api", "fetch", "loading-states", "dynamic"]
+    },
+    "store": {
+      "name": "Solis Artisans - Store",
+      "description": "Artisan e-commerce with product collections, Shopify Buy Button, journal blog, and stone-amber design",
+      "tags": ["store", "e-commerce", "shopify", "artisan", "products"]
     }
   }
 }
