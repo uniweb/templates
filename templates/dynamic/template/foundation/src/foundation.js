@@ -1,5 +1,5 @@
 /**
- * {{projectName}} Foundation Configuration
+ * Foundation Configuration
  *
  * CSS custom properties that sites can override in theme.yml.
  */
