@@ -15,5 +15,6 @@ fetch:
 
 This template demonstrates how to handle asynchronous data fetching. The weather card fetches live conditions from Wolong Reserve via **Open-Meteo**.
 
-[Explore Data](/research)
+![](lu-microscope) [Explore Data](/research)
+
 [View Source](https://github.com/uniweb/templates)

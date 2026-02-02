@@ -1,5 +1,5 @@
 import React from 'react'
-import { H1, P, Link, cn } from '@uniweb/kit'
+import { H1, P, Link, Icon, cn } from '@uniweb/kit'
 import { Activity } from 'lucide-react'
 import WeatherCard from './WeatherCard.jsx'
 
@@ -41,8 +41,9 @@ export function Hero({ content, params, block }) {
             {cta && (
               <Link
                 href={cta.href}
-                className="inline-flex items-center px-6 py-3 rounded-xl font-bold transition-all bg-btn-primary text-btn-primary-text hover:bg-btn-primary-hover shadow-lg shadow-primary-300/50"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all bg-btn-primary text-btn-primary-text hover:bg-btn-primary-hover shadow-lg shadow-primary-300/50"
               >
+                {cta.iconBefore && <Icon icon={cta.iconBefore} size="16" />}
                 {cta.label}
               </Link>
             )}
