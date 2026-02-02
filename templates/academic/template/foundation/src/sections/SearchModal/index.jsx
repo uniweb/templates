@@ -271,4 +271,5 @@ const SearchIcon = ({ className }) => (
   </svg>
 )
 
+export { SearchModal }
 export default SearchModal
