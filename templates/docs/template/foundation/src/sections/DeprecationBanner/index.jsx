@@ -14,7 +14,7 @@ import { cn, useVersion } from '@uniweb/kit'
  * - Optional dismissible behavior
  * - Amber/yellow warning styling
  */
-export function DeprecationBanner({ params }) {
+function DeprecationBanner({ params }) {
   const [dismissed, setDismissed] = useState(false)
   const { dismissible } = params
   const {

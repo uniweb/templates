@@ -2,7 +2,7 @@ import React from 'react'
 import { Icon, Link, cn, useScrolled, useMobileMenu, useWebsite, useActiveRoute } from '@uniweb/kit'
 import { Leaf } from 'lucide-react'
 
-export function Header({ content, params, block }) {
+function Header({ content, params, block }) {
   const { website } = useWebsite()
   const { isActive, isActiveOrAncestor } = useActiveRoute()
   const scrolled = useScrolled(20)

@@ -10,7 +10,7 @@ import { H2, P, cn } from '@uniweb/kit'
  * 1. content.data.team - From fetch (page/site level) or tagged code blocks
  * 2. content.items - From markdown H3/H2 patterns
  */
-export function Team({ content, params }) {
+function Team({ content, params }) {
   // Runtime guarantees: content is flat, params have defaults from meta.js
   const { title, subtitle, paragraphs } = content
   const { columns } = params

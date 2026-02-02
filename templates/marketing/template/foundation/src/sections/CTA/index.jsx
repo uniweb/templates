@@ -7,7 +7,7 @@ import { Link, cn } from '@uniweb/kit'
  * Conversion-focused section. Background color/gradient is controlled
  * via frontmatter `background:` and `theme:` — component uses semantic tokens.
  */
-export function CTA({ content, params }) {
+function CTA({ content, params }) {
   // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { title, paragraphs, links } = content
   const { alignment } = params

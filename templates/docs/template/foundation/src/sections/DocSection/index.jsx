@@ -13,7 +13,7 @@ import { H1, H2, H3, P, Link, cn, useWebsite } from '@uniweb/kit'
  * - Previous/Next page navigation
  * - Responsive design
  */
-export function DocSection({ content, params, block }) {
+function DocSection({ content, params, block }) {
   const { website } = useWebsite()
 
   // Runtime guarantees: content fields exist, params have defaults from meta.js

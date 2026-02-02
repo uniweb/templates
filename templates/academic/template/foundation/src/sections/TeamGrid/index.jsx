@@ -7,7 +7,7 @@ import { cn, Link } from '@uniweb/kit'
  * Display lab members, collaborators, or team with academic roles.
  * Supports different member types (faculty, students, alumni).
  */
-export function TeamGrid({ content, params }) {
+function TeamGrid({ content, params }) {
   const { title, paragraphs = [] } = content || {}
   const {
     groupByRole = true,

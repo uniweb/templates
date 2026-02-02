@@ -7,7 +7,7 @@ import { cn, Link } from '@uniweb/kit'
  * Display research focus areas, topics, or expertise.
  * Each item represents a research area with description.
  */
-export function ResearchAreas({ content, params }) {
+function ResearchAreas({ content, params }) {
   const { title, paragraphs = [] } = content || {}
   const {
     layout = 'cards',

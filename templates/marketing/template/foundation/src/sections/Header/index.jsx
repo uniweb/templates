@@ -14,7 +14,7 @@ import { Link, cn, useScrolled, useMobileMenu, useWebsite, useActiveRoute } from
  * - Responsive mobile menu
  * - Theme-aware (adapts to next section's context)
  */
-export function Header({ content, params, block }) {
+function Header({ content, params, block }) {
   const { website } = useWebsite()
   const headerRef = useRef(null)
 

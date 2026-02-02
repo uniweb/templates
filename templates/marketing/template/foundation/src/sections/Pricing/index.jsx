@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, cn } from '@uniweb/kit'
 
-export function Pricing({ content, params }) {
+function Pricing({ content, params }) {
   // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { title, paragraphs, items } = content
   const { showToggle, defaultBilling, currency, annualDiscount } = params

@@ -3,7 +3,7 @@ import { H1, P, Link, Icon, cn } from '@uniweb/kit'
 import { Activity } from 'lucide-react'
 import WeatherCard from './WeatherCard.jsx'
 
-export function Hero({ content, params, block }) {
+function Hero({ content, params, block }) {
   const { title, pretitle, paragraphs, links } = content
   const weather = content.data?.weather || null
   const loading = block.dataLoading

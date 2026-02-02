@@ -6,7 +6,7 @@ import { Link, cn, useWebsite, useRouting, getLocaleLabel } from '@uniweb/kit'
  *
  * A simple footer with navigation and language switcher.
  */
-export function Footer({ content, params }) {
+function Footer({ content, params }) {
   const { website } = useWebsite()
   const { useLocation } = useRouting()
   const location = useLocation()

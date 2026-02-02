@@ -8,7 +8,7 @@ import { ChevronDown, MessageCircle } from 'lucide-react'
  * Collapsible frequently asked questions.
  * Each subsection (H3) becomes a question, with paragraphs as the answer.
  */
-export function FAQ({ content, params }) {
+function FAQ({ content, params }) {
   // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { title, paragraphs } = content
   const { layout, expandFirst, autoClose } = params

@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useWebsite } from '@uniweb/kit'
 import { Leaf } from 'lucide-react'
 
-export function Footer({ content }) {
+function Footer({ content }) {
   const { website } = useWebsite()
 
   const { title, paragraphs } = content

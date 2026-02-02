@@ -8,7 +8,7 @@ import { Zap } from 'lucide-react'
  * Renders its own background (background: 'self' in meta.js).
  * Supports an optional decorative icon and CTA link.
  */
-export function CTA({ content }) {
+function CTA({ content }) {
   const { title, paragraphs, links, icons } = content
 
   return (

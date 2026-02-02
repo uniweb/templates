@@ -15,7 +15,7 @@ import { H1, P, Link, cn } from '@uniweb/kit'
  * - split-right: Content left, image right
  * - split-left: Image left, content right
  */
-export function Hero({ content, params }) {
+function Hero({ content, params }) {
   // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { title, pretitle, subtitle, paragraphs, links, imgs } = content
   const { layout, showPattern } = params

@@ -7,7 +7,7 @@ import { Link, cn, useWebsite, SocialIcon, isSocialLink } from '@uniweb/kit'
  * A marketing footer with navigation, social links, and copyright.
  * Supports simple (single row) and columns (multi-column) layouts.
  */
-export function Footer({ content, params }) {
+function Footer({ content, params }) {
   const { website } = useWebsite()
 
   // Runtime guarantees: content fields exist, params have defaults from meta.js

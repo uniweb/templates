@@ -9,7 +9,7 @@ import { ChevronLeft, Share2, Instagram } from 'lucide-react'
  * Renders author info, featured image, blockquote, body content,
  * and a bottom CTA section.
  */
-export function Article({ content, block }) {
+function Article({ content, block }) {
   const article = content.data?.article
 
   if (!article) {

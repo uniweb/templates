@@ -22,7 +22,7 @@ import { Toast } from '../../components/Toast.jsx'
  * - Mobile responsive menu
  * - Cart drawer and toast notifications
  */
-export function Header({ content, block }) {
+function Header({ content, block }) {
   const { website } = useWebsite()
   const headerRef = useRef(null)
   const scrolled = useScrolled(20)

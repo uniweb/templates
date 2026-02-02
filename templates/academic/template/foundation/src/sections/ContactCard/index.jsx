@@ -7,7 +7,7 @@ import { cn, Link } from '@uniweb/kit'
  * Contact information block for academic profiles.
  * Office location, email, phone, office hours.
  */
-export function ContactCard({ content, params }) {
+function ContactCard({ content, params }) {
   const { title, paragraphs = [], links = [] } = content || {}
   const {
     layout = 'sidebar',

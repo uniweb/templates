@@ -8,7 +8,7 @@ import { Article as ArticleBody } from '@uniweb/kit/styled'
  *
  * Uses kit's Article component for the body content rendering.
  */
-export function Article({ content, params }) {
+function Article({ content, params }) {
   const article = content.data.article
   const { showImage, showAuthor, showDate, showTags } = params
 

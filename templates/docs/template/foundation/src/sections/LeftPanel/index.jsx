@@ -13,7 +13,7 @@ import { Link, cn, useRouting, useWebsite } from '@uniweb/kit'
  * - Category filtering (shows only pages within current category)
  * - Responsive design (hidden on mobile, shown in drawer)
  */
-export function LeftPanel({ content, params, block }) {
+function LeftPanel({ content, params, block }) {
   const { website } = useWebsite()
 
   // Runtime guarantees: params have defaults from meta.js

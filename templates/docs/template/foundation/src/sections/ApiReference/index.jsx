@@ -13,7 +13,7 @@ import { Code } from '@uniweb/kit/styled'
  *
  * Uses dataBlock (yaml:api or json:api) for structured definition.
  */
-export function ApiReference({ content, params }) {
+function ApiReference({ content, params }) {
   const { title, paragraphs } = content
   const { show_try_it, compact } = params
 

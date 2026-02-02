@@ -12,7 +12,7 @@ import { ChevronDown, Search, X } from 'lucide-react'
  * - Language switcher for multilingual sites
  * - Search functionality (Cmd/Ctrl+K)
  */
-export function Header({ content, params, block }) {
+function Header({ content, params, block }) {
   const { website } = useWebsite()
   const { isActive, isActiveOrAncestor } = useActiveRoute()
   const { useLocation } = useRouting()

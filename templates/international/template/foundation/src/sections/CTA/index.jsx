@@ -6,7 +6,7 @@ import { H2, P, Link } from '@uniweb/kit'
  *
  * A call-to-action section.
  */
-export function CTA({ content }) {
+function CTA({ content }) {
   // Runtime guarantees: content is flat, params have defaults from meta.js
   const { title, subtitle, paragraphs, links } = content
 

@@ -24,7 +24,7 @@ const iconMap = {
   chart: BarChart3,
 }
 
-export function Stats({ content, params }) {
+function Stats({ content, params }) {
   // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { title, paragraphs } = content
   const { columns, style } = params

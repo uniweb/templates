@@ -11,7 +11,7 @@ import { cn, Link, SocialIcon, isSocialLink } from '@uniweb/kit'
  * 2. content.items - From markdown H3 patterns
  */
 
-export function Team({ content, params }) {
+function Team({ content, params }) {
   // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { title, paragraphs } = content
   const { columns, style } = params

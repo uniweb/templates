@@ -11,7 +11,7 @@ import { H1, H2, P, cn } from '@uniweb/kit'
  * - Heading styles (typography character)
  * - Width constraints (readability)
  */
-export function Text({ content, params }) {
+function Text({ content, params }) {
   const { title, pretitle, subtitle, paragraphs = [], links = [] } = content || {}
   const {
     textScale = 'normal',

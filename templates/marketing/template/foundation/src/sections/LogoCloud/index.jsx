@@ -7,7 +7,7 @@ import { cn, Link } from '@uniweb/kit'
  * Display a grid or carousel of partner/client logos.
  * Images from markdown become the logos.
  */
-export function LogoCloud({ content, params }) {
+function LogoCloud({ content, params }) {
   // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { title, paragraphs, imgs, links } = content
   const { layout, grayscale } = params

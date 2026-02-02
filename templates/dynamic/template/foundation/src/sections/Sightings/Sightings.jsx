@@ -18,7 +18,7 @@ function Skeleton() {
   ))
 }
 
-export function Sightings({ content, params, block }) {
+function Sightings({ content, params, block }) {
   const { title } = content
   const sightings = content.data?.sightings || []
   const loading = block.dataLoading

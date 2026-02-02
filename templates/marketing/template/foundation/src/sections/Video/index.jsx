@@ -27,7 +27,7 @@ function extractVideoId(url) {
   return null
 }
 
-export function Video({ content, params }) {
+function Video({ content, params }) {
   // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { title, pretitle, paragraphs, links, imgs } = content
   const { layout, autoplay } = params

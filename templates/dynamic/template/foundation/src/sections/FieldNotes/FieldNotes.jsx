@@ -20,7 +20,7 @@ function Skeleton({ count }) {
   ))
 }
 
-export function FieldNotes({ content, params, block }) {
+function FieldNotes({ content, params, block }) {
   const { title, paragraphs, links } = content
   const description = paragraphs[0]
   const posts = content.data?.posts || []

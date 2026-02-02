@@ -7,7 +7,7 @@ import { cn } from '@uniweb/kit'
  * Contact form with customizable fields via dataBlock.
  * Form config is defined in a tagged yaml:form or json:form block.
  */
-export function ContactForm({ content, params }) {
+function ContactForm({ content, params }) {
   const { title, paragraphs } = content
   const { layout } = params
 

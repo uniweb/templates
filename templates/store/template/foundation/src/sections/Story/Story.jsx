@@ -6,7 +6,7 @@ import { H2, P } from '@uniweb/kit'
  * Centered headline with optional accent text, descriptive paragraph,
  * and a full-width featured image. Used for brand storytelling.
  */
-export function Story({ content }) {
+function Story({ content }) {
   const { title, paragraphs, imgs } = content
   const image = imgs[0]
 

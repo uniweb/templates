@@ -7,7 +7,7 @@ import { cn } from '@uniweb/kit'
  * Layout container with background and spacing options.
  * Used to wrap other components or provide visual separation.
  */
-export function Section({ content, params }) {
+function Section({ content, params }) {
   const { title, paragraphs = [] } = content || {}
   const {
     background = 'white',

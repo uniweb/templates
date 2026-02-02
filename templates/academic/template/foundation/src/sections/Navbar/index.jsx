@@ -16,7 +16,7 @@ import { useSearchShortcut, useSearchWithIntent } from '@uniweb/kit/search'
  * - Sticky positioning option
  * - Integrated search (when fuse.js is installed)
  */
-export function Navbar({ content, params }) {
+function Navbar({ content, params }) {
   const { website, localize } = useWebsite()
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)

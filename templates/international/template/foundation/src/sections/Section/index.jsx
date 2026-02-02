@@ -6,7 +6,7 @@ import { H2, P, Icon, cn } from '@uniweb/kit'
  *
  * A general-purpose content section with title, description, and items.
  */
-export function Section({ content }) {
+function Section({ content }) {
   const { title, subtitle, paragraphs = [], items = [] } = content || {}
 
   return (

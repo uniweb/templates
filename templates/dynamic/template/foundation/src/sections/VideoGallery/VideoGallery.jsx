@@ -14,7 +14,7 @@ function Skeleton() {
   ))
 }
 
-export function VideoGallery({ content, params, block }) {
+function VideoGallery({ content, params, block }) {
   const { title, paragraphs } = content
   const videos = content.data?.videos || []
   const loading = block.dataLoading

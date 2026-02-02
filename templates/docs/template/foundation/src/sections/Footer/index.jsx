@@ -6,7 +6,7 @@ import { Link, cn, useWebsite } from '@uniweb/kit'
  *
  * A simple footer with copyright, links, and optional branding.
  */
-export function Footer({ content, params }) {
+function Footer({ content, params }) {
   const { website } = useWebsite()
 
   // Runtime guarantees: content fields exist, params have defaults from meta.js

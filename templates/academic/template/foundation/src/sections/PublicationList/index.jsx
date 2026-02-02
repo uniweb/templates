@@ -156,7 +156,7 @@ function PublicationCard({ pub, citationStyle, showType, showCiteButton }) {
   )
 }
 
-export function PublicationList({ content, params }) {
+function PublicationList({ content, params }) {
   const { title, paragraphs = [] } = content || {}
   const {
     citationStyle = 'detailed',

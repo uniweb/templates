@@ -7,7 +7,7 @@ import { cn, Image } from '@uniweb/kit'
  * Display images in various grid layouts.
  * Images come from markdown ![alt](url) syntax.
  */
-export function Gallery({ content, params }) {
+function Gallery({ content, params }) {
   // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { title, paragraphs, imgs } = content
   const { layout, columns } = params

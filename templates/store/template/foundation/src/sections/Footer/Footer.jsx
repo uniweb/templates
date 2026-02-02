@@ -11,7 +11,7 @@ import { Link, H3, useWebsite } from '@uniweb/kit'
  *
  * Renders its own dark background.
  */
-export function Footer({ content }) {
+function Footer({ content }) {
   const { website } = useWebsite()
   const { title, paragraphs, items } = content
   const siteName = title || website?.name || 'Solis Artisans'

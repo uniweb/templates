@@ -1,7 +1,7 @@
 import React from 'react'
 import { cn } from '@uniweb/kit'
 
-export function Testimonials({ content, params }) {
+function Testimonials({ content, params }) {
   // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { title, paragraphs } = content
   const { columns } = params

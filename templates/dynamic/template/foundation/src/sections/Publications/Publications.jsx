@@ -11,7 +11,7 @@ function Skeleton() {
   ))
 }
 
-export function Publications({ content, params, block }) {
+function Publications({ content, params, block }) {
   const { title } = content
   const papers = content.data?.papers || []
   const loading = block.dataLoading

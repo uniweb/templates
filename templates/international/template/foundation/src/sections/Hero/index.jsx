@@ -6,7 +6,7 @@ import { H1, P, Link, cn } from '@uniweb/kit'
  *
  * A hero section for landing pages with headline, description, and CTAs.
  */
-export function Hero({ content, params, block }) {
+function Hero({ content, params, block }) {
   // Runtime guarantees: content is flat, params have defaults from meta.js
   const { title, pretitle, subtitle, paragraphs, links } = content
   const { variant } = params

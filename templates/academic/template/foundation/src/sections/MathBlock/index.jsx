@@ -62,7 +62,7 @@ function EquationCard({ item, showNumber }) {
   )
 }
 
-export function MathBlock({ content, params }) {
+function MathBlock({ content, params }) {
   const { title, pretitle, paragraphs = [], subsections = [] } = content || {}
   const {
     layout = 'standard',

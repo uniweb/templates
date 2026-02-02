@@ -7,7 +7,7 @@ import { cn } from '@uniweb/kit'
  * Academic career timeline - education, positions, awards.
  * Each item is a timeline entry with date and description.
  */
-export function Timeline({ content, params }) {
+function Timeline({ content, params }) {
   const { title, paragraphs = [] } = content || {}
   const {
     orientation = 'vertical',

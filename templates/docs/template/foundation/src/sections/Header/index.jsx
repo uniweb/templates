@@ -19,7 +19,7 @@ import SearchModal from '../SearchModal'
  * - Smart locale switcher (inline badges or dropdown based on count)
  * - Responsive mobile menu
  */
-export function Header({ content, params, block }) {
+function Header({ content, params, block }) {
   const { website } = useWebsite()
   const { useLocation, useNavigate } = useRouting()
   const location = useLocation()

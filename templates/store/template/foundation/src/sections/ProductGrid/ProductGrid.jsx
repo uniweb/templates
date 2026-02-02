@@ -12,7 +12,7 @@ import { QuickView } from '../../components/QuickView.jsx'
  * Each card has hover actions for quick view and add-to-cart,
  * plus a Shopify buy button.
  */
-export function ProductGrid({ content, params, block }) {
+function ProductGrid({ content, params, block }) {
   const [selectedProduct, setSelectedProduct] = useState(null)
   const products = content.data?.products || []
   const { columns } = params

@@ -11,7 +11,7 @@ import { H1, P, Link, cn } from '@uniweb/kit'
  * - Research role/title
  * - Key metrics (citations, h-index, etc.)
  */
-export function ProfileHero({ content, params }) {
+function ProfileHero({ content, params }) {
   const { title, pretitle, subtitle, paragraphs = [], links = [], imgs = [] } = content || {}
   const {
     variant = 'researcher',

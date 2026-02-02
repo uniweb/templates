@@ -7,7 +7,7 @@ import { H2, H3, P, Icon } from '@uniweb/kit'
  * Uses theme: dark context — semantic tokens adapt automatically.
  * Each item from markdown becomes a feature card.
  */
-export function TechFeatures({ content, params }) {
+function TechFeatures({ content, params }) {
   const { title, paragraphs, items } = content
   const { columns } = params
 

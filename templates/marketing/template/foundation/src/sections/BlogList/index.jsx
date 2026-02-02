@@ -6,7 +6,7 @@ import { Link } from '@uniweb/kit'
  * Displays a grid of article cards. Gets articles from inherited data
  * (page-level fetch) and renders them with links to individual posts.
  */
-export function BlogList({ content, params, block }) {
+function BlogList({ content, params, block }) {
   const { title, subtitle, paragraphs } = content
   const articles = content.data.articles || []
   const { columns, showExcerpt, showAuthor, showDate } = params

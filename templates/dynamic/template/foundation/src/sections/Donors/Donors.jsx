@@ -11,7 +11,7 @@ function Skeleton() {
   ))
 }
 
-export function Donors({ content, params, block }) {
+function Donors({ content, params, block }) {
   const { title, paragraphs } = content
   const donors = content.data?.donors || []
   const loading = block.dataLoading

@@ -7,7 +7,7 @@ import { ChevronRight } from 'lucide-react'
  * Displays articles from a collection in a responsive grid.
  * Each card links to the full article page via the collection route.
  */
-export function JournalList({ content, params, block }) {
+function JournalList({ content, params, block }) {
   const articles = content.data?.articles || []
   const { title } = content
   const { columns } = params

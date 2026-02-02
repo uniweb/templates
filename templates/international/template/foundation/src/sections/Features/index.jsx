@@ -6,7 +6,7 @@ import { H2, P, cn } from '@uniweb/kit'
  *
  * Display features/services in a grid layout.
  */
-export function Features({ content, params }) {
+function Features({ content, params }) {
   // Runtime guarantees: content is flat, params have defaults from meta.js
   const { title, subtitle, paragraphs, items } = content
   const { columns } = params

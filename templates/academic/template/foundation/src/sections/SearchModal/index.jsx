@@ -14,7 +14,7 @@ import { Link, useWebsite, cn } from '@uniweb/kit'
  * - Mobile-responsive
  * - Intent-based index preloading (via useSearchWithIntent hook)
  */
-export function SearchModal({ isOpen, onClose, searchClient }) {
+function SearchModal({ isOpen, onClose, searchClient }) {
   const { website } = useWebsite()
 
   const [query, setQuery] = useState('')

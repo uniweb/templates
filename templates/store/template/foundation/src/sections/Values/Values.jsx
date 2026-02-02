@@ -7,7 +7,7 @@ import { H3, P, Icon } from '@uniweb/kit'
  * Supports both text-only columns and icon-list columns.
  * Icons are rendered with text from the item's paragraphs.
  */
-export function Values({ content }) {
+function Values({ content }) {
   const { items } = content
 
   return (

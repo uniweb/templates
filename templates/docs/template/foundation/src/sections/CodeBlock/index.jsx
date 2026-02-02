@@ -9,7 +9,7 @@ import { Code } from '@uniweb/kit/styled'
  * Uses Shiki via kit's Code component for syntax highlighting.
  * Designed for documentation sites that need to show code examples.
  */
-export function CodeBlock({ content, params }) {
+function CodeBlock({ content, params }) {
   const [copied, setCopied] = useState(false)
 
   const { title, paragraphs = [] } = content || {}

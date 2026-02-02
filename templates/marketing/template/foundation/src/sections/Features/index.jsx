@@ -8,7 +8,7 @@ import { cn, Icon } from '@uniweb/kit'
  * Icons are specified via markdown image syntax: ![](lu-zap)
  */
 
-export function Features({ content, params }) {
+function Features({ content, params }) {
   // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { title, paragraphs } = content
   const { columns, style } = params

@@ -13,7 +13,7 @@ import { Link, useWebsite, cn, SocialIcon, filterSocialLinks } from '@uniweb/kit
  * - Social links from content
  * - Copyright with dynamic year
  */
-export function Footer({ content, params }) {
+function Footer({ content, params }) {
   const { website, localize } = useWebsite()
 
   // Runtime guarantees: content fields exist, params have defaults from meta.js

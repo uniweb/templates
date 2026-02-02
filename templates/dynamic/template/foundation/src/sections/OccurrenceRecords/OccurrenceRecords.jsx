@@ -7,7 +7,7 @@ function Skeleton() {
   ))
 }
 
-export function OccurrenceRecords({ content, params, block }) {
+function OccurrenceRecords({ content, params, block }) {
   const { title } = content
   const records = content.data?.occurrences || []
   const loading = block.dataLoading

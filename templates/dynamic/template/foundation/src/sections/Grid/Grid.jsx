@@ -1,7 +1,7 @@
 import React from 'react'
 import { H1, P } from '@uniweb/kit'
 
-export function Grid({ content, block }) {
+function Grid({ content, block }) {
   const { title, paragraphs } = content
   const ChildBlocks = block.getChildBlockRenderer()
   const children = block.childBlocks || []

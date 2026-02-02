@@ -7,7 +7,7 @@ import { H1, P, Link } from '@uniweb/kit'
  * with optional accent text, subtitle, and CTA button.
  * Background is handled by the engine (frontmatter background property).
  */
-export function Hero({ content }) {
+function Hero({ content }) {
   const { title, paragraphs, links } = content
 
   return (
