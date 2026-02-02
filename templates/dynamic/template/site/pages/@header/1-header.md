@@ -2,8 +2,8 @@
 type: Header
 theme:
   mode: light
-  btn-primary-bg: var(--neutral-900)
-  btn-primary-hover: var(--neutral-800)
+  btn-primary-bg: var(--color-neutral-900)
+  btn-primary-hover: var(--color-neutral-800)
 ---
 
 # PandaWatch

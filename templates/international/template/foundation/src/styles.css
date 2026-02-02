@@ -1,67 +1,10 @@
 @import "tailwindcss";
+@import "@uniweb/kit/theme-tokens.css";
 
 @source "./sections/**/*.{js,jsx}";
 @source "../node_modules/@uniweb/kit/src/**/*.{js,jsx}";
 
 @theme inline {
-  /* Surfaces (backgrounds) */
-  --color-surface: var(--primary-50);
-  --color-surface-subtle: var(--bg-subtle);
-  --color-surface-muted: var(--bg-muted);
-
-  /* Text */
-  --color-heading: var(--heading);
-  --color-body: var(--text);
-  --color-muted: var(--text-muted);
-  --color-subtle: var(--text-subtle);
-
-  /* Links */
-  --color-link: var(--link);
-  --color-link-hover: var(--link-hover);
-
-  /* Borders */
-  --color-edge: var(--border);
-  --color-edge-muted: var(--border-muted);
-
-  /* Focus */
-  --color-ring: var(--ring);
-
-  /* Buttons */
-  --color-btn-primary: var(--btn-primary-bg);
-  --color-btn-primary-text: var(--btn-primary-text);
-  --color-btn-primary-hover: var(--btn-primary-hover);
-  --color-btn-secondary: var(--btn-secondary-bg);
-  --color-btn-secondary-text: var(--btn-secondary-text);
-  --color-btn-secondary-hover: var(--btn-secondary-hover);
-
-  /* Brand palette (from build system) */
-  --color-primary-50: var(--primary-50);
-  --color-primary-100: var(--primary-100);
-  --color-primary-200: var(--primary-200);
-  --color-primary-300: var(--primary-300);
-  --color-primary-400: var(--primary-400);
-  --color-primary-500: var(--primary-500);
-  --color-primary-600: var(--primary-600);
-  --color-primary-700: var(--primary-700);
-  --color-primary-800: var(--primary-800);
-  --color-primary-900: var(--primary-900);
-  --color-primary-950: var(--primary-950);
-
-  /* Accent palette (from build system) */
-  --color-accent-50: var(--accent-50);
-  --color-accent-100: var(--accent-100);
-  --color-accent-200: var(--accent-200);
-  --color-accent-300: var(--accent-300);
-  --color-accent-400: var(--accent-400);
-  --color-accent-500: var(--accent-500);
-  --color-accent-600: var(--accent-600);
-  --color-accent-700: var(--accent-700);
-  --color-accent-800: var(--accent-800);
-  --color-accent-900: var(--accent-900);
-  --color-accent-950: var(--accent-950);
-
-  /* Brand shorthand */
-  --color-primary: var(--primary-500);
-  --color-secondary: var(--secondary-500);
-  --color-accent: var(--accent-500);
+  /* Foundation-specific: use primary-50 instead of bg for surface */
+  --color-surface: var(--color-primary-50);
 }

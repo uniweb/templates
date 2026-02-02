@@ -2,7 +2,7 @@
 type: CTA
 theme: dark
 background:
-  color: var(--primary-600)
+  color: var(--color-primary-600)
 ---
 
 # Join Our Conservation Efforts
