@@ -1,8 +1,15 @@
 colors:
-  primary: "#059669"
+  primary:
+    base: "#059669"
+    exactMatch: true
   secondary: "#475569"
   accent: "#d97706"
   neutral: "#475569"
+
+contexts:
+  light:
+    btn-primary-bg: var(--primary-500)
+    btn-primary-hover: var(--primary-600)
 
 fonts:
   import:
