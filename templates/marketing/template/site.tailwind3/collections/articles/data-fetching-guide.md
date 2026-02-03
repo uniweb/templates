@@ -87,7 +87,7 @@ Uniweb supports multiple data sources:
 
 - **Local JSON**: Files in `site/public/data/`
 - **Remote APIs**: Any public URL returning JSON
-- **Collection data**: Markdown files in `site/library/`
+- **Collection data**: Markdown files in `site/collections/`
 
 ```yaml
 # Collection shorthand (recommended)
@@ -106,12 +106,12 @@ Collections are powerful for blog posts, team members, products, etc.
 ```yaml
 collections:
   articles:
-    path: library/articles
+    path: collections/articles
     route: /blog
     sort: date desc
 
   team:
-    path: library/team
+    path: collections/team
     sort: order asc
 ```
 

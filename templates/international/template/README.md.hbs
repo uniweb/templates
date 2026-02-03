@@ -35,8 +35,18 @@ This template demonstrates internationalization (i18n), nested navigation with d
 │   │   ├── services/    # Parent page with nested children
 │   │   │   ├── consulting/   # Child page
 │   │   │   └── development/  # Child page
+│   │   ├── blog/        # Article list + dynamic routes
+│   │   │   └── [slug]/  # Individual article pages
 │   │   └── contact/
-│   ├── locales/         # Translation files (en.json, es.json, fr.json)
+│   ├── collections/     # Content collections (articles)
+│   ├── locales/         # Translation files
+│   │   ├── es.json, fr.json           # Hash-based page translations
+│   │   ├── collections/               # Hash-based collection translations
+│   │   │   ├── manifest.json
+│   │   │   ├── es.json, fr.json
+│   │   └── freeform/                  # Free-form section translations
+│   │       ├── es/pages/about/story.md
+│   │       └── fr/pages/about/story.md
 │   ├── site.yml         # Site configuration with i18n settings
 │   └── vite.config.js   # defineSiteConfig()
 │
@@ -157,17 +167,18 @@ Translatable strings are extracted automatically. The same content structure wor
 
 ## i18n Workflow
 
-Uniweb supports two translation approaches that can be used together:
+Uniweb supports three translation approaches that can be used together:
 
 | Approach | Best For | File Location |
 |----------|----------|---------------|
-| **Hash-based** | UI strings, short text, reusable phrases | `locales/{locale}.json` |
+| **Hash-based (pages)** | UI strings, short text, reusable phrases | `locales/{locale}.json` |
+| **Hash-based (collections)** | Article titles, excerpts, tags, body text | `locales/collections/{locale}.json` |
 | **Free-form** | Long-form content, sections needing creative rewording | `locales/freeform/{locale}/pages/...` |
 
 ### Commands
 
 ```bash
-# Extract translatable strings from content
+# Extract translatable strings from pages and collections
 pnpm uniweb i18n extract
 
 # Check translation coverage
@@ -180,7 +191,7 @@ pnpm uniweb i18n status --freeform
 pnpm uniweb i18n sync
 ```
 
-### Hash-Based Translation (Granular)
+### Hash-Based Translation (Pages)
 
 Translation files in `site/locales/` map content hashes to localized text:
 
@@ -192,6 +203,39 @@ Translation files in `site/locales/` map content hashes to localized text:
 ```
 
 Run `uniweb i18n extract` to generate the manifest with all translatable strings.
+
+### Hash-Based Translation (Collections)
+
+Collection data (articles, team members, etc.) has its own translation files in `locales/collections/`. The extraction runs automatically with `uniweb i18n extract` — no special flags needed.
+
+**Translation structure:**
+```
+locales/collections/
+├── manifest.json   # Extracted strings with hashes and context
+├── es.json         # Spanish translations for collection data
+└── fr.json         # French translations for collection data
+```
+
+**Workflow:**
+1. Author collection items in `collections/` (e.g., `collections/articles/my-post.md`)
+2. Build once to generate `public/data/` JSON: `pnpm build`
+3. Extract: `pnpm uniweb i18n extract`
+4. Translate hashes in `locales/collections/{locale}.json`
+5. Build again — translated data is served at `/{locale}/data/articles.json`
+
+The manifest includes context so translators know which collection and item each string belongs to:
+
+```json
+{
+  "620d9c54": {
+    "source": "Protecting Panda Habitats in Sichuan",
+    "field": "title",
+    "contexts": [{ "collection": "articles", "item": "habitat-protection" }]
+  }
+}
+```
+
+The runtime automatically fetches the correct locale-specific data — components don't need any special handling.
 
 ### Free-Form Translation (Complete Replacement)
 
@@ -206,6 +250,13 @@ locales/freeform/
 └── fr/
     ├── .manifest.json
     └── pages/about/story.md    # Complete French version
+```
+
+Free-form translations also work for collection items:
+
+```bash
+# Initialize a free-form translation for a collection item
+pnpm uniweb i18n init-freeform es collections/articles getting-started
 ```
 
 **Creating a free-form translation:**
@@ -245,8 +296,9 @@ This template includes free-form translations for the About page "story" section
      locales: [en, es, fr, de]  # Add 'de' for German
    ```
 2. Create `site/locales/de.json` with hash-based translations
-3. Optionally create `site/locales/freeform/de/` for free-form translations
-4. Run `pnpm build` to generate locale-specific pages
+3. Create `site/locales/collections/de.json` for collection translations
+4. Optionally create `site/locales/freeform/de/` for free-form translations
+5. Run `pnpm build` to generate locale-specific pages
 
 ## Development
 

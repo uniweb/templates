@@ -24,7 +24,7 @@ This template demonstrates key Uniweb patterns including content collections, dy
 │   │   ├── team/        # Team page with 3 data approaches
 │   │   ├── blog/        # Dynamic routes for articles
 │   │   └── ...
-│   ├── library/         # Content collections
+│   ├── collections/     # Content collections
 │   │   ├── articles/    # Blog posts
 │   │   └── team/        # Team member profiles
 │   ├── site.yml         # Site configuration + collections
@@ -48,15 +48,15 @@ Collections turn folders of markdown files into queryable data. Each file has fr
 ```yaml
 collections:
   articles:
-    path: library/articles
+    path: collections/articles
     route: /blog           # Enables dynamic routes
     sort: date desc
   team:
-    path: library/team
+    path: collections/team
     sort: order asc
 ```
 
-**Example collection item** (`library/team/sarah-chen.md`):
+**Example collection item** (`collections/team/sarah-chen.md`):
 ```markdown
 ---
 name: Sarah Chen

@@ -49,7 +49,7 @@ my-site/
 │       └── components/
 ├── site/              # Content site
 │   ├── pages/         # Page content
-│   ├── library/       # Collections (articles, team, etc.)
+│   ├── collections/   # Collections (articles, team, etc.)
 │   └── public/        # Static assets
 └── package.json
 ```
