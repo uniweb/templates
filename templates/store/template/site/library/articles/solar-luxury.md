@@ -5,7 +5,7 @@ excerpt: Debunking the myth that renewable energy means compromising on aestheti
 date: 2024-09-28
 readTime: 4 min read
 author: Marcus Thorne
-image: https://images.unsplash.com/photo-1509391366360-fe5bb58583bb?auto=format&fit=crop&q=80&w=1200
+image: https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&q=80&w=1200
 ---
 
 For decades, the term "solar powered" was synonymous with bulky plastic panels and weak, bluish LEDs. It was a compromise — an ethical choice that often resulted in an aesthetic eyesore. But a paradigm shift is occurring in the luxury market.
