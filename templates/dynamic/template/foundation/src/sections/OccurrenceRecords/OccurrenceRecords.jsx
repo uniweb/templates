@@ -1,5 +1,5 @@
 import React from 'react'
-import { Database, RefreshCw } from 'lucide-react'
+import { Database } from 'lucide-react'
 
 function Skeleton() {
   return [1, 2, 3, 4, 5, 6].map((n) => (
@@ -19,12 +19,6 @@ function OccurrenceRecords({ content, params, block }) {
           <Database className="text-accent-600 w-5 h-5" />
           <span className="text-xl font-bold text-heading">{title || 'Occurrence Records'}</span>
         </div>
-        <button
-          onClick={() => block.refetch?.()}
-          className="text-subtle hover:text-accent-600 transition-colors"
-        >
-          <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-        </button>
       </div>
 
       <div className="space-y-3">

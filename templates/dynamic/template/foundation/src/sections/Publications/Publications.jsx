@@ -1,6 +1,6 @@
 import React from 'react'
 import { H2, P } from '@uniweb/kit'
-import { BookOpen, RefreshCw } from 'lucide-react'
+import { BookOpen } from 'lucide-react'
 
 function Skeleton() {
   return [1, 2, 3, 4, 5].map((n) => (
@@ -23,12 +23,6 @@ function Publications({ content, params, block }) {
           <BookOpen className="text-primary-600 w-5 h-5" />
           <span className="text-xl font-bold text-heading">{title || 'Recent Publications'}</span>
         </div>
-        <button
-          onClick={() => block.refetch?.()}
-          className="text-subtle hover:text-primary-600 transition-colors"
-        >
-          <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-        </button>
       </div>
 
       <div className="space-y-4">
