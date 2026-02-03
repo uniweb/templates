@@ -364,7 +364,7 @@
           "section": "3"
         },
         {
-          "page": "/@header",
+          "page": "/layout/header",
           "section": "1"
         }
       ]
@@ -748,11 +748,11 @@
       "field": "title",
       "contexts": [
         {
-          "page": "/@header",
+          "page": "/layout/header",
           "section": "1"
         },
         {
-          "page": "/@footer",
+          "page": "/layout/footer",
           "section": "1"
         }
       ]
@@ -762,7 +762,7 @@
       "field": "paragraph",
       "contexts": [
         {
-          "page": "/@footer",
+          "page": "/layout/footer",
           "section": "1"
         }
       ]
@@ -772,7 +772,7 @@
       "field": "heading.h3.0",
       "contexts": [
         {
-          "page": "/@footer",
+          "page": "/layout/footer",
           "section": "1"
         }
       ]
@@ -782,7 +782,7 @@
       "field": "heading.h3.1",
       "contexts": [
         {
-          "page": "/@footer",
+          "page": "/layout/footer",
           "section": "1"
         }
       ]
@@ -792,7 +792,7 @@
       "field": "heading.h3.2",
       "contexts": [
         {
-          "page": "/@footer",
+          "page": "/layout/footer",
           "section": "1"
         }
       ]

@@ -22,10 +22,11 @@ A documentation site built with [Uniweb](https://github.com/uniweb/cli) — a co
 │   └── dist/                # Built output
 │
 ├── site/                # Documentation content (markdown)
+│   ├── layout/          # Layout panels
+│   │   ├── header/      # Global header
+│   │   ├── footer/      # Global footer
+│   │   └── left/        # Left sidebar navigation
 │   ├── pages/
-│   │   ├── @header/     # Global header
-│   │   ├── @footer/     # Global footer
-│   │   ├── @left/       # Left sidebar navigation
 │   │   └── docs/        # Versioned documentation scope
 │   │       ├── page.yml # Version configuration
 │   │       ├── v2/      # Current version (routes to /docs/*)
@@ -105,7 +106,7 @@ site/pages/docs/v2/
 
 Categories are enabled by default in this template. Both Header and LeftPanel must have `categories: true`:
 
-**`@header/1-header.md`**
+**`layout/header/1-header.md`**
 ```yaml
 ---
 type: Header
@@ -113,7 +114,7 @@ categories: true
 ---
 ```
 
-**`@left/1-navigation.md`**
+**`layout/left/1-navigation.md`**
 ```yaml
 ---
 type: LeftPanel
@@ -125,7 +126,7 @@ categories: true
 
 For smaller sites, you may prefer flat navigation where the sidebar shows the entire page tree:
 
-**`@header/1-header.md`**
+**`layout/header/1-header.md`**
 ```yaml
 ---
 type: Header
@@ -133,7 +134,7 @@ categories: false
 ---
 ```
 
-**`@left/1-navigation.md`**
+**`layout/left/1-navigation.md`**
 ```yaml
 ---
 type: LeftPanel
