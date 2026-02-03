@@ -27,10 +27,59 @@ const iconMap = {
 function Stats({ content, params }) {
   // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { title, paragraphs } = content
-  const { columns, style } = params
+  const { theme, columns, style } = params
 
   // Extract stats from semantic groups (H3 patterns)
   const stats = content.items
+
+  const themes = {
+    light: {
+      section: 'bg-white',
+      title: 'text-gray-900',
+      description: 'text-gray-600',
+      value: 'text-gray-900',
+      label: 'text-gray-600',
+      card: '',
+      icon: 'text-primary',
+      iconBg: 'bg-primary/10',
+      border: 'border-gray-100',
+    },
+    gray: {
+      section: 'bg-gray-50',
+      title: 'text-gray-900',
+      description: 'text-gray-600',
+      value: 'text-gray-900',
+      label: 'text-gray-600',
+      card: 'bg-white shadow-sm',
+      icon: 'text-primary',
+      iconBg: 'bg-primary/10',
+      border: 'border-gray-200',
+    },
+    dark: {
+      section: 'bg-gray-900',
+      title: 'text-white',
+      description: 'text-gray-400',
+      value: 'text-white',
+      label: 'text-gray-400',
+      card: 'bg-gray-800',
+      icon: 'text-primary',
+      iconBg: 'bg-primary/20',
+      border: 'border-gray-700',
+    },
+    primary: {
+      section: 'bg-primary',
+      title: 'text-white',
+      description: 'text-blue-100',
+      value: 'text-white',
+      label: 'text-blue-100',
+      card: 'bg-white/10 backdrop-blur-sm',
+      icon: 'text-white',
+      iconBg: 'bg-white/20',
+      border: 'border-white/20',
+    },
+  }
+
+  const t = themes[theme] || themes.light
 
   const gridCols = {
     2: 'sm:grid-cols-2',
@@ -48,28 +97,28 @@ function Stats({ content, params }) {
     },
     cards: {
       container: '',
-      card: 'p-6 rounded-xl bg-surface-subtle',
+      card: cn('p-6 rounded-xl', t.card),
     },
     bordered: {
       container: 'text-center',
-      card: 'p-6 border-l first:border-l-0 border-edge-muted',
+      card: cn('p-6 border-l first:border-l-0', t.border),
     },
   }
 
   const s = styleVariants[style] || styleVariants.simple
 
   return (
-    <section className="py-16 px-6">
+    <section className={cn('py-16 px-6', t.section)}>
       <div className="max-w-6xl mx-auto">
         {(title || paragraphs[0]) && (
           <div className="text-center mb-12">
             {title && (
-              <h2 className="text-3xl font-bold mb-4 text-heading">
+              <h2 className={cn('text-3xl font-bold mb-4', t.title)}>
                 {title}
               </h2>
             )}
             {paragraphs[0] && (
-              <p className="text-lg max-w-2xl mx-auto text-muted">
+              <p className={cn('text-lg max-w-2xl mx-auto', t.description)}>
                 {paragraphs[0]}
               </p>
             )}
@@ -93,22 +142,22 @@ function Stats({ content, params }) {
                 className={cn(s.container, s.card)}
               >
                 {IconComponent && style === 'cards' && (
-                  <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-primary/10">
-                    <IconComponent className="w-6 h-6 text-primary" />
+                  <div className={cn('w-12 h-12 rounded-lg flex items-center justify-center mb-4', t.iconBg)}>
+                    <IconComponent className={cn('w-6 h-6', t.icon)} />
                   </div>
                 )}
                 {value && (
-                  <div className="text-4xl sm:text-5xl font-bold mb-2 text-heading">
+                  <div className={cn('text-4xl sm:text-5xl font-bold mb-2', t.value)}>
                     {value}
                   </div>
                 )}
                 {label && (
-                  <div className="text-sm font-medium uppercase tracking-wide text-muted">
+                  <div className={cn('text-sm font-medium uppercase tracking-wide', t.label)}>
                     {label}
                   </div>
                 )}
                 {description && (
-                  <p className="mt-2 text-sm text-muted">
+                  <p className={cn('mt-2 text-sm', t.description)}>
                     {description}
                   </p>
                 )}

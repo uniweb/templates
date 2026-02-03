@@ -24,7 +24,7 @@ function Features({ content, params }) {
 
   const styles = {
     cards: {
-      container: 'p-6 rounded-xl bg-surface-subtle',
+      container: 'p-6 rounded-xl bg-gray-50',
       iconWrapper: 'w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-primary/10',
     },
     minimal: {

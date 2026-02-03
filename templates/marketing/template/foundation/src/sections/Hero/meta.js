@@ -1,41 +1,51 @@
 /**
- * Hero Banner Metadata (v2)
+ * Hero Component Metadata (v2)
+ *
+ * A modern hero section with multiple layout options, glassmorphism effects,
+ * and support for eyebrow text (kicker/pretitle).
  */
 export default {
   title: 'Hero Banner',
-  description: 'Bold hero section with headline, description, and call-to-action buttons',
+  description: 'Bold hero section with headline, eyebrow, description, and CTA buttons',
   category: 'impact',
   purpose: 'Impress',
 
+  // Static capabilities for cross-block coordination
+  // Header reads this to know Hero supports translucent/floating navbar
   context: {
     allowTranslucentTop: true,
   },
 
   content: {
-    pretitle: 'Eyebrow text (e.g., "New in 2025")',
-    title: 'Main headline',
-    subtitle: 'Subtitle text',
-    paragraphs: 'Description [1]',
+    pretitle: 'Eyebrow',
+    title: 'Headline',
+    subtitle: 'Subtitle',
+    paragraphs: 'Description [1-2]',
     links: 'CTA buttons [1-2]',
     image: 'Hero image [1]',
   },
 
   params: {
+    theme: {
+      type: 'select',
+      label: 'Theme',
+      options: ['gradient', 'glass', 'dark', 'light'],
+      default: 'gradient',
+    },
     layout: {
       type: 'select',
       label: 'Layout',
       options: [
-        { value: 'center', label: 'Centered' },
-        { value: 'left', label: 'Left-Aligned' },
-        { value: 'split-right', label: 'Split (Image Right)' },
-        { value: 'split-left', label: 'Split (Image Left)' },
+        'center',
+        'left',
+        { value: 'split-right', label: 'Split (image right)' },
+        { value: 'split-left', label: 'Split (image left)' },
       ],
       default: 'center',
     },
     showPattern: {
       type: 'boolean',
-      label: 'Background Pattern',
-      hint: 'Show subtle grid pattern',
+      label: 'Show Background Pattern',
       default: true,
     },
   },
@@ -43,15 +53,19 @@ export default {
   presets: {
     default: {
       label: 'Centered Hero',
-      params: { layout: 'center', showPattern: true },
+      params: { theme: 'gradient', layout: 'center' },
+    },
+    glass: {
+      label: 'Glassmorphism',
+      params: { theme: 'glass', layout: 'center' },
     },
     split: {
       label: 'Split Layout',
-      params: { layout: 'split-right', showPattern: true },
+      params: { theme: 'gradient', layout: 'split-right' },
     },
     minimal: {
-      label: 'Minimal',
-      params: { layout: 'center', showPattern: false },
+      label: 'Minimal Light',
+      params: { theme: 'light', layout: 'left', showPattern: false },
     },
   },
 }

@@ -32,7 +32,7 @@ function Header({ content, params, block }) {
   const isFloating = allowTranslucentTop
 
   // Determine text color based on next block's theme (when floating)
-  const isDarkBackground = isFloating && ['dark'].includes(nextBlockTheme)
+  const isDarkBackground = isFloating && ['gradient', 'glass', 'dark'].includes(nextBlockTheme)
 
   // Runtime guarantees: content fields exist
   const { title, imgs, links } = content
@@ -49,16 +49,16 @@ function Header({ content, params, block }) {
     if (isFloating) {
       // Floating/translucent mode
       if (scrolled) {
-        return 'bg-surface/95 backdrop-blur-lg shadow-sm text-heading'
+        return 'bg-white/95 backdrop-blur-lg shadow-sm text-gray-900'
       }
       return isDarkBackground
         ? 'bg-transparent text-white'
-        : 'bg-transparent text-heading'
+        : 'bg-transparent text-gray-900'
     }
     // Standard mode
     return scrolled
-      ? 'bg-surface shadow-sm text-heading'
-      : 'bg-surface text-heading'
+      ? 'bg-white shadow-sm text-gray-900'
+      : 'bg-white text-gray-900'
   }
 
   const getLinkStyles = (page) => {
@@ -66,7 +66,7 @@ function Header({ content, params, block }) {
     if (isFloating && !scrolled && isDarkBackground) {
       return isActive ? 'text-white font-semibold' : 'text-white/90 hover:text-white'
     }
-    return isActive ? 'text-primary font-semibold' : 'text-muted hover:text-heading'
+    return isActive ? 'text-primary font-semibold' : 'text-gray-600 hover:text-gray-900'
   }
 
   return (
@@ -156,8 +156,8 @@ function Header({ content, params, block }) {
                     className={cn(
                       'inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-colors',
                       isFloating && !scrolled && isDarkBackground
-                        ? 'bg-white text-neutral-900 hover:bg-neutral-100'
-                        : 'bg-btn-primary text-btn-primary-text hover:bg-btn-primary-hover'
+                        ? 'bg-white text-gray-900 hover:bg-gray-100'
+                        : 'bg-primary text-white hover:bg-blue-700'
                     )}
                   >
                     {links[1].label}
@@ -194,7 +194,7 @@ function Header({ content, params, block }) {
 
         {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-surface border-t border-edge">
+          <div className="lg:hidden bg-white border-t">
             <div className="px-4 py-4 space-y-2">
               {navPages.map((page) => (
                 <Link
@@ -204,7 +204,7 @@ function Header({ content, params, block }) {
                     'block px-3 py-2 text-base font-medium rounded-md',
                     isActiveOrAncestor(page)
                       ? 'text-primary bg-primary/5'
-                      : 'text-muted hover:text-heading hover:bg-surface-subtle'
+                      : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
                   )}
                   onClick={closeMobileMenu}
                 >
@@ -212,11 +212,11 @@ function Header({ content, params, block }) {
                 </Link>
               ))}
               {links.length > 0 && (
-                <div className="mt-4 pt-4 border-t border-edge space-y-2">
+                <div className="mt-4 pt-4 border-t border-gray-200 space-y-2">
                   {links[0] && (
                     <Link
                       href={links[0].href}
-                      className="block px-3 py-2 text-base font-medium text-muted hover:text-heading hover:bg-surface-subtle rounded-md text-center"
+                      className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md text-center"
                       onClick={closeMobileMenu}
                     >
                       {links[0].label}
@@ -225,7 +225,7 @@ function Header({ content, params, block }) {
                   {links[1] && (
                     <Link
                       href={links[1].href}
-                      className="block px-3 py-2 text-base font-medium bg-btn-primary text-btn-primary-text hover:bg-btn-primary-hover rounded-md text-center"
+                      className="block px-3 py-2 text-base font-medium text-white bg-primary hover:bg-blue-700 rounded-md text-center"
                       onClick={closeMobileMenu}
                     >
                       {links[1].label}

@@ -36,7 +36,7 @@ function Pricing({ content, params }) {
           onClick={() => setBilling(billing === 'monthly' ? 'annual' : 'monthly')}
           className={cn(
             'relative inline-flex h-6 w-11 items-center rounded-full transition-colors',
-            billing === 'annual' ? 'bg-primary' : 'bg-surface-muted'
+            billing === 'annual' ? 'bg-primary' : 'bg-gray-200'
           )}
           role="switch"
           aria-checked={billing === 'annual'}
@@ -72,7 +72,7 @@ function Pricing({ content, params }) {
       <div
         key={tier.name || index}
         className={cn(
-          'rounded-2xl p-8 flex flex-col bg-surface-subtle shadow-lg',
+          'rounded-2xl p-8 flex flex-col bg-white shadow-lg',
           isPopular && 'ring-2 ring-primary scale-105'
         )}
       >
@@ -140,7 +140,7 @@ function Pricing({ content, params }) {
       <div
         key={index}
         className={cn(
-          'rounded-2xl p-8 bg-surface-subtle shadow-lg',
+          'rounded-2xl p-8 bg-white shadow-lg',
           isPopular && 'ring-2 ring-primary scale-105'
         )}
       >

@@ -108,7 +108,7 @@ function Team({ content, params }) {
             return (
               <div
                 key={index}
-                className="rounded-2xl overflow-hidden transition-all duration-300 bg-surface-subtle hover:shadow-lg"
+                className="rounded-2xl overflow-hidden transition-all duration-300 bg-gray-50 hover:shadow-lg"
               >
                 {photo && (
                   <div className="aspect-square">

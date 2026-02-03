@@ -80,7 +80,7 @@ function ArticleCard({ article, fallbackRoute, showExcerpt, showAuthor, showDate
     : null
 
   return (
-    <article className="bg-surface-subtle rounded-xl shadow-sm border border-edge-muted overflow-hidden hover:shadow-md transition-shadow">
+    <article className="bg-white rounded-xl shadow-sm border border-edge-muted overflow-hidden hover:shadow-md transition-shadow">
       {/* Image */}
       {image && (
         <Link href={articleUrl} className="block">
@@ -135,7 +135,7 @@ function ArticleCard({ article, fallbackRoute, showExcerpt, showAuthor, showDate
               </div>
             )}
             {showAuthor && showDate && author && formattedDate && (
-              <span className="text-edge">|</span>
+              <span className="text-gray-300">|</span>
             )}
             {showDate && formattedDate && (
               <time dateTime={date}>{formattedDate}</time>

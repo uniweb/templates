@@ -17,6 +17,12 @@ export default {
   },
 
   params: {
+    theme: {
+      type: 'select',
+      label: 'Theme',
+      options: ['light', 'gray', 'dark', 'primary'],
+      default: 'light',
+    },
     columns: {
       type: 'select',
       label: 'Columns',
@@ -38,11 +44,15 @@ export default {
   presets: {
     default: {
       label: 'Default Stats',
-      params: { style: 'simple' },
+      params: { theme: 'light', style: 'simple' },
     },
     cards: {
       label: 'Card Stats',
-      params: { style: 'cards' },
+      params: { theme: 'gray', style: 'cards' },
+    },
+    primary: {
+      label: 'Primary Background',
+      params: { theme: 'primary', style: 'simple' },
     },
   },
 }

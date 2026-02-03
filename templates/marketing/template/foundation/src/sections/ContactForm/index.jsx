@@ -73,7 +73,7 @@ function ContactForm({ content, params }) {
     const error = errors[name]
 
     const baseInputClass = cn(
-      'w-full px-4 py-3 rounded-lg border transition-colors bg-surface border-edge text-heading placeholder-subtle focus:border-primary focus:ring-primary',
+      'w-full px-4 py-3 rounded-lg border transition-colors bg-white border-edge text-heading placeholder-gray-400 focus:border-primary focus:ring-primary',
       error && 'border-red-500'
     )
 
