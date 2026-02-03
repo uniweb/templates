@@ -1,3 +1,10 @@
 title: Blog
 label: Blog
 description: Field notes and conservation updates
+
+# Posts collection data - cascades to child pages including [id]
+fetch:
+  url: https://jsonplaceholder.typicode.com/posts?_limit=12
+  schema: posts
+  prerender: false
+  detail: rest

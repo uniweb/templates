@@ -1,9 +1,13 @@
 import React from 'react'
+import { Link } from '@uniweb/kit'
 import { Calendar, ArrowRight } from 'lucide-react'
 
 export default function NoteCard({ note }) {
   return (
-    <div className="bg-white rounded-xl border border-edge-muted shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col overflow-hidden group animate-fade-in-up">
+    <Link
+      href={`/blog/${note.id}`}
+      className="bg-white rounded-xl border border-edge-muted shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col overflow-hidden group animate-fade-in-up no-underline"
+    >
       <div className="h-48 overflow-hidden bg-surface-subtle relative">
         <img
           src={`https://picsum.photos/seed/${note.id + 50}/400/250`}
@@ -26,6 +30,6 @@ export default function NoteCard({ note }) {
           Read Report <ArrowRight className="w-4 h-4" />
         </span>
       </div>
-    </div>
+    </Link>
   )
 }
