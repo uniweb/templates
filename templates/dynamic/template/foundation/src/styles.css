@@ -5,8 +5,8 @@
 @source "../node_modules/@uniweb/kit/src/**/*.{js,jsx}";
 
 @theme inline {
-  /* Foundation-specific: use primary-50 instead of bg for surface */
-  --color-surface: var(--primary-50);
+  /* Foundation-specific: use white or primary-50 instead of bg for surface */
+  --color-surface: white;
 }
 
 /* Page background - slightly tinted like the original design */
