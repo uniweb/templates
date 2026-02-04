@@ -31,6 +31,11 @@
       "name": "Solis Artisans - Store",
       "description": "Artisan e-commerce with product collections, Shopify Buy Button, journal blog, and stone-amber design",
       "tags": ["store", "e-commerce", "shopify", "artisan", "products"]
+    },
+    "extensions": {
+      "name": "Extensions Demo",
+      "description": "Primary foundation with a visual effects extension, demonstrating multi-foundation sites",
+      "tags": ["extensions", "multi-foundation", "visual-effects", "runtime"]
     }
   }
 }

@@ -1,0 +1,41 @@
+# {{projectName}}
+
+A Uniweb project demonstrating **extensions** — secondary foundations that contribute additional section types to a site.
+
+## Structure
+
+- **`foundation/`** — Primary foundation with general-purpose section types (Header, Hero, Features, Footer)
+- **`effects/`** — Extension foundation with visual effects (ParticleHero, AnimatedCounter)
+- **`site/`** — Site that uses section types from both foundations
+
+## Getting Started
+
+```bash
+pnpm install
+pnpm dev
+```
+
+The dev script builds the effects extension first, then starts the site dev server. Both primary and extension section types are available.
+
+## How Extensions Work
+
+The site declares extensions in `site.yml`:
+
+```yaml
+extensions:
+  - /effects/foundation.js
+```
+
+The runtime loads the primary foundation (bundled into the site), then loads each extension via `import()`. Section types from all sources are available to content authors — they write `type: ParticleHero` in frontmatter and the runtime resolves it from whichever foundation provides it.
+
+**Resolution order:** Primary foundation wins. If both define a component with the same name, the primary's version is used. Extensions are checked in the order they're declared.
+
+## Building for Production
+
+```bash
+pnpm build
+```
+
+This builds the primary foundation, then the effects extension, then the site, and copies the extension output into `site/dist/effects/` so it's served from the same domain.
+
+{{> learn-more}}

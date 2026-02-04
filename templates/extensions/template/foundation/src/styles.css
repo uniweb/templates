@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@import "@uniweb/kit/theme-tokens.css";
+
+@source "./sections/**/*.{js,jsx}";
+@source "../node_modules/@uniweb/kit/src/**/*.{js,jsx}";
+
+@theme inline {
+  --header-height: var(--foundation-header-height, 4rem);
+  --max-content-width: var(--foundation-max-content-width, 80rem);
+  --section-padding-y: var(--foundation-section-padding-y, 5rem);
+}

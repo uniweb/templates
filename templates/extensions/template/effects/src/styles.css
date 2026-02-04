@@ -1,0 +1,17 @@
+@import "tailwindcss";
+@import "@uniweb/kit/theme-tokens.css";
+
+@source "./sections/**/*.{js,jsx}";
+@source "../node_modules/@uniweb/kit/src/**/*.{js,jsx}";
+
+/* Particle animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+/* Counter animation */
+@keyframes countFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
