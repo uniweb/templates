@@ -95,27 +95,30 @@ jobs:
             # Install dependencies
             pnpm install
 
-            # Build foundation first (if exists)
-            if [ -d "foundation" ]; then
-              echo "Building foundation..."
-              cd foundation
-              pnpm build
-              cd ..
-            fi
-
-            # Build site with base path for GitHub Pages
+            # Add base path to site.yml for GitHub Pages
             if [ -d "site" ]; then
-              echo "Building site with base: /templates/$template/"
-
-              # Add base path to site.yml
               echo "" >> site/site.yml
               echo "base: /templates/$template/" >> site/site.yml
+              echo "Building site with base: /templates/$template/"
+            fi
 
-              cd site
+            # Use root build script if available (handles multi-package templates
+            # like extensions which need to build effects/ and copy dist).
+            # Otherwise fall back to manual foundation + site build.
+            if node -e "require('./package.json').scripts.build" 2>/dev/null; then
               pnpm build
-              cd ..
+            else
+              if [ -d "foundation" ]; then
+                echo "Building foundation..."
+                cd foundation && pnpm build && cd ..
+              fi
+              if [ -d "site" ]; then
+                cd site && pnpm build && cd ..
+              fi
+            fi
 
-              # Copy built site to demos folder
+            # Copy built site to demos folder
+            if [ -d "site/dist" ]; then
               cp -r site/dist "../demos/$template"
               echo "Copied to demos/$template"
             fi
