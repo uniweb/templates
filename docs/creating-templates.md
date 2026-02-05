@@ -140,7 +140,9 @@ This `"foundation": "file:../foundation"` entry is essential because:
 - Foundation: `"name": "foundation"` (not `{{projectName}}-foundation`)
 - Site: `"name": "site"` (not `{{projectName}}-site`)
 
-**The foundation package MUST include `@uniweb/core` as a direct dependency:**
+**Foundation source code should only import from `@uniweb/kit`** — not `@uniweb/core` directly. Kit provides React-friendly hooks and components; core contains internal classes that foundation developers don't need to interact with.
+
+**However, `@uniweb/core` must be listed as a direct dependency:**
 
 ```json
 // foundation/package.json.hbs
@@ -153,13 +155,14 @@ This `"foundation": "file:../foundation"` entry is essential because:
 }
 ```
 
-This is required because:
-1. The foundation build externalizes `@uniweb/core` (it's not bundled into `foundation.js`)
-2. When the site's prerender (SSG) loads `foundation/dist/foundation.js` in Node.js, it needs to resolve `import ... from '@uniweb/core'`
-3. pnpm uses strict module resolution - each package can only see its own dependencies
-4. Even though `@uniweb/kit` depends on `@uniweb/core`, the foundation's direct imports won't resolve through transitive dependencies
+This seems redundant since kit already depends on core, but it's required because of how the build works:
 
-Without this, prerendering will fail with:
+1. Kit imports from core (e.g., `import { getUniweb } from '@uniweb/core'`)
+2. The foundation build bundles kit's code into `foundation.js`, but externalizes core — those import statements remain as-is
+3. At prerender time, Node.js loads `foundation/dist/foundation.js` and needs to resolve `@uniweb/core`
+4. pnpm uses strict module resolution — packages can only see their own direct dependencies, not transitive ones nested inside other packages
+
+Without this direct dependency, prerendering fails with:
 ```
 Cannot find package '@uniweb/core' imported from foundation/dist/foundation.js
 ```
@@ -372,7 +375,7 @@ This forces Vite to pre-bundle these packages, ensuring proper CJS-to-ESM conver
 - [ ] Include `pnpm-workspace.yaml` with workspace packages
 - [ ] Include both `foundation/` and `site/` packages
 - [ ] Add `"foundation": "file:../foundation"` to site's dependencies (not `workspace:*`)
-- [ ] Add `"@uniweb/core"` to foundation's dependencies (required for prerender/SSG)
+- [ ] Add `"@uniweb/core"` to foundation's dependencies (required for prerender — kit depends on it, but pnpm strict resolution needs it direct)
 - [ ] Use fixed names: `"name": "foundation"` and `"name": "site"`
 - [ ] Add `.hbs` extension to files needing variable substitution
 - [ ] Include sample content in `site/pages/`
