@@ -26,16 +26,12 @@ export const vars = {
     description: 'Vertical padding for sections',
   },
 }
-
-// Optional: Export custom Layout component
-// import Layout from './sections/Layout'
-
 /**
  * Runtime exports (Layout and props)
  */
 export default {
-  // Uncomment to use a custom page layout:
-  // Layout,
+  // Optional: Create custom layouts in src/layouts/
+  // Then set defaultLayout: 'MyLayout' below
 
   // Foundation-wide props (accessible via website.foundationProps):
   props: {},

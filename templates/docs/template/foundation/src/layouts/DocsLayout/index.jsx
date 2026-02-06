@@ -15,8 +15,8 @@ import { cn } from '@uniweb/kit'
  * - header: Header component
  * - body: Main page content
  * - footer: Footer component (prev/next navigation for docs)
- * - left/leftPanel: Left sidebar navigation
- * - right/rightPanel: Right sidebar (table of contents, etc.)
+ * - left: Left sidebar navigation
+ * - right: Right sidebar (table of contents, etc.)
  */
 
 /**
@@ -92,22 +92,18 @@ function MenuButton({ onClick }) {
 /**
  * Main Layout component
  */
-export default function Layout({
+export default function DocsLayout({
   page,
-  website,
   header,
   body,
   footer,
   left,
   right,
-  leftPanel,
-  rightPanel,
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
-  // Use left or leftPanel (backwards compatibility)
-  const leftContent = left || leftPanel
-  const rightContent = right || rightPanel
+  const leftContent = left
+  const rightContent = right
 
   // Close sidebar on page navigation
   const activeRoute = page?.route
