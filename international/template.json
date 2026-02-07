@@ -4,5 +4,10 @@
   "compatible": ">=0.7.0",
   "format": 2,
   "tags": ["i18n", "multilingual", "blog", "collections", "search", "localization", "conservation"],
-  "components": ["Hero", "Features", "Team", "CTA", "Header", "Footer", "ArticleList", "Article"]
+  "components": ["Hero", "Features", "Team", "CTA", "Header", "Footer", "ArticleList", "Article"],
+  "dependencies": {
+    "foundation": {
+      "lucide-react": "^0.400.0"
+    }
+  }
 }

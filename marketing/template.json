@@ -4,5 +4,11 @@
   "compatible": ">=0.7.0",
   "format": 2,
   "tags": ["marketing", "landing-page", "saas", "business"],
-  "components": ["Hero", "Features", "Pricing", "Testimonials", "CTA"]
+  "components": ["Hero", "Features", "Pricing", "Testimonials", "CTA"],
+  "dependencies": {
+    "foundation": {
+      "lucide-react": "^0.400.0",
+      "@tailwindcss/typography": "^0.5.0"
+    }
+  }
 }

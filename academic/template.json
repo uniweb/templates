@@ -4,5 +4,10 @@
   "compatible": ">=0.7.0",
   "format": 2,
   "tags": ["academic", "research", "portfolio"],
-  "components": ["ProfileHero", "PublicationList", "ResearchAreas", "TeamGrid", "Timeline", "MathBlock"]
+  "components": ["ProfileHero", "PublicationList", "ResearchAreas", "TeamGrid", "Timeline", "MathBlock"],
+  "dependencies": {
+    "foundation": {
+      "@uniweb/scholar": "^0.2.0"
+    }
+  }
 }

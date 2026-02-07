@@ -4,5 +4,10 @@
   "compatible": ">=0.7.0",
   "format": 2,
   "tags": ["data", "api", "fetch", "loading-states", "transform", "dynamic", "conservation"],
-  "components": ["Hero", "FieldNotes", "Sightings", "Donors", "Publications", "OccurrenceRecords", "VideoGallery", "Header", "Footer"]
+  "components": ["Hero", "FieldNotes", "Sightings", "Donors", "Publications", "OccurrenceRecords", "VideoGallery", "Header", "Footer"],
+  "dependencies": {
+    "foundation": {
+      "lucide-react": "^0.400.0"
+    }
+  }
 }
