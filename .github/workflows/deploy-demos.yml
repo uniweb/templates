@@ -79,6 +79,18 @@ jobs:
               echo "Copied to demos/$template"
             fi
 
+            # Copy built extensions (loaded via URL at runtime)
+            if [ -d "extensions" ]; then
+              for ext_dir in extensions/*/dist; do
+                if [ -d "$ext_dir" ]; then
+                  ext_name=$(basename "$(dirname "$ext_dir")")
+                  mkdir -p "../demos/$template/$ext_name"
+                  cp -r "$ext_dir"/* "../demos/$template/$ext_name/"
+                  echo "Copied extension: $ext_name"
+                fi
+              done
+            fi
+
             cd ..
 
             # Clean up project directory
