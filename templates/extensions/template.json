@@ -1,7 +1,0 @@
-{
-  "name": "Extensions Demo",
-  "description": "A primary foundation with a visual effects extension, demonstrating how multiple foundations contribute section types to one site.",
-  "uniweb": ">=0.2.0",
-  "tags": ["extensions", "multi-foundation", "visual-effects", "runtime"],
-  "components": ["Header", "Hero", "Features", "Footer", "ParticleHero", "AnimatedCounter"]
-}

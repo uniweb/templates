@@ -4,7 +4,13 @@
   "description": "Official templates for the Uniweb CLI",
   "type": "module",
   "files": [
-    "templates",
+    "marketing",
+    "academic",
+    "docs",
+    "dynamic",
+    "extensions",
+    "international",
+    "store",
     "manifest.json"
   ],
   "keywords": [

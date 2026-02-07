@@ -1,0 +1,8 @@
+{
+  "name": "Marketing Starter",
+  "description": "A complete marketing site with landing page, features showcase, pricing tables, and testimonials. Perfect for product launches, SaaS websites, and business landing pages.",
+  "compatible": ">=0.7.0",
+  "format": 2,
+  "tags": ["marketing", "landing-page", "saas", "business"],
+  "components": ["Hero", "Features", "Pricing", "Testimonials", "CTA"]
+}

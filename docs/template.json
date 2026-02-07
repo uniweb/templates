@@ -1,0 +1,8 @@
+{
+  "name": "Documentation Starter",
+  "description": "A documentation site with navigation levels, sidebar navigation, and code syntax highlighting. Perfect for technical docs, API references, and developer guides.",
+  "compatible": ">=0.7.0",
+  "format": 2,
+  "tags": ["docs", "documentation", "developer", "technical"],
+  "components": ["Header", "LeftPanel", "DocSection", "CodeBlock", "Footer"]
+}

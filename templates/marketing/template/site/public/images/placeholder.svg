@@ -1,7 +1,0 @@
-<svg width="800" height="400" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="800" height="400" fill="#f3f4f6"/>
-  <rect x="320" y="140" width="160" height="120" rx="8" fill="#d1d5db"/>
-  <circle cx="360" cy="180" r="20" fill="#9ca3af"/>
-  <path d="M340 240 L380 200 L420 220 L460 180" stroke="#9ca3af" stroke-width="3" fill="none"/>
-  <text x="400" y="300" font-family="system-ui" font-size="16" fill="#6b7280" text-anchor="middle">Local Image Placeholder</text>
-</svg>

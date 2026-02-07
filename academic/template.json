@@ -1,0 +1,8 @@
+{
+  "name": "Academic",
+  "description": "Academic sites for researchers, labs, and departments",
+  "compatible": ">=0.7.0",
+  "format": 2,
+  "tags": ["academic", "research", "portfolio"],
+  "components": ["ProfileHero", "PublicationList", "ResearchAreas", "TeamGrid", "Timeline", "MathBlock"]
+}

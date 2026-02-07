@@ -1,6 +1,0 @@
-{
-  "yaml.schemas": {
-    "https://raw.githubusercontent.com/uniweb/cli/main/docs/meta/site.schema.json": "site/site.yml",
-    "https://raw.githubusercontent.com/uniweb/cli/main/docs/meta/page.schema.json": "**/page.yml"
-  }
-}

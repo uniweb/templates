@@ -26,12 +26,13 @@ jobs:
         run: |
           mkdir -p dist
 
-          for template_dir in templates/*/; do
-            template_name=$(basename "$template_dir")
+          # Read template names from manifest
+          TEMPLATES=$(jq -r '.templates | keys[]' manifest.json)
 
-            if [ -f "${template_dir}template.json" ]; then
+          for template_name in $TEMPLATES; do
+            if [ -f "${template_name}/template.json" ]; then
               echo "Creating tarball for: $template_name"
-              tar -czf "dist/${template_name}.tar.gz" -C templates "$template_name"
+              tar -czf "dist/${template_name}.tar.gz" "$template_name"
               echo "Created: dist/${template_name}.tar.gz"
             fi
           done

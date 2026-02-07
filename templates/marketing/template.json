@@ -1,8 +1,0 @@
-{
-  "name": "Marketing Starter",
-  "description": "A complete marketing site with landing page, features showcase, pricing tables, and testimonials. Perfect for product launches, SaaS websites, and business landing pages.",
-  "uniweb": ">=0.2.0",
-  "preview": "preview.png",
-  "tags": ["marketing", "landing-page", "saas", "business"],
-  "components": ["Hero", "Features", "Pricing", "Testimonials", "CTA"]
-}

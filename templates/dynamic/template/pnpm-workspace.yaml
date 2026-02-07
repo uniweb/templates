@@ -1,5 +1,0 @@
-packages:
-  - "site"
-  - "foundation"
-  - "sites/*"
-  - "foundations/*"

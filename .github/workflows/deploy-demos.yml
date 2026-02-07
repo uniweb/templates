@@ -35,9 +35,6 @@ jobs:
         with:
           version: 9
 
-      - name: Install Uniweb CLI (local, for processor import)
-        run: npm install uniweb@latest
-
       - name: Build all template demos
         run: |
           mkdir -p demos
@@ -50,45 +47,16 @@ jobs:
             echo "Building demo: $template"
             echo "=========================================="
 
-            TEMPLATE_DIR="templates/$template/template"
             WORK_DIR="demo-$template"
 
-            if [ ! -d "$TEMPLATE_DIR" ]; then
-              echo "Template directory not found: $TEMPLATE_DIR, skipping"
+            if [ ! -f "${template}/template.json" ]; then
+              echo "Template not found: $template, skipping"
               continue
             fi
 
-            # Use CLI's processor to create project from template
-            node -e "
-              import { copyTemplateDirectory, registerVersions } from 'uniweb/processor';
-              import { execSync } from 'child_process';
-
-              // Get latest versions from npm for dependencies
-              const getVersion = (pkg) => {
-                try {
-                  return execSync('npm view ' + pkg + ' version', { encoding: 'utf8' }).trim();
-                } catch {
-                  return '0.1.0';
-                }
-              };
-
-              // Register versions for template processing
-              registerVersions({
-                '@uniweb/build': getVersion('@uniweb/build'),
-                '@uniweb/runtime': getVersion('@uniweb/runtime'),
-                '@uniweb/core': getVersion('@uniweb/core'),
-                '@uniweb/kit': getVersion('@uniweb/kit'),
-                '@uniweb/scholar': getVersion('@uniweb/scholar'),
-                'uniweb': getVersion('uniweb'),
-              });
-
-              await copyTemplateDirectory('$TEMPLATE_DIR', '$WORK_DIR', {
-                projectName: '$template-demo',
-                description: 'Demo of the $template template'
-              });
-
-              console.log('Created project from local template');
-            "
+            # Use CLI's create command with local template path
+            # CLI detects format 2, scaffolds structure, overlays content
+            npx uniweb@latest create "$WORK_DIR" --template "./$template" --no-git
 
             cd "$WORK_DIR"
 
@@ -102,20 +70,8 @@ jobs:
               echo "Building site with base: /templates/$template/"
             fi
 
-            # Use root build script if available (handles multi-package templates
-            # like extensions which need to build effects/ and copy dist).
-            # Otherwise fall back to manual foundation + site build.
-            if node -e "require('./package.json').scripts.build" 2>/dev/null; then
-              pnpm build
-            else
-              if [ -d "foundation" ]; then
-                echo "Building foundation..."
-                cd foundation && pnpm build && cd ..
-              fi
-              if [ -d "site" ]; then
-                cd site && pnpm build && cd ..
-              fi
-            fi
+            # Build (root script handles foundation → extensions → site ordering)
+            pnpm build
 
             # Copy built site to demos folder
             if [ -d "site/dist" ]; then
