@@ -1,7 +1,5 @@
 title: Research & Data
 label: Research & Data
 description: Scientific data and publications
-sections:
-  - grid:
-      - publications
-      - occurrences
+nest:
+  grid: [publications, occurrences]
