@@ -4,11 +4,11 @@ import VideoCard from './VideoCard.jsx'
 
 function Skeleton() {
   return [1, 2, 3, 4, 5, 6].map((n) => (
-    <div key={n} className="bg-white rounded-xl border border-edge-muted shadow-sm overflow-hidden">
-      <div className="aspect-video bg-surface-subtle animate-pulse"></div>
+    <div key={n} className="bg-white rounded-xl border border-border/50 shadow-sm overflow-hidden">
+      <div className="aspect-video bg-card animate-pulse"></div>
       <div className="p-4 space-y-2">
-        <div className="h-5 bg-surface-subtle rounded w-3/4 animate-pulse"></div>
-        <div className="h-3 bg-surface-muted rounded w-1/2 animate-pulse"></div>
+        <div className="h-5 bg-card rounded w-3/4 animate-pulse"></div>
+        <div className="h-3 bg-muted rounded w-1/2 animate-pulse"></div>
       </div>
     </div>
   ))
@@ -24,7 +24,7 @@ function VideoGallery({ content, params, block }) {
       {(title || paragraphs[0]) && (
         <div className="mb-8">
           {title && <H2 text={title} className="text-2xl sm:text-3xl font-bold text-heading mb-2" />}
-          {paragraphs[0] && <P text={paragraphs[0]} className="text-muted max-w-2xl" />}
+          {paragraphs[0] && <P text={paragraphs[0]} className="text-subtle max-w-2xl" />}
         </div>
       )}
 
@@ -32,7 +32,7 @@ function VideoGallery({ content, params, block }) {
         {loading ? (
           <Skeleton />
         ) : videos.length === 0 ? (
-          <div className="col-span-full bg-surface-subtle p-8 rounded-xl text-center text-muted">
+          <div className="col-span-full bg-card p-8 rounded-xl text-center text-subtle">
             No videos available.
           </div>
         ) : (

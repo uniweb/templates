@@ -108,7 +108,7 @@ function TeamGrid({ content, params }) {
               <Link
                 key={i}
                 href={link.url}
-                className="text-xs text-muted hover:text-primary"
+                className="text-xs text-subtle hover:text-primary"
               >
                 {link.text}
               </Link>

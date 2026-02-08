@@ -3,7 +3,7 @@ import { Database } from 'lucide-react'
 
 function Skeleton() {
   return [1, 2, 3, 4, 5, 6].map((n) => (
-    <div key={n} className="h-10 bg-surface-subtle rounded-lg animate-pulse"></div>
+    <div key={n} className="h-10 bg-card rounded-lg animate-pulse"></div>
   ))
 }
 
@@ -13,7 +13,7 @@ function OccurrenceRecords({ content, params, block }) {
   const loading = block.dataLoading
 
   return (
-    <div className="bg-surface rounded-2xl border border-edge-muted p-6 shadow-sm h-full">
+    <div className="bg-section rounded-2xl border border-border/50 p-6 shadow-sm h-full">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
           <Database className="text-accent-600 w-5 h-5" />
@@ -25,7 +25,7 @@ function OccurrenceRecords({ content, params, block }) {
         {loading ? (
           <Skeleton />
         ) : records.length === 0 ? (
-          <p className="text-muted text-center py-4">No records available.</p>
+          <p className="text-subtle text-center py-4">No records available.</p>
         ) : (
           records.map((rec) => (
             <a
@@ -51,7 +51,7 @@ function OccurrenceRecords({ content, params, block }) {
         )}
       </div>
 
-      <div className="mt-4 pt-2 border-t border-edge-muted text-center">
+      <div className="mt-4 pt-2 border-t border-border/50 text-center">
         <span className="text-[10px] text-subtle uppercase tracking-widest font-bold">
           Source: GBIF API
         </span>

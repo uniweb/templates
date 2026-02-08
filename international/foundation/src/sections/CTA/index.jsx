@@ -17,14 +17,14 @@ function CTA({ content }) {
     <div className="py-16 sm:py-20 px-6">
       <div className="max-w-3xl mx-auto text-center">
         {title && <H2 text={title} className="text-3xl sm:text-4xl font-bold mb-4 text-heading" />}
-        {subtitle && <p className="text-xl mb-4 text-muted">{subtitle}</p>}
-        {paragraphs[0] && <P text={paragraphs[0]} className="text-lg mb-8 text-muted" />}
+        {subtitle && <p className="text-xl mb-4 text-subtle">{subtitle}</p>}
+        {paragraphs[0] && <P text={paragraphs[0]} className="text-lg mb-8 text-subtle" />}
         {(cta || secondaryCta) && (
           <div className="flex gap-4 flex-wrap justify-center">
             {cta && (
               <Link
                 href={cta.href}
-                className="inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all bg-btn-primary text-btn-primary-text hover:bg-btn-primary-hover"
+                className="inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all bg-primary text-primary-foreground hover:bg-primary-hover"
               >
                 {cta.label}
               </Link>
@@ -32,7 +32,7 @@ function CTA({ content }) {
             {secondaryCta && (
               <Link
                 href={secondaryCta.href}
-                className="inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all bg-btn-secondary text-btn-secondary-text hover:bg-btn-secondary-hover"
+                className="inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all bg-secondary text-secondary-foreground hover:bg-secondary-hover"
               >
                 {secondaryCta.label}
               </Link>

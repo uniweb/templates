@@ -7,14 +7,14 @@ function Skeleton({ count }) {
   return Array.from({ length: count }).map((_, n) => (
     <div
       key={n}
-      className="bg-white rounded-xl border border-edge-muted shadow-sm overflow-hidden h-96"
+      className="bg-white rounded-xl border border-border/50 shadow-sm overflow-hidden h-96"
     >
-      <div className="h-48 bg-surface-subtle animate-pulse"></div>
+      <div className="h-48 bg-card animate-pulse"></div>
       <div className="p-6 space-y-4">
-        <div className="h-4 bg-surface-subtle rounded w-1/3 animate-pulse"></div>
-        <div className="h-6 bg-surface-subtle rounded w-full animate-pulse"></div>
-        <div className="h-3 bg-surface-muted rounded w-full animate-pulse"></div>
-        <div className="h-3 bg-surface-muted rounded w-2/3 animate-pulse"></div>
+        <div className="h-4 bg-card rounded w-1/3 animate-pulse"></div>
+        <div className="h-6 bg-card rounded w-full animate-pulse"></div>
+        <div className="h-3 bg-muted rounded w-full animate-pulse"></div>
+        <div className="h-3 bg-muted rounded w-2/3 animate-pulse"></div>
       </div>
     </div>
   ))
@@ -36,7 +36,7 @@ function FieldNotes({ content, params, block }) {
             text={title}
             className="text-3xl font-extrabold text-heading mb-2"
           />
-          <P text={description} className="text-muted max-w-2xl" />
+          <P text={description} className="text-subtle max-w-2xl" />
         </div>
       ) : title ? (
         <div className="flex items-center justify-between mb-6">
@@ -51,7 +51,7 @@ function FieldNotes({ content, params, block }) {
         {loading ? (
           <Skeleton count={posts.length || 3} />
         ) : posts.length === 0 ? (
-          <div className="col-span-full bg-surface-subtle p-8 rounded-xl text-center text-muted">
+          <div className="col-span-full bg-card p-8 rounded-xl text-center text-subtle">
             No field notes available.
           </div>
         ) : (
@@ -63,7 +63,7 @@ function FieldNotes({ content, params, block }) {
         <div className="mt-8 text-center">
           <Link
             href={ctaLink.href}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-edge-muted text-body font-medium hover:bg-surface-subtle transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border/50 text-body font-medium hover:bg-card transition-colors"
           >
             {ctaLink.label}
             <ArrowRight className="w-4 h-4" />

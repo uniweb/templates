@@ -45,7 +45,7 @@ function LogoCloud({ content, params }) {
               </h2>
             )}
             {paragraphs[0] && (
-              <p className="text-sm text-muted">
+              <p className="text-sm text-subtle">
                 {paragraphs[0]}
               </p>
             )}

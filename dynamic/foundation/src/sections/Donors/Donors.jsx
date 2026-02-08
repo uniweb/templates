@@ -6,7 +6,7 @@ function Skeleton() {
   return [1, 2, 3, 4, 5, 6].map((i) => (
     <div
       key={i}
-      className="w-12 h-12 rounded-full bg-surface-subtle animate-pulse ring-2 ring-white"
+      className="w-12 h-12 rounded-full bg-card animate-pulse ring-2 ring-white"
     ></div>
   ))
 }
@@ -28,7 +28,7 @@ function Donors({ content, params, block }) {
           <Heart className="w-8 h-8 text-primary-500 mx-auto mb-4 fill-current animate-pulse-slow" />
 
           {title && <H2 text={title} className="text-2xl font-bold text-heading mb-2" />}
-          {paragraphs[0] && <P text={paragraphs[0]} className="text-muted mb-8" />}
+          {paragraphs[0] && <P text={paragraphs[0]} className="text-subtle mb-8" />}
 
           <div className="flex flex-wrap justify-center gap-4 min-h-[64px]">
             {loading ? (

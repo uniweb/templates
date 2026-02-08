@@ -52,8 +52,8 @@ function Team({ content, params }) {
         {(title || subtitle) && (
           <div className="text-center mb-12">
             {title && <H2 text={title} className="text-3xl sm:text-4xl font-bold mb-4 text-heading" />}
-            {subtitle && <p className="text-lg text-muted">{subtitle}</p>}
-            {paragraphs[0] && <P text={paragraphs[0]} className="text-lg mt-4 max-w-2xl mx-auto text-muted" />}
+            {subtitle && <p className="text-lg text-subtle">{subtitle}</p>}
+            {paragraphs[0] && <P text={paragraphs[0]} className="text-lg mt-4 max-w-2xl mx-auto text-subtle" />}
           </div>
         )}
 
@@ -70,7 +70,7 @@ function Team({ content, params }) {
                 )}
                 {member.name && <h3 className="text-lg font-semibold text-heading">{member.name}</h3>}
                 {member.role && <p className="text-primary-600 text-sm">{member.role}</p>}
-                {member.bio && <P text={member.bio} className="text-muted text-sm mt-2" />}
+                {member.bio && <P text={member.bio} className="text-subtle text-sm mt-2" />}
               </div>
             ))}
           </div>

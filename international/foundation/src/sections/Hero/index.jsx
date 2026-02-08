@@ -30,7 +30,7 @@ function Hero({ content, params, block }) {
         {pretitle && (
           <span className={cn(
             'inline-block px-4 py-1.5 rounded-full text-sm font-medium mb-6',
-            'bg-primary-100/20 text-body border border-edge-muted'
+            'bg-primary-100/20 text-body border border-border/50'
           )}>
             {pretitle}
           </span>
@@ -44,7 +44,7 @@ function Hero({ content, params, block }) {
         )}
 
         {subtitle && (
-          <p className="text-xl sm:text-2xl font-medium mb-4 text-muted">
+          <p className="text-xl sm:text-2xl font-medium mb-4 text-subtle">
             {subtitle}
           </p>
         )}
@@ -52,7 +52,7 @@ function Hero({ content, params, block }) {
         {description && (
           <P
             text={description}
-            className="text-lg sm:text-xl mb-10 max-w-2xl mx-auto text-muted"
+            className="text-lg sm:text-xl mb-10 max-w-2xl mx-auto text-subtle"
           />
         )}
 
@@ -61,7 +61,7 @@ function Hero({ content, params, block }) {
             {cta && (
               <Link
                 href={cta.href}
-                className="inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all bg-btn-primary text-btn-primary-text hover:bg-btn-primary-hover"
+                className="inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all bg-primary text-primary-foreground hover:bg-primary-hover"
               >
                 {cta.label}
               </Link>
@@ -69,7 +69,7 @@ function Hero({ content, params, block }) {
             {secondaryCta && (
               <Link
                 href={secondaryCta.href}
-                className="inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all border border-edge text-body hover:bg-surface-muted"
+                className="inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all border border-border text-body hover:bg-muted"
               >
                 {secondaryCta.label}
               </Link>

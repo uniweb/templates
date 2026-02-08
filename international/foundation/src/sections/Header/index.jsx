@@ -93,14 +93,14 @@ function Header({ content, params, block }) {
   const getHeaderStyles = () => {
     if (isFloating) {
       return scrolled
-        ? 'bg-surface/95 backdrop-blur-lg shadow-sm text-heading'
+        ? 'bg-section/95 backdrop-blur-lg shadow-sm text-heading'
         : isDarkBackground
           ? 'bg-transparent text-white'
           : 'bg-transparent text-heading'
     }
     return scrolled
-      ? 'bg-surface shadow-sm text-heading'
-      : 'bg-surface text-heading'
+      ? 'bg-section shadow-sm text-heading'
+      : 'bg-section text-heading'
   }
 
   // Link styles
@@ -114,7 +114,7 @@ function Header({ content, params, block }) {
     if (isFloating && !scrolled && isDarkBackground) {
       return 'text-white/90 hover:text-white'
     }
-    return 'text-muted hover:text-body'
+    return 'text-subtle hover:text-body'
   }
 
   // Render a nav item (with or without dropdown)
@@ -305,7 +305,7 @@ function Header({ content, params, block }) {
                     'inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-colors',
                     isFloating && !scrolled && isDarkBackground
                       ? 'bg-white text-neutral-900 hover:bg-neutral-100'
-                      : 'bg-btn-primary text-btn-primary-text hover:bg-btn-primary-hover'
+                      : 'bg-primary text-primary-foreground hover:bg-primary-hover'
                   )}
                 >
                   {links[0].label}

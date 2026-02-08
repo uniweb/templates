@@ -50,7 +50,7 @@ function Features({ content, params }) {
               </h2>
             )}
             {paragraphs[0] && (
-              <p className="text-lg max-w-2xl mx-auto text-muted">
+              <p className="text-lg max-w-2xl mx-auto text-subtle">
                 {paragraphs[0]}
               </p>
             )}
@@ -85,7 +85,7 @@ function Features({ content, params }) {
                       </h3>
                     )}
                     {featureDesc && (
-                      <p className="text-sm text-muted">{featureDesc}</p>
+                      <p className="text-sm text-subtle">{featureDesc}</p>
                     )}
                   </div>
                 ) : (
@@ -96,7 +96,7 @@ function Features({ content, params }) {
                       </h3>
                     )}
                     {featureDesc && (
-                      <p className="text-muted">{featureDesc}</p>
+                      <p className="text-subtle">{featureDesc}</p>
                     )}
                   </>
                 )}

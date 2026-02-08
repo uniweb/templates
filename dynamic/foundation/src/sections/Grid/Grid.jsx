@@ -11,7 +11,7 @@ function Grid({ content, block }) {
       {(title || paragraphs[0]) && (
         <div className="mb-12">
           {title && <H1 text={title} className="text-3xl font-extrabold text-heading mb-2" />}
-          {paragraphs[0] && <P text={paragraphs[0]} className="text-muted max-w-2xl" />}
+          {paragraphs[0] && <P text={paragraphs[0]} className="text-subtle max-w-2xl" />}
         </div>
       )}
 

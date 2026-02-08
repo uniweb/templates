@@ -35,7 +35,7 @@ function Gallery({ content, params }) {
               </h2>
             )}
             {paragraphs[0] && (
-              <p className="text-lg max-w-2xl mx-auto text-muted">
+              <p className="text-lg max-w-2xl mx-auto text-subtle">
                 {paragraphs[0]}
               </p>
             )}

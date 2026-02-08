@@ -8,8 +8,8 @@ colors:
 
 contexts:
   light:
-    btn-primary-bg: var(--primary-500)
-    btn-primary-hover: var(--primary-600)
+    primary: var(--primary-500)
+    primary-hover: var(--primary-600)
 
 fonts:
   import:
@@ -18,7 +18,7 @@ fonts:
   body: "Inter, system-ui, sans-serif"
 
 inline:
-  accent:
+  emphasis:
     color: var(--primary-600)
     background: var(--primary-50)
     font-family: var(--font-mono)

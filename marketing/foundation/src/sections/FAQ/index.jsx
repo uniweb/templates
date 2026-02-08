@@ -35,7 +35,7 @@ function FAQ({ content, params }) {
     const isOpen = openItems.includes(index)
 
     return (
-      <div className="border-b last:border-b-0 border-edge">
+      <div className="border-b last:border-b-0 border-border">
         <button
           onClick={() => toggleItem(index)}
           className="flex items-center justify-between w-full py-5 text-left transition-colors text-heading hover:text-primary"
@@ -57,7 +57,7 @@ function FAQ({ content, params }) {
         >
           <div className="overflow-hidden">
             {answerParagraphs.map((para, i) => (
-              <p key={i} className="mb-3 last:mb-0 text-muted">
+              <p key={i} className="mb-3 last:mb-0 text-subtle">
                 {para}
               </p>
             ))}
@@ -84,7 +84,7 @@ function FAQ({ content, params }) {
               </h2>
             )}
             {paragraphs[0] && (
-              <p className="text-lg max-w-2xl mx-auto text-muted">
+              <p className="text-lg max-w-2xl mx-auto text-subtle">
                 {paragraphs[0]}
               </p>
             )}

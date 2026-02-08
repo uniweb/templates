@@ -15,8 +15,8 @@ function Section({ content }) {
         {(title || subtitle) && (
           <div className="text-center mb-12">
             {title && <H2 text={title} className="text-3xl sm:text-4xl font-bold mb-4 text-heading" />}
-            {subtitle && <p className="text-lg text-muted">{subtitle}</p>}
-            {paragraphs[0] && <P text={paragraphs[0]} className="text-lg mt-4 max-w-2xl mx-auto text-muted" />}
+            {subtitle && <p className="text-lg text-subtle">{subtitle}</p>}
+            {paragraphs[0] && <P text={paragraphs[0]} className="text-lg mt-4 max-w-2xl mx-auto text-subtle" />}
           </div>
         )}
 
@@ -25,14 +25,14 @@ function Section({ content }) {
             {items.map((item, i) => {
               const icon = item.icons?.[0]
               return (
-                <div key={i} className="p-6 rounded-xl bg-surface shadow-sm border border-edge-muted border-t-2 border-t-primary-500">
+                <div key={i} className="p-6 rounded-xl bg-section shadow-sm border border-border/50 border-t-2 border-t-primary-500">
                   {icon && (
                     <div className="w-10 h-10 rounded-lg bg-primary-100/50 text-primary-600 flex items-center justify-center mb-4">
                       <Icon icon={icon} size={20} />
                     </div>
                   )}
                   {item.title && <h3 className="text-xl font-semibold mb-2 text-heading">{item.title}</h3>}
-                  {item.paragraphs?.[0] && <P text={item.paragraphs[0]} className="text-muted" />}
+                  {item.paragraphs?.[0] && <P text={item.paragraphs[0]} className="text-subtle" />}
                 </div>
               )
             })}

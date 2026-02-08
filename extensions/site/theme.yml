@@ -4,21 +4,18 @@ colors:
 
 contexts:
   light:
-    bg: white
-    fg: neutral-900
-    muted: neutral-500
+    section: white
+    subtle: neutral-500
     border: neutral-200
 
   medium:
-    bg: neutral-100
-    fg: neutral-900
-    muted: neutral-600
+    section: neutral-100
+    subtle: neutral-600
     border: neutral-300
 
   dark:
-    bg: neutral-900
-    fg: white
-    muted: neutral-400
+    section: neutral-900
+    subtle: neutral-400
     border: neutral-700
 
 appearance:

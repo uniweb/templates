@@ -37,7 +37,7 @@ function Footer({ content, params }) {
           {/* Brand */}
           <div className="md:col-span-2">
             <h3 className="text-xl font-bold mb-4 text-heading">{siteName}</h3>
-            {description && <p className="text-muted max-w-md">{description}</p>}
+            {description && <p className="text-subtle max-w-md">{description}</p>}
           </div>
 
           {/* Navigation */}
@@ -46,7 +46,7 @@ function Footer({ content, params }) {
             <ul className="space-y-2">
               {navPages.map((page) => (
                 <li key={page.route}>
-                  <Link href={page.route} className="text-muted hover:text-body transition-colors">
+                  <Link href={page.route} className="text-subtle hover:text-body transition-colors">
                     {page.label || page.title}
                   </Link>
                 </li>
@@ -68,7 +68,7 @@ function Footer({ content, params }) {
                         'transition-colors',
                         locale.code === activeLocale
                           ? 'text-body font-medium'
-                          : 'text-muted hover:text-body'
+                          : 'text-subtle hover:text-body'
                       )}
                     >
                       {getLocaleLabel(locale)}
@@ -80,7 +80,7 @@ function Footer({ content, params }) {
           )}
         </div>
 
-        <div className="border-t border-edge pt-8 text-center text-subtle text-sm">
+        <div className="border-t border-border pt-8 text-center text-subtle text-sm">
           <p>&copy; {year} {siteName}. {copyrightText}</p>
         </div>
       </div>

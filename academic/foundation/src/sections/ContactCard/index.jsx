@@ -106,7 +106,7 @@ function ContactCard({ content, params }) {
             )}
             <div>
               {item.label && layout !== 'inline' && (
-                <p className="text-xs text-muted uppercase tracking-wide">{item.label}</p>
+                <p className="text-xs text-subtle uppercase tracking-wide">{item.label}</p>
               )}
               <p className="text-slate-900">{item.value}</p>
             </div>

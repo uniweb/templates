@@ -118,7 +118,7 @@ function PublicationCard({ pub, citationStyle, showType, showCiteButton }) {
                   <AuthorList authors={pub.authors} style="apa" />
                 </p>
               )}
-              <div className="flex flex-wrap items-center gap-2 text-sm text-muted">
+              <div className="flex flex-wrap items-center gap-2 text-sm text-subtle">
                 {pub.venue && <span className="italic">{pub.venue}</span>}
                 {pub.venue && pub.year && <span>•</span>}
                 {pub.year && <span>{pub.year}</span>}

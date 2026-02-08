@@ -32,7 +32,7 @@ function ProfileHero({ content, params }) {
       photoSize: 'w-48 h-48',
       nameStyle: 'text-slate-900',
       roleStyle: 'text-primary font-medium',
-      affiliationStyle: 'text-muted text-sm uppercase tracking-wide',
+      affiliationStyle: 'text-subtle text-sm uppercase tracking-wide',
     },
     lab: {
       container: 'bg-primary text-white',

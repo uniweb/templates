@@ -8,7 +8,7 @@ export default function VideoCard({ video }) {
   if (imageError) return null
 
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all border border-edge-muted group flex flex-col h-full animate-fade-in-up">
+    <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all border border-border/50 group flex flex-col h-full animate-fade-in-up">
       <div className="relative aspect-video bg-gray-900">
         {!isPlaying ? (
           <button
@@ -42,7 +42,7 @@ export default function VideoCard({ video }) {
       <div className="p-4 flex-grow flex flex-col justify-between">
         <div>
           <h3 className="font-bold text-heading line-clamp-1">{video.title}</h3>
-          <p className="text-sm text-muted mt-1">
+          <p className="text-sm text-subtle mt-1">
             {video.views} views &middot; {video.date}
           </p>
         </div>

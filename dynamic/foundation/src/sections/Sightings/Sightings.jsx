@@ -6,13 +6,13 @@ function Skeleton() {
   return [1, 2, 3].map((n) => (
     <div
       key={n}
-      className="bg-white rounded-xl border border-edge-muted shadow-sm overflow-hidden h-80"
+      className="bg-white rounded-xl border border-border/50 shadow-sm overflow-hidden h-80"
     >
-      <div className="h-48 bg-surface-subtle animate-pulse"></div>
+      <div className="h-48 bg-card animate-pulse"></div>
       <div className="p-4 space-y-3">
-        <div className="h-4 bg-surface-subtle rounded w-1/3 animate-pulse"></div>
-        <div className="h-3 bg-surface-muted rounded w-full animate-pulse"></div>
-        <div className="h-3 bg-surface-muted rounded w-2/3 animate-pulse"></div>
+        <div className="h-4 bg-card rounded w-1/3 animate-pulse"></div>
+        <div className="h-3 bg-muted rounded w-full animate-pulse"></div>
+        <div className="h-3 bg-muted rounded w-2/3 animate-pulse"></div>
       </div>
     </div>
   ))
@@ -38,7 +38,7 @@ function Sightings({ content, params, block }) {
         {loading ? (
           <Skeleton />
         ) : sightings.length === 0 ? (
-          <div className="col-span-full bg-surface-subtle p-8 rounded-xl text-center text-muted">
+          <div className="col-span-full bg-card p-8 rounded-xl text-center text-subtle">
             No sightings available.
           </div>
         ) : (
@@ -50,9 +50,9 @@ function Sightings({ content, params, block }) {
                 href={obs.uri}
                 target="_blank"
                 rel="noreferrer"
-                className="bg-surface rounded-xl border border-edge-muted shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col overflow-hidden group h-full animate-fade-in-up"
+                className="bg-section rounded-xl border border-border/50 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col overflow-hidden group h-full animate-fade-in-up"
               >
-                <div className="h-48 overflow-hidden bg-surface-subtle relative">
+                <div className="h-48 overflow-hidden bg-card relative">
                   {photoUrl ? (
                     <img
                       src={photoUrl}
@@ -60,7 +60,7 @@ function Sightings({ content, params, block }) {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-subtle bg-surface-subtle">
+                    <div className="w-full h-full flex items-center justify-center text-subtle bg-card">
                       No Photo
                     </div>
                   )}

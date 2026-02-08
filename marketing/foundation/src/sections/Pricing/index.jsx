@@ -28,7 +28,7 @@ function Pricing({ content, params }) {
       <div className="flex items-center justify-center gap-4 mb-12">
         <span className={cn(
           'text-sm font-medium transition-colors',
-          billing === 'monthly' ? 'text-heading' : 'text-muted'
+          billing === 'monthly' ? 'text-heading' : 'text-subtle'
         )}>
           Monthly
         </span>
@@ -50,7 +50,7 @@ function Pricing({ content, params }) {
         </button>
         <span className={cn(
           'text-sm font-medium transition-colors',
-          billing === 'annual' ? 'text-heading' : 'text-muted'
+          billing === 'annual' ? 'text-heading' : 'text-subtle'
         )}>
           Annual
           {annualDiscount && (
@@ -85,14 +85,14 @@ function Pricing({ content, params }) {
         )}
         <h3 className="text-2xl font-bold text-center mb-2 text-heading">{tier.name}</h3>
         {tier.description && (
-          <p className="text-center mb-6 text-muted">{tier.description}</p>
+          <p className="text-center mb-6 text-subtle">{tier.description}</p>
         )}
 
         {/* Price display */}
         <div className="text-center mb-6">
           <span className="text-4xl font-bold text-heading">{formatPrice(price)}</span>
           {price !== 0 && typeof price === 'number' && (
-            <span className="text-sm ml-1 text-muted">
+            <span className="text-sm ml-1 text-subtle">
               /{billing === 'annual' ? 'year' : 'month'}
             </span>
           )}
@@ -105,7 +105,7 @@ function Pricing({ content, params }) {
                 <svg className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span className="text-muted">{feature}</span>
+                <span className="text-subtle">{feature}</span>
               </li>
             ))}
           </ul>
@@ -117,8 +117,8 @@ function Pricing({ content, params }) {
             className={cn(
               'block w-full py-3 text-center font-semibold rounded-lg transition-colors mt-auto',
               isPopular
-                ? 'bg-btn-primary text-btn-primary-text hover:bg-btn-primary-hover'
-                : 'bg-btn-secondary text-btn-secondary-text hover:bg-btn-secondary-hover'
+                ? 'bg-primary text-primary-foreground hover:bg-primary-hover'
+                : 'bg-secondary text-secondary-foreground hover:bg-secondary-hover'
             )}
           >
             {tier.cta.label || 'Get Started'}
@@ -155,7 +155,7 @@ function Pricing({ content, params }) {
           <h3 className="text-2xl font-bold text-center mb-2 text-heading">{tierTitle}</h3>
         )}
         {tierDesc && (
-          <p className="text-center mb-6 text-muted">{tierDesc}</p>
+          <p className="text-center mb-6 text-subtle">{tierDesc}</p>
         )}
 
         {features.length > 0 && (
@@ -169,7 +169,7 @@ function Pricing({ content, params }) {
                   <svg className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span className="text-muted">{featureText}</span>
+                  <span className="text-subtle">{featureText}</span>
                 </li>
               )
             })}
@@ -182,8 +182,8 @@ function Pricing({ content, params }) {
             className={cn(
               'block w-full py-3 text-center font-semibold rounded-lg transition-colors',
               isPopular
-                ? 'bg-btn-primary text-btn-primary-text hover:bg-btn-primary-hover'
-                : 'bg-btn-secondary text-btn-secondary-text hover:bg-btn-secondary-hover'
+                ? 'bg-primary text-primary-foreground hover:bg-primary-hover'
+                : 'bg-secondary text-secondary-foreground hover:bg-secondary-hover'
             )}
           >
             {link.label}
@@ -202,7 +202,7 @@ function Pricing({ content, params }) {
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-heading">{title}</h2>
             )}
             {paragraphs[0] && (
-              <p className="text-lg max-w-2xl mx-auto text-muted">
+              <p className="text-lg max-w-2xl mx-auto text-subtle">
                 {paragraphs[0]}
               </p>
             )}

@@ -6,9 +6,9 @@ export default function NoteCard({ note }) {
   return (
     <Link
       href={`/blog/${note.id}`}
-      className="bg-white rounded-xl border border-edge-muted shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col overflow-hidden group animate-fade-in-up no-underline"
+      className="bg-white rounded-xl border border-border/50 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col overflow-hidden group animate-fade-in-up no-underline"
     >
-      <div className="h-48 overflow-hidden bg-surface-subtle relative">
+      <div className="h-48 overflow-hidden bg-card relative">
         <img
           src={`https://picsum.photos/seed/${note.id + 50}/400/250`}
           alt="Field location"
@@ -23,7 +23,7 @@ export default function NoteCard({ note }) {
         <h3 className="text-lg font-bold text-heading mb-3 leading-snug capitalize line-clamp-2">
           {note.title}
         </h3>
-        <p className="text-muted text-sm mb-4 flex-grow line-clamp-3">
+        <p className="text-subtle text-sm mb-4 flex-grow line-clamp-3">
           {note.body}
         </p>
         <span className="text-link text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all mt-auto">

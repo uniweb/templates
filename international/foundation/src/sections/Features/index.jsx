@@ -19,8 +19,8 @@ function Features({ content, params }) {
         {(title || subtitle) && (
           <div className="text-center mb-12">
             {title && <H2 text={title} className="text-3xl sm:text-4xl font-bold mb-4 text-heading" />}
-            {subtitle && <p className="text-lg text-muted">{subtitle}</p>}
-            {paragraphs[0] && <P text={paragraphs[0]} className="text-lg mt-4 max-w-2xl mx-auto text-muted" />}
+            {subtitle && <p className="text-lg text-subtle">{subtitle}</p>}
+            {paragraphs[0] && <P text={paragraphs[0]} className="text-lg mt-4 max-w-2xl mx-auto text-subtle" />}
           </div>
         )}
 
@@ -34,7 +34,7 @@ function Features({ content, params }) {
                   </div>
                 )}
                 {item.title && <h3 className="text-xl font-semibold mb-2 text-heading">{item.title}</h3>}
-                {item.paragraphs?.[0] && <P text={item.paragraphs[0]} className="text-muted" />}
+                {item.paragraphs?.[0] && <P text={item.paragraphs[0]} className="text-subtle" />}
               </div>
             ))}
           </div>

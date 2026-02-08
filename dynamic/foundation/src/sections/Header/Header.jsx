@@ -22,14 +22,14 @@ function Header({ content, params, block }) {
   const getHeaderStyles = () => {
     if (isFloating) {
       return scrolled
-        ? 'bg-surface/95 backdrop-blur-lg shadow-sm text-heading'
+        ? 'bg-section/95 backdrop-blur-lg shadow-sm text-heading'
         : isDarkBackground
           ? 'bg-transparent text-white'
           : 'bg-transparent text-heading'
     }
     return scrolled
-      ? 'bg-surface shadow-sm border-b border-edge text-heading'
-      : 'bg-surface border-b border-edge text-heading'
+      ? 'bg-section shadow-sm border-b border-border text-heading'
+      : 'bg-section border-b border-border text-heading'
   }
 
   const getLinkStyles = (isActiveLink = false) => {
@@ -38,7 +38,7 @@ function Header({ content, params, block }) {
       return 'bg-primary-50 text-primary-700 font-medium'
     }
     if (isFloating && !scrolled && isDarkBackground) return 'text-white/90 hover:text-white hover:bg-white/5'
-    return 'text-muted hover:text-primary-600 hover:bg-surface-subtle'
+    return 'text-subtle hover:text-primary-600 hover:bg-card'
   }
 
   // Render a nav item (works for both manual and auto nav)
@@ -98,7 +98,7 @@ function Header({ content, params, block }) {
                     'inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-colors',
                     isFloating && !scrolled && isDarkBackground
                       ? 'bg-white text-neutral-900 hover:bg-neutral-100'
-                      : 'bg-btn-primary text-btn-primary-text hover:bg-btn-primary-hover'
+                      : 'bg-primary text-primary-foreground hover:bg-primary-hover'
                   )}
                 >
                   {links[0].label}
@@ -130,7 +130,7 @@ function Header({ content, params, block }) {
 
         {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-surface border-t border-edge">
+          <div className="md:hidden bg-section border-t border-border">
             <div className="px-4 py-4 space-y-1">
               {navItems.map((item, i) => {
                 const href = item.href || item.navigableRoute
@@ -149,7 +149,7 @@ function Header({ content, params, block }) {
                       'flex items-center gap-2 px-3 py-2 text-base font-medium rounded-md',
                       active
                         ? 'text-primary-600 bg-primary-50'
-                        : 'text-muted hover:text-heading hover:bg-surface-subtle'
+                        : 'text-subtle hover:text-heading hover:bg-card'
                     )}
                     onClick={closeMobileMenu}
                   >

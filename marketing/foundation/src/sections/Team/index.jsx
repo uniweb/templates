@@ -64,7 +64,7 @@ function Team({ content, params }) {
               </h2>
             )}
             {paragraphs[0] && (
-              <p className="text-lg max-w-2xl mx-auto text-muted">
+              <p className="text-lg max-w-2xl mx-auto text-subtle">
                 {paragraphs[0]}
               </p>
             )}
@@ -129,7 +129,7 @@ function Team({ content, params }) {
                     <p className="text-sm mb-3 text-subtle">{role}</p>
                   )}
                   {bio && (
-                    <p className="text-sm mb-4 text-muted">{bio}</p>
+                    <p className="text-sm mb-4 text-subtle">{bio}</p>
                   )}
                   {socialLinks.length > 0 && (
                     <div className="flex gap-3">

@@ -32,7 +32,7 @@ function Hero({ content, params, block }) {
         {description && (
           <P
             text={description}
-            className="text-lg leading-relaxed max-w-lg text-muted"
+            className="text-lg leading-relaxed max-w-lg text-subtle"
           />
         )}
 
@@ -41,7 +41,7 @@ function Hero({ content, params, block }) {
             {cta && (
               <Link
                 href={cta.href}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all bg-btn-primary text-btn-primary-text hover:bg-btn-primary-hover shadow-lg shadow-primary-300/50"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all bg-primary text-primary-foreground hover:bg-primary-hover shadow-lg shadow-primary-300/50"
               >
                 {cta.iconBefore && <Icon icon={cta.iconBefore} size="16" />}
                 {cta.label}
@@ -50,7 +50,7 @@ function Hero({ content, params, block }) {
             {secondaryCta && (
               <Link
                 href={secondaryCta.href}
-                className="px-6 py-3 rounded-xl font-bold text-body hover:bg-surface-muted transition-colors"
+                className="px-6 py-3 rounded-xl font-bold text-body hover:bg-muted transition-colors"
               >
                 {secondaryCta.label}
               </Link>
@@ -66,6 +66,6 @@ function Hero({ content, params, block }) {
   )
 }
 
-Hero.className = 'py-16 md:py-24 border-b border-edge'
+Hero.className = 'py-16 md:py-24 border-b border-border'
 
 export default Hero

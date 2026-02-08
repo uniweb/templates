@@ -69,12 +69,12 @@ function Article({ content, params }) {
 
           {/* Excerpt */}
           {excerpt && (
-            <p className="text-xl text-muted mb-6">{excerpt}</p>
+            <p className="text-xl text-subtle mb-6">{excerpt}</p>
           )}
 
           {/* Date */}
           {showDate && formattedDate && (
-            <div className="text-muted">
+            <div className="text-subtle">
               <time dateTime={date}>{formattedDate}</time>
             </div>
           )}

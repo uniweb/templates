@@ -73,7 +73,7 @@ function ContactForm({ content, params }) {
     const error = errors[name]
 
     const baseInputClass = cn(
-      'w-full px-4 py-3 rounded-lg border transition-colors bg-white border-edge text-heading placeholder-gray-400 focus:border-primary focus:ring-primary',
+      'w-full px-4 py-3 rounded-lg border transition-colors bg-white border-border text-heading placeholder-gray-400 focus:border-primary focus:ring-primary',
       error && 'border-red-500'
     )
 
@@ -130,7 +130,7 @@ function ContactForm({ content, params }) {
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20">
           <div>
             {title && <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-heading">{title}</h2>}
-            {paragraphs[0] && <p className="text-lg text-muted">{paragraphs[0]}</p>}
+            {paragraphs[0] && <p className="text-lg text-subtle">{paragraphs[0]}</p>}
           </div>
           <form onSubmit={handleSubmit} className="grid gap-6">
             {fields.map(renderField)}
@@ -138,7 +138,7 @@ function ContactForm({ content, params }) {
               type="submit"
               disabled={submitting}
               className={cn(
-                'w-full py-3 px-6 rounded-lg font-medium transition-colors bg-btn-primary text-btn-primary-text hover:bg-btn-primary-hover',
+                'w-full py-3 px-6 rounded-lg font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary-hover',
                 submitting && 'opacity-70 cursor-not-allowed'
               )}
             >
@@ -157,7 +157,7 @@ function ContactForm({ content, params }) {
         {(title || paragraphs[0]) && (
           <div className="text-center mb-12">
             {title && <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-heading">{title}</h2>}
-            {paragraphs[0] && <p className="text-lg text-muted">{paragraphs[0]}</p>}
+            {paragraphs[0] && <p className="text-lg text-subtle">{paragraphs[0]}</p>}
           </div>
         )}
         <form onSubmit={handleSubmit} className="grid sm:grid-cols-2 gap-6">
@@ -167,7 +167,7 @@ function ContactForm({ content, params }) {
               type="submit"
               disabled={submitting}
               className={cn(
-                'w-full py-3 px-6 rounded-lg font-medium transition-colors bg-btn-primary text-btn-primary-text hover:bg-btn-primary-hover',
+                'w-full py-3 px-6 rounded-lg font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary-hover',
                 submitting && 'opacity-70 cursor-not-allowed'
               )}
             >

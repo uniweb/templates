@@ -118,7 +118,7 @@ function Video({ content, params }) {
         </h2>
       )}
       {paragraphs[0] && (
-        <p className={cn('text-lg text-muted', !isSplit && 'max-w-2xl mx-auto')}>
+        <p className={cn('text-lg text-subtle', !isSplit && 'max-w-2xl mx-auto')}>
           {paragraphs[0]}
         </p>
       )}

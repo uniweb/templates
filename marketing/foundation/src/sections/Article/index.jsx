@@ -58,12 +58,12 @@ function Article({ content, params }) {
 
           {/* Excerpt */}
           {excerpt && (
-            <p className="text-xl text-muted mb-6">{excerpt}</p>
+            <p className="text-xl text-subtle mb-6">{excerpt}</p>
           )}
 
           {/* Author and Date */}
           {(showAuthor || showDate) && (
-            <div className="flex items-center gap-4 text-muted">
+            <div className="flex items-center gap-4 text-subtle">
               {showAuthor && author && (
                 <div className="flex items-center gap-3">
                   {author.avatar && (

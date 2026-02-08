@@ -5,15 +5,15 @@ import { ArrowLeft, Calendar, User } from 'lucide-react'
 function Skeleton() {
   return (
     <div className="max-w-3xl mx-auto px-4 animate-pulse">
-      <div className="h-80 bg-surface-subtle rounded-xl mb-8"></div>
-      <div className="h-4 bg-surface-subtle rounded w-24 mb-4"></div>
-      <div className="h-8 bg-surface-subtle rounded w-3/4 mb-6"></div>
+      <div className="h-80 bg-card rounded-xl mb-8"></div>
+      <div className="h-4 bg-card rounded w-24 mb-4"></div>
+      <div className="h-8 bg-card rounded w-3/4 mb-6"></div>
       <div className="space-y-3">
-        <div className="h-4 bg-surface-muted rounded w-full"></div>
-        <div className="h-4 bg-surface-muted rounded w-full"></div>
-        <div className="h-4 bg-surface-muted rounded w-5/6"></div>
-        <div className="h-4 bg-surface-muted rounded w-full"></div>
-        <div className="h-4 bg-surface-muted rounded w-2/3"></div>
+        <div className="h-4 bg-muted rounded w-full"></div>
+        <div className="h-4 bg-muted rounded w-full"></div>
+        <div className="h-4 bg-muted rounded w-5/6"></div>
+        <div className="h-4 bg-muted rounded w-full"></div>
+        <div className="h-4 bg-muted rounded w-2/3"></div>
       </div>
     </div>
   )
@@ -28,7 +28,7 @@ function FieldNote({ content, block }) {
   if (!post) {
     return (
       <div className="max-w-3xl mx-auto px-4 text-center py-16">
-        <p className="text-muted text-lg mb-4">Field note not found.</p>
+        <p className="text-subtle text-lg mb-4">Field note not found.</p>
         <Link
           href="/blog"
           className="text-link font-semibold inline-flex items-center gap-1"
@@ -44,7 +44,7 @@ function FieldNote({ content, block }) {
     <div className="max-w-3xl mx-auto px-4">
       <Link
         href="/blog"
-        className="inline-flex items-center gap-1 text-muted hover:text-body transition-colors mb-6 text-sm font-medium"
+        className="inline-flex items-center gap-1 text-subtle hover:text-body transition-colors mb-6 text-sm font-medium"
       >
         <ArrowLeft className="w-4 h-4" />
         Back to Field Notes
@@ -58,7 +58,7 @@ function FieldNote({ content, block }) {
         />
       </div>
 
-      <div className="flex items-center gap-4 mb-4 text-sm text-muted">
+      <div className="flex items-center gap-4 mb-4 text-sm text-subtle">
         <span className="bg-primary-100 text-primary-800 text-xs font-bold px-2.5 py-1 rounded flex items-center gap-1">
           <Calendar className="w-3 h-3" />
           LOG #{post.id}

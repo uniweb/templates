@@ -29,10 +29,10 @@ function BlogList({ content, params, block }) {
               <h2 className="text-3xl font-bold text-heading mb-4">{title}</h2>
             )}
             {subtitle && (
-              <p className="text-xl text-muted mb-4">{subtitle}</p>
+              <p className="text-xl text-subtle mb-4">{subtitle}</p>
             )}
             {paragraphs.map((p, i) => (
-              <p key={i} className="text-muted max-w-2xl mx-auto">
+              <p key={i} className="text-subtle max-w-2xl mx-auto">
                 {p}
               </p>
             ))}
@@ -80,7 +80,7 @@ function ArticleCard({ article, fallbackRoute, showExcerpt, showAuthor, showDate
     : null
 
   return (
-    <article className="bg-white rounded-xl shadow-sm border border-edge-muted overflow-hidden hover:shadow-md transition-shadow">
+    <article className="bg-white rounded-xl shadow-sm border border-border/50 overflow-hidden hover:shadow-md transition-shadow">
       {/* Image */}
       {image && (
         <Link href={articleUrl} className="block">
@@ -116,7 +116,7 @@ function ArticleCard({ article, fallbackRoute, showExcerpt, showAuthor, showDate
 
         {/* Excerpt */}
         {showExcerpt && excerpt && (
-          <p className="text-muted mb-4 line-clamp-2">{excerpt}</p>
+          <p className="text-subtle mb-4 line-clamp-2">{excerpt}</p>
         )}
 
         {/* Meta */}
