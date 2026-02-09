@@ -74,7 +74,7 @@ function Header({ content, block }) {
                   <Link href={links[1].href} className={cn(
                     'inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-colors',
                     isFloating && !scrolled && isDarkBg
-                      ? 'bg-white/90 text-gray-900 hover:bg-white'
+                      ? 'bg-white/90 text-neutral-900 hover:bg-white'
                       : 'bg-primary text-primary-foreground hover:bg-primary-hover'
                   )}>
                     {links[1].label}

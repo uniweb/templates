@@ -8,9 +8,9 @@ No hidden fees. No surprises. Cancel anytime.
 
 ### Starter
 
-Free for small teams getting started.
+$0/mo
 
-## $0/mo
+Free for small teams getting started.
 
 - Up to 5 team members
 - 10 GB storage
@@ -22,9 +22,9 @@ Free for small teams getting started.
 ### Pro
 ![](lu-star)
 
-For growing teams that need more power.
+$29/mo
 
-## $29/mo
+For growing teams that need more power.
 
 - Unlimited team members
 - 100 GB storage
@@ -37,9 +37,9 @@ For growing teams that need more power.
 
 ### Enterprise
 
-For organizations with advanced needs.
+Custom
 
-## Custom
+For organizations with advanced needs.
 
 - Everything in Pro
 - Unlimited storage

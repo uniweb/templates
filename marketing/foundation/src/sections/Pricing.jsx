@@ -10,16 +10,16 @@ export default function Pricing({ content }) {
       <div className={cn('mt-12 grid gap-8', items.length === 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-2')}>
         {items.map((plan, i) => {
           const featured = plan.icons.length > 0
+          const price = plan.paragraphs[0]
+          const description = plan.paragraphs[1]
           return (
             <div key={i} className={cn(
               'rounded-xl p-8 border flex flex-col',
               featured ? 'border-primary bg-card shadow-lg ring-1 ring-primary/20' : 'border-border bg-card'
             )}>
               <H3 text={plan.title} className="text-heading text-xl font-bold" />
-              {plan.paragraphs[0] && <P text={plan.paragraphs[0]} className="text-subtle mt-2" />}
-              {plan.subtitle && (
-                <p className="text-heading text-4xl font-bold mt-6">{plan.subtitle}</p>
-              )}
+              {description && <P text={description} className="text-subtle mt-2" />}
+              {price && <p className="text-heading text-4xl font-bold mt-6" dangerouslySetInnerHTML={{ __html: price }} />}
               {plan.lists[0] && (
                 <ul className="mt-8 space-y-3 flex-1">
                   {plan.lists[0].map((feature, j) => (
@@ -27,7 +27,7 @@ export default function Pricing({ content }) {
                       <svg className="w-5 h-5 text-success shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                      <P text={feature.paragraphs} className="inline" />
+                      <P text={feature.paragraphs[0]} className="inline" />
                     </li>
                   ))}
                 </ul>

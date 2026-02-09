@@ -10,3 +10,5 @@ Acme integrates with your existing tools and workflows. Connect your repo, confi
 No vendor lock-in. Export your data at any time, use standard APIs, and keep full control of your infrastructure.
 
 [See Documentation](/features)
+
+![Platform dashboard](/images/placeholder.svg)
