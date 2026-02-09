@@ -1,5 +1,4 @@
-import { Link } from '@uniweb/kit'
-import { Article as ArticleBody } from '@uniweb/kit/styled'
+import { Link, Article as ArticleBody } from '@uniweb/kit'
 import { ChevronLeft, Share2, Instagram } from 'lucide-react'
 
 /**

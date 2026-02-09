@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Link, cn, useScrolled, useMobileMenu, useWebsite, useActiveRoute, useRouting } from '@uniweb/kit'
-import { useSearchShortcut, useSearchWithIntent } from '@uniweb/kit/search'
+import { Link, cn, useScrolled, useMobileMenu, useWebsite, useActiveRoute, useRouting, useSearchShortcut, useSearchWithIntent } from '@uniweb/kit'
 import { ChevronDown, Search, X } from 'lucide-react'
 
 /**

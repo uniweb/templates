@@ -1,5 +1,4 @@
-import { useWebsite } from '@uniweb/kit'
-import { Article as ArticleBody } from '@uniweb/kit/styled'
+import { useWebsite, Article as ArticleBody } from '@uniweb/kit'
 
 /**
  * Article Component

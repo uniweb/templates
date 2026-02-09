@@ -38,7 +38,7 @@ function SearchModal({ isOpen, onClose, searchClient }) {
 
     async function initSearch() {
       try {
-        const { createSearchClient } = await import('@uniweb/kit/search')
+        const { createSearchClient } = await import('@uniweb/kit')
         setClient(createSearchClient(website))
       } catch (err) {
         console.warn('Search not available:', err.message)

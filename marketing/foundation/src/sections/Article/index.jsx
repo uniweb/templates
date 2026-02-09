@@ -1,4 +1,4 @@
-import { Article as ArticleBody } from '@uniweb/kit/styled'
+import { Article as ArticleBody } from '@uniweb/kit'
 
 /**
  * Article Component

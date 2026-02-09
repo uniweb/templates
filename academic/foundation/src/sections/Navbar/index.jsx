@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Link, useWebsite, cn, getLocaleLabel } from '@uniweb/kit'
+import { Link, useWebsite, cn, getLocaleLabel, useSearchShortcut, useSearchWithIntent } from '@uniweb/kit'
 import { SearchModal, SearchButton } from '../SearchModal'
-import { useSearchShortcut, useSearchWithIntent } from '@uniweb/kit/search'
 
 /**
  * Navbar Component

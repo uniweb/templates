@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { cn } from '@uniweb/kit'
-import { Code } from '@uniweb/kit/styled'
+import { cn, Code } from '@uniweb/kit'
 
 /**
  * ApiReference Component

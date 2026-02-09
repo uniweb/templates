@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, cn, useActiveRoute, useScrolled, useMobileMenu, useWebsite, useVersion, getLocaleLabel, useRouting } from '@uniweb/kit'
-import { useSearchShortcut, useSearchWithIntent } from '@uniweb/kit/search'
+import { Link, cn, useActiveRoute, useScrolled, useMobileMenu, useWebsite, useVersion, getLocaleLabel, useRouting, useSearchShortcut, useSearchWithIntent } from '@uniweb/kit'
 import SearchModal from '../SearchModal'
 
 /**

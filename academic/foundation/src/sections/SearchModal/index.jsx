@@ -37,7 +37,7 @@ function SearchModal({ isOpen, onClose, searchClient }) {
 
     async function initSearch() {
       try {
-        const { createSearchClient } = await import('@uniweb/kit/search')
+        const { createSearchClient } = await import('@uniweb/kit')
         setClient(createSearchClient(website))
         // Note: No preload here - use useSearchWithIntent in parent for intent-based loading
       } catch (err) {
@@ -262,7 +262,7 @@ export function SearchButton({ onClick, onMouseEnter, onFocus, className }) {
 }
 
 // Re-export useSearchShortcut from kit for convenience
-export { useSearchShortcut } from '@uniweb/kit/search'
+export { useSearchShortcut } from '@uniweb/kit'
 
 // Search icon
 const SearchIcon = ({ className }) => (
