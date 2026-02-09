@@ -54,4 +54,4 @@ foundation:
     # Uncomment to customize:
     # header-height: 5rem
     # max-content-width: 72rem
-    # section-padding-y: 6rem
+    # section-padding-y: clamp(3rem, 5vw, 5rem)  # tighter spacing

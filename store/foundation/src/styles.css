@@ -9,7 +9,7 @@
 @theme inline {
   --header-height: var(--foundation-header-height, 5rem);
   --max-content-width: var(--foundation-max-content-width, 80rem);
-  --section-padding-y: var(--foundation-section-padding-y, 6rem);
+  --section-padding-y: var(--foundation-section-padding-y, clamp(4rem, 6vw, 7rem));
   --section-padding-x: var(--foundation-section-padding-x, 2rem);
   --font-heading: var(--foundation-heading-font, inherit);
   --font-body: var(--foundation-body-font, inherit);

@@ -22,8 +22,8 @@ export const vars = {
     description: 'Maximum content width (1152px)',
   },
   'section-padding-y': {
-    default: '4rem',
-    description: 'Vertical padding for sections',
+    default: 'clamp(3rem, 5vw, 5rem)',
+    description: 'Vertical padding for sections (fluid: adapts to viewport)',
   },
 
   // Academic-specific

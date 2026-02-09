@@ -9,7 +9,7 @@
   /* Foundation layout vars */
   --header-height: var(--foundation-header-height, 4rem);
   --max-content-width: var(--foundation-max-content-width, 80rem);
-  --section-padding-y: var(--foundation-section-padding-y, 5rem);
+  --section-padding-y: var(--foundation-section-padding-y, clamp(4rem, 6vw, 7rem));
   --section-padding-x: var(--foundation-section-padding-x, 1.5rem);
 
   /* Foundation typography vars */
