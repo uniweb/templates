@@ -4,7 +4,7 @@ theme: dark
 columns: 3
 ---
 
-## Inside the [Core]{.accent}
+## Inside the [Core]{accent}
 
 Standard solar lights fail in winter. Ours don't. Here's why.
 

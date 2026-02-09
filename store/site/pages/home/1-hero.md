@@ -6,7 +6,7 @@ background:
   overlay: 0.6
 ---
 
-# Solar [Gold]{.accent}
+# Solar [Gold]{accent}
 
 Lighting that breathes on sunlight. Designed for the conscious architect.
 

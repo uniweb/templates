@@ -11,7 +11,7 @@ fetch:
 
 ### Live Data Demo
 
-# Conservation powered by [real-time data.]{.accent}
+# Conservation powered by [real-time data.]{accent}
 
 This template demonstrates how to handle asynchronous data fetching. The weather card fetches live conditions from Wolong Reserve via **Open-Meteo**.
 

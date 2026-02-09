@@ -2,7 +2,7 @@
 type: Story
 ---
 
-## Crafted by hand, fueled by the [infinite]{.accent}.
+## Crafted by hand, fueled by the [infinite]{accent}.
 
 Solis Artisans was born in a small studio in 2021 with one mission: to prove that luxury lighting doesn't need a power grid.
 
