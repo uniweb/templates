@@ -5,4 +5,4 @@ type: Header
 # {{projectName}}
 
 [Log in](#)
-[Sign up](#)
+[Get Started](#)

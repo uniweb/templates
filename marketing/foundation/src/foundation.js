@@ -1,108 +1,18 @@
-/**
- * Foundation Configuration
- *
- * This file defines foundation-level configuration:
- * - vars: CSS custom properties that sites can override in theme.yml
- * - defaultLayout: Name of the default layout from src/layouts/ (optional)
- *
- * Identity (name, version, description) comes from package.json.
- */
-
-/**
- * CSS custom properties that sites can override in theme.yml
- *
- * Sites override these in theme.yml:
- *   vars:
- *     header-height: 5rem
- */
 export const vars = {
-  // Layout
-  'header-height': {
-    default: '4rem',
-    description: 'Fixed header height',
-  },
-  'max-content-width': {
-    default: '80rem',
-    description: 'Maximum content width (1280px)',
-  },
-  'section-padding-y': {
-    default: 'clamp(4rem, 6vw, 7rem)',
-    description: 'Vertical padding for sections (fluid: adapts to viewport)',
-  },
-  'section-padding-x': {
-    default: '1.5rem',
-    description: 'Horizontal padding for sections',
-  },
-
-  // Typography
-  'heading-font': {
-    default: 'inherit',
-    description: 'Font family for headings',
-  },
-  'body-font': {
-    default: 'inherit',
-    description: 'Font family for body text',
-  },
-
-  // Border radius
-  'radius-sm': {
-    default: '0.375rem',
-    description: 'Small border radius (6px)',
-  },
-  'radius-md': {
-    default: '0.5rem',
-    description: 'Medium border radius (8px)',
-  },
-  'radius-lg': {
-    default: '0.75rem',
-    description: 'Large border radius (12px)',
-  },
-  'radius-xl': {
-    default: '1rem',
-    description: 'Extra large border radius (16px)',
-  },
-
-  // Transitions
-  'transition-fast': {
-    default: '150ms',
-    description: 'Fast transition duration',
-  },
-  'transition-normal': {
-    default: '200ms',
-    description: 'Normal transition duration',
-  },
-
-  // Shadows
-  'shadow-sm': {
-    default: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
-    description: 'Small shadow',
-  },
-  'shadow-md': {
-    default: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
-    description: 'Medium shadow',
-  },
-  'shadow-lg': {
-    default: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
-    description: 'Large shadow',
-  },
+  'header-height': { default: '4rem' },
+  'max-content-width': { default: '80rem' },
+  'section-padding-y': { default: 'clamp(4rem, 6vw, 7rem)' },
+  'section-padding-x': { default: '1.5rem' },
+  'heading-font': { default: 'inherit' },
+  'body-font': { default: 'inherit' },
+  'radius-sm': { default: '0.375rem' },
+  'radius-md': { default: '0.5rem' },
+  'radius-lg': { default: '0.75rem' },
+  'radius-xl': { default: '1rem' },
+  'shadow-sm': { default: '0 1px 2px 0 rgb(0 0 0 / 0.05)' },
+  'shadow-md': { default: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)' },
 }
 
-
-/**
- * Runtime exports
- *
- * Layout components live in src/layouts/ and are auto-discovered.
- * Each layout receives pre-rendered page areas as props:
- * - page, website, params: Runtime context
- * - header, body, footer: Core page regions (pre-rendered React elements)
- * - Plus any custom areas declared in the layout's meta.js
- *
- * If no layouts exist, the runtime uses a default layout.
- */
 export default {
-  // Optional: Create custom layouts in src/layouts/
-  // Then set defaultLayout: 'MyLayout' below
-
-  // Foundation-wide props (accessible via website.foundationProps):
   props: {},
 }

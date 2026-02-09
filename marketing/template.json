@@ -1,13 +1,12 @@
 {
   "name": "Marketing Starter",
-  "description": "A complete marketing site with landing page, features showcase, pricing tables, and testimonials. Perfect for product launches, SaaS websites, and business landing pages.",
-  "compatible": ">=0.7.0",
+  "description": "Clean marketing site showcasing CCA best practices — semantic tokens, multi-line headings, inline styling, insets, and grid layouts.",
+  "compatible": ">=0.8.0",
   "format": 2,
-  "tags": ["marketing", "landing-page", "saas", "business"],
-  "components": ["Hero", "Features", "Pricing", "Testimonials", "CTA"],
+  "tags": ["marketing", "landing-page", "saas", "showcase"],
+  "components": ["Hero", "Features", "SplitContent", "Grid", "Pricing", "CTA"],
   "dependencies": {
     "foundation": {
-      "lucide-react": "^0.400.0",
       "@tailwindcss/typography": "^0.5.0"
     }
   }

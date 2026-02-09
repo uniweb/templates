@@ -1,7 +1,0 @@
-title: Blog
-description: Latest articles and insights from our team.
-label: Blog
-order: 5
-
-# Articles collection data - cascades to child pages including [slug]
-data: articles

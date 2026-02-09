@@ -1,31 +1,29 @@
 ---
 type: Features
-columns: 2
-style: list
 ---
 
-## Core Capabilities
+# Core Platform
 
-### Blazing Fast Performance
+### Instant Deploys
+![](lu-rocket)
+Push to main, see it live in seconds. Zero-downtime deployments with automatic rollbacks if anything goes wrong.
 
-![](lu-zap)
-
-Our platform is built from the ground up for speed. Static generation means your pages load instantly, with no database queries or server-side rendering delays.
-
-### Enterprise-Grade Security
-
-![](lu-shield)
-
-Security is built into every layer. Static sites have a minimal attack surface, and all content is served over HTTPS with automatic certificate management.
-
-### Global CDN Distribution
-
+### Edge Runtime
 ![](lu-globe)
+Your code runs at the edge, close to your users. Sub-50ms response times from 30+ regions worldwide.
 
-Your content is served from edge locations around the world. Visitors get fast response times regardless of their location.
+### Database
+![](lu-database)
+Managed Postgres with automatic backups, point-in-time recovery, and branching for development environments.
 
-### Developer Experience
+### CI/CD Pipeline
+![](lu-git-branch)
+Built-in continuous integration with parallel test execution. No YAML configuration required.
 
-![](lu-settings)
+### Monitoring
+![](lu-activity)
+Real-time error tracking, performance monitoring, and custom alerting. Know before your users do.
 
-A modern development workflow with hot reloading, TypeScript support, and seamless integration with your favorite tools.
+### API Gateway
+![](lu-network)
+Rate limiting, authentication, and request routing. Scale your APIs with confidence.

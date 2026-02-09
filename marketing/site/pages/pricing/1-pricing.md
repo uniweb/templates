@@ -1,60 +1,51 @@
 ---
 type: Pricing
-showToggle: true
-defaultBilling: annual
 ---
 
-## Simple, Transparent Pricing
+# Simple, transparent pricing
 
-Choose the plan that works for you. All plans include core features with no hidden fees.
+No hidden fees. No surprises. Cancel anytime.
 
-```yaml:pricing
-- name: Starter
-  monthlyPrice: 0
-  annualPrice: 0
-  description: Perfect for personal projects and small sites
-  popular: false
-  features:
-    - Up to 5 pages
-    - 1 custom domain
-    - Basic analytics
-    - Community support
-    - SSL certificate included
-  cta:
-    label: Start Free
-    href: "#"
+### Starter
 
-- name: Professional
-  monthlyPrice: 29
-  annualPrice: 290
-  description: For growing businesses and teams
-  popular: true
-  features:
-    - Unlimited pages
-    - 3 custom domains
-    - Advanced analytics
-    - Priority support
-    - Custom components
-    - Team collaboration
-    - API access
-  cta:
-    label: Start Free Trial
-    href: "#"
+Free for small teams getting started.
 
-- name: Enterprise
-  monthlyPrice: 99
-  annualPrice: 990
-  description: For large organizations with custom needs
-  popular: false
-  features:
-    - Everything in Professional
-    - Unlimited domains
-    - Dedicated support
-    - Custom integrations
-    - SLA guarantee
-    - SSO & SAML
-    - Audit logs
-  cta:
-    label: Contact Sales
-    href: "/contact"
-```
+## $0/mo
+
+- Up to 5 team members
+- 10 GB storage
+- Community support
+- Basic analytics
+
+[Get Started](#)
+
+### Pro
+![](lu-star)
+
+For growing teams that need more power.
+
+## $29/mo
+
+- Unlimited team members
+- 100 GB storage
+- Priority support
+- Advanced analytics
+- Custom domains
+- CI/CD pipeline
+
+[Start Free Trial](#)
+
+### Enterprise
+
+For organizations with advanced needs.
+
+## Custom
+
+- Everything in Pro
+- Unlimited storage
+- Dedicated support
+- SSO & SAML
+- SLA guarantee
+- Custom integrations
+
+[Contact Sales](#)

@@ -1,10 +1,6 @@
 ---
 type: Footer
 theme: dark
-layout: simple
-showNav: true
-background:
-  color: '#111827'
 ---
 
 # {{projectName}}
@@ -13,5 +9,5 @@ background:
 [GitHub](https://github.com)
 [LinkedIn](https://linkedin.com)
 
-[Privacy Policy](/privacy)
-[Terms of Service](/terms)
+[Privacy Policy](#)
+[Terms of Service](#)
