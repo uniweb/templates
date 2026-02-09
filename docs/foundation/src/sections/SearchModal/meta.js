@@ -12,5 +12,5 @@ export default {
 
   // SearchModal is not rendered from content
   // It's imported and controlled by the Header component
-  exposed: false,
+  hidden: true,
 }
