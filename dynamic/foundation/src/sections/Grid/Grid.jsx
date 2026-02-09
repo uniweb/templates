@@ -1,9 +1,8 @@
 import React from 'react'
-import { H1, P } from '@uniweb/kit'
+import { H1, P, ChildBlocks } from '@uniweb/kit'
 
 function Grid({ content, block }) {
   const { title, paragraphs } = content
-  const ChildBlocks = block.getChildBlockRenderer()
   const children = block.childBlocks || []
 
   return (
@@ -15,7 +14,7 @@ function Grid({ content, block }) {
         </div>
       )}
 
-      {ChildBlocks && children.length > 0 && (
+      {children.length > 0 && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {children.map((childBlock, index) => (
             <div
