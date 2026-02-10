@@ -5,7 +5,7 @@ export default function Hero({ content, block }) {
   const visual = block.insets[0] || imgs[0]
 
   return (
-    <div className={cn('flex flex-col items-center text-center gap-12', visual && 'lg:flex-row lg:text-left')}>
+    <div className={cn('max-w-(--max-content-width) mx-auto flex flex-col items-center text-center gap-12', visual && 'lg:flex-row lg:text-left')}>
       <div className="flex-1 max-w-2xl">
         {pretitle && <p className="text-xs font-bold uppercase tracking-widest text-subtle mb-4">{pretitle}</p>}
         <H1 text={title} className="text-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight" />
