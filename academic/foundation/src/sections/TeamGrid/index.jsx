@@ -19,14 +19,14 @@ function TeamGrid({ content, params }) {
 
   // Parse member data from content items
   const parsedMembers = members.map(member => {
-    const { title: name, pretitle, paragraphs = [], imgs = [], links = [] } = member || {}
+    const { title: name, pretitle, paragraphs = [], images = [], links = [] } = member || {}
 
     return {
       name,
       role: pretitle || 'Member', // e.g., "PhD Student", "Postdoc"
       bio: paragraphs[0],
       email: paragraphs[1],
-      photo: imgs[0],
+      photo: images[0],
       links,
     }
   })

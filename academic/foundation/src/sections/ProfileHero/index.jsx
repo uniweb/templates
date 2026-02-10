@@ -12,14 +12,14 @@ import { H1, P, Link, cn } from '@uniweb/kit'
  * - Key metrics (citations, h-index, etc.)
  */
 function ProfileHero({ content, params }) {
-  const { title, pretitle, subtitle, paragraphs = [], links = [], imgs = [] } = content || {}
+  const { title, pretitle, subtitle, paragraphs = [], links = [], images = [] } = content || {}
   const {
     variant = 'researcher',
     photoPosition = 'right',
     showAffiliation = true,
   } = params || {}
 
-  const photo = imgs[0]
+  const photo = images[0]
   const bio = paragraphs[0]
   const affiliation = pretitle  // e.g., "Department of Computer Science"
   const role = subtitle         // e.g., "Associate Professor"

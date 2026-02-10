@@ -1,8 +1,8 @@
 import { H1, P, Link, Visual, cn } from '@uniweb/kit'
 
 export default function Hero({ content, block }) {
-  const { title, pretitle, paragraphs, links, imgs } = content
-  const visual = block.insets[0] || imgs[0]
+  const { title, pretitle, paragraphs, links, images } = content
+  const visual = block.insets[0] || images[0]
 
   return (
     <div className={cn('max-w-(--max-content-width) mx-auto flex flex-col items-center text-center gap-12', visual && 'lg:flex-row lg:text-left')}>
@@ -22,7 +22,7 @@ export default function Hero({ content, block }) {
           </div>
         )}
       </div>
-      {visual && <Visual inset={block.insets[0]} image={imgs[0]} className="flex-1 max-w-lg w-full" />}
+      {visual && <Visual inset={block.insets[0]} image={images[0]} className="flex-1 max-w-lg w-full" />}
     </div>
   )
 }

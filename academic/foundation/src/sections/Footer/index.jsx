@@ -17,7 +17,7 @@ function Footer({ content, params }) {
   const { website, localize } = useWebsite()
 
   // Runtime guarantees: content fields exist, params have defaults from meta.js
-  const { title, subtitle, paragraphs, links, imgs, items } = content
+  const { title, subtitle, paragraphs, links, images, items } = content
 
   const {
     mode,
@@ -39,7 +39,7 @@ function Footer({ content, params }) {
   // Site branding
   const siteName = title || website?.name || ''
   const tagline = subtitle || website?.description || ''
-  const logo = imgs[0]
+  const logo = images[0]
 
   // Use kit's social link utilities
   const socialLinks = filterSocialLinks(links)

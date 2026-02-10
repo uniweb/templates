@@ -1,9 +1,9 @@
 import { H2, P, Link, Visual, cn } from '@uniweb/kit'
 
 export default function SplitContent({ content, block, params }) {
-  const { title, paragraphs, links, imgs } = content
+  const { title, paragraphs, links, images } = content
   const flipped = params.variant === 'flipped'
-  const visual = block.insets[0] || imgs[0]
+  const visual = block.insets[0] || images[0]
 
   return (
     <div className={cn(
@@ -28,7 +28,7 @@ export default function SplitContent({ content, block, params }) {
       </div>
       <div>
         {visual ? (
-          <Visual inset={block.insets[0]} image={imgs[0]} className="rounded-xl w-full" />
+          <Visual inset={block.insets[0]} image={images[0]} className="rounded-xl w-full" />
         ) : (
           <div className="aspect-[4/3] w-full bg-card rounded-xl border border-border" />
         )}

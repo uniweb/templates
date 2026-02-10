@@ -11,7 +11,7 @@ export default {
 
   content: {
     title: 'Site name (when no logo)',
-    imgs: 'Site logo image [1]',
+    images: 'Site logo image [1]',
     links: 'Links: first internal link becomes CTA, external links (http...) shown as icons [0+]',
   },
 

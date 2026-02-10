@@ -12,9 +12,9 @@ function Header({ content, block }) {
   const isFloating = nextBlockInfo?.context?.allowTranslucentTop || false
   const isDarkBg = isFloating && ['gradient', 'glass', 'dark'].includes(nextBlockInfo?.theme || 'light')
 
-  const { title, imgs, links } = content
+  const { title, images, links } = content
   const navPages = website.getPageHierarchy({ for: 'header' })
-  const logo = imgs[0]
+  const logo = images[0]
   const siteName = title || website.name || 'Site'
 
   const headerClass = isFloating

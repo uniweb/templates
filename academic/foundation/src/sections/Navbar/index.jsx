@@ -23,7 +23,7 @@ function Navbar({ content, params }) {
   const [searchOpen, setSearchOpen] = useState(false)
 
   // Runtime guarantees: content fields exist, params have defaults from meta.js
-  const { title, links, imgs } = content
+  const { title, links, images } = content
   const { mode, sticky, showLocale, showSearch, logoPosition } = params
 
   // Determine if search should be shown
@@ -50,7 +50,7 @@ function Navbar({ content, params }) {
 
   // Site branding
   const siteName = title || website.name || ''
-  const logo = imgs[0]
+  const logo = images[0]
 
   // Locale handling
   const locales = website.getLocales()

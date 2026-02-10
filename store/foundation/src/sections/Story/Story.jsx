@@ -7,8 +7,8 @@ import { H2, P } from '@uniweb/kit'
  * and a full-width featured image. Used for brand storytelling.
  */
 function Story({ content }) {
-  const { title, paragraphs, imgs } = content
-  const image = imgs[0]
+  const { title, paragraphs, images } = content
+  const image = images[0]
 
   return (
     <div className="max-w-4xl mx-auto px-8 py-24 space-y-16">

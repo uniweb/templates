@@ -7,7 +7,7 @@ export default {
   content: {
     title: 'Main headline',
     paragraphs: 'Description [1]',
-    imgs: 'Featured image [1]',
+    images: 'Featured image [1]',
   },
 
   params: {},

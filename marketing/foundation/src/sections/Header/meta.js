@@ -5,7 +5,7 @@ export default {
 
   content: {
     title: 'Site name',
-    imgs: 'Logo image [0-1]',
+    images: 'Logo image [0-1]',
     links: 'CTA buttons [0-2]',
   },
 

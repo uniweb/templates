@@ -36,10 +36,10 @@ function Header({ content, params, block }) {
 
   // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { sticky, categories, transparency, showSearch, showLocale, showVersion } = params
-  const { title, imgs, links } = content
+  const { title, images, links } = content
 
   // Get logo and links from content
-  const logo = imgs[0]
+  const logo = images[0]
   const siteName = title || website.name || 'Docs'
 
   // Separate CTA link from external links

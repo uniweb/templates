@@ -7,7 +7,7 @@ export default {
     title: 'Section heading',
     paragraphs: 'Description text [1-2]',
     links: 'Call-to-action buttons [0-2]',
-    imgs: 'Visual image [0-1]',
+    images: 'Visual image [0-1]',
   },
 
   params: {

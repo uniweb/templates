@@ -17,7 +17,7 @@ function Team({ content, params }) {
 
   // Support both fetched data and markdown items
   // Fetched data: { name, role, bio, avatar }
-  // Markdown items: { title, subtitle, paragraphs, imgs }
+  // Markdown items: { title, subtitle, paragraphs, images }
   const rawMembers = content.data.team || content.items || []
 
   // Normalize to consistent shape
@@ -36,7 +36,7 @@ function Team({ content, params }) {
       name: member.title,
       role: member.subtitle,
       bio: member.paragraphs?.[0],
-      avatar: member.imgs?.[0],
+      avatar: member.images?.[0],
     }
   })
 
