@@ -49,3 +49,5 @@ export default function Pricing({ content }) {
     </div>
   )
 }
+
+Pricing.className = 'py-(--section-padding-y) px-(--section-padding-x)'

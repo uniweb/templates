@@ -36,3 +36,5 @@ export default function SplitContent({ content, block, params }) {
     </div>
   )
 }
+
+SplitContent.className = 'py-(--section-padding-y) px-(--section-padding-x)'

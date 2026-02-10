@@ -23,3 +23,5 @@ export default function Grid({ content, block, params }) {
     </div>
   )
 }
+
+Grid.className = 'py-(--section-padding-y) px-(--section-padding-x)'

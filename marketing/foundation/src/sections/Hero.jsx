@@ -27,3 +27,5 @@ export default function Hero({ content, block }) {
   )
 }
 
+Hero.className = 'py-(--section-padding-y) px-(--section-padding-x)'
+

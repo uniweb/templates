@@ -15,3 +15,5 @@ export default function CTA({ content }) {
     </div>
   )
 }
+
+CTA.className = 'py-(--section-padding-y) px-(--section-padding-x)'
