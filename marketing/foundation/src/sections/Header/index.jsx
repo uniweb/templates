@@ -63,25 +63,37 @@ function Header({ content, block }) {
               ))}
             </div>
 
-            {links.length > 0 && (
-              <div className="hidden lg:flex lg:items-center lg:gap-4">
-                {links[0] && (
-                  <Link href={links[0].href} className={cn('text-sm font-medium transition-colors', linkClass(null))}>
-                    {links[0].label}
-                  </Link>
-                )}
-                {links[1] && (
-                  <Link href={links[1].href} className={cn(
-                    'inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-colors',
-                    isFloating && !scrolled && isDarkBg
-                      ? 'bg-white/90 text-neutral-900 hover:bg-white'
-                      : 'bg-primary text-primary-foreground hover:bg-primary-hover'
-                  )}>
-                    {links[1].label}
-                  </Link>
-                )}
-              </div>
-            )}
+            <div className="hidden lg:flex lg:items-center lg:gap-4">
+              {website.locales.length > 1 && (
+                <div className="flex items-center gap-1">
+                  {website.locales.map((loc) => (
+                    <Link key={loc.code} reload href={website.getLocaleUrl(loc.code)} className={cn(
+                      'px-1.5 py-0.5 text-xs font-medium rounded transition-colors uppercase',
+                      loc.code === website.locale
+                        ? isFloating && !scrolled && isDarkBg ? 'bg-white/20 text-white' : 'bg-primary/10 text-link'
+                        : linkClass(null)
+                    )}>
+                      {loc.code}
+                    </Link>
+                  ))}
+                </div>
+              )}
+              {links[0] && (
+                <Link href={links[0].href} className={cn('text-sm font-medium transition-colors', linkClass(null))}>
+                  {links[0].label}
+                </Link>
+              )}
+              {links[1] && (
+                <Link href={links[1].href} className={cn(
+                  'inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-colors',
+                  isFloating && !scrolled && isDarkBg
+                    ? 'bg-white/90 text-neutral-900 hover:bg-white'
+                    : 'bg-primary text-primary-foreground hover:bg-primary-hover'
+                )}>
+                  {links[1].label}
+                </Link>
+              )}
+            </div>
 
             <div className="lg:hidden">
               <button type="button" onClick={toggleMobile} className="inline-flex items-center justify-center p-2 rounded-md" aria-expanded={mobileOpen}>
@@ -115,6 +127,18 @@ function Header({ content, block }) {
                       i === 1 ? 'bg-primary text-primary-foreground hover:bg-primary-hover' : 'text-body hover:text-heading hover:bg-muted'
                     )} onClick={closeMobile}>
                       {link.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+              {website.locales.length > 1 && (
+                <div className="mt-4 pt-4 border-t border-border flex items-center gap-2 px-3">
+                  {website.locales.map((loc) => (
+                    <Link key={loc.code} reload href={website.getLocaleUrl(loc.code)} className={cn(
+                      'px-2 py-1 text-sm font-medium rounded transition-colors uppercase',
+                      loc.code === website.locale ? 'bg-primary/10 text-link' : 'text-body hover:text-heading hover:bg-muted'
+                    )} onClick={closeMobile}>
+                      {loc.code}
                     </Link>
                   ))}
                 </div>
