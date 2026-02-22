@@ -150,7 +150,7 @@ Test with the CLI's `create` command using a local path:
 
 ```bash
 # From the workspace root
-npx uniweb create test-project --template ./packages/templates/marketing
+uniweb create test-project --template ./packages/templates/marketing
 
 cd test-project
 pnpm install
@@ -162,9 +162,9 @@ The CLI detects format 2 from `template.json`, scaffolds the project structure f
 You can also test the `add --from` flow:
 
 ```bash
-npx uniweb create test-project
+uniweb create test-project
 cd test-project
-npx uniweb add foundation --from ../packages/templates/marketing
+uniweb add foundation --from ../packages/templates/marketing
 ```
 
 Key testing points:
@@ -219,5 +219,5 @@ The CLI downloads and extracts tarballs on demand when users run `create --templ
 - [ ] Section types in `foundation/src/sections/` with components and optional `meta.js`
 - [ ] Add `.hbs` extension to files needing variable substitution
 - [ ] Add the template to `manifest.json`
-- [ ] Test locally: `npx uniweb create test --template ./<name>` → install → build
+- [ ] Test locally: `uniweb create test --template ./<name>` → install → build
 - [ ] Verify no structural files are included (no `package.json`, `vite.config.js`, etc.)

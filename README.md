@@ -19,13 +19,13 @@ See the templates in action: **[View all demos](https://uniweb.github.io/templat
 ## Quick Start
 
 ```bash
-npx uniweb@latest create my-project --template marketing
-npx uniweb@latest create my-project --template academic
-npx uniweb@latest create my-project --template docs
-npx uniweb@latest create my-project --template international
-npx uniweb@latest create my-project --template dynamic
-npx uniweb@latest create my-project --template store
-npx uniweb@latest create my-project --template extensions
+uniweb create my-project --template marketing
+uniweb create my-project --template academic
+uniweb create my-project --template docs
+uniweb create my-project --template international
+uniweb create my-project --template dynamic
+uniweb create my-project --template store
+uniweb create my-project --template extensions
 ```
 
 Then:
