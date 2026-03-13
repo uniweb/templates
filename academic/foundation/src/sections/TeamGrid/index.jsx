@@ -59,7 +59,7 @@ function TeamGrid({ content, params }) {
       'group',
       cardStyle === 'photo' && 'text-center',
       cardStyle === 'compact' && 'flex items-center gap-4',
-      cardStyle === 'detailed' && 'bg-slate-50 p-4 rounded-lg',
+      cardStyle === 'detailed' && 'bg-card p-4 rounded-lg',
     )}>
       {member.photo && cardStyle !== 'minimal' && (
         <div className={cn(
@@ -78,7 +78,7 @@ function TeamGrid({ content, params }) {
 
       <div className={cardStyle === 'compact' ? 'flex-1 min-w-0' : ''}>
         <h3 className={cn(
-          'font-semibold text-slate-900',
+          'font-semibold text-heading',
           cardStyle === 'photo' && 'text-lg',
           cardStyle === 'compact' && 'text-base truncate',
           cardStyle === 'detailed' && 'text-lg mb-1',
@@ -96,7 +96,7 @@ function TeamGrid({ content, params }) {
         )}
 
         {cardStyle === 'detailed' && member.bio && (
-          <p className="text-sm text-slate-600 mt-2 clear-both">{member.bio}</p>
+          <p className="text-sm text-body mt-2 clear-both">{member.bio}</p>
         )}
 
         {member.links.length > 0 && cardStyle !== 'compact' && (
@@ -107,10 +107,10 @@ function TeamGrid({ content, params }) {
             {member.links.map((link, i) => (
               <Link
                 key={i}
-                href={link.url}
+                href={link.href}
                 className="text-xs text-subtle hover:text-primary"
               >
-                {link.text}
+                {link.label}
               </Link>
             ))}
           </div>
@@ -120,15 +120,15 @@ function TeamGrid({ content, params }) {
   )
 
   return (
-    <section className="py-12 px-6 bg-white">
+    <section className="py-12 px-6">
       <div className="max-w-6xl mx-auto">
         {(title || paragraphs[0]) && (
           <div className="mb-10">
             {title && (
-              <h2 className="text-2xl font-bold text-slate-900 mb-2">{title}</h2>
+              <h2 className="text-2xl font-bold text-heading mb-2">{title}</h2>
             )}
             {paragraphs[0] && (
-              <p className="text-slate-600">{paragraphs[0]}</p>
+              <p className="text-body">{paragraphs[0]}</p>
             )}
           </div>
         )}
@@ -136,7 +136,7 @@ function TeamGrid({ content, params }) {
         {sortedRoles.map(role => (
           <div key={role} className="mb-10 last:mb-0">
             {role && groupByRole && (
-              <h3 className="text-lg font-semibold text-slate-700 mb-6 pb-2 border-b border-slate-200">
+              <h3 className="text-lg font-semibold text-body mb-6 pb-2 border-b border-border">
                 {role}
               </h3>
             )}

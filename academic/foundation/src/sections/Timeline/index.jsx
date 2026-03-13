@@ -31,15 +31,15 @@ function Timeline({ content, params }) {
 
   if (orientation === 'horizontal') {
     return (
-      <section className="py-12 px-6 bg-white overflow-x-auto">
+      <section className="py-12 px-6 overflow-x-auto">
         <div className="max-w-6xl mx-auto">
           {title && (
-            <h2 className="text-2xl font-bold text-slate-900 mb-8">{title}</h2>
+            <h2 className="text-2xl font-bold text-heading mb-8">{title}</h2>
           )}
 
           <div className="relative min-w-max">
             {showLine && (
-              <div className="absolute top-6 left-0 right-0 h-0.5 bg-slate-200" />
+              <div className="absolute top-6 left-0 right-0 h-0.5 bg-muted" />
             )}
 
             <div className="flex gap-8">
@@ -51,12 +51,12 @@ function Timeline({ content, params }) {
                     <p className="text-sm font-medium text-primary mb-2">{entry.date}</p>
                   )}
 
-                  <h3 className="text-base font-semibold text-slate-900 text-center">
+                  <h3 className="text-base font-semibold text-heading text-center">
                     {entry.title}
                   </h3>
 
                   {entry.institution && (
-                    <p className="text-sm text-slate-600 text-center mt-1">
+                    <p className="text-sm text-body text-center mt-1">
                       {entry.institution}
                     </p>
                   )}
@@ -71,24 +71,24 @@ function Timeline({ content, params }) {
 
   // Vertical timeline
   return (
-    <section className="py-12 px-6 bg-white">
+    <section className="py-12 px-6">
       <div className="max-w-3xl mx-auto">
         {(title || paragraphs[0]) && (
           <div className="mb-8">
             {title && (
-              <h2 className="text-2xl font-bold text-slate-900 mb-2">{title}</h2>
+              <h2 className="text-2xl font-bold text-heading mb-2">{title}</h2>
             )}
             {paragraphs[0] && (
-              <p className="text-slate-600">{paragraphs[0]}</p>
+              <p className="text-body">{paragraphs[0]}</p>
             )}
           </div>
         )}
 
-        <div className={cn('relative', showLine && 'pl-8 border-l-2 border-slate-200')}>
+        <div className={cn('relative', showLine && 'pl-10 border-l-2 border-border')}>
           {parsedEntries.map((entry, i) => (
             <div key={i} className={cn('relative pb-8 last:pb-0', datePosition === 'inline' && 'flex gap-4')}>
               {showLine && (
-                <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-white border-2 border-primary" />
+                <div className="absolute -left-[17px] top-1.5 w-4 h-4 rounded-full bg-section border-2 border-primary" />
               )}
 
               {datePosition === 'left' && entry.date && (
@@ -96,20 +96,20 @@ function Timeline({ content, params }) {
               )}
 
               {datePosition === 'inline' && entry.date && (
-                <p className="text-sm font-medium text-primary w-24 flex-shrink-0 pt-0.5">
+                <p className="text-sm font-medium text-primary w-auto min-w-[6rem] flex-shrink-0 pt-0.5">
                   {entry.date}
                 </p>
               )}
 
               <div className={datePosition === 'inline' ? 'flex-1' : ''}>
-                <h3 className="text-lg font-semibold text-slate-900">{entry.title}</h3>
+                <h3 className="text-lg font-semibold text-heading">{entry.title}</h3>
 
                 {entry.institution && (
-                  <p className="text-slate-600 mt-1">{entry.institution}</p>
+                  <p className="text-body mt-1">{entry.institution}</p>
                 )}
 
                 {entry.description && (
-                  <p className="text-sm text-slate-500 mt-2">{entry.description}</p>
+                  <p className="text-sm text-subtle mt-2">{entry.description}</p>
                 )}
               </div>
             </div>

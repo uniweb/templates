@@ -27,27 +27,27 @@ function ProfileHero({ content, params }) {
   // Variant-specific styling
   const variants = {
     researcher: {
-      container: 'bg-gradient-to-br from-slate-50 to-slate-100',
-      photoStyle: 'rounded-full border-4 border-white shadow-xl',
+      container: 'bg-card',
+      photoStyle: 'rounded-full border-4 border-section shadow-xl',
       photoSize: 'w-48 h-48',
-      nameStyle: 'text-slate-900',
+      nameStyle: 'text-heading',
       roleStyle: 'text-primary font-medium',
       affiliationStyle: 'text-subtle text-sm uppercase tracking-wide',
     },
     lab: {
-      container: 'bg-primary text-white',
+      container: 'bg-primary text-primary-foreground',
       photoStyle: 'rounded-2xl shadow-2xl',
       photoSize: 'w-64 h-48 object-cover',
-      nameStyle: 'text-white',
-      roleStyle: 'text-blue-200',
-      affiliationStyle: 'text-blue-200/70 text-sm uppercase tracking-wide',
+      nameStyle: 'text-primary-foreground',
+      roleStyle: 'text-primary-foreground/70',
+      affiliationStyle: 'text-primary-foreground/60 text-sm uppercase tracking-wide',
     },
     department: {
-      container: 'bg-white border-b-4 border-primary',
+      container: 'bg-section border-b-4 border-primary',
       photoStyle: 'rounded-lg',
       photoSize: 'w-full h-64 object-cover',
-      nameStyle: 'text-slate-900',
-      roleStyle: 'text-slate-600',
+      nameStyle: 'text-heading',
+      roleStyle: 'text-body',
       affiliationStyle: 'text-primary text-sm font-semibold uppercase tracking-wide',
     },
   }
@@ -91,15 +91,15 @@ function ProfileHero({ content, params }) {
           {links.map((link, i) => (
             <Link
               key={i}
-              href={link.url}
+              href={link.href}
               className={cn(
                 'inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-colors',
                 i === 0
-                  ? 'bg-primary text-white hover:bg-blue-800'
-                  : 'bg-slate-200 text-slate-700 hover:bg-slate-300'
+                  ? 'bg-primary text-primary-foreground hover:bg-primary-hover'
+                  : 'bg-secondary text-secondary-foreground hover:bg-secondary-hover'
               )}
             >
-              {link.text}
+              {link.label}
             </Link>
           ))}
         </div>

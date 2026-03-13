@@ -1,5 +1,5 @@
 import React from 'react'
-import { cn, Link } from '@uniweb/kit'
+import { cn, Link, P } from '@uniweb/kit'
 
 /**
  * ContactCard Component
@@ -74,8 +74,8 @@ function ContactCard({ content, params }) {
 
   const layouts = {
     sidebar: {
-      container: 'bg-slate-50 p-6 rounded-xl',
-      title: 'text-lg font-semibold text-slate-900 mb-4',
+      container: 'bg-card p-6 rounded-xl',
+      title: 'text-lg font-semibold text-heading mb-4',
       item: 'flex items-start gap-3 py-2',
     },
     inline: {
@@ -84,9 +84,9 @@ function ContactCard({ content, params }) {
       item: 'flex items-center gap-2',
     },
     card: {
-      container: 'bg-white border border-slate-200 p-6 rounded-xl shadow-sm',
-      title: 'text-xl font-semibold text-slate-900 mb-6',
-      item: 'flex items-start gap-3 py-3 border-b border-slate-100 last:border-b-0',
+      container: 'bg-section border border-border p-6 rounded-xl shadow-sm',
+      title: 'text-xl font-semibold text-heading mb-6',
+      item: 'flex items-start gap-3 py-3 border-b border-border last:border-b-0',
     },
   }
 
@@ -108,7 +108,7 @@ function ContactCard({ content, params }) {
               {item.label && layout !== 'inline' && (
                 <p className="text-xs text-subtle uppercase tracking-wide">{item.label}</p>
               )}
-              <p className="text-slate-900">{item.value}</p>
+              <P text={item.value} className="text-heading" />
             </div>
           </div>
         ))}
@@ -119,10 +119,10 @@ function ContactCard({ content, params }) {
           {links.map((link, i) => (
             <Link
               key={i}
-              href={link.url}
+              href={link.href}
               className="text-sm text-primary hover:underline"
             >
-              {link.text}
+              {link.label}
             </Link>
           ))}
         </div>

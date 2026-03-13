@@ -43,9 +43,9 @@ function Navbar({ content, params }) {
   const navItems = mode === 'auto'
     ? website.getHeaderPages()
     : links.map(link => ({
-        route: link.url,
-        label: link.text,
-        title: link.text
+        route: link.href,
+        label: link.label,
+        title: link.label
       }))
 
   // Site branding
@@ -79,7 +79,7 @@ function Navbar({ content, params }) {
             itemClassName,
             isActive(item.route)
               ? 'text-primary font-semibold'
-              : 'text-slate-600 hover:text-primary'
+              : 'text-body hover:text-primary'
           )}
         >
           {item.label || item.title}
@@ -97,7 +97,7 @@ function Navbar({ content, params }) {
       <div className="relative">
         <button
           onClick={() => setLocaleMenuOpen(!localeMenuOpen)}
-          className="flex items-center gap-1 px-3 py-1.5 text-sm text-slate-600 hover:text-primary rounded-md hover:bg-slate-100 transition-colors"
+          className="flex items-center gap-1 px-3 py-1.5 text-sm text-body hover:text-primary rounded-md hover:bg-muted transition-colors"
           aria-label="Change language"
         >
           <GlobeIcon className="w-4 h-4" />
@@ -111,7 +111,7 @@ function Navbar({ content, params }) {
               className="fixed inset-0 z-40"
               onClick={() => setLocaleMenuOpen(false)}
             />
-            <div className="absolute right-0 top-full mt-1 z-50 bg-white rounded-lg shadow-lg border border-slate-200 py-1 min-w-[140px]">
+            <div className="absolute right-0 top-full mt-1 z-50 bg-section rounded-lg shadow-lg border border-border py-1 min-w-[140px]">
               {locales.map(locale => (
                 <a
                   key={locale.code}
@@ -120,7 +120,7 @@ function Navbar({ content, params }) {
                     'block px-4 py-2 text-sm transition-colors',
                     locale.code === activeLocale
                       ? 'bg-primary/5 text-primary font-medium'
-                      : 'text-slate-700 hover:bg-slate-50'
+                      : 'text-body hover:bg-card'
                   )}
                   onClick={() => setLocaleMenuOpen(false)}
                 >
@@ -137,7 +137,7 @@ function Navbar({ content, params }) {
   return (
     <header
       className={cn(
-        'bg-white border-b border-slate-200 z-50',
+        'bg-section border-b border-border z-50',
         sticky && 'sticky top-0'
       )}
     >
@@ -147,7 +147,7 @@ function Navbar({ content, params }) {
           <Link
             href="/"
             className={cn(
-              'flex items-center gap-3 font-semibold text-lg text-slate-900 hover:text-primary transition-colors',
+              'flex items-center gap-3 font-semibold text-lg text-heading hover:text-primary transition-colors',
               logoPosition === 'center' && 'md:absolute md:left-1/2 md:-translate-x-1/2'
             )}
           >
@@ -184,7 +184,7 @@ function Navbar({ content, params }) {
                 onClick={() => setSearchOpen(true)}
                 onMouseEnter={triggerPreload}
                 onFocus={triggerPreload}
-                className="p-2 text-slate-600 hover:text-primary rounded-md hover:bg-slate-100"
+                className="p-2 text-body hover:text-primary rounded-md hover:bg-muted"
                 aria-label="Search"
               >
                 <SearchIcon className="w-5 h-5" />
@@ -193,7 +193,7 @@ function Navbar({ content, params }) {
             <LocaleSwitcher />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-slate-600 hover:text-primary rounded-md hover:bg-slate-100"
+              className="p-2 text-body hover:text-primary rounded-md hover:bg-muted"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? (
@@ -207,10 +207,10 @@ function Navbar({ content, params }) {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-slate-200 py-4">
+          <div className="md:hidden border-t border-border py-4">
             <NavLinks
               className="flex flex-col gap-1"
-              itemClassName="px-3 py-2 text-base font-medium rounded-md hover:bg-slate-50"
+              itemClassName="px-3 py-2 text-base font-medium rounded-md hover:bg-card"
               onClick={() => setMobileMenuOpen(false)}
             />
           </div>

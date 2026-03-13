@@ -100,7 +100,7 @@ function Text({ content, params }) {
   const a = alignments[textAlign] || alignments.left
 
   return (
-    <section className={cn('px-6 bg-white', d.section)}>
+    <section className={cn('px-6', d.section)}>
       <div className={cn('mx-auto', w, a)}>
         {pretitle && (
           <p className={cn(
@@ -115,18 +115,18 @@ function Text({ content, params }) {
         {title && (
           <H1
             text={title}
-            className={cn(s.title, h, 'text-slate-900', d.titleGap)}
+            className={cn(s.title, h, 'text-heading', d.titleGap)}
           />
         )}
 
         {subtitle && (
-          <p className={cn(s.subtitle, 'text-slate-600', d.titleGap)}>
+          <p className={cn(s.subtitle, 'text-body', d.titleGap)}>
             {subtitle}
           </p>
         )}
 
         {paragraphs.length > 0 && (
-          <div className={cn('prose-academic text-slate-700', d.lineHeight)}>
+          <div className={cn('prose-academic text-body', d.lineHeight)}>
             {paragraphs.map((para, i) => (
               <P key={i} text={para} className={cn(s.body, d.paragraphGap, 'last:mb-0')} />
             ))}
@@ -138,10 +138,10 @@ function Text({ content, params }) {
             {links.map((link, i) => (
               <a
                 key={i}
-                href={link.url}
+                href={link.href}
                 className="text-primary hover:underline font-medium"
               >
-                {link.text} →
+                {link.label} →
               </a>
             ))}
           </div>

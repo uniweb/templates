@@ -31,6 +31,24 @@ export const vars = {
     default: '300px',
     description: 'Profile sidebar width',
   },
+
+  // Publication type indicators
+  'pub-journal': {
+    default: '#3b82f6',
+    description: 'Journal article indicator color',
+  },
+  'pub-conference': {
+    default: '#8b5cf6',
+    description: 'Conference paper indicator color',
+  },
+  'pub-book': {
+    default: '#f59e0b',
+    description: 'Book/chapter indicator color',
+  },
+  'pub-preprint': {
+    default: '#6b7280',
+    description: 'Preprint indicator color',
+  },
 }
 /**
  * Runtime exports (Layout and props)

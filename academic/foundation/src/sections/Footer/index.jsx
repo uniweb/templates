@@ -24,16 +24,15 @@ function Footer({ content, params }) {
     columns,
     showCopyright,
     copyrightText,
-    background,
   } = params
 
   // Get navigation items based on mode
   const navItems = mode === 'auto' && website
     ? website.getFooterPages()
     : links.map(link => ({
-        route: link.url,
-        label: link.text,
-        title: link.text
+        route: link.href,
+        label: link.label,
+        title: link.label
       }))
 
   // Site branding
@@ -48,25 +47,6 @@ function Footer({ content, params }) {
   const currentYear = new Date().getFullYear()
   const copyright = copyrightText || `© ${currentYear} ${siteName}. All rights reserved.`
 
-  // Background styles
-  const backgrounds = {
-    dark: 'bg-slate-900 text-white',
-    light: 'bg-slate-100 text-slate-900',
-    primary: 'bg-primary text-white',
-    white: 'bg-white text-slate-900 border-t border-slate-200',
-  }
-
-  const bgClass = backgrounds[background] || backgrounds.dark
-  const mutedClass = background === 'dark' || background === 'primary'
-    ? 'text-slate-400'
-    : 'text-slate-500'
-  const linkClass = background === 'dark' || background === 'primary'
-    ? 'text-slate-300 hover:text-white'
-    : 'text-slate-600 hover:text-primary'
-  const headingClass = background === 'dark' || background === 'primary'
-    ? 'text-white'
-    : 'text-slate-900'
-
   // Determine column layout
   const hasItems = items.length > 0
   const colCount = columns === 'auto'
@@ -74,7 +54,7 @@ function Footer({ content, params }) {
     : parseInt(columns)
 
   return (
-    <div className={cn('py-12 px-6', bgClass)}>
+    <div className="py-12 px-6">
       <div className="max-w-6xl mx-auto">
         {/* Main Footer Content */}
         <div className={cn(
@@ -94,19 +74,19 @@ function Footer({ content, params }) {
                 />
               )}
               {siteName && (
-                <span className={cn('text-xl font-semibold', headingClass)}>
+                <span className="text-xl font-semibold text-heading">
                   {siteName}
                 </span>
               )}
             </Link>
 
             {tagline && (
-              <p className={cn('text-sm max-w-xs', mutedClass)}>{tagline}</p>
+              <p className="text-sm max-w-xs text-subtle">{tagline}</p>
             )}
 
             {/* Contact info from paragraphs */}
             {paragraphs.length > 0 && (
-              <div className={cn('text-sm space-y-1', mutedClass)}>
+              <div className="text-sm space-y-1 text-subtle">
                 {paragraphs.map((p, i) => (
                   <p key={i}>{typeof p === 'string' ? p : p.text}</p>
                 ))}
@@ -119,11 +99,11 @@ function Footer({ content, params }) {
                 {socialLinks.map((link, i) => (
                   <Link
                     key={i}
-                    href={link.url || link.href}
-                    className={cn('transition-colors', linkClass)}
-                    aria-label={link.text || link.label || 'Social link'}
+                    href={link.href}
+                    className="transition-colors text-subtle hover:text-heading"
+                    aria-label={link.label || 'Social link'}
                   >
-                    <SocialIcon url={link.url || link.href} className="w-5 h-5" />
+                    <SocialIcon url={link.href} className="w-5 h-5" />
                   </Link>
                 ))}
               </div>
@@ -133,7 +113,7 @@ function Footer({ content, params }) {
           {/* Navigation Column (if no items) */}
           {!hasItems && navItems.length > 0 && (
             <div>
-              <h3 className={cn('font-semibold mb-4', headingClass)}>
+              <h3 className="font-semibold mb-4 text-heading">
                 {localize({ en: 'Pages', fr: 'Pages', es: 'Páginas' }, 'Pages')}
               </h3>
               <nav className="space-y-2">
@@ -141,7 +121,7 @@ function Footer({ content, params }) {
                   <Link
                     key={i}
                     href={item.route || '/'}
-                    className={cn('block text-sm transition-colors', linkClass)}
+                    className="block text-sm transition-colors text-subtle hover:text-heading"
                   >
                     {item.label || item.title}
                   </Link>
@@ -154,7 +134,7 @@ function Footer({ content, params }) {
           {items.map((item, i) => (
             <div key={i}>
               {item.title && (
-                <h3 className={cn('font-semibold mb-4', headingClass)}>
+                <h3 className="font-semibold mb-4 text-heading">
                   {item.title}
                 </h3>
               )}
@@ -163,16 +143,16 @@ function Footer({ content, params }) {
                   {item.links.map((link, j) => (
                     <Link
                       key={j}
-                      href={link.url}
-                      className={cn('block text-sm transition-colors', linkClass)}
+                      href={link.href}
+                      className="block text-sm transition-colors text-subtle hover:text-heading"
                     >
-                      {link.text}
+                      {link.label}
                     </Link>
                   ))}
                 </nav>
               )}
               {item.paragraphs?.length > 0 && (
-                <div className={cn('text-sm space-y-1', mutedClass)}>
+                <div className="text-sm space-y-1 text-subtle">
                   {item.paragraphs.map((p, j) => (
                     <p key={j}>{typeof p === 'string' ? p : p.text}</p>
                   ))}
@@ -184,13 +164,7 @@ function Footer({ content, params }) {
 
         {/* Copyright Bar */}
         {showCopyright && (
-          <div className={cn(
-            'pt-8 border-t text-sm text-center',
-            background === 'dark' || background === 'primary'
-              ? 'border-slate-700'
-              : 'border-slate-200',
-            mutedClass
-          )}>
+          <div className="pt-8 border-t border-border text-sm text-center text-subtle">
             {copyright}
           </div>
         )}

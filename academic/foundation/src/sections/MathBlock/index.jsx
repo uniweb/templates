@@ -54,7 +54,7 @@ function EquationCard({ item, showNumber }) {
         {latex}
       </Equation>
       {description && (
-        <p className="text-center text-sm text-slate-600 mt-2 italic">
+        <p className="text-center text-sm text-subtle mt-2 italic">
           {renderMathText(description)}
         </p>
       )}
@@ -67,20 +67,13 @@ function MathBlock({ content, params }) {
   const {
     layout = 'standard',
     showNumbers = true,
-    background = 'white',
   } = params || {}
-
-  const backgrounds = {
-    white: 'bg-white',
-    gray: 'bg-slate-50',
-    dark: 'bg-slate-900 text-white',
-  }
 
   const hasEquations = subsections.length > 0
 
   return (
     <EquationProvider>
-      <section className={cn('py-12 px-6', backgrounds[background])}>
+      <section className="py-12 px-6">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
           {(pretitle || title) && (
@@ -91,22 +84,14 @@ function MathBlock({ content, params }) {
                 </p>
               )}
               {title && (
-                <h2 className={cn(
-                  'text-2xl font-bold mb-4',
-                  background === 'dark' ? 'text-white' : 'text-slate-900'
-                )}>
-                  {title}
-                </h2>
+                <h2 className="text-2xl font-bold mb-4 text-heading">{title}</h2>
               )}
             </div>
           )}
 
           {/* Introductory text with inline math support */}
           {paragraphs.length > 0 && (
-            <div className={cn(
-              'prose max-w-none mb-8',
-              background === 'dark' ? 'prose-invert' : ''
-            )}>
+            <div className="prose max-w-none mb-8">
               {paragraphs.map((para, i) => (
                 <p key={i} className="mb-4 last:mb-0 leading-relaxed">
                   {renderMathText(para)}

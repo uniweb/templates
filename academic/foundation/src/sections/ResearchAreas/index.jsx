@@ -20,15 +20,15 @@ function ResearchAreas({ content, params }) {
   const layouts = {
     cards: {
       container: 'grid gap-6 md:grid-cols-2 lg:grid-cols-3',
-      item: 'bg-slate-50 p-6 rounded-xl hover:shadow-md transition-shadow',
-      title: 'text-lg font-semibold text-slate-900 mb-2',
-      description: 'text-slate-600 text-sm',
+      item: 'bg-card p-6 rounded-xl hover:shadow-md transition-shadow',
+      title: 'text-lg font-semibold text-heading mb-2',
+      description: 'text-body text-sm',
     },
     list: {
       container: 'space-y-6',
       item: 'flex gap-4',
-      title: 'text-lg font-semibold text-slate-900',
-      description: 'text-slate-600',
+      title: 'text-lg font-semibold text-heading',
+      description: 'text-body',
     },
     compact: {
       container: 'flex flex-wrap gap-3',
@@ -41,15 +41,15 @@ function ResearchAreas({ content, params }) {
   const l = layouts[layout] || layouts.cards
 
   return (
-    <section className="py-12 px-6 bg-white">
+    <section className="py-12 px-6">
       <div className="max-w-5xl mx-auto">
         {(title || paragraphs[0]) && (
           <div className="mb-8">
             {title && (
-              <h2 className="text-2xl font-bold text-slate-900 mb-2">{title}</h2>
+              <h2 className="text-2xl font-bold text-heading mb-2">{title}</h2>
             )}
             {paragraphs[0] && (
-              <p className="text-slate-600 max-w-2xl">{paragraphs[0]}</p>
+              <p className="text-body max-w-2xl">{paragraphs[0]}</p>
             )}
           </div>
         )}
@@ -99,10 +99,10 @@ function ResearchAreas({ content, params }) {
                       {areaLinks.map((link, i) => (
                         <Link
                           key={i}
-                          href={link.url}
+                          href={link.href}
                           className="text-sm text-primary hover:underline"
                         >
-                          {link.text} →
+                          {link.label} →
                         </Link>
                       ))}
                     </div>

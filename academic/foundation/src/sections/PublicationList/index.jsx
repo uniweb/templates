@@ -19,10 +19,10 @@ import { formatReference, CiteButton, DoiLink, AuthorList } from '@uniweb/schola
  */
 
 const PUBLICATION_TYPES = {
-  journal: { label: 'Journal Article', color: 'bg-journal' },
-  conference: { label: 'Conference Paper', color: 'bg-conference' },
-  book: { label: 'Book/Chapter', color: 'bg-book' },
-  preprint: { label: 'Preprint', color: 'bg-preprint' },
+  journal: { label: 'Journal Article', color: 'var(--pub-journal, #3b82f6)' },
+  conference: { label: 'Conference Paper', color: 'var(--pub-conference, #8b5cf6)' },
+  book: { label: 'Book/Chapter', color: 'var(--pub-book, #f59e0b)' },
+  preprint: { label: 'Preprint', color: 'var(--pub-preprint, #6b7280)' },
 }
 
 function parsePublication(item) {
@@ -87,15 +87,13 @@ function PublicationCard({ pub, citationStyle, showType, showCiteButton }) {
   }, [scholarPub, citationStyle])
 
   return (
-    <article className="py-4 border-b border-slate-200 last:border-b-0">
+    <article className="py-4 border-b border-border last:border-b-0">
       <div className="flex gap-4">
         {showType && (
           <div className="flex-shrink-0 pt-1">
             <span
-              className={cn(
-                'inline-block w-2 h-2 rounded-full',
-                typeInfo.color
-              )}
+              className="inline-block w-2 h-2 rounded-full"
+              style={{ backgroundColor: typeInfo.color }}
               title={typeInfo.label}
             />
           </div>
@@ -104,17 +102,18 @@ function PublicationCard({ pub, citationStyle, showType, showCiteButton }) {
         <div className="flex-1 min-w-0">
           {formattedCitation ? (
             // Scholar-formatted citation (APA, MLA, Chicago, IEEE)
-            <div className="citation text-slate-700 leading-relaxed">
-              {formattedCitation}
-            </div>
+            <div
+              className="citation text-body leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: formattedCitation.html }}
+            />
           ) : (
             // Detailed format (title prominent)
             <>
-              <h3 className="text-lg font-semibold text-slate-900 mb-1">
+              <h3 className="text-lg font-semibold text-heading mb-1">
                 {pub.title}
               </h3>
               {pub.authors.length > 0 && (
-                <p className="text-slate-600 mb-1">
+                <p className="text-body mb-1">
                   <AuthorList authors={pub.authors} style="apa" />
                 </p>
               )}
@@ -131,14 +130,14 @@ function PublicationCard({ pub, citationStyle, showType, showCiteButton }) {
             {pub.doi && <DoiLink doi={pub.doi} format="short" showIcon />}
 
             {pub.links
-              .filter((link) => link.url && !link.url.includes('doi.org'))
+              .filter((link) => link.href && !link.href.includes('doi.org'))
               .map((link, i) => (
                 <Link
                   key={i}
-                  href={link.url}
+                  href={link.href}
                   className="text-sm text-primary hover:underline"
                 >
-                  {link.text}
+                  {link.label}
                 </Link>
               ))}
 
@@ -208,17 +207,17 @@ function PublicationList({ content, params }) {
   })
 
   return (
-    <section className="py-12 px-6 bg-white">
+    <section className="py-12 px-6">
       <div className="max-w-4xl mx-auto">
         {(title || paragraphs[0]) && (
           <div className="mb-8">
             {title && (
-              <h2 className="text-2xl font-bold text-slate-900 mb-2">
+              <h2 className="text-2xl font-bold text-heading mb-2">
                 {title}
               </h2>
             )}
             {paragraphs[0] && (
-              <p className="text-slate-600">{paragraphs[0]}</p>
+              <p className="text-body">{paragraphs[0]}</p>
             )}
           </div>
         )}
@@ -230,7 +229,7 @@ function PublicationList({ content, params }) {
               placeholder="Search publications..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
+              className="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none bg-transparent text-heading"
             />
           </div>
         )}
@@ -239,8 +238,8 @@ function PublicationList({ content, params }) {
           <div className="flex flex-wrap gap-4 mb-6 text-sm">
             {Object.entries(PUBLICATION_TYPES).map(([key, { label, color }]) => (
               <div key={key} className="flex items-center gap-2">
-                <span className={cn('w-2 h-2 rounded-full', color)} />
-                <span className="text-slate-600">{label}</span>
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: color }} />
+                <span className="text-body">{label}</span>
               </div>
             ))}
           </div>
@@ -249,7 +248,7 @@ function PublicationList({ content, params }) {
         {sortedGroups.map((group) => (
           <div key={group} className="mb-8 last:mb-0">
             {group && groupBy === 'year' && (
-              <h3 className="text-lg font-semibold text-slate-700 mb-4 pb-2 border-b border-slate-200">
+              <h3 className="text-lg font-semibold text-body mb-4 pb-2 border-b border-border">
                 {group}
               </h3>
             )}
@@ -268,7 +267,7 @@ function PublicationList({ content, params }) {
         ))}
 
         {displayed.length === 0 && (
-          <p className="text-slate-500 text-center py-8">
+          <p className="text-subtle text-center py-8">
             No publications found.
           </p>
         )}
