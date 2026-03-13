@@ -91,7 +91,7 @@ function MathBlock({ content, params }) {
 
           {/* Introductory text with inline math support */}
           {paragraphs.length > 0 && (
-            <div className="prose max-w-none mb-8">
+            <div className="prose max-w-none mb-8 text-body">
               {paragraphs.map((para, i) => (
                 <p key={i} className="mb-4 last:mb-0 leading-relaxed">
                   {renderMathText(para)}

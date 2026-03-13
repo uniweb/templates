@@ -1,6 +1,7 @@
 ---
 type: MathBlock
 background: gray
+theme: dark
 showNumbers: true
 ---
 
