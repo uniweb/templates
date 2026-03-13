@@ -167,23 +167,30 @@ function PublicationList({ content, params }) {
   } = params || {}
 
   const [searchQuery, setSearchQuery] = useState('')
+  const [typeFilter, setTypeFilter] = useState(null) // null = show all
 
   const publications = useMemo(() => {
     // Publications come from content.items (semantic groups parsed from markdown)
     return (content.items || []).map(parsePublication)
   }, [content.items])
 
-  // Filter by search
+  // Filter by search and type
   const filtered = useMemo(() => {
-    if (!searchQuery) return publications
-    const q = searchQuery.toLowerCase()
-    return publications.filter(
-      (pub) =>
-        pub.title?.toLowerCase().includes(q) ||
-        pub.authorsStr?.toLowerCase().includes(q) ||
-        pub.venue?.toLowerCase().includes(q)
-    )
-  }, [publications, searchQuery])
+    let result = publications
+    if (typeFilter) {
+      result = result.filter((pub) => pub.type === typeFilter)
+    }
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase()
+      result = result.filter(
+        (pub) =>
+          pub.title?.toLowerCase().includes(q) ||
+          pub.authorsStr?.toLowerCase().includes(q) ||
+          pub.venue?.toLowerCase().includes(q)
+      )
+    }
+    return result
+  }, [publications, searchQuery, typeFilter])
 
   // Apply limit
   const displayed = limit > 0 ? filtered.slice(0, limit) : filtered
@@ -235,12 +242,37 @@ function PublicationList({ content, params }) {
         )}
 
         {showType && (
-          <div className="flex flex-wrap gap-4 mb-6 text-sm">
+          <div className="flex flex-wrap gap-2 mb-6 text-sm">
+            <button
+              type="button"
+              onClick={() => setTypeFilter(null)}
+              className={cn(
+                'flex items-center gap-1.5 px-2.5 py-1 rounded-full transition-colors cursor-pointer',
+                typeFilter === null
+                  ? 'bg-heading text-primary-foreground'
+                  : 'text-subtle hover:text-heading hover:bg-card'
+              )}
+            >
+              All
+            </button>
             {Object.entries(PUBLICATION_TYPES).map(([key, { label, color }]) => (
-              <div key={key} className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: color }} />
-                <span className="text-body">{label}</span>
-              </div>
+              <button
+                key={key}
+                type="button"
+                onClick={() => setTypeFilter(typeFilter === key ? null : key)}
+                className={cn(
+                  'flex items-center gap-1.5 px-2.5 py-1 rounded-full transition-colors cursor-pointer',
+                  typeFilter === key
+                    ? 'bg-card text-heading ring-1 ring-border'
+                    : 'text-subtle hover:text-heading hover:bg-card'
+                )}
+              >
+                <span
+                  className="w-2 h-2 rounded-full flex-shrink-0"
+                  style={{ backgroundColor: color }}
+                />
+                {label}
+              </button>
             ))}
           </div>
         )}
