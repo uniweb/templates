@@ -80,7 +80,7 @@ function ResearchAreas({ content, params }) {
                 )}
 
                 {layout === 'cards' && accentPosition === 'left' && (
-                  <div className="w-1 h-12 bg-primary rounded-full mb-3" />
+                  <div className="w-1 h-6 bg-primary rounded-full mb-3" />
                 )}
 
                 <div className="flex-1">

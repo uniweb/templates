@@ -126,8 +126,8 @@ function PublicationCard({ pub, citationStyle, showType, showCiteButton }) {
           )}
 
           {/* Links row: DOI, PDF, etc. */}
-          <div className="flex flex-wrap items-center gap-3 mt-2">
-            {pub.doi && <DoiLink doi={pub.doi} format="short" showIcon />}
+          <div className="flex flex-wrap items-center gap-2 mt-2">
+            {pub.doi && <DoiLink doi={pub.doi} format="label" />}
 
             {pub.links
               .filter((link) => link.href && !link.href.includes('doi.org'))
@@ -135,7 +135,7 @@ function PublicationCard({ pub, citationStyle, showType, showCiteButton }) {
                 <Link
                   key={i}
                   href={link.href}
-                  className="text-sm text-primary hover:underline"
+                  className="text-sm text-subtle hover:text-primary transition-colors"
                 >
                   {link.label}
                 </Link>

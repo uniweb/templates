@@ -96,7 +96,7 @@ function ProfileHero({ content, params }) {
                 'inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-colors',
                 i === 0
                   ? 'bg-primary text-primary-foreground hover:bg-primary-hover'
-                  : 'bg-secondary text-secondary-foreground hover:bg-secondary-hover'
+                  : 'border border-border text-heading hover:bg-card'
               )}
             >
               {link.label}

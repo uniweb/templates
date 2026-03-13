@@ -1,20 +1,8 @@
 @import "tailwindcss";
+@import "@uniweb/kit/theme-tokens.css";
 
 @source "./sections/**/*.{js,jsx}";
 @source "../node_modules/@uniweb/kit/src/**/*.{js,jsx}";
-
-@theme {
-  /* Academic color palette - professional blues and warm accents */
-  --color-primary: #1e40af;      /* Deep blue - institutional */
-  --color-accent: #b45309;       /* Warm amber - for highlights */
-  --color-muted: #64748b;        /* Slate gray - secondary text */
-
-  /* Semantic colors for publication types */
-  --color-journal: #1e40af;
-  --color-conference: #7c3aed;
-  --color-book: #059669;
-  --color-preprint: #d97706;
-}
 
 /* Academic typography enhancements */
 .prose-academic {
@@ -43,5 +31,5 @@
 }
 
 .citation-venue {
-  color: var(--color-muted);
+  color: var(--subtle);
 }
