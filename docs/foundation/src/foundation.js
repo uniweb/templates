@@ -1,15 +1,24 @@
 /**
  * Documentation Foundation Configuration
  *
- * This file defines foundation-level configuration:
+ * This file defines foundation-level settings:
  * - vars: CSS custom properties that sites can override in theme.yml
+ * - defaultLayout: Which layout to use when pages don't specify one
  *
  * Identity (name, version, description) comes from package.json.
- * Layout components are discovered from src/layouts/.
+ * Layout components are auto-discovered from src/layouts/.
+ * Section types are auto-discovered from src/sections/.
+ *
+ * Optionally, a foundation-level `scroll` property can be set here to
+ * control scroll restoration for all layouts that don't declare their own.
+ * This foundation's DocsLayout declares scroll: 'main' in its own meta.js,
+ * so no foundation-level scroll override is needed.
  */
 
 /**
- * CSS custom properties that sites can override in theme.yml
+ * CSS custom properties — sites override these in theme.yml under `vars:`.
+ * These become CSS variables (e.g., var(--header-height)) available to
+ * all components in the foundation.
  */
 export const vars = {
   // Layout

@@ -1,7 +1,8 @@
 /**
- * Footer Component Metadata (v2)
+ * Footer Component Metadata
  *
  * Simple documentation footer with copyright and links.
+ * `background: 'self'` — layout area component, manages own background.
  */
 export default {
   title: 'Footer',

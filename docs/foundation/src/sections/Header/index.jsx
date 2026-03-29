@@ -102,11 +102,11 @@ function Header({ content, params, block }) {
     const base = 'transition-all duration-300'
     if (scrolled) {
       if (transparency) {
-        return cn(base, 'bg-white/95 backdrop-blur-lg shadow-sm')
+        return cn(base, 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg shadow-sm')
       }
-      return cn(base, 'bg-white shadow-sm')
+      return cn(base, 'bg-white dark:bg-gray-900 shadow-sm')
     }
-    return cn(base, 'bg-white border-b border-gray-200')
+    return cn(base, 'bg-white dark:bg-gray-900')
   }
 
   // Version Badge Component (shows next to logo)
@@ -276,6 +276,33 @@ function Header({ content, params, block }) {
     )
   }
 
+  // Dark mode toggle
+  const [isDark, setIsDark] = useState(() => {
+    return document.documentElement.classList.contains('scheme-dark')
+  })
+
+  const toggleDarkMode = () => {
+    const root = document.documentElement
+    const next = !isDark
+    setIsDark(next)
+    if (next) {
+      root.classList.add('scheme-dark')
+      root.classList.remove('scheme-light')
+    } else {
+      root.classList.remove('scheme-dark')
+      root.classList.add('scheme-light')
+    }
+    try { localStorage.setItem('uniweb-scheme', next ? 'dark' : 'light') } catch {}
+  }
+
+  // Restore preference on mount
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('uniweb-scheme')
+      if (saved === 'dark' && !isDark) toggleDarkMode()
+    } catch {}
+  }, [])
+
   // External Links (GitHub, etc.)
   const ExternalLinks = () => {
     if (externalLinks.length === 0) return null
@@ -325,7 +352,7 @@ function Header({ content, params, block }) {
                     className="h-8 w-auto"
                   />
                 ) : (
-                  <span className="text-xl font-bold text-gray-900">{siteName}</span>
+                  <span className="text-xl font-bold text-gray-900 dark:text-white">{siteName}</span>
                 )}
               </Link>
               <VersionBadge />
@@ -342,6 +369,15 @@ function Header({ content, params, block }) {
               <LocaleSwitcherInline />
               <LocaleSwitcherDropdown />
               <ExternalLinks />
+
+              {/* Dark mode toggle */}
+              <button
+                onClick={toggleDarkMode}
+                className="p-2 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+              >
+                {isDark ? <SunIcon className="w-5 h-5" /> : <MoonIcon className="w-5 h-5" />}
+              </button>
 
               {/* CTA button */}
               {ctaLink && (
@@ -594,6 +630,18 @@ const GitHubIcon = ({ className }) => (
 const ExternalLinkIcon = ({ className }) => (
   <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+  </svg>
+)
+
+const SunIcon = ({ className }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+  </svg>
+)
+
+const MoonIcon = ({ className }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
   </svg>
 )
 

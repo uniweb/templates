@@ -2,10 +2,24 @@
 
 @source "./sections/**/*.{js,jsx}";
 @source "./components/**/*.{js,jsx}";
+@source "./layouts/**/*.{js,jsx}";
 @source "../node_modules/@uniweb/kit/src/**/*.{js,jsx}";
 
+/*
+ * Dark mode variant mapping.
+ *
+ * Uniweb's runtime applies .scheme-dark / .scheme-light classes to the
+ * document root when appearance schemes are enabled in theme.yml. This
+ * @custom-variant maps Tailwind's dark: prefix to that class, so
+ * `dark:bg-gray-900` activates when .scheme-dark is present.
+ *
+ * Without this, Tailwind's dark: uses @media (prefers-color-scheme: dark),
+ * which doesn't respond to the runtime's toggle.
+ */
+@custom-variant dark (&:where(.scheme-dark, .scheme-dark *));
+
 @theme {
-  /* Primary colors - professional blue for docs */
+  /* Primary colors — used for links, buttons, active states */
   --color-primary: #2563eb;
   --color-primary-light: #3b82f6;
   --color-primary-dark: #1d4ed8;
@@ -16,11 +30,11 @@
   /* Accent for highlights */
   --color-accent: #8b5cf6;
 
-  /* Code/syntax colors */
+  /* Code block colors */
   --color-code-bg: #1e293b;
   --color-code-text: #e2e8f0;
 
-  /* Sidebar */
+  /* Sidebar (used by LeftPanel border) */
   --color-sidebar-bg: #f8fafc;
   --color-sidebar-border: #e2e8f0;
 }

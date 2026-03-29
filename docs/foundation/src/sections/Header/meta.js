@@ -1,7 +1,15 @@
 /**
- * Header Component Metadata (v2)
+ * Header Component Metadata
  *
- * Documentation header with category tabs, search, version, and locale switchers.
+ * Documentation header with category tabs, search, version, locale, and
+ * dark mode switchers.
+ *
+ * `background: 'self'` tells the runtime that this component renders its
+ * own background — skip the default section background layer. Without this,
+ * the runtime would render a themed background behind the header that
+ * conflicts with the component's own bg-white / dark:bg-gray-900.
+ * This is the same pattern used for sections that render custom backgrounds
+ * (gradients, images, glassmorphism, etc.).
  */
 export default {
   title: 'Header',

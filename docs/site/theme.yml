@@ -1,8 +1,32 @@
-# Docs template theme — clean white backgrounds for documentation
+# ─── Docs Template Theme ──────────────────────────────────────────────────────
+#
+# This theme demonstrates two Uniweb theming features:
+#
+# 1. Context overrides — The `contexts:` section maps semantic tokens to
+#    specific values per context (light/dark). Sections declare their context
+#    in frontmatter (theme: light), and the runtime applies the matching
+#    token values. Here we set `section: white` for light context to give
+#    docs pages a clean white background instead of the default warm tint.
+#
+# 2. Appearance schemes — The `appearance:` section enables light/dark mode
+#    switching. The runtime applies .scheme-light or .scheme-dark to the
+#    document root. Foundation components use Tailwind's dark: variant
+#    (mapped to .scheme-dark in styles.css) to adapt their styles.
 
 colors:
   primary: '#3b82f6'
 
+# Override section background per context.
+# Light context uses white; dark uses a deep gray.
 contexts:
   light:
     section: white
+  dark:
+    section: '#111827'
+
+# Enable light/dark appearance switching.
+# The Header component provides a toggle button; the runtime handles
+# the .scheme-dark class on the document root.
+appearance:
+  default: light
+  schemes: [light, dark]

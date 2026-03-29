@@ -85,7 +85,7 @@ function LeftPanel({ content, params, block }) {
   }
 
   return (
-    <aside className="h-full border-r border-sidebar-border">
+    <aside className="h-full">
       <div className="h-full overflow-y-auto py-6 px-4">
         <nav>
           <NavigationTree
@@ -120,7 +120,7 @@ function NavigationTree({
   if (!items?.length) return null
 
   return (
-    <ul className={cn('space-y-1', level > 0 && 'mt-1 ml-4 border-l border-gray-200 pl-3')}>
+    <ul className={cn('space-y-1', level > 0 && 'mt-1 ml-4 border-l border-gray-200 dark:border-gray-700 pl-3')}>
       {items.map((page) => {
         const hasChildren = page.children?.length > 0
         const id = page.id || page.route
@@ -169,7 +169,7 @@ function NavigationTree({
                     'flex-1 px-2 py-1.5 text-sm rounded transition-colors',
                     isActive(page)
                       ? 'text-primary font-medium bg-primary/5'
-                      : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100',
+                      : 'text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800',
                     level === 0 && 'font-medium'
                   )}
                 >
@@ -178,7 +178,7 @@ function NavigationTree({
               ) : (
                 <span
                   className={cn(
-                    'flex-1 px-2 py-1.5 text-sm text-gray-600',
+                    'flex-1 px-2 py-1.5 text-sm text-gray-600 dark:text-gray-400',
                     level === 0 && 'font-medium'
                   )}
                 >

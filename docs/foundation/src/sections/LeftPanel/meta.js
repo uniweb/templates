@@ -1,7 +1,12 @@
 /**
- * LeftPanel Component Metadata (v2)
+ * LeftPanel Component Metadata
  *
  * Sidebar navigation with collapsible sections and category filtering.
+ *
+ * `background: 'self'` — this component lives in a layout area (left sidebar)
+ * and manages its own background via the layout's bg-white/dark:bg-gray-900.
+ * Without this, the runtime would apply a themed section background that
+ * creates a visible color mismatch between the sidebar and the layout.
  */
 export default {
   title: 'Left Panel',
@@ -10,7 +15,8 @@ export default {
   purpose: 'Navigate',
   background: 'self',
 
-  // LeftPanel uses website.getPageHierarchy() for navigation
+  // LeftPanel reads navigation from website.getPageHierarchy(), not from
+  // its own content — so the content declaration is empty.
   content: {},
 
   params: {
