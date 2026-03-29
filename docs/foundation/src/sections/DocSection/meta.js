@@ -8,6 +8,7 @@ export default {
   description: 'Main documentation content section with typography and navigation',
   category: 'content',
   purpose: 'Inform',
+  background: 'self',
 
   content: {
     pretitle: 'Category label',

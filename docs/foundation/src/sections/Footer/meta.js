@@ -8,6 +8,7 @@ export default {
   description: 'Simple documentation footer with copyright and links',
   category: 'navigation',
   purpose: 'Navigate',
+  background: 'self',
 
   content: {
     title: 'Site name (for copyright)',

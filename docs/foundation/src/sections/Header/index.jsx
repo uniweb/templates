@@ -309,7 +309,6 @@ function Header({ content, params, block }) {
     <>
       <div
         className={cn(
-          'fixed top-0 left-0 right-0 z-50',
           getHeaderStyles()
         )}
       >
@@ -542,9 +541,6 @@ function Header({ content, params, block }) {
           </div>
         )}
       </div>
-
-      {/* Spacer for fixed header - always uses height for tabs since we show tabs by default now */}
-      <div className={pages.length > 0 ? 'h-[104px]' : 'h-16'} />
 
       {/* Search Modal */}
       {shouldShowSearch && (

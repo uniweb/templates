@@ -8,6 +8,7 @@ export default {
   description: 'Sidebar navigation with collapsible sections and category filtering',
   category: 'navigation',
   purpose: 'Navigate',
+  background: 'self',
 
   // LeftPanel uses website.getPageHierarchy() for navigation
   content: {},

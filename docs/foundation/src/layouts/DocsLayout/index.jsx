@@ -5,11 +5,15 @@ import { cn } from '@uniweb/kit'
  * Documentation Layout Component
  *
  * A layout optimized for documentation sites with:
- * - Sticky header
+ * - Fixed header
  * - Left sidebar navigation (hidden on mobile, visible on md+)
- * - Main content area with prose styling
+ * - Scrollable main content area
  * - Optional right sidebar (hidden on mobile, visible on xl+)
  * - Mobile sidebar drawer
+ *
+ * Uses overflow-based scrolling on <main> rather than window scroll.
+ * The layout declares `scroll: 'main'` in meta.js so the runtime
+ * manages scroll restoration on the <main> element.
  *
  * Receives pre-rendered areas from the runtime Layout:
  * - header: Header component
@@ -23,10 +27,8 @@ import { cn } from '@uniweb/kit'
  * Mobile sidebar drawer component
  */
 function MobileSidebar({ isOpen, onClose, children }) {
-  // Close on route change
   useEffect(() => {
     if (isOpen) {
-      // Prevent body scroll when sidebar is open
       document.body.style.overflow = 'hidden'
       return () => {
         document.body.style.overflow = ''
@@ -52,7 +54,6 @@ function MobileSidebar({ isOpen, onClose, children }) {
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
-        {/* Close button */}
         <button
           onClick={onClose}
           className="absolute top-4 right-4 p-1 rounded-md hover:bg-gray-100"
@@ -63,7 +64,6 @@ function MobileSidebar({ isOpen, onClose, children }) {
           </svg>
         </button>
 
-        {/* Sidebar content */}
         <div className="h-full overflow-y-auto">
           {children}
         </div>
@@ -112,9 +112,9 @@ export default function DocsLayout({
   }, [activeRoute])
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
-      {/* Sticky Header */}
-      <header className="sticky top-0 z-30 w-full border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
+    <div className="h-screen flex flex-col bg-white">
+      {/* Fixed Header */}
+      <header className="flex-shrink-0 z-30 w-full border-b border-gray-200 bg-white">
         {header}
       </header>
 
@@ -128,44 +128,41 @@ export default function DocsLayout({
         </MobileSidebar>
       )}
 
-      {/* Main Content Area */}
-      <div className="flex-1 w-full max-w-7xl mx-auto">
-        <div className="flex">
-          {/* Left Sidebar - Desktop */}
-          {leftContent && (
-            <aside className="hidden md:block sticky top-16 w-64 flex-shrink-0 h-[calc(100vh-4rem)] overflow-y-auto border-r border-gray-200">
-              {leftContent}
-            </aside>
-          )}
+      {/* Content Area — sidebars + scrollable main */}
+      <div className="flex-1 flex overflow-hidden w-full max-w-7xl mx-auto">
+        {/* Left Sidebar - Desktop */}
+        {leftContent && (
+          <aside className="hidden md:block w-64 flex-shrink-0 overflow-y-auto border-r border-gray-200 bg-white">
+            {leftContent}
+          </aside>
+        )}
 
-          {/* Center Content */}
-          <main className="flex-1 min-w-0">
-            <div className={cn(
-              'px-4 py-8 sm:px-6 lg:px-8',
-              // Constrain width when there's no right panel
-              !rightContent && 'max-w-3xl mx-auto'
-            )}>
-              {/* Prose wrapper for body content */}
-              <div className="prose prose-slate max-w-none prose-headings:font-semibold prose-a:text-primary hover:prose-a:text-primary-dark prose-code:bg-code-bg prose-code:text-code-text prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none">
-                {body}
-              </div>
-
-              {/* Footer (prev/next navigation) */}
-              {footer && (
-                <footer className="mt-12 pt-8 border-t border-gray-200">
-                  {footer}
-                </footer>
-              )}
+        {/* Center Content — this is the scroll container */}
+        <main className="flex-1 min-w-0 overflow-y-auto">
+          <div className={cn(
+            'px-4 py-8 sm:px-6 lg:px-8',
+            !rightContent && 'max-w-3xl mx-auto'
+          )}>
+            {/* Prose wrapper for body content */}
+            <div className="prose prose-slate max-w-none prose-headings:font-semibold prose-a:text-primary hover:prose-a:text-primary-dark prose-code:bg-code-bg prose-code:text-code-text prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none">
+              {body}
             </div>
-          </main>
 
-          {/* Right Sidebar - Desktop */}
-          {rightContent && (
-            <aside className="hidden xl:block sticky top-16 w-64 flex-shrink-0 h-[calc(100vh-4rem)] overflow-y-auto border-l border-gray-200">
-              {rightContent}
-            </aside>
-          )}
-        </div>
+            {/* Footer (prev/next navigation) */}
+            {footer && (
+              <footer className="mt-12 pt-8 border-t border-gray-200">
+                {footer}
+              </footer>
+            )}
+          </div>
+        </main>
+
+        {/* Right Sidebar - Desktop */}
+        {rightContent && (
+          <aside className="hidden xl:block w-64 flex-shrink-0 overflow-y-auto border-l border-gray-200 bg-white">
+            {rightContent}
+          </aside>
+        )}
       </div>
 
       {/* Mobile Menu Button */}

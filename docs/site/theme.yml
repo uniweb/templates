@@ -1,0 +1,8 @@
+# Docs template theme — clean white backgrounds for documentation
+
+colors:
+  primary: '#3b82f6'
+
+contexts:
+  light:
+    section: white
