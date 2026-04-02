@@ -37,4 +37,4 @@ export default function SplitContent({ content, block, params }) {
   )
 }
 
-SplitContent.className = 'py-(--section-padding-y) px-(--section-padding-x)'
+SplitContent.className = 'py-[var(--section-padding-y)] px-[var(--section-padding-x)]'

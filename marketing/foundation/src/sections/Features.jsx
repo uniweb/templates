@@ -20,4 +20,4 @@ export default function Features({ content }) {
   )
 }
 
-Features.className = 'py-(--section-padding-y) px-(--section-padding-x)'
+Features.className = 'py-[var(--section-padding-y)] px-[var(--section-padding-x)]'

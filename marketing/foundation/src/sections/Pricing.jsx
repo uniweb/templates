@@ -50,4 +50,4 @@ export default function Pricing({ content }) {
   )
 }
 
-Pricing.className = 'py-(--section-padding-y) px-(--section-padding-x)'
+Pricing.className = 'py-[var(--section-padding-y)] px-[var(--section-padding-x)]'

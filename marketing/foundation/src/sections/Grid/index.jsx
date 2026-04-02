@@ -24,4 +24,4 @@ export default function Grid({ content, block, params }) {
   )
 }
 
-Grid.className = 'py-(--section-padding-y) px-(--section-padding-x)'
+Grid.className = 'py-[var(--section-padding-y)] px-[var(--section-padding-x)]'

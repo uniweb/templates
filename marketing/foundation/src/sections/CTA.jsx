@@ -16,4 +16,4 @@ export default function CTA({ content }) {
   )
 }
 
-CTA.className = 'py-(--section-padding-y) px-(--section-padding-x)'
+CTA.className = 'py-[var(--section-padding-y)] px-[var(--section-padding-x)]'
