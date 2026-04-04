@@ -21,7 +21,7 @@ function Grid({ content, block }) {
               key={childBlock.id || index}
               className={children.length === 2 && index === 0 ? 'lg:col-span-2' : ''}
             >
-              <ChildBlocks blocks={[childBlock]} pure />
+              <ChildBlocks blocks={[childBlock]} />
             </div>
           ))}
         </div>
