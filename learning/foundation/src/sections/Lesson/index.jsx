@@ -1,9 +1,9 @@
-import LessonHeader from '../../components/LessonHeader'
-import LessonFooter from '../../components/LessonFooter'
-import MaterialContent from '../../components/MaterialContent'
-import QuizContent from '../../components/QuizContent'
-import CodeChallengeContent from '../../components/CodeChallengeContent'
-import OpenEndedContent from '../../components/OpenEndedContent'
+import LessonHeader from '#components/LessonHeader'
+import LessonFooter from '#components/LessonFooter'
+import MaterialContent from '#components/MaterialContent'
+import QuizContent from '#components/QuizContent'
+import CodeChallengeContent from '#components/CodeChallengeContent'
+import OpenEndedContent from '#components/OpenEndedContent'
 
 // Collect all tagged data blocks from content.sequence.
 // Authors embed structured YAML in fenced code blocks with a tag:
