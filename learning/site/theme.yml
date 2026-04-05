@@ -1,0 +1,18 @@
+colors:
+  primary: "#4f46e5"
+  accent: "#8b5cf6"
+  neutral: slate
+
+fonts:
+  heading: "'Inter', system-ui, sans-serif"
+  body: "'Inter', system-ui, sans-serif"
+  mono: "'JetBrains Mono', ui-monospace, monospace"
+  import:
+    - url: https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap
+
+appearance:
+  default: light
+  allowToggle: true
+
+vars:
+  surface-bg: "#f0f7ff"

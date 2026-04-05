@@ -14,6 +14,7 @@ See the templates in action: **[View all demos](https://uniweb.github.io/templat
 | international | [Live Demo](https://uniweb.github.io/templates/international/) | Multilingual sites with i18n (English, Spanish, French) |
 | dynamic | [Live Demo](https://uniweb.github.io/templates/dynamic/) | Live API data fetching with loading states and transforms |
 | store | [Live Demo](https://uniweb.github.io/templates/store/) | Artisan e-commerce with product collections and Shopify integration |
+| learning | [Live Demo](https://uniweb.github.io/templates/learning/) | Course-based learning site with quizzes and code challenges |
 | extensions | [Live Demo](https://uniweb.github.io/templates/extensions/) | Multi-foundation sites with visual effects extension |
 
 ## Quick Start
@@ -25,6 +26,7 @@ uniweb create my-project --template docs
 uniweb create my-project --template international
 uniweb create my-project --template dynamic
 uniweb create my-project --template store
+uniweb create my-project --template learning
 uniweb create my-project --template extensions
 ```
 
@@ -49,6 +51,8 @@ pnpm dev
 **Dynamic** — Conservation site demonstrating live API data fetching with loading states, transforms, and the portable data pattern.
 
 **Store** — Artisan e-commerce with product collections, Shopify Buy Button integration, journal blog, and warm stone-amber design.
+
+**Learning** — Course-based learning platform with auto-detecting lesson types (reading material, quizzes, code challenges, open-ended prompts), sidebar navigation, and AI grading integration point.
 
 **Extensions** — Multi-foundation demo with a primary foundation and a visual effects extension, showing how multiple foundations contribute section types to one site.
 

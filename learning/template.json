@@ -1,0 +1,13 @@
+{
+  "name": "Learning Platform",
+  "description": "Course-based learning site with sidebar navigation, auto-detecting lesson variants (reading material, quizzes, code challenges, open-ended prompts), and a custom three-panel layout. Demonstrates deep page hierarchy, tagged YAML data blocks, and content-driven component logic.",
+  "compatible": ">=0.8.0",
+  "format": 2,
+  "tags": ["learning", "course", "education", "quiz", "lms", "tutorial"],
+  "components": ["CourseCatalog", "Lesson", "Header", "Sidebar"],
+  "dependencies": {
+    "foundation": {
+      "@tailwindcss/typography": "^0.5.0"
+    }
+  }
+}
