@@ -31,6 +31,11 @@
       "description": "Artisan e-commerce with product collections, Shopify Buy Button, journal blog, and stone-amber design",
       "tags": ["store", "e-commerce", "shopify", "artisan", "products"]
     },
+    "learning": {
+      "name": "Learning Platform",
+      "description": "Course-based learning site with quizzes, code challenges, and AI grading integration",
+      "tags": ["learning", "course", "education", "quiz", "lms", "tutorial"]
+    },
     "extensions": {
       "name": "Extensions Demo",
       "description": "Primary foundation with a visual effects extension, demonstrating multi-foundation sites",
