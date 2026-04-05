@@ -1,6 +1,6 @@
 import React from 'react'
 import { H2, P } from '@uniweb/kit'
-import VideoCard from './VideoCard.jsx'
+import VideoCard from '#components/VideoCard.jsx'
 
 function Skeleton() {
   return [1, 2, 3, 4, 5, 6].map((n) => (

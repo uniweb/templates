@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { Eye, Plus } from 'lucide-react'
 import { H2, DataPlaceholder } from '@uniweb/kit'
-import { addToCart } from '../../components/cart-store.js'
-import { ShopifyBuyButton } from '../../components/ShopifyBuyButton.jsx'
-import { QuickView } from '../../components/QuickView.jsx'
+import { addToCart } from '#components/cart-store.js'
+import { ShopifyBuyButton } from '#components/ShopifyBuyButton.jsx'
+import { QuickView } from '#components/QuickView.jsx'
 
 /**
  * ProductGrid Component

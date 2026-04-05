@@ -2,6 +2,3 @@ id: 7466921b
 title: Home
 
 sections: [hero, features, split, testimonials, ..., cta]
-
-nest:
-  testimonials: [quote-1, quote-2, quote-3]

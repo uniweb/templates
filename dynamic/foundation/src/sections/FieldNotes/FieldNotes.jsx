@@ -1,7 +1,7 @@
 import React from 'react'
 import { H1, H2, P, Link } from '@uniweb/kit'
 import { ClipboardList, ArrowRight } from 'lucide-react'
-import NoteCard from './NoteCard.jsx'
+import NoteCard from '#components/NoteCard.jsx'
 
 function Skeleton({ count }) {
   return Array.from({ length: count }).map((_, n) => (

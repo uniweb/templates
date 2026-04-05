@@ -1,7 +1,7 @@
 import React from 'react'
 import { H1, P, Link, Icon, cn } from '@uniweb/kit'
 import { Activity } from 'lucide-react'
-import WeatherCard from './WeatherCard.jsx'
+import WeatherCard from '#components/WeatherCard.jsx'
 
 function Hero({ content, params, block }) {
   const { title, pretitle, paragraphs, links } = content

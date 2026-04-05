@@ -8,9 +8,9 @@ import {
   useWebsite,
   useActiveRoute,
 } from '@uniweb/kit'
-import { useCartCount, openCart } from '../../components/cart-store.js'
-import { CartDrawer } from '../../components/CartDrawer.jsx'
-import { Toast } from '../../components/Toast.jsx'
+import { useCartCount, openCart } from '#components/cart-store.js'
+import { CartDrawer } from '#components/CartDrawer.jsx'
+import { Toast } from '#components/Toast.jsx'
 
 /**
  * Header Component
