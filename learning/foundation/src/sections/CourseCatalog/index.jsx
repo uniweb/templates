@@ -33,9 +33,11 @@ function useCourses(content, block) {
   return pages.map((page) => {
     const route = page.route.startsWith('/') ? page.route : '/' + page.route
     const override = itemsByRoute[route]
+    // Strip <a> tags from paragraph — the card itself is a link, so nested <a> is invalid HTML
+    const rawDesc = override?.paragraphs?.[0] || page.description || ''
     return {
       title: page.title || page.label,
-      description: override?.paragraphs?.[0] || page.description || '',
+      description: rawDesc.replace(/<a[^>]*>.*?<\/a>/g, '').trim(),
       href: route,
       linkLabel: override?.links?.[0]?.label || 'Start Course',
     }
