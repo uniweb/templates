@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { Prose } from '@uniweb/kit'
 import AIFeedbackCard from './AIFeedbackCard'
+import splitContent from '#utils/splitContent'
 
 export default function CodeChallengeContent({ content, block, params, data }) {
+  const { lesson, challenge } = splitContent(content)
   const requirements = data?.requirements || []
   const rubric = data?.rubric || []
   const resources = data?.resources || []
@@ -59,8 +61,9 @@ export default function CodeChallengeContent({ content, block, params, data }) {
 
   return (
     <div className="py-8 px-4">
+      {/* Lesson material — clean reading prose before the challenge */}
       <div className="max-w-3xl mx-auto mb-12">
-        <Prose content={content} block={block} />
+        <Prose content={lesson || content} block={block} />
 
         {resources.length > 0 && (
           <div className="mt-12 p-6 bg-primary-50/50 rounded-2xl border border-primary-100">
@@ -88,6 +91,12 @@ export default function CodeChallengeContent({ content, block, params, data }) {
       </div>
 
       <div className="max-w-6xl mx-auto">
+        {/* Challenge description when split from lesson material */}
+        {lesson && challenge.sequence?.length > 0 && (
+          <div className="max-w-3xl mb-8">
+            <Prose content={challenge} block={block} />
+          </div>
+        )}
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Requirements sidebar */}
           <div className="w-full lg:w-1/3">

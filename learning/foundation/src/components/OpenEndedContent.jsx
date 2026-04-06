@@ -1,10 +1,13 @@
 import { useState } from 'react'
 import { Prose } from '@uniweb/kit'
 import AIFeedbackCard from './AIFeedbackCard'
+import splitContent from '#utils/splitContent'
 
 export default function OpenEndedContent({ content, block, params, data }) {
+  const { lesson, challenge } = splitContent(content)
   const rawRubric = data?.rubric
   const rubric = Array.isArray(rawRubric) ? rawRubric : rawRubric ? Object.entries(rawRubric).map(([k, v]) => v ? `${k}: ${v}` : k) : []
+  const requirements = data?.requirements || []
   const [answer, setAnswer] = useState('')
   const [isGrading, setIsGrading] = useState(false)
   const [feedback, setFeedback] = useState(null)
@@ -47,13 +50,41 @@ export default function OpenEndedContent({ content, block, params, data }) {
 
   return (
     <div className="max-w-3xl mx-auto py-8 px-4">
+      {/* Lesson material — clean reading prose before the challenge */}
+      {lesson && (
+        <div className="mb-12">
+          <Prose content={lesson} block={block} />
+        </div>
+      )}
+
+      {/* Challenge prompt */}
       <div className="bg-muted/50 border border-border rounded-2xl p-6 mb-8 relative">
         <div className="absolute -top-3 left-6 px-2 bg-muted text-xs font-bold text-subtle uppercase tracking-wider rounded">
-          Prompt
+          Challenge
         </div>
-        <Prose content={content} block={block} />
+        <Prose content={challenge} block={block} />
       </div>
 
+      {/* Requirements */}
+      {requirements.length > 0 && (
+        <div className="mb-6 p-4 bg-muted/30 border border-border rounded-xl">
+          <h4 className="text-xs font-bold uppercase tracking-wider text-subtle mb-2">
+            Requirements
+          </h4>
+          <ul className="space-y-1">
+            {requirements.map((req, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-body">
+                <svg className="w-4 h-4 text-subtle mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                {typeof req === 'string' ? req : req.text || ''}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Rubric */}
       {rubric.length > 0 && (
         <div className="mb-6 p-4 bg-muted/30 border border-border rounded-xl">
           <h4 className="text-xs font-bold uppercase tracking-wider text-subtle mb-2">
