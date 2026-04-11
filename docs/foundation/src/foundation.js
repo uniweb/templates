@@ -45,6 +45,14 @@ export const vars = {
 export default {
   defaultLayout: 'DocsLayout',
 
+  // Enable animated page transitions using the browser's View Transitions API.
+  // When true, SPA navigation is wrapped in document.startViewTransition(),
+  // producing a smooth crossfade between pages. Each layout can declare which
+  // areas participate via `transitions` in its meta.js — areas with matching
+  // names across layouts morph automatically (e.g., a shared header stays put
+  // while the body content crossfades). No-op in browsers without support.
+  viewTransitions: true,
+
   // Foundation-wide props (accessible via website.foundationProps):
   props: {},
 }
