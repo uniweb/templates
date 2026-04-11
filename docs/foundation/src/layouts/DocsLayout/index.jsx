@@ -239,7 +239,7 @@ export default function DocsLayout({
   return (
     <div className="h-screen flex flex-col bg-white dark:bg-gray-900 dark:text-gray-100">
       {/* Header — natural flex child, not fixed/sticky */}
-      <header className="flex-shrink-0 z-30 border-b border-gray-200 dark:border-gray-700">
+      <header className="flex-shrink-0 z-30">
         {header}
       </header>
 

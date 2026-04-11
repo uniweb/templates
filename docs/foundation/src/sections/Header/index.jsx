@@ -99,7 +99,7 @@ function Header({ content, params, block }) {
 
   // Header styles based on scroll state
   const getHeaderStyles = () => {
-    const base = 'transition-all duration-300'
+    const base = 'transition-all duration-300 border-b border-gray-200 dark:border-gray-700'
     if (scrolled) {
       if (transparency) {
         return cn(base, 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg shadow-sm')
