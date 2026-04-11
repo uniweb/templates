@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, cn, useActiveRoute, useScrolled, useMobileMenu, useWebsite, useVersion, getLocaleLabel, useRouting, useSearchShortcut, useSearchWithIntent } from '@uniweb/kit'
+import { Link, cn, useActiveRoute, useScrolled, useMobileMenu, useWebsite, useVersion, useAppearance, getLocaleLabel, useRouting, useSearchShortcut, useSearchWithIntent } from '@uniweb/kit'
 import SearchModal from '../SearchModal'
 
 /**
@@ -276,32 +276,10 @@ function Header({ content, params, block }) {
     )
   }
 
-  // Dark mode toggle
-  const [isDark, setIsDark] = useState(() => {
-    return document.documentElement.classList.contains('scheme-dark')
-  })
-
-  const toggleDarkMode = () => {
-    const root = document.documentElement
-    const next = !isDark
-    setIsDark(next)
-    if (next) {
-      root.classList.add('scheme-dark')
-      root.classList.remove('scheme-light')
-    } else {
-      root.classList.remove('scheme-dark')
-      root.classList.add('scheme-light')
-    }
-    try { localStorage.setItem('uniweb-scheme', next ? 'dark' : 'light') } catch {}
-  }
-
-  // Restore preference on mount
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem('uniweb-scheme')
-      if (saved === 'dark' && !isDark) toggleDarkMode()
-    } catch {}
-  }, [])
+  // Dark mode — kit's useAppearance handles SSR safety, localStorage
+  // persistence, DOM class management, and system preference detection
+  const { scheme, toggle: toggleDarkMode } = useAppearance()
+  const isDark = scheme === 'dark'
 
   // External Links (GitHub, etc.)
   const ExternalLinks = () => {
