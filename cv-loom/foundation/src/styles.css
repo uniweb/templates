@@ -1,0 +1,36 @@
+@import 'tailwindcss';
+
+/* Typography scale for the career summary. Uses semantic tokens so the
+ * theme.yml drives all colour / font choices. */
+@theme {
+  --font-heading: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-body: 'Crimson Text', Georgia, 'Times New Roman', serif;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--body);
+  background-color: var(--section);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  color: var(--heading);
+}
+
+/* The summary section's prose — applied to the rendered paragraphs so
+ * inline <strong> and <em> from markdown flow through with the right
+ * weight and colour. */
+.summary-prose p {
+  margin-bottom: 1.25em;
+  line-height: 1.7;
+}
+
+.summary-prose p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-prose strong {
+  color: var(--heading);
+  font-weight: 600;
+}

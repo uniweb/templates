@@ -45,6 +45,11 @@
       "name": "CV (Docusite)",
       "description": "An academic CV as a docusite — a URL whose content is also a downloadable Microsoft Word document. Ships with a full Charles Darwin sample CV and demonstrates the one-foundation-many-tenants pattern for download-time theming.",
       "tags": ["cv", "resume", "docusite", "academic", "document", "press"]
+    },
+    "cv-loom": {
+      "name": "CV (Loom-instantiated)",
+      "description": "A single-page narrative CV whose prose is written with {placeholder} expressions and instantiated at render time via the foundation content handler and @uniweb/loom. Reference implementation of the handler hook.",
+      "tags": ["cv", "loom", "template-engine", "content-handler", "dynamic-prose", "academic"]
     }
   }
 }

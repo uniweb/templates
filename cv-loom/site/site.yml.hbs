@@ -1,0 +1,26 @@
+# Site Configuration
+# Full reference: uniweb docs site  |  Schema: schemas/site.schema.json
+
+name: {{projectName}}
+foundation: foundation
+
+# The homepage is the Career Summary.
+index: home
+
+# ─── Collections ───────────────────────────────────────────────────────────
+# This site has a single collection: `profile`. It holds one markdown
+# file — the individual whose CV is being rendered — and the foundation's
+# content handler flattens the first (and only) item of this collection
+# into the Loom variable resolver. Each `{expression}` in the summary
+# page references a field from that profile item.
+collections:
+  profile:
+    path: collections/profile
+
+# ─── Page Ordering ─────────────────────────────────────────────────────────
+# This template ships a single page: /home. If you add more pages,
+# set the ordering here.
+# pages: [home, about]
+
+build:
+  prerender: true
