@@ -1,6 +1,5 @@
 ---
 type: Summary
-data: profile
 theme: light
 ---
 

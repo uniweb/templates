@@ -58,10 +58,10 @@ At render time the runtime calls this handler with the assembled block data. The
 
 ## What Ships in the Box
 
-- **`site/collections/profile/darwin.md`** — one markdown file with the full Darwin profile in YAML frontmatter: name, role, affiliation, research areas, 18 publications with type and year, 5 research grants with source and amount, 6 awards, 6 teaching mentees, and 4 learned societies.
-- **`site/pages/home/summary.md`** — the narrative Career Summary page. Four paragraphs. 17 distinct Loom expressions. All computed against the single profile item.
+- **`site/collections/profile/darwin.yml`** — a single pure-YAML file containing the full Darwin profile: name, role, affiliation, research areas, 18 publications with type and year, 5 research grants with source and amount, 6 awards, 6 teaching mentees, and 4 learned societies. Uniweb's collection loader supports `.yml`, `.yaml`, `.json`, and `.md` files side by side; this template uses `.yml` because a profile is pure structured data with no narrative body.
+- **`site/pages/home/summary.md`** — the narrative Career Summary page. Four paragraphs. 17 distinct Loom expressions. All computed against the single profile item. No `data:` declaration in the frontmatter — the `Summary` section's `meta.js` declares `data: { inherit: ['profile'] }` and the runtime's EntityStore attaches the collection automatically.
 - **`foundation/src/foundation.js`** — the content-handler wiring.
-- **`foundation/src/sections/Summary/`** — a 30-line section component that renders title and paragraphs. Unaware of Loom.
+- **`foundation/src/sections/Summary/`** — a 30-line section component that renders title and paragraphs. Unaware of Loom. Its `meta.js` declares profile inheritance so pages don't need to repeat it.
 
 Run `pnpm dev` and the rendered page reads as a finished bio:
 
@@ -117,7 +117,7 @@ The profile data ships with `funding` pre-sorted from largest to smallest grant.
 
 ### The handler sees one profile
 
-The content handler in `foundation/src/foundation.js` flattens `data.profile[0]` into the Loom resolver. The profile collection holds a single markdown file; that file's frontmatter becomes the variable namespace. If you rename `darwin.md` to `your-name.md`, nothing else needs to change — the collection loader finds the first file in the folder and hands it through.
+The content handler in `foundation/src/foundation.js` flattens `data.profile[0]` into the Loom vars. The profile collection holds a single YAML file; that file's fields become the variable namespace. If you rename `darwin.yml` to `your-name.yml`, nothing else needs to change — the collection loader finds the first file in the folder, emits it as one item, and the handler picks the first item from the array.
 
 If you wanted to render multiple CVs from the same foundation, you'd either scaffold multiple sites (one collection file each) or put multiple files in the profile collection and loop over them from a dynamic route.
 

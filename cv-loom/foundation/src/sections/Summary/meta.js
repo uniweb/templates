@@ -1,10 +1,20 @@
 export default {
-  name: 'Summary',
+  title: 'Career Summary',
   description:
-    'Career summary prose section. Renders a title and paragraphs from semantic content, after the foundation content handler has instantiated any Loom {placeholder} expressions against the block data.',
+    'Narrative prose section that instantiates Loom {placeholder} expressions against the site profile. Inherits the `profile` collection — the runtime attaches it automatically so pages only need `type: Summary`, not `data:`.',
+  category: 'content',
+
+  data: {
+    // Inherit the whole `profile` collection. The foundation's content
+    // handler (see `foundation.js`) flattens `data.profile[0]` into
+    // Loom's variable namespace at render time.
+    inherit: ['profile'],
+  },
+
   content: {
     description:
-      'Narrative markdown. Any {expression} in the text is evaluated by Loom at render time against the data from the page frontmatter.',
+      'Narrative markdown. Any `{expression}` in headings or paragraphs is evaluated by Loom at render time against the inherited profile data.',
   },
+
   params: {},
 }

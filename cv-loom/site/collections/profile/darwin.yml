@@ -1,4 +1,27 @@
----
+# A whole CV as a structured data file. The collection processor
+# picks up every .yml / .yaml / .json file in the collection folder
+# and emits it as one item with `slug` (from filename) + all the
+# fields below. The Career Summary page's foundation content handler
+# flattens this into the Loom variable namespace, so every
+# `{expression}` in the page markdown reads from the fields you see
+# here.
+#
+# Conventions worth knowing:
+#
+#   - Year fields are quoted strings. Loom's default formatter
+#     applies locale grouping to numeric results (turning 1859 into
+#     "1,859"), which reads wrong for years. Quote them and Loom
+#     leaves them alone. Numeric comparisons (`year > '1870'`) still
+#     work — Loom coerces.
+#
+#   - Amount fields are plain numbers so totals and averages get the
+#     locale separator you want for currency ("1,530").
+#
+#   - `funding` is pre-sorted largest → smallest so `funding.0`
+#     gives you the top grant directly. Plain-form `SORTED BY field`
+#     is reliable only for homogeneous lists of primitives; pre-sort
+#     the source data when you need the top item by a different key.
+
 name: Charles Darwin
 first_name: Charles
 family_name: Darwin
@@ -6,6 +29,7 @@ role: Naturalist and Independent Researcher
 affiliation: Down House, Downe, Kent, England
 career_start: '1831'
 career_end: '1882'
+
 research_areas:
   - transmutation of species
   - geology of coral reefs and volcanic islands
@@ -13,6 +37,7 @@ research_areas:
   - physiology of climbing and insectivorous plants
   - expression of emotions in animals and humans
   - role of earthworms in soil formation
+
 publications:
   - title: Journal of Researches (Voyage of the Beagle)
     type: book
@@ -68,6 +93,7 @@ publications:
   - title: The Formation of Vegetable Mould through the Action of Worms
     type: book
     year: '1881'
+
 funding:
   - source: HM Treasury
     purpose: Zoology of the Voyage of H.M.S. Beagle
@@ -89,6 +115,7 @@ funding:
     purpose: climbing plant publication subsidy
     amount: 50
     year: '1865'
+
 awards:
   - title: Royal Medal (Royal Society)
     year: '1853'
@@ -102,6 +129,7 @@ awards:
     year: '1877'
   - title: Baly Medal (Royal College of Physicians)
     year: '1879'
+
 teaching:
   - mentee: Joseph Dalton Hooker
     role: scientific correspondent at Kew Gardens
@@ -115,6 +143,7 @@ teaching:
     role: Oxford protégé in natural selection
   - mentee: Francis Darwin
     role: son and collaborator on plant physiology
+
 service:
   - organization: Geological Society of London
     role: Secretary and Fellow
@@ -124,24 +153,3 @@ service:
     role: Fellow
   - organization: Royal Society of London
     role: Fellow (elected 1839)
----
-
-The single profile item that the Career Summary page instantiates
-against. Loom expressions in the summary markdown reference the
-frontmatter fields above — `{first_name}`, `{COUNT OF publications}`,
-`{TOTAL OF funding.amount}`, and so on — and the framework's content
-handler rewrites them at render time.
-
-Note that every `year` field is quoted. YAML would otherwise parse
-four-digit numbers as integers, and Loom's default formatter applies
-locale grouping to numeric results (turning `1859` into `1,859`). Keep
-year fields as strings; keep currency-like fields as numbers so the
-grouping does the right thing for totals.
-
-The `funding` list is pre-sorted from largest to smallest grant so
-that `funding.0` is always the top grant. Plain-form `SORTED BY field`
-is reliable for sorting homogeneous lists of primitives (all the
-`year` values, for instance), but does not currently sort a list of
-source names "by amount" — that's a known Loom limitation. When you
-need the top / bottom item of a list sorted by a different field,
-pre-sort the source data.
