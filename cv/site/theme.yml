@@ -1,0 +1,79 @@
+# Theme Configuration — "Down House" (default)
+#
+# The default faculty-annual-report theme. Period-appropriate
+# Victorian serif typography, a muted navy primary, warm stone
+# neutral, and a cream section background. Chosen as a sensible
+# default for docusites about researchers and institutions where
+# a formal, printed-document feel suits the content.
+#
+# To switch to the alternate "Modern" theme, copy the contents
+# of theme-modern.yml into this file (or rename the files).
+# See THEMES.md for the full walkthrough.
+
+# ─── Colors ────────────────────────────────────────────────────────────────────
+colors:
+  primary: '#1e3a5f'     # Deep navy — title slides, primary actions, links
+  secondary: '#8b7355'   # Warm stone — secondary actions, muted accents
+  accent: '#7a2e2e'      # Burgundy — rare highlights (like initial caps)
+  neutral: stone         # Warm gray family — matches the cream backgrounds
+
+# ─── Page background ──────────────────────────────────────────────────────────
+# Cream/parchment. Gives the preview a "printed on good paper" feel.
+background: '#faf7f0'
+
+# ─── Fonts ─────────────────────────────────────────────────────────────────────
+# Cormorant Garamond for headings (a warmer, slightly condensed
+# Garamond revival) and Crimson Text for body copy. Both are free
+# Google Fonts with good weights and are easy on the eyes at the
+# long paragraphs a report demands. JetBrains Mono for code blocks.
+fonts:
+  heading: "'Cormorant Garamond', 'Times New Roman', Georgia, serif"
+  body: "'Crimson Text', Georgia, 'Times New Roman', serif"
+  mono: "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace"
+  import:
+    - url: https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap
+    - url: https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap
+    - url: https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap
+
+# ─── Context overrides ─────────────────────────────────────────────────────────
+# Slight refinements to the semantic tokens for the three context
+# modes. Sections can declare theme: light|medium|dark in frontmatter.
+#
+# The default report uses `theme: light` everywhere. These overrides
+# are drafted anyway so authors who want a visual rhythm can
+# interleave a medium or dark section without losing the Victorian
+# feel.
+contexts:
+  light:
+    section: '#faf7f0'     # cream (matches the page background)
+    card: '#ffffff'        # panels stand out slightly
+    heading: '#1e1b1b'     # near-black with a faint warm tint
+    body: '#2d2a26'
+    subtle: '#6b6560'
+    border: '#d8cfc3'      # warm stone border
+  medium:
+    section: '#f0ebde'     # slightly deeper parchment
+    card: '#faf7f0'
+    heading: '#1e1b1b'
+    body: '#2d2a26'
+    subtle: '#6b6560'
+    border: '#c9bfae'
+  dark:
+    section: '#1e1b1b'     # near-black ink
+    card: '#2d2a26'
+    heading: '#faf7f0'     # cream on ink
+    body: '#e8e0d0'
+    subtle: '#a89e8d'
+    border: '#3d3833'
+
+# ─── Inline styles ─────────────────────────────────────────────────────────────
+# Available in markdown via `[text]{name}`. The docusite's report
+# content rarely uses inline styles, but [something]{accent} gives
+# authors a way to mark a term as having special emphasis.
+inline:
+  accent:
+    color: 'var(--accent)'
+    font-weight: '600'
+  muted:
+    color: 'var(--subtle)'
+    font-style: italic

@@ -1,0 +1,55 @@
+# Site Configuration
+# Full reference: uniweb docs site  |  Schema: schemas/site.schema.json
+
+name: {{projectName}}
+foundation: foundation
+
+# /report is the documented CV — this site is a docusite (a URL
+# whose content is also a downloadable document), so the homepage
+# IS the report.
+index: report
+
+# ─── Collections ───────────────────────────────────────────────────────────
+# Each collection is a folder of markdown files under ./collections.
+# Section components reference them by name via `data: <collection>`.
+# `sort: order asc` respects an explicit `order:` field in each
+# item's frontmatter, which is how the Darwin sample CV places
+# educational milestones, employments, publications, etc. in the
+# intended order — change the order fields (or the sort rule) to
+# reorder a section without touching any component code.
+collections:
+  personal:
+    path: collections/personal
+  education:
+    path: collections/education
+    sort: order asc
+  employment:
+    path: collections/employment
+    sort: order asc
+  funding:
+    path: collections/funding
+    sort: order asc
+  publications:
+    path: collections/publications
+    sort: order asc
+  teaching:
+    path: collections/teaching
+    sort: order asc
+  service:
+    path: collections/service
+    sort: order asc
+  awards:
+    path: collections/awards
+    sort: order asc
+
+# ─── Page Ordering ─────────────────────────────────────────────────────────────
+# This template ships a single page: /report. If you add more pages,
+# set the ordering here.
+# pages: [report, about]
+
+# ─── Base Path ─────────────────────────────────────────────────────────────────
+# For subdirectory deployments (e.g., https://example.com/cv/).
+# base: /cv/
+
+build:
+  prerender: true
