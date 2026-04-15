@@ -5,6 +5,19 @@ on:
     tags:
       - 'v*'
 
+# Serialize release workflows so GitHub's "latest release" marker is
+# set by the highest-semver tag's workflow, not whichever happens to
+# finish last. When multiple tags are pushed in the same `git push`,
+# the workflows would otherwise run concurrently and GitHub marks
+# the last-finishing run as latest — which is non-deterministic and
+# once left v0.7.22 ahead of v0.7.23 as "latest" (see the v0.7.22/
+# v0.7.23 incident). `cancel-in-progress: false` ensures queued
+# workflows still run; the group name is fixed so all release runs
+# share one queue regardless of tag.
+concurrency:
+  group: release
+  cancel-in-progress: false
+
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
