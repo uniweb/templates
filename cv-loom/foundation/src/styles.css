@@ -24,14 +24,18 @@ h1, h2, h3 {
 /* ─── Header section ─────────────────────────────────────────────── */
 .cv-header {
   text-align: center;
-  padding: 3rem 0 2rem;
+  padding: 2rem 0 1.5rem;
   border-bottom: 1px solid var(--border);
-  margin-bottom: 2rem;
+}
+
+.cv-header a {
+  color: var(--link);
+  text-decoration: underline;
 }
 
 /* ─── Generic section ────────────────────────────────────────────── */
 .cv-section {
-  padding: var(--section-padding-y) 0;
+  padding: 1.5rem 0;
   border-bottom: 1px solid var(--border);
 }
 
@@ -40,7 +44,7 @@ h1, h2, h3 {
 }
 
 .cv-paragraph {
-  margin-bottom: 1em;
+  margin-bottom: 0.75em;
   line-height: 1.7;
 }
 

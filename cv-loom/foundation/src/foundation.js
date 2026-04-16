@@ -75,6 +75,7 @@ export default {
       }
 
       if (footer.length > 0) {
+        result.push({ type: 'divider' })
         const resolved = instantiateContent(
           { type: 'doc', content: footer },
           loom,

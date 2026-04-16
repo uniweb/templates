@@ -1,9 +1,9 @@
 import { SafeHtml } from '@uniweb/kit'
 import { useDocumentOutput } from '@uniweb/press'
-import { H1, H2, Paragraph, Link } from '@uniweb/press/docx'
+import { H1, H2, Paragraph } from '@uniweb/press/docx'
 
 export default function Header({ content, block }) {
-  const { title, subtitle, paragraphs = [], links = [] } = content || {}
+  const { title, subtitle, paragraphs = [] } = content || {}
 
   const docxBody = (
     <>
@@ -11,9 +11,6 @@ export default function Header({ content, block }) {
       {subtitle && <H2 data={subtitle} data-style="cover-subtitle" />}
       {paragraphs.map((p, i) => (
         <Paragraph key={i} data={p} />
-      ))}
-      {links.map((link, i) => (
-        <Link key={i} data={{ label: link.label || link.href, href: link.href }} />
       ))}
     </>
   )
@@ -31,24 +28,9 @@ export default function Header({ content, block }) {
         <p className="text-xl text-subtle mt-2">{subtitle}</p>
       )}
       {paragraphs.length > 0 && (
-        <div className="mt-4 text-body">
+        <div className="mt-3 text-sm text-body space-y-1">
           {paragraphs.map((para, i) => (
             <SafeHtml key={i} as="p" value={para} />
-          ))}
-        </div>
-      )}
-      {links.length > 0 && (
-        <div className="mt-3 flex flex-wrap gap-4 text-sm">
-          {links.map((link, i) => (
-            <a
-              key={i}
-              href={link.href}
-              className="text-link underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {link.label || link.href}
-            </a>
           ))}
         </div>
       )}
