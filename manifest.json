@@ -50,6 +50,11 @@
       "name": "CV (Loom-instantiated)",
       "description": "A single-page narrative CV whose prose is written with {placeholder} expressions and instantiated at render time via the foundation content handler and @uniweb/loom. Reference implementation of the handler hook.",
       "tags": ["cv", "loom", "template-engine", "content-handler", "dynamic-prose", "academic"]
+    },
+    "monograph": {
+      "name": "Monograph (Press showcase)",
+      "description": "A richly illustrated long-form document — numbered chapters with nested subsections, figures with captions, data-driven specimen and measurement tables, and a citestyle bibliography. The same JSX drives the themed web preview and a branded .docx with headers, footers, and page numbers. Ships with Darwin's Galapagos observations as sample content.",
+      "tags": ["monograph", "docusite", "press", "document", "figures", "tables", "bibliography"]
     }
   }
 }

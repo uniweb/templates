@@ -1,0 +1,150 @@
+# Sample monograph data — Darwin's Galapagos observations.
+#
+# The collection processor loads each .yml in this folder as one item
+# with `slug` (from the filename) plus every top-level key below. So
+# `content.data.monograph[0]` in a section component resolves to the
+# beagle item with title, author, specimens, etc. directly on it.
+
+title: Observations on the Zoology of the Galapagos Archipelago
+author: Charles Darwin
+affiliation: H.M.S. Beagle · Second Surveying Voyage
+date: 'October 1835'
+abstract: |
+  Between the 15th of September and the 20th of October 1835,
+  H.M.S. Beagle visited the Galapagos Archipelago, where observations
+  were made on the geology, climate, and natural history of the islands.
+  The present account summarises the zoological specimens collected
+  and the geological features surveyed, with particular attention to
+  the remarkable endemism of the terrestrial fauna — most notably
+  the giant tortoises and the small land-birds of the finch-family,
+  whose variation by island appears to be more than accidental.
+
+# Tortoises collected on each island. The SpecimenTable section
+# renders this as a bordered 4-column table (island, species, count,
+# notes) in both the web preview and the compiled docx.
+specimens:
+  - island: Española
+    species: Chelonoidis hoodensis
+    count: 3
+    notes: 'Saddleback carapace; long upraised neck.'
+  - island: Isabela
+    species: Chelonoidis guntheri
+    count: 2
+    notes: 'Domed form; collected on the slopes of Volcán Wolf.'
+  - island: Santa Cruz
+    species: Chelonoidis porteri
+    count: 4
+    notes: 'Intermediate carapace; the most numerous form seen.'
+  - island: San Cristóbal
+    species: Chelonoidis chathamensis
+    count: 2
+    notes: 'Modified saddleback; a larger body than the Española form.'
+  - island: Pinzón
+    species: Chelonoidis duncanensis
+    count: 1
+    notes: 'Small population; juvenile.'
+
+# Finch beak measurements. The FinchMeasurements section renders
+# this as a numeric table. Values are illustrative rather than
+# verbatim from the historical specimens.
+finchMeasurements:
+  - species: Geospiza magnirostris
+    island: Floreana
+    beakDepth: 19.4
+    beakLength: 16.2
+    count: 5
+  - species: Geospiza fortis
+    island: Santa Cruz
+    beakDepth: 12.1
+    beakLength: 11.4
+    count: 8
+  - species: Geospiza fuliginosa
+    island: Isabela
+    beakDepth: 8.3
+    beakLength: 8.9
+    count: 12
+  - species: Camarhynchus psittacula
+    island: Santa Cruz
+    beakDepth: 9.8
+    beakLength: 10.7
+    count: 4
+  - species: Certhidea olivacea
+    island: Santiago
+    beakDepth: 4.6
+    beakLength: 7.1
+    count: 6
+  - species: Geospiza scandens
+    island: Floreana
+    beakDepth: 8.1
+    beakLength: 13.5
+    count: 3
+
+# Bibliography in CSL-JSON shape. The Bibliography section formats
+# these through whichever style the reader selected.
+references:
+  - id: lyell1830
+    type: book
+    title: Principles of Geology
+    author:
+      - family: Lyell
+        given: Charles
+    issued:
+      date-parts:
+        - [1830]
+    publisher: John Murray
+    'publisher-place': London
+  - id: humboldt1814
+    type: book
+    title: Personal Narrative of Travels to the Equinoctial Regions of the New Continent
+    author:
+      - family: von Humboldt
+        given: Alexander
+    issued:
+      date-parts:
+        - [1814]
+    publisher: Longman, Hurst, Rees, Orme & Brown
+    'publisher-place': London
+  - id: fitzroy1839
+    type: book
+    title: 'Narrative of the Surveying Voyages of His Majesty''s Ships Adventure and Beagle'
+    author:
+      - family: FitzRoy
+        given: Robert
+    issued:
+      date-parts:
+        - [1839]
+    publisher: Henry Colburn
+    'publisher-place': London
+  - id: darwin1839
+    type: book
+    title: 'Journal of Researches into the Geology and Natural History of the various countries visited by H.M.S. Beagle'
+    author:
+      - family: Darwin
+        given: Charles
+    issued:
+      date-parts:
+        - [1839]
+    publisher: Henry Colburn
+    'publisher-place': London
+  - id: malthus1798
+    type: book
+    title: An Essay on the Principle of Population
+    author:
+      - family: Malthus
+        given: Thomas Robert
+    issued:
+      date-parts:
+        - [1798]
+    publisher: J. Johnson
+    'publisher-place': London
+  - id: paley1802
+    type: book
+    title: 'Natural Theology: or, Evidences of the Existence and Attributes of the Deity'
+    author:
+      - family: Paley
+        given: William
+    issued:
+      date-parts:
+        - [1802]
+    publisher: R. Faulder
+    'publisher-place': London

@@ -1,0 +1,63 @@
+# Theme — "Library" (monograph default)
+#
+# A warm, printed-book palette: cream page, deep ink body text,
+# Cormorant Garamond display + Crimson Text body — both serif,
+# both comfortable at book-length paragraph counts. Semantic
+# tokens keep chapter headings, captions, and table borders
+# consistent across web and docx (the docx style pack reads the
+# same font tokens at compile time).
+
+# ─── Colors ────────────────────────────────────────────────────────────────
+colors:
+  primary: '#1f2a44'     # Deep ink — chapter numbers, primary actions, links
+  secondary: '#6d5a3f'   # Warm bronze — figure captions, table headers
+  accent: '#7a2e2e'      # Burgundy — pull-quote rules, pattern accents
+  neutral: stone         # Warm gray family
+
+# ─── Page background ────────────────────────────────────────────────────────
+background: '#fbf7ee'    # cream, printed-paper
+
+# ─── Fonts ──────────────────────────────────────────────────────────────────
+fonts:
+  heading: "'Cormorant Garamond', 'Times New Roman', Georgia, serif"
+  body: "'Crimson Text', Georgia, 'Times New Roman', serif"
+  mono: "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace"
+  import:
+    - url: https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap
+    - url: https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap
+    - url: https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap
+
+# ─── Context overrides ──────────────────────────────────────────────────────
+contexts:
+  light:
+    section: '#fbf7ee'
+    card: '#ffffff'
+    heading: '#1c1814'
+    body: '#2d2a26'
+    subtle: '#6b6560'
+    border: '#d6cdbd'
+  medium:
+    section: '#f1ebd9'
+    card: '#faf7f0'
+    heading: '#1c1814'
+    body: '#2d2a26'
+    subtle: '#6b6560'
+    border: '#c9bfae'
+  dark:
+    section: '#1c1814'
+    card: '#2d2a26'
+    heading: '#fbf7ee'
+    body: '#e8e0d0'
+    subtle: '#a89e8d'
+    border: '#3d3833'
+
+# ─── Inline styles ──────────────────────────────────────────────────────────
+inline:
+  accent:
+    color: 'var(--accent)'
+    font-weight: '600'
+  muted:
+    color: 'var(--subtle)'
+    font-style: italic
+  latin:
+    font-style: italic

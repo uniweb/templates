@@ -1,0 +1,341 @@
+@import 'tailwindcss';
+@import '@uniweb/kit/theme-tokens.css';
+
+@source "../node_modules/@uniweb/kit/src/**/*.{js,jsx}";
+@source "./sections/**/*.{js,jsx}";
+@source "./layouts/**/*.{js,jsx}";
+@source "./components/**/*.{js,jsx}";
+
+body {
+  font-family: var(--font-body);
+  color: var(--body);
+  background-color: var(--section);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  color: var(--heading);
+  line-height: 1.2;
+}
+
+/* ─── Chapter sections ──────────────────────────────────────────── */
+/* The Chapter component wraps its registered tree in a div with
+   .chapter so we can space chapters from one another, and use
+   CSS counters for the visible "Chapter N." numbering. */
+
+.monograph-body {
+  counter-reset: chapter;
+}
+
+.chapter {
+  counter-increment: chapter;
+  margin-top: var(--chapter-gap);
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.chapter:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.chapter-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+.chapter-title::before {
+  content: counter(chapter) ".  ";
+  color: var(--subtle);
+  font-variant-numeric: tabular-nums;
+}
+
+.chapter-body-list {
+  counter-reset: subsection;
+}
+
+.subsection-title {
+  counter-increment: subsection;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.subsection-title::before {
+  content: counter(chapter) "." counter(subsection) "  ";
+  color: var(--subtle);
+  font-variant-numeric: tabular-nums;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-right: 0.25rem;
+}
+
+.chapter-body {
+  margin-bottom: 1em;
+  hyphens: auto;
+}
+
+.chapter-body:last-child {
+  margin-bottom: 0;
+}
+
+.chapter-lead {
+  font-size: 1.125rem;
+  margin-bottom: 1.25em;
+}
+
+.chapter-lead::first-letter {
+  font-family: var(--font-heading);
+  font-size: 3.25rem;
+  line-height: 0.9;
+  float: left;
+  padding-right: 0.5rem;
+  margin-top: 0.25rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ─── Front matter ──────────────────────────────────────────────── */
+.front-matter {
+  padding: 4rem 0 3rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.front-matter-portrait {
+  width: 180px;
+  height: 200px;
+  margin: 0 auto 2rem;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.front-matter-title {
+  font-size: 2.75rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  max-width: 30ch;
+  margin: 0 auto;
+}
+
+.front-matter-subtitle {
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--subtle);
+  margin-top: 1rem;
+}
+
+.front-matter-meta {
+  margin-top: 2rem;
+  font-size: 0.875rem;
+  color: var(--subtle);
+  font-variant: small-caps;
+  letter-spacing: 0.12em;
+}
+
+.front-matter-abstract {
+  margin-top: 2.5rem;
+  max-width: 38rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--body);
+}
+
+.front-matter-abstract-label {
+  display: block;
+  text-align: center;
+  font-variant: small-caps;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  color: var(--subtle);
+  margin-bottom: 1rem;
+}
+
+/* ─── Figures ───────────────────────────────────────────────────── */
+.fig {
+  margin: 2.5rem auto;
+  max-width: var(--wide-content-width);
+}
+
+.fig-img {
+  width: 100%;
+  max-height: 24rem;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.fig-img-portrait {
+  max-width: 22rem;
+  display: block;
+  margin: 0 auto;
+}
+
+.fig-caption {
+  margin-top: 0.75rem;
+  font-size: 0.9375rem;
+  font-style: italic;
+  color: var(--subtle);
+  text-align: center;
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.55;
+}
+
+.fig-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  margin: 2.5rem auto;
+  max-width: var(--wide-content-width);
+}
+
+.fig-grid .fig {
+  margin: 0;
+}
+
+.fig-grid .fig-img {
+  max-height: 14rem;
+}
+
+/* ─── Tables ────────────────────────────────────────────────────── */
+.monograph-table {
+  max-width: var(--wide-content-width);
+  margin: 2rem auto;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.monograph-table-row {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+}
+
+.monograph-table-row:last-child {
+  border-bottom: none;
+}
+
+.monograph-table-row-head {
+  background-color: color-mix(in srgb, var(--section) 70%, var(--border));
+  font-weight: 600;
+  font-family: var(--font-heading);
+  color: var(--heading);
+  font-size: 0.9375rem;
+  letter-spacing: 0.02em;
+}
+
+.monograph-table-cell {
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.monograph-table-cell-numeric {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+/* ─── Bibliography ──────────────────────────────────────────────── */
+.bibliography-entries {
+  list-style: decimal;
+  padding-left: 1.5rem;
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+}
+
+.bibliography-entries li {
+  margin-bottom: 0.75rem;
+  padding-left: 0.25rem;
+}
+
+.bibliography-entries li::marker {
+  color: var(--subtle);
+  font-family: var(--font-heading);
+  font-variant-numeric: tabular-nums;
+}
+
+.bibliography-meta {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--subtle);
+}
+
+/* ─── Ordered observations list (numbered list inside chapters) ── */
+.observations {
+  counter-reset: observation;
+  max-width: var(--max-content-width);
+  margin: 1.5rem auto;
+  list-style: none;
+  padding: 0;
+}
+
+.observations > li {
+  counter-increment: observation;
+  padding-left: 3rem;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.observations > li::before {
+  content: counter(observation, upper-roman) ".";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2.5rem;
+  text-align: right;
+  color: var(--subtle);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Bullet lists ──────────────────────────────────────────────── */
+.bullets {
+  list-style: disc;
+  padding-left: 1.5rem;
+  max-width: var(--max-content-width);
+  margin: 1rem auto 1.5rem;
+}
+
+.bullets li {
+  margin-bottom: 0.3rem;
+  padding-left: 0.25rem;
+}
+
+/* ─── Press data-attribute inline marks ─────────────────────────── */
+/* Press TextRun uses data-* for the docx IR walker. The single-tree
+   pattern requires web styling too. */
+[data-bold="true"] { font-weight: 600; color: var(--heading); }
+[data-italics="true"] { font-style: italic; }
+[data-underline="true"] { text-decoration: underline; }
+
+a[data-type="externalHyperlink"],
+a[data-type="internalHyperlink"] {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+/* Layout-level utility — the narrow column many sections share */
+.mono-narrow {
+  max-width: var(--max-content-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
