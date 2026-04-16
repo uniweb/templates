@@ -67,7 +67,7 @@ Each section file exercises different Loom features. The progression from simple
 `05-publications.md` — counts and lists filtered by field value:
 ```
 {COUNT OF publications WHERE type = 'book'} books
-{SHOW publications.title WHERE year > '1870' JOINED BY ', '}
+{SHOW publications.title WHERE year > 1870 JOINED BY ', '}
 ```
 
 ### Joining lists
@@ -104,7 +104,7 @@ where: "type = 'book'"
 **{title}** ({year}), {publisher}
 ```
 
-The `where` value is a Loom Plain-form expression. Only items where the expression evaluates to truthy are iterated. Aggregate expressions like `{COUNT OF publications}` in the header reflect the filtered set. Other examples: `year > '1870'` (comparison), `refereed` (truthy check), `type = 'book' AND refereed` (boolean combination).
+The `where` value is a Loom Plain-form expression. Only items where the expression evaluates to truthy are iterated. Aggregate expressions like `{COUNT OF publications}` in the header reflect the filtered set. Other examples: `year > 1870` (comparison), `refereed` (truthy check), `type = 'book' AND refereed` (boolean combination).
 
 ### Auto-linked content
 `01-header.md` — plain `{email}` and `{website}` expressions. The content-reader auto-links emails and URLs at build time, so the resolved text renders as clickable links in both the web preview and the docx output (via Press's `parseStyledString`). No explicit markdown link syntax needed.
@@ -113,11 +113,11 @@ The `where` value is a Loom Plain-form expression. Only items where the expressi
 
 The profile is a single YAML file (`collections/profile/darwin.yml`). Key conventions:
 
-- **Years are quoted strings** (`'1859'`, not `1859`). Loom applies locale grouping to numbers, turning 1859 into "1,859". Quoting suppresses that. Comparisons like `WHERE year > '1870'` still work — Loom coerces.
+- **Years can be plain numbers or quoted strings.** Loom skips locale grouping for 4-digit integers, so `1859` renders as "1859" not "1,859". The Darwin data uses quoted strings (`'1859'`) for historical reasons, but unquoted works identically for display and comparisons.
 
 - **Money amounts are plain numbers** (`1000`, not `'1000'`). This way `TOTAL OF funding.amount` produces locale-grouped output ("1,730").
 
-- **Lists are pre-sorted** by display order. Loom's `SORTED BY` is alphabetical only, so sort the source data when order matters. `funding.0` gives the largest grant because the array is sorted largest-first.
+- **Lists are pre-sorted** by display order. `SORTED BY field` sorts by the named field when items are objects. `funding.0` gives the largest grant because the array is sorted largest-first.
 
 ## Section types
 
