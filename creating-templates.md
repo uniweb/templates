@@ -96,6 +96,37 @@ Required metadata file at the template root:
 | `tags` | No | Keywords for discovery |
 | `components` | No | List of included section types |
 | `packages` | No | Multi-package declaration (see below) |
+| `dependencies` | No | Extra dependencies to merge into scaffolded `package.json` files (see below) |
+
+### Dependencies
+
+Every scaffolded project already gets the framework's base dependencies (`@uniweb/core`, `@uniweb/kit`, `@uniweb/build`, `@uniweb/runtime`, etc.) from the CLI's built-in package templates. Use `dependencies` in `template.json` only for **extra** packages your template needs on top of the base — for example, `@uniweb/press`, `@uniweb/loom`, `@uniweb/scholar`, or third-party libraries like `lucide-react`.
+
+```json
+{
+  "dependencies": {
+    "foundation": {
+      "@uniweb/press": "{{version \"@uniweb/press\"}}",
+      "citestyle": "^1.0.1"
+    },
+    "site": {
+      "lucide-react": "^0.400.0"
+    }
+  }
+}
+```
+
+Each inner object keys by package type (`foundation`, `site`, or a named package from the `packages` array). Values are version strings merged into the matching scaffolded `package.json` at scaffold time.
+
+**Rules:**
+
+1. **`@uniweb/*` packages MUST use the `{{version "@uniweb/X"}}` helper.** Version strings are processed through Handlebars before being written. The helper resolves to the current workspace version at scaffold time, so templates never drift out of sync with framework releases. Never hardcode a version like `"^0.2.0"` for `@uniweb/*` packages.
+
+2. **Third-party packages used across multiple templates must match `standard-deps.json`.** The repo-root `standard-deps.json` lists canonical versions for shared third-party dependencies (e.g., `@tailwindcss/typography`, `lucide-react`, `citestyle`). If your template uses one of these, copy the exact version string. If you need a newer version, update `standard-deps.json` and every template using it in the same change.
+
+3. **Third-party packages used by only your template** may be pinned however you like.
+
+Run `node lint.mjs` at the repo root to validate these rules locally. CI runs the same check on every push.
 
 ### Multi-Package Templates
 
@@ -219,5 +250,9 @@ The CLI downloads and extracts tarballs on demand when users run `create --templ
 - [ ] Section types in `foundation/src/sections/` with components and optional `meta.js`
 - [ ] Add `.hbs` extension to files needing variable substitution
 - [ ] Add the template to `manifest.json`
+- [ ] If using `@uniweb/*` extras, declare them with `{{version "@uniweb/X"}}` in `template.json` `dependencies`
+- [ ] If using a third-party package from `standard-deps.json`, match the canonical version
 - [ ] Test locally: `uniweb create test --template ./<name>` → install → build
 - [ ] Verify no structural files are included (no `package.json`, `vite.config.js`, etc.)
+- [ ] Add the template folder name to the `files` array in the repo-root `package.json` (keep the same order as `manifest.json`)
+- [ ] Run `node lint.mjs` to verify everything is in sync
