@@ -2,8 +2,6 @@ import { SafeHtml } from '@uniweb/kit'
 import { useDocumentOutput } from '@uniweb/press'
 import { H1, H2, Paragraph } from '@uniweb/press/docx'
 
-const stripHtml = (html) => html?.replace(/<[^>]*>/g, '') || ''
-
 export default function Header({ content, block }) {
   const { title, subtitle, paragraphs = [] } = content || {}
 
@@ -12,7 +10,7 @@ export default function Header({ content, block }) {
       {title && <H1 data={title} data-style="cover-title" />}
       {subtitle && <H2 data={subtitle} data-style="cover-subtitle" />}
       {paragraphs.map((p, i) => (
-        <Paragraph key={i} data={stripHtml(p)} />
+        <Paragraph key={i} data={p} />
       ))}
     </>
   )

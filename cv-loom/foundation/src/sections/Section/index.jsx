@@ -3,8 +3,6 @@ import { SafeHtml } from '@uniweb/kit'
 import { useDocumentOutput } from '@uniweb/press'
 import { H2, H3, Paragraph, Paragraphs } from '@uniweb/press/docx'
 
-const stripHtml = (html) => html?.replace(/<[^>]*>/g, '') || ''
-
 export default function Section({ content, block }) {
   const { title, paragraphs = [], items = [] } = content || {}
 
@@ -12,13 +10,13 @@ export default function Section({ content, block }) {
     <>
       {title && <H2 data={title} data-pagebreakbefore="true" />}
       {paragraphs.map((p, i) => (
-        <Paragraph key={`p${i}`} data={stripHtml(p)} />
+        <Paragraph key={`p${i}`} data={p} />
       ))}
       {items.map((item, i) => (
         <Fragment key={i}>
           {item.title && <H3 data={item.title} />}
           {(item.paragraphs || []).map((p, j) => (
-            <Paragraph key={`${i}-${j}`} data={stripHtml(p)} />
+            <Paragraph key={`${i}-${j}`} data={p} />
           ))}
         </Fragment>
       ))}
