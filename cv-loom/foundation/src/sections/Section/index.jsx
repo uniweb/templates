@@ -7,7 +7,7 @@ export default function Section({ content, block }) {
 
   const docxBody = (
     <>
-      {title && <H2 data={title} data-pageBreakBefore="true" />}
+      {title && <H2 data={title} data-pagebreakbefore="true" />}
       <Paragraphs data={paragraphs} />
       {items.map((item, i) => (
         <span key={i}>
