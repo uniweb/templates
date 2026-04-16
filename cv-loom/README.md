@@ -97,14 +97,14 @@ The content handler (powered by `createLoomHandlers` from `@uniweb/loom`) resolv
 ---
 type: CvEntry
 source: publications
-where: "= type 'book'"
+where: "type = 'book'"
 ---
 # Books ({COUNT OF publications})
 ---
 **{title}** ({year}), {publisher}
 ```
 
-The `where` value is a Loom expression in Compact form. Only items where the expression evaluates to truthy are iterated. Aggregate expressions like `{COUNT OF publications}` in the header reflect the filtered set. Other examples: `> year '1870'` (comparison), `refereed` (truthy check).
+The `where` value is a Loom Plain-form expression. Only items where the expression evaluates to truthy are iterated. Aggregate expressions like `{COUNT OF publications}` in the header reflect the filtered set. Other examples: `year > '1870'` (comparison), `refereed` (truthy check), `type = 'book' AND refereed` (boolean combination).
 
 ### Auto-linked content
 `01-header.md` — plain `{email}` and `{website}` expressions. The content-reader auto-links emails and URLs at build time, so the resolved text renders as clickable links in both the web preview and the docx output (via Press's `parseStyledString`). No explicit markdown link syntax needed.

@@ -23,7 +23,7 @@ export default {
     where: {
       type: 'string',
       description:
-        'Loom filter expression (Compact form). When set alongside source, only items where the expression evaluates to truthy are iterated. Examples: "= type \'book\'", "> year \'1870\'", "refereed".',
+        'Loom filter expression. When set alongside source, only items where the expression evaluates to truthy are iterated. Examples: "type = \'book\'", "year > \'1870\'", "refereed".',
     },
   },
 }

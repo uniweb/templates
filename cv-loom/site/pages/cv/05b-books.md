@@ -1,7 +1,7 @@
 ---
 type: CvEntry
 source: publications
-where: "= type 'book'"
+where: "type = 'book'"
 ---
 
 # Books ({COUNT OF publications})
