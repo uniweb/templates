@@ -4,11 +4,7 @@
 @source "../node_modules/@uniweb/kit/src/**/*.{js,jsx}";
 @source "./sections/**/*.{js,jsx}";
 @source "./layouts/**/*.{js,jsx}";
-
-@theme {
-  --font-heading: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  --font-body: 'Crimson Text', Georgia, 'Times New Roman', serif;
-}
+@source "./components/**/*.{js,jsx}";
 
 body {
   font-family: var(--font-body);
@@ -33,13 +29,13 @@ h1, h2, h3 {
   text-decoration: underline;
 }
 
-/* ─── Generic section ────────────────────────────────────────────── */
-.cv-section {
+/* ─── Generic CV entry ───────────────────────────────────────────── */
+.cv-entry {
   padding: 1.5rem 0;
   border-bottom: 1px solid var(--border);
 }
 
-.cv-section:last-child {
+.cv-entry:last-child {
   border-bottom: none;
 }
 
@@ -52,14 +48,33 @@ h1, h2, h3 {
   margin-bottom: 0;
 }
 
-/* Items within a section */
-.cv-item {
+/* Item titles and details within an entry — styled directly on Press
+   builder elements (no wrapper div needed). The border-left groups
+   title + details visually. */
+.cv-item-title {
+  margin-top: 1.25rem;
   padding-left: 1rem;
   border-left: 2px solid var(--border);
+  font-weight: 600;
 }
 
-/* Inline marks from markdown */
-strong {
-  color: var(--heading);
-  font-weight: 600;
+.cv-item-detail {
+  padding-left: 1rem;
+  border-left: 2px solid var(--border);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/* ─── Press builder inline formatting ────────────────────────────── */
+/* Press TextRun renders bold/italics/underline as data-* attributes
+   for the docx IR walker. These rules make them visually effective in
+   the browser too — the single-tree pattern needs both. */
+[data-bold="true"] { font-weight: 600; color: var(--heading); }
+[data-italics="true"] { font-style: italic; }
+[data-underline="true"] { text-decoration: underline; }
+
+/* Links rendered by Press Paragraph (from parseStyledString) */
+a[data-type="externalHyperlink"] {
+  color: var(--link);
+  text-decoration: underline;
 }

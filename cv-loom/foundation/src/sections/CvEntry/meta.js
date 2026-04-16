@@ -1,5 +1,5 @@
 export default {
-  title: 'Section',
+  title: 'CV Entry',
   description:
     'Generic CV section. Renders title, paragraphs, and items from semantic content. Loom expressions in the markdown are resolved before this component sees the content.',
   category: 'content',
@@ -9,8 +9,9 @@ export default {
   },
 
   content: {
-    description:
-      'Markdown with an H1 title, body paragraphs, and optional H2-headed items. Any {expression} is evaluated by Loom at render time.',
+    title: 'Section heading (H1)',
+    paragraphs: 'Introductory text',
+    items: 'Repeated entries — each with title (H2) and detail paragraphs',
   },
 
   params: {

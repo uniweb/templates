@@ -1,6 +1,5 @@
 ---
-type: Section
-theme: light
+type: CvEntry
 repeat: funding
 ---
 

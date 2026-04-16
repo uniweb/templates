@@ -1,4 +1,5 @@
 import { Loom, instantiateContent } from '@uniweb/loom'
+import splitAtDividers from '#utils/splitAtDividers.js'
 
 const loom = new Loom()
 
@@ -15,22 +16,6 @@ export const vars = {
     default: '4rem',
     description: 'Height of the sticky download bar',
   },
-}
-
-function splitAtDividers(nodes) {
-  const parts = [[]]
-  for (const node of nodes) {
-    if (node.type === 'divider' || node.type === 'horizontalRule' || node.type === 'horizontal_rule') {
-      parts.push([])
-    } else {
-      parts[parts.length - 1].push(node)
-    }
-  }
-  return {
-    header: parts[0] || [],
-    body: parts[1] || [],
-    footer: parts[2] || [],
-  }
 }
 
 export default {
@@ -67,7 +52,7 @@ export default {
 
       for (const item of items) {
         const resolved = instantiateContent(
-          { type: 'doc', content: structuredClone(body) },
+          { type: 'doc', content: body },
           loom,
           { ...profile, ...item }
         )
@@ -87,5 +72,4 @@ export default {
       return { type: 'doc', content: result }
     },
   },
-  props: {},
 }

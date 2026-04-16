@@ -4,11 +4,11 @@
   "compatible": ">=0.9.4",
   "format": 2,
   "tags": ["cv", "loom", "press", "docx", "docusite", "content-handler", "academic"],
-  "components": ["Header", "Section"],
+  "components": ["Header", "CvEntry", "PageBranding"],
   "dependencies": {
     "foundation": {
       "@uniweb/loom": "^0.2.0",
-      "@uniweb/press": "^0.1.0"
+      "@uniweb/press": "^0.2.0"
     }
   }
 }

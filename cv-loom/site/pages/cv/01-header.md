@@ -1,6 +1,5 @@
 ---
 type: Header
-theme: light
 ---
 
 # {first_name} {family_name}
@@ -9,4 +8,4 @@ theme: light
 
 {title} · {affiliation}
 
-{email} · ORCID {orcid} · {website}
+[{email}](mailto:{email}) · [ORCID {orcid}](https://orcid.org/{orcid}) · [{website}]({website})

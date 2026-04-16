@@ -2,7 +2,7 @@
 
 An academic CV template that demonstrates two Uniweb companion packages working together: **Loom** instantiates content from live data, and **Press** compiles it to a downloadable Word document. The same Loom-resolved content feeds both the themed web preview and the `.docx` file — one source, two outputs.
 
-Ships with Charles Darwin's CV as sample data: 9 sections, 18 publications, 6 awards, a full career timeline, and a branded Word document with custom header, footer, and page numbering.
+Ships with Charles Darwin's CV as sample data: 9 page sections, 18 publications, 6 awards, a full career timeline, and a branded Word document with custom header, footer, and page numbering.
 
 ```bash
 npx uniweb create my-cv --template cv-loom
@@ -76,18 +76,23 @@ Each section file exercises different Loom features. The progression from simple
 {SHOW publications.title WHERE type = 'book' JOINED BY ' · '}
 ```
 
-### Indexed array access
-`03-education.md` through `09-awards.md` — per-record rendering via dotted index paths. Each record becomes a content item (H2 heading + paragraph):
+### The repeat pattern
+`03-education.md` through `09-awards.md` — a `---` divider splits the markdown into header (rendered once) and body (repeated per data item). Declared via `repeat: fieldName` in frontmatter:
 ```
-## {education.0.degree}
-{education.0.institution} — {education.0.field} ({education.0.start}–{education.0.end})
+---
+type: CvEntry
+repeat: education
+---
+# Education
+{COUNT OF education} degrees from Edinburgh and Cambridge.
+---
+## {degree}
+{institution} — {field} ({start}–{end})
 ```
+The content handler resolves the header against the full profile, then loops the body template per record in the named array (each item's fields are merged into the Loom namespace). A second `---` starts a footer, rendered once after all items.
 
-### Links
-`01-header.md` — markdown links with Loom-resolved URLs:
-```
-[{email}](mailto:{email}) · [ORCID {orcid}](https://orcid.org/{orcid})
-```
+### Auto-linked content
+`01-header.md` — plain `{email}` and `{website}` expressions. The content-reader auto-links emails and URLs at build time, so the resolved text renders as clickable links in both the web preview and the docx output (via Press's `parseStyledString`). No explicit markdown link syntax needed.
 
 ## Data conventions
 
@@ -101,41 +106,43 @@ The profile is a single YAML file (`collections/profile/darwin.yml`). Key conven
 
 ## Section types
 
-The foundation has two section types and one layout — deliberately minimal.
+The foundation has three section types and one layout — deliberately minimal.
 
 ### Header
 
-Renders the personal info block: name (H1), role (H2), affiliation, and contact links. Loom fills in every value. The component renders `content.title`, `content.subtitle`, `content.paragraphs`, and `content.links`.
+Renders the personal info block: name (H1), role (H2), affiliation, and contact lines. Loom fills in every value. Uses a **single JSX tree** with Press builders — the same `<H1>`, `<H2>`, `<Paragraph>` elements serve as the web preview (styled via `className`) and compile to docx (via `data-*` attributes). This is the Press hello-world pattern: one tree, two consumers, zero drift.
 
-### Section
+### CvEntry
 
-The generic workhorse. Renders `content.title` as H2, `content.paragraphs` as body text, and `content.items` as a list of sub-entries (H3 + paragraph each). Used for all 8 non-header sections. The items come from H2 headings in the markdown that appear after body content — the semantic parser groups them automatically.
+The generic workhorse. Renders `content.title` as H2, `content.paragraphs` as body text, and `content.items` as a list of sub-entries (H3 + paragraph each). Used for all 8 non-header sections. The items come from H2 headings in the markdown that appear after body content — the semantic parser groups them automatically. Same single-tree Press pattern as Header.
 
-Both section types register docx output via `useDocumentOutput`, so the same resolved content feeds both the web preview and the compiled Word document.
+### PageBranding
+
+A layout section (`site/layout/header.md`) that registers the docx document header from content. The institution name and document label are author-editable markdown — change `layout/header.md` to rebrand the Word output. Renders nothing visible on the web page.
 
 ### CvLayout
 
 Wraps the page in a `<DocumentProvider>` and provides:
 - A **download button** (fixed bottom-right) that compiles all registered sections to `.docx`
-- A branded **docx header** ("Down House Natural History — Curriculum Vitae")
 - A **docx footer** with centered page numbers ("Page X of Y")
 - Paragraph styles for the cover title and subtitle
+- The **header area** where `PageBranding` registers the docx header
 
 ## Press integration
 
 Press is format-agnostic: section components register JSX fragments via `useDocumentOutput(block, 'docx', body)`, and a `compile('docx')` call walks all registrations to produce a Blob. The layout's download button triggers this.
 
-The docx header and footer are registered with `{ role: 'header' }` and `{ role: 'footer' }` options. The Press compile pipeline routes them to the Word document's header/footer sections automatically.
+**Single-tree pattern.** Each section component builds one JSX tree using Press builder components (`<H1>`, `<H2>`, `<H3>`, `<Paragraph>`). The same tree is registered for docx AND returned as the web preview. Press builders render semantic HTML (`<h1>`, `<h2>`, `<p>`) that is styled via `className` (Tailwind) + CSS selectors for the browser, and walked via `data-*` attributes for the docx compiler. No duplicate rendering trees — one source, two outputs.
 
-The compile call passes paragraph style definitions (cover-title, cover-subtitle) so the Word document renders the header section with appropriate typography.
+The docx header is registered by `PageBranding` (from `layout/header.md`) with `{ role: 'header' }`. The footer (page numbers) is registered structurally by the layout. The compile call passes paragraph style definitions (cover-title, cover-subtitle) so the Word document renders the header section with appropriate typography.
 
 ## How to customize
 
 **Change the profile data.** Edit `darwin.yml` (or replace it). Every {expression} in the markdown resolves against this file. Add or remove fields freely — unused fields are ignored, missing fields produce empty strings.
 
-**Add a section.** Create a new `.md` file in `pages/cv/` with `type: Section` in frontmatter. Use indexed array access (`{newField.0.name}`) for record items, or `SHOW ... JOINED BY` for inline lists.
+**Add a section.** Create a new `.md` file in `pages/cv/` with `type: CvEntry` in frontmatter. Add `repeat: fieldName` to iterate over a data array, or use inline Loom expressions for summaries.
 
-**Change the docx branding.** Edit `CvLayout/index.jsx` — the `DocxBranding` component defines the header and footer. The `DownloadBar` component's `compile()` call accepts paragraph styles, numbering definitions, and document metadata.
+**Change the docx branding.** Edit `site/layout/header.md` — the institution name (H1) and document label (H2) are plain markdown. The `DownloadBar` component's `compile()` call accepts paragraph styles, numbering definitions, and document metadata.
 
 **Switch themes.** The `theme.yml` controls all colors, fonts, and contexts. The components use semantic CSS tokens (`text-heading`, `text-body`, `text-subtle`, `bg-section`) — changing the theme changes the entire visual identity without touching component code.
 

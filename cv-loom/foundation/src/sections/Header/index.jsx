@@ -1,52 +1,45 @@
-import { SafeHtml } from '@uniweb/kit'
 import { useDocumentOutput } from '@uniweb/press'
 import { H1, H2, Paragraph } from '@uniweb/press/docx'
+import { SP } from '#utils/docx-spacing.js'
 
 export default function Header({ content, block }) {
-  const { title, subtitle, paragraphs = [] } = content || {}
+  const { title, subtitle, paragraphs } = content
 
-  const docxBody = (
+  // One tree, two consumers: Press builders render <h1>, <h2>, <p> in the
+  // browser (styled via className + CSS) and compile to docx (via data-*
+  // attributes). No duplicate rendering — this is the Press hello-world
+  // pattern.
+  const body = (
     <>
       {title && (
         <H1
           data={title}
+          className="text-heading text-4xl font-bold leading-tight"
           data-style="cover-title"
-          data-spacing-before={960}
-          data-spacing-after={120}
+          data-spacing-before={SP.coverTitleBefore}
+          data-spacing-after={SP.coverTitleAfter}
         />
       )}
       {subtitle && (
         <H2
           data={subtitle}
+          className="text-xl text-subtle mt-2"
           data-style="cover-subtitle"
-          data-spacing-after={240}
+          data-spacing-after={SP.coverSubtitleAfter}
         />
       )}
       {paragraphs.map((p, i) => (
-        <Paragraph key={i} data={p} data-spacing-after={80} />
+        <Paragraph
+          key={i}
+          data={p}
+          className="text-sm text-body mt-1"
+          data-spacing-after={SP.contactAfter}
+        />
       ))}
     </>
   )
 
-  useDocumentOutput(block, 'docx', docxBody)
+  useDocumentOutput(block, 'docx', body)
 
-  return (
-    <div className="cv-header">
-      {title && (
-        <h1 className="text-heading text-4xl font-bold leading-tight">
-          {title}
-        </h1>
-      )}
-      {subtitle && (
-        <p className="text-xl text-subtle mt-2">{subtitle}</p>
-      )}
-      {paragraphs.length > 0 && (
-        <div className="mt-3 text-sm text-body space-y-1">
-          {paragraphs.map((para, i) => (
-            <SafeHtml key={i} as="p" value={para} />
-          ))}
-        </div>
-      )}
-    </div>
-  )
+  return <div className="cv-header">{body}</div>
 }

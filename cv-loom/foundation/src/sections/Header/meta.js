@@ -9,8 +9,9 @@ export default {
   },
 
   content: {
-    description:
-      'H1 = full name, H2 = role. Body paragraphs for affiliation and contact lines. Loom expressions fill in the values.',
+    title: 'Full name (H1)',
+    subtitle: 'Role or title (H2)',
+    paragraphs: 'Affiliation and contact lines',
   },
 
   params: {},
