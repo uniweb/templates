@@ -115,7 +115,8 @@ export default function Chapter({ content, block, params }) {
             <li key={i} data-type="contentWrapper">
               <Paragraph
                 data={b}
-                data-bullet-level={0}
+                data-numbering-reference="bullet-list"
+                data-numbering-level={0}
                 data-spacing-after={SP.bulletAfter}
               />
             </li>
