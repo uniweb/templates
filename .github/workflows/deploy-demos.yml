@@ -35,6 +35,9 @@ jobs:
         with:
           version: 9
 
+      - name: Lint templates
+        run: node lint.mjs
+
       - name: Build all template demos
         run: |
           mkdir -p demos
