@@ -1,7 +1,9 @@
 ---
-type: Teaching
+type: Section
 theme: light
-data: teaching
+dataField: teaching
+primaryField: name
+secondaryField: relationship
 ---
 
-# Teaching and Mentorship
+# Supervision & Mentoring

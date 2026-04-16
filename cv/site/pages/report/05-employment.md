@@ -1,7 +1,9 @@
 ---
-type: Employment
+type: Section
 theme: light
-data: employment
+dataField: employment
+primaryField: role
+secondaryField: organization
 ---
 
 # Employment

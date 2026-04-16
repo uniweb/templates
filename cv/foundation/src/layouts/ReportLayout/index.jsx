@@ -2,8 +2,10 @@ import React, { useEffect, useRef, useState } from 'react'
 import {
   DocumentProvider,
   useDocumentCompile,
+  useDocumentOutput,
   triggerDownload,
 } from '@uniweb/press'
+import { Paragraph, TextRun } from '@uniweb/press/docx'
 import { buildStylePack } from '#components/docx-style-pack.js'
 import {
   DocumentOptionsProvider,
@@ -180,19 +182,55 @@ function DownloadControls({ page, personal }) {
   )
 }
 
+function DocxBranding() {
+  const headerKey = useRef({}).current
+  const footerKey = useRef({}).current
+
+  const header = (
+    <Paragraph>
+      <TextRun bold>Down House Natural History</TextRun>
+      <TextRun
+        data-positionaltab-alignment="right"
+        data-positionaltab-relativeto="margin"
+        data-positionaltab-leader="none"
+      >
+        {'\t'}
+      </TextRun>
+      <TextRun italics>Annual Activity Report</TextRun>
+    </Paragraph>
+  )
+
+  const footer = (
+    <Paragraph>
+      <TextRun
+        data-positionaltab-alignment="center"
+        data-positionaltab-relativeto="margin"
+        data-positionaltab-leader="none"
+      >
+        {'\t'}
+      </TextRun>
+      <TextRun>_currentPage</TextRun>
+      <TextRun> of </TextRun>
+      <TextRun>_totalPages</TextRun>
+    </Paragraph>
+  )
+
+  useDocumentOutput(headerKey, 'docx', header, { role: 'header' })
+  useDocumentOutput(footerKey, 'docx', footer, { role: 'footer' })
+
+  return null
+}
+
 export default function ReportLayout({ page, body }) {
-  // The personal collection is fetched at the page level via `data: personal`
-  // in the page frontmatter. We grab the resolved item here so the download
-  // filename and docx metadata can use the real name, matching what each
-  // individual section component does internally.
-  const personal =
-    (page?.content?.data?.personal && page.content.data.personal[0]) || {}
+  const profile =
+    (page?.content?.data?.profile && page.content.data.profile[0]) || {}
 
   return (
     <DocumentOptionsProvider>
       <DocumentProvider>
+        <DocxBranding />
         <div className="min-h-screen bg-section text-body">
-          <DownloadControls page={page} personal={personal} />
+          <DownloadControls page={page} personal={profile} />
           <main className="mx-auto max-w-5xl px-6 py-12">{body}</main>
         </div>
       </DocumentProvider>

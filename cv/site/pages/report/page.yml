@@ -1,9 +1,3 @@
-title: Annual Report
-description: Faculty annual report — Charles Darwin test CV
-
-# Page-level `data: personal` loads the personal collection once so
-# the layout can use it for the download filename and docx metadata.
-# Individual sections that need different data (education, employment,
-# etc.) declare their own `data:` source in frontmatter — the runtime
-# passes through whatever the section asks for.
-data: personal
+title: Curriculum Vitae
+description: Academic CV — Charles Darwin
+data: profile

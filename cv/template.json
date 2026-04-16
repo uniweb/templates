@@ -1,25 +1,18 @@
 {
   "name": "CV (Docusite)",
-  "description": "An academic CV rendered as a docusite — a URL whose content is also a downloadable Microsoft Word document. Ships with a full Charles Darwin sample (20 publications, 6 research grants, education, employment, teaching, service, awards), APA bibliography via citestyle, and download-time options for date range and citation style. Demonstrates the one-foundation-many-tenants pattern: the same section components produce both the on-screen preview and the compiled .docx, and the theme.yml drives both.",
+  "description": "An academic CV rendered as a docusite — a URL whose content is also a downloadable Word document. Components read from a single hierarchical profile YAML and produce both a themed web preview and a compiled .docx with branded headers, footers, and page numbers. Demonstrates Press builder components, table layout, citestyle bibliography formatting, and download-time options.",
   "compatible": ">=0.9.4",
   "format": 2,
-  "tags": ["cv", "resume", "docusite", "academic", "document", "press", "publications"],
+  "tags": ["cv", "resume", "docusite", "academic", "press", "publications"],
   "components": [
     "Cover",
-    "Contents",
-    "PersonalInfo",
-    "Education",
-    "Employment",
+    "Section",
     "ResearchFunding",
-    "Publications",
-    "Teaching",
-    "Service",
-    "Awards",
-    "Appendix"
+    "Publications"
   ],
   "dependencies": {
     "foundation": {
-      "@uniweb/press": "{{version \"@uniweb/press\"}}",
+      "@uniweb/press": "^0.1.0",
       "citestyle": "^1.0.1"
     }
   }

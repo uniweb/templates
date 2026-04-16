@@ -1,14 +1,16 @@
 export default {
   title: 'Publications',
-  description: 'Formatted bibliography rendered through citestyle. Preview uses CSL semantic HTML with per-field CSS classes; docx uses a hanging-indent paragraph style from the foundation style pack.',
+  description:
+    'Formatted bibliography via citestyle. Reads CSL-JSON items from the profile and formats them with the selected citation style.',
   category: 'report',
-  purpose: 'Inform',
+
+  data: {
+    inherit: ['profile'],
+  },
 
   content: {
     title: 'Optional heading override (defaults to "Publications")',
   },
 
-  data: {
-    publications: 'Collection of CSL-JSON publication records. Each item: { id, type, title, author, issued, publisher, container-title, volume, page, ... }',
-  },
+  params: {},
 }

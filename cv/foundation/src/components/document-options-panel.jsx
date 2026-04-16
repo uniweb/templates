@@ -25,16 +25,13 @@ import {
 
 const SECTION_LABELS = {
   cover: 'Cover',
-  contents: 'Contents',
-  personal: 'Personal information',
   education: 'Education',
   employment: 'Employment',
   funding: 'Research funding',
   publications: 'Publications',
-  teaching: 'Teaching and mentorship',
-  service: 'Service',
-  awards: 'Awards and honours',
-  appendix: 'Appendix',
+  teaching: 'Supervision & mentoring',
+  service: 'Professional service',
+  awards: 'Awards & honours',
 }
 
 function FieldLabel({ children, htmlFor }) {

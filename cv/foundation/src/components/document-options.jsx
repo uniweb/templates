@@ -33,8 +33,6 @@ import React, { createContext, useContext, useEffect, useMemo, useState } from '
 
 export const ALL_SECTION_KEYS = [
   'cover',
-  'contents',
-  'personal',
   'education',
   'employment',
   'funding',
@@ -42,7 +40,6 @@ export const ALL_SECTION_KEYS = [
   'teaching',
   'service',
   'awards',
-  'appendix',
 ]
 
 export const CITATION_STYLES = [

@@ -1,7 +1,9 @@
 ---
-type: Education
+type: Section
 theme: light
-data: education
+dataField: education
+primaryField: degree
+secondaryField: institution
 ---
 
 # Education

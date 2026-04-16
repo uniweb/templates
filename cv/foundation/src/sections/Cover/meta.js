@@ -1,15 +1,16 @@
 export default {
   title: 'Cover',
-  description: 'Title slide for a faculty annual report docusite.',
+  description: 'Title page for the CV. Reads name, role, affiliation, and contact info from the profile.',
   category: 'report',
-  purpose: 'Inform',
+
+  data: {
+    inherit: ['profile'],
+  },
 
   content: {
     title: 'Report title',
-    subtitle: 'Date range or sub-heading',
+    subtitle: 'Sub-heading',
   },
 
-  data: {
-    personal: 'The personal collection item (first entry)',
-  },
+  params: {},
 }

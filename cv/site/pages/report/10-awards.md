@@ -1,7 +1,9 @@
 ---
-type: Awards
+type: Section
 theme: light
-data: awards
+dataField: awards
+primaryField: title
+secondaryField: organization
 ---
 
-# Awards and Honours
+# Awards & Honours

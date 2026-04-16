@@ -1,14 +1,16 @@
 export default {
   title: 'Research Funding',
-  description: 'Tabular summary of research funding — period, project + source, amount — with a total row. Reads from the funding collection.',
+  description:
+    'Tabular summary of research funding — period, project + source, amount — with a total row. Demonstrates Press table attributes.',
   category: 'report',
-  purpose: 'Inform',
+
+  data: {
+    inherit: ['profile'],
+  },
 
   content: {
     title: 'Optional heading override (defaults to "Research Funding")',
   },
 
-  data: {
-    funding: 'Collection of funding entries. Each item: { title, source, role, amount, currency, start, end, excerpt }',
-  },
+  params: {},
 }

@@ -1,7 +1,9 @@
 ---
-type: Service
+type: Section
 theme: light
-data: service
+dataField: service
+primaryField: organization
+secondaryField: role
 ---
 
-# Service
+# Professional Service

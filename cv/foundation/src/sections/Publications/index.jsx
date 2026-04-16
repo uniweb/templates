@@ -70,7 +70,8 @@ export default function Publications({ content, block }) {
   const { dateRange, citationStyle, includedSections } = options
   const sectionIncluded = includedSections[SECTION_KEY] !== false
 
-  const rawItems = content?.data?.publications || []
+  const profile = content?.data?.profile?.[0] || {}
+  const rawItems = profile.publications || []
 
   // Filter by date range before handing to citestyle. Publications
   // with no year slip through (treated as unbounded so they aren't
@@ -124,12 +125,13 @@ export default function Publications({ content, block }) {
     'docx',
     sectionIncluded ? (
       <>
-        <DocxH2 data={heading} data-page-break-before="true" />
+        <DocxH2 data={heading} data-pagebreakbefore="true" data-spacing-before={480} data-spacing-after={120} />
         {entries.map((entry) => (
           <Paragraph
             key={entry.id || entry.text}
             data={entry.text}
             data-style="bibliography"
+            data-spacing-after={80}
           />
         ))}
       </>

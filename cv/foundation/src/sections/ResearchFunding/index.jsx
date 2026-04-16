@@ -99,7 +99,8 @@ export default function ResearchFunding({ content, block }) {
   const { dateRange, includedSections } = options
   const sectionIncluded = includedSections[SECTION_KEY] !== false
 
-  const rawItems = content?.data?.funding || []
+  const profile = content?.data?.profile?.[0] || {}
+  const rawItems = profile.funding || []
 
   // Filter by date range — an entry counts if its [start, end] interval
   // overlaps the requested range. Totals reflect only the filtered set.
@@ -170,7 +171,7 @@ export default function ResearchFunding({ content, block }) {
     'docx',
     sectionIncluded ? (
       <>
-        <DocxH2 data={heading} data-page-break-before="true" />
+        <DocxH2 data={heading} data-pagebreakbefore="true" />
         {table}
       </>
     ) : (
