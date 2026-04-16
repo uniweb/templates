@@ -7,8 +7,8 @@
   "components": ["Header", "CvEntry", "Publications", "KeyWorks", "PageBranding"],
   "dependencies": {
     "foundation": {
-      "@uniweb/loom": "^0.2.0",
-      "@uniweb/press": "^0.2.0",
+      "@uniweb/loom": "{{version \"@uniweb/loom\"}}",
+      "@uniweb/press": "{{version \"@uniweb/press\"}}",
       "citestyle": "^1.0.1"
     }
   }

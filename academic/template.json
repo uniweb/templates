@@ -7,7 +7,7 @@
   "components": ["ProfileHero", "PublicationList", "ResearchAreas", "TeamGrid", "Timeline", "MathBlock"],
   "dependencies": {
     "foundation": {
-      "@uniweb/scholar": "^0.2.0"
+      "@uniweb/scholar": "{{version \"@uniweb/scholar\"}}"
     }
   }
 }
