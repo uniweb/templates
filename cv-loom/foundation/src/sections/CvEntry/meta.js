@@ -20,5 +20,10 @@ export default {
       description:
         'Profile data field to iterate. When set, a --- divider splits the markdown into header (rendered once against the full profile) and body (repeated per item in the named array). A second --- starts a footer (rendered once).',
     },
+    where: {
+      type: 'string',
+      description:
+        'Loom filter expression (Compact form). When set alongside source, only items where the expression evaluates to truthy are iterated. Examples: "= type \'book\'", "> year \'1870\'", "refereed".',
+    },
   },
 }
