@@ -7,10 +7,23 @@ export default function Header({ content, block }) {
 
   const docxBody = (
     <>
-      {title && <H1 data={title} data-style="cover-title" />}
-      {subtitle && <H2 data={subtitle} data-style="cover-subtitle" />}
+      {title && (
+        <H1
+          data={title}
+          data-style="cover-title"
+          data-spacing-before={960}
+          data-spacing-after={120}
+        />
+      )}
+      {subtitle && (
+        <H2
+          data={subtitle}
+          data-style="cover-subtitle"
+          data-spacing-after={240}
+        />
+      )}
       {paragraphs.map((p, i) => (
-        <Paragraph key={i} data={p} />
+        <Paragraph key={i} data={p} data-spacing-after={80} />
       ))}
     </>
   )

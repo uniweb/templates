@@ -1,22 +1,49 @@
 import { Fragment } from 'react'
 import { SafeHtml } from '@uniweb/kit'
 import { useDocumentOutput } from '@uniweb/press'
-import { H2, H3, Paragraph, Paragraphs } from '@uniweb/press/docx'
+import { H2, H3, Paragraph } from '@uniweb/press/docx'
+
+// Docx spacing in twips (1 pt = 20 twips)
+const SP = {
+  sectionBefore: 480,  // 24pt before section heading
+  sectionAfter: 120,   // 6pt after section heading
+  paraAfter: 120,      // 6pt after body paragraphs
+  itemBefore: 200,     // 10pt before each item heading
+  itemAfter: 40,       // 2pt after item heading
+  detailAfter: 60,     // 3pt after item detail
+}
 
 export default function Section({ content, block }) {
   const { title, paragraphs = [], items = [] } = content || {}
 
   const docxBody = (
     <>
-      {title && <H2 data={title} data-pagebreakbefore="true" />}
+      {title && (
+        <H2
+          data={title}
+          data-pagebreakbefore="true"
+          data-spacing-before={SP.sectionBefore}
+          data-spacing-after={SP.sectionAfter}
+        />
+      )}
       {paragraphs.map((p, i) => (
-        <Paragraph key={`p${i}`} data={p} />
+        <Paragraph key={`p${i}`} data={p} data-spacing-after={SP.paraAfter} />
       ))}
       {items.map((item, i) => (
         <Fragment key={i}>
-          {item.title && <H3 data={item.title} />}
+          {item.title && (
+            <H3
+              data={item.title}
+              data-spacing-before={SP.itemBefore}
+              data-spacing-after={SP.itemAfter}
+            />
+          )}
           {(item.paragraphs || []).map((p, j) => (
-            <Paragraph key={`${i}-${j}`} data={p} />
+            <Paragraph
+              key={`${i}-${j}`}
+              data={p}
+              data-spacing-after={SP.detailAfter}
+            />
           ))}
         </Fragment>
       ))}
