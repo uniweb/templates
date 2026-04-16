@@ -15,6 +15,7 @@
  *   - The floating DownloadBar toolbar in the top-right.
  */
 import React, { useRef } from 'react'
+import { useWebsite } from '@uniweb/kit'
 import { DocumentProvider, useDocumentOutput } from '@uniweb/press'
 import { Paragraph, TextRun } from '@uniweb/press/docx'
 import DownloadBar from '#components/DownloadBar.jsx'
@@ -44,6 +45,7 @@ function DocxFooter() {
 }
 
 export default function MonographLayout({ body, header, page }) {
+  const { website } = useWebsite()
   const pageTitle = page?.title || 'Monograph'
   const filename =
     (page?.title || 'monograph')
@@ -53,7 +55,7 @@ export default function MonographLayout({ body, header, page }) {
 
   return (
     <DocumentOptionsProvider>
-      <DocumentProvider>
+      <DocumentProvider basePath={website.basePath}>
         <DocxFooter />
         {header}
         <main className="monograph-body mx-auto max-w-5xl px-6 pb-16">
