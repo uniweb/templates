@@ -20,7 +20,7 @@ export default function DownloadBar({ filename = 'document.docx' }) {
           name: 'Cover Title',
           basedOn: 'Normal',
           next: 'Normal',
-          run: { size: 72, bold: true },
+          run: { size: 48, bold: true },
           paragraph: {
             alignment: 'center',
             spacing: { before: 960, after: 240 },
@@ -31,7 +31,7 @@ export default function DownloadBar({ filename = 'document.docx' }) {
           name: 'Cover Subtitle',
           basedOn: 'Normal',
           next: 'Normal',
-          run: { size: 40, color: '555555' },
+          run: { size: 28, color: '555555' },
           paragraph: {
             alignment: 'center',
             spacing: { before: 0, after: 480 },

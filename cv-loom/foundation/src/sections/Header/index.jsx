@@ -33,6 +33,7 @@ export default function Header({ content, block }) {
           key={i}
           data={p}
           className="text-sm text-body mt-1"
+          data-alignment="center"
           data-spacing-after={SP.contactAfter}
         />
       ))}
