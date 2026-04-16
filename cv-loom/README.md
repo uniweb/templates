@@ -1,137 +1,142 @@
-# CV (Loom-instantiated) Template
+# CV (Loom + Press)
 
-A single-page narrative CV whose prose is written with `{placeholder}` expressions and instantiated at render time against a profile data file. This template is the reference implementation for Uniweb's **foundation content handler** hook, paired with [`@uniweb/loom`](https://www.npmjs.com/package/@uniweb/loom) — the template-engine companion to Press.
+An academic CV template that demonstrates two Uniweb companion packages working together: **Loom** instantiates content from live data, and **Press** compiles it to a downloadable Word document. The same Loom-resolved content feeds both the themed web preview and the `.docx` file — one source, two outputs.
+
+Ships with Charles Darwin's CV as sample data: 9 sections, 18 publications, 6 awards, a full career timeline, and a branded Word document with custom header, footer, and page numbering.
 
 ```bash
-uniweb create my-bio --template cv-loom
-cd my-bio && pnpm dev
-# Open http://localhost:5173
+npx uniweb create my-cv --template cv-loom
+cd my-cv && pnpm dev
 ```
 
-## What Makes This Template Different
+## The pipeline
 
-The [`cv` template](../cv/) is a docusite: authored prose and section-component logic produce both an on-screen preview and a downloadable `.docx`. It's the Press story.
-
-**`cv-loom` is the Loom story.** There is no `.docx` compile, no section vocabulary for tables and bibliographies, no download. Just one section component rendering whatever prose it's given. The interesting thing — the whole point of the template — is that the prose itself contains live expressions that get evaluated at render time.
-
-Open `site/pages/home/summary.md` and look at the paragraphs:
-
-```markdown
-{first_name} {family_name} is a {role} based at **{affiliation}**.
-Over a career spanning {career_start} to {career_end}, his work has
-addressed {SHOW research_areas JOINED BY ', '}.
-
-He has authored **{COUNT OF publications} published works**, including
-{COUNT OF publications WHERE type = 'book'} books and
-{COUNT OF publications WHERE type = 'article-journal'} journal
-articles. The {COUNT OF publications WHERE year > '1870'} works from
-the last decade of his career:
-{SHOW publications.title WHERE year > '1870' JOINED BY ' • '}.
+```
+darwin.yml (profile data)
+    │
+    ▼
+site.yml declares `profile` collection
+    │
+    ▼
+page.yml declares `data: profile`
+    │
+    ▼
+Section markdown files contain {Loom expressions}
+    │
+    ▼
+Content handler (foundation.js) runs instantiateContent()
+against data.profile[0] — resolves every {expression}
+    │
+    ▼
+Framework re-parses through semantic parser
+    │
+    ▼
+Components receive ordinary content (title, paragraphs, items)
+— zero knowledge of Loom
+    │
+    ├──► Web preview (React)
+    └──► Press docx registration → compile() → .docx download
 ```
 
-None of those `{…}` expressions are escaped or processed by your components. The foundation declares a **content handler** that runs Loom over every block's raw ProseMirror tree before the semantic parser sees it:
+## What makes this a "docusite"
 
-```js
-// foundation/src/foundation.js
-import { Loom, instantiateContent } from '@uniweb/loom'
+A docusite is a Uniweb site whose primary purpose is generating a document. The URL _is_ the document — navigable, themed, live — and the download button produces a file from the same content. No separate template, no export pipeline, no drift between what you see and what you get.
 
-const loom = new Loom()
+This CV is one page with 9 sections. Each section is a markdown file whose {expressions} are resolved against a single profile data file. The content handler runs Loom once; after that, everything downstream (components, Press, prerender) sees plain resolved content.
 
-export default {
-  handlers: {
-    content: (data, block) => {
-      const profile = data?.profile?.[0]
-      if (!profile) return null
-      return instantiateContent(
-        block.rawContent,
-        loom,
-        (key) => profile[key]
-      )
-    },
-  },
-}
+## Loom patterns demonstrated
+
+Each section file exercises different Loom features. The progression from simple to complex is deliberate.
+
+### Simple variable substitution
+`01-header.md` — name, role, affiliation filled from profile fields:
+```
+# {first_name} {family_name}
+## {role}
 ```
 
-At render time the runtime calls this handler with the assembled block data. The handler hands Loom the raw ProseMirror tree and a key resolver pointing at the profile item. Loom walks the tree, evaluates every `{expression}` it finds in a text node, and returns a new tree with the computed strings in place. The framework re-parses that tree through the semantic parser, and the `Summary` component receives an ordinary content object with title and paragraphs — the placeholders are gone.
-
-**The section component has zero knowledge of Loom.** It's the same semantic-content-in, React-JSX-out shape any Uniweb component follows. Template instantiation lives at the foundation boundary, not inside components.
-
-## What Ships in the Box
-
-- **`site/collections/profile/darwin.yml`** — a single pure-YAML file containing the full Darwin profile: name, role, affiliation, research areas, 18 publications with type and year, 5 research grants with source and amount, 6 awards, 6 teaching mentees, and 4 learned societies. Uniweb's collection loader supports `.yml`, `.yaml`, `.json`, and `.md` files side by side; this template uses `.yml` because a profile is pure structured data with no narrative body.
-- **`site/pages/home/summary.md`** — the narrative Career Summary page. Four paragraphs. 17 distinct Loom expressions. All computed against the single profile item. No `data:` declaration in the frontmatter — the `Summary` section's `meta.js` declares `data: { inherit: ['profile'] }` and the runtime's EntityStore attaches the collection automatically.
-- **`foundation/src/foundation.js`** — the content-handler wiring.
-- **`foundation/src/sections/Summary/`** — a 30-line section component that renders title and paragraphs. Unaware of Loom. Its `meta.js` declares profile inheritance so pages don't need to repeat it.
-
-Run `pnpm dev` and the rendered page reads as a finished bio:
-
-> Charles Darwin is a Naturalist and Independent Researcher based at **Down House, Downe, Kent, England**. Over a career spanning 1831 to 1882, his work has addressed transmutation of species, geology of coral reefs and volcanic islands, systematics of the Cirripedia, physiology of climbing and insectivorous plants, expression of emotions in animals and humans, role of earthworms in soil formation.
->
-> He has authored **18 published works**, including 17 books and 1 journal articles. The 8 works from the last decade of his career: The Descent of Man, and Selection in Relation to Sex • The Expression of the Emotions in Man and Animals • ...
-
-Every count, every total, every filtered list is computed from the profile, not hand-written. Change `funding.0.amount` to `1500` in the profile and the total updates automatically on the next render.
-
-## Loom Features Demonstrated
-
-The 17 expressions in `summary.md` cover most of Loom's Plain-form surface:
-
-| Feature | Example expression | Produces |
-|---|---|---|
-| Variable substitution | `{first_name}` | "Charles" |
-| Dotted field access | `{funding.0.amount}` | "1,000" |
-| Multi-value `SHOW` with `JOINED BY` | `{SHOW research_areas JOINED BY ', '}` | "transmutation of species, geology of coral reefs, ..." |
-| `COUNT OF` | `{COUNT OF publications}` | "18" |
-| `COUNT OF ... WHERE` | `{COUNT OF publications WHERE type = 'book'}` | "17" |
-| `COUNT OF ... WHERE` (comparison) | `{COUNT OF publications WHERE year > '1870'}` | "8" |
-| `TOTAL OF` with dot access | `{TOTAL OF funding.amount}` | "1,530" (locale-grouped currency) |
-| `AVERAGE OF` | `{AVERAGE OF funding.amount}` | "306" |
-| `SHOW ... WHERE ... JOINED BY` | `{SHOW publications.title WHERE year > '1870' JOINED BY ' • '}` | filtered list |
-
-Every feature above runs in the browser and during prerender via the foundation content handler — no special build step, no separate pre-processing of markdown. Edit the profile, refresh, see updated output.
-
-## A Few Conventions Worth Knowing
-
-### Years are strings
-
-Loom's default formatter applies locale grouping to numeric results. That's welcome for totals (`1000` → `"1,000"`) but not for years (`1859` → `"1,859"`, which reads wrong). Store every `year` field as a quoted string in YAML:
-
-```yaml
-career_start: '1831'    # quoted
-career_end: '1882'      # quoted
-publications:
-  - year: '1859'        # quoted
-    ...
+### Aggregation
+`02-summary.md` — counts, totals, and averages computed inline:
+```
+{COUNT OF publications} published works
+£{TOTAL OF funding.amount}
+£{AVERAGE OF funding.amount} per grant
 ```
 
-Comparisons still work (`{COUNT OF publications WHERE year > '1870'}`) — Loom coerces numerically.
+### Filtering with WHERE
+`05-publications.md` — counts and lists filtered by field value:
+```
+{COUNT OF publications WHERE type = 'book'} books
+{SHOW publications.title WHERE year > '1870' JOINED BY ', '}
+```
 
-### Amounts are numbers
+### Joining lists
+`05-publications.md` — single-field extraction joined into prose:
+```
+{SHOW publications.title WHERE type = 'book' JOINED BY ' · '}
+```
 
-Currency is the opposite. Store amounts as integers. `TOTAL OF funding.amount` produces `"1,530"` with the locale separator, which is what you want for pounds and dollars.
+### Indexed array access
+`03-education.md` through `09-awards.md` — per-record rendering via dotted index paths. Each record becomes a content item (H2 heading + paragraph):
+```
+## {education.0.degree}
+{education.0.institution} — {education.0.field} ({education.0.start}–{education.0.end})
+```
 
-### `SORTED BY field` has a known limitation
+### Links
+`01-header.md` — markdown links with Loom-resolved URLs:
+```
+[{email}](mailto:{email}) · [ORCID {orcid}](https://orcid.org/{orcid})
+```
 
-Plain's `SORTED BY field` and `FROM HIGHEST TO LOWEST field` currently sort the list items themselves, ignoring the field hint. This works correctly when the items are homogeneous primitives (all years, all amounts) but not when you try to sort a list of source names "by amount" — the sort walks the source strings alphabetically, not the amounts.
+## Data conventions
 
-The profile data ships with `funding` pre-sorted from largest to smallest grant. References like `funding.0.source` and `funding.0.amount` give you the top grant directly without relying on sort. See `docs/future-work.md` in the `@uniweb/loom` repo for the status of this limitation.
+The profile is a single YAML file (`collections/profile/darwin.yml`). Key conventions:
 
-### The handler sees one profile
+- **Years are quoted strings** (`'1859'`, not `1859`). Loom applies locale grouping to numbers, turning 1859 into "1,859". Quoting suppresses that. Comparisons like `WHERE year > '1870'` still work — Loom coerces.
 
-The content handler in `foundation/src/foundation.js` flattens `data.profile[0]` into the Loom vars. The profile collection holds a single YAML file; that file's fields become the variable namespace. If you rename `darwin.yml` to `your-name.yml`, nothing else needs to change — the collection loader finds the first file in the folder, emits it as one item, and the handler picks the first item from the array.
+- **Money amounts are plain numbers** (`1000`, not `'1000'`). This way `TOTAL OF funding.amount` produces locale-grouped output ("1,730").
 
-If you wanted to render multiple CVs from the same foundation, you'd either scaffold multiple sites (one collection file each) or put multiple files in the profile collection and loop over them from a dynamic route.
+- **Lists are pre-sorted** by display order. Loom's `SORTED BY` is alphabetical only, so sort the source data when order matters. `funding.0` gives the largest grant because the array is sorted largest-first.
 
-## Where Press Fits In (or Doesn't)
+## Section types
 
-This template does not use [`@uniweb/press`](https://www.npmjs.com/package/@uniweb/press). The two packages solve different problems:
+The foundation has two section types and one layout — deliberately minimal.
 
-- **Press** compiles React JSX into Word documents. It's how the [`cv` template](../cv/) produces `.docx` downloads that track the preview.
-- **Loom** evaluates template expressions inline in authored text. It's how this template keeps CV prose in sync with profile data.
+### Header
 
-They compose cleanly — a future `cv-full` template could layer Press's section vocabulary on top of Loom-instantiated markdown, producing both a live-updating preview and a downloadable document from a single profile source. But each package is interesting on its own, and this template keeps the scope to just the content-handler / Loom story so the pattern is readable without Press on screen at the same time.
+Renders the personal info block: name (H1), role (H2), affiliation, and contact links. Loom fills in every value. The component renders `content.title`, `content.subtitle`, `content.paragraphs`, and `content.links`.
 
-## Further Reading
+### Section
 
-- **`@uniweb/loom` docs** — [npmjs.com/package/@uniweb/loom](https://www.npmjs.com/package/@uniweb/loom). The `docs/basics.md`, `docs/quick-guide.md`, and `docs/language.md` in that package are the authoritative syntax reference.
-- **`cv` template** (sibling) — the Press story. Same Charles Darwin sample, rendered through Press section components with `.docx` download.
-- **Foundation content handler design** — the handler hook is framework machinery documented in `@uniweb/runtime`'s README. The relocation that landed this hook at render time (rather than at Block construction) is described in the plan `kb/framework/plans/content-handler-relocation.md` in the Uniweb workspace.
+The generic workhorse. Renders `content.title` as H2, `content.paragraphs` as body text, and `content.items` as a list of sub-entries (H3 + paragraph each). Used for all 8 non-header sections. The items come from H2 headings in the markdown that appear after body content — the semantic parser groups them automatically.
+
+Both section types register docx output via `useDocumentOutput`, so the same resolved content feeds both the web preview and the compiled Word document.
+
+### CvLayout
+
+Wraps the page in a `<DocumentProvider>` and provides:
+- A **download button** (fixed bottom-right) that compiles all registered sections to `.docx`
+- A branded **docx header** ("Down House Natural History — Curriculum Vitae")
+- A **docx footer** with centered page numbers ("Page X of Y")
+- Paragraph styles for the cover title and subtitle
+
+## Press integration
+
+Press is format-agnostic: section components register JSX fragments via `useDocumentOutput(block, 'docx', body)`, and a `compile('docx')` call walks all registrations to produce a Blob. The layout's download button triggers this.
+
+The docx header and footer are registered with `{ role: 'header' }` and `{ role: 'footer' }` options. The Press compile pipeline routes them to the Word document's header/footer sections automatically.
+
+The compile call passes paragraph style definitions (cover-title, cover-subtitle) so the Word document renders the header section with appropriate typography.
+
+## How to customize
+
+**Change the profile data.** Edit `darwin.yml` (or replace it). Every {expression} in the markdown resolves against this file. Add or remove fields freely — unused fields are ignored, missing fields produce empty strings.
+
+**Add a section.** Create a new `.md` file in `pages/cv/` with `type: Section` in frontmatter. Use indexed array access (`{newField.0.name}`) for record items, or `SHOW ... JOINED BY` for inline lists.
+
+**Change the docx branding.** Edit `CvLayout/index.jsx` — the `DocxBranding` component defines the header and footer. The `DownloadBar` component's `compile()` call accepts paragraph styles, numbering definitions, and document metadata.
+
+**Switch themes.** The `theme.yml` controls all colors, fonts, and contexts. The components use semantic CSS tokens (`text-heading`, `text-body`, `text-subtle`, `bg-section`) — changing the theme changes the entire visual identity without touching component code.
+
+**Add images to the docx.** Import `Image` from `@uniweb/press/docx` in a section component and register it alongside text content. The Press adapter fetches images at compile time and embeds them in the Word document. Use PNG or JPEG for best Word compatibility.

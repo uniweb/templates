@@ -1,13 +1,14 @@
 {
-  "name": "CV (Loom-instantiated)",
-  "description": "A narrative CV whose prose is written with {placeholder} expressions and instantiated at render time against a profile data file. Demonstrates Uniweb's foundation content handler hook with @uniweb/loom, the template-engine companion to Press. Ships with a single Charles Darwin profile containing publications, funding, teaching, service, and awards, and a Career Summary page with 17 Loom expressions that compute counts, totals, filters, and joins directly inside the authored markdown. Read the README for the pedagogical tour.",
-  "compatible": ">=0.9.1",
+  "name": "CV (Loom + Press)",
+  "description": "An academic CV whose sections are authored as markdown with Loom {placeholder} expressions, instantiated against a single profile data file at render time. Produces both a themed web preview and a downloadable Word document with branded headers and footers via Press. Ships with Charles Darwin's CV as sample data — 9 sections demonstrating variable substitution, aggregation, filtering, joining, and indexed record access.",
+  "compatible": ">=0.9.4",
   "format": 2,
-  "tags": ["cv", "loom", "template-engine", "content-handler", "dynamic-prose", "academic"],
-  "components": ["Summary"],
+  "tags": ["cv", "loom", "press", "docx", "docusite", "content-handler", "academic"],
+  "components": ["Header", "Section"],
   "dependencies": {
     "foundation": {
-      "@uniweb/loom": "^0.2.0"
+      "@uniweb/loom": "^0.2.0",
+      "@uniweb/press": "^0.1.0"
     }
   }
 }

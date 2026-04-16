@@ -1,7 +1,10 @@
 @import 'tailwindcss';
+@import '@uniweb/kit/theme-tokens.css';
 
-/* Typography scale for the career summary. Uses semantic tokens so the
- * theme.yml drives all colour / font choices. */
+@source "../node_modules/@uniweb/kit/src/**/*.{js,jsx}";
+@source "./sections/**/*.{js,jsx}";
+@source "./layouts/**/*.{js,jsx}";
+
 @theme {
   --font-heading: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --font-body: 'Crimson Text', Georgia, 'Times New Roman', serif;
@@ -18,19 +21,41 @@ h1, h2, h3 {
   color: var(--heading);
 }
 
-/* The summary section's prose — applied to the rendered paragraphs so
- * inline <strong> and <em> from markdown flow through with the right
- * weight and colour. */
-.summary-prose p {
-  margin-bottom: 1.25em;
+/* ─── Header section ─────────────────────────────────────────────── */
+.cv-header {
+  text-align: center;
+  padding: 3rem 0 2rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+
+/* ─── Generic section ────────────────────────────────────────────── */
+.cv-section {
+  padding: var(--section-padding-y) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.cv-section:last-child {
+  border-bottom: none;
+}
+
+.cv-paragraph {
+  margin-bottom: 1em;
   line-height: 1.7;
 }
 
-.summary-prose p:last-child {
+.cv-paragraph:last-child {
   margin-bottom: 0;
 }
 
-.summary-prose strong {
+/* Items within a section */
+.cv-item {
+  padding-left: 1rem;
+  border-left: 2px solid var(--border);
+}
+
+/* Inline marks from markdown */
+strong {
   color: var(--heading);
   font-weight: 600;
 }

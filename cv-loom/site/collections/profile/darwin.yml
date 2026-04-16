@@ -1,155 +1,234 @@
-# A whole CV as a structured data file. The collection processor
-# picks up every .yml / .yaml / .json file in the collection folder
-# and emits it as one item with `slug` (from filename) + all the
-# fields below. The Career Summary page's foundation content handler
-# flattens this into the Loom variable namespace, so every
-# `{expression}` in the page markdown reads from the fields you see
-# here.
+# Charles Darwin — CV profile data
 #
-# Conventions worth knowing:
+# A whole CV as a single structured data file. The collection processor
+# picks up every .yml file in the collection folder and emits it as one
+# item with `slug` (from filename) + all the fields below. The content
+# handler in foundation.js flattens data.profile[0] into the Loom
+# variable namespace, so every {expression} in the section markdown
+# reads directly from these fields.
 #
-#   - Year fields are quoted strings. Loom's default formatter
-#     applies locale grouping to numeric results (turning 1859 into
-#     "1,859"), which reads wrong for years. Quote them and Loom
-#     leaves them alone. Numeric comparisons (`year > '1870'`) still
-#     work — Loom coerces.
+# Conventions:
 #
-#   - Amount fields are plain numbers so totals and averages get the
-#     locale separator you want for currency ("1,530").
+#   - Year fields are quoted strings ('1859', not 1859). Loom applies
+#     locale grouping to numbers, turning 1859 into "1,859". Quoting
+#     suppresses that. Numeric comparisons still work — Loom coerces.
 #
-#   - `funding` is pre-sorted largest → smallest so `funding.0`
-#     gives you the top grant directly. Plain-form `SORTED BY field`
-#     is reliable only for homogeneous lists of primitives; pre-sort
-#     the source data when you need the top item by a different key.
+#   - Money amounts are plain numbers so TOTAL OF / AVERAGE OF get
+#     locale-grouped output ("1,530").
+#
+#   - Lists are ordered by relevance or reverse chronology. Loom's
+#     SORTED BY is alphabetical only, so pre-sort source data when
+#     the display order matters.
 
-name: Charles Darwin
+# ─── Personal ───────────────────────────────────────────────────────
 first_name: Charles
 family_name: Darwin
+title: Fellow of the Royal Society
 role: Naturalist and Independent Researcher
 affiliation: Down House, Downe, Kent, England
+email: c.darwin@royalsociety.org
+website: https://darwin-online.org.uk
+orcid: '0000-0001-8200-1882'
 career_start: '1831'
 career_end: '1882'
 
+# ─── Research areas ─────────────────────────────────────────────────
 research_areas:
-  - transmutation of species
-  - geology of coral reefs and volcanic islands
-  - systematics of the Cirripedia
-  - physiology of climbing and insectivorous plants
-  - expression of emotions in animals and humans
-  - role of earthworms in soil formation
+  - Natural selection and the origin of species
+  - Biogeography and coral reef formation
+  - Systematics of the Cirripedia (barnacles)
+  - Botany — climbing plants, insectivorous plants, orchid pollination
+  - Expression of emotions in animals and humans
+  - Earthworm ecology and soil formation
 
+# ─── Education ──────────────────────────────────────────────────────
+education:
+  - degree: BA (Honours)
+    institution: Christ's College, University of Cambridge
+    field: Theology and Natural Science
+    start: '1828'
+    end: '1831'
+  - degree: Medical studies (incomplete)
+    institution: University of Edinburgh
+    field: Medicine
+    start: '1825'
+    end: '1827'
+
+# ─── Employment ─────────────────────────────────────────────────────
+employment:
+  - role: Independent Researcher
+    organization: Down House
+    location: Downe, Kent
+    start: '1842'
+    end: '1882'
+  - role: Ship's Naturalist
+    organization: HMS Beagle, Royal Navy
+    location: Worldwide expedition
+    start: '1831'
+    end: '1836'
+
+# ─── Publications ───────────────────────────────────────────────────
 publications:
   - title: Journal of Researches (Voyage of the Beagle)
     type: book
     year: '1839'
+    publisher: Henry Colburn
   - title: The Structure and Distribution of Coral Reefs
     type: book
     year: '1842'
+    publisher: Smith, Elder & Co.
   - title: Geological Observations on Volcanic Islands
     type: book
     year: '1844'
+    publisher: Smith, Elder & Co.
   - title: Geological Observations on South America
     type: book
     year: '1846'
+    publisher: Smith, Elder & Co.
   - title: A Monograph on the Sub-Class Cirripedia (Lepadidae)
     type: book
     year: '1851'
+    publisher: Ray Society
   - title: A Monograph on the Sub-Class Cirripedia (Balanidae)
     type: book
     year: '1854'
+    publisher: Ray Society
   - title: On the Tendency of Species to Form Varieties
     type: article-journal
     year: '1858'
+    journal: Journal of the Proceedings of the Linnean Society
+    coauthor: Alfred Russel Wallace
   - title: On the Origin of Species by Means of Natural Selection
     type: book
     year: '1859'
+    publisher: John Murray
   - title: On the Various Contrivances by which Orchids are Fertilised
     type: book
     year: '1862'
+    publisher: John Murray
   - title: The Variation of Animals and Plants under Domestication
     type: book
     year: '1868'
+    publisher: John Murray
   - title: The Descent of Man, and Selection in Relation to Sex
     type: book
     year: '1871'
+    publisher: John Murray
   - title: The Expression of the Emotions in Man and Animals
     type: book
     year: '1872'
+    publisher: John Murray
   - title: Insectivorous Plants
     type: book
     year: '1875'
+    publisher: John Murray
   - title: The Movements and Habits of Climbing Plants
-    type: book
+    type: article-journal
     year: '1875'
-  - title: The Effects of Cross and Self-Fertilisation in the Vegetable Kingdom
+    journal: Journal of the Linnean Society (Botany)
+  - title: The Effects of Cross and Self-Fertilisation
     type: book
     year: '1876'
+    publisher: John Murray
   - title: The Different Forms of Flowers on Plants of the Same Species
     type: book
     year: '1877'
+    publisher: John Murray
   - title: The Power of Movement in Plants
     type: book
     year: '1880'
+    publisher: John Murray
   - title: The Formation of Vegetable Mould through the Action of Worms
     type: book
     year: '1881'
+    publisher: John Murray
 
+# ─── Funding ────────────────────────────────────────────────────────
+# Pre-sorted largest → smallest so funding.0 gives the top grant.
 funding:
-  - source: HM Treasury
-    purpose: Zoology of the Voyage of H.M.S. Beagle
+  - title: Zoology of the Voyage of H.M.S. Beagle
+    agency: HM Treasury
     amount: 1000
+    currency: GBP
     year: '1837'
-  - source: Royal Society
-    purpose: earthworm habitat studies
-    amount: 200
-    year: '1879'
-  - source: John Murray
-    purpose: advance on Origin of Species
-    amount: 180
-    year: '1859'
-  - source: Royal Society
-    purpose: orchid cross-pollination experiments
-    amount: 100
+  - title: Orchid cross-pollination experiments
+    agency: Royal Society
+    amount: 300
+    currency: GBP
     year: '1863'
-  - source: Linnean Society
-    purpose: climbing plant publication subsidy
+  - title: Earthworm habitat studies
+    agency: Royal Society
+    amount: 200
+    currency: GBP
+    year: '1879'
+  - title: Advance on Origin of Species
+    agency: John Murray (publisher)
+    amount: 180
+    currency: GBP
+    year: '1859'
+  - title: Climbing plant publication subsidy
+    agency: Linnean Society
     amount: 50
+    currency: GBP
     year: '1865'
 
-awards:
-  - title: Royal Medal (Royal Society)
-    year: '1853'
-  - title: Wollaston Medal (Geological Society)
-    year: '1859'
-  - title: Copley Medal (Royal Society)
-    year: '1864'
-  - title: Pour le Mérite (Prussia)
-    year: '1867'
-  - title: Honorary Doctorate (Cambridge)
-    year: '1877'
-  - title: Baly Medal (Royal College of Physicians)
-    year: '1879'
-
+# ─── Teaching & mentoring ───────────────────────────────────────────
 teaching:
   - mentee: Joseph Dalton Hooker
-    role: scientific correspondent at Kew Gardens
+    role: Scientific correspondent
+    topic: Biogeography and plant distribution
   - mentee: Thomas Henry Huxley
-    role: scientific correspondent at the Royal School of Mines
-  - mentee: Sir John Lubbock
-    role: neighbour and protégé at Down Village
-  - mentee: George Romanes
-    role: researcher in comparative psychology
-  - mentee: Edward Bagnall Poulton
-    role: Oxford protégé in natural selection
+    role: Scientific correspondent
+    topic: Comparative anatomy and evolution advocacy
   - mentee: Francis Darwin
-    role: son and collaborator on plant physiology
+    role: Son and collaborator
+    topic: Plant physiology and movement
+  - mentee: George John Romanes
+    role: Research mentee
+    topic: Comparative psychology and animal intelligence
+  - mentee: Sir John Lubbock
+    role: Neighbour and protégé
+    topic: Entomology and prehistoric archaeology
+  - mentee: Edward Bagnall Poulton
+    role: Oxford protégé
+    topic: Protective coloration and natural selection
 
+# ─── Professional service ───────────────────────────────────────────
 service:
   - organization: Geological Society of London
-    role: Secretary and Fellow
-  - organization: Linnean Society of London
-    role: Fellow
-  - organization: Zoological Society of London
-    role: Fellow
+    role: Secretary
+    start: '1838'
+    end: '1841'
   - organization: Royal Society of London
     role: Fellow (elected 1839)
+    start: '1839'
+    end: '1882'
+  - organization: Linnean Society of London
+    role: Fellow
+    start: '1854'
+    end: '1882'
+  - organization: Zoological Society of London
+    role: Fellow
+    start: '1839'
+    end: '1882'
+
+# ─── Awards & honours ──────────────────────────────────────────────
+awards:
+  - title: Royal Medal
+    organization: Royal Society
+    year: '1853'
+  - title: Wollaston Medal
+    organization: Geological Society
+    year: '1859'
+  - title: Copley Medal
+    organization: Royal Society
+    year: '1864'
+  - title: Pour le Mérite (Civil Class)
+    organization: Kingdom of Prussia
+    year: '1867'
+  - title: Honorary Doctorate (LLD)
+    organization: University of Cambridge
+    year: '1877'
+  - title: Baly Medal
+    organization: Royal College of Physicians
+    year: '1879'
