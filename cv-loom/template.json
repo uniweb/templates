@@ -1,14 +1,15 @@
 {
   "name": "CV (Loom + Press)",
-  "description": "An academic CV whose sections are authored as markdown with Loom {placeholder} expressions, instantiated against a single profile data file at render time. Produces both a themed web preview and a downloadable Word document with branded headers and footers via Press. Ships with Charles Darwin's CV as sample data — 9 sections demonstrating variable substitution, aggregation, filtering, joining, and indexed record access.",
+  "description": "An academic CV whose sections are authored as markdown with Loom {placeholder} expressions, instantiated against a single profile data file at render time. Produces both a themed web preview and a downloadable Word document with branded headers and footers via Press. Ships with Charles Darwin's CV as sample data — 9 sections demonstrating variable substitution, aggregation, filtering, joining, indexed record access, a custom CITE Loom function backed by citestyle, and an escape-hatch Publications section that renders a formatted bibliography.",
   "compatible": ">=0.9.4",
   "format": 2,
-  "tags": ["cv", "loom", "press", "docx", "docusite", "content-handler", "academic"],
-  "components": ["Header", "CvEntry", "PageBranding"],
+  "tags": ["cv", "loom", "press", "docx", "docusite", "content-handler", "academic", "citestyle"],
+  "components": ["Header", "CvEntry", "Publications", "KeyWorks", "PageBranding"],
   "dependencies": {
     "foundation": {
       "@uniweb/loom": "^0.2.0",
-      "@uniweb/press": "^0.2.0"
+      "@uniweb/press": "^0.2.0",
+      "citestyle": "^1.0.1"
     }
   }
 }

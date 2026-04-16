@@ -1,8 +1,10 @@
 # CV (Loom + Press)
 
-An academic CV template that demonstrates two Uniweb companion packages working together: **Loom** instantiates content from live data, and **Press** compiles it to a downloadable Word document. The same Loom-resolved content feeds both the themed web preview and the `.docx` file — one source, two outputs.
+An academic CV template that demonstrates two Uniweb companion packages working together: **Loom** instantiates content from live data, and **Press** compiles it to a downloadable Word document. The same content feeds both the themed web preview and the `.docx` file — one source, two outputs.
 
-Ships with Charles Darwin's CV as sample data: 9 page sections, 18 publications, 6 awards, a full career timeline, and a branded Word document with custom header, footer, and page numbering.
+The template also shows three ways to reach beyond plain Loom into a full third library: a custom `CITE` Loom function that delegates to **citestyle** for inline plain-text citations, a `@KeyWorks` block inset that renders a curated short bibliography between paragraphs, and a `Publications` escape-hatch section that bypasses Loom entirely to render a formatted bibliography.
+
+Ships with Charles Darwin's CV as sample data: 10 page sections, 18 publications with stable ids, 6 awards, a full career timeline, and a branded Word document with custom header, footer, and page numbering.
 
 ```bash
 npx uniweb create my-cv --template cv-loom
@@ -42,7 +44,7 @@ Components receive ordinary content (title, paragraphs, items)
 
 A docusite is a Uniweb site whose primary purpose is generating a document. The URL _is_ the document — navigable, themed, live — and the download button produces a file from the same content. No separate template, no export pipeline, no drift between what you see and what you get.
 
-This CV is one page with 9 sections. Each section is a markdown file whose {expressions} are resolved against a single profile data file. The content handler runs Loom once; after that, everything downstream (components, Press, prerender) sees plain resolved content.
+This CV is one page with 10 sections. Nine are markdown files whose {expressions} are resolved against a single profile data file — the content handler runs Loom once, and everything downstream (components, Press, prerender) sees plain resolved content. The tenth, `Publications`, is an escape-hatch section that bypasses Loom entirely to render a citestyle-formatted bibliography.
 
 ## Loom patterns demonstrated
 
@@ -109,6 +111,52 @@ The `where` value is a Loom Plain-form expression. Only items where the expressi
 ### Auto-linked content
 `01-header.md` — plain `{email}` and `{website}` expressions. The content-reader auto-links emails and URLs at build time, so the resolved text renders as clickable links in both the web preview and the docx output (via Press's `parseStyledString`). No explicit markdown link syntax needed.
 
+### Custom function: `CITE`
+`02-summary.md` — inline citations backed by citestyle:
+```
+*On the Origin of Species* {CITE 'origin-1859'}
+```
+resolves to `*On the Origin of Species* (Darwin, 1859)`. With a locator:
+```
+{CITE 'descent-1871' -p='398'}
+```
+resolves to `(Darwin, 1871, p. 398)`.
+
+Registered in `foundation.js` as a custom Loom function — a two-argument JS function (`flags, id`) that looks the publication up by `id` in the profile, normalizes the flat shape to CSL-JSON via `utils/to-csl.js`, and calls citestyle's `formatCitation`. This is the canonical pattern for *extending Loom's vocabulary*: when data-in-text calls for a library Loom doesn't include, drop to JS for one function.
+
+Custom functions have an important constraint: **Loom is synchronous**, so any library the function depends on must be statically imported at module load. The template picks APA as its one citation style — the tradeoff for staying synchronous. For a foundation that needs runtime style switching, drop down to a full escape-hatch section type (see `Publications` below).
+
+### Block inset: `![](@KeyWorks)`
+
+`02-summary.md` — a curated short bibliography on its own line between paragraphs:
+```
+![](@KeyWorks){ids=origin-1859,descent-1871,variation-1868}
+```
+
+Renders as a small "Key Works" card with the three listed publications formatted in APA. Each entry is a link to the matching `Publications` entry — in web via an `href="#ref-<id>"` anchor, in docx via Press's internal-hyperlink that resolves because `Publications` tags each paragraph with `data-bookmark="ref-<id>"`.
+
+This is an **inset** in the Uniweb sense: a named component that content authors embed in markdown via `![](@Name){params}` syntax. Insets are block-level — they live between paragraphs, not inline inside prose (inline inset support isn't in the framework today). The author picks where to place the widget; the component reads its params and renders.
+
+`KeyWorks` reuses the same pipeline as `Publications`: `meta.data.inherit: ['profile']` gives it the publications array, `utils/to-csl.js` normalizes each record, citestyle formats them. The only new concept is the `ids` param (comma-separated, parsed by the component).
+
+The inset exercises `Bookmark` — a Press primitive added for this template (`data-bookmark` on a `<Paragraph>` emits a Word bookmark). Without it, the internal hyperlinks produced by `KeyWorks` would point at nothing in the docx export.
+
+### Press primitives added (for this template and future ones)
+
+Beyond the visible demos above, the template landed three generic Press primitives that aren't all exercised by cv-loom but will serve other templates:
+
+- `<Paragraph data-bookmark="id">` — emits a Word bookmark around the paragraph. **Used by `Publications` entries** so `KeyWorks` can link to them.
+- `<WebOnly>` — wraps a subtree that renders in the browser but is dropped from docx. Useful when web and Word need different affordances for the same payload.
+- `<FootnoteReference>` — emits a real Word footnote. Word typesets the children at the bottom of whichever page the reference marker lands on. Future academic/monograph templates will want this; cv-loom doesn't use it (CVs don't carry scholarly footnotes).
+
+### When to pick which
+
+| Need | Use |
+|---|---|
+| Plain-text citation inline with narrative prose | `{CITE 'id'}` |
+| A curated short bibliography between paragraphs, each entry linked to the full list | `![](@KeyWorks){ids=a,b,c}` |
+| The full formatted bibliography as a standalone section | `Publications` section type |
+
 ## Data conventions
 
 The profile is a single YAML file (`collections/profile/darwin.yml`). Key conventions:
@@ -119,9 +167,11 @@ The profile is a single YAML file (`collections/profile/darwin.yml`). Key conven
 
 - **Lists are pre-sorted** by display order. `SORTED BY field` sorts by the named field when items are objects. `funding.0` gives the largest grant because the array is sorted largest-first.
 
+- **Publications carry an `id:`.** Short kebab-case slugs (`origin-1859`, `descent-1871`) that `CITE` and `Publications` use to reference entries. The rest of each publication is a flat author-friendly shape (`year`, `publisher`, `journal`) rather than CSL-JSON — `utils/to-csl.js` normalizes to CSL-JSON at the formatting boundary. Coauthored papers declare an explicit `authors:` list; anything without defaults to Darwin-only authorship.
+
 ## Section types
 
-The foundation has three section types and one layout — deliberately minimal.
+The foundation has four section types and one layout — three Loom-driven, one escape hatch.
 
 ### Header
 
@@ -129,7 +179,15 @@ Renders the personal info block: name (H1), role (H2), affiliation, and contact 
 
 ### CvEntry
 
-The generic workhorse. Renders `content.title` as H2, `content.paragraphs` as body text, and `content.items` as a list of sub-entries (H3 + paragraph each). Used for all 8 non-header sections. The items come from H2 headings in the markdown that appear after body content — the semantic parser groups them automatically. Same single-tree Press pattern as Header.
+The generic workhorse. Renders `content.title` as H2, `content.paragraphs` as body text, and `content.items` as a list of sub-entries (H3 + paragraph each). Used for all non-header Loom sections. The items come from H2 headings in the markdown that appear after body content — the semantic parser groups them automatically. Same single-tree Press pattern as Header.
+
+### Publications (escape hatch)
+
+Unlike Header and CvEntry, this component does **not** use Loom. The bibliography it renders — per-field CSS classes, auto-linked DOIs, and a hanging-indent docx paragraph style — is too structured for text substitution to express cleanly.
+
+The component reads `profile.publications` directly, normalizes each flat record to CSL-JSON through `utils/to-csl.js`, and runs citestyle's `formatAll` (APA, statically imported). Web preview uses `SafeHtml` on `entry.html` so the `.csl-author` / `.csl-title` / `.csl-container` classes survive. Docx gets `entry.text` wrapped in a `<Paragraph data-style="bibliography">` — the `bibliography` paragraph style is declared on `DownloadBar`'s `compile()` call with a 0.5" hanging indent.
+
+This is the right pattern whenever a section needs richer output than Loom can express: **drop the Loom handler for that section, keep Loom for the rest.** The `meta.js` file declares `data: { inherit: ['profile'] }` so the section receives the profile the same way Loom sections do; from there, it's an ordinary React component.
 
 ### PageBranding
 

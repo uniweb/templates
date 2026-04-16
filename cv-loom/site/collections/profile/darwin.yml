@@ -68,77 +68,105 @@ employment:
     end: 1836
 
 # ─── Publications ───────────────────────────────────────────────────
+#
+# Each entry has an `id:` that serves as a stable reference — the
+# CITE custom Loom function (see foundation.js) looks publications
+# up by id, e.g. {CITE 'origin-1859'} → "(Darwin, 1859)".
+#
+# Authorship is implicit Darwin-only unless an `authors:` list is
+# provided (see the 1858 Linnean paper, co-authored with Wallace).
+# The to-csl helper reads this shape and emits CSL-JSON for citestyle.
 publications:
-  - title: Journal of Researches (Voyage of the Beagle)
+  - id: beagle-1839
+    title: Journal of Researches (Voyage of the Beagle)
     type: book
     year: 1839
     publisher: Henry Colburn
-  - title: The Structure and Distribution of Coral Reefs
+  - id: coral-reefs-1842
+    title: The Structure and Distribution of Coral Reefs
     type: book
     year: 1842
     publisher: Smith, Elder & Co.
-  - title: Geological Observations on Volcanic Islands
+  - id: volcanic-1844
+    title: Geological Observations on Volcanic Islands
     type: book
     year: 1844
     publisher: Smith, Elder & Co.
-  - title: Geological Observations on South America
+  - id: south-america-1846
+    title: Geological Observations on South America
     type: book
     year: 1846
     publisher: Smith, Elder & Co.
-  - title: A Monograph on the Sub-Class Cirripedia (Lepadidae)
+  - id: cirripedia-lepadidae-1851
+    title: A Monograph on the Sub-Class Cirripedia (Lepadidae)
     type: book
     year: 1851
     publisher: Ray Society
-  - title: A Monograph on the Sub-Class Cirripedia (Balanidae)
+  - id: cirripedia-balanidae-1854
+    title: A Monograph on the Sub-Class Cirripedia (Balanidae)
     type: book
     year: 1854
     publisher: Ray Society
-  - title: On the Tendency of Species to Form Varieties
+  - id: linnean-1858
+    title: On the Tendency of Species to Form Varieties
     type: article-journal
     year: 1858
     journal: Journal of the Proceedings of the Linnean Society
-    coauthor: Alfred Russel Wallace
-  - title: On the Origin of Species by Means of Natural Selection
+    authors:
+      - { family: Darwin, given: Charles }
+      - { family: Wallace, given: Alfred Russel }
+  - id: origin-1859
+    title: On the Origin of Species by Means of Natural Selection
     type: book
     year: 1859
     publisher: John Murray
-  - title: On the Various Contrivances by which Orchids are Fertilised
+  - id: orchids-1862
+    title: On the Various Contrivances by which Orchids are Fertilised
     type: book
     year: 1862
     publisher: John Murray
-  - title: The Variation of Animals and Plants under Domestication
+  - id: variation-1868
+    title: The Variation of Animals and Plants under Domestication
     type: book
     year: 1868
     publisher: John Murray
-  - title: The Descent of Man, and Selection in Relation to Sex
+  - id: descent-1871
+    title: The Descent of Man, and Selection in Relation to Sex
     type: book
     year: 1871
     publisher: John Murray
-  - title: The Expression of the Emotions in Man and Animals
+  - id: emotions-1872
+    title: The Expression of the Emotions in Man and Animals
     type: book
     year: 1872
     publisher: John Murray
-  - title: Insectivorous Plants
+  - id: insectivorous-1875
+    title: Insectivorous Plants
     type: book
     year: 1875
     publisher: John Murray
-  - title: The Movements and Habits of Climbing Plants
+  - id: climbing-1875
+    title: The Movements and Habits of Climbing Plants
     type: article-journal
     year: 1875
     journal: Journal of the Linnean Society (Botany)
-  - title: The Effects of Cross and Self-Fertilisation
+  - id: cross-fertilisation-1876
+    title: The Effects of Cross and Self-Fertilisation
     type: book
     year: 1876
     publisher: John Murray
-  - title: The Different Forms of Flowers on Plants of the Same Species
+  - id: flower-forms-1877
+    title: The Different Forms of Flowers on Plants of the Same Species
     type: book
     year: 1877
     publisher: John Murray
-  - title: The Power of Movement in Plants
+  - id: movement-plants-1880
+    title: The Power of Movement in Plants
     type: book
     year: 1880
     publisher: John Murray
-  - title: The Formation of Vegetable Mould through the Action of Worms
+  - id: vegetable-mould-1881
+    title: The Formation of Vegetable Mould through the Action of Worms
     type: book
     year: 1881
     publisher: John Murray

@@ -37,6 +37,21 @@ export default function DownloadBar({ filename = 'document.docx' }) {
             spacing: { before: 0, after: 480 },
           },
         },
+        // Bibliography: 11pt with a 0.5" hanging indent — the standard
+        // shape for APA / Chicago / Harvard / MLA reference lists.
+        // Referenced by Publications via data-style="bibliography".
+        {
+          id: 'bibliography',
+          name: 'Bibliography',
+          basedOn: 'Normal',
+          next: 'Normal',
+          quickFormat: true,
+          run: { size: 22 },
+          paragraph: {
+            indent: { left: 720, hanging: 720 },
+            spacing: { before: 0, after: 120 },
+          },
+        },
       ],
     })
     triggerDownload(blob, filename)
