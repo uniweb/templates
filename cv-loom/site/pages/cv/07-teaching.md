@@ -1,6 +1,6 @@
 ---
 type: CvEntry
-repeat: teaching
+source: teaching
 ---
 
 # Supervision & Mentoring

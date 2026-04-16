@@ -24,8 +24,8 @@ page.yml declares `data: profile`
 Section markdown files contain {Loom expressions}
     │
     ▼
-Content handler (foundation.js) runs instantiateContent()
-against data.profile[0] — resolves every {expression}
+Content handler (createLoomHandlers) runs instantiateContent()
+or instantiateRepeated() against data.profile[0]
     │
     ▼
 Framework re-parses through semantic parser
@@ -76,12 +76,12 @@ Each section file exercises different Loom features. The progression from simple
 {SHOW publications.title WHERE type = 'book' JOINED BY ' · '}
 ```
 
-### The repeat pattern
-`03-education.md` through `09-awards.md` — a `---` divider splits the markdown into header (rendered once) and body (repeated per data item). Declared via `repeat: fieldName` in frontmatter:
+### The source pattern
+`03-education.md` through `09-awards.md` — a `---` divider splits the markdown into header (rendered once) and body (repeated per data item). Declared via `source: fieldName` in frontmatter:
 ```
 ---
 type: CvEntry
-repeat: education
+source: education
 ---
 # Education
 {COUNT OF education} degrees from Edinburgh and Cambridge.
@@ -89,7 +89,7 @@ repeat: education
 ## {degree}
 {institution} — {field} ({start}–{end})
 ```
-The content handler resolves the header against the full profile, then loops the body template per record in the named array (each item's fields are merged into the Loom namespace). A second `---` starts a footer, rendered once after all items.
+The content handler (powered by `createLoomHandlers` from `@uniweb/loom`) resolves the header against the full profile, then loops the body template per record in the named array (each item's fields are merged into the Loom namespace). A second `---` starts a footer, rendered once after all items.
 
 ### Auto-linked content
 `01-header.md` — plain `{email}` and `{website}` expressions. The content-reader auto-links emails and URLs at build time, so the resolved text renders as clickable links in both the web preview and the docx output (via Press's `parseStyledString`). No explicit markdown link syntax needed.
@@ -140,7 +140,7 @@ The docx header is registered by `PageBranding` (from `layout/header.md`) with `
 
 **Change the profile data.** Edit `darwin.yml` (or replace it). Every {expression} in the markdown resolves against this file. Add or remove fields freely — unused fields are ignored, missing fields produce empty strings.
 
-**Add a section.** Create a new `.md` file in `pages/cv/` with `type: CvEntry` in frontmatter. Add `repeat: fieldName` to iterate over a data array, or use inline Loom expressions for summaries.
+**Add a section.** Create a new `.md` file in `pages/cv/` with `type: CvEntry` in frontmatter. Add `source: fieldName` to iterate over a data array, or use inline Loom expressions for summaries.
 
 **Change the docx branding.** Edit `site/layout/header.md` — the institution name (H1) and document label (H2) are plain markdown. The `DownloadBar` component's `compile()` call accepts paragraph styles, numbering definitions, and document metadata.
 

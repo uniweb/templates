@@ -15,7 +15,7 @@ export default {
   },
 
   params: {
-    repeat: {
+    source: {
       type: 'string',
       description:
         'Profile data field to iterate. When set, a --- divider splits the markdown into header (rendered once against the full profile) and body (repeated per item in the named array). A second --- starts a footer (rendered once).',

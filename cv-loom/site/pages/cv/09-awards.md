@@ -1,6 +1,6 @@
 ---
 type: CvEntry
-repeat: awards
+source: awards
 ---
 
 # Awards & Honours

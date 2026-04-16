@@ -1,6 +1,6 @@
 ---
 type: CvEntry
-repeat: education
+source: education
 ---
 
 # Education

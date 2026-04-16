@@ -1,6 +1,6 @@
 ---
 type: CvEntry
-repeat: publications
+source: publications
 ---
 
 # Publications ({COUNT OF publications})

@@ -1,6 +1,6 @@
 ---
 type: CvEntry
-repeat: service
+source: service
 ---
 
 # Professional Service

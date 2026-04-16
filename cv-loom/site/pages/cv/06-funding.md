@@ -1,6 +1,6 @@
 ---
 type: CvEntry
-repeat: funding
+source: funding
 ---
 
 # Research Funding

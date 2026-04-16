@@ -1,6 +1,6 @@
 ---
 type: CvEntry
-repeat: employment
+source: employment
 ---
 
 # Employment
