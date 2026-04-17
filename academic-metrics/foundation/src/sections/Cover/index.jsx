@@ -12,14 +12,10 @@
  */
 import { useDocumentOutput } from '@uniweb/press'
 import { Paragraph } from '@uniweb/press/docx'
-import QuerySelector from '#components/QuerySelector.jsx'
-import SectionToggles from '#components/SectionToggles.jsx'
-import ReportOptions from '#components/ReportOptions.jsx'
 import { useFilteredMembers } from '#components/query-context.jsx'
 
 export default function Cover({ content, block }) {
-  const { members, activeQuery, totalCount, allQueries } =
-    useFilteredMembers(content)
+  const { members, activeQuery, totalCount } = useFilteredMembers(content)
 
   // Loom-resolved narrative paragraphs — the content handler in
   // foundation.js has already instantiated {COUNT OF members}, etc.,
@@ -115,13 +111,12 @@ export default function Cover({ content, block }) {
           ))}
         </div>
       )}
-      <QuerySelector
-        queries={allQueries}
-        matchedCount={members.length}
-        totalCount={totalCount}
-      />
-      <ReportOptions />
-      <SectionToggles />
+      {activeQuery && (
+        <p className="cover-population">
+          Population: <strong>{activeQuery.name}</strong> —{' '}
+          {members.length} of {totalCount} members
+        </p>
+      )}
       <div className="cover-meta" role="list">
         <Stat label="Members" value={members.length} />
         <Stat label="Publications" value={publicationCount} />
