@@ -1,0 +1,37 @@
+# Sample member — Alfred Russel Wallace (lightly anachronized).
+
+name: Alfred Russel Wallace
+rank: associate
+department: biology
+tenured: false
+start_year: 1870
+email: wallace@ternate.example
+affiliation: Broadstone
+
+publications:
+  - title: On the Tendency of Varieties to Depart Indefinitely from the Original Type
+    year: 1858
+    type: article
+    journal: Journal of the Proceedings of the Linnean Society
+  - title: The Malay Archipelago
+    year: 1869
+    type: book
+    publisher: Macmillan
+  - title: The Geographical Distribution of Animals
+    year: 1876
+    type: book
+    publisher: Macmillan
+  - title: Darwinism
+    year: 1889
+    type: book
+    publisher: Macmillan
+
+funding:
+  - title: Expedition to the Malay Archipelago
+    source: Royal Geographical Society
+    amount: 500
+    currency: GBP
+    start_year: 1854
+    end_year: 1862
+
+supervisions: []

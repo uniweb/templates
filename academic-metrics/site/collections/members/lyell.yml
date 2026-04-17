@@ -1,0 +1,55 @@
+# Sample member — Charles Lyell (lightly anachronized).
+
+name: Charles Lyell
+rank: professor
+department: geology
+tenured: true
+start_year: 1830
+email: lyell@kinnordy.example
+affiliation: King's College London
+
+publications:
+  - title: Principles of Geology (Vol. 1)
+    year: 1830
+    type: book
+    publisher: John Murray
+  - title: Principles of Geology (Vol. 2)
+    year: 1832
+    type: book
+    publisher: John Murray
+  - title: Principles of Geology (Vol. 3)
+    year: 1833
+    type: book
+    publisher: John Murray
+  - title: The Geological Evidences of the Antiquity of Man
+    year: 1863
+    type: book
+    publisher: John Murray
+  - title: 'On the delta and alluvial deposits of the Mississippi'
+    year: 1847
+    type: article
+    journal: American Journal of Science
+  - title: 'On the structure of lavas which have consolidated on steep slopes'
+    year: 1858
+    type: article
+    journal: Philosophical Transactions of the Royal Society
+
+funding:
+  - title: Geological survey of Mount Etna
+    source: Royal Society
+    amount: 300
+    currency: GBP
+    start_year: 1828
+    end_year: 1829
+  - title: Travel support for North American field work
+    source: Royal Society
+    amount: 250
+    currency: GBP
+    start_year: 1841
+    end_year: 1842
+
+supervisions:
+  - student_name: Joseph Prestwich
+    level: doctoral
+    year_started: 1845
+    year_completed: 1851

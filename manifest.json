@@ -107,6 +107,20 @@
         "tables",
         "bibliography"
       ]
+    },
+    "academic-metrics": {
+      "name": "Academic Metrics (xlsx showcase)",
+      "description": "A docusite whose content is also a downloadable Excel workbook. Aggregates academic metrics (publications, funding, supervisions) across multiple members of a university unit. Rich web previews + flat tabular xlsx sheets from the same data. Ships with three 19th-century naturalists as sample members.",
+      "tags": [
+        "academic-metrics",
+        "docusite",
+        "press",
+        "xlsx",
+        "report",
+        "members",
+        "aggregate",
+        "academic"
+      ]
     }
   }
 }

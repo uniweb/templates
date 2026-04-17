@@ -1,0 +1,55 @@
+# Sample member — Charles Darwin (lightly anachronized).
+#
+# The collection processor turns every .yml in this folder into one
+# item of the `members` collection, keyed by `slug` (the filename).
+# `content.data.members[0]` resolves to whichever member sorts first.
+
+name: Charles Darwin
+rank: professor
+department: biology
+tenured: true
+start_year: 1859
+email: charles@down-house.example
+affiliation: Down House
+
+publications:
+  - title: On the Origin of Species
+    year: 1859
+    type: book
+    publisher: John Murray
+  - title: The Descent of Man
+    year: 1871
+    type: book
+    publisher: John Murray
+  - title: Insectivorous Plants
+    year: 1875
+    type: book
+    publisher: John Murray
+  - title: The Power of Movement in Plants
+    year: 1880
+    type: book
+    publisher: John Murray
+  - title: 'On the formation of mould'
+    year: 1837
+    type: article
+    journal: Proceedings of the Geological Society of London
+
+funding:
+  - title: Heated glass-house for experimental botany
+    source: Royal Society
+    amount: 200
+    currency: GBP
+    start_year: 1862
+    end_year: 1863
+  - title: 'Worm-observation apparatus, Down House'
+    source: Personal estate
+    amount: 80
+    currency: GBP
+    start_year: 1875
+    end_year: 1881
+
+supervisions:
+  - student_name: Francis Darwin
+    level: apprentice
+    year_started: 1875
+    year_completed: 1882

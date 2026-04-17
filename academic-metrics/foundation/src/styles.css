@@ -1,0 +1,119 @@
+/* Academic Metrics — foundation styles.
+ *
+ * Minimal styling for slice 1. Later slices will add chart-specific
+ * rules and richer table treatments; for now the goal is a readable
+ * two-section report with a legible roster table.
+ */
+
+.metrics-body {
+  padding-block: var(--section-padding-y, 3rem);
+}
+
+.metrics-report > * + * {
+  margin-top: var(--report-gap, 3rem);
+}
+
+/* ── Cover ─────────────────────────────────────────────────────────── */
+
+.cover {
+  text-align: center;
+  padding-block: clamp(2rem, 6vw, 4rem);
+}
+
+.cover-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--heading);
+  margin: 0 0 0.5rem;
+}
+
+.cover-subtitle {
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  color: var(--subtle);
+  font-style: italic;
+  margin: 0 0 1.5rem;
+}
+
+.cover-meta {
+  display: inline-flex;
+  gap: 2rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--body);
+}
+
+.cover-meta-label {
+  color: var(--subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  font-size: 0.75rem;
+  display: block;
+  margin-bottom: 0.125rem;
+}
+
+.cover-meta-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--heading);
+}
+
+/* ── Members roster ────────────────────────────────────────────────── */
+
+.members {
+  padding-block: var(--section-padding-y, 3rem);
+}
+
+.members-title {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 600;
+  color: var(--heading);
+  margin: 0 0 1.5rem;
+}
+
+.members-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.members-table th,
+.members-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.members-table th {
+  font-weight: 600;
+  color: var(--heading);
+  background: color-mix(in oklch, var(--card), var(--section) 30%);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.members-table tr:last-child td {
+  border-bottom: none;
+}
+
+.members-table .numeric {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.members-table .status-yes {
+  color: var(--heading);
+  font-weight: 500;
+}
+
+.members-table .status-no {
+  color: var(--subtle);
+}
