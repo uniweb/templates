@@ -1,9 +1,17 @@
 # Theme — "Institute" (academic-metrics default)
 #
-# A clean, institutional palette: near-white page, deep slate body,
-# Inter heading + body for a legible, spreadsheet-adjacent feel.
-# The xlsx adapter will later read these font tokens at compile time
-# so the Excel file inherits the preview's typography.
+# Clean, institutional palette suited to administrative reporting:
+# near-white page, slate body text, Inter throughout for a legible,
+# spreadsheet-adjacent feel. Semantic tokens drive every surface so a
+# site author overrides colors and fonts once and the whole report —
+# preview AND downloaded xlsx typography, once the style pack reads
+# these vars at compile time — tracks the change.
+#
+# Tenant-level tuning:
+#   - `colors.primary` sets the link/button hue (currently blue).
+#   - `colors.accent` drives totals rows, chart highlights, emphasis.
+#   - `fonts.heading` / `fonts.body` flow through to Excel's font table
+#     (pending the xlsx style-pack pass planned in slice 9).
 
 # ─── Colors ────────────────────────────────────────────────────────────────
 colors:
@@ -33,6 +41,7 @@ contexts:
     body: '#334155'
     subtle: '#64748b'
     border: '#e2e8f0'
+    muted: '#f1f5f9'
   medium:
     section: '#f1f5f9'
     card: '#ffffff'
@@ -40,6 +49,7 @@ contexts:
     body: '#334155'
     subtle: '#64748b'
     border: '#cbd5e1'
+    muted: '#e2e8f0'
   dark:
     section: '#0f172a'
     card: '#1e293b'
@@ -47,3 +57,13 @@ contexts:
     body: '#e2e8f0'
     subtle: '#94a3b8'
     border: '#334155'
+    muted: '#1e293b'
+
+# ─── Inline styles ──────────────────────────────────────────────────────────
+inline:
+  accent:
+    color: 'var(--accent)'
+    font-weight: '600'
+  subtle:
+    color: 'var(--subtle)'
+    font-style: italic
