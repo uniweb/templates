@@ -156,6 +156,114 @@ kbd {
   font-variant-numeric: tabular-nums;
 }
 
+/* ── Report options (date range, refereed, citation style) ────────── */
+
+.report-options {
+  display: block;
+  margin: 0 auto 1.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  text-align: left;
+  max-width: 40rem;
+}
+
+.report-options-legend {
+  padding: 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.report-options-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+@media (max-width: 36rem) {
+  .report-options-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.report-options-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.report-options-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.report-options-input {
+  font: inherit;
+  padding: 0.375rem 0.5rem;
+  color: var(--heading);
+  background: var(--section);
+  border: 1px solid var(--border);
+  border-radius: 0.25rem;
+}
+
+.report-options-input:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+.report-options-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--body);
+  cursor: pointer;
+}
+
+.report-options-item input {
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+/* ── Publications list ────────────────────────────────────────────── */
+
+.publications-list {
+  list-style: decimal outside;
+  padding-left: 2rem;
+  margin: 0;
+}
+
+.publications-list > li {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+  color: var(--body);
+}
+
+.publications-list .csl-entry-wrapper .csl-author {
+  font-weight: 500;
+  color: var(--heading);
+}
+
+.publications-list .csl-entry-wrapper .csl-title {
+  font-style: italic;
+}
+
+.publications-list-note {
+  margin-top: 1rem;
+  color: var(--subtle);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
 /* ── Section toggles ──────────────────────────────────────────────── */
 
 .section-toggles {

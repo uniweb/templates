@@ -14,6 +14,7 @@ import { useDocumentOutput } from '@uniweb/press'
 import { Paragraph } from '@uniweb/press/docx'
 import QuerySelector from '#components/QuerySelector.jsx'
 import SectionToggles from '#components/SectionToggles.jsx'
+import ReportOptions from '#components/ReportOptions.jsx'
 import { useFilteredMembers } from '#components/query-context.jsx'
 
 export default function Cover({ content, block }) {
@@ -119,6 +120,7 @@ export default function Cover({ content, block }) {
         matchedCount={members.length}
         totalCount={totalCount}
       />
+      <ReportOptions />
       <SectionToggles />
       <div className="cover-meta" role="list">
         <Stat label="Members" value={members.length} />

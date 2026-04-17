@@ -26,8 +26,10 @@ import { useDocumentOutput } from '@uniweb/press'
 import { Paragraph, Table, Tr, Td } from '@uniweb/press/docx'
 import {
   useFilteredMembers,
+  useReportOptions,
   useSectionIncluded,
 } from '#components/query-context.jsx'
+import { filterPublications } from '#utils/publication-filters.js'
 
 const SECTION_KEY = 'publications-by-journal'
 const TOP_N = 10
@@ -39,9 +41,10 @@ const NUMBER_FORMATS = ['text', 'number']
 export default function PublicationsByJournal({ content, block }) {
   const included = useSectionIncluded(SECTION_KEY)
   const { members, activeQuery } = useFilteredMembers(content)
+  const [reportOpts] = useReportOptions()
   const heading = content?.title || 'Publications by journal'
 
-  const counts = aggregateByVenue(members, TOP_N)
+  const counts = aggregateByVenue(members, TOP_N, reportOpts)
 
   // Always call useDocumentOutput so the hook order is stable across
   // renders. Registering an empty fragment is fine — the adapter skips
@@ -160,10 +163,10 @@ function JournalBars({ counts }) {
   )
 }
 
-function aggregateByVenue(members, topN) {
+function aggregateByVenue(members, topN, reportOpts) {
   const tally = new Map()
   for (const m of members) {
-    const pubs = Array.isArray(m.publications) ? m.publications : []
+    const pubs = filterPublications(m.publications, reportOpts)
     for (const p of pubs) {
       const venue = (p.journal || p.publisher || 'Unknown').trim()
       if (!venue) continue

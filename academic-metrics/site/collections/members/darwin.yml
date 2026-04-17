@@ -17,22 +17,27 @@ publications:
     year: 1859
     type: book
     publisher: John Murray
+    refereed: true
   - title: The Descent of Man
     year: 1871
     type: book
     publisher: John Murray
+    refereed: true
   - title: Insectivorous Plants
     year: 1875
     type: book
     publisher: John Murray
+    refereed: false
   - title: The Power of Movement in Plants
     year: 1880
     type: book
     publisher: John Murray
+    refereed: false
   - title: 'On the formation of mould'
     year: 1837
     type: article
     journal: Proceedings of the Geological Society of London
+    refereed: true
 
 funding:
   - title: Heated glass-house for experimental botany

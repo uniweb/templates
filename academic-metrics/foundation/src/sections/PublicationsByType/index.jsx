@@ -26,8 +26,10 @@ import { useDocumentOutput } from '@uniweb/press'
 import { Paragraph, Table, Tr, Td } from '@uniweb/press/docx'
 import {
   useFilteredMembers,
+  useReportOptions,
   useSectionIncluded,
 } from '#components/query-context.jsx'
+import { filterPublications } from '#utils/publication-filters.js'
 
 const SECTION_KEY = 'publications-by-type'
 
@@ -48,9 +50,10 @@ const NUMBER_FORMATS = ['text', 'number']
 export default function PublicationsByType({ content, block }) {
   const included = useSectionIncluded(SECTION_KEY)
   const { members, activeQuery } = useFilteredMembers(content)
+  const [reportOpts] = useReportOptions()
   const heading = content?.title || 'Publications by type'
 
-  const counts = aggregateByType(members)
+  const counts = aggregateByType(members, reportOpts)
 
   useDocumentOutput(
     block,
@@ -181,10 +184,10 @@ function PublicationsPie({ counts }) {
   )
 }
 
-function aggregateByType(members) {
+function aggregateByType(members, reportOpts) {
   const tally = new Map()
   for (const m of members) {
-    const pubs = Array.isArray(m.publications) ? m.publications : []
+    const pubs = filterPublications(m.publications, reportOpts)
     for (const p of pubs) {
       const type = (p.type || 'other').toLowerCase()
       tally.set(type, (tally.get(type) || 0) + 1)

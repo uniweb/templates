@@ -1,17 +1,29 @@
 /**
- * Query-selection + section-inclusion context for academic-metrics.
+ * Query-selection + section-inclusion + report-options context for
+ * academic-metrics.
  *
- * Two pieces of state, persisted together to localStorage:
+ * Three pieces of state, persisted as one blob to localStorage:
  *
  *   - Selected query slug — which saved query filters the member set.
  *     'all-members' is a reserved sentinel meaning "no filter."
  *   - Included section keys — set of section keys the reader wants in
  *     the preview and the download. A section that isn't included
- *     skips its xlsx registration and returns null from render.
+ *     skips its fragment registrations and returns null from render.
+ *   - Report options:
+ *       dateRange.start  required (year, number) when a filter is on
+ *       dateRange.end    optional — null/empty means "open on the right"
+ *                        (reports often need windows that extend into
+ *                        the future: some grants / supervisions have
+ *                        no end date, so the report's end doesn't
+ *                        either)
+ *       refereedOnly     boolean
+ *       citationStyle    'apa' | 'mla' | 'chicago-author-date' | ...
+ *                        drives PublicationsList
  *
- * The template ships every section ON by default: the idea is "mother
- * of all reports, trim what you don't want." Each section declares its
- * own key and calls useSectionIncluded(key) to gate itself.
+ * The template ships every section ON by default and leaves the date
+ * range empty: the idea is "mother of all reports, trim what you
+ * don't want." Each section declares its own key and calls
+ * useSectionIncluded(key) to gate itself.
  */
 
 import {
@@ -35,6 +47,7 @@ export const SECTION_KEYS = [
   'publications-by-type',
   'publications-by-journal',
   'publications-by-year',
+  'publications-list',
   'funding',
   'supervisions',
 ]
@@ -44,6 +57,7 @@ const SECTION_LABELS = {
   'publications-by-type': 'Publications by type',
   'publications-by-journal': 'Publications by journal',
   'publications-by-year': 'Publications by year',
+  'publications-list': 'Publications (list)',
   funding: 'Funding',
   supervisions: 'Supervisions',
 }
@@ -52,9 +66,22 @@ export function sectionLabel(key) {
   return SECTION_LABELS[key] || key
 }
 
+export const CITATION_STYLES = [
+  { value: 'apa', label: 'APA (7th)' },
+  { value: 'mla', label: 'MLA (9th)' },
+  { value: 'chicago-author-date', label: 'Chicago (author–date)' },
+  { value: 'ieee', label: 'IEEE' },
+  { value: 'vancouver', label: 'Vancouver' },
+  { value: 'harvard', label: 'Harvard' },
+  { value: 'nature', label: 'Nature' },
+]
+
 const DEFAULT_STATE = {
   slug: ALL_MEMBERS_SLUG,
   excludedSections: [],
+  dateRange: { start: null, end: null },
+  refereedOnly: false,
+  citationStyle: 'apa',
 }
 
 const QueryContext = createContext(null)
@@ -70,6 +97,18 @@ function loadPersisted() {
       excludedSections: Array.isArray(parsed.excludedSections)
         ? parsed.excludedSections
         : [],
+      dateRange: {
+        start:
+          parsed.dateRange?.start != null && parsed.dateRange?.start !== ''
+            ? Number(parsed.dateRange.start)
+            : null,
+        end:
+          parsed.dateRange?.end != null && parsed.dateRange?.end !== ''
+            ? Number(parsed.dateRange.end)
+            : null,
+      },
+      refereedOnly: Boolean(parsed.refereedOnly),
+      citationStyle: parsed.citationStyle || DEFAULT_STATE.citationStyle,
     }
   } catch {
     return null
@@ -101,14 +140,22 @@ export function QueryProvider({ children }) {
     })
   }, [])
 
+  const setReportOption = useCallback((patch) => {
+    setState((prev) => ({ ...prev, ...patch }))
+  }, [])
+
   const value = useMemo(
     () => ({
       slug: state.slug,
       setSlug,
       excludedSections: state.excludedSections,
       toggleSection,
+      dateRange: state.dateRange,
+      refereedOnly: state.refereedOnly,
+      citationStyle: state.citationStyle,
+      setReportOption,
     }),
-    [state, setSlug, toggleSection],
+    [state, setSlug, toggleSection, setReportOption],
   )
 
   return <QueryContext.Provider value={value}>{children}</QueryContext.Provider>
@@ -117,46 +164,45 @@ export function QueryProvider({ children }) {
 function useCtx() {
   const ctx = useContext(QueryContext)
   if (ctx) return ctx
-  // Outside the provider, return a read-only default so sections can
-  // call hooks unconditionally.
   return {
     slug: ALL_MEMBERS_SLUG,
     setSlug: () => {},
     excludedSections: [],
     toggleSection: () => {},
+    dateRange: DEFAULT_STATE.dateRange,
+    refereedOnly: DEFAULT_STATE.refereedOnly,
+    citationStyle: DEFAULT_STATE.citationStyle,
+    setReportOption: () => {},
   }
 }
 
-/**
- * @returns {[string, (slug: string) => void]} current query slug + setter.
- */
 export function useSelectedQuery() {
   const { slug, setSlug } = useCtx()
   return [slug, setSlug]
 }
 
-/**
- * Whether a given section key is currently included.
- */
 export function useSectionIncluded(key) {
   const { excludedSections } = useCtx()
   return !excludedSections.includes(key)
 }
 
-/**
- * [excludedSections, toggleSection] — used by the Cover's options panel.
- */
 export function useSectionToggles() {
   const { excludedSections, toggleSection } = useCtx()
   return [excludedSections, toggleSection]
 }
 
 /**
+ * [options, setReportOption] for the date-range / refereed / citation
+ * controls.
+ */
+export function useReportOptions() {
+  const { dateRange, refereedOnly, citationStyle, setReportOption } = useCtx()
+  return [{ dateRange, refereedOnly, citationStyle }, setReportOption]
+}
+
+/**
  * Read members + queries from `content.data`, look up the selected
  * query, and return the filtered member set.
- *
- * @param {Object} content - The section's content prop (with .data).
- * @returns {{ members, activeQuery, totalCount, allQueries }}
  */
 export function useFilteredMembers(content) {
   const [slug] = useSelectedQuery()

@@ -13,26 +13,32 @@ publications:
     year: 1830
     type: book
     publisher: John Murray
+    refereed: true
   - title: Principles of Geology (Vol. 2)
     year: 1832
     type: book
     publisher: John Murray
+    refereed: true
   - title: Principles of Geology (Vol. 3)
     year: 1833
     type: book
     publisher: John Murray
+    refereed: true
   - title: The Geological Evidences of the Antiquity of Man
     year: 1863
     type: book
     publisher: John Murray
+    refereed: false
   - title: 'On the delta and alluvial deposits of the Mississippi'
     year: 1847
     type: article
     journal: American Journal of Science
+    refereed: true
   - title: 'On the structure of lavas which have consolidated on steep slopes'
     year: 1858
     type: article
     journal: Philosophical Transactions of the Royal Society
+    refereed: true
 
 funding:
   - title: Geological survey of Mount Etna

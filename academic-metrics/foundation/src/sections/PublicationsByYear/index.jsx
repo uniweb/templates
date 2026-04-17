@@ -22,8 +22,10 @@ import { useDocumentOutput } from '@uniweb/press'
 import { Paragraph, Table, Tr, Td } from '@uniweb/press/docx'
 import {
   useFilteredMembers,
+  useReportOptions,
   useSectionIncluded,
 } from '#components/query-context.jsx'
+import { filterPublications } from '#utils/publication-filters.js'
 
 const SECTION_KEY = 'publications-by-year'
 
@@ -34,9 +36,10 @@ const NUMBER_FORMATS = ['number', 'number', 'number']
 export default function PublicationsByYear({ content, block }) {
   const included = useSectionIncluded(SECTION_KEY)
   const { members, activeQuery } = useFilteredMembers(content)
+  const [reportOpts] = useReportOptions()
   const heading = content?.title || 'Publications by year'
 
-  const { series, total } = aggregateByYear(members)
+  const { series, total } = aggregateByYear(members, reportOpts)
 
   useDocumentOutput(
     block,
@@ -143,10 +146,10 @@ function YearBars({ series }) {
   )
 }
 
-function aggregateByYear(members) {
+function aggregateByYear(members, reportOpts) {
   const tally = new Map()
   for (const m of members) {
-    const pubs = Array.isArray(m.publications) ? m.publications : []
+    const pubs = filterPublications(m.publications, reportOpts)
     for (const p of pubs) {
       const year = Number(p.year)
       if (!Number.isFinite(year)) continue

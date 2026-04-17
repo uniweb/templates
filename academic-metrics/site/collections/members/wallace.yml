@@ -13,18 +13,22 @@ publications:
     year: 1858
     type: article
     journal: Journal of the Proceedings of the Linnean Society
+    refereed: true
   - title: The Malay Archipelago
     year: 1869
     type: book
     publisher: Macmillan
+    refereed: false
   - title: The Geographical Distribution of Animals
     year: 1876
     type: book
     publisher: Macmillan
+    refereed: true
   - title: Darwinism
     year: 1889
     type: book
     publisher: Macmillan
+    refereed: true
 
 funding:
   - title: Expedition to the Malay Archipelago
