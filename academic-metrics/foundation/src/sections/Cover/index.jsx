@@ -19,6 +19,14 @@ export default function Cover({ content, block }) {
   const { members, activeQuery, totalCount, allQueries } =
     useFilteredMembers(content)
 
+  // Loom-resolved narrative paragraphs — the content handler in
+  // foundation.js has already instantiated {COUNT OF members}, etc.,
+  // so content.paragraphs arrives as plain strings at this point.
+  // These reflect the UNIT as a whole, not the current query filter.
+  const narrative = Array.isArray(content?.paragraphs)
+    ? content.paragraphs
+    : []
+
   const publicationCount = members.reduce(
     (sum, m) => sum + (Array.isArray(m.publications) ? m.publications.length : 0),
     0,
@@ -76,6 +84,13 @@ export default function Cover({ content, block }) {
     <section className="cover">
       <h1 className="cover-title">{title}</h1>
       <p className="cover-subtitle">{subtitle}</p>
+      {narrative.length > 0 && (
+        <div className="cover-narrative">
+          {narrative.map((p, i) => (
+            <p key={i} dangerouslySetInnerHTML={{ __html: p }} />
+          ))}
+        </div>
+      )}
       <QuerySelector
         queries={allQueries}
         matchedCount={members.length}

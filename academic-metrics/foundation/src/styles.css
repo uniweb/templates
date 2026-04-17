@@ -34,6 +34,24 @@
   margin: 0 0 1.5rem;
 }
 
+.cover-narrative {
+  max-width: 44rem;
+  margin: 0 auto 2rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--body);
+  text-align: left;
+}
+
+.cover-narrative strong {
+  color: var(--heading);
+  font-weight: 600;
+}
+
+.cover-narrative p {
+  margin: 0 0 1rem;
+}
+
 .cover-meta {
   display: inline-flex;
   gap: 2rem;
