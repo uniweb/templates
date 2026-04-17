@@ -18,7 +18,8 @@
     "Members",
     "PublicationsByType",
     "PublicationsByJournal",
-    "PublicationsByYear"
+    "PublicationsByYear",
+    "Funding"
   ],
   "dependencies": {
     "foundation": {
