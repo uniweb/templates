@@ -11,6 +11,7 @@
  * matched / total member counts, and the aggregate totals.
  */
 import { useDocumentOutput } from '@uniweb/press'
+import { Paragraph } from '@uniweb/press/docx'
 import QuerySelector from '#components/QuerySelector.jsx'
 import SectionToggles from '#components/SectionToggles.jsx'
 import { useFilteredMembers } from '#components/query-context.jsx'
@@ -79,6 +80,28 @@ export default function Cover({ content, block }) {
       'number',
     ],
   })
+
+  // Docx companion: title + subtitle + Loom narrative paragraphs.
+  // The live stats strip is UI chrome and doesn't belong in the file.
+  useDocumentOutput(
+    block,
+    'docx',
+    <>
+      <Paragraph
+        as="h1"
+        data={title}
+        data-heading="HEADING_1"
+        data-spacing-after={240}
+      />
+      <Paragraph
+        data={subtitle}
+        data-spacing-after={240}
+      />
+      {narrative.map((p, i) => (
+        <Paragraph key={i} data={p} data-spacing-after={160} />
+      ))}
+    </>,
+  )
 
   return (
     <section className="cover">

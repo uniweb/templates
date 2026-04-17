@@ -24,6 +24,7 @@ import {
   Legend,
 } from 'recharts'
 import { useDocumentOutput } from '@uniweb/press'
+import { Paragraph, Table, Tr, Td } from '@uniweb/press/docx'
 import {
   useFilteredMembers,
   useSectionIncluded,
@@ -65,6 +66,60 @@ export default function Supervisions({ content, block }) {
           totals: totalsRow,
         }
       : null,
+  )
+
+  // Docx: same cross-tab, with column widths distributed evenly.
+  const perColWidth = levels.length > 0 ? Math.floor(60 / levels.length) : 60
+  const docxWidths = [
+    100 - perColWidth * levels.length - 10,
+    ...levels.map(() => perColWidth),
+    10,
+  ]
+  // Compute column totals for the docx totals row (docx has no formulas).
+  const columnTotals = levels.map((l) =>
+    rows.reduce((s, r) => s + (r.counts[l] || 0), 0),
+  )
+  const docxTotal = rows.reduce((s, r) => s + r.total, 0)
+
+  useDocumentOutput(
+    block,
+    'docx',
+    included && rows.length > 0 ? (
+      <>
+        <Paragraph
+          as="h2"
+          data={heading}
+          data-heading="HEADING_2"
+          data-spacing-before={240}
+          data-spacing-after={160}
+        />
+        <Table widths={docxWidths} borderColor="cbd5e1">
+          <Tr header>
+            {headers.map((h) => (
+              <Td key={h}>{h}</Td>
+            ))}
+          </Tr>
+          {rows.map((r, i) => (
+            <Tr key={i}>
+              <Td>{r.member}</Td>
+              {levels.map((l) => (
+                <Td key={l}>{String(r.counts[l] || 0)}</Td>
+              ))}
+              <Td>{String(r.total)}</Td>
+            </Tr>
+          ))}
+          <Tr>
+            <Td emphasis>Total</Td>
+            {columnTotals.map((n, i) => (
+              <Td key={i} emphasis>
+                {String(n)}
+              </Td>
+            ))}
+            <Td emphasis>{String(docxTotal)}</Td>
+          </Tr>
+        </Table>
+      </>
+    ) : null,
   )
 
   if (!included) return null

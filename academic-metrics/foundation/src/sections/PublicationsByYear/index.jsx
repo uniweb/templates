@@ -19,6 +19,7 @@ import {
   LabelList,
 } from 'recharts'
 import { useDocumentOutput } from '@uniweb/press'
+import { Paragraph, Table, Tr, Td } from '@uniweb/press/docx'
 import {
   useFilteredMembers,
   useSectionIncluded,
@@ -50,6 +51,41 @@ export default function PublicationsByYear({ content, block }) {
           totals: ['Total', 'sum', total],
         }
       : null,
+  )
+
+  useDocumentOutput(
+    block,
+    'docx',
+    included && series.length > 0 ? (
+      <>
+        <Paragraph
+          as="h2"
+          data={heading}
+          data-heading="HEADING_2"
+          data-spacing-before={240}
+          data-spacing-after={160}
+        />
+        <Table widths={[30, 35, 35]} borderColor="cbd5e1">
+          <Tr header>
+            <Td>Year</Td>
+            <Td>Count</Td>
+            <Td>Cumulative</Td>
+          </Tr>
+          {series.map((row, i) => (
+            <Tr key={i}>
+              <Td>{String(row.year)}</Td>
+              <Td>{String(row.count)}</Td>
+              <Td>{String(row.cumulative)}</Td>
+            </Tr>
+          ))}
+          <Tr>
+            <Td emphasis>Total</Td>
+            <Td emphasis>{String(total)}</Td>
+            <Td emphasis>{String(total)}</Td>
+          </Tr>
+        </Table>
+      </>
+    ) : null,
   )
 
   if (!included) return null

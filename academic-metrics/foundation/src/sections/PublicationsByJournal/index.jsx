@@ -23,6 +23,7 @@ import {
   LabelList,
 } from 'recharts'
 import { useDocumentOutput } from '@uniweb/press'
+import { Paragraph, Table, Tr, Td } from '@uniweb/press/docx'
 import {
   useFilteredMembers,
   useSectionIncluded,
@@ -58,6 +59,39 @@ export default function PublicationsByJournal({ content, block }) {
           totals: ['Total', 'sum'],
         }
       : null,
+  )
+
+  const totalForDocx = counts.reduce((s, r) => s + r.count, 0)
+  useDocumentOutput(
+    block,
+    'docx',
+    included && counts.length > 0 ? (
+      <>
+        <Paragraph
+          as="h2"
+          data={heading}
+          data-heading="HEADING_2"
+          data-spacing-before={240}
+          data-spacing-after={160}
+        />
+        <Table widths={[82, 18]} borderColor="cbd5e1">
+          <Tr header>
+            <Td>Venue</Td>
+            <Td>Count</Td>
+          </Tr>
+          {counts.map(({ venue, count }, i) => (
+            <Tr key={i}>
+              <Td>{venue}</Td>
+              <Td>{String(count)}</Td>
+            </Tr>
+          ))}
+          <Tr>
+            <Td emphasis>Total</Td>
+            <Td emphasis>{String(totalForDocx)}</Td>
+          </Tr>
+        </Table>
+      </>
+    ) : null,
   )
 
   if (!included) return null

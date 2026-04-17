@@ -16,11 +16,12 @@ import { QueryProvider } from '#components/query-context.jsx'
 export default function MetricsLayout({ body, page }) {
   const { website } = useWebsite()
   const pageTitle = page?.title || 'Academic Metrics'
+  // filename is the stem — DownloadBar appends the format extension.
   const filename =
     (page?.title || 'academic-metrics')
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '') + '.xlsx'
+      .replace(/^-+|-+$/g, '')
 
   return (
     <QueryProvider>

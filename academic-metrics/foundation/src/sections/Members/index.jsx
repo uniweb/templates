@@ -10,6 +10,7 @@
  * next compile('xlsx') reflects the selection.
  */
 import { useDocumentOutput } from '@uniweb/press'
+import { Paragraph, Table, Tr, Td } from '@uniweb/press/docx'
 import {
   useFilteredMembers,
   useSectionIncluded,
@@ -51,6 +52,37 @@ export default function Members({ content, block }) {
           numberFormats: NUMBER_FORMATS,
         }
       : null,
+  )
+
+  // Docx companion: heading + roster Table. Columns as percentages.
+  useDocumentOutput(
+    block,
+    'docx',
+    included ? (
+      <>
+        <Paragraph
+          as="h2"
+          data={heading}
+          data-heading="HEADING_2"
+          data-spacing-before={240}
+          data-spacing-after={160}
+        />
+        <Table widths={[32, 16, 22, 12, 18]} borderColor="cbd5e1">
+          <Tr header>
+            {HEADERS.map((h) => (
+              <Td key={h}>{h}</Td>
+            ))}
+          </Tr>
+          {rows.map((r, i) => (
+            <Tr key={i}>
+              {r.map((cell, j) => (
+                <Td key={j}>{cell == null ? '' : String(cell)}</Td>
+              ))}
+            </Tr>
+          ))}
+        </Table>
+      </>
+    ) : null,
   )
 
   if (!included) return null

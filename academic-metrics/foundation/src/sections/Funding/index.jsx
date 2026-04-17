@@ -20,6 +20,7 @@ import {
   LabelList,
 } from 'recharts'
 import { useDocumentOutput } from '@uniweb/press'
+import { Paragraph, Table, Tr, Td } from '@uniweb/press/docx'
 import {
   useFilteredMembers,
   useSectionIncluded,
@@ -58,6 +59,42 @@ export default function Funding({ content, block }) {
           totals: ['Total', 'sum', 'sum'],
         }
       : null,
+  )
+
+  const totalGrants = bySource.reduce((s, r) => s + r.count, 0)
+  useDocumentOutput(
+    block,
+    'docx',
+    included && bySource.length > 0 ? (
+      <>
+        <Paragraph
+          as="h2"
+          data={heading}
+          data-heading="HEADING_2"
+          data-spacing-before={240}
+          data-spacing-after={160}
+        />
+        <Table widths={[55, 15, 30]} borderColor="cbd5e1">
+          <Tr header>
+            <Td>Source</Td>
+            <Td>Grants</Td>
+            <Td>Total (GBP)</Td>
+          </Tr>
+          {bySource.map(({ source, count, total }, i) => (
+            <Tr key={i}>
+              <Td>{source}</Td>
+              <Td>{String(count)}</Td>
+              <Td>{POUND.format(total)}</Td>
+            </Tr>
+          ))}
+          <Tr>
+            <Td emphasis>Total</Td>
+            <Td emphasis>{String(totalGrants)}</Td>
+            <Td emphasis>{POUND.format(grandTotal)}</Td>
+          </Tr>
+        </Table>
+      </>
+    ) : null,
   )
 
   if (!included) return null
