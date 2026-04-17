@@ -116,6 +116,36 @@ kbd {
 
 /* ── Floating toolbar ──────────────────────────────────────────────── */
 
+.doc-bar {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.doc-bar-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.doc-bar-download-wrap {
+  position: relative;
+}
+
+.doc-bar-error {
+  max-width: 20rem;
+  padding: 0.25rem 0.75rem;
+  background: color-mix(in oklch, var(--accent), white 85%);
+  color: var(--accent);
+  font-size: 0.75rem;
+  border-radius: 0.25rem;
+  margin: 0;
+}
+
 .doc-bar-button {
   display: inline-flex;
   align-items: center;

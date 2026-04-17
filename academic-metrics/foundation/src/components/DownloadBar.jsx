@@ -136,11 +136,8 @@ export default function DownloadBar({
   const disabled = isCompiling || busy !== null
 
   return (
-    <div
-      ref={toolbarRef}
-      className="fixed top-6 right-6 z-40 flex flex-col items-end gap-2"
-    >
-      <div className="flex gap-2">
+    <div ref={toolbarRef} className="doc-bar">
+      <div className="doc-bar-row">
         <button
           type="button"
           onClick={() => {
@@ -155,7 +152,7 @@ export default function DownloadBar({
           <span>Options</span>
         </button>
 
-        <div className="relative">
+        <div className="doc-bar-download-wrap">
           <button
             type="button"
             onClick={() => {
@@ -208,11 +205,7 @@ export default function DownloadBar({
 
       {panelOpen && <DocumentOptionsPanel />}
 
-      {error && (
-        <p className="max-w-xs rounded bg-error-subtle px-3 py-1 text-xs text-error">
-          {error}
-        </p>
-      )}
+      {error && <p className="doc-bar-error">{error}</p>}
     </div>
   )
 }
