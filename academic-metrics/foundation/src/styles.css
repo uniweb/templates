@@ -61,6 +61,48 @@
   color: var(--heading);
 }
 
+/* ── Query selector ────────────────────────────────────────────────── */
+
+.query-selector {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  margin: 1rem 0 2rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.query-selector-label {
+  font-weight: 600;
+  color: var(--subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+}
+
+.query-selector-control {
+  font: inherit;
+  color: var(--heading);
+  background: transparent;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.query-selector-control:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+.query-selector-count {
+  color: var(--subtle);
+  font-variant-numeric: tabular-nums;
+}
+
 /* ── Members roster ────────────────────────────────────────────────── */
 
 .members {
@@ -72,6 +114,27 @@
   font-weight: 600;
   color: var(--heading);
   margin: 0 0 1.5rem;
+}
+
+.members-query-note {
+  margin: 0 0 1rem;
+  color: var(--subtle);
+  font-size: 0.9rem;
+}
+
+.members-query-note em {
+  font-style: italic;
+  color: var(--heading);
+}
+
+.members-empty {
+  padding: 2rem;
+  text-align: center;
+  color: var(--subtle);
+  background: var(--card);
+  border: 1px dashed var(--border);
+  border-radius: 0.5rem;
+  font-style: italic;
 }
 
 .members-table {

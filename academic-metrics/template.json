@@ -19,7 +19,8 @@
   ],
   "dependencies": {
     "foundation": {
-      "@uniweb/press": "{{version \"@uniweb/press\"}}"
+      "@uniweb/press": "{{version \"@uniweb/press\"}}",
+      "@uniweb/query": "{{version \"@uniweb/query\"}}"
     }
   }
 }

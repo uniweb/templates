@@ -1,0 +1,9 @@
+# Recent Hires — saved query.
+#
+# Selects members who joined in 1860 or later. Demonstrates the
+# numeric-comparison operators in @uniweb/query.
+
+name: Recent Hires
+description: Members who joined the institution in 1860 or later.
+source: members
+where: "start_year >= 1860"

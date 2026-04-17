@@ -1,0 +1,11 @@
+# Tenured Biology — saved query.
+#
+# Selects biology-department members who hold tenure. Written in the
+# @uniweb/query DSL (see https://github.com/uniweb/query for the full
+# grammar). The options panel shows this query by name; every section
+# that calls useFilteredMembers() sees the filtered set.
+
+name: Tenured Biology
+description: Tenured members of the Department of Biology.
+source: members
+where: "department = 'biology' AND tenured"

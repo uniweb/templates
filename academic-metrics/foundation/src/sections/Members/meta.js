@@ -1,11 +1,11 @@
 export default {
   title: 'Members',
   description:
-    'Roster of selected members (name, rank, department, tenured, start year). Registers a Members sheet in the downloaded workbook.',
+    'Roster of the filtered member set (name, rank, department, tenured, start year). Registers a Members sheet in the downloaded workbook.',
   category: 'academic-metrics',
 
   data: {
-    inherit: ['members'],
+    inherit: ['members', 'queries'],
   },
 
   content: {

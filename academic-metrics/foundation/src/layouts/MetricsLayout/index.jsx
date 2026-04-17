@@ -11,6 +11,7 @@
 import { useWebsite } from '@uniweb/kit'
 import { DocumentProvider } from '@uniweb/press'
 import DownloadBar from '#components/DownloadBar.jsx'
+import { QueryProvider } from '#components/query-context.jsx'
 
 export default function MetricsLayout({ body, page }) {
   const { website } = useWebsite()
@@ -22,11 +23,13 @@ export default function MetricsLayout({ body, page }) {
       .replace(/^-+|-+$/g, '') + '.xlsx'
 
   return (
-    <DocumentProvider basePath={website.basePath}>
-      <main className="metrics-body mx-auto max-w-5xl px-6 pb-16">
-        <div className="metrics-report">{body}</div>
-      </main>
-      <DownloadBar title={pageTitle} filename={filename} />
-    </DocumentProvider>
+    <QueryProvider>
+      <DocumentProvider basePath={website.basePath}>
+        <main className="metrics-body mx-auto max-w-5xl px-6 pb-16">
+          <div className="metrics-report">{body}</div>
+        </main>
+        <DownloadBar title={pageTitle} filename={filename} />
+      </DocumentProvider>
+    </QueryProvider>
   )
 }
