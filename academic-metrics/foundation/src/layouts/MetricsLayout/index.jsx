@@ -7,30 +7,33 @@
  *
  * Filename is computed from the page title, following the convention
  * established by cv-loom / monograph.
+ *
+ * Installs query-state persistence on mount — seeds page.state from
+ * localStorage and subscribes to write-back on change.
  */
+import { useEffect } from 'react'
 import { useWebsite } from '@uniweb/kit'
 import { DocumentProvider } from '@uniweb/press'
 import DownloadBar from '#components/DownloadBar.jsx'
-import { QueryProvider } from '#components/query-context.jsx'
+import { installQueryStatePersistence } from '#components/query-context.jsx'
 
 export default function MetricsLayout({ body, page }) {
   const { website } = useWebsite()
   const pageTitle = page?.title || 'Academic Metrics'
-  // filename is the stem — DownloadBar appends the format extension.
   const filename =
     (page?.title || 'academic-metrics')
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/^-+|-+$/g, '')
 
+  useEffect(() => installQueryStatePersistence(page), [page])
+
   return (
-    <QueryProvider>
-      <DocumentProvider basePath={website.basePath}>
-        <main className="metrics-body mx-auto max-w-5xl px-6 pb-16">
-          <div className="metrics-report">{body}</div>
-        </main>
-        <DownloadBar title={pageTitle} filename={filename} />
-      </DocumentProvider>
-    </QueryProvider>
+    <DocumentProvider basePath={website.basePath}>
+      <main className="metrics-body mx-auto max-w-5xl px-6 pb-16">
+        <div className="metrics-report">{body}</div>
+      </main>
+      <DownloadBar title={pageTitle} filename={filename} />
+    </DocumentProvider>
   )
 }

@@ -1,47 +1,45 @@
 /**
- * Query-selection + section-inclusion + report-options context for
+ * Query-selection + section-inclusion + report-options state for
  * academic-metrics.
  *
- * Three pieces of state, persisted as one blob to localStorage:
+ * State lives on `page.state` (not a React context) so:
+ *   - The fetcher — which runs outside React in the dispatcher path —
+ *     could read the same values via `ctx.page.state` when it wants
+ *     backend-filtered results.
+ *   - The values survive SPA navigation without being re-hydrated from
+ *     React state on every mount.
+ *   - A local sync helper persists to localStorage independently.
  *
- *   - Selected query slug — which saved query filters the member set.
- *     'all-members' is a reserved sentinel meaning "no filter."
- *   - Included section keys — set of section keys the reader wants in
- *     the preview and the download. A section that isn't included
- *     skips its fragment registrations and returns null from render.
- *   - Report options:
- *       dateRange.start  required (year, number) when a filter is on
- *       dateRange.end    optional — null/empty means "open on the right"
- *                        (reports often need windows that extend into
- *                        the future: some grants / supervisions have
- *                        no end date, so the report's end doesn't
- *                        either)
- *       refereedOnly     boolean
- *       citationStyle    'apa' | 'mla' | 'chicago-author-date' | ...
- *                        drives PublicationsList
+ * Five slots, each a separate key so only the subscribing component
+ * re-renders when any one changes:
+ *
+ *   - slug              — which saved query filters the member set.
+ *                         'all-members' means "no filter."
+ *   - excludedSections  — array of section keys the reader hid.
+ *   - dateRange         — { start, end } year window. null on either
+ *                         side means "open" (start: beginning of time,
+ *                         end: open to the future — grants /
+ *                         supervisions can have no end date).
+ *   - refereedOnly      — boolean toggle.
+ *   - citationStyle     — 'apa' | 'mla' | ... — drives PublicationsList.
+ *
+ * Persistence: `installQueryStatePersistence(page)` reads localStorage
+ * once on first call, seeds any missing slots, then subscribes to the
+ * keys it cares about and writes the combined blob on change. Callable
+ * from inside a useEffect in the layout.
  *
  * The template ships every section ON by default and leaves the date
- * range empty: the idea is "mother of all reports, trim what you
- * don't want." Each section declares its own key and calls
- * useSectionIncluded(key) to gate itself.
+ * range empty: "mother of all reports, trim what you don't want."
  */
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
+import { useMemo } from 'react'
+import { usePageState } from '@uniweb/kit'
 import { resolveQuery, QueryError } from '@uniweb/query'
 
 const STORAGE_KEY = 'academic-metrics/options'
 const ALL_MEMBERS_SLUG = 'all-members'
+export const ALL_MEMBERS = ALL_MEMBERS_SLUG
 
-// The canonical list of section keys the template ships. Keep in sync
-// with the section components that call useSectionIncluded(). The Cover
-// is intentionally absent — it hosts the controls themselves.
 export const SECTION_KEYS = [
   'members',
   'publications-by-type',
@@ -76,7 +74,7 @@ export const CITATION_STYLES = [
   { value: 'nature', label: 'Nature' },
 ]
 
-const DEFAULT_STATE = {
+const DEFAULTS = {
   slug: ALL_MEMBERS_SLUG,
   excludedSections: [],
   dateRange: { start: null, end: null },
@@ -84,125 +82,117 @@ const DEFAULT_STATE = {
   citationStyle: 'apa',
 }
 
-const QueryContext = createContext(null)
+// ─── Persistence ──────────────────────────────────────────────────
 
-function loadPersisted() {
+function readPersisted() {
   if (typeof window === 'undefined') return null
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY)
     if (!raw) return null
     const parsed = JSON.parse(raw)
     return {
-      slug: parsed.slug || DEFAULT_STATE.slug,
-      excludedSections: Array.isArray(parsed.excludedSections)
-        ? parsed.excludedSections
-        : [],
+      slug: parsed.slug || DEFAULTS.slug,
+      excludedSections: Array.isArray(parsed.excludedSections) ? parsed.excludedSections : [],
       dateRange: {
-        start:
-          parsed.dateRange?.start != null && parsed.dateRange?.start !== ''
-            ? Number(parsed.dateRange.start)
-            : null,
-        end:
-          parsed.dateRange?.end != null && parsed.dateRange?.end !== ''
-            ? Number(parsed.dateRange.end)
-            : null,
+        start: parsed.dateRange?.start != null && parsed.dateRange?.start !== ''
+          ? Number(parsed.dateRange.start) : null,
+        end: parsed.dateRange?.end != null && parsed.dateRange?.end !== ''
+          ? Number(parsed.dateRange.end) : null,
       },
       refereedOnly: Boolean(parsed.refereedOnly),
-      citationStyle: parsed.citationStyle || DEFAULT_STATE.citationStyle,
+      citationStyle: parsed.citationStyle || DEFAULTS.citationStyle,
     }
   } catch {
     return null
   }
 }
 
-export function QueryProvider({ children }) {
-  const [state, setState] = useState(() => loadPersisted() || DEFAULT_STATE)
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-    try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-    } catch {
-      // Quota or disabled — state remains live in memory.
-    }
-  }, [state])
-
-  const setSlug = useCallback((slug) => {
-    setState((prev) => ({ ...prev, slug }))
-  }, [])
-
-  const toggleSection = useCallback((key) => {
-    setState((prev) => {
-      const set = new Set(prev.excludedSections)
-      if (set.has(key)) set.delete(key)
-      else set.add(key)
-      return { ...prev, excludedSections: [...set] }
-    })
-  }, [])
-
-  const setReportOption = useCallback((patch) => {
-    setState((prev) => ({ ...prev, ...patch }))
-  }, [])
-
-  const value = useMemo(
-    () => ({
-      slug: state.slug,
-      setSlug,
-      excludedSections: state.excludedSections,
-      toggleSection,
-      dateRange: state.dateRange,
-      refereedOnly: state.refereedOnly,
-      citationStyle: state.citationStyle,
-      setReportOption,
-    }),
-    [state, setSlug, toggleSection, setReportOption],
-  )
-
-  return <QueryContext.Provider value={value}>{children}</QueryContext.Provider>
-}
-
-function useCtx() {
-  const ctx = useContext(QueryContext)
-  if (ctx) return ctx
-  return {
-    slug: ALL_MEMBERS_SLUG,
-    setSlug: () => {},
-    excludedSections: [],
-    toggleSection: () => {},
-    dateRange: DEFAULT_STATE.dateRange,
-    refereedOnly: DEFAULT_STATE.refereedOnly,
-    citationStyle: DEFAULT_STATE.citationStyle,
-    setReportOption: () => {},
+function writePersisted(page) {
+  if (typeof window === 'undefined') return
+  const snapshot = {
+    slug: page.state.get('slug') ?? DEFAULTS.slug,
+    excludedSections: page.state.get('excludedSections') ?? DEFAULTS.excludedSections,
+    dateRange: page.state.get('dateRange') ?? DEFAULTS.dateRange,
+    refereedOnly: page.state.get('refereedOnly') ?? DEFAULTS.refereedOnly,
+    citationStyle: page.state.get('citationStyle') ?? DEFAULTS.citationStyle,
+  }
+  try {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot))
+  } catch {
+    // Quota or disabled — state remains live in memory only.
   }
 }
 
+/**
+ * Seed `page.state` from localStorage if present, then subscribe to
+ * changes and write back. Idempotent — safe to call on every layout
+ * mount; the page-level "installed" flag short-circuits repeat calls.
+ *
+ * Returns an unsubscribe function.
+ */
+export function installQueryStatePersistence(page) {
+  if (!page || !page.state) return () => {}
+  if (page.state.get('__amPersistInstalled')) return () => {}
+
+  const persisted = readPersisted()
+  const seed = persisted || DEFAULTS
+
+  if (!page.state.has('slug')) page.state.set('slug', seed.slug)
+  if (!page.state.has('excludedSections')) page.state.set('excludedSections', seed.excludedSections)
+  if (!page.state.has('dateRange')) page.state.set('dateRange', seed.dateRange)
+  if (!page.state.has('refereedOnly')) page.state.set('refereedOnly', seed.refereedOnly)
+  if (!page.state.has('citationStyle')) page.state.set('citationStyle', seed.citationStyle)
+
+  page.state.set('__amPersistInstalled', true)
+
+  return page.state.subscribe(() => writePersisted(page))
+}
+
+// ─── Hooks ───────────────────────────────────────────────────────
+
 export function useSelectedQuery() {
-  const { slug, setSlug } = useCtx()
-  return [slug, setSlug]
+  return usePageState('slug', DEFAULTS.slug)
 }
 
 export function useSectionIncluded(key) {
-  const { excludedSections } = useCtx()
-  return !excludedSections.includes(key)
+  const [excluded] = usePageState('excludedSections', DEFAULTS.excludedSections)
+  return !excluded.includes(key)
 }
 
 export function useSectionToggles() {
-  const { excludedSections, toggleSection } = useCtx()
-  return [excludedSections, toggleSection]
+  const [excluded, setExcluded] = usePageState('excludedSections', DEFAULTS.excludedSections)
+  const toggle = (key) => {
+    const set = new Set(excluded)
+    if (set.has(key)) set.delete(key)
+    else set.add(key)
+    setExcluded([...set])
+  }
+  return [excluded, toggle]
 }
 
 /**
- * [options, setReportOption] for the date-range / refereed / citation
- * controls.
+ * Group the date-range / refereed / citation controls under one hook
+ * so call sites don't grow three separate usePageState lines. The setter
+ * accepts a patch object (matches the original React-context API).
  */
 export function useReportOptions() {
-  const { dateRange, refereedOnly, citationStyle, setReportOption } = useCtx()
+  const [dateRange, setDateRange] = usePageState('dateRange', DEFAULTS.dateRange)
+  const [refereedOnly, setRefereedOnly] = usePageState('refereedOnly', DEFAULTS.refereedOnly)
+  const [citationStyle, setCitationStyle] = usePageState('citationStyle', DEFAULTS.citationStyle)
+
+  const setReportOption = (patch) => {
+    if ('dateRange' in patch) setDateRange(patch.dateRange)
+    if ('refereedOnly' in patch) setRefereedOnly(patch.refereedOnly)
+    if ('citationStyle' in patch) setCitationStyle(patch.citationStyle)
+  }
+
   return [{ dateRange, refereedOnly, citationStyle }, setReportOption]
 }
 
 /**
  * Read members + queries from `content.data`, look up the selected
- * query, and return the filtered member set.
+ * query, and return the filtered member set. Identical surface to
+ * the previous React-context implementation.
  */
 export function useFilteredMembers(content) {
   const [slug] = useSelectedQuery()
@@ -220,7 +210,6 @@ export function useFilteredMembers(content) {
       return resolveQuery(activeQuery, allMembers)
     } catch (err) {
       if (err instanceof QueryError) {
-        // eslint-disable-next-line no-console
         console.warn(
           `[academic-metrics] query "${activeQuery.slug}" failed to parse:`,
           err.message,
@@ -240,4 +229,3 @@ export function useFilteredMembers(content) {
   }
 }
 
-export const ALL_MEMBERS = ALL_MEMBERS_SLUG
