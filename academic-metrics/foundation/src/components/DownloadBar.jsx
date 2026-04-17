@@ -36,7 +36,7 @@ function GearIcon() {
   return (
     <svg
       aria-hidden="true"
-      className="doc-bar-icon"
+      className="h-4 w-4"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -54,7 +54,7 @@ function DownloadIcon() {
   return (
     <svg
       aria-hidden="true"
-      className="doc-bar-icon"
+      className="h-4 w-4"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -73,7 +73,7 @@ function ChevronDown() {
   return (
     <svg
       aria-hidden="true"
-      className="doc-bar-icon-sm"
+      className="h-3.5 w-3.5"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -136,8 +136,11 @@ export default function DownloadBar({
   const disabled = isCompiling || busy !== null
 
   return (
-    <div ref={toolbarRef} className="doc-bar">
-      <div className="doc-bar-row">
+    <div
+      ref={toolbarRef}
+      className="fixed top-6 right-6 z-40 flex flex-col items-end gap-2"
+    >
+      <div className="flex gap-2 items-center">
         <button
           type="button"
           onClick={() => {
@@ -146,13 +149,13 @@ export default function DownloadBar({
           }}
           aria-expanded={panelOpen}
           aria-label="Report options"
-          className="doc-bar-button doc-bar-button-secondary"
+          className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2.5 text-body text-sm font-semibold shadow-md transition hover:bg-muted"
         >
           <GearIcon />
-          <span>Options</span>
+          Options
         </button>
 
-        <div className="doc-bar-download-wrap">
+        <div className="relative">
           <button
             type="button"
             onClick={() => {
@@ -162,41 +165,44 @@ export default function DownloadBar({
             disabled={disabled}
             aria-expanded={menuOpen}
             aria-haspopup="menu"
-            className="doc-bar-button doc-bar-button-primary"
+            className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-primary-foreground text-sm font-semibold shadow-lg shadow-primary/20 transition hover:bg-primary-hover disabled:opacity-60"
           >
             {busy ? (
               <>
-                <span className="doc-bar-spinner" />
-                <span>Generating…</span>
+                <span className="h-2 w-2 animate-pulse rounded-full bg-primary-foreground" />
+                Generating…
               </>
             ) : (
               <>
                 <DownloadIcon />
-                <span>Download</span>
+                Download
                 <ChevronDown />
               </>
             )}
           </button>
 
           {menuOpen && (
-            <div role="menu" className="doc-bar-menu">
+            <div
+              role="menu"
+              className="absolute right-0 top-full mt-2 min-w-48 rounded-lg border border-border bg-card p-1.5 shadow-xl flex flex-col gap-0.5"
+            >
               <button
                 type="button"
                 role="menuitem"
                 onClick={() => handleDownload('xlsx')}
-                className="doc-bar-menu-item"
+                className="flex items-center justify-between gap-4 rounded-md px-3 py-2 text-sm text-body text-left hover:bg-muted hover:text-heading"
               >
-                <span className="doc-bar-menu-label">Excel</span>
-                <span className="doc-bar-menu-ext">.xlsx</span>
+                <span className="font-medium">Excel</span>
+                <span className="text-xs text-subtle tabular-nums">.xlsx</span>
               </button>
               <button
                 type="button"
                 role="menuitem"
                 onClick={() => handleDownload('docx')}
-                className="doc-bar-menu-item"
+                className="flex items-center justify-between gap-4 rounded-md px-3 py-2 text-sm text-body text-left hover:bg-muted hover:text-heading"
               >
-                <span className="doc-bar-menu-label">Word</span>
-                <span className="doc-bar-menu-ext">.docx</span>
+                <span className="font-medium">Word</span>
+                <span className="text-xs text-subtle tabular-nums">.docx</span>
               </button>
             </div>
           )}
@@ -205,7 +211,11 @@ export default function DownloadBar({
 
       {panelOpen && <DocumentOptionsPanel />}
 
-      {error && <p className="doc-bar-error">{error}</p>}
+      {error && (
+        <p className="max-w-xs rounded bg-error-subtle px-3 py-1 text-xs text-error">
+          {error}
+        </p>
+      )}
     </div>
   )
 }

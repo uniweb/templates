@@ -1,12 +1,36 @@
 /* Academic Metrics — foundation styles.
  *
- * Pulls in both theme-variant font stacks up front so a tenant can
- * swap site/theme.yml <-> site/theme-archive.yml without the
- * foundation having to rebuild. Uniweb's theme pipeline sets
- * --font-heading / --font-body from theme.yml; we apply those vars
- * to body/headings here because the pipeline currently exposes the
- * vars but does not emit default font-family rules.
+ * Tailwind 4 is imported here so every section / layout / component
+ * can use utility classes inline (bg-card, text-subtle, rounded-full,
+ * fixed top-6 right-6, etc.). The @uniweb/kit theme-tokens bridge
+ * exposes semantic theme vars (--heading, --body, --primary, --card,
+ * …) to Tailwind's --color-* namespace, so utilities like bg-card
+ * and text-heading pick up values set by theme.yml.
+ *
+ * The @source directives tell Tailwind where to scan for utility
+ * class names. Without them, classes that only appear in JSX string
+ * literals would be dropped from the final CSS.
+ *
+ * Named CSS classes (.chart-container, .members-table, .cover-*)
+ * stay alongside utilities — they're natural for complex selectors
+ * (table head, :nth-child, ::marker) that utility classes can't
+ * express cleanly. The template deliberately shows both patterns:
+ * utilities for composition, named classes for domain components.
  */
+
+@import 'tailwindcss';
+@import '@uniweb/kit/theme-tokens.css';
+
+@source "../node_modules/@uniweb/kit/src/**/*.{js,jsx}";
+@source "./sections/**/*.{js,jsx}";
+@source "./layouts/**/*.{js,jsx}";
+@source "./components/**/*.{js,jsx}";
+
+/* Theme-variant font stacks are imported up front so a tenant can
+ * swap site/theme.yml <-> site/theme-archive.yml without a foundation
+ * rebuild. The theme pipeline exposes --font-heading / --font-body
+ * / --font-mono from theme.yml; the body rules below wire them to
+ * elements (the pipeline doesn't emit default font-family rules). */
 
 /* Institute theme fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
@@ -112,173 +136,6 @@ kbd {
   font-size: 1rem;
   font-weight: 600;
   color: var(--heading);
-}
-
-/* ── Floating toolbar ──────────────────────────────────────────────── */
-
-.doc-bar {
-  position: fixed;
-  top: 1.5rem;
-  right: 1.5rem;
-  z-index: 40;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.5rem;
-}
-
-.doc-bar-row {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.doc-bar-download-wrap {
-  position: relative;
-}
-
-.doc-bar-error {
-  max-width: 20rem;
-  padding: 0.25rem 0.75rem;
-  background: color-mix(in oklch, var(--accent), white 85%);
-  color: var(--accent);
-  font-size: 0.75rem;
-  border-radius: 0.25rem;
-  margin: 0;
-}
-
-.doc-bar-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  border-radius: 9999px;
-  font: inherit;
-  font-size: 0.875rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.15s, opacity 0.15s, box-shadow 0.15s;
-  border: 1px solid transparent;
-}
-
-.doc-bar-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.doc-bar-button-secondary {
-  background: var(--card);
-  color: var(--body);
-  border-color: var(--border);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-}
-
-.doc-bar-button-secondary:hover:not(:disabled) {
-  background: var(--muted, var(--section));
-}
-
-.doc-bar-button-primary {
-  background: var(--primary);
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-}
-
-.doc-bar-button-primary:hover:not(:disabled) {
-  opacity: 0.92;
-}
-
-.doc-bar-icon {
-  width: 1rem;
-  height: 1rem;
-}
-
-.doc-bar-icon-sm {
-  width: 0.875rem;
-  height: 0.875rem;
-}
-
-.doc-bar-spinner {
-  width: 0.5rem;
-  height: 0.5rem;
-  background: currentColor;
-  border-radius: 9999px;
-  animation: doc-bar-pulse 1s infinite;
-}
-
-@keyframes doc-bar-pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
-}
-
-/* Download format menu ------------------------------------------------ */
-
-.doc-bar-menu {
-  position: absolute;
-  top: calc(100% + 0.5rem);
-  right: 0;
-  min-width: 12rem;
-  padding: 0.375rem;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 0.5rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
-  display: flex;
-  flex-direction: column;
-  gap: 0.125rem;
-}
-
-.doc-bar-menu-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.5rem 0.75rem;
-  background: transparent;
-  border: none;
-  border-radius: 0.375rem;
-  cursor: pointer;
-  font: inherit;
-  font-size: 0.875rem;
-  color: var(--body);
-  text-align: left;
-}
-
-.doc-bar-menu-item:hover {
-  background: var(--muted, var(--section));
-  color: var(--heading);
-}
-
-.doc-bar-menu-label {
-  font-weight: 500;
-}
-
-.doc-bar-menu-ext {
-  color: var(--subtle);
-  font-size: 0.75rem;
-  font-variant-numeric: tabular-nums;
-}
-
-/* Options panel ------------------------------------------------------- */
-
-.doc-options-panel {
-  width: min(32rem, calc(100vw - 3rem));
-  padding: 1rem;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 0.5rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  max-height: calc(100vh - 8rem);
-  overflow-y: auto;
-}
-
-.doc-options-panel > fieldset,
-.doc-options-panel > .query-selector,
-.doc-options-panel > .report-options,
-.doc-options-panel > .section-toggles {
-  margin: 0;
-  max-width: none;
 }
 
 /* ── Query selector ────────────────────────────────────────────────── */

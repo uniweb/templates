@@ -40,7 +40,7 @@ export default function DocumentOptionsPanel() {
   }, [website?.basePath])
 
   return (
-    <div className="doc-options-panel">
+    <div className="w-[min(32rem,calc(100vw-3rem))] max-h-[calc(100vh-8rem)] overflow-y-auto rounded-lg border border-border bg-card p-4 shadow-xl flex flex-col gap-4">
       <QuerySelector queries={queries} />
       <ReportOptions />
       <SectionToggles />
