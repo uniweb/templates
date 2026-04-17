@@ -123,29 +123,35 @@ function writePersisted(page) {
   }
 }
 
+// Track which pages already have persistence wired so repeat mounts of
+// the layout don't attach duplicate subscribers. A WeakSet keyed by page
+// keeps this out of page.state's keyspace — no sentinel values, no
+// risk of collision with a foundation slot.
+const persistedPages = new WeakSet()
+
+const PERSISTED_KEYS = ['slug', 'excludedSections', 'dateRange', 'refereedOnly', 'citationStyle']
+
 /**
  * Seed `page.state` from localStorage if present, then subscribe to
  * changes and write back. Idempotent — safe to call on every layout
- * mount; the page-level "installed" flag short-circuits repeat calls.
+ * mount.
  *
  * Returns an unsubscribe function.
  */
 export function installQueryStatePersistence(page) {
   if (!page || !page.state) return () => {}
-  if (page.state.get('__amPersistInstalled')) return () => {}
+  if (persistedPages.has(page)) return () => {}
+  persistedPages.add(page)
 
-  const persisted = readPersisted()
-  const seed = persisted || DEFAULTS
+  const seed = readPersisted() || DEFAULTS
+  for (const key of PERSISTED_KEYS) {
+    if (!page.state.has(key)) page.state.set(key, seed[key])
+  }
 
-  if (!page.state.has('slug')) page.state.set('slug', seed.slug)
-  if (!page.state.has('excludedSections')) page.state.set('excludedSections', seed.excludedSections)
-  if (!page.state.has('dateRange')) page.state.set('dateRange', seed.dateRange)
-  if (!page.state.has('refereedOnly')) page.state.set('refereedOnly', seed.refereedOnly)
-  if (!page.state.has('citationStyle')) page.state.set('citationStyle', seed.citationStyle)
-
-  page.state.set('__amPersistInstalled', true)
-
-  return page.state.subscribe(() => writePersisted(page))
+  // Per-key subscriptions — no all-keys fan-out in ObservableState.
+  const write = () => writePersisted(page)
+  const unsubs = PERSISTED_KEYS.map((key) => page.state.subscribe(key, write))
+  return () => unsubs.forEach((fn) => fn())
 }
 
 // ─── Hooks ───────────────────────────────────────────────────────
