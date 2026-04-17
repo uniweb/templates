@@ -116,6 +116,55 @@
   margin: 0 0 1.5rem;
 }
 
+/* ── Chart sections (PublicationsByType, etc) ─────────────────────── */
+
+.chart-section {
+  padding-block: var(--section-padding-y, 3rem);
+}
+
+.chart-title {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 600;
+  color: var(--heading);
+  margin: 0 0 0.5rem;
+}
+
+.chart-query-note {
+  margin: 0 0 1.5rem;
+  color: var(--subtle);
+  font-size: 0.9rem;
+}
+
+.chart-query-note em {
+  color: var(--heading);
+  font-style: italic;
+}
+
+.chart-container {
+  width: 100%;
+  min-height: 320px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 1.5rem 1rem;
+}
+
+.chart-container-placeholder {
+  /* Reserve the chart footprint during SSR / prerender so hydration
+   * doesn't cause layout shift when the chart mounts. */
+  display: block;
+}
+
+.chart-empty {
+  padding: 2.5rem;
+  text-align: center;
+  color: var(--subtle);
+  background: var(--card);
+  border: 1px dashed var(--border);
+  border-radius: 0.5rem;
+  font-style: italic;
+}
+
 .members-query-note {
   margin: 0 0 1rem;
   color: var(--subtle);

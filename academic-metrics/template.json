@@ -15,12 +15,14 @@
   ],
   "components": [
     "Cover",
-    "Members"
+    "Members",
+    "PublicationsByType"
   ],
   "dependencies": {
     "foundation": {
       "@uniweb/press": "{{version \"@uniweb/press\"}}",
-      "@uniweb/query": "{{version \"@uniweb/query\"}}"
+      "@uniweb/query": "{{version \"@uniweb/query\"}}",
+      "recharts": "^2.15.0"
     }
   }
 }
