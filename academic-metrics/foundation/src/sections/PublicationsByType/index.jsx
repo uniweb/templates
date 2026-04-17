@@ -23,7 +23,12 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 import { useDocumentOutput } from '@uniweb/press'
-import { useFilteredMembers } from '#components/query-context.jsx'
+import {
+  useFilteredMembers,
+  useSectionIncluded,
+} from '#components/query-context.jsx'
+
+const SECTION_KEY = 'publications-by-type'
 
 const PALETTE = [
   '#1e40af', // primary
@@ -40,19 +45,28 @@ const COLUMN_WIDTHS = [24, 10]
 const NUMBER_FORMATS = ['text', 'number']
 
 export default function PublicationsByType({ content, block }) {
+  const included = useSectionIncluded(SECTION_KEY)
   const { members, activeQuery } = useFilteredMembers(content)
   const heading = content?.title || 'Publications by type'
 
   const counts = aggregateByType(members)
 
-  useDocumentOutput(block, 'xlsx', {
-    title: 'Publications by Type',
-    headers: HEADERS,
-    data: counts.map(({ type, count }) => [titleCase(type), count]),
-    columnWidths: COLUMN_WIDTHS,
-    numberFormats: NUMBER_FORMATS,
-    totals: ['Total', 'sum'],
-  })
+  useDocumentOutput(
+    block,
+    'xlsx',
+    included && counts.length > 0
+      ? {
+          title: 'Publications by Type',
+          headers: HEADERS,
+          data: counts.map(({ type, count }) => [titleCase(type), count]),
+          columnWidths: COLUMN_WIDTHS,
+          numberFormats: NUMBER_FORMATS,
+          totals: ['Total', 'sum'],
+        }
+      : null,
+  )
+
+  if (!included) return null
 
   return (
     <section className="chart-section">

@@ -16,7 +16,9 @@
   "components": [
     "Cover",
     "Members",
-    "PublicationsByType"
+    "PublicationsByType",
+    "PublicationsByJournal",
+    "PublicationsByYear"
   ],
   "dependencies": {
     "foundation": {

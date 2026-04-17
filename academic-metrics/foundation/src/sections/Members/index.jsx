@@ -10,13 +10,18 @@
  * next compile('xlsx') reflects the selection.
  */
 import { useDocumentOutput } from '@uniweb/press'
-import { useFilteredMembers } from '#components/query-context.jsx'
+import {
+  useFilteredMembers,
+  useSectionIncluded,
+} from '#components/query-context.jsx'
 
+const SECTION_KEY = 'members'
 const HEADERS = ['Name', 'Rank', 'Department', 'Tenured', 'Start year']
 const COLUMN_WIDTHS = [28, 14, 18, 10, 12]
 const NUMBER_FORMATS = ['text', 'text', 'text', 'text', 'number']
 
 export default function Members({ content, block }) {
+  const included = useSectionIncluded(SECTION_KEY)
   const { members, activeQuery } = useFilteredMembers(content)
   const heading = content?.title || 'Members'
 
@@ -34,13 +39,21 @@ export default function Members({ content, block }) {
     Number(m.start_year) || null,
   ])
 
-  useDocumentOutput(block, 'xlsx', {
-    title: 'Members',
-    headers: HEADERS,
-    data: rows,
-    columnWidths: COLUMN_WIDTHS,
-    numberFormats: NUMBER_FORMATS,
-  })
+  useDocumentOutput(
+    block,
+    'xlsx',
+    included
+      ? {
+          title: 'Members',
+          headers: HEADERS,
+          data: rows,
+          columnWidths: COLUMN_WIDTHS,
+          numberFormats: NUMBER_FORMATS,
+        }
+      : null,
+  )
+
+  if (!included) return null
 
   return (
     <section className="members">

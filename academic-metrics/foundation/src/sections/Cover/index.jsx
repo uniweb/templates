@@ -12,6 +12,7 @@
  */
 import { useDocumentOutput } from '@uniweb/press'
 import QuerySelector from '#components/QuerySelector.jsx'
+import SectionToggles from '#components/SectionToggles.jsx'
 import { useFilteredMembers } from '#components/query-context.jsx'
 
 export default function Cover({ content, block }) {
@@ -80,6 +81,7 @@ export default function Cover({ content, block }) {
         matchedCount={members.length}
         totalCount={totalCount}
       />
+      <SectionToggles />
       <div className="cover-meta" role="list">
         <Stat label="Members" value={members.length} />
         <Stat label="Publications" value={publicationCount} />

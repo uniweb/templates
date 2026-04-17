@@ -103,6 +103,48 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* ── Section toggles ──────────────────────────────────────────────── */
+
+.section-toggles {
+  display: block;
+  margin: 0 auto 2rem;
+  padding: 1rem 1.25rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  text-align: left;
+  max-width: 40rem;
+}
+
+.section-toggles-legend {
+  padding: 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.section-toggles-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+}
+
+.section-toggles-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--body);
+  cursor: pointer;
+}
+
+.section-toggles-item input {
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
 /* ── Members roster ────────────────────────────────────────────────── */
 
 .members {
