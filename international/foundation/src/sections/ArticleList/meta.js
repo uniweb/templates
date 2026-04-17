@@ -4,9 +4,10 @@ export default {
   category: 'content',
   purpose: 'Organize',
 
-  // Data configuration: inherit articles data from page-level fetch
+  // Data: article-shaped data. Delivery is default-on; `entity` is a
+  // declaration for the editor and prepare-props shape guarantees.
   data: {
-    inherit: ['articles'],
+    entity: 'articles',
     schemas: {
       articles: {
         slug: { type: 'string', default: '' },

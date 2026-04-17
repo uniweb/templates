@@ -15,8 +15,6 @@ export default {
     links: 'Call-to-action buttons [1-2]',
   },
 
-  data: { inherit: true },
-
   params: {},
 
   presets: {

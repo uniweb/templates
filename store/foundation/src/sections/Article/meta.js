@@ -5,7 +5,7 @@ export default {
   purpose: 'Inform',
 
   data: {
-    inherit: ['article', 'articles'],
+    entity: 'articles',
     schemas: {
       article: {
         slug: { type: 'string', default: '' },

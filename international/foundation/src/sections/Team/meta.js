@@ -7,9 +7,10 @@ export default {
   category: 'showcase',
   purpose: 'Introduce',
 
-  // Data configuration: cascading and schema for team member data
+  // Data: team-shaped data. Delivery is default-on; `entity` is a
+  // declaration for the editor and prepare-props shape guarantees.
   data: {
-    inherit: ['team'],
+    entity: 'team',
     schemas: {
       team: {
         name: { type: 'string', default: '' },

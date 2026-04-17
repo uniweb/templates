@@ -5,7 +5,7 @@ export default {
   category: 'content',
 
   data: {
-    inherit: ['profile'],
+    entity: 'profile',
   },
 
   content: {

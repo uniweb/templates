@@ -9,8 +9,6 @@ export default {
     paragraphs: 'Description',
   },
 
-  data: { inherit: true },
-
   params: {},
 
   presets: {

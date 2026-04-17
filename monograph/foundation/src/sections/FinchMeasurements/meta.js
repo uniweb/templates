@@ -5,7 +5,7 @@ export default {
   category: 'monograph',
 
   data: {
-    inherit: ['monograph'],
+    entity: 'monograph',
   },
 
   content: {

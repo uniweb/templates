@@ -9,8 +9,6 @@ export default {
     paragraphs: 'Description [0-1]',
   },
 
-  data: { inherit: true },
-
   params: {},
 
   presets: {

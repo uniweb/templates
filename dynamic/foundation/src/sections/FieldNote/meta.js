@@ -8,7 +8,6 @@ export default {
 
   data: {
     entity: 'posts',
-    inherit: true,
   },
 
   params: {},

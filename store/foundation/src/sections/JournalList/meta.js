@@ -5,7 +5,7 @@ export default {
   purpose: 'Organize',
 
   data: {
-    inherit: ['articles'],
+    entity: 'articles',
     schemas: {
       articles: {
         slug: { type: 'string', default: '' },

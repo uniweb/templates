@@ -5,7 +5,7 @@ export default {
   purpose: 'Sell',
 
   data: {
-    inherit: ['products'],
+    entity: 'products',
     schemas: {
       products: {
         title: { type: 'string', default: '' },

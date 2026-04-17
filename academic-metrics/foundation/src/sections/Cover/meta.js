@@ -4,10 +4,6 @@ export default {
     'Report summary: title, a narrative paragraph rendered via Loom (unit-wide counts), a Population selector, and a live stats strip over the filtered member set. Registers a Summary sheet in the downloaded workbook.',
   category: 'academic-metrics',
 
-  data: {
-    inherit: ['members', 'queries'],
-  },
-
   content: {
     title: 'Report title (e.g., "Academic Metrics — 2025")',
     subtitle: 'Optional subtitle (overridden by active query name when one is selected)',

@@ -4,9 +4,10 @@ export default {
   category: 'content',
   purpose: 'Inform',
 
-  // Data configuration: inherit article data from parent page
+  // Data: article-shaped data. Delivery is default-on; `entity` is a
+  // declaration for the editor and prepare-props shape guarantees.
   data: {
-    inherit: ['article', 'articles'],
+    entity: 'articles',
     schemas: {
       article: {
         slug: { type: 'string', default: '' },
@@ -21,7 +22,7 @@ export default {
   },
 
   content: {
-    // Article content is expected from inherited data, not markdown
+    // Article content is expected from cascaded data, not markdown
   },
 
   params: {
