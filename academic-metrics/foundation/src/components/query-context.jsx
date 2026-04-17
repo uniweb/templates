@@ -36,6 +36,7 @@ export const SECTION_KEYS = [
   'publications-by-journal',
   'publications-by-year',
   'funding',
+  'supervisions',
 ]
 
 const SECTION_LABELS = {
@@ -44,6 +45,7 @@ const SECTION_LABELS = {
   'publications-by-journal': 'Publications by journal',
   'publications-by-year': 'Publications by year',
   funding: 'Funding',
+  supervisions: 'Supervisions',
 }
 
 export function sectionLabel(key) {

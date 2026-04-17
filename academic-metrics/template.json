@@ -19,7 +19,8 @@
     "PublicationsByType",
     "PublicationsByJournal",
     "PublicationsByYear",
-    "Funding"
+    "Funding",
+    "Supervisions"
   ],
   "dependencies": {
     "foundation": {
