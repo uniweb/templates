@@ -1,9 +1,11 @@
-# Recent Hires — saved query.
+# Recent Hires — saved view.
 #
 # Selects members who joined in 1860 or later. Demonstrates the
-# numeric-comparison operators in @uniweb/query.
+# numeric-comparison operators in the where-object format
+# (`{ start_year: { gte: 1860 } }`).
 
 name: Recent Hires
 description: Members who joined the institution in 1860 or later.
 source: members
-where: "start_year >= 1860"
+where:
+  start_year: { gte: 1860 }

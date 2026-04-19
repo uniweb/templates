@@ -3,11 +3,11 @@
  * academic-metrics.
  *
  * State lives on `page.state` (not a React context) so:
- *   - The fetcher — which runs outside React in the dispatcher path —
- *     could read the same values via `ctx.page.state` when it wants
- *     backend-filtered results.
  *   - The values survive SPA navigation without being re-hydrated from
  *     React state on every mount.
+ *   - The foundation's `data` handler (in foundation.js) can read the
+ *     active query slug via `block.page.state.get('slug')` to simulate
+ *     backend filtering of the members collection.
  *   - A local sync helper persists to localStorage independently.
  *
  * Five slots, each a separate key so only the subscribing component
@@ -30,11 +30,16 @@
  *
  * The template ships every section ON by default and leaves the date
  * range empty: "mother of all reports, trim what you don't want."
+ *
+ * NOTE: Members filtering by active query is no longer done here.
+ * Section components read the already-filtered list from
+ * `content.data.members`, with `content.data.membersTotal` and
+ * `content.data.activeQuery` available for "X of Y" displays. The
+ * filtering happens in the foundation's `data` handler — see
+ * foundation.js for the simulated-backend explanation.
  */
 
-import { useMemo } from 'react'
 import { usePageState } from '@uniweb/kit'
-import { resolveQuery, QueryError } from '@uniweb/query'
 
 const STORAGE_KEY = 'academic-metrics/options'
 const ALL_MEMBERS_SLUG = 'all-members'
@@ -194,44 +199,3 @@ export function useReportOptions() {
 
   return [{ dateRange, refereedOnly, citationStyle }, setReportOption]
 }
-
-/**
- * Read members + queries from `content.data`, look up the selected
- * query, and return the filtered member set. Identical surface to
- * the previous React-context implementation.
- */
-export function useFilteredMembers(content) {
-  const [slug] = useSelectedQuery()
-  const allMembers = content?.data?.members || []
-  const allQueries = content?.data?.queries || []
-
-  const activeQuery =
-    slug === ALL_MEMBERS_SLUG
-      ? null
-      : allQueries.find((q) => q.slug === slug) || null
-
-  const filtered = useMemo(() => {
-    if (!activeQuery) return allMembers
-    try {
-      return resolveQuery(activeQuery, allMembers)
-    } catch (err) {
-      if (err instanceof QueryError) {
-        console.warn(
-          `[academic-metrics] query "${activeQuery.slug}" failed to parse:`,
-          err.message,
-        )
-      } else {
-        throw err
-      }
-      return allMembers
-    }
-  }, [activeQuery, allMembers])
-
-  return {
-    members: filtered,
-    activeQuery,
-    totalCount: allMembers.length,
-    allQueries,
-  }
-}
-

@@ -25,7 +25,6 @@ import {
 import { useDocumentOutput } from '@uniweb/press'
 import { Paragraph, Table, Tr, Td } from '@uniweb/press/docx'
 import {
-  useFilteredMembers,
   useReportOptions,
   useSectionIncluded,
 } from '#components/query-context.jsx'
@@ -40,7 +39,10 @@ const NUMBER_FORMATS = ['text', 'number']
 
 export default function PublicationsByJournal({ content, block }) {
   const included = useSectionIncluded(SECTION_KEY)
-  const { members, activeQuery } = useFilteredMembers(content)
+  // Filtered members + active query come from content.data (foundation
+  // data handler — see foundation.js for simulator notes).
+  const members = Array.isArray(content?.data?.members) ? content.data.members : []
+  const activeQuery = content?.data?.activeQuery || null
   const [reportOpts] = useReportOptions()
   const heading = content?.title || 'Publications by journal'
 

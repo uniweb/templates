@@ -26,7 +26,6 @@
   "dependencies": {
     "foundation": {
       "@uniweb/press": "{{version \"@uniweb/press\"}}",
-      "@uniweb/query": "{{version \"@uniweb/query\"}}",
       "@uniweb/loom": "{{version \"@uniweb/loom\"}}",
       "recharts": "^2.15.0",
       "citestyle": "^1.0.1"

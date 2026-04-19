@@ -12,10 +12,15 @@
  */
 import { useDocumentOutput } from '@uniweb/press'
 import { Paragraph } from '@uniweb/press/docx'
-import { useFilteredMembers } from '#components/query-context.jsx'
 
 export default function Cover({ content, block }) {
-  const { members, activeQuery, totalCount } = useFilteredMembers(content)
+  // Filtered members + meta arrive on content.data already shaped by
+  // the foundation's data handler — see foundation.js for the
+  // simulated-backend explanation. In production a real backend would
+  // perform this same filtering and return the same shape.
+  const members = Array.isArray(content?.data?.members) ? content.data.members : []
+  const activeQuery = content?.data?.activeQuery || null
+  const totalCount = content?.data?.membersTotal ?? members.length
 
   // Loom-resolved narrative paragraphs — the content handler in
   // foundation.js has already instantiated {COUNT OF members}, etc.,

@@ -29,7 +29,6 @@ import { SafeHtml } from '@uniweb/kit'
 import { useDocumentOutput } from '@uniweb/press'
 import { Paragraph } from '@uniweb/press/docx'
 import {
-  useFilteredMembers,
   useReportOptions,
   useSectionIncluded,
 } from '#components/query-context.jsx'
@@ -67,7 +66,10 @@ async function loadStyle(styleName) {
 
 export default function PublicationsList({ content, block }) {
   const included = useSectionIncluded(SECTION_KEY)
-  const { members, activeQuery } = useFilteredMembers(content)
+  // Filtered members + active query come from content.data (foundation
+  // data handler — see foundation.js for simulator notes).
+  const members = Array.isArray(content?.data?.members) ? content.data.members : []
+  const activeQuery = content?.data?.activeQuery || null
   const [reportOpts] = useReportOptions()
   const heading = content?.title || 'Publications'
 

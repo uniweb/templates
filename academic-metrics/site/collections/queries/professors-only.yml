@@ -1,8 +1,9 @@
-# Professors Only — saved query.
+# Professors Only — saved view.
 #
 # Selects members whose rank is professor, across any department.
 
 name: Professors Only
 description: Members at the rank of professor, across all departments.
 source: members
-where: "rank = 'professor'"
+where:
+  rank: professor

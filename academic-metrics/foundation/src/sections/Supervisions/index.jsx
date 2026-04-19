@@ -25,10 +25,7 @@ import {
 } from 'recharts'
 import { useDocumentOutput } from '@uniweb/press'
 import { Paragraph, Table, Tr, Td } from '@uniweb/press/docx'
-import {
-  useFilteredMembers,
-  useSectionIncluded,
-} from '#components/query-context.jsx'
+import { useSectionIncluded } from '#components/query-context.jsx'
 
 const SECTION_KEY = 'supervisions'
 
@@ -36,7 +33,10 @@ const PALETTE = ['#1e40af', '#0f766e', '#ea580c', '#9333ea', '#be123c', '#0ea5e9
 
 export default function Supervisions({ content, block }) {
   const included = useSectionIncluded(SECTION_KEY)
-  const { members, activeQuery } = useFilteredMembers(content)
+  // Filtered members + active query come from content.data (foundation
+  // data handler — see foundation.js for simulator notes).
+  const members = Array.isArray(content?.data?.members) ? content.data.members : []
+  const activeQuery = content?.data?.activeQuery || null
   const heading = content?.title || 'Supervisions'
 
   const { levels, rows, grandTotal } = aggregate(members)

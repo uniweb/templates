@@ -1,20 +1,20 @@
 /**
  * Members — roster of the currently-filtered member set.
  *
- * Reads the filtered members from the shared query context via
- * useFilteredMembers. Renders a web preview as a styled HTML table
- * and registers an xlsx sheet with the same rows.
+ * Reads the already-filtered list from `content.data.members` (see
+ * foundation.js for the simulated-backend explanation). Renders a web
+ * preview as a styled HTML table and registers an xlsx sheet with the
+ * same rows.
  *
- * When the active query changes, this section re-renders — the new
- * rows replace the previous useDocumentOutput registration, so the
- * next compile('xlsx') reflects the selection.
+ * When the active query changes, the layout re-renders, every
+ * BlockRenderer re-runs the data handler, and this section receives a
+ * fresh `content.data.members`; the new rows replace the previous
+ * useDocumentOutput registration, so the next compile('xlsx') reflects
+ * the selection.
  */
 import { useDocumentOutput } from '@uniweb/press'
 import { Paragraph, Table, Tr, Td } from '@uniweb/press/docx'
-import {
-  useFilteredMembers,
-  useSectionIncluded,
-} from '#components/query-context.jsx'
+import { useSectionIncluded } from '#components/query-context.jsx'
 
 const SECTION_KEY = 'members'
 const HEADERS = ['Name', 'Rank', 'Department', 'Tenured', 'Start year']
@@ -23,7 +23,10 @@ const NUMBER_FORMATS = ['text', 'text', 'text', 'text', 'number']
 
 export default function Members({ content, block }) {
   const included = useSectionIncluded(SECTION_KEY)
-  const { members, activeQuery } = useFilteredMembers(content)
+  // Filtered members + active query arrive on content.data already
+  // shaped by the foundation's data handler — see foundation.js.
+  const members = Array.isArray(content?.data?.members) ? content.data.members : []
+  const activeQuery = content?.data?.activeQuery || null
   const heading = content?.title || 'Members'
 
   const sorted = [...members].sort((a, b) => {
