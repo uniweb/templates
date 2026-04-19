@@ -14,51 +14,39 @@
  *
  * The handler's `vars` extractor exposes the members collection plus
  * a few precomputed totals. These are unit-wide numbers — not filtered
- * by the active query — which sets up the narrative contrast on Cover:
- * "X members of the unit total" (Loom, static) vs. "Y matched by the
- * current query" (JSX stats strip, reactive).
- *
+ * by the active selection — which sets up the narrative contrast on
+ * Cover: "X members of the unit total" (Loom, static) vs. "Y matched
+ * by the current selection" (JSX stats strip via useFilteredMembers,
+ * reactive).
  *
  * ─────────────────────────────────────────────────────────────────────
- *  ⚠️  SIMULATED BACKEND — read this before extending the template.
+ * Filtering: the framework does the work.
  * ─────────────────────────────────────────────────────────────────────
  *
- * The `data` handler below filters the members collection in-process
- * based on the active saved query. THIS IS NOT WHAT YOU WOULD DO IN
- * PRODUCTION. It exists so the demo runs without a backend.
+ * This foundation does NOT filter members itself. Sections that show
+ * the active population call useFilteredMembers (see components/
+ * query-context.jsx) — a thin hook over @uniweb/kit's useFetched that
+ * passes the active where-object as part of the request.
  *
- * In a real deployment with thousands of faculty:
+ * The framework decides whether to ship that where-object to the
+ * source or to evaluate it locally, based on the site's
+ * `fetcher.supports:` declaration:
  *
- *   1. The active view's `where:` predicate (a structured where-object
- *      authored as YAML in site/collections/queries/) would be sent to
- *      your backend as part of the request — typically as JSON in a
- *      POST body.
+ *   - supports: []       (default; static /data/members.json) — the
+ *     framework fetches the file once and applies the predicate in
+ *     JS. Multiple sections share one cached fetch.
  *
- *   2. The backend would evaluate the predicate against the database
- *      (translating it to SQL/Cypher/Mongo as needed) and return ONLY
- *      the matching records — say 47 of 3,000.
+ *   - supports: [where]  (real backend, e.g., the dev backend at
+ *     localhost:8080) — the predicate ships in the request; the
+ *     backend returns only matching records.
  *
- *   3. The browser would receive the already-filtered set and render
- *      it. The components downstream wouldn't know or care that
- *      filtering happened on the server.
- *
- * In this template we ship 3 sample members embedded in the build
- * output (public/data/members.json) and evaluate the same where-object
- * in the browser using @uniweb/core's matchWhere. Same predicate, same
- * result shape — just a different execution site. To swap in a real
- * backend you'd:
- *
- *   - Configure the `fetcher:` block in site.yml to point at your
- *     endpoint and declare `supports: [where]` (so the framework ships
- *     the predicate in the request rather than evaluating locally).
- *   - Delete the data handler below (the backend now does its job).
- *
- * Section components don't change. The selector UI doesn't change.
- * The saved YAML views don't change. That's the point.
+ * Same author code, same foundation code, same components. Switching
+ * modes is one block in site.yml. That's the architecture's promise
+ * made concrete — and it's why this foundation no longer needs a
+ * `data:` handler to bypass the framework's transport-aware fetcher.
  */
 
 import { Loom, createLoomHandlers } from '@uniweb/loom'
-import { matchWhere } from '@uniweb/core'
 
 export const vars = {
   'max-content-width': {
@@ -108,73 +96,11 @@ function buildVars(data) {
   }
 }
 
-const ALL_MEMBERS_SLUG = 'all-members'
-
-/**
- * SIMULATED BACKEND FILTERING. See the file header for the full story.
- *
- * Runs once per block, after Layer-1 fetches have populated
- * `data.members` (page-level cascade) and `data.queries` (per-block
- * fetch). Reads the active query slug from page.state — written by
- * the QuerySelector dropdown in the layout's options panel.
- *
- * Output shape mirrors what a real backend would return:
- *
- *   data.members        → records matching the active query
- *                         (or all records when no filter active)
- *   data.membersTotal   → unfiltered count, for "X of Y" displays
- *   data.activeQuery    → the query doc itself, for label rendering
- *                         (null when no filter active)
- *
- * Components consume these as plain content. They never see the
- * predicate or call the evaluator — those concerns live only here.
- */
-function filterMembersByActiveQuery(data, block) {
-  const allMembers = Array.isArray(data?.members) ? data.members : null
-  if (!allMembers) return data
-
-  const slug = block.page?.state?.get?.('slug')
-  const allQueries = Array.isArray(data?.queries) ? data.queries : []
-
-  if (!slug || slug === ALL_MEMBERS_SLUG) {
-    return {
-      ...data,
-      membersTotal: allMembers.length,
-      activeQuery: null,
-    }
-  }
-
-  const activeQuery = allQueries.find((q) => q.slug === slug) || null
-  if (!activeQuery || !activeQuery.where) {
-    return {
-      ...data,
-      membersTotal: allMembers.length,
-      activeQuery: activeQuery || null,
-    }
-  }
-
-  // matchWhere walks the where-object against each record. In production
-  // this same predicate would ship to the backend (see file header).
-  const filtered = matchWhere(activeQuery.where, allMembers)
-
-  return {
-    ...data,
-    members: filtered,
-    membersTotal: allMembers.length,
-    activeQuery,
-  }
-}
-
-const loomHandlers = createLoomHandlers({
-  engine,
-  vars: buildVars,
-})
-
 export default {
   defaultLayout: 'MetricsLayout',
   props: {},
-  handlers: {
-    data: filterMembersByActiveQuery,
-    ...loomHandlers,
-  },
+  handlers: createLoomHandlers({
+    engine,
+    vars: buildVars,
+  }),
 }

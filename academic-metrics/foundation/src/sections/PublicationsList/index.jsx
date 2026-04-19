@@ -31,6 +31,7 @@ import { Paragraph } from '@uniweb/press/docx'
 import {
   useReportOptions,
   useSectionIncluded,
+  useFilteredMembers,
 } from '#components/query-context.jsx'
 import { collectPublications } from '#utils/publication-filters.js'
 import { publicationsToCsl } from '#utils/to-csl.js'
@@ -66,10 +67,7 @@ async function loadStyle(styleName) {
 
 export default function PublicationsList({ content, block }) {
   const included = useSectionIncluded(SECTION_KEY)
-  // Filtered members + active query come from content.data (foundation
-  // data handler — see foundation.js for simulator notes).
-  const members = Array.isArray(content?.data?.members) ? content.data.members : []
-  const activeQuery = content?.data?.activeQuery || null
+  const { members, activeLabel } = useFilteredMembers(content)
   const [reportOpts] = useReportOptions()
   const heading = content?.title || 'Publications'
 
@@ -174,9 +172,9 @@ export default function PublicationsList({ content, block }) {
   return (
     <section className="chart-section">
       <h2 className="chart-title">{heading}</h2>
-      {activeQuery && (
+      {activeLabel && (
         <p className="chart-query-note">
-          Across <em>{activeQuery.name}</em> ({members.length}{' '}
+          Across <em>{activeLabel}</em> ({members.length}{' '}
           {members.length === 1 ? 'member' : 'members'}).
         </p>
       )}

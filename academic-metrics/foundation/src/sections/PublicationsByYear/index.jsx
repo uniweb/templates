@@ -23,6 +23,7 @@ import { Paragraph, Table, Tr, Td } from '@uniweb/press/docx'
 import {
   useReportOptions,
   useSectionIncluded,
+  useFilteredMembers,
 } from '#components/query-context.jsx'
 import { filterPublications } from '#utils/publication-filters.js'
 
@@ -34,10 +35,7 @@ const NUMBER_FORMATS = ['number', 'number', 'number']
 
 export default function PublicationsByYear({ content, block }) {
   const included = useSectionIncluded(SECTION_KEY)
-  // Filtered members + active query come from content.data (foundation
-  // data handler — see foundation.js for simulator notes).
-  const members = Array.isArray(content?.data?.members) ? content.data.members : []
-  const activeQuery = content?.data?.activeQuery || null
+  const { members, activeLabel } = useFilteredMembers(content)
   const [reportOpts] = useReportOptions()
   const heading = content?.title || 'Publications by year'
 
@@ -98,9 +96,9 @@ export default function PublicationsByYear({ content, block }) {
   return (
     <section className="chart-section">
       <h2 className="chart-title">{heading}</h2>
-      {activeQuery && (
+      {activeLabel && (
         <p className="chart-query-note">
-          Across <em>{activeQuery.name}</em> ({members.length}{' '}
+          Across <em>{activeLabel}</em> ({members.length}{' '}
           {members.length === 1 ? 'member' : 'members'}).
         </p>
       )}

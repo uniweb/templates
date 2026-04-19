@@ -1,47 +1,38 @@
 /**
  * DocumentOptionsPanel — the popover revealed by the Options gear
- * button on the floating toolbar. Composes three control groups:
+ * button on the floating toolbar. Composes four control groups:
  *
- *   1. Population — saved-query dropdown (QuerySelector)
- *   2. Report options — date range, refereed-only, citation style
- *   3. Sections — per-section inclusion checkboxes
+ *   1. Population — saved-view dropdown (QuerySelector)
+ *   2. Filter — free-form filter UI (FilterPanel) reading the
+ *      collection's `queryable:` declaration
+ *   3. Report options — date range, refereed-only, citation style
+ *   4. Sections — per-section inclusion checkboxes
  *
- * The panel fetches /data/queries.json itself rather than reading
- * the queries collection through a section's content.data — it
- * lives at layout scope, outside any section's data cascade. One
- * fetch on mount, cached in state.
+ * The saved-view dropdown and the filter panel are alternatives —
+ * activating one clears the other. See query-context.jsx for the
+ * predicate-resolution rules (panel takes precedence when set).
+ *
+ * Queries data comes from the page-level cascade via useFetched —
+ * shares the cache with section-side useFilteredMembers calls.
  */
-import { useEffect, useState } from 'react'
-import { useWebsite } from '@uniweb/kit'
+import { useFetched } from '@uniweb/kit'
 import QuerySelector from './QuerySelector.jsx'
+import FilterPanel from './FilterPanel.jsx'
 import ReportOptions from './ReportOptions.jsx'
 import SectionToggles from './SectionToggles.jsx'
 
 export default function DocumentOptionsPanel() {
-  const { website } = useWebsite()
-  const [queries, setQueries] = useState([])
-
-  useEffect(() => {
-    const base = website?.basePath || '/'
-    const url = `${base}data/queries.json`
-    let cancelled = false
-    fetch(url)
-      .then((r) => (r.ok ? r.json() : []))
-      .then((data) => {
-        if (cancelled) return
-        setQueries(Array.isArray(data) ? data : [])
-      })
-      .catch(() => {
-        if (!cancelled) setQueries([])
-      })
-    return () => {
-      cancelled = true
-    }
-  }, [website?.basePath])
+  // Kit hooks take explicit path:/url: — the `collection:` shorthand
+  // is build-time only. The page-level cascade fetches the same path
+  // (translated from `data: queries`), so this useFetched gets a
+  // synchronous cache hit on first render.
+  const { data } = useFetched({ path: '/data/queries.json', schema: 'queries' })
+  const queries = Array.isArray(data) ? data : []
 
   return (
     <div className="w-[min(32rem,calc(100vw-3rem))] max-h-[calc(100vh-8rem)] overflow-y-auto rounded-lg border border-border bg-card p-4 shadow-xl flex flex-col gap-4">
       <QuerySelector queries={queries} />
+      <FilterPanel />
       <ReportOptions />
       <SectionToggles />
     </div>

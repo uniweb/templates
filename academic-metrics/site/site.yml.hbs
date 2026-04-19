@@ -9,8 +9,53 @@ index: report
 collections:
   members:
     path: collections/members
+    # Queryable surface — declares which fields a foundation can offer
+    # for filtering UI. The FilterPanel component reads this metadata
+    # via the useCollectionQueryable hook and renders one control per
+    # field. Composed predicates flow through the same useFetched path
+    # as saved-view selections, so the framework decides whether to
+    # ship the where: to a backend or evaluate it locally based on
+    # `fetcher.supports:` below.
+    queryable:
+      department:
+        type: enum
+        label: Department
+        options: [biology, geology]
+      rank:
+        type: enum
+        label: Rank
+        options: [associate, professor]
+      tenured:
+        type: boolean
+        label: Tenured
+      start_year:
+        type: range
+        label: Start year
+        min: 1820
+        max: 1880
   queries:
     path: collections/queries
+
+# Fetcher capability declaration.
+#
+# `supports: []` (the default — what's commented in below) tells the
+# framework default fetcher that the source (here, static JSON files
+# at /data/<name>.json) does not evaluate query operators natively.
+# `where:` clauses on fetch declarations are applied as a JS fallback
+# after the response. Two pages with different where: values share
+# one cached fetch.
+#
+# To exercise predicate pushdown end-to-end, run the dev backend:
+#
+#   npx uniweb-dev-backend --collections ./site/collections --port 8080
+#
+# Then uncomment the supports + baseUrl lines below. The same author
+# code now ships where:/limit:/sort: to the backend; the backend
+# returns matching records.
+#
+# fetcher:
+#   baseUrl: http://localhost:8080
+#   supports: [where, limit, sort]
 
 build:
   prerender: true

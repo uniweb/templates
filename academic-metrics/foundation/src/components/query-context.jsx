@@ -1,20 +1,24 @@
 /**
- * Query-selection + section-inclusion + report-options state for
+ * Population-selection + section-inclusion + report-options state for
  * academic-metrics.
  *
  * State lives on `page.state` (not a React context) so:
  *   - The values survive SPA navigation without being re-hydrated from
  *     React state on every mount.
- *   - The foundation's `data` handler (in foundation.js) can read the
- *     active query slug via `block.page.state.get('slug')` to simulate
- *     backend filtering of the members collection.
+ *   - The shared useFilteredMembers hook resolves the active predicate
+ *     from page.state on every render and passes it to useFetched —
+ *     the framework decides whether to ship that predicate to the
+ *     source or evaluate it locally based on `fetcher.supports:`.
  *   - A local sync helper persists to localStorage independently.
  *
- * Five slots, each a separate key so only the subscribing component
+ * Six slots, each a separate key so only the subscribing component
  * re-renders when any one changes:
  *
- *   - slug              — which saved query filters the member set.
- *                         'all-members' means "no filter."
+ *   - slug              — which saved view filters the member set.
+ *                         'all-members' means "no saved view active."
+ *   - panelWhere        — a where-object composed by the FilterPanel.
+ *                         null when the panel is inactive. When set,
+ *                         takes precedence over `slug`.
  *   - excludedSections  — array of section keys the reader hid.
  *   - dateRange         — { start, end } year window. null on either
  *                         side means "open" (start: beginning of time,
@@ -30,16 +34,10 @@
  *
  * The template ships every section ON by default and leaves the date
  * range empty: "mother of all reports, trim what you don't want."
- *
- * NOTE: Members filtering by active query is no longer done here.
- * Section components read the already-filtered list from
- * `content.data.members`, with `content.data.membersTotal` and
- * `content.data.activeQuery` available for "X of Y" displays. The
- * filtering happens in the foundation's `data` handler — see
- * foundation.js for the simulated-backend explanation.
  */
 
-import { usePageState } from '@uniweb/kit'
+import { useMemo } from 'react'
+import { usePageState, useFetched } from '@uniweb/kit'
 
 const STORAGE_KEY = 'academic-metrics/options'
 const ALL_MEMBERS_SLUG = 'all-members'
@@ -81,6 +79,7 @@ export const CITATION_STYLES = [
 
 const DEFAULTS = {
   slug: ALL_MEMBERS_SLUG,
+  panelWhere: null,
   excludedSections: [],
   dateRange: { start: null, end: null },
   refereedOnly: false,
@@ -97,6 +96,7 @@ function readPersisted() {
     const parsed = JSON.parse(raw)
     return {
       slug: parsed.slug || DEFAULTS.slug,
+      panelWhere: (parsed.panelWhere && typeof parsed.panelWhere === 'object') ? parsed.panelWhere : null,
       excludedSections: Array.isArray(parsed.excludedSections) ? parsed.excludedSections : [],
       dateRange: {
         start: parsed.dateRange?.start != null && parsed.dateRange?.start !== ''
@@ -116,6 +116,7 @@ function writePersisted(page) {
   if (typeof window === 'undefined') return
   const snapshot = {
     slug: page.state.get('slug') ?? DEFAULTS.slug,
+    panelWhere: page.state.get('panelWhere') ?? DEFAULTS.panelWhere,
     excludedSections: page.state.get('excludedSections') ?? DEFAULTS.excludedSections,
     dateRange: page.state.get('dateRange') ?? DEFAULTS.dateRange,
     refereedOnly: page.state.get('refereedOnly') ?? DEFAULTS.refereedOnly,
@@ -134,7 +135,7 @@ function writePersisted(page) {
 // risk of collision with a foundation slot.
 const persistedPages = new WeakSet()
 
-const PERSISTED_KEYS = ['slug', 'excludedSections', 'dateRange', 'refereedOnly', 'citationStyle']
+const PERSISTED_KEYS = ['slug', 'panelWhere', 'excludedSections', 'dateRange', 'refereedOnly', 'citationStyle']
 
 /**
  * Seed `page.state` from localStorage if present, then subscribe to
@@ -163,6 +164,10 @@ export function installQueryStatePersistence(page) {
 
 export function useSelectedQuery() {
   return usePageState('slug', DEFAULTS.slug)
+}
+
+export function usePanelFilter() {
+  return usePageState('panelWhere', DEFAULTS.panelWhere)
 }
 
 export function useSectionIncluded(key) {
@@ -198,4 +203,90 @@ export function useReportOptions() {
   }
 
   return [{ dateRange, refereedOnly, citationStyle }, setReportOption]
+}
+
+// ─── The shared filtered-members hook ────────────────────────────
+
+/**
+ * Resolve the active where-object from page.state. The FilterPanel and
+ * the QuerySelector dropdown are alternatives; whichever one is active
+ * provides the predicate. The panel takes precedence when set.
+ */
+function resolveActiveWhere(slug, panelWhere, allQueries) {
+  if (panelWhere && typeof panelWhere === 'object' && Object.keys(panelWhere).length > 0) {
+    return { where: panelWhere, source: 'panel', label: 'Custom filter' }
+  }
+  if (slug && slug !== ALL_MEMBERS_SLUG) {
+    const view = allQueries.find((q) => q.slug === slug)
+    if (view?.where) {
+      return { where: view.where, source: 'view', label: view.name || slug, view }
+    }
+  }
+  return { where: null, source: null, label: null, view: null }
+}
+
+/**
+ * Fetch the members collection narrowed by the active predicate.
+ *
+ * Reads the available saved views from `content.data.queries` (cascaded
+ * from page.yml). Composes the active predicate from page.state.
+ * Hands a where-bound request to useFetched — the framework dispatches
+ * a fresh fetch when the predicate changes (cache key includes
+ * pushed-down operators) and uses the runtime fallback when not.
+ *
+ * Returns { members, activeView, activeWhere, totalCount, loading }:
+ *   - members      — the filtered set (or the full set when no filter is active)
+ *   - activeView   — the saved-view doc when the dropdown is the source; null otherwise
+ *   - activeWhere  — the resolved predicate (or null)
+ *   - totalCount   — the unfiltered count, for "X of Y" displays
+ *   - loading      — true while the fetch is in flight on first read
+ *
+ * @param {Object} content - The block's content (delivered by the framework).
+ *   Reads content.data.queries for the saved-views catalog and
+ *   content.data.members for the unfiltered count.
+ */
+export function useFilteredMembers(content) {
+  const [slug] = useSelectedQuery()
+  const [panelWhere] = usePanelFilter()
+
+  const allQueries = useMemo(
+    () => (Array.isArray(content?.data?.queries) ? content.data.queries : []),
+    [content?.data?.queries],
+  )
+  const allMembers = useMemo(
+    () => (Array.isArray(content?.data?.members) ? content.data.members : []),
+    [content?.data?.members],
+  )
+
+  const active = useMemo(
+    () => resolveActiveWhere(slug, panelWhere, allQueries),
+    [slug, panelWhere, allQueries],
+  )
+
+  // The page-level cascade already fetched /data/members.json without
+  // a where: clause. With supports:[], the cache key for this useFetched
+  // matches that fetch (where: doesn't split the key when not pushed down),
+  // so we get a synchronous cache hit and apply the predicate locally.
+  // With supports:[where], the where: splits the key and triggers a
+  // separate fetch with the predicate.
+  //
+  // NOTE: kit hooks take an explicit path:/url:; the `collection:`
+  // shorthand is build-time only. To swap to a backend, change BOTH
+  // the page-level fetch (in page.yml) AND the path here.
+  const { data: fetched, loading } = useFetched(
+    active.where
+      ? { path: '/data/members.json', schema: 'members', where: active.where }
+      : null,
+  )
+
+  const members = active.where ? (fetched || []) : allMembers
+
+  return {
+    members,
+    activeView: active.view,
+    activeWhere: active.where,
+    activeLabel: active.label,
+    totalCount: allMembers.length,
+    loading: active.where ? loading : false,
+  }
 }

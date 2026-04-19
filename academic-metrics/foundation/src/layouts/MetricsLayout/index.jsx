@@ -15,10 +15,7 @@ import { useEffect } from 'react'
 import { useWebsite } from '@uniweb/kit'
 import { DocumentProvider } from '@uniweb/press'
 import DownloadBar from '#components/DownloadBar.jsx'
-import {
-  installQueryStatePersistence,
-  useSelectedQuery,
-} from '#components/query-context.jsx'
+import { installQueryStatePersistence } from '#components/query-context.jsx'
 
 export default function MetricsLayout({ body, page }) {
   const { website } = useWebsite()
@@ -31,13 +28,12 @@ export default function MetricsLayout({ body, page }) {
 
   useEffect(() => installQueryStatePersistence(page), [page])
 
-  // Subscribe to the active query slug at the layout level so that
-  // changing it re-renders the whole report body. The cascade reaches
-  // every BlockRenderer, which re-runs prepareProps, which re-runs the
-  // foundation's `data` handler with the new slug — every section ends
-  // up with freshly filtered `content.data.members` without needing
-  // its own subscription. See foundation.js for the simulator notes.
-  useSelectedQuery()
+  // Each section subscribes to the active selection via
+  // useFilteredMembers (which itself subscribes to page.state.slug and
+  // page.state.panelWhere via usePageState). When either changes, the
+  // affected sections re-render, and their useFetched call dispatches
+  // a fresh fetch (or returns the cached result for the new predicate).
+  // The layout no longer needs to drive the cascade.
 
   return (
     <DocumentProvider basePath={website.basePath}>

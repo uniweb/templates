@@ -12,15 +12,15 @@
  */
 import { useDocumentOutput } from '@uniweb/press'
 import { Paragraph } from '@uniweb/press/docx'
+import { useFilteredMembers } from '#components/query-context.jsx'
 
 export default function Cover({ content, block }) {
-  // Filtered members + meta arrive on content.data already shaped by
-  // the foundation's data handler — see foundation.js for the
-  // simulated-backend explanation. In production a real backend would
-  // perform this same filtering and return the same shape.
-  const members = Array.isArray(content?.data?.members) ? content.data.members : []
-  const activeQuery = content?.data?.activeQuery || null
-  const totalCount = content?.data?.membersTotal ?? members.length
+  // useFilteredMembers reads the active predicate from page.state and
+  // dispatches a where-bound fetch via @uniweb/kit's useFetched. With
+  // the site's default `fetcher.supports: []`, the predicate evaluates
+  // locally over the cached members.json. With `supports: [where]`, it
+  // ships to the backend. Same component code in either mode.
+  const { members, activeView, activeLabel, totalCount } = useFilteredMembers(content)
 
   // Loom-resolved narrative paragraphs — the content handler in
   // foundation.js has already instantiated {COUNT OF members}, etc.,
@@ -45,8 +45,8 @@ export default function Cover({ content, block }) {
 
   const title = content?.title || 'Academic Metrics'
   const subtitle =
-    activeQuery?.description ||
-    activeQuery?.name ||
+    activeView?.description ||
+    activeLabel ||
     content?.subtitle ||
     'All members'
 
@@ -64,7 +64,7 @@ export default function Cover({ content, block }) {
     data: [
       [
         title,
-        activeQuery?.name || 'All members',
+        activeLabel || 'All members',
         members.length,
         totalCount,
         publicationCount,
@@ -116,9 +116,9 @@ export default function Cover({ content, block }) {
           ))}
         </div>
       )}
-      {activeQuery && (
+      {activeLabel && (
         <p className="cover-population">
-          Population: <strong>{activeQuery.name}</strong> —{' '}
+          Population: <strong>{activeLabel}</strong> —{' '}
           {members.length} of {totalCount} members
         </p>
       )}

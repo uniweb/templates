@@ -14,7 +14,7 @@
  */
 import { useDocumentOutput } from '@uniweb/press'
 import { Paragraph, Table, Tr, Td } from '@uniweb/press/docx'
-import { useSectionIncluded } from '#components/query-context.jsx'
+import { useSectionIncluded, useFilteredMembers } from '#components/query-context.jsx'
 
 const SECTION_KEY = 'members'
 const HEADERS = ['Name', 'Rank', 'Department', 'Tenured', 'Start year']
@@ -23,10 +23,10 @@ const NUMBER_FORMATS = ['text', 'text', 'text', 'text', 'number']
 
 export default function Members({ content, block }) {
   const included = useSectionIncluded(SECTION_KEY)
-  // Filtered members + active query arrive on content.data already
-  // shaped by the foundation's data handler — see foundation.js.
-  const members = Array.isArray(content?.data?.members) ? content.data.members : []
-  const activeQuery = content?.data?.activeQuery || null
+  // useFilteredMembers fetches the active selection via @uniweb/kit's
+  // useFetched. Source = framework default fetcher; pushdown vs. local
+  // evaluation is governed by `fetcher.supports:` in site.yml.
+  const { members, activeLabel } = useFilteredMembers(content)
   const heading = content?.title || 'Members'
 
   const sorted = [...members].sort((a, b) => {
@@ -93,9 +93,9 @@ export default function Members({ content, block }) {
   return (
     <section className="members">
       <h2 className="members-title">{heading}</h2>
-      {activeQuery && (
+      {activeLabel && (
         <p className="members-query-note">
-          Showing {members.length} members matching <em>{activeQuery.name}</em>.
+          Showing {members.length} members matching <em>{activeLabel}</em>.
         </p>
       )}
       {members.length === 0 ? (

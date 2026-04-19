@@ -1,20 +1,27 @@
 /**
- * QuerySelector — saved-query dropdown.
+ * QuerySelector — saved-view dropdown (Pattern B in the demo).
  *
- * Lives inside DocumentOptionsPanel; the panel owns the queries list
- * (fetched from /data/queries.json) and passes it in as a prop.
+ * Picking a saved view writes its slug to page.state.slug and clears
+ * any active panel filter (page.state.panelWhere = null). The shared
+ * useFilteredMembers hook resolves the active predicate on each
+ * section's render and dispatches a where-bound fetch via useFetched —
+ * the framework handles the rest.
  *
- * Writing to the selected-query slot of page.state propagates through
- * the layout's useSelectedQuery() subscription, which re-renders every
- * section. Each section's BlockRenderer re-runs the foundation's data
- * handler with the new slug, so `content.data.members` is freshly
- * filtered and the next compile('xlsx' | 'docx') walks the refreshed
- * registrations. See foundation.js for the simulator explanation.
+ * The dropdown shows "All members" plus one option per record in the
+ * `views` collection (declared in site.yml as `collections.queries:`).
+ * Each record's `where:` field is what gets handed to useFetched when
+ * activated.
  */
-import { useSelectedQuery, ALL_MEMBERS } from './query-context.jsx'
+import { useSelectedQuery, usePanelFilter, ALL_MEMBERS } from './query-context.jsx'
 
 export default function QuerySelector({ queries = [] }) {
   const [slug, setSlug] = useSelectedQuery()
+  const [, setPanelWhere] = usePanelFilter()
+
+  const onChange = (next) => {
+    setSlug(next)
+    setPanelWhere(null) // Saved-view selection clears the panel.
+  }
 
   return (
     <div className="query-selector">
@@ -25,7 +32,7 @@ export default function QuerySelector({ queries = [] }) {
         id="academic-metrics-query"
         className="query-selector-control"
         value={slug}
-        onChange={(e) => setSlug(e.target.value)}
+        onChange={(e) => onChange(e.target.value)}
       >
         <option value={ALL_MEMBERS}>All members</option>
         {queries.map((q) => (

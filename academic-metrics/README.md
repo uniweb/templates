@@ -9,24 +9,37 @@ npx uniweb create my-metrics --template academic-metrics
 cd my-metrics && pnpm dev
 ```
 
-## ⚠️ Simulated backend — read this first
+## How predicates work — static files now, real backend later
 
-A real "academic metrics" deployment serves a unit with hundreds or thousands of members. The browser does **not** receive every record; it sends the active view's `where:` predicate (a small JSON object) to a backend, which evaluates it against its database and returns only the matching subset.
+The active population (saved view or panel-composed filter) is a **where-object** — a small structured JSON predicate. Sections that show the filtered set call `useFilteredMembers()`, a foundation hook backed by `@uniweb/kit`'s `useFetched`. The framework decides whether to ship that predicate to the source or evaluate it locally, driven entirely by `fetcher.supports:` in `site.yml`.
 
-This template has no backend. To keep the demo runnable from a single `pnpm dev`, the foundation **simulates that backend in the browser**:
+Two modes, one author surface:
 
-- `site/collections/members/*.yml` is collected at build into `public/data/members.json` — the runtime fetches it whole.
-- The foundation's `data` handler (in `foundation/src/foundation.js`) reads the active view from `page.state` and evaluates its `where:` predicate against the loaded members using `matchWhere` from `@uniweb/core`. The result lands on `content.data.members` for every section.
-- Section components are dumb readers — they consume `content.data.members` (already filtered) and never see the predicate.
+| Site setting | What the framework does | When to use |
+|---|---|---|
+| `fetcher.supports: []` *(default)* | Fetches `/data/members.json` once and applies the predicate in JS for each unique selection. Multiple sections share one cached fetch. | The default demo. Works without any backend. |
+| `fetcher.supports: [where]` *(or more)* | Ships the predicate in the request (`?_where=<JSON>` for GET; merged into the body for POST). The source returns only matching records. | Production. Or local development against the dev backend (see below). |
 
-**This isn't how you'd deploy it.** With 3 sample members the browser-side evaluation is trivial; with 3,000 it would be wasteful and slow. To swap in a real backend:
+The foundation has **no filtering code of its own**. There's no `data:` handler intercepting the cascade. Sections call `useFilteredMembers()`; that hook reads the active predicate from `page.state` and hands a where-bound request to the framework. The framework does the rest. Switching modes is one line in `site.yml`; nothing else changes.
 
-1. Configure the `fetcher:` block in `site.yml` to point at your endpoint with `supports: [where]`. The framework will ship the `where:` predicate (as JSON in the POST body) instead of evaluating it locally.
-2. Delete the `data` handler in `foundation.js` (the backend now does its job).
+## Try the dev backend
 
-Section components don't change. The selector UI doesn't change. The saved YAML views don't change. **The architectural pattern is the same in both cases — only the execution site of the predicate moves.**
+The framework ships a tiny Node server (`uniweb-dev-backend`) that boots an HTTP service reading the same YAML collections the static build emits. It implements the framework default fetcher's pushdown wire format, so you can develop against a "real" backend in one terminal:
 
-Read `foundation/src/foundation.js` for the inline simulator commentary. The handler is heavily annotated to make the boundary obvious.
+```bash
+# In one terminal: start the dev backend
+npx uniweb-dev-backend --collections ./site/collections --port 8080
+
+# In site.yml, uncomment the fetcher block:
+#   fetcher:
+#     baseUrl: http://localhost:8080
+#     supports: [where, limit, sort]
+
+# In another terminal: run the site as usual
+pnpm dev
+```
+
+Now changing the population dropdown or the filter panel triggers a network request to `localhost:8080`. The browser receives only the matching subset; the server-side evaluator does the work. Switch the `fetcher:` block back to `supports: []` (or remove it) and the same site works against the static `/data/members.json` again. **Same components, same hooks, same author config.**
 
 ## What makes this a Press xlsx showcase
 
@@ -44,7 +57,7 @@ Most docusite templates favour the "same JSX → same output" pattern (see `mono
 
 ## Sections
 
-Seven sections, all gated by the **Population** selector (a saved-query dropdown) and a **Sections** checkbox list on the Cover. Switch either and both the preview AND the next download update.
+Seven sections, all narrowed by either the **Population** dropdown (saved views from `site/collections/queries/`) or the **Filter** panel (free-form controls generated from the `queryable:` declaration on the `members` collection in `site.yml`). The two are alternatives — picking from one clears the other. A **Sections** checkbox list on the same options panel hides individual sections from both the preview and the download.
 
 | Section | Preview | Xlsx sheet |
 |---|---|---|
@@ -99,14 +112,15 @@ The narrative describes the **unit as a whole** (unfiltered totals); the live st
 
 1. **Replace the members.** Edit or add files under `site/collections/members/`.
 2. **Add a saved view.** Drop a new `name` / `description` / `where` YAML into `site/collections/queries/` (the `where:` value is a where-object — see existing files for examples). Appears in the selector automatically.
-3. **Change theme.** Edit `theme.yml` or swap in `theme-archive.yml` per above.
-4. **Edit the narrative.** Rewrite the body of `site/pages/report/cover.md` with any Loom expressions that make sense for the unit.
-5. **Add a section.** Create a new `.md` in `site/pages/report/` with a new section type. Each section registers one xlsx sheet.
-6. **Toggle sections live.** The Cover's checkbox list lets readers drop sections from the preview and the download without editing anything.
+3. **Change the filterable surface.** Edit the `queryable:` block on the `members` collection in `site.yml` — add fields, change types (`enum` / `boolean` / `range` / `text`), update enum options. The filter panel re-renders to match.
+4. **Change theme.** Edit `theme.yml` or swap in `theme-archive.yml` per above.
+5. **Edit the narrative.** Rewrite the body of `site/pages/report/cover.md` with any Loom expressions that make sense for the unit.
+6. **Add a section.** Create a new `.md` in `site/pages/report/` with a new section type. Each section registers one xlsx sheet.
+7. **Toggle sections live.** The Cover's checkbox list lets readers drop sections from the preview and the download without editing anything.
 
 ## Dependencies
 
 - **`@uniweb/press`** — document compilation (registered outputs → xlsx Blob via exceljs, dynamic-imported).
-- **`@uniweb/core`** — provides `matchWhere` (the where-object evaluator) used by the foundation's data handler to simulate backend filtering. Section components never call it.
+- **`@uniweb/kit`** — provides `useFetched` (used by `useFilteredMembers` for predicate-bound fetches) and `useCollectionQueryable` (used by `FilterPanel` to read the queryable surface from `site.yml`).
 - **`@uniweb/loom`** — text weaving for the Cover narrative.
 - **`recharts`** — chart library for web-preview visualizations.

@@ -1,3 +1,13 @@
 title: Academic Metrics
 description: An aggregate report across the selected set of members. Same data feeds the web preview and the downloadable Excel workbook.
-data: members
+
+# Both collections cascade to every section on this page:
+#   - members  → unfiltered set; Loom-rendered Cover narrative reads totals from it.
+#   - queries  → saved views, populated into the Population dropdown.
+# Sections that show the FILTERED member set call useFilteredMembers()
+# (a foundation-provided hook backed by useFetched), which composes
+# the active predicate from page.state and lets the framework decide
+# whether to ship it to the source or evaluate it locally.
+fetch:
+  - { collection: members }
+  - { collection: queries }
