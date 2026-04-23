@@ -1,51 +1,31 @@
 import React from 'react'
-import { cn } from '@uniweb/kit'
-import { Math, Equation, EquationProvider, EquationRef } from '@uniweb/scholar/math'
+import { cn, Text } from '@uniweb/kit'
+import { Equation, EquationProvider } from '@uniweb/scholar/math'
 
 /**
  * MathBlock Component
  *
- * Display mathematical equations and formulas using LaTeX notation.
- * Uses @uniweb/scholar for KaTeX-based math rendering.
+ * Inline/display LaTeX inside paragraphs is handled by the content
+ * pipeline: authors write `$x^2$`, `$$\int f\,dx$$`, or fenced ```math
+ * blocks and the browser renders real MathML natively. No runtime math
+ * library needed here.
+ *
+ * This block's distinct job is the numbered-equation feature: each
+ * subsection becomes a numbered display equation that other text can
+ * cross-reference via <EquationRef id="...">. See @uniweb/scholar/math.
  *
  * Content structure:
- * - Title: Section heading
- * - Paragraphs: Text with inline math using $...$ or $$...$$ delimiters
- * - Subsections: Named equations (H3 = equation label, paragraph = LaTeX)
+ * - Title / pretitle: section header.
+ * - Paragraphs: prose. Inline math is already compiled into the paragraph HTML.
+ * - Math: display equations from $$...$$ or ```math fences (content.math).
+ * - Subsections: numbered cross-referenceable equations.
  */
-
-/**
- * Parse text and render inline math
- * Supports $...$ for inline and $$...$$ for display math
- */
-function renderMathText(text) {
-  if (!text) return null
-
-  // Split by math delimiters, preserving delimiters
-  const parts = text.split(/(\$\$[^$]+\$\$|\$[^$]+\$)/g)
-
-  return parts.map((part, i) => {
-    // Display math: $$...$$
-    if (part.startsWith('$$') && part.endsWith('$$')) {
-      const latex = part.slice(2, -2).trim()
-      return <Math key={i} display>{latex}</Math>
-    }
-    // Inline math: $...$
-    if (part.startsWith('$') && part.endsWith('$')) {
-      const latex = part.slice(1, -1).trim()
-      return <Math key={i}>{latex}</Math>
-    }
-    // Regular text
-    return part
-  })
-}
 
 function EquationCard({ item, showNumber }) {
   const { title, paragraphs = [] } = item || {}
   const latex = paragraphs[0] || ''
   const description = paragraphs[1] || ''
 
-  // Use title as equation ID/label
   const id = title?.toLowerCase().replace(/\s+/g, '-') || undefined
 
   return (
@@ -54,28 +34,31 @@ function EquationCard({ item, showNumber }) {
         {latex}
       </Equation>
       {description && (
-        <p className="text-center text-sm text-subtle mt-2 italic">
-          {renderMathText(description)}
-        </p>
+        <Text
+          as="p"
+          text={description}
+          className="text-center text-sm text-subtle mt-2 italic"
+        />
       )}
     </div>
   )
 }
 
 function MathBlock({ content, params }) {
-  const { title, pretitle, paragraphs = [], subsections = [] } = content || {}
+  const { title, pretitle, paragraphs = [], subsections = [], math = [] } =
+    content || {}
   const {
     layout = 'standard',
     showNumbers = true,
   } = params || {}
 
   const hasEquations = subsections.length > 0
+  const hasDisplayMath = math.length > 0
 
   return (
     <EquationProvider>
       <section className="py-12 px-6">
         <div className="max-w-3xl mx-auto">
-          {/* Header */}
           {(pretitle || title) && (
             <div className="mb-8">
               {pretitle && (
@@ -89,18 +72,31 @@ function MathBlock({ content, params }) {
             </div>
           )}
 
-          {/* Introductory text with inline math support */}
           {paragraphs.length > 0 && (
             <div className="prose max-w-none mb-8 text-body">
               {paragraphs.map((para, i) => (
-                <p key={i} className="mb-4 last:mb-0 leading-relaxed">
-                  {renderMathText(para)}
-                </p>
+                <Text
+                  key={i}
+                  as="p"
+                  text={para}
+                  className="mb-4 last:mb-0 leading-relaxed"
+                />
               ))}
             </div>
           )}
 
-          {/* Named equations from subsections */}
+          {hasDisplayMath && (
+            <div className="space-y-4 mb-8">
+              {math.map((m, i) => (
+                <div
+                  key={`math-${i}`}
+                  className="overflow-x-auto py-2"
+                  dangerouslySetInnerHTML={{ __html: m.mathml }}
+                />
+              ))}
+            </div>
+          )}
+
           {hasEquations && (
             <div className={cn(
               'space-y-4',

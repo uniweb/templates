@@ -1,5 +1,5 @@
 import React from 'react'
-import { cn } from '@uniweb/kit'
+import { cn, Text } from '@uniweb/kit'
 
 /**
  * Section Component
@@ -7,6 +7,11 @@ import { cn } from '@uniweb/kit'
  * Layout container with spacing options.
  * Uses semantic CSS tokens — adapts automatically to theme context
  * (context-light, context-medium, context-dark) set via frontmatter `theme:`.
+ *
+ * Paragraphs are rendered through kit's <Text> so HTML produced by the
+ * content pipeline (inline math, bracketed spans, bold/italic, links)
+ * renders correctly. Using plain {paragraphs[0]} would escape the HTML
+ * and show raw <math> markup instead of real math.
  */
 function Section({ content, params }) {
   const { title, paragraphs = [] } = content || {}
@@ -39,7 +44,7 @@ function Section({ content, params }) {
               <h2 className="text-2xl font-bold mb-3 text-heading">{title}</h2>
             )}
             {paragraphs[0] && (
-              <p className="text-lg text-body">{paragraphs[0]}</p>
+              <Text as="p" text={paragraphs[0]} className="text-lg text-body" />
             )}
           </div>
         )}
