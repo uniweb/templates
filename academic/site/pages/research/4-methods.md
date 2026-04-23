@@ -32,20 +32,16 @@ And a standalone display equation on its own paragraph:
 
 $$\int_0^\infty e^{-x^2}\,dx = \frac{\sqrt{\pi}}{2}$$
 
-### Cross-Entropy Loss
+Key quantities used throughout this work are collected below. Label each equation with `math:<id>` and cross-reference it from prose with `<EquationRef id="...">`.
 
+```math:cross-entropy
 \mathcal{L}_{CE} = -\sum_{c=1}^{C} y_c \log(\hat{y}_c)
+```
 
-The cross-entropy loss measures the divergence between predicted and true distributions.
-
-### Attention Mechanism
-
+```math:attention
 \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+```
 
-The scaled dot-product attention enables models to focus on relevant parts of the input.
-
-### Variational Bound
-
+```math:elbo
 \mathcal{L}_{ELBO} = \mathbb{E}_{q(z|x)}[\log p(x|z)] - D_{KL}(q(z|x) \| p(z))
-
-The evidence lower bound provides a tractable objective for variational inference.
+```

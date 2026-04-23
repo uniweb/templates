@@ -10,50 +10,30 @@ import { Equation, EquationProvider } from '@uniweb/scholar/math'
  * blocks and the browser renders real MathML natively. No runtime math
  * library needed here.
  *
- * This block's distinct job is the numbered-equation feature: each
- * subsection becomes a numbered display equation that other text can
- * cross-reference via <EquationRef id="...">. See @uniweb/scholar/math.
+ * This block's distinct job is the numbered-equation feature. Authors
+ * label equations in markdown with a `:<id>` suffix on a math fence:
  *
- * Content structure:
- * - Title / pretitle: section header.
- * - Paragraphs: prose. Inline math is already compiled into the paragraph HTML.
- * - Math: display equations from $$...$$ or ```math fences (content.math).
- * - Subsections: numbered cross-referenceable equations.
+ *     ```math:cross-entropy
+ *     \mathcal{L}_{CE} = -\sum_{c=1}^{C} y_c \log(\hat{y}_c)
+ *     ```
+ *
+ * Labeled equations are rendered through <Equation> with automatic
+ * sequential numbering; other prose can cross-reference them with
+ * <EquationRef id="cross-entropy" />. See @uniweb/scholar/math.
+ *
+ * Unlabeled display math (plain $$...$$ or ```math without a tag)
+ * renders as pretty display math without a number.
  */
 
-function EquationCard({ item, showNumber }) {
-  const { title, paragraphs = [] } = item || {}
-  const latex = paragraphs[0] || ''
-  const description = paragraphs[1] || ''
-
-  const id = title?.toLowerCase().replace(/\s+/g, '-') || undefined
-
-  return (
-    <div className="my-6">
-      <Equation id={id} label={showNumber ? undefined : title}>
-        {latex}
-      </Equation>
-      {description && (
-        <Text
-          as="p"
-          text={description}
-          className="text-center text-sm text-subtle mt-2 italic"
-        />
-      )}
-    </div>
-  )
-}
-
 function MathBlock({ content, params }) {
-  const { title, pretitle, paragraphs = [], subsections = [], math = [] } =
-    content || {}
+  const { title, pretitle, paragraphs = [], math = [] } = content || {}
   const {
     layout = 'standard',
     showNumbers = true,
   } = params || {}
 
-  const hasEquations = subsections.length > 0
-  const hasDisplayMath = math.length > 0
+  const labeled = math.filter((m) => m.id)
+  const unlabeled = math.filter((m) => !m.id)
 
   return (
     <EquationProvider>
@@ -85,9 +65,9 @@ function MathBlock({ content, params }) {
             </div>
           )}
 
-          {hasDisplayMath && (
+          {unlabeled.length > 0 && (
             <div className="space-y-4 mb-8">
-              {math.map((m, i) => (
+              {unlabeled.map((m, i) => (
                 <div
                   key={`math-${i}`}
                   className="overflow-x-auto py-2"
@@ -97,16 +77,19 @@ function MathBlock({ content, params }) {
             </div>
           )}
 
-          {hasEquations && (
-            <div className={cn(
-              'space-y-4',
-              layout === 'compact' && 'space-y-2'
-            )}>
-              {subsections.map((item, i) => (
-                <EquationCard
-                  key={i}
-                  item={item}
-                  showNumber={showNumbers}
+          {labeled.length > 0 && (
+            <div
+              className={cn(
+                'space-y-4',
+                layout === 'compact' && 'space-y-2'
+              )}
+            >
+              {labeled.map((m) => (
+                <Equation
+                  key={m.id}
+                  id={m.id}
+                  mathml={m.mathml}
+                  label={showNumbers ? undefined : ''}
                 />
               ))}
             </div>
