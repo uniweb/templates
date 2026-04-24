@@ -47,6 +47,7 @@
  */
 
 import { Loom, createLoomHandlers } from '@uniweb/loom'
+import { buildXlsxOptions, buildDocxOptions } from './compile-options.js'
 
 export const vars = {
   'max-content-width': {
@@ -103,4 +104,21 @@ export default {
     engine,
     vars: buildVars,
   }),
+
+  // Document outputs. Hosts (DownloadBar in-browser, `unipress compile`
+  // headless) consume this map via `compileDocument(website, { format,
+  // foundation, ...hostHints })`. Per-section sheet / paragraph
+  // registrations still happen inside each section via useDocumentOutput;
+  // these entries own document-level adapterOptions (workbook metadata,
+  // paragraph style pack).
+  outputs: {
+    xlsx: {
+      extension: 'xlsx',
+      getOptions: (website, opts) => buildXlsxOptions(website, opts),
+    },
+    docx: {
+      extension: 'docx',
+      getOptions: (website, opts) => buildDocxOptions(website, opts),
+    },
+  },
 }

@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import { useDocumentCompile, triggerDownload } from '@uniweb/press'
+import { compileDocument, triggerDownload } from '@uniweb/press'
+import { useWebsite } from '@uniweb/kit'
+import foundation from '../foundation.js'
 import DocumentOptionsPanel from './DocumentOptionsPanel.jsx'
 
 /**
@@ -12,25 +14,11 @@ import DocumentOptionsPanel from './DocumentOptionsPanel.jsx'
  *     the matching compile path.
  *
  * Must be rendered inside a <DocumentProvider>. Workbook / document
- * metadata (title, creator, subject) flow through compile(format,
- * { ... }). For docx, a bibliography paragraph-style pack is passed
- * so PublicationsList entries render with the classic hanging indent.
+ * metadata and paragraph styles live on the foundation's outputs
+ * declaration (src/foundation.js + src/compile-options.js); this
+ * component just maps UI intent to format, calls compileDocument,
+ * triggers the download.
  */
-
-const DOCX_PARAGRAPH_STYLES = [
-  {
-    id: 'bibliography',
-    name: 'Bibliography',
-    basedOn: 'Normal',
-    next: 'Normal',
-    quickFormat: true,
-    run: { size: 22 }, // 11pt
-    paragraph: {
-      indent: { left: 720, hanging: 720 }, // 0.5" hanging
-      spacing: { before: 0, after: 120 },
-    },
-  },
-]
 
 function GearIcon() {
   return (
@@ -90,7 +78,7 @@ export default function DownloadBar({
   title = 'Academic Metrics',
   filename = 'academic-metrics',
 }) {
-  const { compile, isCompiling } = useDocumentCompile()
+  const { website } = useWebsite()
   const [error, setError] = useState(null)
   const [busy, setBusy] = useState(null) // 'xlsx' | 'docx' | null
   const [panelOpen, setPanelOpen] = useState(false)
@@ -115,16 +103,13 @@ export default function DownloadBar({
     setBusy(format)
     setMenuOpen(false)
     try {
-      const compileOptions = {
+      const blob = await compileDocument(website, {
+        format,
+        foundation,
         title,
-        creator: 'Uniweb',
-        subject: 'Academic metrics report',
-      }
-      if (format === 'docx') {
-        compileOptions.paragraphStyles = DOCX_PARAGRAPH_STYLES
-      }
-      const blob = await compile(format, compileOptions)
-      triggerDownload(blob, `${filename}.${format}`)
+      })
+      const ext = foundation.outputs?.[format]?.extension || format
+      triggerDownload(blob, `${filename}.${ext}`)
     } catch (err) {
       console.error('compile failed', err)
       setError(err?.message || String(err))
@@ -133,7 +118,7 @@ export default function DownloadBar({
     }
   }
 
-  const disabled = isCompiling || busy !== null
+  const disabled = busy !== null
 
   return (
     <div
