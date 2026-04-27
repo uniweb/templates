@@ -1,0 +1,28 @@
+status: paid
+number: 'INV-2026-0002'
+sow_ref: '0001'
+issued: 2026-02-15
+due: 2026-03-17
+period:
+  from: 2026-02-01
+  to: 2026-02-28
+client:
+  organization: Globex Corporation
+  contact: Jane Example
+  email: jane@globex.example
+po_number: PO-2026-001
+items:
+  - description: Hosting (Feb)
+    qty: 1
+    unit_price: 750
+    period: { from: 2026-02-01, to: 2026-02-28 }
+  - description: Platform support (Feb)
+    qty: 1
+    unit_price: 2200
+    period: { from: 2026-02-01, to: 2026-02-28 }
+tax:
+  jurisdiction: NONE
+payment:
+  paid_on: 2026-03-10
+  remittance_ref: WIRE-20260310-9912
+foundation_version: '@uniweb/business-docs@0.1.0'

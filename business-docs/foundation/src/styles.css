@@ -1,0 +1,209 @@
+/**
+ * business-docs foundation styles.
+ *
+ * Print-leaning typography because PDF is the most common output. Browser
+ * preview shares the same baseline so authors see roughly what they'll
+ * get on paper. Theming is left to the site — this file only ships the
+ * structural rules every business document needs.
+ */
+
+.business-docs-body {
+  max-width: var(--max-content-width, 52rem);
+  margin: 0 auto;
+  padding: clamp(1rem, 3vw, 2.5rem);
+  color: var(--body, #111);
+  font-family: var(--font-body, ui-sans-serif, system-ui, sans-serif);
+  font-size: 11pt;
+  line-height: 1.5;
+}
+
+.business-docs-document section {
+  padding-block: var(--section-padding-y, clamp(1rem, 3vw, 2rem));
+}
+
+/* SOW + Invoice slices share the same structural rules */
+
+.sow-section h1,
+.invoice-section h1 {
+  font-size: 1.65rem;
+  margin: 0 0 0.5em;
+  color: var(--heading, #111);
+}
+
+.sow-section h2,
+.invoice-section h2,
+.sow-item-title,
+.invoice-item-title {
+  font-size: 1.1rem;
+  margin: 1.4em 0 0.4em;
+  color: var(--heading, #111);
+}
+
+.sow-section p,
+.invoice-section p {
+  margin: 0 0 0.7em;
+}
+
+/* Engagement report */
+
+.engagement-report > header {
+  margin-bottom: 1.25rem;
+}
+
+.engagement-report-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.engagement-report-card {
+  border: 1px solid var(--border, #e2e2e2);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--card, #fff);
+  display: flex;
+  flex-direction: column;
+}
+
+.engagement-report-card-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--subtle, #666);
+  letter-spacing: 0.04em;
+}
+
+.engagement-report-card-value {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 0.25rem;
+  color: var(--heading, #111);
+}
+
+.engagement-report-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.engagement-report-table th,
+.engagement-report-table td {
+  border-bottom: 1px solid var(--border, #e2e2e2);
+  padding: 0.5rem 0.6rem;
+  text-align: left;
+  vertical-align: top;
+  font-size: 0.95rem;
+}
+
+.engagement-report-table th {
+  font-weight: 600;
+  color: var(--heading, #111);
+}
+
+.engagement-report-population,
+.engagement-report-subtitle {
+  color: var(--subtle, #555);
+  margin: 0.2em 0;
+}
+
+.engagement-report-loading {
+  color: var(--subtle, #888);
+  font-style: italic;
+}
+
+/* Download bar */
+
+.business-docs-download {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 40;
+}
+
+.business-docs-download > button {
+  border: 1px solid var(--border, #d0d0d0);
+  background: var(--primary, #111);
+  color: var(--primary-foreground, #fff);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.business-docs-download > button:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+.business-docs-download-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.4rem);
+  min-width: 12rem;
+  background: var(--card, #fff);
+  border: 1px solid var(--border, #e2e2e2);
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  padding: 0.3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.business-docs-download-menu > button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.9rem;
+  background: transparent;
+  border: 0;
+  border-radius: 0.35rem;
+  cursor: pointer;
+  color: var(--body, #111);
+  text-align: left;
+}
+
+.business-docs-download-menu > button:hover {
+  background: var(--muted, #f3f3f3);
+}
+
+.business-docs-download-ext {
+  font-size: 0.75rem;
+  color: var(--subtle, #666);
+  font-variant-numeric: tabular-nums;
+}
+
+.business-docs-download-error {
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  background: #fde8e8;
+  color: #9b1c1c;
+  font-size: 0.8rem;
+  border-radius: 0.4rem;
+}
+
+/* Signatures (used by the SOW signatures section) */
+
+.signature-block {
+  margin-top: 2rem;
+}
+
+.signature-block .unsigned {
+  color: var(--subtle, #888);
+  font-style: italic;
+}
+
+/* Totals — invoice-specific */
+
+.totals-row {
+  font-weight: 500;
+}
+
+.totals-row.grand {
+  border-top: 2px solid var(--heading, #111);
+  font-weight: 700;
+  font-size: 1.05rem;
+}

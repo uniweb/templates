@@ -1,0 +1,38 @@
+# Demonstrates the validation matrix: an in-review SOW. Any issued
+# invoice that points at this SOW will surface as an error in the
+# build log; a draft invoice surfaces as info.
+status: in-review
+number: '0003'
+title: Data migration — legacy ERP to platform
+client:
+  organization: Pied Piper
+  contact: Lee Example
+  email: lee@piedpiper.example
+issued: 2026-03-15
+signed: null
+expires: 2027-03-15
+fee_model: fixed
+budget:
+  total: 32000
+scope: |
+  One-time migration of legacy ERP records into Pied Piper's new
+  platform tenant. Schema mapping, validation, two dry-run cutovers.
+deliverables:
+  - milestone: M1
+    description: Schema mapping + dry run 1
+    due: 2026-06-15
+    fee: 14000
+  - milestone: M2
+    description: Final cutover + acceptance
+    due: 2026-08-30
+    fee: 18000
+signatures:
+  - party: vendor
+    name: First Last
+    role: Director
+    signed: null
+  - party: client
+    name: Lee Example
+    role: COO
+    signed: null
+foundation_version: '@uniweb/business-docs@0.1.0'

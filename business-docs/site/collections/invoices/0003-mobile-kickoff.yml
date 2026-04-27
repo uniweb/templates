@@ -1,0 +1,23 @@
+# Single-line milestone bill against a T&M SOW — typical pattern for
+# fixed-price kickoff payments inside a larger time-and-materials
+# engagement.
+status: paid
+number: 'INV-2026-0003'
+sow_ref: '0002'
+issued: 2026-02-05
+due: 2026-03-07
+client:
+  organization: Initech
+  contact: Sam Example
+  email: sam@initech.example
+po_number: PO-INT-2026-014
+items:
+  - description: Mobile app — kickoff milestone
+    qty: 1
+    unit_price: 8000
+tax:
+  jurisdiction: NONE
+payment:
+  paid_on: 2026-02-28
+  remittance_ref: ACH-7733
+foundation_version: '@uniweb/business-docs@0.1.0'

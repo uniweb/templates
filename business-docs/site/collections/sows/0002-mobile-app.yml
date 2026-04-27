@@ -1,0 +1,40 @@
+status: signed
+number: '0002'
+title: Mobile companion app
+client:
+  organization: Initech
+  contact: Sam Example
+  email: sam@initech.example
+issued: 2026-01-08
+signed: 2026-01-22
+expires: 2027-06-30
+fee_model: time-and-materials
+budget:
+  total: 75000
+  hourly_rate: 135
+scope: |
+  Companion mobile app for Initech's existing platform. Native iOS +
+  Android with shared core. Time-and-materials billed monthly.
+deliverables:
+  - milestone: Kickoff
+    description: Team ramp-up + design baseline
+    due: 2026-02-01
+    fee: 8000
+  - milestone: Sprint pair 1
+    description: Auth + account flows
+    due: 2026-04-01
+    fee: 18000
+  - milestone: Sprint pair 2
+    description: Settings + notifications
+    due: 2026-06-01
+    fee: 18000
+signatures:
+  - party: vendor
+    name: First Last
+    role: Director
+    signed: 2026-01-22
+  - party: client
+    name: Sam Example
+    role: CTO
+    signed: 2026-01-22
+foundation_version: '@uniweb/business-docs@0.1.0'

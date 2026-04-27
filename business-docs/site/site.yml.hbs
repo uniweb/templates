@@ -1,0 +1,67 @@
+# Site Configuration
+
+name: {{projectName}}
+foundation: foundation
+
+index: index
+
+# Vendor identity, default currency, default tax jurisdiction, and locale.
+# Per-record fields override these defaults, so individual invoices /
+# SOWs only carry what varies. The foundation reads this once and merges
+# it into the Loom namespace alongside per-record fields.
+business_docs:
+  vendor:
+    organization: Acme Studios
+    contact: First Last
+    email: billing@acme.example
+    address: |
+      123 Example Street
+      City, Region 00000
+      Country
+  defaults:
+    currency: USD
+    locale: en-US
+    tax_jurisdiction: NONE     # Demo: no tax. Real users: HST | GST | PST | VAT | …
+    payment_terms_days: 30
+  # registries.tax: { ... } — uncomment to extend the foundation's
+  # built-in registry with jurisdictions it doesn't ship with.
+
+collections:
+  invoices:
+    path: collections/invoices
+    queryable:
+      status:
+        type: enum
+        label: Status
+        options: [draft, issued, open, to-verify, paid, overdue, void]
+      client.organization:
+        type: enum
+        label: Client
+        options: [Globex Corporation, Initech, Pied Piper]
+      issued:
+        type: range
+        label: Issued
+        min: 2025-01-01
+        max: 2027-12-31
+  sows:
+    path: collections/sows
+    queryable:
+      status:
+        type: enum
+        label: Status
+        options: [draft, in-review, signed, expired, superseded]
+      client.organization:
+        type: enum
+        label: Client
+        options: [Globex Corporation, Initech, Pied Piper]
+
+# `supports: []` (default) — predicates evaluate locally over cached JSON.
+# Switch to `supports: [where, limit, sort]` with a real backend to push
+# them down. Same author code, same foundation code, same components.
+#
+# fetcher:
+#   baseUrl: http://localhost:8080
+#   supports: [where, limit, sort]
+
+build:
+  prerender: true

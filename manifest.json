@@ -121,6 +121,20 @@
         "aggregate",
         "academic"
       ]
+    },
+    "business-docs": {
+      "name": "Business documents",
+      "description": "A complete business-document site: invoice and SOW collections, per-record preview pages, and a filtered engagement report with XLSX export. Built on @uniweb/business-docs and demonstrates the same foundation that ships the unipress invoice template.",
+      "tags": [
+        "business-docs",
+        "invoice",
+        "sow",
+        "report",
+        "press",
+        "xlsx",
+        "docx",
+        "pagedjs"
+      ]
     }
   }
 }

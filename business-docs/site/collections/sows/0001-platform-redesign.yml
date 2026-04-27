@@ -1,0 +1,41 @@
+status: signed
+number: '0001'
+title: Platform redesign — Phase 1
+client:
+  organization: Globex Corporation
+  contact: Jane Example
+  email: jane@globex.example
+issued: 2025-09-01
+signed: 2025-09-15
+expires: 2026-12-31
+fee_model: fixed
+budget:
+  total: 48000
+  hourly_rate: 120
+scope: |
+  Redesign Globex Corporation's customer-facing platform: information
+  architecture review, visual system, and a working prototype of three
+  representative flows.
+deliverables:
+  - milestone: M1
+    description: Discovery + IA review
+    due: 2025-10-31
+    fee: 12000
+  - milestone: M2
+    description: Visual system + component library
+    due: 2025-12-15
+    fee: 18000
+  - milestone: M3
+    description: Prototype of three flows + handoff
+    due: 2026-02-28
+    fee: 18000
+signatures:
+  - party: vendor
+    name: First Last
+    role: Director
+    signed: 2025-09-15
+  - party: client
+    name: Jane Example
+    role: VP Engineering
+    signed: 2025-09-15
+foundation_version: '@uniweb/business-docs@0.1.0'

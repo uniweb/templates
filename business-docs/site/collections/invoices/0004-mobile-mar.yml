@@ -1,0 +1,23 @@
+# T&M monthly bill against the mobile-app SOW. Single-line entry
+# representing total billable hours for the month.
+status: open
+number: 'INV-2026-0004'
+sow_ref: '0002'
+issued: 2026-04-02
+due: 2026-05-02
+period:
+  from: 2026-03-01
+  to: 2026-03-31
+client:
+  organization: Initech
+  contact: Sam Example
+  email: sam@initech.example
+po_number: PO-INT-2026-014
+items:
+  - description: Engineering — March (T&M, 64 hrs @ 135)
+    qty: 64
+    unit_price: 135
+    period: { from: 2026-03-01, to: 2026-03-31 }
+tax:
+  jurisdiction: NONE
+foundation_version: '@uniweb/business-docs@0.1.0'

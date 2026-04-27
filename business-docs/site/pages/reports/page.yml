@@ -1,0 +1,5 @@
+title: Engagement report
+description: Filtered report with date-range, client, and status filters. Aggregate cards and the on-screen table track the active filter; the XLSX export captures whatever is currently visible.
+fetch:
+  - { collection: invoices }
+  - { collection: sows }

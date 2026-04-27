@@ -1,0 +1,24 @@
+# Theme — "Studio" (business-docs default)
+#
+# Clean, neutral palette suited to professional billing documents.
+# Site authors override colors / fonts once and the whole document —
+# preview, PDF print sheet, and Word styles — tracks the change.
+
+colors:
+  primary: '#0f172a'     # Slate-900 — primary buttons, link emphasis
+  secondary: '#64748b'   # Slate-500 — secondary surfaces, table borders
+  accent: '#0891b2'      # Cyan-600 — totals rows, callouts
+  neutral: slate
+
+background: '#fcfcfd'
+
+fonts:
+  heading: "'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
+  body: "'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
+  mono: "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace"
+
+# Foundation-declared variables — see business-docs/src/foundation.js
+vars:
+  max-content-width: 56rem
+  section-padding-y: 'clamp(1.5rem, 3vw, 3rem)'
+  header-height: '3.5rem'

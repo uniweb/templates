@@ -1,0 +1,5 @@
+title: Invoices
+description: All invoices, sortable and filterable by client, status, and date range.
+fetch:
+  - { collection: invoices }
+  - { collection: sows }

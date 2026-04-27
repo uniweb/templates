@@ -1,0 +1,29 @@
+# Demonstrates an overdue status — the report's "Outstanding" aggregate
+# pulls totals from non-paid/void invoices including this one.
+status: overdue
+number: 'INV-2025-0099'
+sow_ref: '0001'
+issued: 2025-12-01
+due: 2025-12-31
+period:
+  from: 2025-11-01
+  to: 2025-11-30
+client:
+  organization: Globex Corporation
+  contact: Jane Example
+  email: jane@globex.example
+po_number: PO-2025-114
+items:
+  - description: Hosting (Nov 2025)
+    qty: 1
+    unit_price: 750
+    period: { from: 2025-11-01, to: 2025-11-30 }
+  - description: Platform support (Nov 2025)
+    qty: 1
+    unit_price: 2200
+    period: { from: 2025-11-01, to: 2025-11-30 }
+tax:
+  jurisdiction: NONE
+notes: |
+  Reissued with overdue status — second reminder sent 2026-01-15.
+foundation_version: '@uniweb/business-docs@0.1.0'

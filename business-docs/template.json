@@ -1,0 +1,27 @@
+{
+  "name": "Business documents",
+  "description": "A complete business-document site: invoice and SOW collections, per-record preview pages, and a filtered engagement report with XLSX export. Built on @uniweb/business-docs and demonstrates the same foundation that ships the unipress invoice template.",
+  "compatible": ">=0.9.4",
+  "format": 2,
+  "tags": [
+    "business-docs",
+    "invoice",
+    "sow",
+    "report",
+    "press",
+    "xlsx",
+    "docx",
+    "pagedjs"
+  ],
+  "components": [
+    "SOW",
+    "Invoice",
+    "EngagementReport"
+  ],
+  "dependencies": {
+    "foundation": {
+      "@uniweb/press": "{{version \"@uniweb/press\"}}",
+      "@uniweb/loom": "{{version \"@uniweb/loom\"}}"
+    }
+  }
+}

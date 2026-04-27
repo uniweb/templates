@@ -1,0 +1,35 @@
+# Multi-line subscription billing — the canonical "month bill"
+# pattern, demonstrating items[] + per-line periods.
+status: open
+number: 'INV-2026-0001'
+sow_ref: '0001'
+issued: 2026-01-15
+due: 2026-02-14
+period:
+  from: 2026-01-01
+  to: 2026-01-31
+client:
+  organization: Globex Corporation
+  contact: Jane Example
+  email: jane@globex.example
+po_number: PO-2026-001
+items:
+  - description: Hosting (Jan)
+    qty: 1
+    unit_price: 750
+    period: { from: 2026-01-01, to: 2026-01-31 }
+  - description: Platform support (Jan)
+    qty: 1
+    unit_price: 2200
+    period: { from: 2026-01-01, to: 2026-01-31 }
+  - description: Quarterly review session
+    qty: 1
+    unit_price: 1500
+tax:
+  jurisdiction: NONE
+notes: |
+  Standard monthly subscription bill plus the Q1 review session.
+payment:
+  paid_on: null
+  remittance_ref: null
+foundation_version: '@uniweb/business-docs@0.1.0'
