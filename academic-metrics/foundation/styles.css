@@ -18,19 +18,19 @@
  * utilities for composition, named classes for domain components.
  */
 
-@import 'tailwindcss';
-@import '@uniweb/kit/theme-tokens.css';
-
-@source "./node_modules/@uniweb/kit/src/**/*.{js,jsx}";
-@source "./sections/**/*.{js,jsx}";
-@source "./layouts/**/*.{js,jsx}";
-@source "./components/**/*.{js,jsx}";
-
 /* Theme-variant font stacks are imported up front so a tenant can
  * swap site/theme.yml <-> site/theme-archive.yml without a foundation
  * rebuild. The theme pipeline exposes --font-heading / --font-body
  * / --font-mono from theme.yml; the body rules below wire them to
- * elements (the pipeline doesn't emit default font-family rules). */
+ * elements (the pipeline doesn't emit default font-family rules).
+ *
+ * Font `@import url(...)` MUST appear before the local imports below
+ * — `@import 'tailwindcss'` and `@import '@uniweb/kit/theme-tokens.css'`
+ * are inlined by the Tailwind/lightningcss pipeline, so font imports
+ * placed after them end up after raw rules in the bundled output and
+ * trip the CSS-spec ordering rule ("@import rules must precede all
+ * rules aside from @charset and @layer statements"). The GH Actions
+ * CI surfaces that as a warning per font line. */
 
 /* Institute theme fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
@@ -41,6 +41,14 @@
  * fonts that no CSS rule references. */
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap');
+
+@import 'tailwindcss';
+@import '@uniweb/kit/theme-tokens.css';
+
+@source "./node_modules/@uniweb/kit/src/**/*.{js,jsx}";
+@source "./sections/**/*.{js,jsx}";
+@source "./layouts/**/*.{js,jsx}";
+@source "./components/**/*.{js,jsx}";
 
 body {
   font-family: var(--font-body);

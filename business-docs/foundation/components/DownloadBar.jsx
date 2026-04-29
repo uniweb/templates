@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { compileDocument, triggerDownload } from '@uniweb/press'
 import { useWebsite } from '@uniweb/kit'
-import foundation from '../foundation.js'
+import foundation from '../main.js'
 
 /**
  * Floating download menu in the top-right of the layout. One pill button
