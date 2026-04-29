@@ -6,7 +6,7 @@
  * re-hydrated on every mount, and so multiple sections on the same
  * report page subscribe per-key (only the subscribing component
  * re-renders when one slot changes). Mirrors the academic-metrics
- * pattern in framework/templates/academic-metrics/foundation/src/components/query-context.jsx.
+ * pattern in framework/templates/academic-metrics/foundation/components/query-context.jsx.
  */
 
 import { usePageState } from '@uniweb/kit'

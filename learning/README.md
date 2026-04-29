@@ -32,7 +32,7 @@ The code challenge and open-ended variants include grading UI with a demo mode i
 ## Structure
 
 ```
-foundation/src/
+foundation/
 ├── sections/
 │   ├── CourseCatalog/    # Home page — course cards from page hierarchy
 │   ├── Header/           # Top bar with logo and theme toggle

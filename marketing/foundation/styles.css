@@ -3,7 +3,7 @@
 @plugin "@tailwindcss/typography";
 
 @source "./sections/**/*.{js,jsx}";
-@source "../node_modules/@uniweb/kit/src/**/*.{js,jsx}";
+@source "./node_modules/@uniweb/kit/src/**/*.{js,jsx}";
 
 @theme inline {
   --font-heading: var(--heading-font, inherit);

@@ -245,9 +245,9 @@ The CLI downloads and extracts tarballs on demand when users run `create --templ
 ## Checklist for New Templates
 
 - [ ] Create `<name>/template.json` with `name` and `format: 2`
-- [ ] Create `<name>/foundation/src/` with `foundation.js`, `styles.css`, and `sections/`
+- [ ] Create `<name>/foundation/` with `foundation.js`, `styles.css`, and `sections/`
 - [ ] Create `<name>/site/` with `site.yml.hbs`, pages, and layout
-- [ ] Section types in `foundation/src/sections/` with components and optional `meta.js`
+- [ ] Section types in `foundation/sections/` with components and optional `meta.js`
 - [ ] Add `.hbs` extension to files needing variable substitution
 - [ ] Add the template to `manifest.json`
 - [ ] If using `@uniweb/*` extras, declare them with `{{version "@uniweb/X"}}` in `template.json` `dependencies`

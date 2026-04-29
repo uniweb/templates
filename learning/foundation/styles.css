@@ -5,7 +5,7 @@
 @source "./sections/**/*.{js,jsx}";
 @source "./layouts/**/*.{js,jsx}";
 @source "./components/**/*.{js,jsx}";
-@source "../node_modules/@uniweb/kit/src/**/*.{js,jsx}";
+@source "./node_modules/@uniweb/kit/src/**/*.{js,jsx}";
 
 /* Page surface background — adapts per color scheme */
 .surface-bg { background-color: #f0f7ff; }

@@ -72,7 +72,7 @@ Images are in `site/public/images/`:
 - A `DocumentOptionsProvider` so sections can read the citation style, figure inclusion, and chapter-key toggles via `useDocumentOptions()`.
 - A structural **docx footer** with centred page numbering ("X of Y").
 - The **floating `DownloadBar`** in the top-right — a gear icon opening the options popover, and a Download button that compiles the page to a `.docx` Blob.
-- The layout threads `--font-heading` and `--font-body` from the live theme through the style pack (`foundation/src/components/docx-style-pack.js`), so the downloaded file inherits the site's typography.
+- The layout threads `--font-heading` and `--font-body` from the live theme through the style pack (`foundation/components/docx-style-pack.js`), so the downloaded file inherits the site's typography.
 
 ## Download options
 
@@ -87,21 +87,21 @@ Settings persist to `localStorage` under `monograph/document-options`.
 ## How to customize
 
 1. **Replace the content.** Edit `beagle.yml` and the markdown chapters under `site/pages/monograph/`. The section types and the style pack handle the rest.
-2. **Add a chapter.** Create a new `.md` file under `site/pages/monograph/` with `type: Chapter` in the frontmatter. Add the chapter's key to `ALL_CHAPTER_KEYS` in `foundation/src/components/document-options.jsx` to pick up an inclusion toggle.
+2. **Add a chapter.** Create a new `.md` file under `site/pages/monograph/` with `type: Chapter` in the frontmatter. Add the chapter's key to `ALL_CHAPTER_KEYS` in `foundation/components/document-options.jsx` to pick up an inclusion toggle.
 3. **Add a figure.** Drop an image into `site/public/images/`, then add a new `type: Figure` section, or add a plate entry to the FigureGrid's `plates` array.
 4. **Tweak typography.** Edit `theme.yml` — the docx style pack reads the same font tokens so the file tracks the preview.
-5. **Tune Word spacing.** All spacing constants are in `foundation/src/utils/docx-spacing.js` (twips, 1 pt = 20 twips). These attributes are docx-only — CSS handles the web preview spacing independently.
+5. **Tune Word spacing.** All spacing constants are in `foundation/utils/docx-spacing.js` (twips, 1 pt = 20 twips). These attributes are docx-only — CSS handles the web preview spacing independently.
 
 ## Key source files
 
 Read in this order to understand the template:
 
-1. **`foundation/src/layouts/MonographLayout/index.jsx`** — the providers, the docx footer, the download bar wiring.
-2. **`foundation/src/sections/Chapter/index.jsx`** — the single-tree Press pattern plus numbered headings, bullets, and observations.
-3. **`foundation/src/sections/SpecimenTable/index.jsx`** — data-driven tables with Press's `<Table>`/`<Tr>`/`<Td>`.
-4. **`foundation/src/sections/Bibliography/index.jsx`** — citestyle integration with live style swap.
-5. **`foundation/src/components/docx-style-pack.js`** — the theme → Word bridge. Defines chapter numbering, caption style, bibliography hanging indent.
-6. **`foundation/src/components/document-options.jsx`** — the hook + provider every chapter reads.
+1. **`foundation/layouts/MonographLayout/index.jsx`** — the providers, the docx footer, the download bar wiring.
+2. **`foundation/sections/Chapter/index.jsx`** — the single-tree Press pattern plus numbered headings, bullets, and observations.
+3. **`foundation/sections/SpecimenTable/index.jsx`** — data-driven tables with Press's `<Table>`/`<Tr>`/`<Td>`.
+4. **`foundation/sections/Bibliography/index.jsx`** — citestyle integration with live style swap.
+5. **`foundation/components/docx-style-pack.js`** — the theme → Word bridge. Defines chapter numbering, caption style, bibliography hanging indent.
+6. **`foundation/components/document-options.jsx`** — the hook + provider every chapter reads.
 
 ## Dependencies
 

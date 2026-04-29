@@ -2,7 +2,7 @@
 @import "@uniweb/kit/theme-tokens.css";
 
 @source "./sections/**/*.{js,jsx}";
-@source "../node_modules/@uniweb/kit/src/**/*.{js,jsx}";
+@source "./node_modules/@uniweb/kit/src/**/*.{js,jsx}";
 
 @theme inline {
   /* Foundation-specific: use white or primary-50 instead of bg for surface */

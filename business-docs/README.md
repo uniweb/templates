@@ -29,7 +29,7 @@ Then visit:
 
 | Path | What it is |
 |---|---|
-| `foundation/src/` | A copy of the `@uniweb/business-docs` foundation source. Authors are free to fork it for site-specific extensions. |
+| `foundation/` | A copy of the `@uniweb/business-docs` foundation source. Authors are free to fork it for site-specific extensions. |
 | `site/site.yml.hbs` | Vendor identity, default currency, default tax jurisdiction, locale, and the queryable surface for both collections. |
 | `site/theme.yml` | Default colors and fonts. The foundation declares no hard-coded colors; everything maps through CSS variables. |
 | `site/collections/sows/` | 3 sample SOWs: two signed (Globex platform redesign, Initech mobile app) and one in-review (Pied Piper data migration). |
@@ -46,8 +46,8 @@ Then visit:
    `site/collections/invoices/` or `site/collections/sows/`. The
    collection processor also accepts `.bib` and YAML array form (one
    file with multiple records) for bulk imports.
-4. **Foundation tweaks** — edit `foundation/src/`. The `useFilteredEngagement`
-   hook (`foundation/src/hooks/`) is the place to extend filter
+4. **Foundation tweaks** — edit `foundation/`. The `useFilteredEngagement`
+   hook (`foundation/hooks/`) is the place to extend filter
    composition; `compile-options.js` is where Press output options live
    (paragraph styles for docx, the print stylesheet for pagedjs, etc.).
 

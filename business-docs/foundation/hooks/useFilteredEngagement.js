@@ -2,7 +2,7 @@
  * useFilteredEngagement — hook for the EngagementReport section.
  *
  * Mirrors useFilteredMembers in academic-metrics
- * (framework/templates/academic-metrics/foundation/src/components/query-context.jsx).
+ * (framework/templates/academic-metrics/foundation/components/query-context.jsx).
  * Takes the block's `content` object and reads filter state internally
  * via usePageState — section components don't pass arguments other
  * than `content`. The framework decides whether to push the where-object
