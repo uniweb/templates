@@ -4,22 +4,9 @@ export default {
   category: 'content',
   purpose: 'Inform',
 
-  // Data: article-shaped data. Delivery is default-on; `entity` is a
-  // declaration for the editor and prepare-props shape guarantees.
-  data: {
-    entity: 'articles',
-    schemas: {
-      article: {
-        slug: { type: 'string', default: '' },
-        title: { type: 'string', default: '' },
-        excerpt: { type: 'string', default: '' },
-        date: { type: 'string', default: '' },
-        image: { type: 'string', default: '' },
-        body: { type: 'string', default: '' },
-        tags: { type: 'array', default: [] },
-      },
-    },
-  },
+  // Renders one article — content.data.articles[0] on a [slug] route. Field
+  // defaults come from the '@/article' schema. Delivery is default-on.
+  data: { articles: '@/article' },
 
   content: {
     // Article content is expected from cascaded data, not markdown

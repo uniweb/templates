@@ -9,7 +9,7 @@ import { useWebsite, Article as ArticleBody } from '@uniweb/kit'
  * Uses kit's Article component for the body content rendering.
  */
 function Article({ content, params }) {
-  const article = content.data.article
+  const article = content.data.articles?.[0]
   const { showImage, showDate, showTags } = params
   const { website } = useWebsite()
 

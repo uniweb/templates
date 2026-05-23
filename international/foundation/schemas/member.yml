@@ -1,0 +1,9 @@
+# Team-member schema. Referenced from section bindings as '@/member'.
+name: member
+version: 1.0.0
+description: A team member.
+fields:
+  name: { type: string, default: '' }
+  role: { type: string, default: '' }
+  bio: { type: string, default: '' }
+  avatar: { type: string, default: '' }

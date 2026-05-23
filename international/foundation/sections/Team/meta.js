@@ -7,19 +7,9 @@ export default {
   category: 'showcase',
   purpose: 'Introduce',
 
-  // Data: team-shaped data. Delivery is default-on; `entity` is a
-  // declaration for the editor and prepare-props shape guarantees.
-  data: {
-    entity: 'team',
-    schemas: {
-      team: {
-        name: { type: 'string', default: '' },
-        role: { type: 'string', default: '' },
-        bio: { type: 'string', default: '' },
-        avatar: { type: 'string', default: '' },
-      },
-    },
-  },
+  // Renders team-member data (content.data.team); field defaults come from the
+  // '@/member' schema. Delivery is default-on.
+  data: { team: '@/member' },
 
   content: {
     title: 'Section title',

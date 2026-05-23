@@ -4,21 +4,9 @@ export default {
   category: 'content',
   purpose: 'Organize',
 
-  // Data: article-shaped data. Delivery is default-on; `entity` is a
-  // declaration for the editor and prepare-props shape guarantees.
-  data: {
-    entity: 'articles',
-    schemas: {
-      articles: {
-        slug: { type: 'string', default: '' },
-        title: { type: 'string', default: '' },
-        excerpt: { type: 'string', default: '' },
-        date: { type: 'string', default: '' },
-        image: { type: 'string', default: '' },
-        tags: { type: 'array', default: [] },
-      },
-    },
-  },
+  // Renders article-shaped data (content.data.articles); field defaults come
+  // from the '@/article' schema. Delivery is default-on.
+  data: { articles: '@/article' },
 
   content: {
     title: 'Section title',
