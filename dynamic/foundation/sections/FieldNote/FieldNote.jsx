@@ -20,7 +20,7 @@ function Skeleton() {
 }
 
 function FieldNote({ content, block }) {
-  const post = content.data?.post
+  const post = content.data?.posts?.[0]
   const loading = block.dataLoading
 
   if (loading) return <Skeleton />

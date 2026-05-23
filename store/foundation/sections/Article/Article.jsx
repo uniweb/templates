@@ -9,7 +9,7 @@ import { ChevronLeft, Share2, Instagram } from 'lucide-react'
  * and a bottom CTA section.
  */
 function Article({ content, block }) {
-  const article = content.data?.article
+  const article = content.data?.articles?.[0]
 
   if (!article) {
     return (

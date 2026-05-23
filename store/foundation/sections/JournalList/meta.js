@@ -5,17 +5,14 @@ export default {
   purpose: 'Organize',
 
   data: {
-    entity: 'articles',
-    schemas: {
-      articles: {
-        slug: { type: 'string', default: '' },
-        title: { type: 'string', default: '' },
-        excerpt: { type: 'string', default: '' },
-        date: { type: 'string', default: '' },
-        readTime: { type: 'string', default: '' },
-        image: { type: 'string', default: '' },
-        author: { type: 'string', default: '' },
-      },
+    articles: {
+      slug: { type: 'string', default: '' },
+      title: { type: 'string', default: '' },
+      excerpt: { type: 'string', default: '' },
+      date: { type: 'string', default: '' },
+      readTime: { type: 'string', default: '' },
+      image: { type: 'string', default: '' },
+      author: { type: 'string', default: '' },
     },
   },
 

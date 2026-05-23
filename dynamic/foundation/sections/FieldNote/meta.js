@@ -6,10 +6,6 @@ export default {
 
   content: {},
 
-  data: {
-    entity: 'posts',
-  },
-
   params: {},
 
   presets: {

@@ -5,17 +5,14 @@ export default {
   purpose: 'Sell',
 
   data: {
-    entity: 'products',
-    schemas: {
-      products: {
-        title: { type: 'string', default: '' },
-        excerpt: { type: 'string', default: '' },
-        longDescription: { type: 'string', default: '' },
-        price: { type: 'number', default: 0 },
-        category: { type: 'string', default: '' },
-        image: { type: 'string', default: '' },
-        features: { type: 'array', default: [] },
-      },
+    products: {
+      title: { type: 'string', default: '' },
+      excerpt: { type: 'string', default: '' },
+      longDescription: { type: 'string', default: '' },
+      price: { type: 'number', default: 0 },
+      category: { type: 'string', default: '' },
+      image: { type: 'string', default: '' },
+      features: { type: 'array', default: [] },
     },
   },
 

@@ -4,10 +4,6 @@ export default {
     'Numeric table of beak morphometrics. Reads the `finchMeasurements` array from the monograph collection.',
   category: 'monograph',
 
-  data: {
-    entity: 'monograph',
-  },
-
   content: {
     title: 'Chapter heading (defaults to "Finch beak morphometrics")',
   },

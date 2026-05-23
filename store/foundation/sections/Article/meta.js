@@ -5,18 +5,15 @@ export default {
   purpose: 'Inform',
 
   data: {
-    entity: 'articles',
-    schemas: {
-      article: {
-        slug: { type: 'string', default: '' },
-        title: { type: 'string', default: '' },
-        excerpt: { type: 'string', default: '' },
-        date: { type: 'string', default: '' },
-        readTime: { type: 'string', default: '' },
-        image: { type: 'string', default: '' },
-        author: { type: 'string', default: '' },
-        content: { type: 'object', default: null },
-      },
+    articles: {
+      slug: { type: 'string', default: '' },
+      title: { type: 'string', default: '' },
+      excerpt: { type: 'string', default: '' },
+      date: { type: 'string', default: '' },
+      readTime: { type: 'string', default: '' },
+      image: { type: 'string', default: '' },
+      author: { type: 'string', default: '' },
+      content: { type: 'object', default: null },
     },
   },
 
