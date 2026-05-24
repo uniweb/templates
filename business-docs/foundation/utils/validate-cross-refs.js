@@ -3,7 +3,7 @@
  *
  * Runs at content-prepare time (after collections are resolved, before
  * sections render). Surfaces issues at info / warn / error severity per
- * the matrix from kb/framework/plans/uniweb-business-docs.md. Severity
+ * the cross-reference matrix. Severity
  * depends on the invoice's own status: a draft invoice that points at
  * an unsigned SOW is informational; an issued invoice with the same
  * problem is an error.
