@@ -42,14 +42,16 @@ export default {
     },
   },
 
-  // Schema for the inline `yaml:api` data block.
+  // Schema for the inline `yaml:api` data block. Uses the data-schema format:
+  // object → `fields`, array of
+  // objects → `items: { type: object, fields }`, picklist → `enum`.
   data: {
     api: {
       method: {
-        type: 'select',
+        type: 'string',
         default: 'GET',
         label: 'HTTP Method',
-        options: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+        enum: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
       },
       path: {
         type: 'string',
@@ -61,12 +63,15 @@ export default {
         type: 'array',
         default: [],
         label: 'Parameters',
-        of: {
-          name: { type: 'string', label: 'Parameter name' },
-          in: { type: 'string', default: 'query', label: 'Location' },
-          type: { type: 'string', default: 'string', label: 'Data type' },
-          required: { type: 'boolean', default: false, label: 'Required' },
-          description: { type: 'string', default: '', label: 'Description' },
+        items: {
+          type: 'object',
+          fields: {
+            name: { type: 'string', label: 'Parameter name' },
+            in: { type: 'string', default: 'query', label: 'Location' },
+            type: { type: 'string', default: 'string', label: 'Data type' },
+            required: { type: 'bool', default: false, label: 'Required' },
+            description: { type: 'string', default: '', label: 'Description' },
+          },
         },
       },
       requestBody: {
@@ -77,8 +82,8 @@ export default {
       response: {
         type: 'object',
         label: 'Response',
-        schema: {
-          status: { type: 'number', default: 200, label: 'Status code' },
+        fields: {
+          status: { type: 'int', default: 200, label: 'Status code' },
           body: { type: 'string', default: '', label: 'Response body' },
         },
       },
@@ -86,10 +91,13 @@ export default {
         type: 'array',
         default: [],
         label: 'Multiple Responses',
-        of: {
-          status: { type: 'number', default: 200, label: 'Status code' },
-          description: { type: 'string', default: '', label: 'Description' },
-          body: { type: 'string', default: '', label: 'Response body' },
+        items: {
+          type: 'object',
+          fields: {
+            status: { type: 'int', default: 200, label: 'Status code' },
+            description: { type: 'string', default: '', label: 'Description' },
+            body: { type: 'string', default: '', label: 'Response body' },
+          },
         },
       },
     },
