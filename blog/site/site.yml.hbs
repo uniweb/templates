@@ -12,10 +12,12 @@ index: home
 search: true
 
 # Content collections
-# Markdown files in collections/ are processed into JSON at build time
+# Markdown files in collections/ are processed into JSON at build time, and —
+# when synced to a backend — into @std/article entities (the `schema:` binding).
 collections:
   articles:
     path: collections/articles
+    schema: '@std/article'
     route: /blog
     sort: date desc
 
