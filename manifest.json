@@ -39,6 +39,17 @@
         "localization"
       ]
     },
+    "blog": {
+      "name": "Blog",
+      "description": "A blog built on the @std/article standard schema. Markdown articles render as a card grid and as full posts via dynamic [slug] routes. The first template to use a shared standard data schema — no custom schema file needed.",
+      "tags": [
+        "blog",
+        "articles",
+        "collections",
+        "standard-schema",
+        "data-schema"
+      ]
+    },
     "dynamic": {
       "name": "Dynamic Data",
       "description": "Live API data fetching with loading states, transforms, and the portable data pattern",

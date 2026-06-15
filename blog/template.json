@@ -1,0 +1,14 @@
+{
+  "name": "Blog",
+  "description": "A blog built on the @std/article standard schema. Markdown articles render as a card grid and as full posts via dynamic [slug] routes. Demonstrates using a shared standard data schema — no custom schema file needed: the foundation binds @std/article and the site supplies articles as a markdown collection.",
+  "compatible": ">=0.7.0",
+  "format": 2,
+  "tags": ["blog", "articles", "collections", "standard-schema", "data-schema"],
+  "components": ["Header", "Footer", "Hero", "ArticleList", "Article"],
+  "dependencies": {
+    "foundation": {
+      "lucide-react": "^0.400.0",
+      "@uniweb/schemas": "{{version \"@uniweb/schemas\"}}"
+    }
+  }
+}

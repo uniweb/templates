@@ -1,0 +1,38 @@
+/**
+ * Foundation Configuration
+ *
+ * This file defines foundation-level configuration:
+ * - vars: CSS custom properties that sites can override in theme.yml
+ * - Layout: Custom layout component (optional)
+ *
+ * Identity (name, version, description) comes from package.json.
+ */
+
+/**
+ * CSS custom properties that sites can override in theme.yml
+ */
+export const vars = {
+  // Layout
+  'header-height': {
+    default: '4rem',
+    description: 'Fixed header height',
+  },
+  'max-content-width': {
+    default: '80rem',
+    description: 'Maximum content width (1280px)',
+  },
+  'section-padding-y': {
+    default: 'clamp(4rem, 6vw, 7rem)',
+    description: 'Vertical padding for sections (fluid: adapts to viewport)',
+  },
+}
+/**
+ * Runtime exports (Layout and props)
+ */
+export default {
+  // Optional: Create custom layouts in src/layouts/
+  // Then set defaultLayout: 'MyLayout' below
+
+  // Foundation-wide props (accessible via website.foundationProps):
+  props: {},
+}

@@ -1,0 +1,24 @@
+name: {{projectName}}
+description: Notes on building for the web.
+defaultLanguage: en
+
+# Foundation to use for this site
+foundation: foundation
+
+# Homepage - specifies which page folder becomes the root route (/)
+index: home
+
+# Enable search functionality
+search: true
+
+# Content collections
+# Markdown files in collections/ are processed into JSON at build time
+collections:
+  articles:
+    path: collections/articles
+    route: /blog
+    sort: date desc
+
+# Build options
+build:
+  prerender: true

@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@import "@uniweb/kit/theme-tokens.css";
+
+@source "./sections/**/*.{js,jsx}";
+@source "./node_modules/@uniweb/kit/src/**/*.{js,jsx}";
+
+@theme inline {
+  /* Foundation-specific: use primary-50 instead of bg for surface */
+  --color-surface: var(--primary-50);
+}

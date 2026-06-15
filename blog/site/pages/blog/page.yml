@@ -1,0 +1,8 @@
+id: b7788da4
+title: Blog
+description: Essays and notes on building for the web.
+label: Blog
+order: 2
+
+# Articles collection data - cascades to child pages including [slug]
+data: articles
