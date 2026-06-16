@@ -5,8 +5,9 @@ export default {
   purpose: 'Inform',
 
   // Renders one article — content.data.articles[0] on a [slug] route. Field
-  // defaults come from the '@/article' schema. Delivery is default-on.
-  data: { articles: '@/article' },
+  // defaults come from the '@std/article' standard schema (shipped in
+  // @uniweb/schemas). Delivery is default-on.
+  data: { articles: '@std/article' },
 
   content: {
     // Article content is expected from cascaded data, not markdown

@@ -5,8 +5,9 @@ export default {
   purpose: 'Organize',
 
   // Renders article-shaped data (content.data.articles); field defaults come
-  // from the '@/article' schema. Delivery is default-on.
-  data: { articles: '@/article' },
+  // from the '@std/article' standard schema (shipped in @uniweb/schemas).
+  // Delivery is default-on.
+  data: { articles: '@std/article' },
 
   content: {
     title: 'Section title',
