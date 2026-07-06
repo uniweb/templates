@@ -8,8 +8,4 @@ export default {
     images: 'Logo image [0-1]',
     links: 'CTA buttons [0-2]',
   },
-
-  context: {
-    allowTranslucentTop: true,
-  },
 }
