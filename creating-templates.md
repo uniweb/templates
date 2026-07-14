@@ -4,7 +4,7 @@ This guide covers how to create, test, and publish official Uniweb templates usi
 
 ## How Templates Work
 
-Templates provide **content only** — section type components, pages, theme configuration, and collections. The CLI provides all structural scaffolding (`package.json`, `vite.config.js`, `main.js`, `pnpm-workspace.yaml`, etc.) from its built-in package templates. This means:
+Templates provide **content only** — section type components, pages, theme configuration, and collections. The CLI provides all structural scaffolding (`package.json`, `vite.config.js`, the site's `entry.js`, `pnpm-workspace.yaml`, etc.) from its built-in package templates. This means:
 
 - Templates never duplicate structural files
 - Structural upgrades (new Vite version, new runtime features) happen in the CLI, not in every template
@@ -18,15 +18,14 @@ Each template lives at the repo root with this structure:
 marketing/
 ├── template.json           # Required: Template metadata
 ├── preview.png             # Optional: Preview image
-├── foundation/
-│   └── src/
-│       ├── foundation.js   # Section type exports
-│       ├── styles.css      # Foundation styles
-│       └── sections/       # Section type components
-│           └── Hero/
-│               ├── index.jsx
-│               └── meta.js
-└── site/
+├── foundation/             # Foundation content → scaffolds into the project's foundation folder (src/ by default)
+│   ├── main.js             # Foundation config: capabilities, vars (optional — the CLI scaffolds a default)
+│   ├── styles.css          # Foundation styles
+│   └── sections/           # Section type components
+│       └── Hero/
+│           ├── index.jsx
+│           └── meta.js
+└── site/                   # Site content → scaffolds into the project's site/
     ├── site.yml.hbs        # Site configuration (Handlebars-processed)
     ├── theme.yml            # Theme variables
     ├── layout/
@@ -41,16 +40,18 @@ marketing/
     └── public/              # Optional: static assets
 ```
 
+> **"Foundation" is a concept, not a required folder name.** A foundation is code that exposes an interface for non-code selection and configuration — section types, theme variables, layouts. The `foundation/` and `site/` folders above are just the two content buckets the CLI reads; they don't dictate folder names in the generated project. In a standard project pairing one site with one foundation, the foundation's code lives in `src/` and the site in `site/`, and the CLI points `site.yml`'s `foundation:` field at it. Multi-foundation layouts use explicit names (see [Multi-Package Templates](#multi-package-templates)).
+
 ## What to Include
 
 Templates contain only content — the unique parts that make each template different.
 
-**Foundation content:**
-- `src/foundation.js` — exports section types
-- `src/styles.css` — foundation-level styles
-- `src/sections/` — section type components (JSX + optional `meta.js`)
-- `src/layouts/` — custom layout components (if any)
-- `src/components/` — internal (non-addressable) components (if any)
+**Foundation content** (in the template's `foundation/` folder):
+- `main.js` — foundation config: capabilities and an optional `vars` export (the CLI scaffolds a default, so include this only to customize)
+- `styles.css` — foundation-level styles
+- `sections/` — section type components (JSX + optional `meta.js`)
+- `layouts/` — custom layout components (if any)
+- `components/` — internal (non-addressable) components (if any)
 
 **Site content:**
 - `site.yml.hbs` — site configuration (processed through Handlebars)
@@ -64,7 +65,7 @@ Templates contain only content — the unique parts that make each template diff
 **Do NOT include** (the CLI generates these from package templates):
 - `package.json` (root, foundation, or site)
 - `vite.config.js`
-- `main.js`
+- `entry.js` (the site's entry point)
 - `index.html`
 - `pnpm-workspace.yaml`
 - `.gitignore`
@@ -245,7 +246,7 @@ The CLI downloads and extracts tarballs on demand when users run `create --templ
 ## Checklist for New Templates
 
 - [ ] Create `<name>/template.json` with `name` and `format: 2`
-- [ ] Create `<name>/foundation/` with `foundation.js`, `styles.css`, and `sections/`
+- [ ] Create `<name>/foundation/` with `main.js`, `styles.css`, and `sections/`
 - [ ] Create `<name>/site/` with `site.yml.hbs`, pages, and layout
 - [ ] Section types in `foundation/sections/` with components and optional `meta.js`
 - [ ] Add `.hbs` extension to files needing variable substitution
