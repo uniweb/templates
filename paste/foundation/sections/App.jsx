@@ -50,7 +50,7 @@ export default function App() {
           <p className="mt-4 text-lg leading-relaxed text-slate-600">
             Paste your design into{' '}
             <code className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-[0.9em] text-slate-800">
-              foundation/sections/App.jsx
+              src/sections/App.jsx
             </code>{' '}
             and see it live — no wiring required.
           </p>
