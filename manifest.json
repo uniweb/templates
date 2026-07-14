@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "templates": {
     "marketing": {
-      "name": "Marketing Starter",
+      "name": "Marketing",
       "description": "Landing pages and marketing sites with Tailwind CSS v4",
       "tags": [
         "marketing",
@@ -20,7 +20,7 @@
       ]
     },
     "docs": {
-      "name": "Documentation",
+      "name": "Docs",
       "description": "Documentation sites with navigation levels",
       "tags": [
         "docs",
@@ -29,7 +29,7 @@
       ]
     },
     "international": {
-      "name": "International Business",
+      "name": "International",
       "description": "Multilingual corporate website with English, Spanish, and French",
       "tags": [
         "i18n",
@@ -51,7 +51,7 @@
       ]
     },
     "dynamic": {
-      "name": "Dynamic Data",
+      "name": "Dynamic",
       "description": "Live API data fetching with loading states, transforms, and the portable data pattern",
       "tags": [
         "data",
@@ -62,7 +62,7 @@
       ]
     },
     "store": {
-      "name": "Solis Artisans - Store",
+      "name": "Store",
       "description": "Artisan e-commerce with product collections, Shopify Buy Button, journal blog, and stone-amber design",
       "tags": [
         "store",
@@ -73,7 +73,7 @@
       ]
     },
     "learning": {
-      "name": "Learning Platform",
+      "name": "Learning",
       "description": "Course-based learning site with quizzes, code challenges, and AI grading integration",
       "tags": [
         "learning",
@@ -85,7 +85,7 @@
       ]
     },
     "extensions": {
-      "name": "Extensions Demo",
+      "name": "Extensions",
       "description": "Primary foundation with a visual effects extension, demonstrating multi-foundation sites",
       "tags": [
         "extensions",
@@ -95,7 +95,7 @@
       ]
     },
     "cv-loom": {
-      "name": "CV (Loom-instantiated)",
+      "name": "CV (Loom)",
       "description": "A single-page narrative CV whose prose is written with {placeholder} expressions and instantiated at render time via the foundation content handler and @uniweb/loom. Reference implementation of the handler hook.",
       "tags": [
         "cv",
@@ -107,7 +107,7 @@
       ]
     },
     "monograph": {
-      "name": "Monograph (Press showcase)",
+      "name": "Monograph",
       "description": "A richly illustrated long-form document — numbered chapters with nested subsections, figures with captions, data-driven specimen and measurement tables, and a citestyle bibliography. The same JSX drives the themed web preview and a branded .docx with headers, footers, and page numbers. Ships with Darwin's Galapagos observations as sample content.",
       "tags": [
         "monograph",
@@ -120,7 +120,7 @@
       ]
     },
     "academic-metrics": {
-      "name": "Academic Metrics (xlsx showcase)",
+      "name": "Academic Metrics",
       "description": "A docusite whose content is also a downloadable Excel workbook. Aggregates academic metrics (publications, funding, supervisions) across multiple members of a university unit. Rich web previews + flat tabular xlsx sheets from the same data. Ships with three 19th-century naturalists as sample members.",
       "tags": [
         "academic-metrics",
@@ -134,7 +134,7 @@
       ]
     },
     "business-docs": {
-      "name": "Business documents",
+      "name": "Business Documents",
       "description": "A complete business-document site: invoice and SOW collections, per-record preview pages, and a filtered engagement report with XLSX export. Built on @uniweb/business-docs and demonstrates the same foundation that ships the unipress invoice template.",
       "tags": [
         "business-docs",
