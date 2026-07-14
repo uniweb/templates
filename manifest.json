@@ -146,6 +146,17 @@
         "docx",
         "pagedjs"
       ]
+    },
+    "paste": {
+      "name": "Paste a Design (Level 0)",
+      "description": "Bring an existing React design (AI-generated or hand-built) into Uniweb with zero rewiring — replace App.jsx and run. Ships lucide-react preinstalled and SPA-first. The Level 0 conversion starting point.",
+      "tags": [
+        "paste",
+        "level-0",
+        "convert",
+        "ai-generated",
+        "starter"
+      ]
     }
   }
 }

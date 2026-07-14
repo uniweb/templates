@@ -1,0 +1,13 @@
+{
+  "name": "Paste a Design (Level 0)",
+  "description": "A one-section harness for bringing an existing React design — AI-generated or hand-built — into Uniweb with zero rewiring. Replace foundation/sections/App.jsx with your design and run: the home page is prewired and lucide-react (the icon set most AI tools emit) is preinstalled. SPA-first, so any design renders without server-side-rendering surprises. The starting point for the 'Converting Existing Designs' Level 0 workflow.",
+  "compatible": ">=0.7.0",
+  "format": 2,
+  "tags": ["paste", "level-0", "convert", "ai-generated", "react", "single-file", "landing-page", "starter"],
+  "components": ["App"],
+  "dependencies": {
+    "foundation": {
+      "lucide-react": "^0.400.0"
+    }
+  }
+}
