@@ -1,4 +1,4 @@
-id: rest-api
+id: v1-rest-api
 title: REST Endpoints
 description: Legacy REST API reference
 order: 3
