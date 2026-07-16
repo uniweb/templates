@@ -1,0 +1,12 @@
+# Your pasted design brings its own colors, so theme tokens aren't wired up at
+# Level 0 — this file is here for when you graduate to semantic theming
+# (Level 3). Set your palette here and switch components to tokens like
+# `text-heading` / `bg-section`, and the same design adapts to light/dark/brand.
+colors:
+  primary: "#2E6BF0"
+  neutral: slate
+
+appearance:
+  default: light
+  schemes: [light]
+  allowToggle: false

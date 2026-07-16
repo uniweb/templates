@@ -1,0 +1,13 @@
+name: {{projectName}}
+defaultLanguage: en
+foundation: foundation
+index: home
+
+# ── Rendering mode ───────────────────────────────────────────────────────────
+# SPA-first: the site renders entirely in the browser. This lets you paste ANY
+# React design and see it live without a server-side render pass — many
+# AI-generated designs read `window`/`document` while rendering, which would
+# crash prerendering. Once your design is SSR-clean, set `prerender: true` to
+# emit static HTML for better SEO and first paint.
+build:
+  prerender: false
