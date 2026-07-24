@@ -52,12 +52,10 @@ contexts:
     border: '#3d3833'
 
 # ─── Inline styles ──────────────────────────────────────────────────────────
+# Only the deltas — `accent` is already the framework default, and `muted`
+# keeps its default colour while gaining italics.
 inline:
-  accent:
-    color: 'var(--accent)'
-    font-weight: '600'
   muted:
-    color: 'var(--subtle)'
     font-style: italic
   latin:
     font-style: italic

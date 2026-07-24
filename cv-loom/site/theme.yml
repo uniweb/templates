@@ -71,9 +71,6 @@ contexts:
 # content rarely uses inline styles, but [something]{accent} gives
 # authors a way to mark a term as having special emphasis.
 inline:
-  accent:
-    color: 'var(--accent)'
-    font-weight: '600'
+  # Only the delta — `muted` keeps its default colour and gains italics.
   muted:
-    color: 'var(--subtle)'
     font-style: italic

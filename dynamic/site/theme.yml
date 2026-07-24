@@ -18,9 +18,13 @@ fonts:
   body: "Inter, system-ui, sans-serif"
 
 inline:
+  # A full redefinition: [text]{accent} is a code chip here, not emphasis.
+  # `font-weight: inherit` opts out of the default bold — inline styles merge
+  # property by property, so a default you don't want needs a neutral value.
   accent:
     color: var(--primary-600)
     background: var(--primary-50)
-    font-family: var(--font-mono)
+    font-family: var(--font-code)
+    font-weight: inherit
     padding: 0.125rem 0.375rem
     border-radius: 0.25rem

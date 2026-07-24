@@ -60,10 +60,10 @@ contexts:
     muted: '#1e293b'
 
 # ─── Inline styles ──────────────────────────────────────────────────────────
+# `accent`, `callout` and `muted` come from the framework; only declare what
+# differs. Overrides merge property by property, so an entry can add to a
+# default rather than restate it.
 inline:
-  accent:
-    color: 'var(--accent)'
-    font-weight: '600'
   subtle:
     color: 'var(--subtle)'
     font-style: italic
