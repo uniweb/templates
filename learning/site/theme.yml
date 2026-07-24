@@ -11,9 +11,8 @@ fonts:
     - url: https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap
 
 appearance:
-  default: light
-  allowToggle: true
-  respectSystemPreference: false   # always start light; the toggle is the only way to dark
+  default: system      # follow the visitor's OS preference on first visit
+  allowToggle: true    # with a manual light/dark override
 
 vars:
   surface-bg: "#f0f7ff"
