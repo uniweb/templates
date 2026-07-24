@@ -13,6 +13,7 @@ fonts:
 appearance:
   default: light
   allowToggle: true
+  respectSystemPreference: false   # always start light; the toggle is the only way to dark
 
 vars:
   surface-bg: "#f0f7ff"
