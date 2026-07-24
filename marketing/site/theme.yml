@@ -17,11 +17,6 @@ contexts:
     subtle: neutral-400
     border: neutral-700
 
-inline:
-  accent:
-    color: var(--link)
-    font-weight: "600"
-
 appearance:
   default: light
   schemes: [light]
