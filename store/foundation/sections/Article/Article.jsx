@@ -122,7 +122,7 @@ function Article({ content, block }) {
 
         {/* Body content (ProseMirror JSON from collection) */}
         {articleContent && (
-          <div className="prose prose-lg prose-neutral max-w-none">
+          <div className="prose prose-lg max-w-none">
             <ArticleBody content={articleContent} />
           </div>
         )}

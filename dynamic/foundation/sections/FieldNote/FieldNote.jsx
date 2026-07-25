@@ -73,7 +73,7 @@ function FieldNote({ content, block }) {
         {post.title}
       </h1>
 
-      <div className="prose max-w-none text-body leading-relaxed space-y-4">
+      <div className="text-body leading-relaxed space-y-4">
         <p>{post.body}</p>
         <p>{post.body}</p>
       </div>

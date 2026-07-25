@@ -53,7 +53,7 @@ function MathBlock({ content, params }) {
           )}
 
           {paragraphs.length > 0 && (
-            <div className="prose max-w-none mb-8 text-body">
+            <div className="mb-8 text-body">
               {paragraphs.map((para, i) => (
                 <Text
                   key={i}
