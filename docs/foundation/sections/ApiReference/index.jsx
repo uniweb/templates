@@ -25,7 +25,10 @@ function ApiReference({ content, params }) {
   const response = api.response
   const responses = api.responses || []
 
-  // Method color mapping
+  // HTTP method colours are conventional, not thematic — GET is green and
+  // DELETE is red in every API reference on the web, and a site's palette has
+  // no opinion about that. Deliberately left as fixed colours; the surrounding
+  // chrome uses semantic tokens.
   const methodColors = {
     GET: 'bg-emerald-500',
     POST: 'bg-blue-500',
@@ -41,7 +44,7 @@ function ApiReference({ content, params }) {
     return parts.map((part, i) => {
       if (part.startsWith('{') && part.endsWith('}')) {
         return (
-          <span key={i} className="text-amber-400">
+          <span key={i} className="text-warning">
             {part}
           </span>
         )
@@ -70,28 +73,28 @@ function ApiReference({ content, params }) {
       {/* Header: Method + Path */}
       <div className="mb-6">
         {title && (
-          <h2 className="text-2xl font-bold text-gray-900 mb-3">{title}</h2>
+          <h2 className="text-2xl font-bold text-heading mb-3">{title}</h2>
         )}
 
-        <div className="flex items-center gap-3 p-4 bg-gray-900 rounded-lg font-mono text-sm">
+        <div className="flex items-center gap-3 p-4 bg-section rounded-lg font-mono text-sm">
           <span
             className={cn(
-              'px-3 py-1 rounded font-bold text-white text-xs uppercase',
-              methodColors[method.toUpperCase()] || 'bg-gray-500'
+              'px-3 py-1 rounded font-bold text-primary-foreground text-xs uppercase',
+              methodColors[method.toUpperCase()] || 'bg-subtle'
             )}
           >
             {method}
           </span>
-          <code className="text-gray-100">{renderPath(path)}</code>
+          <code className="text-heading">{renderPath(path)}</code>
           {show_try_it && (
-            <button className="ml-auto px-3 py-1 text-xs bg-primary hover:bg-primary-dark text-white rounded transition-colors">
+            <button className="ml-auto px-3 py-1 text-xs bg-primary hover:bg-primary-dark text-primary-foreground rounded transition-colors">
               Try it
             </button>
           )}
         </div>
 
         {paragraphs[0] && (
-          <p className="mt-4 text-gray-600">{paragraphs[0]}</p>
+          <p className="mt-4 text-subtle">{paragraphs[0]}</p>
         )}
       </div>
 
@@ -100,38 +103,38 @@ function ApiReference({ content, params }) {
         <div className="mb-8">
           {Object.entries(paramsByLocation).map(([location, params]) => (
             <div key={location} className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">
+              <h3 className="text-lg font-semibold text-heading mb-3">
                 {locationLabels[location] || location}
               </h3>
-              <div className="border border-gray-200 rounded-lg overflow-hidden">
+              <div className="border border-border rounded-lg overflow-hidden">
                 <table className="w-full text-sm">
-                  <thead className="bg-gray-50">
+                  <thead className="bg-muted">
                     <tr>
-                      <th className="text-left px-4 py-2 font-medium text-gray-700">Name</th>
-                      <th className="text-left px-4 py-2 font-medium text-gray-700">Type</th>
+                      <th className="text-left px-4 py-2 font-medium text-body">Name</th>
+                      <th className="text-left px-4 py-2 font-medium text-body">Type</th>
                       {!compact && (
-                        <th className="text-left px-4 py-2 font-medium text-gray-700">Description</th>
+                        <th className="text-left px-4 py-2 font-medium text-body">Description</th>
                       )}
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-200">
+                  <tbody className="divide-y divide-border">
                     {params.map((param, i) => (
                       <tr key={i}>
                         <td className="px-4 py-3">
-                          <code className="text-sm font-mono text-gray-900">
+                          <code className="text-sm font-mono text-heading">
                             {param.name}
                           </code>
                           {param.required && (
-                            <span className="ml-2 text-xs text-red-500 font-medium">
+                            <span className="ml-2 text-xs text-error font-medium">
                               required
                             </span>
                           )}
                         </td>
                         <td className="px-4 py-3">
-                          <span className="text-gray-600">{param.type || 'string'}</span>
+                          <span className="text-subtle">{param.type || 'string'}</span>
                         </td>
                         {!compact && (
-                          <td className="px-4 py-3 text-gray-600">
+                          <td className="px-4 py-3 text-subtle">
                             {param.description}
                           </td>
                         )}
@@ -148,7 +151,7 @@ function ApiReference({ content, params }) {
       {/* Request Body */}
       {requestBody && (
         <div className="mb-8">
-          <h3 className="text-lg font-semibold text-gray-900 mb-3">Request Body</h3>
+          <h3 className="text-lg font-semibold text-heading mb-3">Request Body</h3>
           <CodeExample
             code={typeof requestBody === 'string' ? requestBody : JSON.stringify(requestBody, null, 2)}
             language="json"
@@ -159,10 +162,10 @@ function ApiReference({ content, params }) {
       {/* Response */}
       {response && (
         <div className="mb-8">
-          <h3 className="text-lg font-semibold text-gray-900 mb-3">
+          <h3 className="text-lg font-semibold text-heading mb-3">
             Response
             {response.status && (
-              <span className="ml-2 text-sm font-normal text-gray-500">
+              <span className="ml-2 text-sm font-normal text-subtle">
                 {response.status}
               </span>
             )}
@@ -177,7 +180,7 @@ function ApiReference({ content, params }) {
       {/* Multiple Responses */}
       {responses.length > 0 && (
         <div className="mb-8">
-          <h3 className="text-lg font-semibold text-gray-900 mb-3">Responses</h3>
+          <h3 className="text-lg font-semibold text-heading mb-3">Responses</h3>
           <div className="space-y-4">
             {responses.map((res, i) => (
               <div key={i}>
@@ -186,16 +189,16 @@ function ApiReference({ content, params }) {
                     className={cn(
                       'px-2 py-0.5 rounded text-xs font-medium',
                       res.status >= 200 && res.status < 300
-                        ? 'bg-emerald-100 text-emerald-800'
+                        ? 'bg-success-subtle text-success'
                         : res.status >= 400
-                        ? 'bg-red-100 text-red-800'
-                        : 'bg-gray-100 text-gray-800'
+                        ? 'bg-error-subtle text-error'
+                        : 'bg-muted text-heading'
                     )}
                   >
                     {res.status}
                   </span>
                   {res.description && (
-                    <span className="text-sm text-gray-600">{res.description}</span>
+                    <span className="text-sm text-subtle">{res.description}</span>
                   )}
                 </div>
                 {res.body && (
@@ -231,13 +234,13 @@ function CodeExample({ code, language = 'json' }) {
 
   return (
     <div className="rounded-lg overflow-hidden">
-      <div className="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-gray-700">
-        <span className="text-xs font-mono text-gray-400 uppercase">
+      <div className="flex items-center justify-between px-4 py-2 bg-muted border-b border-border">
+        <span className="text-xs font-mono text-subtle uppercase">
           {language}
         </span>
         <button
           onClick={handleCopy}
-          className="text-xs text-gray-400 hover:text-white transition-colors flex items-center gap-1"
+          className="text-xs text-subtle hover:text-primary-foreground transition-colors flex items-center gap-1"
         >
           {copied ? (
             <>

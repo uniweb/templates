@@ -1,40 +1,71 @@
 @import "tailwindcss";
 
+/*
+ * Semantic theme tokens.
+ *
+ * This is what makes `bg-section`, `text-heading`, `text-subtle`,
+ * `border-border`, `bg-primary` and the rest resolve. Their *values* come from
+ * the site's theme.yml — the foundation names what it needs, the site decides
+ * what it looks like. That split is the point of a foundation: these same
+ * components should dress an academic handbook and a product changelog without
+ * either site editing this file.
+ *
+ * The tokens also flip with the visitor's light/dark choice on their own,
+ * which is why there is no `dark:` variant anywhere in this foundation. A
+ * component written as `bg-white dark:bg-gray-900` looks identical on every
+ * site that installs it, and no theme.yml can talk it out of that.
+ */
+@import "@uniweb/kit/theme-tokens.css";
+
+/* Documentation is long-form prose, so the typography plugin does the rhythm. */
+@plugin "@tailwindcss/typography";
+
 @source "./sections/**/*.{js,jsx}";
 @source "./components/**/*.{js,jsx}";
 @source "./layouts/**/*.{js,jsx}";
 @source "./node_modules/@uniweb/kit/src/**/*.{js,jsx}";
 
 /*
- * Dark mode variant mapping.
+ * Documentation prose.
  *
- * Uniweb's runtime applies .scheme-dark / .scheme-light classes to the
- * document root when appearance schemes are enabled in theme.yml. This
- * @custom-variant maps Tailwind's dark: prefix to that class, so
- * `dark:bg-gray-900` activates when .scheme-dark is present.
- *
- * Without this, Tailwind's dark: uses @media (prefers-color-scheme: dark),
- * which doesn't respond to the runtime's toggle.
+ * Typography ships its own greys. Re-pointing its variables at the semantic
+ * tokens is a dozen lines, and means body copy answers to the site's theme
+ * like everything else — rather than a wall of `prose-headings:text-…`
+ * utilities repeated at every call site.
  */
-@custom-variant dark (&:where(.scheme-dark, .scheme-dark *));
+.docs-prose {
+  --tw-prose-body: var(--body);
+  --tw-prose-headings: var(--heading);
+  --tw-prose-lead: var(--subtle);
+  --tw-prose-links: var(--primary);
+  --tw-prose-bold: var(--heading);
+  --tw-prose-counters: var(--subtle);
+  --tw-prose-bullets: var(--border);
+  --tw-prose-hr: var(--border);
+  --tw-prose-quotes: var(--subtle);
+  --tw-prose-quote-borders: var(--primary);
+  --tw-prose-captions: var(--subtle);
+  --tw-prose-code: var(--heading);
+  --tw-prose-th-borders: var(--border);
+  --tw-prose-td-borders: var(--border);
+}
 
-@theme {
-  /* Primary colors — used for links, buttons, active states */
-  --color-primary: #2563eb;
-  --color-primary-light: #3b82f6;
-  --color-primary-dark: #1d4ed8;
+/* Headings clear the header when the contents rail jumps to one. */
+.docs-prose :is(h1, h2, h3, h4) {
+  scroll-margin-top: calc(var(--header-height, 4rem) + 1rem);
+}
 
-  /* Secondary colors */
-  --color-secondary: #64748b;
-
-  /* Accent for highlights */
-  --color-accent: #8b5cf6;
-
-  /* Code block colors */
-  --color-code-bg: #1e293b;
-  --color-code-text: #e2e8f0;
-
-  /* Sidebar (used by LeftPanel border) */
-  --color-sidebar-bg: #f8fafc;
-  --color-sidebar-border: #e2e8f0;
+/* Inline code reads as a chip against whatever surface it sits on. Fenced
+   blocks are left alone — the syntax highlighter paints those, and a site
+   retunes it through `code:` in theme.yml. */
+.docs-prose :not(pre) > code {
+  background-color: color-mix(in oklch, var(--section), var(--heading) 6%);
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.375rem;
+  font-weight: 500;
+  font-size: 0.875em;
+}
+.docs-prose :not(pre) > code::before,
+.docs-prose :not(pre) > code::after {
+  content: none;
 }

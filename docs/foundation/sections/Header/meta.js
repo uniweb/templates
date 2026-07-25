@@ -7,7 +7,7 @@
  * `background: 'self'` tells the runtime that this component renders its
  * own background — skip the default section background layer. Without this,
  * the runtime would render a themed background behind the header that
- * conflicts with the component's own bg-white / dark:bg-gray-900.
+ * conflicts with the surface the component paints itself.
  * This is the same pattern used for sections that render custom backgrounds
  * (gradients, images, glassmorphism, etc.).
  */

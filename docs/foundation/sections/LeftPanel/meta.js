@@ -3,10 +3,9 @@
  *
  * Sidebar navigation with collapsible sections and category filtering.
  *
- * `background: 'self'` — this component lives in a layout area (left sidebar)
- * and manages its own background via the layout's bg-white/dark:bg-gray-900.
- * Without this, the runtime would apply a themed section background that
- * creates a visible color mismatch between the sidebar and the layout.
+ * `background: 'self'` — this component fills a layout area, and the layout
+ * already paints that column. Without the opt-out the runtime would render a
+ * themed section background underneath, and the seam would show.
  */
 export default {
   title: 'Left Panel',
@@ -15,8 +14,8 @@ export default {
   purpose: 'Navigate',
   background: 'self',
 
-  // LeftPanel reads navigation from website.getPageHierarchy(), not from
-  // its own content — so the content declaration is empty.
+  // Navigation comes from the site's own page tree, not from this section's
+  // content — so the content declaration is empty.
   content: {},
 
   params: {
@@ -29,7 +28,7 @@ export default {
     categories: {
       type: 'boolean',
       label: 'Category Filtering',
-      description: 'Show only pages within the current category (pairs with Header categories)',
+      description: 'Show only the section being read, rather than the whole site tree',
       default: false,
     },
     default_open: {

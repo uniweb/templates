@@ -99,14 +99,14 @@ function Header({ content, params, block }) {
 
   // Header styles based on scroll state
   const getHeaderStyles = () => {
-    const base = 'transition-all duration-300 border-b border-gray-200 dark:border-gray-700'
+    const base = 'transition-all duration-300 border-b border-border'
     if (scrolled) {
       if (transparency) {
-        return cn(base, 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg shadow-sm')
+        return cn(base, 'bg-section/95 backdrop-blur-lg shadow-sm')
       }
-      return cn(base, 'bg-white dark:bg-gray-900 shadow-sm')
+      return cn(base, 'bg-section shadow-sm')
     }
-    return cn(base, 'bg-white dark:bg-gray-900')
+    return cn(base, 'bg-section')
   }
 
   // Version Badge Component (shows next to logo)
@@ -120,7 +120,7 @@ function Header({ content, params, block }) {
           className={cn(
             'flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-md transition-colors',
             'bg-primary/10 text-primary hover:bg-primary/20',
-            currentVersion?.deprecated && 'bg-amber-100 text-amber-700 hover:bg-amber-200'
+            currentVersion?.deprecated && 'bg-warning-subtle text-warning hover:bg-warning-subtle/70'
           )}
           aria-label="Change version"
         >
@@ -134,7 +134,7 @@ function Header({ content, params, block }) {
               className="fixed inset-0 z-40"
               onClick={() => setVersionMenuOpen(false)}
             />
-            <div className="absolute left-0 top-full mt-1 z-50 bg-white rounded-lg shadow-lg border border-gray-200 py-1 min-w-[180px]">
+            <div className="absolute left-0 top-full mt-1 z-50 bg-section rounded-lg shadow-lg border border-border py-1 min-w-[180px]">
               {versions.map(version => (
                 <a
                   key={version.id}
@@ -143,18 +143,18 @@ function Header({ content, params, block }) {
                     'flex items-center justify-between px-3 py-2 text-sm transition-colors',
                     version.id === currentVersion?.id
                       ? 'bg-primary/5 text-primary font-medium'
-                      : 'text-gray-700 hover:bg-gray-50'
+                      : 'text-body hover:bg-muted'
                   )}
                   onClick={() => setVersionMenuOpen(false)}
                 >
                   <span>{version.label || version.id}</span>
                   {version.latest && (
-                    <span className="text-[10px] px-1.5 py-0.5 bg-green-100 text-green-700 rounded-full font-medium">
+                    <span className="text-[10px] px-1.5 py-0.5 bg-success-subtle text-success rounded-full font-medium">
                       latest
                     </span>
                   )}
                   {version.deprecated && (
-                    <span className="text-[10px] px-1.5 py-0.5 bg-amber-100 text-amber-700 rounded-full font-medium">
+                    <span className="text-[10px] px-1.5 py-0.5 bg-warning-subtle text-warning rounded-full font-medium">
                       deprecated
                     </span>
                   )}
@@ -176,12 +176,12 @@ function Header({ content, params, block }) {
         onClick={() => setSearchOpen(true)}
         onMouseEnter={triggerPreload}
         onFocus={triggerPreload}
-        className="hidden md:flex items-center gap-3 w-full max-w-md px-4 py-2 text-sm text-gray-500 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors cursor-text"
+        className="hidden md:flex items-center gap-3 w-full max-w-md px-4 py-2 text-sm text-subtle bg-muted hover:bg-card rounded-lg transition-colors cursor-text"
         aria-label="Search documentation"
       >
         <SearchIcon className="w-4 h-4 flex-shrink-0" />
         <span className="flex-1 text-left">Search documentation...</span>
-        <kbd className="flex items-center gap-0.5 px-2 py-0.5 text-xs text-gray-400 bg-white rounded border border-gray-200">
+        <kbd className="flex items-center gap-0.5 px-2 py-0.5 text-xs text-subtle bg-section rounded border border-border">
           <span>⌘</span>K
         </kbd>
       </button>
@@ -196,7 +196,7 @@ function Header({ content, params, block }) {
       <button
         onClick={() => setSearchOpen(true)}
         onMouseEnter={triggerPreload}
-        className="md:hidden p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
+        className="md:hidden p-2 text-subtle hover:text-body hover:bg-muted rounded-md transition-colors"
         aria-label="Search"
       >
         <SearchIcon className="w-5 h-5" />
@@ -209,7 +209,7 @@ function Header({ content, params, block }) {
     if (!shouldShowLocale || !useInlineLocales) return null
 
     return (
-      <div className="hidden sm:flex items-center gap-0.5 p-1 bg-gray-100 rounded-lg">
+      <div className="hidden sm:flex items-center gap-0.5 p-1 bg-muted rounded-lg">
         {locales.map(locale => (
           <a
             key={locale.code}
@@ -217,8 +217,8 @@ function Header({ content, params, block }) {
             className={cn(
               'px-2 py-1 text-xs font-medium rounded-md transition-colors uppercase',
               locale.code === activeLocale
-                ? 'bg-white text-gray-900 shadow-sm'
-                : 'text-gray-600 hover:text-gray-900'
+                ? 'bg-section text-heading shadow-sm'
+                : 'text-subtle hover:text-heading'
             )}
             title={getLocaleLabel(locale)}
           >
@@ -239,7 +239,7 @@ function Header({ content, params, block }) {
       <div className="relative hidden sm:block">
         <button
           onClick={() => setLocaleMenuOpen(!localeMenuOpen)}
-          className="flex items-center gap-1.5 px-2 py-1.5 text-sm text-gray-600 hover:text-gray-900 rounded-md hover:bg-gray-100 transition-colors"
+          className="flex items-center gap-1.5 px-2 py-1.5 text-sm text-subtle hover:text-heading rounded-md hover:bg-muted transition-colors"
           aria-label="Change language"
         >
           <GlobeIcon className="w-4 h-4" />
@@ -253,7 +253,7 @@ function Header({ content, params, block }) {
               className="fixed inset-0 z-40"
               onClick={() => setLocaleMenuOpen(false)}
             />
-            <div className="absolute right-0 top-full mt-1 z-50 bg-white rounded-lg shadow-lg border border-gray-200 py-1 min-w-[140px]">
+            <div className="absolute right-0 top-full mt-1 z-50 bg-section rounded-lg shadow-lg border border-border py-1 min-w-[140px]">
               {locales.map(locale => (
                 <a
                   key={locale.code}
@@ -262,7 +262,7 @@ function Header({ content, params, block }) {
                     'block px-4 py-2 text-sm transition-colors',
                     locale.code === activeLocale
                       ? 'bg-primary/5 text-primary font-medium'
-                      : 'text-gray-700 hover:bg-gray-50'
+                      : 'text-body hover:bg-muted'
                   )}
                   onClick={() => setLocaleMenuOpen(false)}
                 >
@@ -295,7 +295,7 @@ function Header({ content, params, block }) {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-gray-500 hover:text-gray-900 rounded-md hover:bg-gray-100 transition-colors"
+              className="p-2 text-subtle hover:text-heading rounded-md hover:bg-muted transition-colors"
               title={link.label || (isGitHub ? 'GitHub' : 'External link')}
             >
               {isGitHub ? (
@@ -330,7 +330,7 @@ function Header({ content, params, block }) {
                     className="h-8 w-auto"
                   />
                 ) : (
-                  <span className="text-xl font-bold text-gray-900 dark:text-white">{siteName}</span>
+                  <span className="text-xl font-bold text-heading">{siteName}</span>
                 )}
               </Link>
               <VersionBadge />
@@ -351,7 +351,7 @@ function Header({ content, params, block }) {
               {/* Dark mode toggle */}
               <button
                 onClick={toggleDarkMode}
-                className="p-2 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                className="p-2 text-subtle hover:text-heading rounded-md hover:bg-muted transition-colors"
                 aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
               >
                 {isDark ? <SunIcon className="w-5 h-5" /> : <MoonIcon className="w-5 h-5" />}
@@ -361,7 +361,7 @@ function Header({ content, params, block }) {
               {ctaLink && (
                 <Link
                   href={ctaLink.href}
-                  className="hidden sm:inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors"
+                  className="hidden sm:inline-flex items-center px-4 py-2 text-sm font-medium text-primary-foreground bg-primary rounded-lg hover:bg-primary/90 transition-colors"
                 >
                   {ctaLink.label}
                 </Link>
@@ -371,7 +371,7 @@ function Header({ content, params, block }) {
               <button
                 type="button"
                 onClick={toggleMobileMenu}
-                className="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                className="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-subtle hover:text-heading hover:bg-muted"
                 aria-expanded={mobileMenuOpen}
               >
                 <span className="sr-only">Toggle menu</span>
@@ -395,7 +395,7 @@ function Header({ content, params, block }) {
                     'px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap',
                     isActiveOrAncestor(page)
                       ? 'border-primary text-primary'
-                      : 'border-transparent text-gray-600 hover:text-gray-900 hover:border-gray-300'
+                      : 'border-transparent text-subtle hover:text-heading hover:border-border'
                   )}
                 >
                   {page.label || page.title}
@@ -415,7 +415,7 @@ function Header({ content, params, block }) {
                     'px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap',
                     isActiveOrAncestor(page)
                       ? 'border-primary text-primary'
-                      : 'border-transparent text-gray-600 hover:text-gray-900 hover:border-gray-300'
+                      : 'border-transparent text-subtle hover:text-heading hover:border-border'
                   )}
                 >
                   {page.label || page.title}
@@ -427,7 +427,7 @@ function Header({ content, params, block }) {
 
         {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-white border-t border-gray-200">
+          <div className="lg:hidden bg-section border-t border-border">
             <div className="px-4 py-4 space-y-2">
               {/* Mobile search */}
               {shouldShowSearch && (
@@ -436,7 +436,7 @@ function Header({ content, params, block }) {
                     closeMobileMenu()
                     setSearchOpen(true)
                   }}
-                  className="w-full flex items-center gap-3 px-3 py-2 text-base text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md"
+                  className="w-full flex items-center gap-3 px-3 py-2 text-base text-subtle hover:text-heading hover:bg-muted rounded-md"
                 >
                   <SearchIcon className="w-5 h-5" />
                   Search
@@ -452,7 +452,7 @@ function Header({ content, params, block }) {
                     'block px-3 py-2 text-base font-medium rounded-md',
                     isActiveOrAncestor(page)
                       ? 'text-primary bg-primary/5'
-                      : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
+                      : 'text-body hover:text-heading hover:bg-muted'
                   )}
                   onClick={closeMobileMenu}
                 >
@@ -462,8 +462,8 @@ function Header({ content, params, block }) {
 
               {/* Mobile version switcher */}
               {shouldShowVersion && versions.length > 1 && (
-                <div className="pt-2 mt-2 border-t border-gray-200">
-                  <div className="px-3 py-2 text-xs font-medium text-gray-500 uppercase tracking-wide">
+                <div className="pt-2 mt-2 border-t border-border">
+                  <div className="px-3 py-2 text-xs font-medium text-subtle uppercase tracking-wide">
                     Version
                   </div>
                   {versions.map(version => (
@@ -474,18 +474,18 @@ function Header({ content, params, block }) {
                         'flex items-center justify-between px-3 py-2 text-base rounded-md',
                         version.id === currentVersion?.id
                           ? 'text-primary font-medium bg-primary/5'
-                          : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
+                          : 'text-body hover:text-heading hover:bg-muted'
                       )}
                       onClick={closeMobileMenu}
                     >
                       <span>{version.label || version.id}</span>
                       {version.latest && (
-                        <span className="text-[10px] px-1.5 py-0.5 bg-green-100 text-green-700 rounded-full font-medium">
+                        <span className="text-[10px] px-1.5 py-0.5 bg-success-subtle text-success rounded-full font-medium">
                           latest
                         </span>
                       )}
                       {version.deprecated && (
-                        <span className="text-[10px] px-1.5 py-0.5 bg-amber-100 text-amber-700 rounded-full font-medium">
+                        <span className="text-[10px] px-1.5 py-0.5 bg-warning-subtle text-warning rounded-full font-medium">
                           deprecated
                         </span>
                       )}
@@ -496,8 +496,8 @@ function Header({ content, params, block }) {
 
               {/* Mobile locale switcher */}
               {shouldShowLocale && locales.length > 1 && (
-                <div className="pt-2 mt-2 border-t border-gray-200">
-                  <div className="px-3 py-2 text-xs font-medium text-gray-500 uppercase tracking-wide">
+                <div className="pt-2 mt-2 border-t border-border">
+                  <div className="px-3 py-2 text-xs font-medium text-subtle uppercase tracking-wide">
                     Language
                   </div>
                   {locales.map(locale => (
@@ -508,7 +508,7 @@ function Header({ content, params, block }) {
                         'block px-3 py-2 text-base rounded-md',
                         locale.code === activeLocale
                           ? 'text-primary font-medium bg-primary/5'
-                          : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
+                          : 'text-body hover:text-heading hover:bg-muted'
                       )}
                       onClick={closeMobileMenu}
                     >
@@ -520,14 +520,14 @@ function Header({ content, params, block }) {
 
               {/* Mobile external links */}
               {externalLinks.length > 0 && (
-                <div className="pt-2 mt-2 border-t border-gray-200">
+                <div className="pt-2 mt-2 border-t border-border">
                   {externalLinks.map((link, i) => (
                     <a
                       key={i}
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 px-3 py-2 text-base text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md"
+                      className="flex items-center gap-3 px-3 py-2 text-base text-body hover:text-heading hover:bg-muted rounded-md"
                       onClick={closeMobileMenu}
                     >
                       {link.href?.includes('github.com') ? (
@@ -545,7 +545,7 @@ function Header({ content, params, block }) {
               {ctaLink && (
                 <Link
                   href={ctaLink.href}
-                  className="block px-3 py-2 text-base font-medium text-white bg-primary hover:bg-primary/90 rounded-md text-center mt-4"
+                  className="block px-3 py-2 text-base font-medium text-primary-foreground bg-primary hover:bg-primary/90 rounded-md text-center mt-4"
                   onClick={closeMobileMenu}
                 >
                   {ctaLink.label}

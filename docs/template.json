@@ -1,8 +1,27 @@
 {
   "name": "Documentation Starter",
   "description": "A documentation site with navigation levels, sidebar navigation, and code syntax highlighting. Perfect for technical docs, API references, and developer guides.",
-  "compatible": ">=0.7.0",
+  "compatible": ">=0.13.0",
   "format": 2,
-  "tags": ["docs", "documentation", "developer", "technical"],
-  "components": ["Header", "LeftPanel", "DocSection", "CodeBlock", "Footer"]
+  "tags": [
+    "docs",
+    "documentation",
+    "developer",
+    "technical"
+  ],
+  "components": [
+    "Header",
+    "LeftPanel",
+    "DocSection",
+    "CodeBlock",
+    "ApiReference",
+    "DeprecationBanner",
+    "SearchModal",
+    "Footer"
+  ],
+  "dependencies": {
+    "foundation": {
+      "@tailwindcss/typography": "^0.5.0"
+    }
+  }
 }

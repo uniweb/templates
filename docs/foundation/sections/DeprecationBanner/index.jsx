@@ -35,12 +35,12 @@ function DeprecationBanner({ params }) {
   const latestUrl = getVersionUrl(latestVersionId)
 
   return (
-    <div className="bg-amber-50 border-b border-amber-200">
+    <div className="bg-warning-subtle border-b border-warning">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <WarningIcon className="w-5 h-5 text-amber-600 flex-shrink-0" />
-            <p className="text-sm text-amber-800">
+            <WarningIcon className="w-5 h-5 text-warning flex-shrink-0" />
+            <p className="text-sm text-warning">
               <span className="font-medium">
                 You are viewing documentation for {currentVersion?.label || currentVersion?.id}.
               </span>
@@ -51,7 +51,7 @@ function DeprecationBanner({ params }) {
                   {' '}
                   <a
                     href={latestUrl}
-                    className="font-medium text-amber-900 underline hover:text-amber-700"
+                    className="font-medium text-warning underline hover:text-warning"
                   >
                     View {latestVersion?.label || latestVersionId} documentation
                   </a>
@@ -64,7 +64,7 @@ function DeprecationBanner({ params }) {
             <button
               type="button"
               onClick={() => setDismissed(true)}
-              className="flex-shrink-0 p-1 rounded-md text-amber-600 hover:text-amber-800 hover:bg-amber-100 transition-colors"
+              className="flex-shrink-0 p-1 rounded-md text-warning hover:text-warning hover:bg-warning-subtle transition-colors"
               aria-label="Dismiss"
             >
               <CloseIcon className="w-4 h-4" />

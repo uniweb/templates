@@ -40,18 +40,18 @@ function DocSection({ content, params, block }) {
     <article className={cn('py-8 px-6 lg:px-8', widthClass, 'mx-auto')}>
       {/* Header */}
       {(pretitle || title || subtitle) && (
-        <header className="mb-8 pb-6 border-b border-gray-200">
+        <header className="mb-8 pb-6 border-b border-border">
           {pretitle && (
             <p className="text-sm font-medium text-primary mb-2">{pretitle}</p>
           )}
           {title && (
             <H1
               text={title}
-              className="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight"
+              className="text-3xl sm:text-4xl font-bold text-heading tracking-tight"
             />
           )}
           {subtitle && (
-            <p className="mt-3 text-lg text-gray-600">{subtitle}</p>
+            <p className="mt-3 text-lg text-subtle">{subtitle}</p>
           )}
         </header>
       )}
@@ -62,7 +62,7 @@ function DocSection({ content, params, block }) {
         {paragraphs[0] && (
           <P
             text={paragraphs[0]}
-            className="text-lg text-gray-600 leading-relaxed mb-6"
+            className="text-lg text-subtle leading-relaxed mb-6"
           />
         )}
 
@@ -71,7 +71,7 @@ function DocSection({ content, params, block }) {
           <P
             key={index}
             text={para}
-            className="text-gray-700 leading-relaxed mb-4"
+            className="text-body leading-relaxed mb-4"
           />
         ))}
 
@@ -104,14 +104,14 @@ function DocSection({ content, params, block }) {
             {item.title && (
               <H3
                 text={item.title}
-                className="text-xl font-semibold text-gray-900 mb-4"
+                className="text-xl font-semibold text-heading mb-4"
               />
             )}
             {item.paragraphs?.map((para, pIndex) => (
               <P
                 key={pIndex}
                 text={para}
-                className="text-gray-700 leading-relaxed mb-4"
+                className="text-body leading-relaxed mb-4"
               />
             ))}
             {item.lists?.map((list, lIndex) => (
@@ -123,14 +123,14 @@ function DocSection({ content, params, block }) {
 
       {/* Page navigation */}
       {show_navigation && (prevPage || nextPage) && (
-        <nav className="mt-12 pt-6 border-t border-gray-200">
+        <nav className="mt-12 pt-6 border-t border-border">
           <div className="flex justify-between">
             {prevPage ? (
               <Link
                 href={prevPage.route}
                 className="group flex flex-col"
               >
-                <span className="text-sm text-gray-500 mb-1">Previous</span>
+                <span className="text-sm text-subtle mb-1">Previous</span>
                 <span className="text-primary group-hover:text-primary-dark font-medium flex items-center gap-1">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -147,7 +147,7 @@ function DocSection({ content, params, block }) {
                 href={nextPage.route}
                 className="group flex flex-col text-right"
               >
-                <span className="text-sm text-gray-500 mb-1">Next</span>
+                <span className="text-sm text-subtle mb-1">Next</span>
                 <span className="text-primary group-hover:text-primary-dark font-medium flex items-center gap-1">
                   {nextPage.label || nextPage.title}
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -179,7 +179,7 @@ function RenderList({ list }) {
   return (
     <ListTag className={listClass}>
       {list.items.map((item, index) => (
-        <li key={index} className="text-gray-700">
+        <li key={index} className="text-body">
           {typeof item === 'string' ? item : item.text || item.content}
         </li>
       ))}

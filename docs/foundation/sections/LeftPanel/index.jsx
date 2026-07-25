@@ -1,175 +1,99 @@
-import React, { useState, useCallback } from 'react'
-import { Link, cn, useRouting, useWebsite } from '@uniweb/kit'
+import { Link, cn, useAccordion, useActiveRoute, useWebsite } from '@uniweb/kit'
 
 /**
- * LeftPanel Component for Documentation Sites
+ * LeftPanel — documentation navigation
  *
- * A sidebar navigation component with collapsible sections and
- * category filtering support.
+ * Reads the site's own page tree rather than a hand-written menu, so a
+ * markdown file added anywhere under the docs appears here with no change to
+ * this foundation.
  *
- * Features:
- * - Collapsible navigation tree
- * - Active page highlighting
- * - Category filtering (shows only pages within current category)
- * - Responsive design (hidden on mobile, shown in drawer)
+ * Three things this component deliberately does *not* do, because the
+ * framework already does them:
+ *
+ * - **Narrow to the current section.** `getBranchHierarchy` answers the branch
+ *   the visitor is in — under `/docs` it returns the docs, under `/guides` the
+ *   guides. No route arithmetic here.
+ * - **Sort.** `pages:` lists in site.yml / folder.yml resolve at build time, so
+ *   the tree arrives in the order the site asked for.
+ * - **Track open sections.** `useAccordion` holds that state.
+ *
+ * `for: 'left'` names the layout area being filled, and a page's `hideIn:` is
+ * tested against it — so an author can keep a page in the header menu while
+ * leaving it out of this rail, or the reverse.
  */
-function LeftPanel({ content, params, block }) {
-  const { website } = useWebsite()
 
-  // Runtime guarantees: params have defaults from meta.js
-  const { collapsible, categories, default_open } = params
-
-  // Get navigation data from website
-  const pages = website.getPageHierarchy({ for: 'header' })
-
-  // Use SSG-safe useLocation for reactive route updates during client-side navigation
-  const { useLocation } = useRouting()
-  const location = useLocation()
-  const activeRoute = location?.pathname?.replace(/^\//, '').replace(/\/$/, '') || ''
-  const firstSegment = activeRoute.split('/')[0]
-
-  // Initialize open state for collapsible sections
-  const [openSections, setOpenSections] = useState(() => {
-    const state = {}
-    if (default_open) {
-      // Open all sections by default
-      const registerOpen = (items) => {
-        items.forEach((item) => {
-          if (item.children?.length) {
-            state[item.id || item.route] = true
-            registerOpen(item.children)
-          }
-        })
-      }
-      registerOpen(pages)
-    }
-    return state
-  })
-
-  // Toggle section open/closed
-  const toggleSection = useCallback((id) => {
-    setOpenSections((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }))
-  }, [])
-
-  // Normalize route by removing leading/trailing slashes
-  const normalizeRoute = (route) => {
-    return (route || '').replace(/^\//, '').replace(/\/$/, '')
-  }
-
-  // Filter navigation based on categories mode
-  let navigation = pages
-  if (categories) {
-    // Find the root section that matches the current route
-    const match = pages.find((p) => normalizeRoute(p.route) === firstSegment)
-    if (match?.children?.length) {
-      // Show children of the matched root section
-      navigation = match.children
-    } else if (match) {
-      // No children, show the root itself
-      navigation = [match]
-    }
-  }
-
-  // Check if a page is active
-  const isActive = (page) => {
-    return normalizeRoute(page.route) === activeRoute
-  }
-
-  // Check if a page is in the active path
-  const isInActivePath = (page) => {
-    const pageRoute = normalizeRoute(page.route)
-    return activeRoute.startsWith(pageRoute + '/') || pageRoute === activeRoute
-  }
-
-  return (
-    <aside className="h-full">
-      <div className="h-full overflow-y-auto py-6 px-4">
-        <nav>
-          <NavigationTree
-            items={navigation}
-            activeRoute={activeRoute}
-            collapsible={collapsible}
-            openSections={openSections}
-            toggleSection={toggleSection}
-            isActive={isActive}
-            isInActivePath={isInActivePath}
-            level={0}
-          />
-        </nav>
-      </div>
-    </aside>
-  )
+function normalizeRoute(route) {
+  return (route || '').replace(/^\//, '').replace(/\/$/, '')
 }
 
-/**
- * Recursive navigation tree component
- */
-function NavigationTree({
-  items,
-  activeRoute,
-  collapsible,
-  openSections,
-  toggleSection,
-  isActive,
-  isInActivePath,
-  level,
-}) {
+/** Every branch id in the tree — the "start expanded" case. */
+function allBranchIds(items, found = []) {
+  for (const page of items || []) {
+    if (!page.children?.length) continue
+    found.push(page.id || page.route)
+    allBranchIds(page.children, found)
+  }
+  return found
+}
+
+/** Only the branches containing the active page, so the tree opens to it. */
+function ancestorIds(items, activeRoute, found = []) {
+  for (const page of items || []) {
+    if (!page.children?.length) continue
+    const route = normalizeRoute(page.route)
+    if (activeRoute === route || activeRoute.startsWith(route + '/')) {
+      found.push(page.id || page.route)
+    }
+    ancestorIds(page.children, activeRoute, found)
+  }
+  return found
+}
+
+function NavigationTree({ items, activeRoute, collapsible, isOpen, toggle, level }) {
   if (!items?.length) return null
 
   return (
-    <ul className={cn('space-y-1', level > 0 && 'mt-1 ml-4 border-l border-gray-200 dark:border-gray-700 pl-3')}>
+    <ul className={cn('space-y-1', level > 0 && 'ml-4 mt-1 border-l border-border pl-3')}>
       {items.map((page) => {
-        const hasChildren = page.children?.length > 0
         const id = page.id || page.route
-        const isOpen = openSections[id] || !collapsible
-        const showChildren = hasChildren && isOpen
+        const hasChildren = page.children?.length > 0
+        const expanded = !collapsible || isOpen(id)
+        const isCurrent = normalizeRoute(page.route) === activeRoute
 
         return (
           <li key={id}>
             <div className="flex items-center gap-1">
-              {/* Collapse toggle */}
-              {hasChildren && collapsible && (
+              {hasChildren && collapsible ? (
                 <button
-                  onClick={() => toggleSection(id)}
-                  className="p-1 rounded hover:bg-gray-100 text-gray-500"
-                  aria-expanded={isOpen}
+                  type="button"
+                  onClick={() => toggle(id)}
+                  aria-expanded={expanded}
+                  aria-label={expanded ? 'Collapse section' : 'Expand section'}
+                  className="rounded p-1 text-subtle transition-colors hover:text-heading"
                 >
                   <svg
-                    className={cn(
-                      'w-3 h-3 transition-transform',
-                      isOpen && 'rotate-90'
-                    )}
+                    className={cn('h-3 w-3 transition-transform', expanded && 'rotate-90')}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </button>
-              )}
-
-              {/* Spacer when no toggle button */}
-              {(!hasChildren || !collapsible) && (
+              ) : (
                 <span className="w-5" />
               )}
 
-              {/* Page link or label */}
+              {/* A folder with no markdown of its own is a group heading, not a
+                  dead link — the framework marks those `hasContent: false`. */}
               {page.hasContent ? (
                 <Link
-                  href={page.route}
+                  to={page.route}
                   className={cn(
-                    'flex-1 px-2 py-1.5 text-sm rounded transition-colors',
-                    isActive(page)
-                      ? 'text-primary font-medium bg-primary/5'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800',
+                    'flex-1 rounded px-2 py-1.5 text-sm no-underline transition-colors',
+                    isCurrent
+                      ? 'bg-primary/5 font-medium text-primary'
+                      : 'text-body hover:bg-muted hover:text-heading',
                     level === 0 && 'font-medium'
                   )}
                 >
@@ -178,7 +102,7 @@ function NavigationTree({
               ) : (
                 <span
                   className={cn(
-                    'flex-1 px-2 py-1.5 text-sm text-gray-600 dark:text-gray-400',
+                    'flex-1 px-2 py-1.5 text-sm text-subtle',
                     level === 0 && 'font-medium'
                   )}
                 >
@@ -187,16 +111,13 @@ function NavigationTree({
               )}
             </div>
 
-            {/* Children */}
-            {showChildren && (
+            {hasChildren && expanded && (
               <NavigationTree
                 items={page.children}
                 activeRoute={activeRoute}
                 collapsible={collapsible}
-                openSections={openSections}
-                toggleSection={toggleSection}
-                isActive={isActive}
-                isInActivePath={isInActivePath}
+                isOpen={isOpen}
+                toggle={toggle}
                 level={level + 1}
               />
             )}
@@ -207,4 +128,39 @@ function NavigationTree({
   )
 }
 
-export default LeftPanel
+export default function LeftPanel({ params }) {
+  const { website } = useWebsite()
+  const { route } = useActiveRoute()
+  const { collapsible, categories, default_open } = params
+
+  const activeRoute = normalizeRoute(route)
+
+  // `categories` narrows to the section being read; otherwise the whole tree.
+  const navigation = categories
+    ? website.getBranchHierarchy({ route, for: 'left' })
+    : website.getPageHierarchy({ for: 'left' })
+
+  const { isOpen, toggle } = useAccordion({
+    multiple: true,
+    defaultOpen: default_open ? allBranchIds(navigation) : ancestorIds(navigation, activeRoute),
+  })
+
+  if (!navigation.length) return null
+
+  return (
+    <aside className="h-full">
+      <div className="h-full overflow-y-auto px-4 py-6">
+        <nav aria-label="Documentation">
+          <NavigationTree
+            items={navigation}
+            activeRoute={activeRoute}
+            collapsible={collapsible}
+            isOpen={isOpen}
+            toggle={toggle}
+            level={0}
+          />
+        </nav>
+      </div>
+    </aside>
+  )
+}

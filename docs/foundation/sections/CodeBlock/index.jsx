@@ -36,21 +36,21 @@ function CodeBlock({ content, params }) {
     <div className="my-6 rounded-lg overflow-hidden">
       {/* Header with language and copy button */}
       {(show_language || show_copy || title) && (
-        <div className="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-gray-700">
+        <div className="flex items-center justify-between px-4 py-2 bg-muted border-b border-border">
           <div className="flex items-center gap-3">
             {show_language && (
-              <span className="text-xs font-mono text-gray-400 uppercase">
+              <span className="text-xs font-mono text-subtle uppercase">
                 {language}
               </span>
             )}
             {title && (
-              <span className="text-sm text-gray-300">{title}</span>
+              <span className="text-sm text-subtle">{title}</span>
             )}
           </div>
           {show_copy && (
             <button
               onClick={handleCopy}
-              className="text-xs text-gray-400 hover:text-white transition-colors flex items-center gap-1"
+              className="text-xs text-subtle hover:text-primary-foreground transition-colors flex items-center gap-1"
             >
               {copied ? (
                 <>

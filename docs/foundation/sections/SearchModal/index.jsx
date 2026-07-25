@@ -137,16 +137,16 @@ function SearchModal({ isOpen, onClose, searchClient }) {
     <div className="fixed inset-0 z-[100] overflow-y-auto">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-gray-900/50 backdrop-blur-sm"
+        className="fixed inset-0 bg-section/50 backdrop-blur-sm"
         onClick={onClose}
       />
 
       {/* Modal */}
       <div className="relative min-h-screen flex items-start justify-center pt-[15vh] px-4">
-        <div className="relative w-full max-w-2xl bg-white rounded-xl shadow-2xl border border-gray-200">
+        <div className="relative w-full max-w-2xl bg-section rounded-xl shadow-2xl border border-border">
           {/* Search Input */}
-          <div className="flex items-center gap-3 px-4 py-3 border-b border-gray-200">
-            <SearchIcon className="w-5 h-5 text-gray-400 flex-shrink-0" />
+          <div className="flex items-center gap-3 px-4 py-3 border-b border-border">
+            <SearchIcon className="w-5 h-5 text-subtle flex-shrink-0" />
             <input
               ref={inputRef}
               type="text"
@@ -154,12 +154,12 @@ function SearchModal({ isOpen, onClose, searchClient }) {
               onChange={(e) => setQuery(e.target.value)}
               placeholder={searchEnabled ? "Search documentation..." : "Search not enabled"}
               disabled={!searchEnabled}
-              className="flex-1 text-base outline-none placeholder:text-gray-400 disabled:opacity-50 bg-transparent"
+              className="flex-1 text-base outline-none placeholder:text-subtle disabled:opacity-50 bg-transparent"
             />
             {isLoading && (
               <div className="w-5 h-5 border-2 border-primary/30 border-t-primary rounded-full animate-spin flex-shrink-0" />
             )}
-            <kbd className="hidden sm:inline-flex items-center px-2 py-1 text-xs text-gray-400 bg-gray-100 rounded border border-gray-200">
+            <kbd className="hidden sm:inline-flex items-center px-2 py-1 text-xs text-subtle bg-muted rounded border border-border">
               ESC
             </kbd>
           </div>
@@ -168,9 +168,9 @@ function SearchModal({ isOpen, onClose, searchClient }) {
           {searchEnabled && query && (
             <div ref={resultsRef} className="max-h-[60vh] overflow-y-auto">
               {results.length === 0 && !isLoading ? (
-                <div className="px-4 py-12 text-center text-gray-500">
+                <div className="px-4 py-12 text-center text-subtle">
                   <p className="text-sm">No results found for "{query}"</p>
-                  <p className="text-xs mt-1 text-gray-400">Try different keywords</p>
+                  <p className="text-xs mt-1 text-subtle">Try different keywords</p>
                 </div>
               ) : (
                 <div className="py-2">
@@ -184,7 +184,7 @@ function SearchModal({ isOpen, onClose, searchClient }) {
                         'block px-4 py-3 transition-colors',
                         index === selectedIndex
                           ? 'bg-primary/5'
-                          : 'hover:bg-gray-50'
+                          : 'hover:bg-muted'
                       )}
                     >
                       <div className="flex items-center gap-2 mb-1">
@@ -193,18 +193,18 @@ function SearchModal({ isOpen, onClose, searchClient }) {
                             {result.component}
                           </span>
                         )}
-                        <span className="text-sm font-medium text-gray-900">
+                        <span className="text-sm font-medium text-heading">
                           {result.title}
                         </span>
                       </div>
                       {result.pageTitle && result.type === 'section' && (
-                        <div className="text-xs text-gray-500 mb-1">
+                        <div className="text-xs text-subtle mb-1">
                           in {result.pageTitle}
                         </div>
                       )}
                       {result.snippetHtml && (
                         <p
-                          className="text-sm text-gray-600 line-clamp-2 [&>mark]:bg-yellow-100 [&>mark]:text-gray-900 [&>mark]:px-0.5 [&>mark]:rounded"
+                          className="text-sm text-subtle line-clamp-2 [&>mark]:bg-warning-subtle [&>mark]:text-heading [&>mark]:px-0.5 [&>mark]:rounded"
                           dangerouslySetInnerHTML={{ __html: result.snippetHtml }}
                         />
                       )}
@@ -217,28 +217,28 @@ function SearchModal({ isOpen, onClose, searchClient }) {
 
           {/* Empty state when no query */}
           {searchEnabled && !query && (
-            <div className="px-4 py-8 text-center text-gray-500">
+            <div className="px-4 py-8 text-center text-subtle">
               <p className="text-sm">Start typing to search</p>
             </div>
           )}
 
           {/* Footer hint */}
           {searchEnabled && (
-            <div className="flex items-center justify-between gap-4 px-4 py-2 border-t border-gray-200 text-xs text-gray-400">
+            <div className="flex items-center justify-between gap-4 px-4 py-2 border-t border-border text-xs text-subtle">
               <div className="flex items-center gap-4">
                 <span className="flex items-center gap-1">
-                  <kbd className="px-1.5 py-0.5 bg-gray-100 rounded border border-gray-200">↑</kbd>
-                  <kbd className="px-1.5 py-0.5 bg-gray-100 rounded border border-gray-200">↓</kbd>
+                  <kbd className="px-1.5 py-0.5 bg-muted rounded border border-border">↑</kbd>
+                  <kbd className="px-1.5 py-0.5 bg-muted rounded border border-border">↓</kbd>
                   to navigate
                 </span>
                 <span className="flex items-center gap-1">
-                  <kbd className="px-1.5 py-0.5 bg-gray-100 rounded border border-gray-200">↵</kbd>
+                  <kbd className="px-1.5 py-0.5 bg-muted rounded border border-border">↵</kbd>
                   to select
                 </span>
               </div>
               <span className="hidden sm:flex items-center gap-1">
-                <kbd className="px-1.5 py-0.5 bg-gray-100 rounded border border-gray-200">⌘</kbd>
-                <kbd className="px-1.5 py-0.5 bg-gray-100 rounded border border-gray-200">K</kbd>
+                <kbd className="px-1.5 py-0.5 bg-muted rounded border border-border">⌘</kbd>
+                <kbd className="px-1.5 py-0.5 bg-muted rounded border border-border">K</kbd>
                 to search
               </span>
             </div>
@@ -270,10 +270,10 @@ export function SearchButton({ onClick, onMouseEnter, onFocus, className, compac
       onMouseEnter={onMouseEnter}
       onFocus={onFocus}
       className={cn(
-        'flex items-center gap-2 text-gray-500 hover:text-gray-700 transition-colors',
+        'flex items-center gap-2 text-subtle hover:text-body transition-colors',
         compact
-          ? 'p-2 hover:bg-gray-100 rounded-md'
-          : 'px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg',
+          ? 'p-2 hover:bg-muted rounded-md'
+          : 'px-3 py-1.5 bg-muted hover:bg-card rounded-lg',
         className
       )}
       aria-label="Search documentation"
@@ -282,7 +282,7 @@ export function SearchButton({ onClick, onMouseEnter, onFocus, className, compac
       {!compact && (
         <>
           <span className="hidden sm:inline text-sm">Search</span>
-          <kbd className="hidden lg:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-xs text-gray-400 bg-white rounded border border-gray-200">
+          <kbd className="hidden lg:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-xs text-subtle bg-section rounded border border-border">
             <span className="text-xs">⌘</span>K
           </kbd>
         </>

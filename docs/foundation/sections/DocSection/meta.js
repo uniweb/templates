@@ -2,7 +2,7 @@
  * DocSection Component Metadata
  *
  * Main documentation content section with typography and navigation.
- * `background: 'self'` — the layout's prose wrapper and bg-white handle
+ * `background: 'self'` — the layout's prose wrapper and the layout's own surface handle
  * the visual background; the runtime's section background is not needed.
  */
 export default {
