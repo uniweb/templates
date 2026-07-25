@@ -140,8 +140,11 @@ function MobileNav({ isOpen, onClose, children }) {
 export default function DocsLayout({ header, body, footer, left, right }) {
   const { isOpen, open, close } = useMobileMenu()
 
+  // No background here: the framework paints the page. A layout declares a
+  // surface only when it wants one *different* from the page — otherwise it
+  // covers whatever the site set in theme.yml's `background:`.
   return (
-    <div className="flex h-screen flex-col bg-section text-body">
+    <div className="flex h-screen flex-col text-body">
       <header className="z-30 flex-shrink-0">{header}</header>
 
       {left && (
