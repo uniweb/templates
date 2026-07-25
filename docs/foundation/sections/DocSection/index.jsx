@@ -57,7 +57,13 @@ function DocSection({ content, params, block }) {
       )}
 
       {/* Main content */}
-      <div className="prose prose-gray max-w-none">
+      {/* This section owns the reading typography, so it renders correctly
+          under any layout. Exactly one `prose` container may wrap a given
+          subtree — the variables are inherited, so a nested one silently
+          resets them for everything inside it. No palette modifier
+          (`prose-gray` and friends) for the same reason: it would
+          re-declare what kit/prose-tokens.css just pointed at the theme. */}
+      <div className="prose max-w-none">
         {/* First paragraph as lead */}
         {paragraphs[0] && (
           <P

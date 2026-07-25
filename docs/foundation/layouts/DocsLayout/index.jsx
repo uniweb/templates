@@ -160,10 +160,11 @@ export default function DocsLayout({ header, body, footer, left, right }) {
         {/* The scroll container named by meta.js `scroll: 'main'`. */}
         <main className="min-w-0 flex-1 overflow-y-auto">
           <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
-            {/* Typography's `prose` supplies the rhythm; styles.css points its
-                colours at the same semantic tokens used above, so one theme
-                governs the whole page. */}
-            <div className="prose docs-prose max-w-none">{body}</div>
+            {/* Column geometry only — no `prose` wrapper here. The sections
+                own their own typography, which keeps them renderable under any
+                layout, and a second container would reset the prose variables
+                for everything inside it. */}
+            {body}
 
             {footer && <footer className="mt-12 border-t border-border pt-8">{footer}</footer>}
           </div>
