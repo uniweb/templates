@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { createPortal } from 'react-dom'
-import { Link, useWebsite, cn } from '@uniweb/kit'
+import { Link, useWebsite, cn, useShortcutLabel } from '@uniweb/kit'
 
 /**
  * SearchModal Component
@@ -10,13 +10,16 @@ import { Link, useWebsite, cn } from '@uniweb/kit'
  *
  * Features:
  * - Keyboard navigation (↑↓ to navigate, Enter to select, Escape to close)
- * - Cmd/Ctrl+K shortcut to open (via useSearchShortcut hook)
+ * - Opened by a keyboard shortcut the Header binds with useShortcut
  * - Highlighted search matches
  * - Mobile-responsive
  * - Intent-based index preloading
  */
 function SearchModal({ isOpen, onClose, searchClient }) {
   const { website } = useWebsite()
+
+  // Matches whatever the Header bound; rendered for the visitor's platform.
+  const shortcutLabel = useShortcutLabel('mod+k')
 
   const [query, setQuery] = useState('')
   const [results, setResults] = useState([])
@@ -237,8 +240,7 @@ function SearchModal({ isOpen, onClose, searchClient }) {
                 </span>
               </div>
               <span className="hidden sm:flex items-center gap-1">
-                <kbd className="px-1.5 py-0.5 bg-muted rounded border border-border">⌘</kbd>
-                <kbd className="px-1.5 py-0.5 bg-muted rounded border border-border">K</kbd>
+                <kbd className="px-1.5 py-0.5 bg-muted rounded border border-border">{shortcutLabel}</kbd>
                 to search
               </span>
             </div>
@@ -264,6 +266,8 @@ function SearchModal({ isOpen, onClose, searchClient }) {
  * Shows Cmd/Ctrl+K keyboard shortcut hint.
  */
 export function SearchButton({ onClick, onMouseEnter, onFocus, className, compact }) {
+  const shortcutLabel = useShortcutLabel('mod+k')
+
   return (
     <button
       onClick={onClick}
@@ -283,7 +287,7 @@ export function SearchButton({ onClick, onMouseEnter, onFocus, className, compac
         <>
           <span className="hidden sm:inline text-sm">Search</span>
           <kbd className="hidden lg:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-xs text-subtle bg-section rounded border border-border">
-            <span className="text-xs">⌘</span>K
+            {shortcutLabel}
           </kbd>
         </>
       )}

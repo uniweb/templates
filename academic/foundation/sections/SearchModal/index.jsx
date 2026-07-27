@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
-import { Link, useWebsite, cn } from '@uniweb/kit'
+import { Link, useWebsite, cn, useShortcutLabel } from '@uniweb/kit'
 
 /**
  * SearchModal Component
@@ -9,7 +9,7 @@ import { Link, useWebsite, cn } from '@uniweb/kit'
  *
  * Features:
  * - Keyboard navigation (↑↓ to navigate, Enter to select, Escape to close)
- * - Cmd/Ctrl+K shortcut to open (via useSearchShortcut hook)
+ * - Opened by a keyboard shortcut the Navbar binds with useShortcut
  * - Highlighted search matches
  * - Mobile-responsive
  * - Intent-based index preloading (via useSearchWithIntent hook)
@@ -241,6 +241,8 @@ function SearchModal({ isOpen, onClose, searchClient }) {
  * Accepts onMouseEnter/onFocus for intent-based preloading.
  */
 export function SearchButton({ onClick, onMouseEnter, onFocus, className }) {
+  const shortcutLabel = useShortcutLabel('mod+k')
+
   return (
     <button
       onClick={onClick}
@@ -255,14 +257,15 @@ export function SearchButton({ onClick, onMouseEnter, onFocus, className }) {
       <SearchIcon className="w-4 h-4" />
       <span className="hidden sm:inline">Search</span>
       <kbd className="hidden md:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-xs text-subtle bg-section rounded border border-border">
-        <span className="text-xs">⌘</span>K
+        {shortcutLabel}
       </kbd>
     </button>
   )
 }
 
-// Re-export useSearchShortcut from kit for convenience
-export { useSearchShortcut } from '@uniweb/kit'
+// Re-export the shortcut primitives so a foundation file that already imports
+// from this module doesn't need a second import line.
+export { useShortcut, useShortcutLabel } from '@uniweb/kit'
 
 // Search icon
 const SearchIcon = ({ className }) => (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Link, useWebsite, cn, getLocaleLabel, useSearchShortcut, useSearchWithIntent } from '@uniweb/kit'
+import { Link, useWebsite, cn, getLocaleLabel, useShortcut, useSearchWithIntent } from '@uniweb/kit'
 import { SearchModal, SearchButton } from '../SearchModal'
 
 /**
@@ -33,10 +33,11 @@ function Navbar({ content, params }) {
   // Intent-based search preloading (only loads index on hover/focus/shortcut)
   const { triggerPreload, client: searchClient } = useSearchWithIntent(website)
 
-  // Search keyboard shortcut (Cmd/Ctrl+K) - triggers preload immediately
-  useSearchShortcut({
-    onOpen: () => setSearchOpen(true),
-    onPreload: triggerPreload,
+  // Search keyboard shortcut — this foundation's choice of key, and it
+  // triggers preload immediately. `mod` is Cmd on Apple, Ctrl elsewhere.
+  useShortcut('mod+k', () => {
+    triggerPreload()
+    setSearchOpen(true)
   })
 
   // Get navigation items based on mode

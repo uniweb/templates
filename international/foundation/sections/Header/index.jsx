@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Link, cn, useScrolled, useMobileMenu, useWebsite, useActiveRoute, useRouting, useSearchShortcut, useSearchWithIntent } from '@uniweb/kit'
+import { Link, cn, useScrolled, useMobileMenu, useWebsite, useActiveRoute, useRouting, useShortcut, useSearchWithIntent } from '@uniweb/kit'
 import { ChevronDown, Search, X } from 'lucide-react'
 
 /**
@@ -30,10 +30,11 @@ function Header({ content, params, block }) {
   const [searchQuery, setSearchQuery] = useState('')
   const searchInputRef = useRef(null)
 
-  // Keyboard shortcut to open search (Cmd/Ctrl+K)
-  useSearchShortcut({
-    onOpen: () => setSearchOpen(true),
-    onPreload: triggerPreload,
+  // Keyboard shortcut to open search — this foundation's choice of key.
+  // `mod` resolves to Cmd on Apple platforms and Ctrl elsewhere.
+  useShortcut('mod+k', () => {
+    triggerPreload()
+    setSearchOpen(true)
   })
 
   // Focus input when search modal opens, handle Escape key

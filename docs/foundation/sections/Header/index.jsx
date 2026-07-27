@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, cn, useActiveRoute, useScrolled, useMobileMenu, useWebsite, useVersion, useAppearance, getLocaleLabel, useRouting, useSearchShortcut, useSearchWithIntent } from '@uniweb/kit'
+import { Link, cn, useActiveRoute, useScrolled, useMobileMenu, useWebsite, useVersion, useAppearance, getLocaleLabel, useRouting, useShortcut, useShortcutLabel, useSearchWithIntent } from '@uniweb/kit'
 import SearchModal from '../SearchModal'
 
 /**
@@ -57,11 +57,15 @@ function Header({ content, params, block }) {
   // Intent-based search preloading
   const { triggerPreload, client: searchClient } = useSearchWithIntent(website)
 
-  // Search keyboard shortcut (Cmd/Ctrl+K)
-  useSearchShortcut({
-    onOpen: () => setSearchOpen(true),
-    onPreload: triggerPreload,
+  // Search keyboard shortcut. The key is this foundation's choice, not the
+  // framework's — `mod` resolves to Cmd on Apple platforms and Ctrl elsewhere.
+  useShortcut('mod+k', () => {
+    triggerPreload()
+    setSearchOpen(true)
   })
+
+  // Rendered form of the same binding: '⌘K' or 'Ctrl+K' depending on platform.
+  const searchShortcutLabel = useShortcutLabel('mod+k')
 
   // Locale configuration
   const locales = website.getLocales()
@@ -182,7 +186,7 @@ function Header({ content, params, block }) {
         <SearchIcon className="w-4 h-4 flex-shrink-0" />
         <span className="flex-1 text-left">Search documentation...</span>
         <kbd className="flex items-center gap-0.5 px-2 py-0.5 text-xs text-subtle bg-section rounded border border-border">
-          <span>⌘</span>K
+          {searchShortcutLabel}
         </kbd>
       </button>
     )
