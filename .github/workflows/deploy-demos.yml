@@ -23,19 +23,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          # Must be >= 22: pnpm 11 imports node:sqlite, which Node 20 does not
-          # have. Bump this in step with the pnpm version below.
-          node-version: '22'
-
+      # pnpm is installed before setup-node on purpose. setup-node v5+ turns on
+      # package-manager caching by itself when package.json carries a
+      # `packageManager` field, and that caching needs pnpm already on PATH.
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           version: 11
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          # Must be >= 22: pnpm 11 imports node:sqlite, which Node 20 does not
+          # have. Bump this in step with the pnpm version above.
+          node-version: '22'
 
       - name: Lint templates
         run: node lint.mjs
@@ -241,10 +244,10 @@ jobs:
           EOF
 
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: demos
 
@@ -257,4 +260,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
