@@ -18,10 +18,5 @@
     "DeprecationBanner",
     "SearchModal",
     "Footer"
-  ],
-  "dependencies": {
-    "foundation": {
-      "@tailwindcss/typography": "^0.5.0"
-    }
-  }
+  ]
 }

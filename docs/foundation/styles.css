@@ -18,7 +18,6 @@
 @import "@uniweb/kit/theme-tokens.css";
 
 /* Documentation is long-form prose, so the typography plugin does the rhythm. */
-@plugin "@tailwindcss/typography";
 
 @source "./sections/**/*.{js,jsx}";
 @source "./components/**/*.{js,jsx}";

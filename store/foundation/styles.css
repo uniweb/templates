@@ -1,8 +1,5 @@
 @import "tailwindcss";
 @import "@uniweb/kit/theme-tokens.css";
-@plugin "@tailwindcss/typography";
-/* Points typography at the site's theme tokens, so body copy answers to
-   theme.yml like everything else. Must come after the @plugin. */
 @import "@uniweb/kit/prose-tokens.css";
 
 @source "./sections/**/*.{js,jsx}";

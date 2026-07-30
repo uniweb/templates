@@ -4,10 +4,5 @@
   "compatible": ">=0.8.0",
   "format": 2,
   "tags": ["learning", "course", "education", "quiz", "lms", "tutorial"],
-  "components": ["CourseCatalog", "Lesson", "Header", "Sidebar"],
-  "dependencies": {
-    "foundation": {
-      "@tailwindcss/typography": "^0.5.0"
-    }
-  }
+  "components": ["CourseCatalog", "Lesson", "Header", "Sidebar"]
 }
