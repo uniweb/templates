@@ -1,8 +1,6 @@
 ---
 type: VideoGallery
-fetch:
-  path: /data/videos.json
-  schema: videos
+data: videos
 ---
 
 # PandaCam Archives

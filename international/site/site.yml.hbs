@@ -38,6 +38,12 @@ collections:
     route: /blog
     sort: date desc
 
+  # A JSON file holding a top-level array is one record per entry — the same
+  # collection machinery as the markdown items above, so this gets i18n
+  # extraction too.
+  team:
+    path: collections/team
+
 # Build options
 build:
   prerender: true

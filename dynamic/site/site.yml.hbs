@@ -7,6 +7,13 @@ foundation: foundation
 # Homepage
 index: home
 
+# A JSON file holding a top-level array is one record per entry. Data exported
+# from another tool belongs here, not in public/data/ — that directory is the
+# build's output.
+collections:
+  videos:
+    path: collections/videos
+
 # Build options
 build:
   prerender: true
