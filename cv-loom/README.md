@@ -135,7 +135,7 @@ Custom functions have an important constraint: **Loom is synchronous**, so any l
 
 Renders as a small "Key Works" card with the three listed publications formatted in APA. Each entry is a link to the matching `Publications` entry — in web via an `href="#ref-<id>"` anchor, in docx via Press's internal-hyperlink that resolves because `Publications` tags each paragraph with `data-bookmark="ref-<id>"`.
 
-This is an **inset** in the Uniweb sense: a named component that content authors embed in markdown via `![](@Name){params}` syntax. Insets are block-level — they live between paragraphs, not inline inside prose (inline inset support isn't in the framework today). The author picks where to place the widget; the component reads its params and renders.
+This is an **inset** in the Uniweb sense: a named component that content authors embed in markdown via `![](@Name){params}` syntax. `KeyWorks` is a block-level inset — it lives between paragraphs, on its own line. (The framework also has an inline form, `[text](@Name){params}`, which renders as words inside prose; this template doesn't use it.) The author picks where to place the widget; the component reads its params and renders.
 
 `KeyWorks` reuses the same pipeline as `Publications`: `meta.data.inherit: ['profile']` gives it the publications array, `utils/to-csl.js` normalizes each record, citestyle formats them. The only new concept is the `ids` param (comma-separated, parsed by the component).
 
