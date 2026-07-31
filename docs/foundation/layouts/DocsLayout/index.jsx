@@ -145,7 +145,12 @@ export default function DocsLayout({ header, body, footer, left, right }) {
   // covers whatever the site set in theme.yml's `background:`.
   return (
     <div className="flex h-screen flex-col text-body">
-      <header className="z-30 flex-shrink-0">{header}</header>
+      {/* No z-index here. The runtime already orders the layout areas, and a
+          z-index on a flex item creates a stacking context even when static —
+          which would seal the header area's own layer inside this element and
+          make a foundation's `layers` setting do nothing. `flex-shrink-0` is
+          geometry, and stays. */}
+      <header className="flex-shrink-0">{header}</header>
 
       {left && (
         <MobileNav isOpen={isOpen} onClose={close}>
