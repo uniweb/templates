@@ -1,0 +1,14 @@
+colors:
+  primary: "#0369a1"
+  secondary: "#475569"
+  accent: "#ea580c"
+  neutral: slate
+
+fonts:
+  import:
+    - url: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+  heading: "Inter, system-ui, sans-serif"
+  body: "Inter, system-ui, sans-serif"
+
+vars:
+  control-radius: 0.75rem

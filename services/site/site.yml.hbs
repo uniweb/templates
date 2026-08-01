@@ -1,0 +1,36 @@
+name: {{projectName}}
+description: Emergency and scheduled plumbing, done properly.
+defaultLanguage: en
+
+# Foundation to use for this site
+foundation: foundation
+
+# Homepage - specifies which page folder becomes the root route (/)
+index: home
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Where the quote form sends submissions.
+#
+# It is commented out on purpose, and until you decide, the form on the homepage
+# renders DISABLED with a short explanation instead of collecting answers it
+# cannot deliver. That is the intended behaviour, not a broken template: a form
+# posting into an endpoint that does not exist loses what a visitor typed and
+# looks like it worked.
+#
+# Two ways to give it one:
+#
+#   1. Uncomment and point it at your own endpoint. It is resolved against the
+#      site's `base:`, so a relative path works from a subdirectory too, and an
+#      absolute URL works for a form service on another origin.
+#
+#   2. Publish to a host that handles submissions, which supplies one itself —
+#      in that case leave this commented out, because setting it here would
+#      override what the host provides.
+#
+# submit: /forms
+# submit: https://forms.example.com/intake
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Build options
+build:
+  prerender: true

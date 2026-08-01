@@ -157,6 +157,17 @@
         "ai-generated",
         "starter"
       ]
+    },
+    "services": {
+      "name": "Services",
+      "description": "Local-services site built around an author-designed quote request form",
+      "tags": [
+        "services",
+        "local-business",
+        "forms",
+        "quote",
+        "trades"
+      ]
     }
   }
 }

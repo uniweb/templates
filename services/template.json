@@ -1,0 +1,22 @@
+{
+  "name": "Services",
+  "description": "A local-services site — a plumber, an electrician, a studio — built around a quote request form. The form is authored as content, not code: a `yaml:form` block an author designs in the editor, rendered by one section type that draws whatever fields it is given.",
+  "compatible": ">=0.13.0",
+  "format": 2,
+  "tags": [
+    "services",
+    "local-business",
+    "forms",
+    "quote",
+    "contact",
+    "trades"
+  ],
+  "components": [
+    "Header",
+    "Hero",
+    "Services",
+    "QuoteForm",
+    "Testimonials",
+    "Footer"
+  ]
+}
