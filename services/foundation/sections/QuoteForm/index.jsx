@@ -23,7 +23,7 @@ export default function QuoteForm({ content, block }) {
   const form = content.data?.form
   const [values, setValues] = useState({})
 
-  const { submit, status, error, canSubmit, unavailableReason } = useFormSubmit({
+  const { submit, status, error, canSubmit, unavailableReason, canUploadFiles } = useFormSubmit({
     block,
     context: { formId: 'quote' },
     // Built from the values just submitted, so whoever reads these can tell
@@ -47,14 +47,19 @@ export default function QuoteForm({ content, block }) {
     e.preventDefault()
     if (disabled) return
 
-    // Split the answers from the uploads. Files are declared as `fileSlots` and
-    // the endpoint replies with somewhere to put the bytes, so they never ride
-    // inside the JSON body.
+    // Files are declared as `fileSlots` and the endpoint replies with somewhere
+    // to put the bytes, so they never ride inside the JSON body.
+    //
+    // While `canUploadFiles` is false the second phase does not exist, so no
+    // manifest is sent — and the fields were not rendered in the first place.
+    // Sending one anyway would record an attachment the visitor believes they
+    // provided and nobody ever receives.
     const formData = {}
     const fileSlots = []
     for (const [name, field] of fields) {
       const value = values[name]
       if (field.type === 'file' || field.type === 'image') {
+        if (!canUploadFiles) continue
         for (const file of value || []) {
           fileSlots.push({ name: file.name, size: file.size, mime: file.type, field: name })
         }
@@ -93,16 +98,26 @@ export default function QuoteForm({ content, block }) {
           <p className="text-subtle -mt-4">{form.description}</p>
         )}
 
-        {fields.map(([name, field]) => (
-          <FormField
-            key={name}
-            name={name}
-            field={field}
-            value={values[name]}
-            onChange={setValue(name)}
-            disabled={disabled}
-          />
-        ))}
+        {fields.map(([name, field]) => {
+          // A file input is a promise to deliver the bytes, and the framework
+          // cannot yet. Rendering one anyway would take a visitor's attachment
+          // and discard it on a submission that reports success — so the field
+          // is skipped rather than shown broken. Drops out on its own when
+          // `canUploadFiles` becomes true.
+          const isFile = field.type === 'file' || field.type === 'image'
+          if (isFile && !canUploadFiles) return null
+
+          return (
+            <FormField
+              key={name}
+              name={name}
+              field={field}
+              value={values[name]}
+              onChange={setValue(name)}
+              disabled={disabled}
+            />
+          )
+        })}
 
         <div className="pt-2 space-y-3">
           <button
