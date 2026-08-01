@@ -47,32 +47,31 @@ export default function QuoteForm({ content, block }) {
     e.preventDefault()
     if (disabled) return
 
-    // Files are declared as `fileSlots` and the endpoint replies with somewhere
-    // to put the bytes, so they never ride inside the JSON body.
+    // Answers ride in the JSON body; attachments do not. Pass the File objects
+    // as `files` and kit derives the manifest, sends the bytes and finalizes —
+    // handing it `fileSlots` instead would declare attachments without
+    // delivering them.
     //
-    // While `canUploadFiles` is false the second phase does not exist, so no
-    // manifest is sent — and the fields were not rendered in the first place.
-    // Sending one anyway would record an attachment the visitor believes they
-    // provided and nobody ever receives.
+    // Tagged with the field they came from, so a form with more than one file
+    // input stays legible to whoever reads the submission.
     const formData = {}
-    const fileSlots = []
+    const files = []
     for (const [name, field] of fields) {
       const value = values[name]
       if (field.type === 'file' || field.type === 'image') {
         if (!canUploadFiles) continue
-        for (const file of value || []) {
-          fileSlots.push({ name: file.name, size: file.size, mime: file.type, field: name })
-        }
+        for (const file of value || []) files.push({ file, field: name })
       } else if (value !== undefined && value !== '') {
         formData[name] = value
       }
     }
 
     try {
-      await submit(formData, fileSlots.length ? { fileSlots } : {})
+      await submit(formData, files.length ? { files } : {})
       setValues({})
     } catch {
-      /* captured into `error` by the hook */
+      /* captured into `error` by the hook — including a partial upload failure,
+         whose message says the submission landed and the attachment did not */
     }
   }
 
