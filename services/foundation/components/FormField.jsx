@@ -124,6 +124,7 @@ export default function FormField({ name, field, value, onChange, disabled }) {
         <textarea
           id={id}
           className={cn('control', 'min-h-32 resize-y')}
+          placeholder={field.placeholder || undefined}
           value={value ?? ''}
           required={!!field.required}
           disabled={disabled}
@@ -170,6 +171,7 @@ export default function FormField({ name, field, value, onChange, disabled }) {
         id={id}
         type={inputType(field)}
         className="control"
+        placeholder={field.placeholder || undefined}
         step={field.type === 'int' || field.type === 'integer' ? 1 : undefined}
         value={value ?? ''}
         required={!!field.required}

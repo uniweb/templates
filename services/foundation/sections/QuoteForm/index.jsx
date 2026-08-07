@@ -18,9 +18,23 @@ import FormField from '#components/FormField'
  *    site (or its host); nothing here names an endpoint. When there is none,
  *    `canSubmit` is false and the form renders disabled with the reason, rather
  *    than collecting answers it cannot deliver.
+ *
+ * ## A form is a LIST of controls (`@std/form` v2)
+ *
+ * `content.data.form` is a bare array; each record carries its own `name`. There
+ * is no envelope — a form's heading and intro are the SECTION's own markdown,
+ * read from `content.title` / `content.paragraphs` like any other section, and
+ * drawn above the form below.
+ *
+ * The v1 shape (`{title, description, fields: <map>}`) is deliberately NOT
+ * accepted. `@std/form` states there is no migration path from it; tolerating
+ * both here would be the compatibility branch that decision exists to avoid. A
+ * v1 block is reported once to the console rather than silently drawing nothing,
+ * because "the section vanished" is the least diagnosable failure this component
+ * has.
  */
 export default function QuoteForm({ content, block }) {
-  const form = content.data?.form
+  const controls = readControls(content.data?.form)
   const [values, setValues] = useState({})
 
   const { submit, status, error, canSubmit, unavailableReason, canUploadFiles } = useFormSubmit({
@@ -34,11 +48,10 @@ export default function QuoteForm({ content, block }) {
     },
   })
 
-  // A section with no form block renders nothing rather than an empty shell —
-  // the author has not designed one yet.
-  if (!form?.fields) return null
+  // A section with no form renders nothing rather than an empty shell — the
+  // author has not designed one yet.
+  if (controls.length === 0) return null
 
-  const fields = Object.entries(form.fields)
   const disabled = !canSubmit || status === 'submitting' || status === 'success'
 
   const setValue = (name) => (v) => setValues((prev) => ({ ...prev, [name]: v }))
@@ -56,9 +69,10 @@ export default function QuoteForm({ content, block }) {
     // input stays legible to whoever reads the submission.
     const formData = {}
     const files = []
-    for (const [name, field] of fields) {
+    for (const control of flatten(controls)) {
+      const { name } = control
       const value = values[name]
-      if (field.type === 'file' || field.type === 'image') {
+      if (isFileControl(control)) {
         if (!canUploadFiles) continue
         for (const file of value || []) files.push({ file, field: name })
       } else if (value !== undefined && value !== '') {
@@ -88,35 +102,16 @@ export default function QuoteForm({ content, block }) {
         onSubmit={handleSubmit}
         className="bg-card border border-border rounded-2xl p-6 sm:p-8 shadow-sm space-y-6"
       >
-        {/* The form definition carries its own heading, separate from the
-            section's — an author can title the section and the form apart. */}
-        {form.title && (
-          <h3 className="text-xl font-bold text-heading">{form.title}</h3>
-        )}
-        {form.description && (
-          <p className="text-subtle -mt-4">{form.description}</p>
-        )}
-
-        {fields.map(([name, field]) => {
-          // A file input is a promise to deliver the bytes, and the framework
-          // cannot yet. Rendering one anyway would take a visitor's attachment
-          // and discard it on a submission that reports success — so the field
-          // is skipped rather than shown broken. Drops out on its own when
-          // `canUploadFiles` becomes true.
-          const isFile = field.type === 'file' || field.type === 'image'
-          if (isFile && !canUploadFiles) return null
-
-          return (
-            <FormField
-              key={name}
-              name={name}
-              field={field}
-              value={values[name]}
-              onChange={setValue(name)}
-              disabled={disabled}
-            />
-          )
-        })}
+        {controls.map((control) => (
+          <Control
+            key={control.name}
+            control={control}
+            values={values}
+            setValue={setValue}
+            disabled={disabled}
+            canUploadFiles={canUploadFiles}
+          />
+        ))}
 
         <div className="pt-2 space-y-3">
           <button
@@ -145,4 +140,87 @@ export default function QuoteForm({ content, block }) {
       </form>
     </div>
   )
+}
+
+/**
+ * One control, or a group of them.
+ *
+ * `@std/form` declares the control list as a tree — a control may carry
+ * `children`, which is how a fieldset or a wizard step is expressed. Nothing
+ * authors one today, but a group that arrived and was not drawn would take the
+ * author's fields off the page with no error anywhere, so it is rendered rather
+ * than ignored. Children keep their own `name`, so answers stay flat.
+ */
+function Control({ control, values, setValue, disabled, canUploadFiles }) {
+  const children = Array.isArray(control.children) ? control.children : []
+
+  if (children.length > 0) {
+    return (
+      <fieldset className="space-y-6 border border-border rounded-xl p-5">
+        {control.label && (
+          <legend className="px-2 text-sm font-semibold text-heading">{control.label}</legend>
+        )}
+        {control.description && <p className="text-sm text-subtle">{control.description}</p>}
+        {children.map((child) => (
+          <Control
+            key={child.name}
+            control={child}
+            values={values}
+            setValue={setValue}
+            disabled={disabled}
+            canUploadFiles={canUploadFiles}
+          />
+        ))}
+      </fieldset>
+    )
+  }
+
+  // A file input is a promise to deliver the bytes. Kit sends the manifest, the
+  // bytes and the finalize call, so this holds wherever a target resolves —
+  // the guard is what keeps a file input off a form that has nowhere to post.
+  if (isFileControl(control) && !canUploadFiles) return null
+
+  return (
+    <FormField
+      name={control.name}
+      field={control}
+      value={values[control.name]}
+      onChange={setValue(control.name)}
+      disabled={disabled}
+    />
+  )
+}
+
+const isFileControl = (control) => control.type === 'file' || control.type === 'image'
+
+/** Every control in the tree, in document order — what a submission is built from. */
+function flatten(controls) {
+  return controls.flatMap((control) =>
+    Array.isArray(control.children) && control.children.length > 0
+      ? [control, ...flatten(control.children)]
+      : [control],
+  )
+}
+
+let warnedAboutV1 = false
+
+/**
+ * The authored form, as a list of controls.
+ *
+ * Anything without a `name` is dropped — it is what a submission would be keyed
+ * by, and a control that cannot be keyed cannot be answered.
+ */
+function readControls(form) {
+  if (Array.isArray(form)) return form.filter((c) => c && typeof c === 'object' && c.name)
+
+  if (form && typeof form === 'object' && form.fields && !warnedAboutV1) {
+    warnedAboutV1 = true
+    console.warn(
+      '[QuoteForm] This `yaml:form` block is the v1 shape (an envelope with a `fields` map). ' +
+      '`@std/form` v2 is a bare list of controls, each with its own `name`, and there is no ' +
+      'migration path — re-author the block as a list. Nothing is rendered until then.',
+    )
+  }
+
+  return []
 }

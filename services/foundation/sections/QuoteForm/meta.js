@@ -8,10 +8,12 @@
  * this file is written, so declaring a schema for them would describe the
  * visitor's answers rather than anything this component can promise.
  *
- * A schema for the form's *envelope* (title, description, fields-as-a-map)
- * would be legitimate and is deliberately left off: the component already
- * degrades to rendering nothing when the block is absent or malformed, and a
- * build-time check earns its keep once a site has more than one of these.
+ * What IS declared is `@std/form` — a schema describing *a well-formed form
+ * definition*, which is the only answerable question at build time. It cannot
+ * reach the author's own field names (it does not name them, and validation
+ * recurses only where a schema declares structure), so it checks the shape
+ * without touching the design: a list of controls, each with a `name` and a
+ * `type` from the authoring vocabulary.
  */
 export default {
   title: 'Quote Form',
@@ -20,10 +22,14 @@ export default {
   category: 'structure',
   purpose: 'Convert',
 
+  data: {
+    form: '@std/form',
+  },
+
   content: {
     title: 'Section heading',
     paragraphs: 'Short introduction [0-1]',
-    data: 'A `yaml:form` block describing the fields to draw',
+    data: 'A `yaml:form` block — a list of controls to draw',
   },
 
   params: {},
