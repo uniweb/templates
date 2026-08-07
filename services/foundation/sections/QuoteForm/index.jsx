@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { H2, P, useFormSubmit } from '@uniweb/kit'
+import React from 'react'
+import { H2, P, useFormSubmit, useFormValues, valueAt } from '@uniweb/kit'
 import FormField from '#components/FormField'
 
 /**
@@ -19,23 +19,30 @@ import FormField from '#components/FormField'
  *    `canSubmit` is false and the form renders disabled with the reason, rather
  *    than collecting answers it cannot deliver.
  *
+ * ## Two kit hooks own everything that is not this foundation's design
+ *
+ * `useFormValues()` holds the answers — seeding declared defaults, tracking
+ * edits, listing what is still `missing`, and keeping `File` objects out of
+ * `formData` (they would serialize to `{}` and report an attachment nobody
+ * received). `useFormSubmit()` resolves the destination and runs the request.
+ *
+ * What is left is the only part that should live in a foundation: which control
+ * a `type` draws, and how it looks. Everything this component used to hold by
+ * hand — a values map, a flatten, the file/formData split — was a second
+ * implementation of kit's, differing from it in ways nobody had compared.
+ *
  * ## A form is a LIST of controls (`@std/form` v2)
  *
  * `content.data.form` is a bare array; each record carries its own `name`. There
  * is no envelope — a form's heading and intro are the SECTION's own markdown,
  * read from `content.title` / `content.paragraphs` like any other section, and
  * drawn above the form below.
- *
- * The v1 shape (`{title, description, fields: <map>}`) is deliberately NOT
- * accepted. `@std/form` states there is no migration path from it; tolerating
- * both here would be the compatibility branch that decision exists to avoid. A
- * v1 block is reported once to the console rather than silently drawing nothing,
- * because "the section vanished" is the least diagnosable failure this component
- * has.
  */
 export default function QuoteForm({ content, block }) {
-  const controls = readControls(content.data?.form)
-  const [values, setValues] = useState({})
+  const definition = readDefinition(content.data?.form)
+
+  const { controls, values, setValue, reset, missing, formData, files } =
+    useFormValues(definition)
 
   const { submit, status, error, canSubmit, unavailableReason, canUploadFiles } = useFormSubmit({
     block,
@@ -54,40 +61,24 @@ export default function QuoteForm({ content, block }) {
 
   const disabled = !canSubmit || status === 'submitting' || status === 'success'
 
-  const setValue = (name) => (v) => setValues((prev) => ({ ...prev, [name]: v }))
-
   async function handleSubmit(e) {
     e.preventDefault()
     if (disabled) return
 
-    // Answers ride in the JSON body; attachments do not. Pass the File objects
-    // as `files` and kit derives the manifest, sends the bytes and finalizes —
-    // handing it `fileSlots` instead would declare attachments without
-    // delivering them.
-    //
-    // Tagged with the field they came from, so a form with more than one file
-    // input stays legible to whoever reads the submission.
-    const formData = {}
-    const files = []
-    for (const control of flatten(controls)) {
-      const { name } = control
-      const value = values[name]
-      if (isFileControl(control)) {
-        if (!canUploadFiles) continue
-        for (const file of value || []) files.push({ file, field: name })
-      } else if (value !== undefined && value !== '') {
-        formData[name] = value
-      }
-    }
-
+    // `formData` is what is submitted and `files` are the attachments, already
+    // tagged with the control each came from — kit derives the manifest, sends
+    // the bytes and finalizes.
     try {
       await submit(formData, files.length ? { files } : {})
-      setValues({})
+      reset()
     } catch {
       /* captured into `error` by the hook — including a partial upload failure,
          whose message says the submission landed and the attachment did not */
     }
   }
+
+  // The controls to draw, top level only: a group renders its own children.
+  const topLevel = controls.filter((c) => !c.path.includes('.'))
 
   return (
     <div className="max-w-2xl mx-auto px-6">
@@ -102,10 +93,11 @@ export default function QuoteForm({ content, block }) {
         onSubmit={handleSubmit}
         className="bg-card border border-border rounded-2xl p-6 sm:p-8 shadow-sm space-y-6"
       >
-        {controls.map((control) => (
+        {topLevel.map((control) => (
           <Control
-            key={control.name}
+            key={control.path}
             control={control}
+            controls={controls}
             values={values}
             setValue={setValue}
             disabled={disabled}
@@ -127,6 +119,10 @@ export default function QuoteForm({ content, block }) {
                 the state that exists so a visitor is never invited to fill in a
                 form whose answers have nowhere to go. */}
             {!canSubmit && <p className="text-subtle">{unavailableReason}</p>}
+            {/* `missing` is kit's computed fact; whether it blocks is this
+                component's design decision, and here it does not — the browser's
+                own `required` handles that, and a nag before anyone has typed
+                reads as an error the visitor caused. */}
             {status === 'success' && (
               <p className="text-success font-medium">Thanks — we'll be in touch shortly.</p>
             )}
@@ -145,16 +141,19 @@ export default function QuoteForm({ content, block }) {
 /**
  * One control, or a group of them.
  *
- * `@std/form` declares the control list as a tree — a control may carry
- * `children`, which is how a fieldset or a wizard step is expressed. Nothing
- * authors one today, but a group that arrived and was not drawn would take the
- * author's fields off the page with no error anywhere, so it is rendered rather
- * than ignored. Children keep their own `name`, so answers stay flat.
+ * A control may carry `children` — a fieldset, a wizard step. Kit flattens the
+ * tree and gives every control a dotted `path`; a group's children are the
+ * controls whose path is the group's plus one segment. Drawing them nested
+ * rather than flat is this foundation's choice, and it is why a group that
+ * arrives is drawn instead of quietly taking its author's fields off the page.
  */
-function Control({ control, values, setValue, disabled, canUploadFiles }) {
-  const children = Array.isArray(control.children) ? control.children : []
+function Control({ control, controls, values, setValue, disabled, canUploadFiles }) {
+  if (control.isGroup) {
+    const depth = control.path.split('.').length
+    const children = controls.filter(
+      (c) => c.path.startsWith(`${control.path}.`) && c.path.split('.').length === depth + 1,
+    )
 
-  if (children.length > 0) {
     return (
       <fieldset className="space-y-6 border border-border rounded-xl p-5">
         {control.label && (
@@ -163,8 +162,9 @@ function Control({ control, values, setValue, disabled, canUploadFiles }) {
         {control.description && <p className="text-sm text-subtle">{control.description}</p>}
         {children.map((child) => (
           <Control
-            key={child.name}
+            key={child.path}
             control={child}
+            controls={controls}
             values={values}
             setValue={setValue}
             disabled={disabled}
@@ -178,49 +178,43 @@ function Control({ control, values, setValue, disabled, canUploadFiles }) {
   // A file input is a promise to deliver the bytes. Kit sends the manifest, the
   // bytes and the finalize call, so this holds wherever a target resolves —
   // the guard is what keeps a file input off a form that has nowhere to post.
-  if (isFileControl(control) && !canUploadFiles) return null
+  const isUpload = control.type === 'file' || control.type === 'image'
+  if (isUpload && !canUploadFiles) return null
 
   return (
     <FormField
-      name={control.name}
+      name={control.path}
       field={control}
-      value={values[control.name]}
-      onChange={setValue(control.name)}
+      value={valueAt(values, control.path)}
+      onChange={(v) => setValue(control.path, v)}
       disabled={disabled}
     />
   )
 }
 
-const isFileControl = (control) => control.type === 'file' || control.type === 'image'
-
-/** Every control in the tree, in document order — what a submission is built from. */
-function flatten(controls) {
-  return controls.flatMap((control) =>
-    Array.isArray(control.children) && control.children.length > 0
-      ? [control, ...flatten(control.children)]
-      : [control],
-  )
-}
-
-let warnedAboutV1 = false
+let warnedAboutEnvelope = false
 
 /**
- * The authored form, as a list of controls.
+ * The authored form.
  *
- * Anything without a `name` is dropped — it is what a submission would be keyed
- * by, and a control that cannot be keyed cannot be answered.
+ * Kit accepts a list, and also the older map keyed by control name. What it
+ * cannot read is the v1 ENVELOPE — `{title, description, fields: <map>}` —
+ * whose `fields` key would be taken for a control called "fields". That draws a
+ * junk input rather than a form, so it is reported and refused here. There is
+ * no migration path from v1 by design; this exists so the failure is legible,
+ * not to support it.
  */
-function readControls(form) {
-  if (Array.isArray(form)) return form.filter((c) => c && typeof c === 'object' && c.name)
-
-  if (form && typeof form === 'object' && form.fields && !warnedAboutV1) {
-    warnedAboutV1 = true
-    console.warn(
-      '[QuoteForm] This `yaml:form` block is the v1 shape (an envelope with a `fields` map). ' +
-      '`@std/form` v2 is a bare list of controls, each with its own `name`, and there is no ' +
-      'migration path — re-author the block as a list. Nothing is rendered until then.',
-    )
+function readDefinition(form) {
+  if (form && !Array.isArray(form) && typeof form === 'object' && form.fields) {
+    if (!warnedAboutEnvelope) {
+      warnedAboutEnvelope = true
+      console.warn(
+        '[QuoteForm] This `yaml:form` block is the v1 envelope (`title`/`description`/`fields`). ' +
+        '`@std/form` v2 is a bare list of controls, each with its own `name`, and there is no ' +
+        'migration path — re-author the block as a list. Nothing is rendered until then.',
+      )
+    }
+    return []
   }
-
-  return []
+  return form
 }
