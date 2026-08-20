@@ -8,14 +8,14 @@ params:
 
 ## This project at a glance
 
-### 2
+#### 2
 
 Foundations working together
 
-### 6
+#### 6
 
 Total section types available
 
-### 0
+#### 0
 
 Lines of glue code needed
