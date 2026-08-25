@@ -1,4 +1,5 @@
-import { useWebsite, Article as ArticleBody } from '@uniweb/kit'
+import { useRef } from 'react'
+import { useWebsite, useReadingDepth, Article as ArticleBody } from '@uniweb/kit'
 
 /**
  * Article Component
@@ -7,11 +8,19 @@ import { useWebsite, Article as ArticleBody } from '@uniweb/kit'
  * where the parent page fetches articles and this page gets one article.
  *
  * Uses kit's Article component for the body content rendering.
+ *
+ * Reports `read_depth` through the article's own box. Only a foundation knows
+ * a section is long-form reading, which is why the hook is opt-in — and with no
+ * tracking destination configured it is a silent no-op that costs the site
+ * nothing. It measures THIS element, not the page, so the number keeps meaning
+ * the same thing when the page around it changes.
  */
-function Article({ content, params }) {
+function Article({ content, params, block }) {
   const article = content.data.articles?.[0]
   const { showImage, showDate, showTags } = params
   const { website } = useWebsite()
+  const bodyRef = useRef(null)
+  useReadingDepth({ ref: bodyRef, block })
 
   if (!article) {
     return (
@@ -45,7 +54,7 @@ function Article({ content, params }) {
   const formattedDate = formatDate(date)
 
   return (
-    <article className="py-16 px-4">
+    <article ref={bodyRef} className="py-16 px-4">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <header className="mb-8">
