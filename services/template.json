@@ -18,10 +18,5 @@
     "QuoteForm",
     "Testimonials",
     "Footer"
-  ],
-  "dependencies": {
-    "foundation": {
-      "@uniweb/schemas": "{{version \"@uniweb/schemas\"}}"
-    }
-  }
+  ]
 }

@@ -7,8 +7,7 @@
   "components": ["Header", "Footer", "Hero", "ArticleList", "Article"],
   "dependencies": {
     "foundation": {
-      "lucide-react": "^0.400.0",
-      "@uniweb/schemas": "{{version \"@uniweb/schemas\"}}"
+      "lucide-react": "^0.400.0"
     }
   }
 }
