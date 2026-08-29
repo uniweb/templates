@@ -121,6 +121,6 @@ The narrative describes the **unit as a whole** (unfiltered totals); the live st
 ## Dependencies
 
 - **`@uniweb/press`** — document compilation (registered outputs → xlsx Blob via exceljs, dynamic-imported).
-- **`@uniweb/kit`** — provides `useFetched` (used by `useFilteredMembers` for predicate-bound fetches) and `useCollectionQueryable` (used by `FilterPanel` to read the queryable surface from `site.yml`).
+- **`@uniweb/kit`** — provides `useFetched` (used by `useFilteredMembers` for predicate-bound fetches) and `useQueryable` (used by `FilterPanel` to read the queryable surface from the named query).
 - **`@uniweb/loom`** — text weaving for the Cover narrative.
 - **`recharts`** — chart library for web-preview visualizations.

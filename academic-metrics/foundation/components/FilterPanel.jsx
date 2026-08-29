@@ -23,13 +23,13 @@
  */
 
 import { useEffect, useState } from 'react'
-import { useCollectionQueryable } from '@uniweb/kit'
+import { useQueryable } from '@uniweb/kit'
 import { ALL_MEMBERS, useSelectedQuery, usePanelFilter } from './query-context.jsx'
 
-const COLLECTION = 'members'
+const QUERY = 'members'
 
 export default function FilterPanel() {
-  const queryable = useCollectionQueryable(COLLECTION)
+  const queryable = useQueryable(QUERY)
   const [, setSlug] = useSelectedQuery()
   const [panelWhere, setPanelWhere] = usePanelFilter()
 
