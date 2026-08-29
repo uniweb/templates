@@ -1,0 +1,4 @@
+# What is in this site's folder. Listing an entity here is what makes it a
+# record; anything left out exists but is not published.
+- members/*.yml
+- queries/*.yml

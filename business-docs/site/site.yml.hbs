@@ -26,9 +26,8 @@ business_docs:
   # registries.tax: { ... } — uncomment to extend the foundation's
   # built-in registry with jurisdictions it doesn't ship with.
 
-collections:
+queries:
   invoices:
-    path: collections/invoices
     queryable:
       status:
         type: enum
@@ -44,7 +43,6 @@ collections:
         min: 2025-01-01
         max: 2027-12-31
   sows:
-    path: collections/sows
     queryable:
       status:
         type: enum

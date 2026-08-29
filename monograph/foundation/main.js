@@ -4,7 +4,7 @@
  * A docusite foundation whose point is to exercise Press. It ships
  * no content-handlers (no Loom); chapter prose is static markdown,
  * structured data (specimens, measurements, references) is loaded
- * from site/collections/monograph/.
+ * from site/entities/monograph/.
  */
 
 export const vars = {

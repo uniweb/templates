@@ -57,7 +57,7 @@ Most docusite templates favour the "same JSX → same output" pattern (see `mono
 
 ## Sections
 
-Seven sections, all narrowed by either the **Population** dropdown (saved views from `site/collections/queries/`) or the **Filter** panel (free-form controls generated from the `queryable:` declaration on the `members` collection in `site.yml`). The two are alternatives — picking from one clears the other. A **Sections** checkbox list on the same options panel hides individual sections from both the preview and the download.
+Seven sections, all narrowed by either the **Population** dropdown (saved views from `site/entities/queries/`) or the **Filter** panel (free-form controls generated from the `queryable:` declaration on the `members` collection in `site.yml`). The two are alternatives — picking from one clears the other. A **Sections** checkbox list on the same options panel hides individual sections from both the preview and the download.
 
 | Section | Preview | Xlsx sheet |
 |---|---|---|
@@ -71,9 +71,9 @@ Seven sections, all narrowed by either the **Population** dropdown (saved views 
 
 ## Data model
 
-`site/collections/members/*.yml` — one file per member. Each becomes one item in the `members` collection. Fields: `name`, `rank`, `department`, `tenured`, `start_year`, plus nested arrays (`publications[]`, `funding[]`, `supervisions[]`) that sections aggregate.
+`site/entities/members/*.yml` — one file per member. Each becomes one item in the `members` collection. Fields: `name`, `rank`, `department`, `tenured`, `start_year`, plus nested arrays (`publications[]`, `funding[]`, `supervisions[]`) that sections aggregate.
 
-`site/collections/queries/*.yml` — saved views (named filters). Each file sets a `name`, `description`, `source: members`, and a `where:` predicate as a structured where-object. Example:
+`site/entities/queries/*.yml` — saved views (named filters). Each file sets a `name`, `description`, `source: members`, and a `where:` predicate as a structured where-object. Example:
 
 ```yaml
 # queries/tenured-biology.yml
@@ -110,8 +110,8 @@ The narrative describes the **unit as a whole** (unfiltered totals); the live st
 
 ## How to customize
 
-1. **Replace the members.** Edit or add files under `site/collections/members/`.
-2. **Add a saved view.** Drop a new `name` / `description` / `where` YAML into `site/collections/queries/` (the `where:` value is a where-object — see existing files for examples). Appears in the selector automatically.
+1. **Replace the members.** Edit or add files under `site/entities/members/`.
+2. **Add a saved view.** Drop a new `name` / `description` / `where` YAML into `site/entities/queries/` (the `where:` value is a where-object — see existing files for examples). Appears in the selector automatically.
 3. **Change the filterable surface.** Edit the `queryable:` block on the `members` collection in `site.yml` — add fields, change types (`enum` / `boolean` / `range` / `text`), update enum options. The filter panel re-renders to match.
 4. **Change theme.** Edit `theme.yml` or swap in `theme-archive.yml` per above.
 5. **Edit the narrative.** Rewrite the body of `site/pages/report/cover.md` with any Loom expressions that make sense for the unit.

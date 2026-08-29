@@ -35,7 +35,9 @@ marketing/
     │   └── home/
     │       ├── page.yml
     │       └── 1-hero.md
-    ├── collections/         # Optional: data collections
+    ├── entities/            # Optional: the site's records, by data schema
+    ├── records.yml          # Optional: which of them are published
+    ├── queries.yml          # Optional: named queries over them
     ├── locales/             # Optional: i18n translations
     └── public/              # Optional: static assets
 ```
@@ -58,7 +60,7 @@ Templates contain only content — the unique parts that make each template diff
 - `theme.yml` — theme variables
 - `layout/` — header, footer, sidebar content (markdown)
 - `pages/` — page content (markdown + page.yml)
-- `collections/` — data collections (if any)
+- `entities/` + `records.yml` + `queries.yml` — the site's records, what is published, and how it is reached (if any)
 - `locales/` — i18n translation files (if any)
 - `public/` — static assets like favicon, images, data files
 

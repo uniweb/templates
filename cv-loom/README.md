@@ -159,7 +159,7 @@ Beyond the visible demos above, the template landed three generic Press primitiv
 
 ## Data conventions
 
-The profile is a single YAML file (`collections/profile/darwin.yml`). Key conventions:
+The profile is a single YAML file (`entities/profile/darwin.yml`). Key conventions:
 
 - **Years can be plain numbers or quoted strings.** Loom skips locale grouping for 4-digit integers, so `1859` renders as "1859" not "1,859". The Darwin data uses quoted strings (`'1859'`) for historical reasons, but unquoted works identically for display and comparisons.
 
