@@ -1,0 +1,23 @@
+# A strand of the programme, holding its sessions IN ORDER.
+name: track
+label: Track
+description: A strand of the programme — a room, a day, or a theme.
+creatable_by: unit_members
+
+sections:
+  identity:
+    brief: true
+    fields:
+      name:    { type: string, required: true }
+      summary: { type: string }
+
+  # ⭐ `many: true` is what makes order authored rather than derived. An organiser
+  # arranges these by hand — a curriculum, a running order — so the sequence is a
+  # stored fact, not a sort key. That is the whole reason a `move` op exists.
+  sessions:
+    many: true
+    fields:
+      title:   { type: string, required: true }
+      speaker: { type: string }
+      room:    { type: string }
+      minutes: { type: number }

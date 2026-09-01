@@ -41,7 +41,7 @@
     },
     "blog": {
       "name": "Blog",
-      "description": "A blog built on the @std/article standard schema. Markdown articles render as a card grid and as full posts via dynamic [slug] routes. The first template to use a shared standard data schema — no custom schema file needed.",
+      "description": "A blog built on the @std/article standard schema. Markdown articles render as a card grid and as full posts via dynamic [slug] routes. The first template to use a shared standard data schema \u2014 no custom schema file needed.",
       "tags": [
         "blog",
         "articles",
@@ -108,7 +108,7 @@
     },
     "monograph": {
       "name": "Monograph",
-      "description": "A richly illustrated long-form document — numbered chapters with nested subsections, figures with captions, data-driven specimen and measurement tables, and a citestyle bibliography. The same JSX drives the themed web preview and a branded .docx with headers, footers, and page numbers. Ships with Darwin's Galapagos observations as sample content.",
+      "description": "A richly illustrated long-form document \u2014 numbered chapters with nested subsections, figures with captions, data-driven specimen and measurement tables, and a citestyle bibliography. The same JSX drives the themed web preview and a branded .docx with headers, footers, and page numbers. Ships with Darwin's Galapagos observations as sample content.",
       "tags": [
         "monograph",
         "docusite",
@@ -149,7 +149,7 @@
     },
     "paste": {
       "name": "Paste a Design (Level 0)",
-      "description": "Bring an existing React design (AI-generated or hand-built) into Uniweb with zero rewiring — replace App.jsx and run. Ships lucide-react preinstalled and SPA-first. The Level 0 conversion starting point.",
+      "description": "Bring an existing React design (AI-generated or hand-built) into Uniweb with zero rewiring \u2014 replace App.jsx and run. Ships lucide-react preinstalled and SPA-first. The Level 0 conversion starting point.",
       "tags": [
         "paste",
         "level-0",
@@ -167,6 +167,18 @@
         "forms",
         "quote",
         "trades"
+      ]
+    },
+    "conference": {
+      "name": "Conference",
+      "description": "A site that is also an app \u2014 sign-in, per-viewer data, and an editable programme. Ships a local backend so it runs with nothing installed.",
+      "tags": [
+        "app",
+        "api",
+        "backend",
+        "auth",
+        "permissions",
+        "conference"
       ]
     }
   }

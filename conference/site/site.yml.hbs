@@ -1,0 +1,16 @@
+name: {{projectName}}
+defaultLanguage: en
+foundation: foundation
+pages: [home, programme]
+
+# Where this site's app backend answers. The SAME value in development and in
+# production — only what answers it changes.
+api: /_api
+
+# What answers it locally. `$`-prefixed, so it is never published: a build cannot
+# carry it and a visitor can never reach it. Delete this line and the site still
+# works — it simply has no backend, and every signed-in feature disappears.
+$devApi: ./mock/api.js
+
+build:
+  prerender: true

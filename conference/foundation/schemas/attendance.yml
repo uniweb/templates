@@ -1,0 +1,30 @@
+# One attendee's record of the sessions they attended.
+name: attendance
+label: Attendance
+description: A personal record of sessions attended. One entity per attendee.
+
+# Anyone signed in keeps their own record — this is per-user activity, not
+# authored content, so it is not gated to the organising unit.
+creatable_by: any_user
+
+sections:
+  identity:
+    brief: true
+    fields:
+      note: { type: string }
+
+  # ⛔ THE POINT OF THIS TEMPLATE, in one line of schema.
+  #
+  # `append_only` is enforced by the STORE. A check-in can be added and then not
+  # edited or removed — not by another attendee, not by the organiser, and not by
+  # the person who wrote it. Hiding a delete button is a UI convention; this is a
+  # rule, and it holds against a foundation calling the API directly.
+  #
+  # Reordering is still allowed: `created_at` is the chronology and a reader orders
+  # by it, so repositioning loses no truth.
+  checkins:
+    many: true
+    append_only: true
+    fields:
+      session: { type: string, required: true }
+      at:      { type: string }

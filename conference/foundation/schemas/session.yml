@@ -1,0 +1,16 @@
+# A talk in the programme. Referenced from section bindings as '@/session'.
+name: session
+label: Session
+description: A talk, workshop or panel in the conference programme.
+
+# ⭐ Only members of the organising unit may create sessions. Without this a
+# content Model materializes OPEN — anyone with an account could add a talk — and
+# the app's "only organisers can edit" would be a UI convention, not a rule.
+creatable_by: unit_members
+
+fields:
+  title:    { type: string, required: true }
+  abstract: { type: markdown }
+  speaker:  { type: string }
+  room:     { type: string }
+  minutes:  { type: number }
