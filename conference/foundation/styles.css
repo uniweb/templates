@@ -1,1 +1,8 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+@import "@uniweb/kit/theme-tokens.css";
+
+/* Tailwind v4 scans only what it is told to. Without these the utility classes in
+   the sections below are never generated and the site renders unstyled — which
+   looks like broken CSS rather than a missing line. */
+@source "./sections/**/*.{js,jsx}";
+@source "./node_modules/@uniweb/kit/src/**/*.{js,jsx}";

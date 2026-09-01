@@ -30,12 +30,16 @@ export default function Header({ content, block }) {
 
 function Account() {
   const { viewer } = useSession()
-  const { submit, status, error } = useSignIn()
+  // ⚠️ `signIn`, not `submit` — the hook's own name for the action.
+  const { signIn, status, error } = useSignIn()
 
   return (
     <div className="flex items-center gap-3 text-sm">
       <SignedIn>
-        <span className="opacity-70">{viewer?.account?.handle || viewer?.account?.username}</span>
+        {/* ⚠️ The viewer is FLAT — `viewer.handle`, not `viewer.account.handle`.
+            The package normalizes the response, so a component reads its shape and
+            not the wire's. Reaching for `.account` renders nothing, silently. */}
+        <span className="opacity-70">{viewer?.handle || viewer?.username}</span>
         <SignOutButton />
       </SignedIn>
 
@@ -45,7 +49,7 @@ function Account() {
           onSubmit={(event) => {
             event.preventDefault()
             const form = new FormData(event.currentTarget)
-            submit({ username: form.get('username'), password: form.get('password') })
+            signIn({ username: form.get('username'), password: form.get('password') })
           }}
         >
           <input name="username" placeholder="username" autoComplete="username" className="w-28 rounded border border-[var(--border)] px-2 py-1" />

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { SafeHtml } from '@uniweb/kit'
-import { useRecords, useEntityWriter, useSession, SignedIn } from '@uniweb/api'
+import { useRecords, useEntityWriter, useSession, createEntity, SignedIn } from '@uniweb/api'
 
 /**
  * The conference programme — the whole point of this template.
@@ -17,18 +17,28 @@ import { useRecords, useEntityWriter, useSession, SignedIn } from '@uniweb/api'
  * and the data layer answers from the site's own config.
  */
 export default function Programme({ content, params }) {
-  const { status, records, refresh } = useRecords({ schema: '@/track' })
+  const { viewer } = useSession()
 
-  // ⭐ `absent` is NOT an empty list, and the difference decides what renders.
-  // `absent` means there is no live source — so show the authored content, which
-  // is a complete, useful page. An empty `ready` means the backend answered and the
+  // ⛔ DO NOT ASK A QUESTION WHOSE ANSWER YOU ALREADY HAVE. Entity reads require a
+  // session — that is the backend's own rule, not this app's — so querying while
+  // signed out buys a guaranteed 401 on every page load, and turns "you are not
+  // signed in" into an error state a visitor has to read.
+  //
+  // ⭐ A signed-out visitor gets the AUTHORED programme, which is the published
+  // one and is complete. Signing in swaps it for the live records. That also makes
+  // the static half meaningful on every deployment, not only on a backendless one.
+  const { status, records, refresh } = useRecords(viewer ? { schema: '@/track' } : null)
+
+  // `absent` is NOT an empty list, and the difference decides what renders.
+  // `absent` means there is no live source — no backend, or nobody signed in — so
+  // show the authored content. An empty `ready` means the backend answered and the
   // programme really is empty, which is a different sentence.
   if (status === 'absent') return <Authored content={content} />
   if (status === 'loading') return <Frame content={content}><p className="opacity-60">Loading the programme…</p></Frame>
   if (status === 'error') {
     return (
       <Frame content={content}>
-        <p className="opacity-70">The live programme could not be loaded. Here is the published version:</p>
+        <p className="mb-4 opacity-70">The live programme could not be loaded. Here is the published version:</p>
         <Authored content={content} bare />
       </Frame>
     )
@@ -55,9 +65,36 @@ function Frame({ content, children }) {
   )
 }
 
-/** The programme as the author wrote it — what a site with no backend serves. */
+/**
+ * The programme as the author wrote it — what a signed-out visitor sees, and what a
+ * site with no backend serves.
+ *
+ * ⚠️ The shape is the PARSER's, not the markdown's. A `###` heading followed by a
+ * list becomes an **item** with a `title` and `lists`; each list entry carries
+ * `paragraphs`, already HTML. There is no `content.body` — reaching for one is the
+ * mistake this comment exists to stop, and it fails silently by rendering nothing.
+ */
 function Authored({ content, bare = false }) {
-  const body = <SafeHtml className="prose" html={content.body} />
+  const body = (
+    <div className="space-y-6">
+      {content.items?.map((item, i) => (
+        <article key={i} className="rounded-[var(--radius-lg)] border border-[var(--border)] p-5">
+          {item.title && <h3 className="mb-3 text-xl font-semibold text-heading">{item.title}</h3>}
+          <ol className="space-y-2">
+            {(item.lists?.[0] || []).map((entry, j) => (
+              <li key={j} className="flex items-start gap-3 rounded-[var(--radius-md)] bg-[var(--section)] p-3">
+                <span className="w-6 shrink-0 text-right opacity-50">{j + 1}</span>
+                {/* ⚠️ The prop is `value`, not `html`. A wrong prop name here
+                    renders NOTHING and throws nothing — the row keeps its number
+                    and loses its text, which reads as missing data. */}
+                <SafeHtml className="grow" value={entry.paragraphs} />
+              </li>
+            ))}
+          </ol>
+        </article>
+      ))}
+    </div>
+  )
   return bare ? body : <Frame content={content}>{body}</Frame>
 }
 
@@ -71,7 +108,11 @@ function Track({ track, onChanged }) {
   // attendee who calls the write anyway is refused there. Showing the controls to
   // the wrong person would be untidy; relying on hiding them would be a security
   // model made of CSS.
-  const mayEdit = (viewer?.units || viewer?.account?.units || []).length > 0
+  //
+  // ⚠️ `actingUnitId` is the package's OWN normalized field for unit membership.
+  // Inventing a `viewer.units` here would be a second idea of who an organiser is,
+  // and two apps would disagree about it.
+  const mayEdit = viewer?.actingUnitId != null
 
   return (
     <article className="rounded-[var(--radius-lg)] border border-[var(--border)] p-5">
@@ -98,7 +139,11 @@ function Track({ track, onChanged }) {
                 <SessionControls
                   writer={writer}
                   item={item}
-                  previous={sessions[index - 1]}
+                  canMoveUp={index > 0}
+                  // ⚠️ Moving UP means landing after the item TWO back — after the
+                  // one directly before it is where it already is, so the obvious
+                  // version is a silent no-op. `'first'` when there is no such item.
+                  target={index > 1 ? { after: sessions[index - 2].item_id } : 'first'}
                   onChanged={onChanged}
                 />
               )}
@@ -121,7 +166,7 @@ function Track({ track, onChanged }) {
   )
 }
 
-function SessionControls({ writer, item, previous, onChanged }) {
+function SessionControls({ writer, item, canMoveUp, target, onChanged }) {
   const [editing, setEditing] = useState(false)
 
   const save = async (event) => {
@@ -152,14 +197,14 @@ function SessionControls({ writer, item, previous, onChanged }) {
   return (
     <div className="flex shrink-0 items-center gap-2 text-sm">
       <button type="button" onClick={() => setEditing(true)} className="opacity-70 hover:opacity-100">Edit</button>
-      {previous && (
-        // ⭐ Reordering names a NEIGHBOUR, never an index. The client does not
-        // compute an order number — two organisers arranging one list from local
+      {canMoveUp && (
+        // ⭐ Reordering names a NEIGHBOUR or an end, never an index. The client does
+        // not compute an order number — two organisers arranging one list from local
         // sequence numbers is how a programme ends up in an order neither chose.
         <button
           type="button"
           onClick={async () => {
-            await writer.move(item.item_id, { after: previous.item_id })
+            await writer.move(item.item_id, target)
             onChanged()
           }}
           className="opacity-70 hover:opacity-100"
@@ -191,7 +236,7 @@ function AddSession({ writer, onChanged }) {
         const form = new FormData(event.currentTarget)
         await writer.create(
           { title: form.get('title'), speaker: form.get('speaker') },
-          { position: 'last' },
+          { section: 'sessions', position: 'last' },
         )
         event.currentTarget.reset()
         onChanged()
@@ -216,21 +261,59 @@ function AddSession({ writer, onChanged }) {
  */
 function CheckIn({ session }) {
   const { viewer } = useSession()
-  const { records } = useRecords(viewer ? { schema: '@/attendance' } : null)
+  const { records, refresh } = useRecords(viewer ? { schema: '@/attendance' } : null)
   const mine = records[0]
   const writer = useEntityWriter(mine ? { schema: '@/attendance', uuid: mine.uuid } : null)
-  const already = (mine?.items || []).some((i) => i.data?.session === session.item_id)
+  const [busy, setBusy] = useState(false)
 
-  if (!viewer || !mine) return null
-  if (already) return <span className="shrink-0 text-sm opacity-60" title="Recorded — and it cannot be unmade">✓ attended</span>
+  if (!viewer) return null
+
+  const already = (mine?.items || []).some(
+    (item) => item.section === 'checkins' && item.data?.session === session.item_id,
+  )
+  if (already) {
+    return (
+      <span className="shrink-0 text-sm opacity-60" title="Recorded — and it cannot be unmade">
+        ✓ attended
+      </span>
+    )
+  }
+
+  const record = async () => {
+    setBusy(true)
+    try {
+      // ⚠️ First check-in of the conference has no record to append to. Creating it
+      // here — rather than seeding one per account somewhere — keeps the entity's
+      // existence a consequence of using the feature, which is what an app usually
+      // wants: no empty rows for people who never attended anything.
+      if (!mine) {
+        await createEntity({ schema: '@/attendance', data: { identity: { note: 'My conference' } } })
+        await refresh()
+        setBusy(false)
+        return
+      }
+      // ⚠️ `section` is required, and it is the whole point here: `checkins` is the
+      // section declared `append_only`. An item that lands anywhere else is stored
+      // happily and is NOT tamper-evident.
+      await writer.create(
+        { session: session.item_id, at: new Date().toISOString() },
+        { section: 'checkins', position: 'last' },
+      )
+      await refresh()
+    } finally {
+      setBusy(false)
+    }
+  }
 
   return (
     <button
       type="button"
-      onClick={() => writer.create({ session: session.item_id, at: new Date().toISOString() })}
-      className="shrink-0 rounded border border-[var(--border)] px-2 py-1 text-sm"
+      onClick={record}
+      disabled={busy}
+      className="shrink-0 rounded border border-[var(--border)] px-2 py-1 text-sm hover:bg-[var(--section)]"
+      title={mine ? 'Record that you attended — this cannot be undone' : 'Start your record'}
     >
-      I attended
+      {mine ? 'I attended' : 'Start my record'}
     </button>
   )
 }
