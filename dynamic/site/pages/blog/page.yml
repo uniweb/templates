@@ -6,6 +6,6 @@ description: Field notes and conservation updates
 # Posts collection data - cascades to child pages including [id]
 fetch:
   url: https://jsonplaceholder.typicode.com/posts?_limit=12
-  schema: posts
+  as: posts
   prerender: false
   detail: rest
