@@ -1,10 +1,32 @@
 {
   "name": "PandaWatch - Dynamic Data",
-  "description": "A conservation site demonstrating live API data fetching with loading states, transforms, and the portable data pattern. Includes weather, blog posts, wildlife sightings, research papers, and video gallery sections.",
+  "description": "A conservation site demonstrating live API data fetching with loading states, transforms, and the portable data pattern. Includes weather, blog posts, wildlife sightings, research papers, and video gallery sections. The logbook shows records placed in folders, served under one `[...path]` page.",
   "compatible": ">=0.7.0",
   "format": 2,
-  "tags": ["data", "api", "fetch", "loading-states", "transform", "dynamic", "conservation"],
-  "components": ["Hero", "FieldNotes", "Sightings", "Donors", "Publications", "OccurrenceRecords", "VideoGallery", "Header", "Footer"],
+  "tags": [
+    "data",
+    "api",
+    "fetch",
+    "loading-states",
+    "transform",
+    "dynamic",
+    "conservation",
+    "records",
+    "dynamic-routes"
+  ],
+  "components": [
+    "Hero",
+    "FieldNotes",
+    "Sightings",
+    "Donors",
+    "Publications",
+    "OccurrenceRecords",
+    "VideoGallery",
+    "Header",
+    "Footer",
+    "LogbookList",
+    "LogbookEntry"
+  ],
   "dependencies": {
     "foundation": {
       "lucide-react": "^0.400.0"

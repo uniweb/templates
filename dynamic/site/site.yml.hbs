@@ -12,6 +12,13 @@ index: home
 # build's output.
 queries:
   videos:
+  # Markdown entries placed in folders by records.yml. Rendered by
+  # pages/logbook — a list, and one `[...path]` page for every entry.
+  logbook:
+    sort: date desc
+    # The page that renders one entry is pages/logbook/[...path]/, so a record's
+    # own URL (`route` on each record) is its placement plus its slug.
+    route: /logbook/[...path]
 
 # Build options
 build:

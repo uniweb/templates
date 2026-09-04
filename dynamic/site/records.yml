@@ -1,3 +1,17 @@
 # What is in this site's folder. Listing an entity here is what makes it a
 # record; anything left out exists but is not published.
 - videos/*.json
+
+# Logbook entries. The FOLDER an entry is placed in is part of its record
+# (`path`) — and under a `[...path]` page it becomes part of its URL:
+# /logbook/welcome, /logbook/field/river-survey, /logbook/lab/dna-results.
+- logbook/welcome.md
+- folder: field
+  label: Field work
+  records:
+    - logbook/river-survey.md
+    - logbook/night-count.md
+- folder: lab
+  label: Lab work
+  records:
+    - logbook/dna-results.md

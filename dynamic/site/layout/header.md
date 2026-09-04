@@ -15,6 +15,9 @@ theme:
 - label: Blog
   href: /blog
   icon: lu:notebook-pen
+- label: Logbook
+  href: /logbook
+  icon: lu:book-open
 - label: Research & Data
   href: /research
   icon: lu:flask-conical
