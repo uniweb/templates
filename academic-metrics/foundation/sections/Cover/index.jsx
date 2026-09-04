@@ -16,10 +16,10 @@ import { useFilteredMembers } from '#components/query-context.jsx'
 
 export default function Cover({ content, block }) {
   // useFilteredMembers reads the active predicate from page.state and
-  // dispatches a where-bound fetch via @uniweb/kit's useFetched. With
-  // the site's default `fetcher.supports: []`, the predicate evaluates
-  // locally over the cached members.json. With `supports: [where]`, it
-  // ships to the backend. Same component code in either mode.
+  // dispatches a where-bound fetch via @uniweb/kit's useFetched. Over the
+  // compiled members.json the framework evaluates it locally, once per
+  // unique selection; a host that answers queries evaluates the very same
+  // predicate at the source. Same component code either way.
   const { members, activeView, activeLabel, totalCount } = useFilteredMembers(content)
 
   // Loom-resolved narrative paragraphs — the content handler in

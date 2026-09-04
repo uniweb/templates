@@ -28,22 +28,24 @@
  * query-context.jsx) — a thin hook over @uniweb/kit's useFetched that
  * passes the active where-object as part of the request.
  *
- * The framework decides whether to ship that where-object to the
- * source or to evaluate it locally, based on the site's
- * `fetcher.supports:` declaration:
+ * Where that where-object is evaluated is decided by the LANE the records
+ * come from, never by this foundation and never by a site knob:
  *
- *   - supports: []       (default; static /data/members.json) — the
- *     framework fetches the file once and applies the predicate in
+ *   - the site's compiled /data/members.json (this template as shipped) —
+ *     the framework fetches the file once and applies the predicate in
  *     JS. Multiple sections share one cached fetch.
  *
- *   - supports: [where]  (real backend, e.g., the dev backend at
- *     localhost:8080) — the predicate ships in the request; the
- *     backend returns only matching records.
+ *   - a Uniweb host that answers queries — the predicate travels with
+ *     the request and the host returns only matching records.
  *
- * Same author code, same foundation code, same components. Switching
- * modes is one block in site.yml. That's the architecture's promise
- * made concrete — and it's why this foundation no longer needs a
- * `data:` handler to bypass the framework's transport-aware fetcher.
+ *   - a backend of your own — a foundation TRANSPORT (`transports:` in
+ *     this file, selected by the site's `fetcher.transports`) decides
+ *     what to send and what to evaluate.
+ *
+ * Same author code, same foundation code, same components in every
+ * case. That's the architecture's promise made concrete — and it's why
+ * this foundation no longer needs a `data:` handler to bypass the
+ * framework's transport-aware fetcher.
  */
 
 import { Loom, createLoomHandlers } from '@uniweb/loom'

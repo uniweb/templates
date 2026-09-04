@@ -24,8 +24,8 @@ const NUMBER_FORMATS = ['text', 'text', 'text', 'text', 'number']
 export default function Members({ content, block }) {
   const included = useSectionIncluded(SECTION_KEY)
   // useFilteredMembers fetches the active selection via @uniweb/kit's
-  // useFetched. Source = framework default fetcher; pushdown vs. local
-  // evaluation is governed by `fetcher.supports:` in site.yml.
+  // useFetched. The framework evaluates the predicate over the compiled
+  // members.json; a host that answers queries evaluates it at the source.
   const { members, activeLabel } = useFilteredMembers(content)
   const heading = content?.title || 'Members'
 

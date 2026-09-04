@@ -5,9 +5,9 @@
  * (framework/templates/academic-metrics/foundation/components/query-context.jsx).
  * Takes the block's `content` object and reads filter state internally
  * via usePageState — section components don't pass arguments other
- * than `content`. The framework decides whether to push the where-object
- * to the source or evaluate it locally based on the site's
- * `fetcher.supports:` declaration.
+ * than `content`. The framework evaluates the where-object over the
+ * compiled records; a host that answers queries evaluates the same
+ * predicate at the source.
  *
  * SOW join is the calling section's responsibility, not this hook's.
  * Sections that need invoice → SOW joins compose this hook with a
@@ -63,8 +63,8 @@ function resolveSchema(source) {
 function fallbackRecordsFor(source, content) {
   // The page-level cascade should already have fetched the active
   // collection without a where: clause. Fall back to that when no filter
-  // is active — same fetched bytes either way thanks to the cache key
-  // matching when supports:[] doesn't split on where:.
+  // is active — same fetched bytes either way, because a cache entry is
+  // identified by its address and a where: does not split it.
   if (source === 'sows') {
     return Array.isArray(content?.data?.sows) ? content.data.sows : []
   }

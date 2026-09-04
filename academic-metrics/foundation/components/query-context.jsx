@@ -7,8 +7,8 @@
  *     React state on every mount.
  *   - The shared useFilteredMembers hook resolves the active predicate
  *     from page.state on every render and passes it to useFetched —
- *     the framework decides whether to ship that predicate to the
- *     source or evaluate it locally based on `fetcher.supports:`.
+ *     the framework evaluates it over the compiled records; a host that
+ *     answers queries evaluates the same predicate at the source.
  *   - A local sync helper persists to localStorage independently.
  *
  * Six slots, each a separate key so only the subscribing component
@@ -264,11 +264,9 @@ export function useFilteredMembers(content) {
   )
 
   // The page-level cascade already fetched /data/members.json without
-  // a where: clause. With supports:[], the cache key for this useFetched
-  // matches that fetch (where: doesn't split the key when not pushed down),
-  // so we get a synchronous cache hit and apply the predicate locally.
-  // With supports:[where], the where: splits the key and triggers a
-  // separate fetch with the predicate.
+  // a where: clause. A cache entry is identified by its ADDRESS, so this
+  // useFetched hits that entry synchronously and the framework applies
+  // the predicate locally over it — one fetch, every selection.
   //
   // NOTE: kit hooks take an explicit path:/url:; the `collection:`
   // shorthand is build-time only. To swap to a backend, change BOTH

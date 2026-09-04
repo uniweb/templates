@@ -9,37 +9,11 @@ npx uniweb create my-metrics --template academic-metrics
 cd my-metrics && pnpm dev
 ```
 
-## How predicates work — static files now, real backend later
+## How predicates work
 
-The active population (saved view or panel-composed filter) is a **where-object** — a small structured JSON predicate. Sections that show the filtered set call `useFilteredMembers()`, a foundation hook backed by `@uniweb/kit`'s `useFetched`. The framework decides whether to ship that predicate to the source or evaluate it locally, driven entirely by `fetcher.supports:` in `site.yml`.
+The active population (saved view or panel-composed filter) is a **where-object** — a small structured JSON predicate. Sections that show the filtered set call `useFilteredMembers()`, a foundation hook backed by `@uniweb/kit`'s `useFetched`. The foundation has **no filtering code of its own**: the hook reads the active predicate from `page.state` and hands a where-bound request to the framework, which evaluates it over `/data/members.json` — once per unique selection, one cached fetch shared by every section.
 
-Two modes, one author surface:
-
-| Site setting | What the framework does | When to use |
-|---|---|---|
-| `fetcher.supports: []` *(default)* | Fetches `/data/members.json` once and applies the predicate in JS for each unique selection. Multiple sections share one cached fetch. | The default demo. Works without any backend. |
-| `fetcher.supports: [where]` *(or more)* | Ships the predicate in the request (`?_where=<JSON>` for GET; merged into the body for POST). The source returns only matching records. | Production. Or local development against the dev backend (see below). |
-
-The foundation has **no filtering code of its own**. There's no `data:` handler intercepting the cascade. Sections call `useFilteredMembers()`; that hook reads the active predicate from `page.state` and hands a where-bound request to the framework. The framework does the rest. Switching modes is one line in `site.yml`; nothing else changes.
-
-## Try the dev backend
-
-The framework ships a tiny Node server (`uniweb-dev-backend`) that boots an HTTP service reading the same YAML collections the static build emits. It implements the framework default fetcher's pushdown wire format, so you can develop against a "real" backend in one terminal:
-
-```bash
-# In one terminal: start the dev backend
-npx uniweb-dev-backend --collections ./site/collections --port 8080
-
-# In site.yml, uncomment the fetcher block:
-#   fetcher:
-#     baseUrl: http://localhost:8080
-#     supports: [where, limit, sort]
-
-# In another terminal: run the site as usual
-pnpm dev
-```
-
-Now changing the population dropdown or the filter panel triggers a network request to `localhost:8080`. The browser receives only the matching subset; the server-side evaluator does the work. Switch the `fetcher:` block back to `supports: []` (or remove it) and the same site works against the static `/data/members.json` again. **Same components, same hooks, same author config.**
+The same predicate reaches other sources unchanged. Published to a Uniweb host, the records are answered live by the host; a backend of your own is reached through a foundation **transport** selected in `site.yml` (`fetcher.transports`), which decides what to send and what to evaluate. What you write in `site.yml` and in the sections is identical in every case — see the framework's `development/connecting-a-backend.md`.
 
 ## What makes this a Press xlsx showcase
 
