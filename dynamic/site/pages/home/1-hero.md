@@ -4,7 +4,7 @@ theme: light
 background: white
 fetch:
   url: https://api.open-meteo.com/v1/forecast?latitude=31.0&longitude=103.2&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&wind_speed_unit=ms
-  schema: weather
+  as: weather
   transform: current
   prerender: false
 ---

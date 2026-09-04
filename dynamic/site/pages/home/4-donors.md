@@ -2,7 +2,7 @@
 type: Donors
 fetch:
   url: https://randomuser.me/api/?results=6
-  schema: donors
+  as: donors
   transform: results
   prerender: false
 ---

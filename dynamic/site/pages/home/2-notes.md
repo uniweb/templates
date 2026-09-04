@@ -2,7 +2,7 @@
 type: FieldNotes
 fetch:
   url: https://jsonplaceholder.typicode.com/posts?_limit=3
-  schema: posts
+  as: posts
   prerender: false
 ---
 
