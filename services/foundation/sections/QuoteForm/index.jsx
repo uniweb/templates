@@ -16,8 +16,20 @@ import FormField from '#components/FormField'
  *    has never seen.
  *  - The destination is configuration. `useFormSubmit()` resolves it from the
  *    site (or its host); nothing here names an endpoint. When there is none,
- *    `canSubmit` is false and the form renders disabled with the reason, rather
- *    than collecting answers it cannot deliver.
+ *    `canSubmit` is false and this section draws NOTHING, rather than
+ *    collecting answers it cannot deliver.
+ *
+ * ## ⛔ There is no reason to show, and asking for one is the mistake
+ *
+ * `canSubmit` is the whole answer — `useFormSubmit` deliberately returns no
+ * explanatory string, and `@uniweb/core/services` says why: a visitor has no
+ * stake in which services an operator provisioned, and any wording we invented
+ * would be in one language, bypassing the site's own localization. Text a
+ * visitor reads is *site content*.
+ *
+ * ⇒ So a service the site does not have means **do not draw the control**. A
+ * disabled form with nothing beside it is not the lesser version of that rule;
+ * it is the thing the rule forbids.
  *
  * ## Two kit hooks own everything that is not this foundation's design
  *
@@ -44,7 +56,7 @@ export default function QuoteForm({ content, block }) {
   const { controls, values, setValue, reset, missing, formData, files } =
     useFormValues(definition)
 
-  const { submit, status, error, canSubmit, unavailableReason, canUploadFiles } = useFormSubmit({
+  const { submit, status, error, canSubmit, canUploadFiles } = useFormSubmit({
     block,
     context: { formId: 'quote' },
     // Built from the values just submitted, so whoever reads these can tell
@@ -59,7 +71,12 @@ export default function QuoteForm({ content, block }) {
   // author has not designed one yet.
   if (controls.length === 0) return null
 
-  const disabled = !canSubmit || status === 'submitting' || status === 'success'
+  // Nowhere to send it, so nothing to draw — including the heading, which
+  // would otherwise promise a form that is not there. Not an error and not a
+  // thing to apologise for: this site simply has no submission service.
+  if (!canSubmit) return null
+
+  const disabled = status === 'submitting' || status === 'success'
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -115,10 +132,6 @@ export default function QuoteForm({ content, block }) {
           </button>
 
           <div className="min-h-6 text-sm" role="status" aria-live="polite">
-            {/* Why the control is disabled, in the site's own words — this is
-                the state that exists so a visitor is never invited to fill in a
-                form whose answers have nowhere to go. */}
-            {!canSubmit && <p className="text-subtle">{unavailableReason}</p>}
             {/* `missing` is kit's computed fact; whether it blocks is this
                 component's design decision, and here it does not — the browser's
                 own `required` handles that, and a nag before anyone has typed
