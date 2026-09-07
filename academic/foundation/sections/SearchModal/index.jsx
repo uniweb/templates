@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
-import { Link, useWebsite, cn, useShortcutLabel } from '@uniweb/kit'
+import { Link, useWebsite, cn, useShortcutLabel, createSearchClient } from '@uniweb/kit'
 
 /**
  * SearchModal Component
@@ -37,7 +37,6 @@ function SearchModal({ isOpen, onClose, searchClient }) {
 
     async function initSearch() {
       try {
-        const { createSearchClient } = await import('@uniweb/kit')
         setClient(createSearchClient(website))
         // Note: No preload here - use useSearchWithIntent in parent for intent-based loading
       } catch (err) {

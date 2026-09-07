@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { createPortal } from 'react-dom'
-import { Link, useWebsite, cn, useShortcutLabel } from '@uniweb/kit'
+import { Link, useWebsite, cn, useShortcutLabel, createSearchClient } from '@uniweb/kit'
 
 /**
  * SearchModal Component
@@ -41,7 +41,6 @@ function SearchModal({ isOpen, onClose, searchClient }) {
 
     async function initSearch() {
       try {
-        const { createSearchClient } = await import('@uniweb/kit')
         setClient(createSearchClient(website))
       } catch (err) {
         console.warn('Search not available:', err.message)
