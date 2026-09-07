@@ -12,7 +12,7 @@ import { Link, useWebsite, cn, useShortcutLabel, createSearchClient } from '@uni
  * - Opened by a keyboard shortcut the Navbar binds with useShortcut
  * - Highlighted search matches
  * - Mobile-responsive
- * - Intent-based index preloading (via useSearchWithIntent hook)
+ * - Intent-based index preloading (via useSearchPrefetch hook)
  */
 function SearchModal({ isOpen, onClose, searchClient }) {
   const { website } = useWebsite()
@@ -38,7 +38,7 @@ function SearchModal({ isOpen, onClose, searchClient }) {
     async function initSearch() {
       try {
         setClient(createSearchClient(website))
-        // Note: No preload here - use useSearchWithIntent in parent for intent-based loading
+        // Note: No preload here - use useSearchPrefetch in parent for intent-based loading
       } catch (err) {
         console.warn('Search not available:', err.message)
       }

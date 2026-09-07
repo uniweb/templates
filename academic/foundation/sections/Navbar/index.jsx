@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Link, useWebsite, cn, getLocaleLabel, useShortcut, useSearchWithIntent } from '@uniweb/kit'
+import { Link, useWebsite, cn, getLocaleLabel, useShortcut, useSearchPrefetch } from '@uniweb/kit'
 import { SearchModal, SearchButton } from '../SearchModal'
 
 /**
@@ -31,7 +31,7 @@ function Navbar({ content, params }) {
   const shouldShowSearch = showSearch === 'always' || (showSearch === 'auto' && searchEnabled)
 
   // Intent-based search preloading (only loads index on hover/focus/shortcut)
-  const { triggerPreload, client: searchClient } = useSearchWithIntent(website)
+  const { triggerPreload, client: searchClient } = useSearchPrefetch(website)
 
   // Search keyboard shortcut — this foundation's choice of key, and it
   // triggers preload immediately. `mod` is Cmd on Apple, Ctrl elsewhere.

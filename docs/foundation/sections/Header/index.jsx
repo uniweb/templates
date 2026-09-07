@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, cn, useActiveRoute, useScrolled, useMobileMenu, useWebsite, useVersion, useAppearance, getLocaleLabel, useRouting, useShortcut, useShortcutLabel, useSearchWithIntent } from '@uniweb/kit'
+import { Link, cn, useActiveRoute, useScrolled, useMobileMenu, useWebsite, useVersion, useAppearance, getLocaleLabel, useRouting, useShortcut, useShortcutLabel, useSearchPrefetch } from '@uniweb/kit'
 import SearchModal from '../SearchModal'
 
 /**
@@ -55,7 +55,7 @@ function Header({ content, params, block }) {
   const shouldShowSearch = showSearch === 'always' || (showSearch === 'auto' && searchEnabled)
 
   // Intent-based search preloading
-  const { triggerPreload, client: searchClient } = useSearchWithIntent(website)
+  const { triggerPreload, client: searchClient } = useSearchPrefetch(website)
 
   // Search keyboard shortcut. The key is this foundation's choice, not the
   // framework's — `mod` resolves to Cmd on Apple platforms and Ctrl elsewhere.

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Link, cn, useScrolled, useMobileMenu, useWebsite, useActiveRoute, useRouting, useShortcut, useSearchWithIntent } from '@uniweb/kit'
+import { Link, cn, useScrolled, useMobileMenu, useWebsite, useActiveRoute, useRouting, useShortcut, useSearchPrefetch } from '@uniweb/kit'
 import { ChevronDown, Search, X } from 'lucide-react'
 
 /**
@@ -26,7 +26,7 @@ function Header({ content, params, block }) {
 
   // Search state
   const [searchOpen, setSearchOpen] = useState(false)
-  const { query, results, isLoading, clear, triggerPreload, intentProps } = useSearchWithIntent(website)
+  const { query, results, isLoading, clear, triggerPreload, prefetchProps } = useSearchPrefetch(website)
   const [searchQuery, setSearchQuery] = useState('')
   const searchInputRef = useRef(null)
 
@@ -267,7 +267,7 @@ function Header({ content, params, block }) {
               {searchEnabled && (
                 <button
                   onClick={() => setSearchOpen(true)}
-                  {...intentProps}
+                  {...prefetchProps}
                   className={cn(
                     'p-2 rounded-lg transition-colors',
                     getLinkStyles()
