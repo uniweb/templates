@@ -122,7 +122,7 @@ resolves to `*On the Origin of Species* (Darwin, 1859)`. With a locator:
 ```
 resolves to `(Darwin, 1871, p. 398)`.
 
-Registered in `foundation.js` as a custom Loom function — a two-argument JS function (`flags, id`) that looks the publication up by `id` in the profile, normalizes the flat shape to CSL-JSON via `utils/to-csl.js`, and calls citestyle's `formatCitation`. This is the canonical pattern for *extending Loom's vocabulary*: when data-in-text calls for a library Loom doesn't include, drop to JS for one function.
+Registered in `main.js` as a custom Loom function — a two-argument JS function (`flags, id`) that looks the publication up by `id` in the profile, normalizes the flat shape to CSL-JSON via `utils/to-csl.js`, and calls citestyle's `formatCitation`. This is the canonical pattern for *extending Loom's vocabulary*: when data-in-text calls for a library Loom doesn't include, drop to JS for one function.
 
 Custom functions have an important constraint: **Loom is synchronous**, so any library the function depends on must be statically imported at module load. The template picks APA as its one citation style — the tradeoff for staying synchronous. For a foundation that needs runtime style switching, drop down to a full escape-hatch section type (see `Publications` below).
 

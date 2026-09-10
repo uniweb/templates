@@ -58,16 +58,16 @@ pnpm dev
 
 ## Template Format
 
-Templates use **format 2** — they contain only content (section types, pages, theme, collections). The CLI provides all structural scaffolding (package.json, vite.config.js, main.js, etc.) from its own package templates.
+Templates use **format 2** — they contain only content (section types, pages, theme, records). The CLI provides all structural scaffolding (package.json, vite.config.js, the site's main.js, etc.) from its own package templates.
 
 ```
 marketing/
 ├── template.json           # Metadata: name, description, format, tags
 ├── foundation/
-│   └── src/
-│       ├── foundation.js   # Section exports
-│       ├── styles.css      # Foundation styles
-│       └── sections/       # Section type components
+│   ├── main.js             # Foundation declarations
+│   ├── styles.css          # Foundation styles
+│   ├── sections/           # Section type components
+│   └── components/         # Components the sections share
 └── site/
     ├── site.yml.hbs        # Site configuration
     ├── theme.yml            # Theme variables
