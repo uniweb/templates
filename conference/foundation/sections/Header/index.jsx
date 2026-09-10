@@ -1,11 +1,11 @@
-import { Link } from '@uniweb/kit'
-import { useSession, useSignIn, SignedIn, SignedOut, isEnabled } from '@uniweb/api'
+import { Link, isApiEnabled } from '@uniweb/kit'
+import { useSession, useSignIn, SignedIn, SignedOut } from '@uniweb/api'
 
 /**
  * The site header, with a sign-in affordance — but only where signing in means
  * something.
  *
- * ⭐ `isEnabled(website)` is a SYNCHRONOUS read, not a probe. Which services a site
+ * ⭐ `isApiEnabled()` is a SYNCHRONOUS read, not a probe. Which services a site
  * has was settled when it was published and travels in its config, so there is no
  * handshake and no await. A site with no app backend draws no sign-in control at
  * all — not a disabled one, and not an explanation. A visitor has no stake in which
@@ -14,7 +14,7 @@ import { useSession, useSignIn, SignedIn, SignedOut, isEnabled } from '@uniweb/a
  */
 export default function Header({ content, block }) {
   const website = block?.website
-  const backend = isEnabled(website)
+  const backend = isApiEnabled()
 
   return (
     <header className="border-b border-[var(--border)]">

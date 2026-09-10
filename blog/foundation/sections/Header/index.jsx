@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Link, cn, useScrolled, useMobileMenu, useWebsite, useActiveRoute, useRouting, useShortcut, useSearchPrefetch } from '@uniweb/kit'
+import { Link, cn, useScrolled, useMobileMenu, useWebsite, useActiveRoute, useRouting, useShortcut, useSearchPrefetch, isSearchEnabled } from '@uniweb/kit'
 import { ChevronDown, Search, X } from 'lucide-react'
 
 /**
@@ -68,7 +68,7 @@ function Header({ content, params, block }) {
   }
 
   // Check if search is enabled
-  const searchEnabled = website.isSearchEnabled()
+  const searchEnabled = isSearchEnabled()
 
   // Get context from the next block
   const nextBlockInfo = block.getNextBlockInfo()

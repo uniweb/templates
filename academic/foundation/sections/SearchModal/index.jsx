@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
-import { Link, useWebsite, cn, useShortcutLabel, createSearchClient } from '@uniweb/kit'
+import { Link, useWebsite, cn, useShortcutLabel, createSearchClient, isSearchEnabled } from '@uniweb/kit'
 
 /**
  * SearchModal Component
@@ -33,7 +33,7 @@ function SearchModal({ isOpen, onClose, searchClient }) {
       return
     }
 
-    if (!website.isSearchEnabled()) return
+    if (!isSearchEnabled()) return
 
     async function initSearch() {
       try {
@@ -129,7 +129,7 @@ function SearchModal({ isOpen, onClose, searchClient }) {
 
   if (!isOpen) return null
 
-  const searchEnabled = website.isSearchEnabled()
+  const searchEnabled = isSearchEnabled()
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">

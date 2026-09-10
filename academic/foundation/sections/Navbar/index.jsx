@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Link, useWebsite, cn, getLocaleLabel, useShortcut, useSearchPrefetch } from '@uniweb/kit'
+import { Link, useWebsite, cn, getLocaleLabel, useShortcut, useSearchPrefetch, isSearchEnabled } from '@uniweb/kit'
 import { SearchModal, SearchButton } from '../SearchModal'
 
 /**
@@ -27,7 +27,7 @@ function Navbar({ content, params }) {
   const { mode, sticky, showLocale, showSearch, logoPosition } = params
 
   // Determine if search should be shown
-  const searchEnabled = website.isSearchEnabled()
+  const searchEnabled = isSearchEnabled()
   const shouldShowSearch = showSearch === 'always' || (showSearch === 'auto' && searchEnabled)
 
   // Intent-based search preloading (only loads index on hover/focus/shortcut)

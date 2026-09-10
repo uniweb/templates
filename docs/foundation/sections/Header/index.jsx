@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, cn, useActiveRoute, useScrolled, useMobileMenu, useWebsite, useVersion, useAppearance, getLocaleLabel, useRouting, useShortcut, useShortcutLabel, useSearchPrefetch } from '@uniweb/kit'
+import { Link, cn, useActiveRoute, useScrolled, useMobileMenu, useWebsite, useVersion, useAppearance, getLocaleLabel, useRouting, useShortcut, useShortcutLabel, useSearchPrefetch, isSearchEnabled } from '@uniweb/kit'
 import SearchModal from '../SearchModal'
 
 /**
@@ -51,7 +51,7 @@ function Header({ content, params, block }) {
   const allPages = website.getPageHierarchy({ for: 'header' })
 
   // Search configuration
-  const searchEnabled = website.isSearchEnabled()
+  const searchEnabled = isSearchEnabled()
   const shouldShowSearch = showSearch === 'always' || (showSearch === 'auto' && searchEnabled)
 
   // Intent-based search preloading
