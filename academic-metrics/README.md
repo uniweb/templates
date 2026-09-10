@@ -13,7 +13,7 @@ cd my-metrics && pnpm dev
 
 The active population (saved view or panel-composed filter) is a **where-object** — a small structured JSON predicate. Sections that show the filtered set call `useFilteredMembers()`, a foundation hook backed by `@uniweb/kit`'s `useFetched`. The foundation has **no filtering code of its own**: the hook reads the active predicate from `page.state` and hands a where-bound request to the framework, which evaluates it over `/data/members.json` — once per unique selection, one cached fetch shared by every section.
 
-The same predicate reaches other sources unchanged. Published to a Uniweb host, the records are answered live by the host; a backend of your own is reached through a foundation **transport** selected in `site.yml` (`fetcher.transports`), which decides what to send and what to evaluate. What you write in `site.yml` and in the sections is identical in every case — see the framework's `development/connecting-a-backend.md`.
+The same predicate reaches other sources unchanged. Published to a Uniweb host, the records are answered live by the host; a backend of your own is reached through a foundation **transport** selected in `site.yml` (`fetcher.transports`), which decides what to send and what to evaluate. What you write in `site.yml` and in the sections is identical in every case — see the framework's `development/data-sources.md`.
 
 ## What makes this a Press xlsx showcase
 
