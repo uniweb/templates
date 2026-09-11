@@ -4,4 +4,4 @@ label: Logbook
 description: Field and lab entries, each at a URL shaped by the folder it is placed in
 
 # The query cascades to every page under this folder, including [...path]/
-data: logbook
+query: logbook

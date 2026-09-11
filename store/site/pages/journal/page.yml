@@ -4,4 +4,4 @@ description: The Solar Journal — Stories about light, design, and sustainabili
 label: Journal
 order: 3
 
-data: articles
+query: articles

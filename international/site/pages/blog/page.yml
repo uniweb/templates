@@ -5,4 +5,4 @@ label: Blog
 order: 3
 
 # Articles collection data - cascades to child pages including [slug]
-data: articles
+query: articles

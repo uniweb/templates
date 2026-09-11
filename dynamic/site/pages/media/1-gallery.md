@@ -1,6 +1,6 @@
 ---
 type: VideoGallery
-data: videos
+query: videos
 ---
 
 # PandaCam Archives

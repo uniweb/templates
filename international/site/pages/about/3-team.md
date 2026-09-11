@@ -2,7 +2,7 @@
 type: Team
 theme: medium
 columns: 4
-data: team
+query: team
 ---
 
 # Our Team

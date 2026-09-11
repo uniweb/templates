@@ -20,7 +20,7 @@ darwin.yml (profile data)
 site.yml declares `profile` collection
     │
     ▼
-page.yml declares `data: profile`
+page.yml declares `query: profile`
     │
     ▼
 Section markdown files contain {Loom expressions}

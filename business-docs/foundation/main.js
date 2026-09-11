@@ -57,8 +57,8 @@ function pickRecord(data, key) {
 /**
  * Single-record documents (the unipress invoice template, an SOW page in
  * a uniweb site) point Loom at one record. The page can either declare
- * the singular form (`data: invoice`) — which the handler picks via
- * data.invoice — or rely on a single-item collection (`data: invoices`),
+ * the singular form (`query: invoice`) — which the handler picks via
+ * data.invoice — or rely on a single-item collection (`query: invoices`),
  * in which case the first item stands in. Authors don't need to know
  * the difference; only one invoice in scope means the page is
  * unambiguously about it.

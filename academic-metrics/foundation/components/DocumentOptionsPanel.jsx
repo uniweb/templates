@@ -24,7 +24,7 @@ import SectionToggles from './SectionToggles.jsx'
 export default function DocumentOptionsPanel() {
   // Kit hooks take explicit path:/url: — the `collection:` shorthand
   // is build-time only. The page-level cascade fetches the same path
-  // (translated from `data: queries`), so this useFetched gets a
+  // (translated from `query: queries`), so this useFetched gets a
   // synchronous cache hit on first render.
   const { data } = useFetched({ path: '/data/queries.json', schema: 'queries' })
   const queries = Array.isArray(data) ? data : []
