@@ -1,5 +1,3 @@
 title: Home
 description: Overview of the active engagements, with shortcuts to the invoice and SOW collections and the filtered engagement report.
-fetch:
-  - { collection: invoices }
-  - { collection: sows }
+query: [invoices, sows]

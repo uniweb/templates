@@ -1,5 +1,3 @@
 title: Statements of work
 description: All SOWs and master agreements with status and budget at a glance.
-fetch:
-  - { collection: sows }
-  - { collection: invoices }
+query: [sows, invoices]
