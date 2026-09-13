@@ -1,9 +1,8 @@
 ---
 type: FieldNotes
 fetch:
-  url: https://jsonplaceholder.typicode.com/posts?_limit=3
-  as: posts
-  prerender: false
+  query: posts
+  limit: 3
 ---
 
 # Recent Field Notes

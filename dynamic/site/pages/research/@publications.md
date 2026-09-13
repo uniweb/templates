@@ -1,10 +1,6 @@
 ---
 type: Publications
-fetch:
-  url: https://api.crossref.org/works?query=giant%20panda%20conservation&rows=5&sort=published&order=desc
-  as: papers
-  transform: message.items
-  prerender: false
+query: papers
 ---
 
 # Recent Publications

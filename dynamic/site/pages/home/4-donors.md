@@ -1,10 +1,6 @@
 ---
 type: Donors
-fetch:
-  url: https://randomuser.me/api/?results=6
-  as: donors
-  transform: results
-  prerender: false
+query: donors
 ---
 
 # Panda Protectors

@@ -11,6 +11,30 @@ index: home
 # from another tool belongs here, not in public/data/ — that directory is the
 # build's output.
 queries:
+  # External queries — public, keyless APIs, named here and bound by the pages that
+  # show them. A query with `url:` is fetched from that address in the visitor's
+  # browser; `transform:` is the dot-path to its records in the response.
+  weather:
+    url: https://api.open-meteo.com/v1/forecast?latitude=31.0&longitude=103.2&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&wind_speed_unit=ms
+    transform: current
+  posts:
+    url: https://jsonplaceholder.typicode.com/posts?_limit=12
+    # One post, for the blog's [id] page — `{id}` is the page's URL segment.
+    record:
+      url: https://jsonplaceholder.typicode.com/posts/{id}
+  sightings:
+    url: https://api.inaturalist.org/v1/observations?taxon_id=41659&order_by=created_at&order=desc&per_page=3&photos=true&quality_grade=research
+    transform: results
+  donors:
+    url: https://randomuser.me/api/?results=6
+    transform: results
+  occurrences:
+    url: https://api.gbif.org/v1/occurrence/search?taxonKey=2433399&limit=6
+    transform: results
+  papers:
+    url: https://api.crossref.org/works?query=giant%20panda%20conservation&rows=5&sort=published&order=desc
+    transform: message.items
+
   videos:
   # Markdown entries placed in folders by records.yml. Rendered by
   # pages/logbook — a list, and one `[...path]` page for every entry.
