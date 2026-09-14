@@ -6,6 +6,9 @@ export default {
 
   content: {},
 
+  // The `content.data` key this section reads. `{}` declares it with no schema.
+  data: { logbook: {} },
+
   params: {},
 
   presets: {

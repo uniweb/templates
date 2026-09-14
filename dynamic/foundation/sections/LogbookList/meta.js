@@ -9,6 +9,9 @@ export default {
     paragraphs: 'Introduction [0-1]',
   },
 
+  // The `content.data` key this section reads. `{}` declares it with no schema.
+  data: { logbook: {} },
+
   params: {},
 
   presets: {

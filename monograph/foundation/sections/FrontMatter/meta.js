@@ -9,6 +9,9 @@ export default {
     subtitle: 'Optional subtitle',
   },
 
+  // The `content.data` key this section reads — the site's `monograph` records. `{}`: no schema.
+  data: { monograph: {} },
+
   params: {
     key: 'front-matter',
     portrait: '/images/darwin-portrait.png',

@@ -8,5 +8,8 @@ export default {
     title: 'Chapter heading (defaults to "Finch beak morphometrics")',
   },
 
+  // The `content.data` key this section reads — the site's `monograph` records. `{}`: no schema.
+  data: { monograph: {} },
+
   params: {},
 }

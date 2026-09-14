@@ -9,6 +9,9 @@ export default {
     paragraphs: 'Description',
   },
 
+  // The `content.data` key this section reads — records of an external API, which have no schema.
+  data: { donors: {} },
+
   params: {},
 
   presets: {

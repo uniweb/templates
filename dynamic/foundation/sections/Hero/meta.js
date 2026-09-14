@@ -15,6 +15,9 @@ export default {
     links: 'Call-to-action buttons [1-2]',
   },
 
+  // The `content.data` key this section reads — records of an external API, which have no schema.
+  data: { weather: {} },
+
   params: {},
 
   presets: {

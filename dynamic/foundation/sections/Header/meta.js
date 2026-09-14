@@ -9,6 +9,9 @@ export default {
     links: 'Optional call-to-action button',
   },
 
+  // The `content.data` key this section reads — the ```yaml:nav``` block in layout/header.md.
+  data: { nav: {} },
+
   params: {
     floating: {
       type: 'boolean',

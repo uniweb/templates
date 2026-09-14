@@ -8,5 +8,8 @@ export default {
     title: 'Section heading (defaults to "Members")',
   },
 
+  // The `content.data` keys this section reads (through useFilteredMembers). `{}`: no schema.
+  data: { members: {}, queries: {} },
+
   params: {},
 }

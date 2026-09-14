@@ -8,5 +8,8 @@ export default {
     title: 'Optional heading override (defaults to "Publications")',
   },
 
+  // The `content.data` key this section reads — the site's `profile` record. `{}`: no schema.
+  data: { profile: {} },
+
   params: {},
 }

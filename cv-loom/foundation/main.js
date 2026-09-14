@@ -67,6 +67,9 @@ const engine = new Loom({}, { CITE })
 
 export default {
   defaultLayout: 'CvLayout',
+  // ⭐ The keys every section receives — what the Loom handlers below read (`vars`), so
+  // a section whose component declares nothing still has its placeholders filled.
+  data: { profile: {} },
   handlers: createLoomHandlers({
     engine,
     vars: (data) => data?.profile?.[0],

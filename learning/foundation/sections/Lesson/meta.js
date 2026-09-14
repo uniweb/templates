@@ -9,6 +9,10 @@ export default {
     snippets: 'Code snippets (triggers code challenge variant)',
   },
 
+  // The data blocks a lesson reads — from content.sequence, by tag. Declared, they are in
+  // content.data too, and a block under another tag is said to reach no key (in dev).
+  data: { quiz: {}, rubric: {}, requirements: {}, resources: {} },
+
   params: {
     video: { type: 'boolean', default: false },
   },

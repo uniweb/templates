@@ -146,6 +146,9 @@ function maybeLogValidation(data, block) {
 export default {
   defaultLayout: 'BusinessDocLayout',
   props: {},
+  // ⭐ The keys every section receives — what the content handler reads (a single record,
+  // or both collections) and what useFilteredEngagement reads in EngagementReport.
+  data: { invoices: {}, sows: {}, invoice: {}, sow: {} },
 
   handlers: {
     content: (data, block) => {
