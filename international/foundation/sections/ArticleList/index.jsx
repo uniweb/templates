@@ -12,9 +12,6 @@ function ArticleList({ content, params, block }) {
   const { columns, showExcerpt, showDate } = params
   const { website } = useWebsite()
 
-  // Fallback route for articles without a route property
-  const fallbackRoute = block.page.route
-
   const gridCols = {
     2: 'md:grid-cols-2',
     3: 'md:grid-cols-3',
@@ -63,7 +60,6 @@ function ArticleList({ content, params, block }) {
               <ArticleCard
                 key={article.slug || i}
                 article={article}
-                fallbackRoute={fallbackRoute}
                 showExcerpt={showExcerpt}
                 showDate={showDate}
                 formatDate={formatDate}
@@ -78,14 +74,21 @@ function ArticleList({ content, params, block }) {
   )
 }
 
+/** A link when there is somewhere to go, else the same content unlinked. */
+function MaybeLink({ href, className, children }) {
+  return href ? <Link href={href} className={className}>{children}</Link> : <span className={className}>{children}</span>
+}
+
 /**
  * Individual article card
  */
-function ArticleCard({ article, fallbackRoute, showExcerpt, showDate, formatDate }) {
-  const { slug, title, excerpt, date, image, tags, route } = article
+function ArticleCard({ article, showExcerpt, showDate, formatDate }) {
+  const { title, excerpt, date, image, tags } = article
 
-  // Use article's route if available (from collection config), otherwise build from fallback
-  const articleUrl = route || `${fallbackRoute}/${slug}`
+  // The page that shows this one article, as the framework links it — `$route` is filled
+  // for every record whose query has such a page. Never rebuild it here; with none, the
+  // card shows without a link.
+  const articleUrl = article.$route
 
   const formattedDate = formatDate(date)
 
@@ -93,13 +96,13 @@ function ArticleCard({ article, fallbackRoute, showExcerpt, showDate, formatDate
     <article className="bg-card rounded-xl shadow-sm border border-border/50 overflow-hidden hover:shadow-md transition-shadow">
       {/* Image */}
       {image && (
-        <Link href={articleUrl} className="block">
+        <MaybeLink href={articleUrl} className="block">
           <img
             src={image}
             alt={title}
             className="w-full h-48 object-cover"
           />
-        </Link>
+        </MaybeLink>
       )}
 
       <div className="p-6">
@@ -119,9 +122,9 @@ function ArticleCard({ article, fallbackRoute, showExcerpt, showDate, formatDate
 
         {/* Title */}
         <h3 className="text-xl font-semibold text-heading mb-2">
-          <Link href={articleUrl} className="hover:text-link-hover">
+          <MaybeLink href={articleUrl} className="hover:text-link-hover">
             {title}
-          </Link>
+          </MaybeLink>
         </h3>
 
         {/* Excerpt */}

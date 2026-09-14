@@ -5,7 +5,7 @@ import { ChevronRight } from 'lucide-react'
  * JournalList Component
  *
  * Displays articles from a collection in a responsive grid.
- * Each card links to the full article page via the collection route.
+ * Each card links to the full article's page, as the framework links it: `$route`.
  */
 function JournalList({ content, params, block }) {
   const articles = content.data?.articles || []
@@ -15,8 +15,6 @@ function JournalList({ content, params, block }) {
   if (block.dataLoading) {
     return <DataPlaceholder lines={6} />
   }
-
-  const fallbackRoute = block.page?.route || '/journal'
 
   const gridCols = {
     2: 'md:grid-cols-2',
@@ -37,7 +35,6 @@ function JournalList({ content, params, block }) {
           <ArticleCard
             key={article.slug || i}
             article={article}
-            fallbackRoute={fallbackRoute}
           />
         ))}
       </div>
@@ -45,11 +42,14 @@ function JournalList({ content, params, block }) {
   )
 }
 
-function ArticleCard({ article, fallbackRoute }) {
-  const articleUrl = article.route || `${fallbackRoute}/${article.slug}`
+function ArticleCard({ article }) {
+  // `$route` — the page that shows this article, filled by the framework. Never rebuilt
+  // here; a record with no such page renders as a card with no link.
+  const articleUrl = article.$route
+  const Card = articleUrl ? Link : 'div'
 
   return (
-    <Link href={articleUrl} className="group block">
+    <Card {...(articleUrl ? { href: articleUrl } : {})} className="group block">
       {article.image && (
         <div className="aspect-video rounded-[2.5rem] overflow-hidden mb-8">
           <img
@@ -83,7 +83,7 @@ function ArticleCard({ article, fallbackRoute }) {
       <div className="flex items-center gap-2 font-bold text-sm uppercase tracking-widest text-neutral-900 group-hover:gap-4 transition-all">
         Read Article <ChevronRight size={16} />
       </div>
-    </Link>
+    </Card>
   )
 }
 
