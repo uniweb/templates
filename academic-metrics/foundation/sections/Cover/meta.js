@@ -1,7 +1,7 @@
 export default {
   title: 'Cover',
   description:
-    'Report summary: title, a narrative paragraph rendered via Loom (unit-wide counts), a Population selector, and a live stats strip over the filtered member set. Registers a Summary sheet in the downloaded workbook.',
+    'Report summary: title, a narrative paragraph rendered via Loom (unit-wide counts), and a live stats strip over the member set the Population selector or filter panel keeps. Registers a Summary sheet in the downloaded workbook.',
   category: 'academic-metrics',
 
   content: {

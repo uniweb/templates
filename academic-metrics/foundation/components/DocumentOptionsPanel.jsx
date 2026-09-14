@@ -13,19 +13,32 @@
  * predicate-resolution rules (panel takes precedence when set).
  *
  * The panel renders outside the sections, so it has no
- * content.data.queries of its own: it reads the saved views with
- * useFetched, from the file a build generates for the `queries` query.
+ * content.data.queries of its own. It asks the `queries` query by name:
+ * @uniweb/core's resolveFetchConfigs turns the name into a request — the
+ * file a static build generates, or a host's live records — and useFetched
+ * dispatches it through the site's fetcher.
  */
-import { useFetched } from '@uniweb/kit'
+import { useMemo } from 'react'
+import { resolveFetchConfigs } from '@uniweb/core'
+import { useFetched, useWebsite } from '@uniweb/kit'
 import QuerySelector from './QuerySelector.jsx'
 import FilterPanel from './FilterPanel.jsx'
 import ReportOptions from './ReportOptions.jsx'
 import SectionToggles from './SectionToggles.jsx'
 
 export default function DocumentOptionsPanel() {
-  // Kit hooks take explicit path:/url: — the `query:` shorthand is
-  // build-time only, so this names the generated file itself.
-  const { data } = useFetched({ path: '/data/queries.json', as: 'queries' })
+  const { website } = useWebsite()
+  const request = useMemo(
+    () =>
+      resolveFetchConfigs([{ query: 'queries', as: 'queries' }], {
+        queries: website?.config?.queries ?? null,
+        services: website?.config?.services ?? null,
+        locale: website?.getActiveLocale?.() ?? null,
+        defaultLocale: website?.getDefaultLocale?.() ?? null,
+      }).get('queries') ?? null,
+    [website],
+  )
+  const { data } = useFetched(request)
   const queries = Array.isArray(data) ? data : []
 
   return (

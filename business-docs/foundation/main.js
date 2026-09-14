@@ -78,20 +78,18 @@ function pickActiveSow(data) {
 }
 
 /**
- * Pull a collection's records from the foundation's two routes: the
- * page-level fetch graph (`data[name]`) and the unipress / runtime
- * cross-page fallback (`website.config.collections[name].records`).
+ * A query's records, from the foundation's two routes: the section's own
+ * data (`data[name]`, the keys main.js declares below) and unipress's
+ * cross-page fallback (`website.config.recordsByQuery[name]`, the record
+ * array unipress resolves for every declared query when it compiles a
+ * document).
  *
- * The page-level fetch only carries the *active* collection (multi-fetch
- * isn't yet wired in the unipress orchestrator — see content-loader.js).
- * The fallback covers everything declared in document.yml's
- * `collections:` config so cross-record validation and cross-collection
- * lookups (invoice → sow_ref) work on any page that fetched only one of
- * the two.
+ * The fallback lets cross-record validation and invoice → sow_ref lookups
+ * work on a page whose sections received only one of the two.
  */
 function gatherCollection(name, data, block) {
   if (Array.isArray(data?.[name])) return data[name]
-  const records = block?.website?.config?.collections?.[name]?.records
+  const records = block?.website?.config?.recordsByQuery?.[name]
   return Array.isArray(records) ? records : []
 }
 
@@ -129,9 +127,8 @@ let loggedRunsForBlock = new WeakSet()
 
 function maybeLogValidation(data, block) {
   // Run cross-record validation whenever both invoices and SOWs are reachable
-  // — either via the page's own fetch (data.invoices / data.sows) or via
-  // the website-config fallback that unipress populates from
-  // document.yml's collections: declaration. One log line per block is
+  // — either via the section's data (data.invoices / data.sows) or via
+  // the website-config fallback unipress fills (config.recordsByQuery). One log line per block is
   // enough; using a WeakSet keyed by block survives dev-server hot
   // reloads and is GC'd when the page unmounts.
   const invoices = gatherCollection('invoices', data, block)

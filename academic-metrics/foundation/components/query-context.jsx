@@ -43,6 +43,9 @@ const STORAGE_KEY = 'academic-metrics/options'
 const ALL_MEMBERS_SLUG = 'all-members'
 export const ALL_MEMBERS = ALL_MEMBERS_SLUG
 
+/** A saved view's handle: `$name` on every record, `slug` on one compiled before it existed. */
+export const handleOf = (record) => record?.$name ?? record?.slug
+
 export const SECTION_KEYS = [
   'members',
   'publications-by-type',
@@ -217,7 +220,7 @@ function resolveActiveWhere(slug, panelWhere, allQueries) {
     return { where: panelWhere, source: 'panel', label: 'Custom filter' }
   }
   if (slug && slug !== ALL_MEMBERS_SLUG) {
-    const view = allQueries.find((q) => q.slug === slug)
+    const view = allQueries.find((q) => handleOf(q) === slug)
     if (view?.where) {
       return { where: view.where, source: 'view', label: view.name || slug, view }
     }

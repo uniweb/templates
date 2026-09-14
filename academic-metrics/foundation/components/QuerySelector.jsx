@@ -11,7 +11,7 @@
  * one file per view in entities/queries/). A view's `where:` field is
  * the predicate applied when it is picked.
  */
-import { useSelectedQuery, usePanelFilter, ALL_MEMBERS } from './query-context.jsx'
+import { useSelectedQuery, usePanelFilter, ALL_MEMBERS, handleOf } from './query-context.jsx'
 
 export default function QuerySelector({ queries = [] }) {
   const [slug, setSlug] = useSelectedQuery()
@@ -35,8 +35,8 @@ export default function QuerySelector({ queries = [] }) {
       >
         <option value={ALL_MEMBERS}>All members</option>
         {queries.map((q) => (
-          <option key={q.slug} value={q.slug}>
-            {q.name || q.slug}
+          <option key={handleOf(q)} value={handleOf(q)}>
+            {q.name || handleOf(q)}
           </option>
         ))}
       </select>

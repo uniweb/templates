@@ -1,9 +1,8 @@
 /**
- * Cover — report summary page, query selector, and top-line aggregates.
+ * Cover — report summary page and top-line aggregates.
  *
  * Renders:
  *   - the report title + (active-query or default) subtitle
- *   - a <QuerySelector> dropdown of saved queries
  *   - a meta strip showing filtered member count, total publications,
  *     total funding, and total supervisions
  *

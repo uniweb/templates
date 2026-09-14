@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
 import { useDocumentOutput } from '@uniweb/press'
-import { useFetched } from '@uniweb/kit'
 import { useFilteredEngagement } from '../../hooks/useFilteredEngagement.js'
 import { useReportSource } from '#components/query-context.jsx'
 import { computeInvoiceTotals } from '#utils/compute-totals.js'
@@ -9,9 +8,9 @@ import { formatCurrency, formatDate, formatDateRange } from '#utils/format.js'
 /**
  * EngagementReport — filtered report across invoices or SOWs.
  *
- * Composes useFilteredEngagement for the active source with a separate
- * useFetched for the SOWs so the invoice rows can show a
- * "% of contract billed" column joined client-side. The hook itself
+ * Composes useFilteredEngagement for the active source with the SOWs the
+ * page's query delivers (`content.data.sows`), so the invoice rows can show
+ * a "% of contract billed" column joined client-side. The hook itself
  * stays single-purpose; joining invoices to SOWs lives in the section.
  */
 
@@ -39,11 +38,9 @@ export default function EngagementReport({ content, block }) {
   } = useFilteredEngagement(content, block)
 
   // SOW lookup, only when the active source is invoices and the section
-  // wants the "% of contract billed" column. Cached the same way as the
-  // page-level cascade — same path, same key.
-  const { data: allSows } = useFetched(
-    isInvoices ? { path: '/data/sows.json', schema: 'sows' } : null,
-  )
+  // wants the "% of contract billed" column — over every SOW the page's
+  // query delivered.
+  const allSows = isInvoices ? content?.data?.sows : null
   const sowIndex = useMemo(() => buildSowIndex(allSows), [allSows])
 
   const enriched = useMemo(

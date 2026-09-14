@@ -4,16 +4,17 @@
  * Mirrors useFilteredMembers in academic-metrics
  * (framework/templates/academic-metrics/foundation/components/query-context.jsx).
  * Takes the block's `content` object and reads filter state internally
- * via usePageState — section components don't pass arguments other
- * than `content`. The framework evaluates the where-object over the
- * compiled records; a host that answers queries evaluates the same
- * predicate at the source.
+ * via usePageState. The page's query (`query: [invoices, sows]`) delivers
+ * every invoice and SOW to the section as `content.data.invoices` and
+ * `content.data.sows` (main.js declares both keys), and the active
+ * where-object narrows the active source's list right here, with
+ * @uniweb/core's matchWhere — the language a query's own `where:` uses.
+ * Nothing is fetched, so the hook works wherever the records come from.
  *
  * SOW join is the calling section's responsibility, not this hook's.
- * Sections that need invoice → SOW joins compose this hook with a
- * separate useFetched({ path: '/data/sows.json' }) and join client-side
- * via Map. This keeps the hook single-purpose and reusable for SOW
- * reporting (where the join would go the other direction).
+ * Sections that need invoice → SOW joins read `content.data.sows` and join
+ * client-side via Map. This keeps the hook single-purpose and reusable for
+ * SOW reporting (where the join would go the other direction).
  *
  * Returns:
  *   {
@@ -25,12 +26,12 @@
  *     activeWhere,     // resolved where-object or null
  *     activeLabel,     // human-readable filter description or null
  *     totalCount,      // unfiltered count, for "X of Y" displays
- *     loading          // true while fetch is in flight on first read
+ *     loading          // always false: the filtering is synchronous
  *   }
  */
 
 import { useMemo } from 'react'
-import { useFetched } from '@uniweb/kit'
+import { matchWhere } from '@uniweb/core'
 import { computeInvoiceTotals } from '#utils/compute-totals.js'
 import {
   composeReportWhere,
@@ -52,19 +53,8 @@ function describeFilter({ source, dateRange, client, status }) {
   return parts.length > 1 ? parts.join(' · ') : null
 }
 
-function resolveDataPath(source) {
-  return source === 'sows' ? '/data/sows.json' : '/data/invoices.json'
-}
-
-function resolveSchema(source) {
-  return source === 'sows' ? 'sows' : 'invoices'
-}
-
-function fallbackRecordsFor(source, content) {
-  // The page-level cascade should already have fetched the active
-  // collection without a where: clause. Fall back to that when no filter
-  // is active — same fetched bytes either way, because a cache entry is
-  // identified by its address and a where: does not split it.
+function deliveredRecordsFor(source, content) {
+  // Every record of the active source, as the page's query delivered it.
   if (source === 'sows') {
     return Array.isArray(content?.data?.sows) ? content.data.sows : []
   }
@@ -113,18 +103,17 @@ export function useFilteredEngagement(content, block) {
     [dateRange, client, status],
   )
 
-  const fallback = useMemo(
-    () => fallbackRecordsFor(source, content),
+  const delivered = useMemo(
+    () => deliveredRecordsFor(source, content),
     [source, content?.data?.invoices, content?.data?.sows],
   )
 
-  const { data: fetched, loading } = useFetched(
-    activeWhere
-      ? { path: resolveDataPath(source), schema: resolveSchema(source), where: activeWhere }
-      : null,
+  // One delivered list, every filter: narrowing it is work in the browser,
+  // not another request.
+  const records = useMemo(
+    () => (activeWhere ? matchWhere(activeWhere, delivered) : delivered),
+    [activeWhere, delivered],
   )
-
-  const records = activeWhere ? fetched || [] : fallback
 
   const { sumSubtotals, sumTotals, sumOutstanding } = useMemo(
     () => aggregate(records, source, taxDefaults, taxRegistry),
@@ -139,7 +128,7 @@ export function useFilteredEngagement(content, block) {
     sumOutstanding,
     activeWhere,
     activeLabel: describeFilter({ source, dateRange, client, status }),
-    totalCount: fallback.length,
-    loading: activeWhere ? loading : false,
+    totalCount: delivered.length,
+    loading: false,
   }
 }
