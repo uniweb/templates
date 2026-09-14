@@ -1,7 +1,7 @@
 /**
  * Per-format adapter-options builders for the academic-metrics foundation's
  * declared outputs. These are referenced by outputs[format].getOptions in
- * foundation.js and used by:
+ * main.js and used by:
  *
  *   - DownloadBar (browser, in-page) via compileDocument(website, {...})
  *   - unipress compile (Node, headless) via the same compileDocument path

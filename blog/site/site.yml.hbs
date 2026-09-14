@@ -11,9 +11,10 @@ index: home
 # Enable search functionality
 search: true
 
-# Content collections
-# Markdown files in entities/ are processed into JSON at build time, and —
-# when synced to a backend — into @std/article entities (the `schema:` binding).
+# Queries — each selects a set of records. `articles` reads the @std/article
+# records: markdown files in entities/std/article/, published by records.yml.
+# They compile to JSON at build time and — when synced to a backend — become
+# @std/article entities (the query's `schema:`).
 queries:
   articles:
     schema: '@std/article'

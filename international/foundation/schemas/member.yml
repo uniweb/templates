@@ -1,4 +1,4 @@
-# Team-member schema. Referenced from section bindings as '@/member'.
+# Team-member schema. Referenced from the Team section's meta.js `data:` as '@/member'.
 name: member
 version: 1.0.0
 description: A team member.

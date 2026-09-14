@@ -2,5 +2,5 @@ id: 93dc5359
 title: Home
 description: Inkwell — notes on building for the web.
 
-# Make the articles collection available to the home page's recent-posts list
+# The articles query, for the home page's recent-posts list
 query: articles

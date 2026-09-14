@@ -4,13 +4,14 @@ export default {
   category: 'content',
   purpose: 'Inform',
 
-  // Renders one article — content.data.articles[0] on a [slug] route. Field
-  // defaults come from the '@std/article' standard schema (shipped in
-  // @uniweb/schemas). Delivery is default-on.
+  // The `content.data` key this section reads. On the [slug] parametric page it
+  // holds a list of one: content.data.articles[0] is the article the URL names.
+  // Field defaults come from the '@std/article' standard schema (shipped in
+  // @uniweb/schemas).
   data: { articles: '@std/article' },
 
   content: {
-    // Article content is expected from cascaded data, not markdown
+    // The article comes from content.data.articles, not from the section's markdown
   },
 
   params: {

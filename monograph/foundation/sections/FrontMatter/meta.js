@@ -1,7 +1,7 @@
 export default {
   title: 'Front matter',
   description:
-    'Cover page: portrait, title, subtitle, author meta, and abstract. Reads title / author / affiliation / date / abstract from the monograph collection.',
+    'Cover page: portrait, title, subtitle, author meta, and abstract. Reads title / author / affiliation / date / abstract from the monograph record.',
   category: 'monograph',
 
   content: {

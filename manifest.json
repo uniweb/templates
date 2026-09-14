@@ -41,7 +41,7 @@
     },
     "blog": {
       "name": "Blog",
-      "description": "A blog built on the @std/article standard schema. Markdown articles render as a card grid and as full posts via dynamic [slug] routes. The first template to use a shared standard data schema \u2014 no custom schema file needed.",
+      "description": "A blog built on the @std/article standard schema. Markdown articles render as a card grid and as full posts on a parametric [slug] page. The first template to use a shared standard data schema \u2014 no custom schema file needed.",
       "tags": [
         "blog",
         "articles",
@@ -63,7 +63,7 @@
     },
     "store": {
       "name": "Store",
-      "description": "Artisan e-commerce with product collections, Shopify Buy Button, journal blog, and stone-amber design",
+      "description": "Artisan e-commerce with a product catalog, Shopify Buy Button, journal blog, and stone-amber design",
       "tags": [
         "store",
         "e-commerce",
@@ -135,7 +135,7 @@
     },
     "business-docs": {
       "name": "Business Documents",
-      "description": "A complete business-document site: invoice and SOW collections, per-record preview pages, and a filtered engagement report with XLSX export. Built on @uniweb/business-docs and demonstrates the same foundation that ships the unipress invoice template.",
+      "description": "A complete business-document site: invoice and SOW records, pages listing them, and a filtered engagement report with XLSX export. Built on @uniweb/business-docs and demonstrates the same foundation that ships the unipress invoice template.",
       "tags": [
         "business-docs",
         "invoice",

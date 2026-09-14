@@ -4,9 +4,10 @@ export default {
   category: 'content',
   purpose: 'Organize',
 
-  // Renders article-shaped data (content.data.articles); field defaults come
-  // from the '@std/article' standard schema (shipped in @uniweb/schemas).
-  // Delivery is default-on.
+  // The `content.data` key this section reads — article records
+  // (content.data.articles); a section receives only the keys it declares.
+  // Field defaults come from the '@std/article' standard schema (shipped in
+  // @uniweb/schemas).
   data: { articles: '@std/article' },
 
   content: {

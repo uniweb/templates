@@ -13,7 +13,7 @@ import { SearchModal, SearchButton } from '../SearchModal'
  * - Locale switcher (appears automatically if multiple locales)
  * - Mobile-responsive with hamburger menu
  * - Sticky positioning option
- * - Integrated search (when fuse.js is installed)
+ * - Integrated search (when the site enables search)
  */
 function Navbar({ content, params }) {
   const { website, localize } = useWebsite()

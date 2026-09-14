@@ -1,4 +1,4 @@
-# A talk in the programme. Referenced from section bindings as '@/session'.
+# A talk in the programme. Referenced as '@/session'.
 name: session
 label: Session
 description: A talk, workshop or panel in the conference programme.

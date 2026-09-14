@@ -1,7 +1,7 @@
 export default {
   title: 'Finch measurements',
   description:
-    'Numeric table of beak morphometrics. Reads the `finchMeasurements` array from the monograph collection.',
+    'Numeric table of beak morphometrics. Reads the `finchMeasurements` array from the monograph record.',
   category: 'monograph',
 
   content: {

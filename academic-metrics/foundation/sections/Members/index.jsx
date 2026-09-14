@@ -1,14 +1,13 @@
 /**
  * Members — roster of the currently-filtered member set.
  *
- * Reads the already-filtered list from `content.data.members` (see
- * foundation.js for the simulated-backend explanation). Renders a web
- * preview as a styled HTML table and registers an xlsx sheet with the
- * same rows.
+ * Reads the members the active selection keeps from useFilteredMembers,
+ * which narrows `content.data.members` — every member the page's query
+ * delivered. Renders a web preview as a styled HTML table and registers
+ * an xlsx sheet with the same rows.
  *
- * When the active query changes, the layout re-renders, every
- * BlockRenderer re-runs the data handler, and this section receives a
- * fresh `content.data.members`; the new rows replace the previous
+ * When the active selection changes, the hook re-renders this section
+ * with the new subset; the new rows replace the previous
  * useDocumentOutput registration, so the next compile('xlsx') reflects
  * the selection.
  */
@@ -23,9 +22,8 @@ const NUMBER_FORMATS = ['text', 'text', 'text', 'text', 'number']
 
 export default function Members({ content, block }) {
   const included = useSectionIncluded(SECTION_KEY)
-  // useFilteredMembers fetches the active selection via @uniweb/kit's
-  // useFetched. The framework evaluates the predicate over the compiled
-  // members.json; a host that answers queries evaluates it at the source.
+  // useFilteredMembers narrows the delivered members by the active
+  // selection, in the browser — see components/query-context.jsx.
   const { members, activeLabel } = useFilteredMembers(content)
   const heading = content?.title || 'Members'
 

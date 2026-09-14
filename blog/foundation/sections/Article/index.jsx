@@ -4,8 +4,9 @@ import { useWebsite, useReadingDepth, Article as ArticleBody } from '@uniweb/kit
 /**
  * Article Component
  *
- * Renders a full article from inherited data. Used on dynamic routes
- * where the parent page fetches articles and this page gets one article.
+ * Renders a full article: content.data.articles[0]. Used on a parametric
+ * page ([slug]) — one URL for each article of the parent page's query —
+ * where it receives the article its URL names.
  *
  * Uses kit's Article component for the body content rendering.
  *
@@ -32,7 +33,7 @@ function Article({ content, params, block }) {
     )
   }
 
-  // content is ProseMirror JSON from the collection processor
+  // content is ProseMirror JSON — the build compiles the record's markdown body
   const { title, excerpt, date, image, content: articleContent, tags } = article
 
   // Get locale-aware date formatting

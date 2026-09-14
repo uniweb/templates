@@ -1,8 +1,8 @@
 # Sample member — Charles Darwin (lightly anachronized).
 #
-# The collection processor turns every .yml in this folder into one
-# item of the `members` collection, keyed by `slug` (the filename).
-# `content.data.members[0]` resolves to whichever member sorts first.
+# Every .yml in this folder is one member record (published by
+# records.yml), keyed by `slug` (the filename). The `members` query in
+# site.yml selects them; sections read them as `content.data.members`.
 
 name: Charles Darwin
 rank: professor

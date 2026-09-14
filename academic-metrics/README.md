@@ -11,9 +11,9 @@ cd my-metrics && pnpm dev
 
 ## How predicates work
 
-The active population (saved view or panel-composed filter) is a **where-object** — a small structured JSON predicate. Sections that show the filtered set call `useFilteredMembers()`, a foundation hook backed by `@uniweb/kit`'s `useFetched`. The foundation has **no filtering code of its own**: the hook reads the active predicate from `page.state` and hands a where-bound request to the framework, which evaluates it over `/data/members.json` — once per unique selection, one cached fetch shared by every section.
+The active population (saved view or panel-composed filter) is a **where-object** — a small structured JSON predicate, in the language a query's own `where:` is written in. The report page's query delivers every member to its sections as `content.data.members`. Sections that show the filtered set call `useFilteredMembers()`, a foundation hook that reads the active predicate from `page.state` and keeps the matching members with `@uniweb/core`'s `matchWhere` — in the browser, over the list already delivered, with no request per selection.
 
-The same predicate reaches other sources unchanged. Published to a Uniweb host, the records are answered live by the host; a backend of your own is reached through a foundation **transport** selected in `site.yml` (`fetcher.transports`), which decides what to send and what to evaluate. What you write in `site.yml` and in the sections is identical in every case — see the framework's `development/data-sources.md`.
+Because the hook never fetches, it works wherever the records come from: the site's own files, a host that serves records live once the site is published, or a backend of your own reached through a foundation **transport** selected in `site.yml` (`fetcher.transports`). What you write in the sections is identical in every case — see the framework's `development/data-sources.md`.
 
 ## What makes this a Press xlsx showcase
 
@@ -31,7 +31,7 @@ Most docusite templates favour the "same JSX → same output" pattern (see `mono
 
 ## Sections
 
-Seven sections, all narrowed by either the **Population** dropdown (saved views from `site/entities/queries/`) or the **Filter** panel (free-form controls generated from the `queryable:` declaration on the `members` collection in `site.yml`). The two are alternatives — picking from one clears the other. A **Sections** checkbox list on the same options panel hides individual sections from both the preview and the download.
+Seven sections, all narrowed by either the **Population** dropdown (saved views from `site/entities/queries/`) or the **Filter** panel (free-form controls generated from the `queryable:` declaration on the `members` query in `site.yml`). The two are alternatives — picking from one clears the other. A **Sections** checkbox list on the same options panel hides individual sections from both the preview and the download.
 
 | Section | Preview | Xlsx sheet |
 |---|---|---|
@@ -45,7 +45,7 @@ Seven sections, all narrowed by either the **Population** dropdown (saved views 
 
 ## Data model
 
-`site/entities/members/*.yml` — one file per member. Each becomes one item in the `members` collection. Fields: `name`, `rank`, `department`, `tenured`, `start_year`, plus nested arrays (`publications[]`, `funding[]`, `supervisions[]`) that sections aggregate.
+`site/entities/members/*.yml` — one file per member. Each is one record, published by `site/records.yml` and selected by the `members` query in `site.yml`. Fields: `name`, `rank`, `department`, `tenured`, `start_year`, plus nested arrays (`publications[]`, `funding[]`, `supervisions[]`) that sections aggregate.
 
 `site/entities/queries/*.yml` — saved views (named filters). Each file sets a `name`, `description`, `source: members`, and a `where:` predicate as a structured where-object. Example:
 
@@ -86,7 +86,7 @@ The narrative describes the **unit as a whole** (unfiltered totals); the live st
 
 1. **Replace the members.** Edit or add files under `site/entities/members/`.
 2. **Add a saved view.** Drop a new `name` / `description` / `where` YAML into `site/entities/queries/` (the `where:` value is a where-object — see existing files for examples). Appears in the selector automatically.
-3. **Change the filterable surface.** Edit the `queryable:` block on the `members` collection in `site.yml` — add fields, change types (`enum` / `boolean` / `range` / `text`), update enum options. The filter panel re-renders to match.
+3. **Change the filterable surface.** Edit the `queryable:` block on the `members` query in `site.yml` — add fields, change types (`enum` / `boolean` / `range` / `text`), update enum options. The filter panel re-renders to match.
 4. **Change theme.** Edit `theme.yml` or swap in `theme-archive.yml` per above.
 5. **Edit the narrative.** Rewrite the body of `site/pages/report/cover.md` with any Loom expressions that make sense for the unit.
 6. **Add a section.** Create a new `.md` in `site/pages/report/` with a new section type. Each section registers one xlsx sheet.
@@ -95,6 +95,7 @@ The narrative describes the **unit as a whole** (unfiltered totals); the live st
 ## Dependencies
 
 - **`@uniweb/press`** — document compilation (registered outputs → xlsx Blob via exceljs, dynamic-imported).
-- **`@uniweb/kit`** — provides `useFetched` (used by `useFilteredMembers` for predicate-bound fetches) and `useQueryable` (used by `FilterPanel` to read the queryable surface from the named query).
+- **`@uniweb/core`** — provides `matchWhere`, the where-object evaluator `useFilteredMembers` filters with.
+- **`@uniweb/kit`** — provides `usePageState` (the selection lives on `page.state`), `useQueryable` (used by `FilterPanel` to read the queryable surface from the named query) and `useFetched` (used by the options panel to read the saved views).
 - **`@uniweb/loom`** — text weaving for the Cover narrative.
 - **`recharts`** — chart library for web-preview visualizations.

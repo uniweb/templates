@@ -11,8 +11,8 @@ index: home
 # from another tool belongs here, not in public/data/ — that directory is the
 # build's output.
 queries:
-  # External queries — public, keyless APIs, named here and bound by the pages that
-  # show them. A query with `url:` is fetched from that address in the visitor's
+  # External queries — public, keyless APIs, declared here and named by the pages
+  # that show them. A query with `url:` is fetched from that address in the visitor's
   # browser; `transform:` is the dot-path to its records in the response.
   weather:
     url: https://api.open-meteo.com/v1/forecast?latitude=31.0&longitude=103.2&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&wind_speed_unit=ms
@@ -37,7 +37,7 @@ queries:
 
   videos:
   # Markdown entries placed in folders by records.yml. Rendered by
-  # pages/logbook — a list, and one `[...path]` page for every entry.
+  # pages/logbook — a list, and the `[...path]` page, with a URL for every entry.
   logbook:
     sort: date desc
     # The page that renders one entry is pages/logbook/[...path]/, so each record's

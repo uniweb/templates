@@ -16,14 +16,14 @@ import { useFilteredMembers } from '#components/query-context.jsx'
 
 export default function Cover({ content, block }) {
   // useFilteredMembers reads the active predicate from page.state and
-  // dispatches a where-bound fetch via @uniweb/kit's useFetched. Over the
-  // compiled members.json the framework evaluates it locally, once per
-  // unique selection; a host that answers queries evaluates the very same
-  // predicate at the source. Same component code either way.
+  // applies it in the browser (@uniweb/core's matchWhere) to
+  // content.data.members — every member the page's query delivered.
+  // Nothing is fetched, so the code is the same wherever the records
+  // came from.
   const { members, activeView, activeLabel, totalCount } = useFilteredMembers(content)
 
   // Loom-resolved narrative paragraphs — the content handler in
-  // foundation.js has already instantiated {COUNT OF members}, etc.,
+  // main.js has already instantiated {COUNT OF members}, etc.,
   // so content.paragraphs arrives as plain strings at this point.
   // These reflect the UNIT as a whole, not the current query filter.
   const narrative = Array.isArray(content?.paragraphs)

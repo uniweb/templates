@@ -1,6 +1,6 @@
 export default {
   title: 'Journal List',
-  description: 'Grid of article cards from a content collection',
+  description: 'Grid of article cards from the records of a query',
   category: 'content',
   purpose: 'Organize',
 

@@ -8,7 +8,8 @@ import { QuickView } from '#components/QuickView.jsx'
 /**
  * ProductGrid Component
  *
- * Displays products from a collection in a responsive grid.
+ * Displays the product records the page's query delivers (content.data.products)
+ * in a responsive grid.
  * Each card has hover actions for quick view and add-to-cart,
  * plus a Shopify buy button.
  */

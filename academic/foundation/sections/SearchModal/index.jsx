@@ -5,7 +5,7 @@ import { Link, useWebsite, cn, useShortcutLabel, createSearchClient, isSearchEna
  * SearchModal Component
  *
  * A modal search interface for academic sites.
- * Uses Fuse.js for fuzzy search (must be installed in foundation).
+ * Uses kit's search client (createSearchClient) — nothing to install.
  *
  * Features:
  * - Keyboard navigation (↑↓ to navigate, Enter to select, Escape to close)

@@ -3,5 +3,6 @@ title: Blog
 label: Blog
 description: Field notes and conservation updates
 
-# The posts query cascades to child pages, including [id]
+# The posts query reaches this page's sections and its child pages',
+# including [id]/, the parametric page with a URL for each post
 query: posts

@@ -15,7 +15,7 @@ import DocumentOptionsPanel from './DocumentOptionsPanel.jsx'
  *
  * Must be rendered inside a <DocumentProvider>. Workbook / document
  * metadata and paragraph styles live on the foundation's outputs
- * declaration (src/foundation.js + src/compile-options.js); this
+ * declaration (main.js + compile-options.js); this
  * component just maps UI intent to format, calls compileDocument,
  * triggers the download.
  */

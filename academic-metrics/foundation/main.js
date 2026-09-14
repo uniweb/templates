@@ -12,40 +12,28 @@
  * during the content-handler pass, so every component below receives
  * fully-resolved content — Loom is entirely upstream of Press.
  *
- * The handler's `vars` extractor exposes the members collection plus
- * a few precomputed totals. These are unit-wide numbers — not filtered
+ * The handler's `vars` extractor exposes the members plus a few
+ * precomputed totals. These are unit-wide numbers — not filtered
  * by the active selection — which sets up the narrative contrast on
  * Cover: "X members of the unit total" (Loom, static) vs. "Y matched
  * by the current selection" (JSX stats strip via useFilteredMembers,
  * reactive).
  *
  * ─────────────────────────────────────────────────────────────────────
- * Filtering: the framework does the work.
+ * Filtering: one delivered list, narrowed in the browser.
  * ─────────────────────────────────────────────────────────────────────
  *
- * This foundation does NOT filter members itself. Sections that show
- * the active population call useFilteredMembers (see components/
- * query-context.jsx) — a thin hook over @uniweb/kit's useFetched that
- * passes the active where-object as part of the request.
+ * The page's query delivers every member to each section as
+ * content.data.members (the `data:` declaration below). Sections that
+ * show the active population call useFilteredMembers (see components/
+ * query-context.jsx), which applies the active where-object — a saved
+ * view's or the filter panel's — to that list with @uniweb/core's
+ * matchWhere: the where-object language a query's own `where:` uses.
  *
- * Where that where-object is evaluated is decided by the LANE the records
- * come from, never by this foundation and never by a site knob:
- *
- *   - the site's compiled /data/members.json (this template as shipped) —
- *     the framework fetches the file once and applies the predicate in
- *     JS. Multiple sections share one cached fetch.
- *
- *   - a Uniweb host that answers queries — the predicate travels with
- *     the request and the host returns only matching records.
- *
- *   - a backend of your own — a foundation TRANSPORT (`transports:` in
- *     this file, selected by the site's `fetcher.transports`) decides
- *     what to send and what to evaluate.
- *
- * Same author code, same foundation code, same components in every
- * case. That's the architecture's promise made concrete — and it's why
- * this foundation no longer needs a `data:` handler to bypass the
- * framework's transport-aware fetcher.
+ * Nothing here names where the records come from — the site's own files,
+ * a host that serves records live, or a foundation transport the site
+ * selects. The sections receive content.data.members either way, and a
+ * new selection narrows it without another request.
  */
 
 import { Loom, createLoomHandlers } from '@uniweb/loom'

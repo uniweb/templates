@@ -1,12 +1,11 @@
 /**
- * FilterPanel — free-form filter UI driven by collection.queryable.
+ * FilterPanel — free-form filter UI driven by a query's `queryable:`.
  *
  * Pattern A demo: the foundation reads the queryable-surface metadata
- * declared by the author in site.yml, renders one control per field,
- * and composes a where-object from the reader's selections. The
- * composed predicate flows through the same useFetched path as a
- * saved-view selection, so the framework decides whether to ship it
- * to the source or evaluate locally.
+ * the author declared on the `members` query in site.yml, renders one
+ * control per field, and composes a where-object from the reader's
+ * selections. useFilteredMembers applies the composed predicate exactly
+ * as it applies a saved view's.
  *
  * Mutually exclusive with the QuerySelector dropdown (Pattern B):
  * activating the panel clears the saved-view selection; activating

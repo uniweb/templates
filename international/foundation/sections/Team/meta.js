@@ -7,8 +7,9 @@ export default {
   category: 'showcase',
   purpose: 'Introduce',
 
-  // Renders team-member data (content.data.team); field defaults come from the
-  // '@/member' schema. Delivery is default-on.
+  // The `content.data` key this section reads — team-member records
+  // (content.data.team); a section receives only the keys it declares. Field
+  // defaults come from the '@/member' schema.
   data: { team: '@/member' },
 
   content: {
@@ -17,7 +18,7 @@ export default {
     paragraphs: 'Description [1]',
     items: {
       label: 'Team members [2-8]',
-      hint: 'Each H3 is a name, H2 is role. Or use data: team',
+      hint: 'Each H3 is a name, the H4 below it the role. Or use query: team',
     },
   },
 

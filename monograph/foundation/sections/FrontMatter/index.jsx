@@ -3,7 +3,7 @@
  *
  * Reads title, subtitle, author, affiliation, date, abstract, and
  * (optionally) a portrait image URL from the section's frontmatter
- * params + the data collection. Produces one JSX tree that:
+ * params + the monograph record. Produces one JSX tree that:
  *   - On screen: a centred cover with a portrait, title, subtitle,
  *     and an indented abstract paragraph.
  *   - In docx: a cover paragraph stack styled via "front-title",
@@ -39,7 +39,7 @@ export default function FrontMatter({ content, block, params }) {
   } = mono
 
   // The section's own frontmatter can also carry title/subtitle;
-  // fall through to the data collection.
+  // fall through to the monograph record.
   const title = content?.title || dataTitle || 'Monograph'
   const subtitle = content?.subtitle || ''
   const portraitUrl = params?.portrait || ''

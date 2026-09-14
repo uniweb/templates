@@ -5,9 +5,9 @@ import { ArrowLeft } from 'lucide-react'
 /**
  * One logbook entry, rendered on the `[...path]` page.
  *
- * The matched record arrives under the same key the list page reads —
- * `content.data.logbook[0]` — exactly as it would under a `[slug]` page. What the
- * `[...path]` route adds is the URL's shape: `block.dynamicContext.params` carries
+ * The record the URL names arrives under the same key the logbook's list reads — a
+ * list of one, `content.data.logbook[0]` — exactly as it would under a `[slug]` page.
+ * What `[...path]` adds is the URL's shape: `block.dynamicContext.params` carries
  * `path` (the whole capture), `dir` (the folder part) and `slug` (the record's
  * handle), which is what the breadcrumb below is built from.
  */

@@ -1,11 +1,10 @@
 # Charles Darwin — CV profile data
 #
-# A whole CV as a single structured data file. The collection processor
-# picks up every .yml file in the collection folder and emits it as one
-# item with `slug` (from filename) + all the fields below. The content
-# handler in foundation.js flattens data.profile[0] into the Loom
-# variable namespace, so every {expression} in the section markdown
-# reads directly from these fields.
+# A whole CV as a single structured data file: one record (records.yml
+# publishes every .yml in this folder) with `slug` (from filename) + all
+# the fields below. The content handler in main.js flattens
+# data.profile[0] into the Loom variable namespace, so every
+# {expression} in the section markdown reads directly from these fields.
 #
 # Conventions:
 #
@@ -70,7 +69,7 @@ employment:
 # ─── Publications ───────────────────────────────────────────────────
 #
 # Each entry has an `id:` that serves as a stable reference — the
-# CITE custom Loom function (see foundation.js) looks publications
+# CITE custom Loom function (see main.js) looks publications
 # up by id, e.g. {CITE 'origin-1859'} → "(Darwin, 1859)".
 #
 # Authorship is implicit Darwin-only unless an `authors:` list is

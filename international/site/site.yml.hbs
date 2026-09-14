@@ -28,17 +28,18 @@ i18n:
 # Enable search functionality
 search: true
 
-# Content collections
-# Markdown files in entities/ are processed into JSON at build time, and —
-# when synced to a backend — into @std/article entities (the `schema:` binding).
+# Queries — each selects a set of records. `articles` reads the @std/article
+# records: markdown files in entities/std/article/, published by records.yml.
+# They compile to JSON at build time and — when synced to a backend — become
+# @std/article entities (the query's `schema:`).
 queries:
   articles:
     schema: '@std/article'
     sort: date desc
 
-  # A JSON file holding a top-level array is one record per entry — the same
-  # collection machinery as the markdown items above, so this gets i18n
-  # extraction too.
+  # `team` reads entities/team/. A JSON file holding a top-level array is one
+  # record per entry — records like the markdown articles above, so they get
+  # i18n extraction too.
   team:
 
 # Build options

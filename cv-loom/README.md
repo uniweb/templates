@@ -17,7 +17,7 @@ cd my-cv && pnpm dev
 darwin.yml (profile data)
     │
     ▼
-site.yml declares `profile` collection
+site.yml declares the `profile` query
     │
     ▼
 page.yml declares `query: profile`
@@ -137,7 +137,7 @@ Renders as a small "Key Works" card with the three listed publications formatted
 
 This is an **inset** in the Uniweb sense: a named component that content authors embed in markdown via `![](@Name){params}` syntax. `KeyWorks` is a block-level inset — it lives between paragraphs, on its own line. (The framework also has an inline form, `[text](@Name){params}`, which renders as words inside prose; this template doesn't use it.) The author picks where to place the widget; the component reads its params and renders.
 
-`KeyWorks` reuses the same pipeline as `Publications`: `meta.data.inherit: ['profile']` gives it the publications array, `utils/to-csl.js` normalizes each record, citestyle formats them. The only new concept is the `ids` param (comma-separated, parsed by the component).
+`KeyWorks` reuses the same pipeline as `Publications`: declaring `data: { profile: {} }` in its `meta.js` gives it the publications array, `utils/to-csl.js` normalizes each record, citestyle formats them. The only new concept is the `ids` param (comma-separated, parsed by the component).
 
 The inset exercises `Bookmark` — a Press primitive added for this template (`data-bookmark` on a `<Paragraph>` emits a Word bookmark). Without it, the internal hyperlinks produced by `KeyWorks` would point at nothing in the docx export.
 
@@ -187,7 +187,7 @@ Unlike Header and CvEntry, this component does **not** use Loom. The bibliograph
 
 The component reads `profile.publications` directly, normalizes each flat record to CSL-JSON through `utils/to-csl.js`, and runs citestyle's `formatAll` (APA, statically imported). Web preview uses `SafeHtml` on `entry.html` so the `.csl-author` / `.csl-title` / `.csl-container` classes survive. Docx gets `entry.text` wrapped in a `<Paragraph data-style="bibliography">` — the `bibliography` paragraph style is declared on `DownloadBar`'s `compile()` call with a 0.5" hanging indent.
 
-This is the right pattern whenever a section needs richer output than Loom can express: **drop the Loom handler for that section, keep Loom for the rest.** The `meta.js` file declares `data: { inherit: ['profile'] }` so the section receives the profile the same way Loom sections do; from there, it's an ordinary React component.
+This is the right pattern whenever a section needs richer output than Loom can express: **drop the Loom handler for that section, keep Loom for the rest.** The `meta.js` file declares `data: { profile: {} }` so the section receives the profile, as every Loom section does through the foundation's `main.js`; from there, it's an ordinary React component.
 
 ### PageBranding
 

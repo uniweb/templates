@@ -5,7 +5,7 @@
  */
 export default {
   title: 'Search Modal',
-  description: 'Full-text search interface for the site. Requires fuse.js to be installed.',
+  description: 'Full-text search interface for the site.',
   category: 'navigation',
   purpose: 'Navigate',
 

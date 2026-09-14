@@ -1,7 +1,7 @@
 /**
  * Cross-record validation for the business-docs foundation.
  *
- * Runs at content-prepare time (after collections are resolved, before
+ * Runs at content-prepare time (after the records are resolved, before
  * sections render). Surfaces issues at info / warn / error severity per
  * the cross-reference matrix. Severity
  * depends on the invoice's own status: a draft invoice that points at

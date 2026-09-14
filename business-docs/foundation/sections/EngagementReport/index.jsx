@@ -10,9 +10,9 @@ import { formatCurrency, formatDate, formatDateRange } from '#utils/format.js'
  * EngagementReport — filtered report across invoices or SOWs.
  *
  * Composes useFilteredEngagement for the active source with a separate
- * useFetched for the SOW collection so the invoice rows can show a
+ * useFetched for the SOWs so the invoice rows can show a
  * "% of contract billed" column joined client-side. The hook itself
- * stays single-purpose; cross-collection joining lives in the section.
+ * stays single-purpose; joining invoices to SOWs lives in the section.
  */
 
 export default function EngagementReport({ content, block }) {

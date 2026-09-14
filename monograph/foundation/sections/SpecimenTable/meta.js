@@ -1,7 +1,7 @@
 export default {
   title: 'Specimen table',
   description:
-    'Bordered table of tortoise specimens. Reads the `specimens` array from the monograph collection.',
+    'Bordered table of tortoise specimens. Reads the `specimens` array from the monograph record.',
   category: 'monograph',
 
   content: {

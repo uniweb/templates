@@ -6,9 +6,8 @@
  *   - The values survive SPA navigation without being re-hydrated from
  *     React state on every mount.
  *   - The shared useFilteredMembers hook resolves the active predicate
- *     from page.state on every render and passes it to useFetched —
- *     the framework evaluates it over the compiled records; a host that
- *     answers queries evaluates the same predicate at the source.
+ *     from page.state on every render and applies it, with @uniweb/core's
+ *     matchWhere, to the members the page's query delivered.
  *   - A local sync helper persists to localStorage independently.
  *
  * Six slots, each a separate key so only the subscribing component
@@ -37,7 +36,8 @@
  */
 
 import { useMemo } from 'react'
-import { usePageState, useFetched } from '@uniweb/kit'
+import { matchWhere } from '@uniweb/core'
+import { usePageState } from '@uniweb/kit'
 
 const STORAGE_KEY = 'academic-metrics/options'
 const ALL_MEMBERS_SLUG = 'all-members'
@@ -226,24 +226,32 @@ function resolveActiveWhere(slug, panelWhere, allQueries) {
 }
 
 /**
- * Fetch the members collection narrowed by the active predicate.
+ * The members the active selection keeps.
  *
- * Reads the available saved views from `content.data.queries` (cascaded
- * from page.yml). Composes the active predicate from page.state.
- * Hands a where-bound request to useFetched — the framework dispatches
- * a fresh fetch when the predicate changes (cache key includes
- * pushed-down operators) and uses the runtime fallback when not.
+ * The page's query (`query: [members, queries]` in page.yml) delivers
+ * every member to each section as `content.data.members`, and the saved
+ * views as `content.data.queries` — main.js declares both keys for every
+ * section. The active predicate, composed from page.state, narrows that
+ * list right here with @uniweb/core's matchWhere: the where-object
+ * language a query's own `where:` is written in, evaluated in the
+ * browser. Nothing is fetched, so the hook works the same wherever the
+ * page's records came from.
  *
- * Returns { members, activeView, activeWhere, totalCount, loading }:
- *   - members      — the filtered set (or the full set when no filter is active)
- *   - activeView   — the saved-view doc when the dropdown is the source; null otherwise
+ * Returns { members, activeView, activeWhere, activeLabel, totalCount, loading }:
+ *   - members      — the members the predicate keeps (all of them when none is active)
+ *   - activeView   — the saved-view record when the dropdown is the source; null otherwise
  *   - activeWhere  — the resolved predicate (or null)
+ *   - activeLabel  — "Custom filter", the saved view's name, or null
  *   - totalCount   — the unfiltered count, for "X of Y" displays
- *   - loading      — true while the fetch is in flight on first read
+ *   - loading      — always false: the filtering is synchronous. While the
+ *                    page's query has not answered, content.data.members is
+ *                    null and the section's own `block.dataLoading` is true.
  *
- * @param {Object} content - The block's content (delivered by the framework).
- *   Reads content.data.queries for the saved-views catalog and
- *   content.data.members for the unfiltered count.
+ * A predicate outside the where-object language keeps no members —
+ * matchWhere never falls back to the whole list.
+ *
+ * @param {Object} content - The section's content. Reads content.data.members
+ *   and content.data.queries (the saved views).
  */
 export function useFilteredMembers(content) {
   const [slug] = useSelectedQuery()
@@ -263,21 +271,12 @@ export function useFilteredMembers(content) {
     [slug, panelWhere, allQueries],
   )
 
-  // The page-level cascade already fetched /data/members.json without
-  // a where: clause. A cache entry is identified by its ADDRESS, so this
-  // useFetched hits that entry synchronously and the framework applies
-  // the predicate locally over it — one fetch, every selection.
-  //
-  // NOTE: kit hooks take an explicit path:/url:; the `query:`
-  // shorthand is build-time only. To swap to a backend, change BOTH
-  // the page-level fetch (in page.yml) AND the path here.
-  const { data: fetched, loading } = useFetched(
-    active.where
-      ? { path: '/data/members.json', as: 'members', where: active.where }
-      : null,
+  // One delivered list, every selection: narrowing it is a filter in the
+  // browser, not another request.
+  const members = useMemo(
+    () => (active.where ? matchWhere(active.where, allMembers) : allMembers),
+    [active.where, allMembers],
   )
-
-  const members = active.where ? (fetched || []) : allMembers
 
   return {
     members,
@@ -285,6 +284,6 @@ export function useFilteredMembers(content) {
     activeWhere: active.where,
     activeLabel: active.label,
     totalCount: allMembers.length,
-    loading: active.where ? loading : false,
+    loading: false,
   }
 }

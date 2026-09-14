@@ -1,14 +1,13 @@
 # Tenured Biology — saved view.
 #
 # Selects biology-department members who hold tenure. The `where:`
-# value is a where-object (structured JSON predicate). The framework's
-# evaluator walks the object against each member record; backends that
-# accept where-objects can ship the same predicate over the wire.
+# value is a where-object (structured JSON predicate) — the language a
+# query's own `where:` is written in.
 #
-# In the academic-metrics demo there is no backend, so the foundation's
-# data handler runs the evaluator against the loaded members collection.
-# Replacing this with a real backend changes the `fetcher:` config in
-# site.yml; this file is unchanged.
+# When this view is picked, the foundation's useFilteredMembers hook runs
+# the framework's evaluator (matchWhere, from @uniweb/core) over the
+# members the report page's query delivered. Wherever those records come
+# from, this file is unchanged.
 
 name: Tenured Biology
 description: Tenured members of the Department of Biology.

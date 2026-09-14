@@ -10,11 +10,9 @@ queries:
   members:
     # Queryable surface — declares which fields a foundation can offer
     # for filtering UI. The FilterPanel component reads this metadata
-    # via the useQueryable hook and renders one control per
-    # field. Composed predicates flow through the same useFetched path
-    # as saved-view selections; the framework evaluates them over the
-    # compiled records, and a host that answers queries would evaluate
-    # the very same predicate at the source.
+    # via the useQueryable hook and renders one control per field. A
+    # composed predicate narrows the delivered members exactly as a
+    # saved view's does.
     queryable:
       department:
         type: enum
@@ -34,13 +32,13 @@ queries:
         max: 1880
   queries:
 
-# Where the predicate runs. The site's records compile to /data/<name>.json
-# and every `where:` — a saved view, a panel-composed filter — is evaluated
-# in the browser over that file; two sections with different predicates share
-# one cached fetch. Published to a Uniweb host, the same predicate is answered
-# live by the host. A backend of your own is reached through a foundation
-# TRANSPORT selected here (`fetcher.transports`), never through a site-level
-# knob — see docs: development/data-sources.md.
+# Where the predicate runs. The report page's query delivers every member to
+# its sections, and a selection — a saved view or a panel-composed filter — is
+# a `where:` the foundation applies to those members in the browser, with no
+# request per selection. Where the records come from is the query's business:
+# the site's own files, a host that serves records live, or a backend of your
+# own reached through a foundation TRANSPORT selected here
+# (`fetcher.transports`) — see docs: development/data-sources.md.
 
 build:
   prerender: true

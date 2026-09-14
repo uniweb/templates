@@ -4,5 +4,6 @@ description: Essays and notes on building for the web.
 label: Blog
 order: 2
 
-# Articles collection data - cascades to child pages including [slug]
+# The articles query — reaches this page's sections and its child pages',
+# including [slug]/, the parametric page with a URL for each article
 query: articles

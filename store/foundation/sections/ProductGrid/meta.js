@@ -1,6 +1,6 @@
 export default {
   title: 'Product Grid',
-  description: 'Display products from a collection with quick view and buy buttons',
+  description: 'Display product records with quick view and buy buttons',
   category: 'showcase',
   purpose: 'Sell',
 

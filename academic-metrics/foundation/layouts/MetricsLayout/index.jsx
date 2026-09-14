@@ -31,9 +31,8 @@ export default function MetricsLayout({ body, page }) {
   // Each section subscribes to the active selection via
   // useFilteredMembers (which itself subscribes to page.state.slug and
   // page.state.panelWhere via usePageState). When either changes, the
-  // affected sections re-render, and their useFetched call dispatches
-  // a fresh fetch (or returns the cached result for the new predicate).
-  // The layout no longer needs to drive the cascade.
+  // affected sections re-render and narrow their members again; the
+  // layout has nothing to drive.
 
   return (
     <DocumentProvider basePath={website.basePath}>

@@ -4,13 +4,12 @@
  * Picking a saved view writes its slug to page.state.slug and clears
  * any active panel filter (page.state.panelWhere = null). The shared
  * useFilteredMembers hook resolves the active predicate on each
- * section's render and dispatches a where-bound fetch via useFetched —
- * the framework handles the rest.
+ * section's render and keeps the members it matches.
  *
- * The dropdown shows "All members" plus one option per record in the
- * `views` collection (declared in site.yml as `collections.queries:`).
- * Each record's `where:` field is what gets handed to useFetched when
- * activated.
+ * The dropdown shows "All members" plus one option per saved view — a
+ * record of the `queries` query (declared under `queries:` in site.yml,
+ * one file per view in entities/queries/). A view's `where:` field is
+ * the predicate applied when it is picked.
  */
 import { useSelectedQuery, usePanelFilter, ALL_MEMBERS } from './query-context.jsx'
 

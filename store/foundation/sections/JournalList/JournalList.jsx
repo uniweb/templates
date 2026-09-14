@@ -4,7 +4,8 @@ import { ChevronRight } from 'lucide-react'
 /**
  * JournalList Component
  *
- * Displays articles from a collection in a responsive grid.
+ * Displays the article records the page's query delivers (content.data.articles)
+ * in a responsive grid.
  * Each card links to the full article's page, as the framework links it: `$route`.
  */
 function JournalList({ content, params, block }) {

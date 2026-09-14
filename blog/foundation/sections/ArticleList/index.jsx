@@ -3,8 +3,8 @@ import { Link, useWebsite } from '@uniweb/kit'
 /**
  * ArticleList Component
  *
- * Displays a grid of article cards. Gets articles from inherited data
- * (page-level fetch) and renders them with links to individual posts.
+ * Displays a grid of article cards. Gets articles from content.data.articles
+ * (the records of the page's query) and links each to its own page.
  */
 function ArticleList({ content, params, block }) {
   const { title, subtitle, paragraphs } = content

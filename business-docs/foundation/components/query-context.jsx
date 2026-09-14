@@ -1,6 +1,6 @@
 /**
  * Filter state for the EngagementReport — date range, client, status,
- * and which collection (invoices or sows) is the active source.
+ * and which records (invoices or sows) are the active source.
  *
  * Lives on `page.state` so values survive SPA navigation without being
  * re-hydrated on every mount, and so multiple sections on the same

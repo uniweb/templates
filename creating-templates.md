@@ -4,7 +4,7 @@ This guide covers how to create, test, and publish official Uniweb templates usi
 
 ## How Templates Work
 
-Templates provide **content only** — section type components, pages, theme configuration, and collections. The CLI provides all structural scaffolding (`package.json`, `vite.config.js`, the site's `entry.js`, `pnpm-workspace.yaml`, etc.) from its built-in package templates. This means:
+Templates provide **content only** — section type components, pages, theme configuration, and records. The CLI provides all structural scaffolding (`package.json`, `vite.config.js`, the site's `entry.js`, `pnpm-workspace.yaml`, etc.) from its built-in package templates. This means:
 
 - Templates never duplicate structural files
 - Structural upgrades (new Vite version, new runtime features) happen in the CLI, not in every template

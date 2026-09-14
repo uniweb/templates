@@ -7,8 +7,8 @@ import { H2, P, cn } from '@uniweb/kit'
  * Display team members in a grid.
  *
  * Data sources (in order of precedence):
- * 1. content.data.team - From fetch (page/site level) or tagged code blocks
- * 2. content.items - From markdown H3/H2 patterns
+ * 1. content.data.team - The records of a fetch (`query: team`) or a tagged code block
+ * 2. content.items - From markdown items: an H3 name with the role as the H4 below it
  */
 function Team({ content, params }) {
   // Runtime guarantees: content is flat, params have defaults from meta.js
@@ -31,7 +31,7 @@ function Team({ content, params }) {
         avatar: member.avatar ? { url: member.avatar } : null,
       }
     }
-    // Markdown items format (H3 = name, H2 = role)
+    // Markdown items format (H3 = name, the H4 below it = role)
     return {
       name: member.title,
       role: member.subtitle,

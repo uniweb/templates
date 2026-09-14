@@ -4,7 +4,8 @@ import { ChevronLeft, Share2, Instagram } from 'lucide-react'
 /**
  * Article Component
  *
- * Full article view from inherited collection data.
+ * Full article view: content.data.articles[0], the article the URL of the
+ * journal's [slug] page names.
  * Renders author info, featured image, blockquote, body content,
  * and a bottom CTA section.
  */
@@ -120,7 +121,7 @@ function Article({ content, block }) {
           </div>
         )}
 
-        {/* Body content (ProseMirror JSON from collection) */}
+        {/* Body content (ProseMirror JSON, compiled from the record's markdown) */}
         {articleContent && (
           <div className="prose prose-lg max-w-none">
             <ArticleBody content={articleContent} />

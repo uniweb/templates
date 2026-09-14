@@ -1,9 +1,8 @@
 id: de665176
-# Dynamic article page
-# The [slug] folder name makes this a dynamic route.
-# Routes are generated for each item in parent's fetched data.
-# Each instance receives:
-#   - content.data.articles - single-element array holding the matched article
+# The article page — a parametric page.
+# The [slug] folder gives it one URL for each record of its route query:
+# the parent page's `articles` query. On each URL, its sections receive:
+#   - content.data.articles - a list of one, the article the URL names
 #     (read it as content.data.articles[0]; [] when nothing matches)
 
 title: Article

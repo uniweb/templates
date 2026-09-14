@@ -46,7 +46,7 @@ export default {
     showSearch: {
       type: 'select',
       label: 'Search',
-      description: 'When to show the search button (requires fuse.js)',
+      description: 'When to show the search button',
       options: [
         { value: 'auto', label: 'Auto (if search enabled)' },
         { value: 'always', label: 'Always' },

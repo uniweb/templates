@@ -1,9 +1,10 @@
 # Sample monograph data — Darwin's Galapagos observations.
 #
-# The collection processor loads each .yml in this folder as one item
-# with `slug` (from the filename) plus every top-level key below. So
-# `content.data.monograph[0]` in a section component resolves to the
-# beagle item with title, author, specimens, etc. directly on it.
+# Each .yml in this folder is one record (published by records.yml),
+# with `slug` (from the filename) plus every top-level key below. The
+# `monograph` query selects it, so `content.data.monograph[0]` in a
+# section component is the beagle record with title, author,
+# specimens, etc. directly on it.
 
 title: Observations on the Zoology of the Galapagos Archipelago
 author: Charles Darwin

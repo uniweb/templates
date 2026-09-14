@@ -4,7 +4,7 @@
  *
  *   1. Population — saved-view dropdown (QuerySelector)
  *   2. Filter — free-form filter UI (FilterPanel) reading the
- *      collection's `queryable:` declaration
+ *      `members` query's `queryable:` declaration
  *   3. Report options — date range, refereed-only, citation style
  *   4. Sections — per-section inclusion checkboxes
  *
@@ -12,8 +12,9 @@
  * activating one clears the other. See query-context.jsx for the
  * predicate-resolution rules (panel takes precedence when set).
  *
- * Queries data comes from the page-level cascade via useFetched —
- * shares the cache with section-side useFilteredMembers calls.
+ * The panel renders outside the sections, so it has no
+ * content.data.queries of its own: it reads the saved views with
+ * useFetched, from the file a build generates for the `queries` query.
  */
 import { useFetched } from '@uniweb/kit'
 import QuerySelector from './QuerySelector.jsx'
@@ -22,10 +23,8 @@ import ReportOptions from './ReportOptions.jsx'
 import SectionToggles from './SectionToggles.jsx'
 
 export default function DocumentOptionsPanel() {
-  // Kit hooks take explicit path:/url: — the `query:` shorthand
-  // is build-time only. The page-level cascade fetches the same path
-  // (translated from `query: queries`), so this useFetched gets a
-  // synchronous cache hit on first render.
+  // Kit hooks take explicit path:/url: — the `query:` shorthand is
+  // build-time only, so this names the generated file itself.
   const { data } = useFetched({ path: '/data/queries.json', as: 'queries' })
   const queries = Array.isArray(data) ? data : []
 

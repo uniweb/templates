@@ -21,7 +21,7 @@
  *     declared on DownloadBar's compile call.
  *
  * citestyle + APA are statically imported at the top of the file;
- * they're already in the foundation bundle because foundation.js
+ * they're already in the foundation bundle because main.js
  * uses them for the CITE custom Loom function. No async loading,
  * no style cache — keep the escape hatch simple.
  */
