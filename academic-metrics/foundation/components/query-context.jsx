@@ -268,12 +268,12 @@ export function useFilteredMembers(content) {
   // useFetched hits that entry synchronously and the framework applies
   // the predicate locally over it — one fetch, every selection.
   //
-  // NOTE: kit hooks take an explicit path:/url:; the `collection:`
+  // NOTE: kit hooks take an explicit path:/url:; the `query:`
   // shorthand is build-time only. To swap to a backend, change BOTH
   // the page-level fetch (in page.yml) AND the path here.
   const { data: fetched, loading } = useFetched(
     active.where
-      ? { path: '/data/members.json', schema: 'members', where: active.where }
+      ? { path: '/data/members.json', as: 'members', where: active.where }
       : null,
   )
 

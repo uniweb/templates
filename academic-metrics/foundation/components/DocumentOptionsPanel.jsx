@@ -22,11 +22,11 @@ import ReportOptions from './ReportOptions.jsx'
 import SectionToggles from './SectionToggles.jsx'
 
 export default function DocumentOptionsPanel() {
-  // Kit hooks take explicit path:/url: — the `collection:` shorthand
+  // Kit hooks take explicit path:/url: — the `query:` shorthand
   // is build-time only. The page-level cascade fetches the same path
   // (translated from `query: queries`), so this useFetched gets a
   // synchronous cache hit on first render.
-  const { data } = useFetched({ path: '/data/queries.json', schema: 'queries' })
+  const { data } = useFetched({ path: '/data/queries.json', as: 'queries' })
   const queries = Array.isArray(data) ? data : []
 
   return (
