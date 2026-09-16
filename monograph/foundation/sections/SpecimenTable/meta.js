@@ -1,8 +1,8 @@
 export default {
+  family: 'data-table',
   title: 'Specimen table',
   description:
     'Bordered table of tortoise specimens. Reads the `specimens` array from the monograph record.',
-  category: 'monograph',
 
   content: {
     title: 'Chapter heading (defaults to "Specimens collected")',

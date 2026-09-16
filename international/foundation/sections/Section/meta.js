@@ -6,8 +6,6 @@
 export default {
   title: 'Content Section',
   description: 'A general content section with title, text, and optional items grid',
-  category: 'content',
-  purpose: 'Inform',
 
   content: {
     title: 'Section heading',

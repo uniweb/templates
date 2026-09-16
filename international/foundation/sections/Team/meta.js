@@ -4,8 +4,6 @@
 export default {
   title: 'Team Grid',
   description: 'Display team members with photos and roles.',
-  category: 'showcase',
-  purpose: 'Introduce',
 
   // The `content.data` key this section reads — team-member records
   // (content.data.team); a section receives only the keys it declares. Field

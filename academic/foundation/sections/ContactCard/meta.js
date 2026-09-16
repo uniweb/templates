@@ -4,10 +4,9 @@
  * Contact information block for academic profiles.
  */
 export default {
+  family: 'contact',
   title: 'Contact Card',
   description: 'Contact information block for academic profiles',
-  category: 'content',
-  purpose: 'Connect',
 
   content: {
     title: 'Optional heading (e.g., "Contact")',

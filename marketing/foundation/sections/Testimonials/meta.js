@@ -1,7 +1,6 @@
 export default {
   title: 'Testimonials',
   description: 'Customer quotes in a responsive grid',
-  category: 'social-proof',
 
   content: {
     title: 'Optional heading above the quotes',

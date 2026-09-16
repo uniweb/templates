@@ -1,7 +1,6 @@
 export default {
   title: 'Animated Counter',
   description: 'Numbers that count up when scrolled into view',
-  category: 'data',
 
   content: {
     title: 'Section title',

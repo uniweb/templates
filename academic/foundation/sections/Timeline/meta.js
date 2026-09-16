@@ -6,8 +6,6 @@
 export default {
   title: 'Timeline',
   description: 'Academic career timeline - education, positions, awards',
-  category: 'content',
-  purpose: 'Inform',
 
   content: {
     title: 'Section heading',

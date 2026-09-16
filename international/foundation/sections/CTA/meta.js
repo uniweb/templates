@@ -6,8 +6,6 @@
 export default {
   title: 'Call to Action',
   description: 'A prominent call-to-action section',
-  category: 'content',
-  purpose: 'Convert',
 
   content: {
     title: 'Headline',

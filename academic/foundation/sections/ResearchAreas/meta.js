@@ -4,10 +4,9 @@
  * Display research focus areas, topics, or expertise.
  */
 export default {
+  family: 'features',
   title: 'Research Areas',
   description: 'Display research focus areas, topics, or expertise',
-  category: 'content',
-  purpose: 'Inform',
 
   content: {
     title: 'Section heading',

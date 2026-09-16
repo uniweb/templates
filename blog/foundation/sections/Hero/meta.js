@@ -6,8 +6,6 @@
 export default {
   title: 'Hero Banner',
   description: 'A bold hero section with headline, description, and call-to-action buttons',
-  category: 'impact',
-  purpose: 'Impress',
 
   // Static capabilities for cross-block coordination
   // Header reads this to know Hero supports translucent/floating navbar

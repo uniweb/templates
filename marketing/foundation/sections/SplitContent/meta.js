@@ -1,7 +1,7 @@
 export default {
+  family: 'spotlight',
   title: 'Split Content',
   description: 'Two-column layout with text and visual',
-  category: 'content',
 
   content: {
     title: 'Section heading',

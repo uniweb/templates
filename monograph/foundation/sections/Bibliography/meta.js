@@ -2,7 +2,6 @@ export default {
   title: 'Bibliography',
   description:
     'Formatted reference list. Reads CSL-JSON items from the `references` array of the monograph record and formats them with the selected citation style.',
-  category: 'monograph',
 
   content: {
     title: 'Chapter heading (defaults to "References")',

@@ -1,8 +1,6 @@
 export default {
   title: 'Hero',
   description: 'Opening section with a headline, a short pitch, reassurance points and calls to action',
-  category: 'impact',
-  purpose: 'Impress',
 
   context: {
     allowTranslucentTop: true,

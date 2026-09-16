@@ -1,8 +1,7 @@
 export default {
+  family: 'gallery',
   title: 'Video Gallery',
   description: 'YouTube video grid with poster/embed facade',
-  category: 'content',
-  purpose: 'Inform',
 
   content: {
     title: 'Section title',

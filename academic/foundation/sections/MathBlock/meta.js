@@ -7,8 +7,6 @@
 export default {
   title: 'Math Block',
   description: 'Display mathematical equations and formulas',
-  category: 'content',
-  purpose: 'Inform',
 
   content: {
     title: 'Section heading',

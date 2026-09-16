@@ -4,10 +4,9 @@
  * Rich text with academic typography options.
  */
 export default {
+  family: 'rich-text',
   title: 'Text Block',
   description: 'Rich text content with academic typography options',
-  category: 'content',
-  purpose: 'Inform',
 
   content: {
     pretitle: 'Eyebrow text',

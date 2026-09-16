@@ -1,4 +1,5 @@
 export default {
+  family: 'schedule',
   title: 'Programme',
   description:
     'The conference programme. Reads the live tracks when the site has an app backend, ' +

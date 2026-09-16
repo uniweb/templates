@@ -1,8 +1,6 @@
 export default {
   title: 'Story',
   description: 'Centered headline with description and a featured image',
-  category: 'content',
-  purpose: 'Inspire',
 
   content: {
     title: 'Main headline',

@@ -4,10 +4,9 @@
  * Purpose-driven hero for academic profiles.
  */
 export default {
+  family: 'profile',
   title: 'Profile Hero',
   description: 'Hero section for researcher, lab, or department profiles',
-  category: 'impact',
-  purpose: 'Impress',
 
   content: {
     pretitle: 'Institutional affiliation',

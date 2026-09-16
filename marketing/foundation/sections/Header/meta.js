@@ -1,7 +1,6 @@
 export default {
   title: 'Header',
   description: 'Responsive navigation header with intelligent context awareness',
-  category: 'navigation',
 
   content: {
     title: 'Site name',

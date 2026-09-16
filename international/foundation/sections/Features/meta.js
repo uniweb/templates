@@ -6,8 +6,6 @@
 export default {
   title: 'Features Grid',
   description: 'Display features or services in a grid layout',
-  category: 'content',
-  purpose: 'Inform',
 
   content: {
     title: 'Section heading',

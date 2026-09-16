@@ -2,7 +2,6 @@ export default {
   title: 'CV Entry',
   description:
     'Generic CV section. Renders title, paragraphs, and items from semantic content. Loom expressions in the markdown are resolved before this component sees the content.',
-  category: 'content',
 
   content: {
     title: 'Section heading (H1)',

@@ -4,10 +4,9 @@
  * Warning banner for deprecated documentation versions.
  */
 export default {
+  family: 'callout',
   title: 'Deprecation Banner',
   description: 'Warning banner for deprecated documentation versions',
-  category: 'feedback',
-  purpose: 'Inform',
 
   content: {},
 

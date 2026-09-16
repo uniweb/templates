@@ -1,8 +1,7 @@
 export default {
+  family: 'features',
   title: 'Services',
   description: 'Grid of the services offered, each with an icon, a name and a short description',
-  category: 'showcase',
-  purpose: 'Explain',
 
   content: {
     title: 'Section heading',

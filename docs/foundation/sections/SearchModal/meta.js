@@ -5,10 +5,9 @@
  * Not directly used in content - imported by Header component.
  */
 export default {
+  family: 'search',
   title: 'Search Modal',
   description: 'Full-text search modal with keyboard navigation',
-  category: 'utility',
-  purpose: 'Search',
 
   // SearchModal is not rendered from content
   // It's imported and controlled by the Header component

@@ -4,10 +4,9 @@
  * Display lab members, collaborators, or team with academic roles.
  */
 export default {
+  family: 'team',
   title: 'Team Grid',
   description: 'Display lab members, collaborators, or team with academic roles',
-  category: 'content',
-  purpose: 'Inform',
 
   content: {
     title: 'Section heading',

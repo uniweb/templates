@@ -1,8 +1,6 @@
 export default {
   title: 'Footer',
   description: 'Site footer with brand info, navigation, social links, and newsletter',
-  category: 'navigation',
-  purpose: 'Navigate',
 
   content: {
     title: 'Store name',

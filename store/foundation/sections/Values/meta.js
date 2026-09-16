@@ -1,8 +1,7 @@
 export default {
+  family: 'features',
   title: 'Values',
   description: 'Two-column layout with text and icon-based value propositions',
-  category: 'content',
-  purpose: 'Explain',
 
   content: {
     items: {

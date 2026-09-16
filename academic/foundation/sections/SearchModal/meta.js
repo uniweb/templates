@@ -4,10 +4,9 @@
  * Full-text search interface for the site.
  */
 export default {
+  family: 'search',
   title: 'Search Modal',
   description: 'Full-text search interface for the site.',
-  category: 'navigation',
-  purpose: 'Navigate',
 
   // This is a utility component, not directly used in content
   hidden: true,

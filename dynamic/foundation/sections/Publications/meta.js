@@ -1,8 +1,7 @@
 export default {
+  family: 'bibliography',
   title: 'Publications',
   description: 'Research paper listings from CrossRef API',
-  category: 'content',
-  purpose: 'Inform',
 
   content: {
     title: 'Section title',

@@ -1,7 +1,6 @@
 export default {
   title: 'Footer',
   description: 'Site footer with navigation, social links, and copyright',
-  category: 'navigation',
 
   content: {
     title: 'Site name (optional)',

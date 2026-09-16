@@ -14,8 +14,6 @@
 export default {
   title: 'Header',
   description: 'Documentation header with category tabs, search, version, and locale switchers',
-  category: 'navigation',
-  purpose: 'Navigate',
   background: 'self',
 
   content: {

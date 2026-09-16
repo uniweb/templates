@@ -6,8 +6,6 @@
 export default {
   title: 'Section',
   description: 'Layout container with background and spacing options',
-  category: 'content',
-  purpose: 'Inform',
 
   content: {
     title: 'Section heading',

@@ -4,10 +4,9 @@
  * Navigation header with auto/manual modes and locale support.
  */
 export default {
+  family: 'header',
   title: 'Navbar',
   description: 'Site navigation header with automatic page detection and locale switcher',
-  category: 'navigation',
-  purpose: 'Navigate',
 
   content: {
     title: 'Site name (uses site config if not provided)',

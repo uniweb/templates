@@ -16,11 +16,10 @@
  * `type` from the authoring vocabulary.
  */
 export default {
+  family: 'estimate',
   title: 'Quote Form',
   description:
     'Renders a form designed by the author and sends it to the destination the site declares. Draws whatever fields it is given.',
-  category: 'structure',
-  purpose: 'Convert',
 
   data: {
     form: '@std/form',

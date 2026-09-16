@@ -1,8 +1,6 @@
 export default {
   title: 'Call to Action',
   description: 'Bold banner with heading, description, and optional decorative element',
-  category: 'impact',
-  purpose: 'Convert',
 
   background: 'self',
 

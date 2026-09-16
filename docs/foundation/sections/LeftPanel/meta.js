@@ -8,10 +8,9 @@
  * themed section background underneath, and the seam would show.
  */
 export default {
+  family: 'toc',
   title: 'Left Panel',
   description: 'Sidebar navigation with collapsible sections and category filtering',
-  category: 'navigation',
-  purpose: 'Navigate',
   background: 'self',
 
   // Navigation comes from the site's own page tree, not from this section's

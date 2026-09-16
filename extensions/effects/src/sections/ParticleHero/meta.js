@@ -1,7 +1,6 @@
 export default {
   title: 'Particle Hero',
   description: 'Hero section with animated floating particles',
-  category: 'impact',
 
   content: {
     title: 'Headline',

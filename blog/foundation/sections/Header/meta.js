@@ -6,8 +6,6 @@
 export default {
   title: 'Header',
   description: 'Responsive navigation header with language switcher',
-  category: 'navigation',
-  purpose: 'Navigate',
 
   content: {
     title: 'Site name (shown as logo text)',

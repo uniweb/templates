@@ -6,8 +6,6 @@
 export default {
   title: 'Code Block',
   description: 'Display code snippets with syntax highlighting and copy button',
-  category: 'content',
-  purpose: 'Inform',
 
   content: {
     title: 'Optional filename or description',

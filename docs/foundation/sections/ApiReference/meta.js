@@ -7,8 +7,6 @@
 export default {
   title: 'API Reference',
   description: 'API endpoint documentation with method, parameters, and examples',
-  category: 'content',
-  purpose: 'Inform',
 
   content: {
     title: 'Endpoint name',

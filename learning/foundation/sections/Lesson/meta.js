@@ -1,7 +1,7 @@
 export default {
+  family: 'steps',
   title: 'Lesson',
   description: 'Unified lesson section with auto-detected variant (material, quiz, code challenge, open-ended)',
-  category: 'learning',
 
   content: {
     title: 'Lesson heading (optional)',

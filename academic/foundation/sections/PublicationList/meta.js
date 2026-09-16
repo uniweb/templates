@@ -5,10 +5,9 @@
  * Uses @uniweb/scholar for professional citation formatting.
  */
 export default {
+  family: 'bibliography',
   title: 'Publication List',
   description: 'Display academic publications with citation formatting',
-  category: 'content',
-  purpose: 'Inform',
 
   content: {
     title: 'Section heading',

@@ -1,8 +1,6 @@
 export default {
   title: 'Hero',
   description: 'Split hero with live data widget',
-  category: 'impact',
-  purpose: 'Impress',
 
   context: {
     allowTranslucentTop: true,

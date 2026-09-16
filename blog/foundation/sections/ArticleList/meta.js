@@ -1,8 +1,7 @@
 export default {
+  family: 'card-grid',
   title: 'Article List',
   description: 'Displays a grid of article cards with links to individual posts.',
-  category: 'content',
-  purpose: 'Organize',
 
   // The `content.data` key this section reads — article records
   // (content.data.articles); a section receives only the keys it declares.

@@ -1,8 +1,7 @@
 export default {
+  family: 'features',
   title: 'Tech Features',
   description: 'Feature cards with icons on a dark background',
-  category: 'showcase',
-  purpose: 'Explain',
 
   content: {
     title: 'Section title',

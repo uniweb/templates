@@ -1,8 +1,6 @@
 export default {
   title: 'Footer',
   description: 'Site footer with a short blurb and link columns',
-  category: 'structure',
-  purpose: 'Navigate',
 
   content: {
     title: 'Business name',

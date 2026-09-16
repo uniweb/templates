@@ -6,8 +6,6 @@
 export default {
   title: 'Footer',
   description: 'A site footer with navigation and language switcher',
-  category: 'navigation',
-  purpose: 'Navigate',
 
   content: {
     title: 'Site name',

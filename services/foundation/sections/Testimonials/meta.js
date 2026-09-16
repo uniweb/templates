@@ -1,8 +1,6 @@
 export default {
   title: 'Testimonials',
   description: 'What customers said, as a grid of short quotes with attribution',
-  category: 'showcase',
-  purpose: 'Reassure',
 
   content: {
     title: 'Section heading',

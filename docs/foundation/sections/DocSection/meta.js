@@ -6,10 +6,9 @@
  * the visual background; the runtime's section background is not needed.
  */
 export default {
+  family: 'article',
   title: 'Doc Section',
   description: 'Main documentation content section with typography and navigation',
-  category: 'content',
-  purpose: 'Inform',
   background: 'self',
 
   content: {

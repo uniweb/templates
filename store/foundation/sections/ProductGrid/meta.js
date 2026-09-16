@@ -1,8 +1,7 @@
 export default {
+  family: 'products',
   title: 'Product Grid',
   description: 'Display product records with quick view and buy buttons',
-  category: 'showcase',
-  purpose: 'Sell',
 
   data: {
     products: {
