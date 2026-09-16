@@ -10,12 +10,6 @@ export default {
     images: 'Visual image [0-1]',
   },
 
-  starter: {
-    title: 'Explain one idea',
-    paragraphs: ['Describe it in a sentence or two, then pair it with an image on the other side.'],
-    links: [{ text: 'Learn more', href: '#' }],
-  },
-
   params: {
     variant: {
       type: 'select',
