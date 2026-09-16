@@ -2,7 +2,7 @@
 type: DocSection
 ---
 
-### Getting Started
+#> Getting Started
 
 # Installation
 

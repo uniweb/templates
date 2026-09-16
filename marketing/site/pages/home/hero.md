@@ -5,7 +5,7 @@ background:
   gradient: linear-gradient(135deg, var(--primary-800), var(--primary-950))
 ---
 
-### Introducing Acme
+#> Introducing Acme
 
 # Build the future
 # [with confidence]{accent}

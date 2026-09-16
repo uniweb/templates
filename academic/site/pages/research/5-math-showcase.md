@@ -5,7 +5,7 @@ theme: light
 showNumbers: false
 ---
 
-### Pipeline Showcase
+#> Pipeline Showcase
 
 # Math Rendering Examples
 

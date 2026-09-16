@@ -7,7 +7,7 @@ textWidth: regular
 headingStyle: light
 ---
 
-### Research Program
+#> Research Program
 
 # Advancing AI for Human Benefit
 

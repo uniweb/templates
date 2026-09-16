@@ -2,7 +2,7 @@
 type: Hero
 ---
 
-### Available 7 days
+#> Available 7 days
 
 # Plumbing that holds up.
 

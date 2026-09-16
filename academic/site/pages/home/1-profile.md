@@ -5,7 +5,7 @@ photoPosition: right
 showAffiliation: true
 ---
 
-### Department of Computer Science, Stanford University
+#> Department of Computer Science, Stanford University
 
 # Dr. Sarah Chen
 

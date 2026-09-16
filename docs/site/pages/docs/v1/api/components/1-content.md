@@ -2,7 +2,7 @@
 type: DocSection
 ---
 
-### API Reference
+#> API Reference
 
 # Components API (v1)
 

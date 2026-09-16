@@ -4,7 +4,7 @@ variant: gradient
 theme: dark
 ---
 
-### The Inkwell Blog
+#> The Inkwell Blog
 
 # Writing about building for the web
 

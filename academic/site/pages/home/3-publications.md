@@ -12,7 +12,7 @@ limit: 5
 
 Recent peer-reviewed publications from my research group.
 
-#### journal
+###> journal
 
 ### Understanding Context in Large Language Models: A Comprehensive Study
 
@@ -26,7 +26,7 @@ Nature Machine Intelligence
 
 [PDF](#)
 
-#### conference
+###> conference
 
 ### Fairness-Aware Machine Learning in Clinical Decision Support
 
@@ -41,7 +41,7 @@ Proceedings of NeurIPS 2024
 [PDF](#)
 [Code](https://github.com)
 
-#### journal
+###> journal
 
 ### Bridging Human Expertise and AI: A Framework for Collaborative Intelligence
 
@@ -55,7 +55,7 @@ Communications of the ACM
 
 [PDF](#)
 
-#### preprint
+###> preprint
 
 ### Multilingual Medical Named Entity Recognition with Transfer Learning
 
@@ -67,7 +67,7 @@ arXiv preprint
 
 [arXiv](https://arxiv.org)
 
-#### conference
+###> conference
 
 ### Privacy-Preserving Natural Language Processing for Healthcare
 

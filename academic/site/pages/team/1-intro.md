@@ -5,7 +5,7 @@ textDensity: normal
 textAlign: left
 ---
 
-### Research Group
+#> Research Group
 
 # Chen Lab Members
 

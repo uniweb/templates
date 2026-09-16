@@ -5,7 +5,7 @@ theme: dark
 showNumbers: true
 ---
 
-### Mathematical Foundations
+#> Mathematical Foundations
 
 # Core Methods
 

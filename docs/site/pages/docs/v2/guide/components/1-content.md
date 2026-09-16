@@ -2,7 +2,7 @@
 type: DocSection
 ---
 
-### Guide
+#> Guide
 
 # Components
 

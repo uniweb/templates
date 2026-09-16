@@ -6,7 +6,7 @@ textAlign: left
 textWidth: regular
 ---
 
-### Publications
+#> Publications
 
 # Complete Publication Record
 

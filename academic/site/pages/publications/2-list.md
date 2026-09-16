@@ -7,7 +7,7 @@ showSearch: true
 showCiteButton: true
 ---
 
-#### journal
+###> journal
 
 ### Understanding Context in Large Language Models: A Comprehensive Study
 
@@ -21,7 +21,7 @@ Nature Machine Intelligence, 6(3), 234-251
 
 [PDF](#)
 
-#### conference
+###> conference
 
 ### Fairness-Aware Machine Learning in Clinical Decision Support
 
@@ -36,7 +36,7 @@ Proceedings of NeurIPS 2024
 [PDF](#)
 [Code](https://github.com)
 
-#### preprint
+###> preprint
 
 ### Multilingual Medical Named Entity Recognition with Transfer Learning
 
@@ -48,7 +48,7 @@ arXiv preprint arXiv:2024.12345
 
 [arXiv](https://arxiv.org/abs/2024.12345)
 
-#### journal
+###> journal
 
 ### Bridging Human Expertise and AI: A Framework for Collaborative Intelligence
 
@@ -62,7 +62,7 @@ Communications of the ACM, 66(8), 78-89
 
 [PDF](#)
 
-#### conference
+###> conference
 
 ### Privacy-Preserving Natural Language Processing for Healthcare
 
@@ -77,7 +77,7 @@ Proceedings of ACL 2023
 [PDF](#)
 [Slides](#)
 
-#### journal
+###> journal
 
 ### Deep Learning Approaches for Medical Image Analysis: A Survey
 
@@ -91,7 +91,7 @@ IEEE Transactions on Medical Imaging, 42(5), 1123-1145
 
 [PDF](#)
 
-#### book
+###> book
 
 ### AI in Healthcare: Principles and Applications
 
@@ -105,7 +105,7 @@ Cambridge University Press
 
 [Publisher](https://cambridge.org)
 
-#### conference
+###> conference
 
 ### Interpretable Machine Learning for Clinical Decision Making
 
@@ -118,7 +118,7 @@ Proceedings of ICML 2021
 [PDF](#)
 [Video](https://youtube.com)
 
-#### journal
+###> journal
 
 ### Natural Language Understanding in Medical Texts
 

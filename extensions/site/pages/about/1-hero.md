@@ -2,7 +2,7 @@
 type: Hero
 ---
 
-#### Extensions Demo
+#> Extensions Demo
 
 # About This Project
 
