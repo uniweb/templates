@@ -56,7 +56,7 @@ Templates contain only content — the unique parts that make each template diff
 - `components/` — internal (non-addressable) components (if any)
 
 **Site content:**
-- `site.yml.hbs` — site configuration (processed through Handlebars)
+- `site.yml.hbs` — site configuration (processed through Handlebars). Give the site its own `name`, a `description` and `tags`: an app that offers the template shows them on its card, and a site made from the template starts with that name. Tags are standard ids from [`@uniweb/schemas`](https://github.com/uniweb/schemas#site-tags). `node lint.mjs` checks all three.
 - `theme.yml` — theme variables
 - `layout/` — header, footer, sidebar content (markdown)
 - `pages/` — page content (markdown + page.yml)
@@ -250,6 +250,7 @@ The CLI downloads and extracts tarballs on demand when users run `create --templ
 - [ ] Create `<name>/template.json` with `name` and `format: 2`
 - [ ] Create `<name>/foundation/` with `main.js`, `styles.css`, and `sections/`
 - [ ] Create `<name>/site/` with `site.yml.hbs`, pages, and layout
+- [ ] Give the site its own `name`, a `description` and standard `tags` in `site.yml.hbs`
 - [ ] Section types in `foundation/sections/` with components and optional `meta.js`
 - [ ] Add `.hbs` extension to files needing variable substitution
 - [ ] Add the template to `manifest.json`

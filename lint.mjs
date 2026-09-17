@@ -12,6 +12,8 @@
  *   - @uniweb/* dependencies in template.json use {{version "X"}} helper
  *   - Third-party dependencies match standard-deps.json when listed
  *   - package.json "files" array matches manifest order
+ *   - A template with a sample site gives it a name, a description and tags,
+ *     which is what a site card shows
  */
 
 import { readFileSync, readdirSync, existsSync, statSync } from 'node:fs'
@@ -77,6 +79,42 @@ for (const name of templateNames) {
           `${name}/template.json (${pkgType}): "${depName}" = "${v}" differs from standard-deps.json ("${standardDeps[depName]}")`
         )
       }
+    }
+  }
+}
+
+// Site card: name, description, tags
+//
+// An app that offers a template shows it as a card read from the sample site's
+// own site.yml — `name` is the title and the default name of a site made from
+// it, `description` the line under it, `tags` its categories. A `{{projectName}}`
+// placeholder would name every site after its project folder instead.
+//
+// Tags must be standard ids from `@uniweb/schemas/site-tags`. This lint runs
+// with nothing installed, so it checks their form here, not the vocabulary.
+const topLevelLine = (text, key) => text.match(new RegExp(`^${key}:(.*)$`, 'm'))?.[1]?.trim()
+for (const name of templateNames) {
+  const siteDir = join(ROOT, name, 'site')
+  if (!existsSync(siteDir)) continue
+  const file = ['site.yml.hbs', 'site.yml'].map((f) => join(siteDir, f)).find(existsSync)
+  if (!file) {
+    errors.push(`${name}/site has no site.yml`)
+    continue
+  }
+  const text = readFileSync(file, 'utf8')
+  for (const key of ['name', 'description']) {
+    const value = topLevelLine(text, key)
+    if (!value) errors.push(`${name}/site: site.yml needs a \`${key}:\` for the site card`)
+    else if (value.includes('{{')) errors.push(`${name}/site: \`${key}:\` is a placeholder — give the template its own`)
+  }
+  const tags = topLevelLine(text, 'tags')
+  const list = tags?.match(/^\[(.*)\]$/)?.[1]
+  const ids = list?.split(',').map((t) => t.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean)
+  if (!ids?.length) {
+    errors.push(`${name}/site: site.yml needs \`tags: [id, …]\` (standard ids from @uniweb/schemas/site-tags)`)
+  } else {
+    for (const id of ids) {
+      if (!/^[a-z][a-z0-9]*(-[a-z0-9]+)*$/.test(id)) errors.push(`${name}/site: tag "${id}" is not a kebab-case id`)
     }
   }
 }
