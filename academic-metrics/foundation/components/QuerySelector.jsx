@@ -8,7 +8,7 @@
  *
  * The dropdown shows "All members" plus one option per saved view — a
  * record of the `queries` query (declared under `queries:` in site.yml,
- * one file per view in entities/queries/). A view's `where:` field is
+ * one file per view in records/queries/). A view's `where:` field is
  * the predicate applied when it is picked.
  */
 import { useSelectedQuery, usePanelFilter, ALL_MEMBERS, handleOf } from './query-context.jsx'

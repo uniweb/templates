@@ -32,8 +32,8 @@ Then visit:
 | `foundation/` | A copy of the `@uniweb/business-docs` foundation source. Authors are free to fork it for site-specific extensions. |
 | `site/site.yml.hbs` | Vendor identity, default currency, default tax jurisdiction, locale, and the queryable surface for both queries. |
 | `site/theme.yml` | Default colors and fonts. The foundation declares no hard-coded colors; everything maps through CSS variables. |
-| `site/entities/sows/` | 3 sample SOWs: two signed (Globex platform redesign, Initech mobile app) and one in-review (Pied Piper data migration). |
-| `site/entities/invoices/` | 5 sample invoices: two multi-line subscription bills, two single-line milestone bills, one overdue. The overdue invoice and the in-review SOW exercise the cross-record validation matrix; the build log surfaces each finding at the appropriate severity. |
+| `site/records/sows/` | 3 sample SOWs: two signed (Globex platform redesign, Initech mobile app) and one in-review (Pied Piper data migration). |
+| `site/records/invoices/` | 5 sample invoices: two multi-line subscription bills, two single-line milestone bills, one overdue. The overdue invoice and the in-review SOW exercise the cross-record validation matrix; the build log surfaces each finding at the appropriate severity. |
 | `site/pages/` | One folder per top-level surface (index, invoices, sows, reports). A parametric `[slug]/` page — a URL for each invoice or SOW — is deferred to a follow-up; the v1 pages already exercise the foundation end-to-end. |
 
 ## Customizing
@@ -43,7 +43,7 @@ Then visit:
    support a jurisdiction the foundation doesn't ship with, extend the
    registry under `business_docs.registries.tax`.
 3. **New invoices / SOWs** — drop `.yml` files into
-   `site/entities/invoices/` or `site/entities/sows/`. The build
+   `site/records/invoices/` or `site/records/sows/`. The build
    also accepts `.bib` and YAML array form (one file with multiple
    records) for bulk imports.
 4. **Foundation tweaks** — edit `foundation/`. The `useFilteredEngagement`

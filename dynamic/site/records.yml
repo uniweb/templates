@@ -1,11 +1,9 @@
-# What is in this site's folder. Listing an entity here is what makes it a
-# record; anything left out exists but is not published.
-- videos/*.json
-
+# How this site's records are organized. Every file in records/ is a record already
+# and sits at the top of the site's folder — this only places some in sub-folders.
+#
 # Logbook entries. The FOLDER an entry is placed in is part of its record
 # (`path`) — and under a `[...path]` page it becomes part of its URL:
-# /logbook/welcome, /logbook/field/river-survey, /logbook/lab/dna-results.
-- logbook/welcome.md
+# /logbook/welcome (at the top), /logbook/field/river-survey, /logbook/lab/dna-results.
 - folder: field
   label: Field work
   records:

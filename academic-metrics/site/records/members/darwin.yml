@@ -1,7 +1,7 @@
 # Sample member — Charles Darwin (lightly anachronized).
 #
-# Every .yml in this folder is one member record (published by
-# records.yml), keyed by `slug` (the filename). The `members` query in
+# Every .yml in this folder is one member record, keyed by `slug` (the
+# filename). The `members` query in
 # site.yml selects them; sections read them as `content.data.members`.
 
 name: Charles Darwin

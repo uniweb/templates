@@ -1,7 +1,7 @@
 # Sample monograph data — Darwin's Galapagos observations.
 #
-# Each .yml in this folder is one record (published by records.yml),
-# with `slug` (from the filename) plus every top-level key below. The
+# Each .yml in this folder is one record, with `slug` (from the filename)
+# plus every top-level key below. The
 # `monograph` query selects it, so `content.data.monograph[0]` in a
 # section component is the beagle record with title, author,
 # specimens, etc. directly on it.

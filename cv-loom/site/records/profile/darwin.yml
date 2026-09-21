@@ -1,8 +1,7 @@
 # Charles Darwin — CV profile data
 #
-# A whole CV as a single structured data file: one record (records.yml
-# publishes every .yml in this folder) with `slug` (from filename) + all
-# the fields below. The content handler in main.js flattens
+# A whole CV as a single structured data file: one record (every file in
+# records/ is one) with `slug` (from filename) + all the fields below. The content handler in main.js flattens
 # data.profile[0] into the Loom variable namespace, so every
 # {expression} in the section markdown reads directly from these fields.
 #
