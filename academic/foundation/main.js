@@ -5,7 +5,8 @@
  * - vars: CSS custom properties that sites can override in theme.yml
  * - Layout: Custom layout component (optional)
  *
- * Identity (name, version, description) comes from package.json.
+ * Name: `uniweb create` adds `name` to the default export — what this
+ * foundation registers as (@org/<name>). The version comes from package.json.
  */
 
 /**
