@@ -36,7 +36,7 @@ marketing/
     │       ├── page.yml
     │       └── 1-hero.md
     ├── records/             # Optional: the site's records, by data schema
-    ├── records.yml          # Optional: sorts records into folders
+    │   └── folder.yml       # Optional: sorts records into folders
     ├── queries.yml          # Optional: named queries over them
     ├── locales/             # Optional: i18n translations
     └── public/              # Optional: static assets
@@ -60,7 +60,7 @@ Templates contain only content — the unique parts that make each template diff
 - `theme.yml` — theme variables
 - `layout/` — header, footer, sidebar content (markdown)
 - `pages/` — page content (markdown + page.yml)
-- `records/` + `records.yml` + `queries.yml` — the site's records, how they are organized, and how they are reached (if any)
+- `records/` (with its optional `folder.yml`) + `queries.yml` — the site's records, how they are organized, and how they are reached (if any)
 - `locales/` — i18n translation files (if any)
 - `public/` — static assets like favicon, images, data files
 

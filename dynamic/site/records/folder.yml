@@ -1,5 +1,6 @@
-# How this site's records are organized. Every file in records/ is a record already
-# and sits at the top of the site's folder — this only places some in sub-folders.
+# How this site's records are organized. Every other file in records/ is a record
+# already and sits at the top of the site's folder — this only places some in
+# sub-folders. It is the one file here that is not a record.
 #
 # Logbook entries. The FOLDER an entry is placed in is part of its record
 # (`path`) — and under a `[...path]` page it becomes part of its URL:

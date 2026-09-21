@@ -5,7 +5,7 @@ import { FolderOpen } from 'lucide-react'
 /**
  * Logbook list — records placed in folders, grouped by their placement.
  *
- * Every record carries `path`, the folder `records.yml` put it in (`''` at the
+ * Every record carries `path`, the folder `records/folder.yml` put it in (`''` at the
  * root), and `$route`, its own URL — filled by the framework from that placement and
  * the record's slug, because the entries' page is a `[...path]` page:
  * `/logbook/field/river-survey`. Read `$route`; never rebuild it.
