@@ -1,5 +1,7 @@
 ---
 type: Grid
+columns: 2
+layout: 67/33
 ---
 
 # Scientific Data
