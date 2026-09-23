@@ -3,9 +3,7 @@ name: attendance
 label: Attendance
 description: A personal record of sessions attended. One entity per attendee.
 
-# Anyone signed in keeps their own record — this is per-user activity, not
-# authored content, so it is not gated to the organising unit.
-creatable_by: any_user
+# Anyone signed in keeps their own record — per-user activity, not authored content.
 
 sections:
   identity:

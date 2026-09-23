@@ -9,40 +9,62 @@
  */
 export const seed = {
   accounts: [
-    // ⭐ The two accounts are the demo. `organiser` belongs to a unit, so the
-    // schemas' `creatable_by: unit_members` lets them author the programme.
-    { username: 'organiser', password: 'organiser', handle: 'Sam (organiser)', units: ['conf'] },
-    // `attendee` belongs to none, so the SERVER refuses their writes — not the UI.
-    { username: 'attendee', password: 'attendee', handle: 'Alex (attendee)', units: [] },
+    // ⭐ The two accounts are the demo. `organiser` runs the site, and the
+    // programme's tracks are theirs to edit.
+    { username: 'organiser', password: 'organiser', handle: 'Sam (organiser)', operator: true },
+    // `attendee` is a member: the SERVER refuses their writes to the organiser's
+    // tracks — not the UI — and lets them record attending.
+    { username: 'attendee', password: 'attendee', handle: 'Alex (attendee)' },
   ],
 
-  // What the store enforces. It mirrors the two rules the real schemas declare —
-  // see `foundation/schemas/` — and enforces nothing else: a mock validates
-  // permissions, not content.
+  // The Models' sections, as `foundation/schemas/` declares them — so a write names
+  // the same sections here as in production, and the store checks it against them,
+  // `append_only` included.
   schemas: {
-    '@/track': { creatable_by: 'unit_members' },
-    '@/session': { creatable_by: 'unit_members' },
-    '@/attendance': { creatable_by: 'any_user', append_only: ['checkins'] },
+    '@/track': {
+      sections: {
+        identity: { kind: 'single', brief: true, fields: { name: { type: 'string', required: true }, summary: { type: 'string' } } },
+        sessions: {
+          kind: 'multi',
+          fields: {
+            title: { type: 'string', required: true },
+            speaker: { type: 'string' },
+            room: { type: 'string' },
+            minutes: { type: 'number' },
+          },
+        },
+      },
+    },
+    '@/attendance': {
+      sections: {
+        identity: { kind: 'single', brief: true, fields: { note: { type: 'string' } } },
+        checkins: {
+          kind: 'multi',
+          append_only: true,
+          fields: { session: { type: 'string', required: true }, at: { type: 'string' } },
+        },
+      },
+    },
   },
 
   entities: [
     {
-      uuid: 'track-main',
+      uuid: '01926d5e-0000-7000-8000-00000000c001',
       model: '@/track',
-      data: { name: 'Main hall', summary: 'Keynotes and plenary sessions.' },
       items: [
-        { id: 'sess-1', section: 'sessions', data: { title: 'Opening keynote', speaker: 'Ada Lovelace', room: 'Hall A', minutes: 45 } },
-        { id: 'sess-2', section: 'sessions', data: { title: 'Designing for the edge', speaker: 'Grace Hopper', room: 'Hall A', minutes: 30 } },
-        { id: 'sess-3', section: 'sessions', data: { title: 'Closing panel', speaker: 'The programme committee', room: 'Hall A', minutes: 60 } },
+        { section: 'identity', data: { name: 'Main hall', summary: 'Keynotes and plenary sessions.' } },
+        { section: 'sessions', data: { title: 'Opening keynote', speaker: 'Ada Lovelace', room: 'Hall A', minutes: 45 } },
+        { section: 'sessions', data: { title: 'Designing for the edge', speaker: 'Grace Hopper', room: 'Hall A', minutes: 30 } },
+        { section: 'sessions', data: { title: 'Closing panel', speaker: 'The programme committee', room: 'Hall A', minutes: 60 } },
       ],
     },
     {
-      uuid: 'track-workshops',
+      uuid: '01926d5e-0000-7000-8000-00000000c002',
       model: '@/track',
-      data: { name: 'Workshops', summary: 'Hands-on, limited places.' },
       items: [
-        { id: 'sess-4', section: 'sessions', data: { title: 'Hands-on: building a foundation', speaker: 'Alan Turing', room: 'Room 2', minutes: 90 } },
-        { id: 'sess-5', section: 'sessions', data: { title: 'Content modelling clinic', speaker: 'Barbara Liskov', room: 'Room 2', minutes: 60 } },
+        { section: 'identity', data: { name: 'Workshops', summary: 'Hands-on, limited places.' } },
+        { section: 'sessions', data: { title: 'Hands-on: building a foundation', speaker: 'Alan Turing', room: 'Room 2', minutes: 90 } },
+        { section: 'sessions', data: { title: 'Content modelling clinic', speaker: 'Barbara Liskov', room: 'Room 2', minutes: 60 } },
       ],
     },
   ],

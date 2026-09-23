@@ -103,16 +103,15 @@ function Track({ track, onChanged }) {
   const writer = useEntityWriter({ schema: '@/track', uuid: track.uuid })
   const { viewer } = useSession()
 
-  // ⛔ This decides what to DRAW, never what is allowed. The rule lives in the
-  // schema (`creatable_by: unit_members`) and is enforced by the store, so an
-  // attendee who calls the write anyway is refused there. Showing the controls to
-  // the wrong person would be untidy; relying on hiding them would be a security
-  // model made of CSS.
+  // ⛔ This decides what to DRAW, never what is allowed. A track is the organiser's
+  // entry, and the store refuses a write to it by anyone else, so an attendee who
+  // calls the write anyway is refused there. Showing the controls to the wrong person
+  // would be untidy; relying on hiding them would be a security model made of CSS.
   //
-  // ⚠️ `actingUnitId` is the package's OWN normalized field for unit membership.
-  // Inventing a `viewer.units` here would be a second idea of who an organiser is,
-  // and two apps would disagree about it.
-  const mayEdit = viewer?.actingUnitId != null
+  // ⭐ The organiser is the site's operator, who holds `system_admin` — the package's
+  // own answer to "who runs this site". (`viewer.workspace` is the same for every
+  // member, so it cannot tell them apart.)
+  const mayEdit = viewer?.roles?.some((r) => r.role === 'system_admin') === true
 
   return (
     <article className="rounded-[var(--radius-lg)] border border-[var(--border)] p-5">
@@ -287,7 +286,10 @@ function CheckIn({ session }) {
       // existence a consequence of using the feature, which is what an app usually
       // wants: no empty rows for people who never attended anything.
       if (!mine) {
-        await createEntity({ schema: '@/attendance', data: { identity: { note: 'My conference' } } })
+        await createEntity({
+          schema: '@/attendance',
+          items: [{ section: 'identity', data: { note: 'My conference' } }],
+        })
         await refresh()
         setBusy(false)
         return

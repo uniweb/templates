@@ -3,10 +3,8 @@ name: session
 label: Session
 description: A talk, workshop or panel in the conference programme.
 
-# ⭐ Only members of the organising unit may create sessions. Without this a
-# content Model materializes OPEN — anyone with an account could add a talk — and
-# the app's "only organisers can edit" would be a UI convention, not a rule.
-creatable_by: unit_members
+# Models are open: anyone signed in may create a session of their own. What keeps the
+# programme the organiser's is the entry — only its owner may edit it.
 
 fields:
   title:    { type: string, required: true }
