@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { SafeHtml } from '@uniweb/kit'
-import { useRecords, useEntityWriter, useSession, createEntity, SignedIn } from '@uniweb/api'
+import { useRecords, useEntity, useEntityWriter, useSession, createEntity, SignedIn } from '@uniweb/api'
 
 /**
  * The conference programme — the whole point of this template.
@@ -99,7 +99,11 @@ function Authored({ content, bare = false }) {
 }
 
 function Track({ track, onChanged }) {
-  const sessions = (track.items || []).filter((item) => item.section === 'sessions')
+  // ⚠️ A listed record is a SUMMARY — its brief, and no items. The sessions are the
+  // track's items, so they are read from the track itself; each carries `section`,
+  // its section's name, which is how the list below finds them.
+  const { entity } = useEntity({ schema: '@/track', uuid: track.uuid })
+  const sessions = (entity?.hydrated?.items || []).filter((item) => item.section === 'sessions')
   const writer = useEntityWriter({ schema: '@/track', uuid: track.uuid })
   const { viewer } = useSession()
 
@@ -116,13 +120,13 @@ function Track({ track, onChanged }) {
   return (
     <article className="rounded-[var(--radius-lg)] border border-[var(--border)] p-5">
       <header className="mb-4">
-        <h3 className="text-xl font-semibold text-heading">{track.name}</h3>
-        {track.summary && <p className="opacity-70">{track.summary}</p>}
+        <h3 className="text-xl font-semibold text-heading">{track.brief?.name}</h3>
+        {track.brief?.summary && <p className="opacity-70">{track.brief.summary}</p>}
       </header>
 
       <ol className="space-y-2">
         {sessions.map((item, index) => (
-          <li key={item.item_id} className="flex items-start gap-3 rounded-[var(--radius-md)] bg-[var(--section)] p-3">
+          <li key={item.id} className="flex items-start gap-3 rounded-[var(--radius-md)] bg-[var(--section)] p-3">
             <span className="w-6 shrink-0 text-right opacity-50">{index + 1}</span>
             <div className="grow">
               <p className="font-medium">{item.data.title}</p>
@@ -142,7 +146,7 @@ function Track({ track, onChanged }) {
                   // ⚠️ Moving UP means landing after the item TWO back — after the
                   // one directly before it is where it already is, so the obvious
                   // version is a silent no-op. `'first'` when there is no such item.
-                  target={index > 1 ? { after: sessions[index - 2].item_id } : 'first'}
+                  target={index > 1 ? { after: sessions[index - 2].id } : 'first'}
                   onChanged={onChanged}
                 />
               )}
@@ -173,7 +177,7 @@ function SessionControls({ writer, item, canMoveUp, target, onChanged }) {
     const form = new FormData(event.currentTarget)
     // ⚠️ Whole-data replace — round-trip every field you are not editing, or it is
     // gone. The writer sends what you give it.
-    await writer.update(item.item_id, {
+    await writer.update(item.id, {
       ...item.data,
       title: form.get('title'),
       speaker: form.get('speaker'),
@@ -203,7 +207,7 @@ function SessionControls({ writer, item, canMoveUp, target, onChanged }) {
         <button
           type="button"
           onClick={async () => {
-            await writer.move(item.item_id, target)
+            await writer.move(item.id, target)
             onChanged()
           }}
           className="opacity-70 hover:opacity-100"
@@ -215,7 +219,7 @@ function SessionControls({ writer, item, canMoveUp, target, onChanged }) {
       <button
         type="button"
         onClick={async () => {
-          await writer.remove(item.item_id)
+          await writer.remove(item.id)
           onChanged()
         }}
         className="opacity-70 hover:opacity-100"
@@ -260,15 +264,18 @@ function AddSession({ writer, onChanged }) {
  */
 function CheckIn({ session }) {
   const { viewer } = useSession()
-  const { records, refresh } = useRecords(viewer ? { schema: '@/attendance' } : null)
+  // `mine`: the organiser may read everyone's records, and this is the viewer's own.
+  const { records, refresh } = useRecords(viewer ? { schema: '@/attendance', scope: 'mine' } : null)
   const mine = records[0]
+  // The check-ins are the record's items — read from the record, as a track's are.
+  const { entity: attendance } = useEntity(mine ? { schema: '@/attendance', uuid: mine.uuid } : null)
   const writer = useEntityWriter(mine ? { schema: '@/attendance', uuid: mine.uuid } : null)
   const [busy, setBusy] = useState(false)
 
   if (!viewer) return null
 
-  const already = (mine?.items || []).some(
-    (item) => item.section === 'checkins' && item.data?.session === session.item_id,
+  const already = (attendance?.hydrated?.items || []).some(
+    (item) => item.section === 'checkins' && item.data?.session === String(session.id),
   )
   if (already) {
     return (
@@ -298,7 +305,7 @@ function CheckIn({ session }) {
       // section declared `append_only`. An item that lands anywhere else is stored
       // happily and is NOT tamper-evident.
       await writer.create(
-        { session: session.item_id, at: new Date().toISOString() },
+        { session: String(session.id), at: new Date().toISOString() },
         { section: 'checkins', position: 'last' },
       )
       await refresh()
