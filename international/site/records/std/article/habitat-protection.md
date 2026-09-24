@@ -1,10 +1,11 @@
 ---
-title: Protecting Panda Habitats in Sichuan
-slug: habitat-protection
-excerpt: New corridors connect fragmented bamboo forests across mountain ranges.
-date: 2024-01-15
-tags: [habitat, sichuan, conservation]
-image: https://images.unsplash.com/photo-1564349683136-77e08dba1ef3?w=800&h=400&fit=crop
+article:
+  title: Protecting Panda Habitats in Sichuan
+  slug: habitat-protection
+  excerpt: New corridors connect fragmented bamboo forests across mountain ranges.
+  date: 2024-01-15
+  tags: [habitat, sichuan, conservation]
+  image: https://images.unsplash.com/photo-1564349683136-77e08dba1ef3?w=800&h=400&fit=crop
 ---
 
 # Protecting Panda Habitats in Sichuan

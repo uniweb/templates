@@ -1,10 +1,11 @@
 ---
-title: Writing for the Web
-slug: writing-for-the-web
-excerpt: People don't read web pages, they scan them. Write so the scan still makes sense.
-date: 2026-05-12
-tags: [writing, content]
-image: https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=400&fit=crop
+article:
+  title: Writing for the Web
+  slug: writing-for-the-web
+  excerpt: People don't read web pages, they scan them. Write so the scan still makes sense.
+  date: 2026-05-12
+  tags: [writing, content]
+  image: https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=400&fit=crop
 ---
 
 # Writing for the Web
