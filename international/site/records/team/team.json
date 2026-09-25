@@ -1,23 +1,27 @@
 [
   {
+    "slug": "wei-zhang",
     "name": "Dr. Wei Zhang",
     "role": "Director & Lead Researcher",
     "bio": "Wildlife biologist with 25 years of panda research experience.",
     "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop"
   },
   {
+    "slug": "lin-chen",
     "name": "Dr. Lin Chen",
     "role": "Conservation Ecologist",
     "bio": "Specializing in habitat restoration and bamboo forest ecology.",
     "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop"
   },
   {
+    "slug": "marie-dubois",
     "name": "Marie Dubois",
     "role": "Community Programs Director",
     "bio": "Building sustainable partnerships with local communities.",
     "avatar": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&fit=crop"
   },
   {
+    "slug": "carlos-rodriguez",
     "name": "Dr. Carlos Rodriguez",
     "role": "Field Research Coordinator",
     "bio": "Leading GPS tracking and population monitoring efforts.",
