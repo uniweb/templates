@@ -1,0 +1,46 @@
+# An invoice. Referenced from the foundation's main.js `data:` as '@/invoice' — the records of the
+# `invoices` query, one file each in records/invoices/.
+name: invoice
+label: Invoice
+description: An invoice issued to a client, line by line.
+fields:
+  status:    { type: string, enum: [draft, issued, open, to-verify, paid, overdue, void], translatable: false }
+  number:    { type: string, required: true, translatable: false }
+  sow_ref:   { type: string, translatable: false }   # the number of the SOW it bills against
+  issued:    { type: date }
+  due:       { type: date }
+  period:
+    type: group
+    fields:
+      from: { type: date }
+      to:   { type: date }
+  client:
+    type: group
+    fields:
+      organization: { type: string, translatable: false }
+      contact:      { type: string, translatable: false }
+      email:        { type: email, translatable: false }
+  po_number: { type: string, translatable: false }
+  items:
+    type: object
+    many: true
+    fields:
+      description: { type: string, required: true }
+      qty:         { type: number }
+      unit_price:  { type: number }
+      period:
+        type: group
+        fields:
+          from: { type: date }
+          to:   { type: date }
+  tax:
+    type: group
+    fields:
+      jurisdiction: { type: string, translatable: false }
+  notes: { type: text }
+  payment:
+    type: group
+    fields:
+      paid_on:        { type: date }
+      remittance_ref: { type: string, translatable: false }
+  foundation_version: { type: string, translatable: false }

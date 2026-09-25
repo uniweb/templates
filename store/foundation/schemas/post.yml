@@ -1,0 +1,13 @@
+# A journal post. Referenced from JournalList's and Article's meta.js `data:` as '@/post' — the
+# records of the `articles` query, one markdown file each in records/articles/.
+name: post
+label: Journal post
+description: A post in the store's journal.
+fields:
+  title:    { type: string, required: true, default: '' }
+  excerpt:  { type: text, default: '' }
+  date:     { type: date }
+  readTime: { type: string, default: '' }
+  author:   { type: string, default: '' }
+  image:    { type: image, default: '' }
+  content:  { type: richtext }   # the post's markdown body

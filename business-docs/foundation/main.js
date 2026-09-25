@@ -145,7 +145,7 @@ export default {
   props: {},
   // ⭐ The keys every section receives — what the content handler reads (a single record,
   // or all invoices and SOWs) and what useFilteredEngagement reads in EngagementReport.
-  data: { invoices: {}, sows: {}, invoice: {}, sow: {} },
+  data: { invoices: '@/invoice', sows: '@/sow', invoice: '@/invoice', sow: '@/sow' },
 
   handlers: {
     content: (data, block) => {

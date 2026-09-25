@@ -1,0 +1,14 @@
+# A product. Referenced from ProductGrid's meta.js `data:` as '@/product' — the records of the
+# `products` query, one markdown file each in records/products/.
+name: product
+label: Product
+description: A product in the store's catalogue.
+fields:
+  title:           { type: string, required: true, default: '' }
+  excerpt:         { type: text, default: '' }
+  longDescription: { type: text, default: '' }
+  price:           { type: number, default: 0 }
+  category:        { type: string, default: '' }
+  image:           { type: image, default: '' }
+  features:        { type: string, many: true, default: [] }
+  order:           { type: integer }   # the catalogue order the `products` query sorts by

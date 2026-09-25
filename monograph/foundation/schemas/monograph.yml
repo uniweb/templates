@@ -1,0 +1,31 @@
+# A monograph — the whole work. Referenced from the FrontMatter, SpecimenTable, FinchMeasurements
+# and Bibliography meta.js `data:` as '@/monograph' — the one record of the `monograph` query,
+# records/monograph/beagle.yml.
+name: monograph
+label: Monograph
+description: A scholarly monograph — its front matter, the specimens and measurements it reports, and its references.
+fields:
+  title:       { type: string, required: true }
+  author:      { type: string, translatable: false }
+  affiliation: { type: string }
+  date:        { type: string }   # as the work gives it ("October 1835"), not a day
+  abstract:    { type: text }
+  specimens:
+    type: object
+    many: true
+    fields:
+      island:  { type: string, translatable: false }
+      species: { type: string, translatable: false }
+      count:   { type: integer }
+      notes:   { type: text }
+  finchMeasurements:
+    type: object
+    many: true
+    fields:
+      species:    { type: string, translatable: false }
+      island:     { type: string, translatable: false }
+      beakDepth:  { type: number }
+      beakLength: { type: number }
+      count:      { type: integer }
+  # The works cited, as CSL-JSON — the citation library reads them as they are.
+  references: { type: json }

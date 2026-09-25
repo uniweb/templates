@@ -3,17 +3,7 @@ export default {
   title: 'Product Grid',
   description: 'Display product records with quick view and buy buttons',
 
-  data: {
-    products: {
-      title: { type: 'string', default: '' },
-      excerpt: { type: 'string', default: '' },
-      longDescription: { type: 'string', default: '' },
-      price: { type: 'number', default: 0 },
-      category: { type: 'string', default: '' },
-      image: { type: 'string', default: '' },
-      features: { type: 'array', default: [] },
-    },
-  },
+  data: { products: '@/product' },
 
   content: {
     title: 'Section title [0-1]',

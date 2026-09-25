@@ -1,5 +1,6 @@
 [
   {
+    "slug": "pool-1",
     "id": "pool_1",
     "videoId": "4n0xNbfJLR8",
     "title": "The Classic: Sneezing Baby Panda",
@@ -7,6 +8,7 @@
     "date": "Archive"
   },
   {
+    "slug": "pool-2",
     "id": "pool_2",
     "videoId": "sGF6bOi1NfA",
     "title": "Panda Slide Playtime",
@@ -14,6 +16,7 @@
     "date": "Chengdu Base"
   },
   {
+    "slug": "pool-3",
     "id": "pool_3",
     "videoId": "ebcCgSRobc4",
     "title": "Giant Panda Cub Bei Bei",
@@ -21,6 +24,7 @@
     "date": "Smithsonian Zoo"
   },
   {
+    "slug": "pool-4",
     "id": "pool_4",
     "videoId": "dqT-UlYlg1s",
     "title": "Bei Bei's First Steps",
@@ -28,6 +32,7 @@
     "date": "Smithsonian Zoo"
   },
   {
+    "slug": "pool-5",
     "id": "pool_5",
     "videoId": "yYp_Shk7XcI",
     "title": "Panda Cub Xiao Qi Ji",
@@ -35,6 +40,7 @@
     "date": "Smithsonian Zoo"
   },
   {
+    "slug": "pool-6",
     "id": "pool_6",
     "videoId": "v_cpPMjE0vU",
     "title": "Panda Cub Climbing",
@@ -42,6 +48,7 @@
     "date": "San Diego Zoo"
   },
   {
+    "slug": "pool-7",
     "id": "pool_7",
     "videoId": "9YkrojbbwiA",
     "title": "Red Panda Cuteness",

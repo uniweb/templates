@@ -1,0 +1,11 @@
+# A video in the gallery. Referenced from VideoGallery's meta.js `data:` as '@/video' — the
+# records of the `videos` query, kept as one list in records/videos/videos.json.
+name: video
+label: Video
+description: A video shown in the gallery.
+fields:
+  id:      { type: string, translatable: false }
+  videoId: { type: string, required: true, translatable: false }   # the YouTube id
+  title:   { type: string, required: true }
+  views:   { type: string, translatable: false }
+  date:    { type: string }   # a caption ("Archive", "Chengdu Base"), not a day

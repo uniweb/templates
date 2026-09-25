@@ -7,8 +7,8 @@ export default {
     title: 'Chapter heading (defaults to "References")',
   },
 
-  // The `content.data` key this section reads — the site's `monograph` records. `{}`: no schema.
-  data: { monograph: {} },
+  // The `content.data` key this section reads — the site's `monograph` record, of '@/monograph'.
+  data: { monograph: '@/monograph' },
 
   params: {},
 }

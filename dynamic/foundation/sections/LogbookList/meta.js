@@ -7,8 +7,8 @@ export default {
     paragraphs: 'Introduction [0-1]',
   },
 
-  // The `content.data` key this section reads. `{}` declares it with no schema.
-  data: { logbook: {} },
+  // The `content.data` key this section reads — the `logbook` query's records, of '@/logentry'.
+  data: { logbook: '@/logentry' },
 
   params: {},
 

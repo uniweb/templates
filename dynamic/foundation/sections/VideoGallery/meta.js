@@ -8,8 +8,8 @@ export default {
     paragraphs: 'Description [0-1]',
   },
 
-  // The `content.data` key this section reads. `{}` declares it with no schema.
-  data: { videos: {} },
+  // The `content.data` key this section reads — the `videos` query's records, of '@/video'.
+  data: { videos: '@/video' },
 
   params: {},
 

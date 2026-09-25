@@ -3,17 +3,7 @@ export default {
   title: 'Journal List',
   description: 'Grid of article cards from the records of a query',
 
-  data: {
-    articles: {
-      slug: { type: 'string', default: '' },
-      title: { type: 'string', default: '' },
-      excerpt: { type: 'string', default: '' },
-      date: { type: 'string', default: '' },
-      readTime: { type: 'string', default: '' },
-      image: { type: 'string', default: '' },
-      author: { type: 'string', default: '' },
-    },
-  },
+  data: { articles: '@/post' },
 
   content: {
     title: 'Section title',

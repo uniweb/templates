@@ -1,0 +1,10 @@
+# A saved view of the members. Referenced from Members' meta.js `data:` as '@/view' — the records
+# of the `queries` query, one file each in records/queries/.
+name: view
+label: Saved view
+description: A named selection of the members, kept so it can be picked again.
+fields:
+  name:        { type: string, required: true }
+  description: { type: text }
+  source:      { type: string, translatable: false }   # the query it selects from
+  where:       { type: json }                          # the selection, as a where-object

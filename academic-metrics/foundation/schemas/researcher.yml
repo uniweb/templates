@@ -1,0 +1,41 @@
+# A member of the department. Referenced from Members' meta.js `data:` as '@/researcher' — the
+# records of the `members` query, one file each in records/members/.
+name: researcher
+label: Researcher
+description: A member of the department, with the publications, funding and supervisions its metrics count.
+fields:
+  name:        { type: string, required: true, translatable: false }
+  rank:        { type: string, enum: [associate, professor], translatable: false }
+  department:  { type: string, enum: [biology, geology], translatable: false }
+  tenured:     { type: boolean }
+  start_year:  { type: integer }
+  email:       { type: email, translatable: false }
+  affiliation: { type: string }
+  publications:
+    type: object
+    many: true
+    fields:
+      title:     { type: string, required: true }
+      year:      { type: integer }
+      type:      { type: string, translatable: false }
+      publisher: { type: string }
+      journal:   { type: string }
+      refereed:  { type: boolean }
+  funding:
+    type: object
+    many: true
+    fields:
+      title:      { type: string }
+      source:     { type: string }
+      amount:     { type: number }
+      currency:   { type: string, translatable: false }
+      start_year: { type: integer }
+      end_year:   { type: integer }
+  supervisions:
+    type: object
+    many: true
+    fields:
+      student_name:   { type: string, translatable: false }
+      level:          { type: string, translatable: false }
+      year_started:   { type: integer }
+      year_completed: { type: integer }

@@ -1,0 +1,42 @@
+# A statement of work. Referenced from the foundation's main.js `data:` as '@/sow' — the records of
+# the `sows` query, one file each in records/sows/.
+name: sow
+label: Statement of work
+description: A statement of work agreed with a client — its scope, budget, deliverables and signatures.
+fields:
+  status:    { type: string, translatable: false }
+  number:    { type: string, required: true, translatable: false }
+  title:     { type: string, required: true }
+  client:
+    type: group
+    fields:
+      organization: { type: string, translatable: false }
+      contact:      { type: string, translatable: false }
+      email:        { type: email, translatable: false }
+  issued:    { type: date }
+  signed:    { type: date }
+  expires:   { type: date }
+  fee_model: { type: string, translatable: false }
+  budget:
+    type: group
+    fields:
+      total:       { type: number }
+      hourly_rate: { type: number }
+  scope: { type: text }
+  deliverables:
+    type: object
+    many: true
+    fields:
+      milestone:   { type: string, translatable: false }
+      description: { type: string }
+      due:         { type: date }
+      fee:         { type: number }
+  signatures:
+    type: object
+    many: true
+    fields:
+      party:  { type: string, translatable: false }
+      name:   { type: string, translatable: false }
+      role:   { type: string }
+      signed: { type: date }
+  foundation_version: { type: string, translatable: false }

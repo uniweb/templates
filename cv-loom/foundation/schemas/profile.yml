@@ -1,0 +1,82 @@
+# An academic profile — the whole CV. Referenced from Publications' and KeyWorks' meta.js `data:`
+# as '@/profile' — the one record of the `profile` query, records/profile/darwin.yml.
+name: profile
+label: Academic profile
+description: A researcher's CV — identity, career, publications, funding, teaching, service and awards.
+fields:
+  first_name:     { type: string, required: true, translatable: false }
+  family_name:    { type: string, required: true, translatable: false }
+  title:          { type: string }
+  role:           { type: string }
+  affiliation:    { type: string }
+  email:          { type: email, translatable: false }
+  website:        { type: url, translatable: false }
+  orcid:          { type: string, translatable: false }
+  career_start:   { type: integer }
+  career_end:     { type: integer }
+  research_areas: { type: string, many: true }
+  education:
+    type: object
+    many: true
+    fields:
+      degree:      { type: string }
+      institution: { type: string }
+      field:       { type: string }
+      start:       { type: integer }
+      end:         { type: integer }
+  employment:
+    type: object
+    many: true
+    fields:
+      role:         { type: string }
+      organization: { type: string }
+      location:     { type: string }
+      start:        { type: integer }
+      end:          { type: integer }
+  publications:
+    type: object
+    many: true
+    fields:
+      id:        { type: string, translatable: false }
+      title:     { type: string, required: true }
+      type:      { type: string, translatable: false }
+      year:      { type: integer }
+      publisher: { type: string }
+      journal:   { type: string }
+      authors:
+        type: object
+        many: true
+        fields:
+          family: { type: string, translatable: false }
+          given:  { type: string, translatable: false }
+  funding:
+    type: object
+    many: true
+    fields:
+      title:    { type: string }
+      agency:   { type: string }
+      amount:   { type: number }
+      currency: { type: string, translatable: false }
+      year:     { type: integer }
+  teaching:
+    type: object
+    many: true
+    fields:
+      mentee: { type: string, translatable: false }
+      role:   { type: string }
+      topic:  { type: string }
+  service:
+    type: object
+    many: true
+    fields:
+      organization: { type: string }
+      role:         { type: string }
+      start:        { type: integer }
+      end:          { type: integer }
+  awards:
+    type: object
+    many: true
+    fields:
+      title:        { type: string }
+      organization: { type: string }
+      year:         { type: integer }

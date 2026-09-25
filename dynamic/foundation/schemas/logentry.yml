@@ -1,0 +1,10 @@
+# A field-logbook entry. Referenced from LogbookList's and LogbookEntry's meta.js `data:` as
+# '@/logentry' — the records of the `logbook` query, one markdown file each in records/logbook/.
+name: logentry
+label: Logbook entry
+description: One dated entry of the field logbook.
+fields:
+  title:   { type: string, required: true }
+  date:    { type: date }
+  summary: { type: text }
+  content: { type: richtext }    # the entry's markdown body

@@ -8,8 +8,8 @@ export default {
     subtitle: 'Optional subtitle',
   },
 
-  // The `content.data` key this section reads — the site's `monograph` records. `{}`: no schema.
-  data: { monograph: {} },
+  // The `content.data` key this section reads — the site's `monograph` record, of '@/monograph'.
+  data: { monograph: '@/monograph' },
 
   params: {
     key: 'front-matter',
