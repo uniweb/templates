@@ -54,6 +54,16 @@ Templates contain only content — the unique parts that make each template diff
 - `sections/` — section type components (JSX + optional `meta.js`)
 - `layouts/` — custom layout components (if any)
 - `components/` — internal (non-addressable) components (if any)
+- `schemas/` — the data schemas of the site's records (if it has any), which a section's `meta.js` names under the key it reads: `data: { products: '@/product' }`
+
+**Records need a data schema.** Without one, a template's records are static files once the site
+is pushed to a backend — nothing to query, edit in an app, or copy into a site made from the
+template. Define the type in `foundation/schemas/<name>.yml` as the foundation's own (`@/product`),
+and use a standard one (`@std/article`, `@std/person`, …) only when it fits the records as written.
+A key named for a query (`products`) that is not a schema itself takes the type its sections give
+it, so the records can stay in `records/products/`. Name your own schemas distinctly from the
+standard ones and from other templates': foundations installed side by side under one scope share
+one namespace, and two schemas of one name collide there.
 
 **Site content:**
 - `site.yml.hbs` — site configuration (processed through Handlebars). Give the site its own `name`, a `description` and `tags`: an app that offers the template shows them on its card, and a site made from the template starts with that name. Tags are standard ids from [`@uniweb/schemas`](https://github.com/uniweb/schemas#site-tags). `node lint.mjs` checks all three.
@@ -252,6 +262,7 @@ The CLI downloads and extracts tarballs on demand when users run `create --templ
 - [ ] Create `<name>/site/` with `site.yml.hbs`, pages, and layout
 - [ ] Give the site its own `name`, a `description` and standard `tags` in `site.yml.hbs`
 - [ ] Section types in `foundation/sections/` with components and optional `meta.js`
+- [ ] Records? A data schema in `foundation/schemas/` for each kind, and the key that reads them typed in `meta.js`
 - [ ] Add `.hbs` extension to files needing variable substitution
 - [ ] Add the template to `manifest.json`
 - [ ] If using `@uniweb/*` extras, declare them with `{{version "@uniweb/X"}}` in `template.json` `dependencies`
