@@ -2,9 +2,9 @@
 # already and sits at the top of the site's folder — this only places some in
 # sub-folders. It is the one file here that is not a record.
 #
-# Logbook entries. The FOLDER an entry is placed in is part of its record
-# (`path`) — and under a `[...path]` page it becomes part of its URL:
-# /logbook/welcome (at the top), /logbook/field/river-survey, /logbook/lab/dna-results.
+# Logbook entries, organized by the kind of work. A folder is what a query reads with
+# `scope:` (`scope: field`); it is not part of an entry's URL, which is its name:
+# /logbook/welcome, /logbook/river-survey, /logbook/dna-results.
 - folder: field
   label: Field work
   records:

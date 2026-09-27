@@ -4,5 +4,5 @@ type: LogbookList
 
 # Logbook
 
-Every entry is a markdown record. The folder `records/folder.yml` places it in becomes part
-of its URL — one `[...path]` page renders them all.
+Every entry is a markdown record, placed in a folder by `records/folder.yml`. One
+`[...path]` page renders them all, each at its own URL.

@@ -1,6 +1,6 @@
 {
   "name": "PandaWatch - Dynamic Data",
-  "description": "A conservation site demonstrating live API data fetching with loading states, transforms, and the portable data pattern. Includes weather, blog posts, wildlife sightings, research papers, and video gallery sections. The logbook shows records placed in folders, served under one `[...path]` page.",
+  "description": "A conservation site demonstrating live API data fetching with loading states, transforms, and the portable data pattern. Includes weather, blog posts, wildlife sightings, research papers, and video gallery sections. The logbook shows records placed in folders, each at its own URL under one `[...path]` page.",
   "compatible": ">=0.7.0",
   "format": 2,
   "tags": [
