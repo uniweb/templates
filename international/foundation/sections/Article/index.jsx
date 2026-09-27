@@ -25,10 +25,10 @@ function Article({ content, params }) {
   }
 
   // The card's fields sit at the top of the record; the body is its own section,
-  // `article_body`, whose `content` is the markdown body as ProseMirror JSON — the
+  // `body`, whose `content` is the markdown body as ProseMirror JSON — the
   // same shape on a static site and a hosted one.
   const { title, excerpt, date, image, tags } = article
-  const articleContent = article.article_body?.content
+  const articleContent = article.body?.content
 
   // Get locale-aware date formatting
   const formatDate = (dateStr) => {

@@ -4,7 +4,7 @@
   "units": {
     "19544096": {
       "source": "The Model",
-      "field": "article_body.content.subtitle",
+      "field": "body.content.subtitle",
       "contexts": [
         {
           "record": "std/article/community-conservation"
@@ -13,7 +13,7 @@
     },
     "34241519": {
       "source": "Giant pandas require large areas of bamboo forest to survive. However, decades of development have fragmented their habitat into isolated patches. When bamboo in one area dies after flowering (which happens every 15-120 years depending on the species), pandas in isolated patches cannot migrate to find food.",
-      "field": "article_body.content.paragraph.1",
+      "field": "body.content.paragraph.1",
       "contexts": [
         {
           "record": "std/article/habitat-protection"
@@ -22,7 +22,7 @@
     },
     "63456415": {
       "source": "Considering assisted migration for key bamboo species",
-      "field": "article_body.content.list.3",
+      "field": "body.content.list.3",
       "contexts": [
         {
           "record": "std/article/bamboo-research"
@@ -31,7 +31,7 @@
     },
     "66571090": {
       "source": "Establishing corridors that span elevational gradients",
-      "field": "article_body.content.list.1",
+      "field": "body.content.list.1",
       "contexts": [
         {
           "record": "std/article/bamboo-research"
@@ -58,7 +58,7 @@
     },
     "bedcbd96": {
       "source": "Our latest initiative in Sichuan province has successfully established three new wildlife corridors connecting previously isolated bamboo forests. These corridors are critical for allowing pandas to move between territories, find mates, and access diverse bamboo species.",
-      "field": "article_body.content.paragraph",
+      "field": "body.content.paragraph",
       "contexts": [
         {
           "record": "std/article/habitat-protection"
@@ -67,7 +67,7 @@
     },
     "e578c36b": {
       "source": "The Challenge",
-      "field": "article_body.content.subtitle",
+      "field": "body.content.subtitle",
       "contexts": [
         {
           "record": "std/article/habitat-protection"
@@ -76,7 +76,7 @@
     },
     "49563b46": {
       "source": "Our Approach",
-      "field": "article_body.content.heading.h2.1",
+      "field": "body.content.heading.h2.1",
       "contexts": [
         {
           "record": "std/article/habitat-protection"
@@ -85,7 +85,7 @@
     },
     "7308c405": {
       "source": "Working with local communities and government agencies, we identified key corridor routes using:",
-      "field": "article_body.content.paragraph.2",
+      "field": "body.content.paragraph.2",
       "contexts": [
         {
           "record": "std/article/habitat-protection"
@@ -94,7 +94,7 @@
     },
     "115df291": {
       "source": "Satellite imagery analysis",
-      "field": "article_body.content.list.0",
+      "field": "body.content.list.0",
       "contexts": [
         {
           "record": "std/article/habitat-protection"
@@ -103,7 +103,7 @@
     },
     "8082a21b": {
       "source": "GPS tracking data from collared pandas",
-      "field": "article_body.content.list.1",
+      "field": "body.content.list.1",
       "contexts": [
         {
           "record": "std/article/habitat-protection"
@@ -112,7 +112,7 @@
     },
     "7e3e4825": {
       "source": "Ground surveys of bamboo distribution",
-      "field": "article_body.content.list.2",
+      "field": "body.content.list.2",
       "contexts": [
         {
           "record": "std/article/habitat-protection"
@@ -121,7 +121,7 @@
     },
     "b7a919eb": {
       "source": "Community interviews about historical panda sightings",
-      "field": "article_body.content.list.3",
+      "field": "body.content.list.3",
       "contexts": [
         {
           "record": "std/article/habitat-protection"
@@ -130,7 +130,7 @@
     },
     "219c4a6c": {
       "source": "Results",
-      "field": "article_body.content.heading.h2.2",
+      "field": "body.content.heading.h2.2",
       "contexts": [
         {
           "record": "std/article/habitat-protection"
@@ -139,7 +139,7 @@
     },
     "5c1ccde1": {
       "source": "The three new corridors span a combined 45 kilometers, connecting five previously isolated forest patches. Camera trap monitoring has already documented pandas using all three corridors.",
-      "field": "article_body.content.paragraph.3",
+      "field": "body.content.paragraph.3",
       "contexts": [
         {
           "record": "std/article/habitat-protection"
@@ -148,7 +148,7 @@
     },
     "22cf4040": {
       "source": "What's Next",
-      "field": "article_body.content.heading.h2.3",
+      "field": "body.content.heading.h2.3",
       "contexts": [
         {
           "record": "std/article/habitat-protection"
@@ -157,7 +157,7 @@
     },
     "309c7d56": {
       "source": "We are now working to establish formal protected status for these corridors and developing sustainable forestry practices with local communities to ensure long-term habitat protection.",
-      "field": "article_body.content.paragraph.4",
+      "field": "body.content.paragraph.4",
       "contexts": [
         {
           "record": "std/article/habitat-protection"
@@ -184,7 +184,7 @@
     },
     "64b518a7": {
       "source": "Bamboo flowering cycles present unique challenges for panda conservation. Our research team has been studying how climate change is affecting these cycles and what it means for panda food security.",
-      "field": "article_body.content.paragraph",
+      "field": "body.content.paragraph",
       "contexts": [
         {
           "record": "std/article/bamboo-research"
@@ -193,7 +193,7 @@
     },
     "a71e93c8": {
       "source": "Why Bamboo Matters",
-      "field": "article_body.content.subtitle",
+      "field": "body.content.subtitle",
       "contexts": [
         {
           "record": "std/article/bamboo-research"
@@ -202,7 +202,7 @@
     },
     "a3d7d4e8": {
       "source": "Giant pandas eat almost exclusively bamboo, consuming 12-38 kilograms daily. They depend on multiple bamboo species because when one species flowers and dies, they need alternatives. Understanding bamboo ecology is essential for panda conservation.",
-      "field": "article_body.content.paragraph.1",
+      "field": "body.content.paragraph.1",
       "contexts": [
         {
           "record": "std/article/bamboo-research"
@@ -211,7 +211,7 @@
     },
     "43bb6b3e": {
       "source": "Our Research",
-      "field": "article_body.content.heading.h2.1",
+      "field": "body.content.heading.h2.1",
       "contexts": [
         {
           "record": "std/article/bamboo-research"
@@ -220,7 +220,7 @@
     },
     "6dc6b338": {
       "source": "Over the past three years, we have:",
-      "field": "article_body.content.paragraph.2",
+      "field": "body.content.paragraph.2",
       "contexts": [
         {
           "record": "std/article/bamboo-research"
@@ -229,7 +229,7 @@
     },
     "c4fcca2e": {
       "source": "Mapped the distribution of 15 bamboo species across panda habitat",
-      "field": "article_body.content.list.0",
+      "field": "body.content.list.0",
       "contexts": [
         {
           "record": "std/article/bamboo-research"
@@ -238,7 +238,7 @@
     },
     "731a0804": {
       "source": "Monitored flowering events using satellite imagery and ground surveys",
-      "field": "article_body.content.list.1",
+      "field": "body.content.list.1",
       "contexts": [
         {
           "record": "std/article/bamboo-research"
@@ -247,7 +247,7 @@
     },
     "6302aeaf": {
       "source": "Analyzed historical records to understand flowering patterns",
-      "field": "article_body.content.list.2",
+      "field": "body.content.list.2",
       "contexts": [
         {
           "record": "std/article/bamboo-research"
@@ -256,7 +256,7 @@
     },
     "3e2f358a": {
       "source": "Modeled how climate change may affect bamboo distribution",
-      "field": "article_body.content.list.3",
+      "field": "body.content.list.3",
       "contexts": [
         {
           "record": "std/article/bamboo-research"
@@ -265,7 +265,7 @@
     },
     "34390fb2": {
       "source": "Key Findings",
-      "field": "article_body.content.heading.h2.2",
+      "field": "body.content.heading.h2.2",
       "contexts": [
         {
           "record": "std/article/bamboo-research"
@@ -274,7 +274,7 @@
     },
     "3836d082": {
       "source": "Our research suggests that warming temperatures may shift bamboo ranges to higher elevations, potentially reducing available habitat. However, we also identified climate-resilient bamboo species that could help pandas adapt.",
-      "field": "article_body.content.paragraph.3",
+      "field": "body.content.paragraph.3",
       "contexts": [
         {
           "record": "std/article/bamboo-research"
@@ -283,7 +283,7 @@
     },
     "0668cde3": {
       "source": "Conservation Implications",
-      "field": "article_body.content.heading.h2.3",
+      "field": "body.content.heading.h2.3",
       "contexts": [
         {
           "record": "std/article/bamboo-research"
@@ -292,7 +292,7 @@
     },
     "67431f92": {
       "source": "Based on our findings, we recommend:",
-      "field": "article_body.content.paragraph.4",
+      "field": "body.content.paragraph.4",
       "contexts": [
         {
           "record": "std/article/bamboo-research"
@@ -301,7 +301,7 @@
     },
     "fd227d8f": {
       "source": "Protecting high-elevation forests as future climate refugia",
-      "field": "article_body.content.list.0",
+      "field": "body.content.list.0",
       "contexts": [
         {
           "record": "std/article/bamboo-research"
@@ -310,7 +310,7 @@
     },
     "6e48e408": {
       "source": "Monitoring bamboo health across all panda reserves",
-      "field": "article_body.content.list.2",
+      "field": "body.content.list.2",
       "contexts": [
         {
           "record": "std/article/bamboo-research"
@@ -319,7 +319,7 @@
     },
     "ec03beb4": {
       "source": "These findings are informing conservation planning across panda range provinces.",
-      "field": "article_body.content.paragraph.5",
+      "field": "body.content.paragraph.5",
       "contexts": [
         {
           "record": "std/article/bamboo-research"
@@ -346,7 +346,7 @@
     },
     "5031adb9": {
       "source": "Working with local villages to create sustainable livelihoods that support panda conservation has been central to our mission since PandaWatch was founded.",
-      "field": "article_body.content.paragraph",
+      "field": "body.content.paragraph",
       "contexts": [
         {
           "record": "std/article/community-conservation"
@@ -355,7 +355,7 @@
     },
     "b52d4ad0": {
       "source": "Our community conservation program is built on the principle that local people must benefit from conservation. We work with villages adjacent to panda habitat to develop:",
-      "field": "article_body.content.paragraph.1",
+      "field": "body.content.paragraph.1",
       "contexts": [
         {
           "record": "std/article/community-conservation"
@@ -364,7 +364,7 @@
     },
     "2ce7cd19": {
       "source": "Sustainable bamboo harvesting practices",
-      "field": "article_body.content.list.0",
+      "field": "body.content.list.0",
       "contexts": [
         {
           "record": "std/article/community-conservation"
@@ -373,7 +373,7 @@
     },
     "221d0b74": {
       "source": "Eco-tourism opportunities",
-      "field": "article_body.content.list.1",
+      "field": "body.content.list.1",
       "contexts": [
         {
           "record": "std/article/community-conservation"
@@ -382,7 +382,7 @@
     },
     "f7eeb53c": {
       "source": "Alternative energy to reduce forest pressure",
-      "field": "article_body.content.list.2",
+      "field": "body.content.list.2",
       "contexts": [
         {
           "record": "std/article/community-conservation"
@@ -391,7 +391,7 @@
     },
     "1ae360ca": {
       "source": "Environmental education programs",
-      "field": "article_body.content.list.3",
+      "field": "body.content.list.3",
       "contexts": [
         {
           "record": "std/article/community-conservation"
@@ -400,7 +400,7 @@
     },
     "3c9bcaef": {
       "source": "Success Stories",
-      "field": "article_body.content.heading.h2.1",
+      "field": "body.content.heading.h2.1",
       "contexts": [
         {
           "record": "std/article/community-conservation"
@@ -409,7 +409,7 @@
     },
     "521fdd69": {
       "source": "Wolong Village",
-      "field": "article_body.content.heading.h3.0",
+      "field": "body.content.heading.h3.0",
       "contexts": [
         {
           "record": "std/article/community-conservation"
@@ -418,7 +418,7 @@
     },
     "d7f2ee58": {
       "source": "In Wolong village, we helped establish a community-run eco-lodge that now employs 15 local residents. Tourists come to experience panda habitat while supporting the local economy. Annual income from the lodge exceeds previous logging revenue by 40%.",
-      "field": "article_body.content.paragraph.2",
+      "field": "body.content.paragraph.2",
       "contexts": [
         {
           "record": "std/article/community-conservation"
@@ -427,7 +427,7 @@
     },
     "f2aa2c64": {
       "source": "Tangjiahe Community Forest",
-      "field": "article_body.content.heading.h3.1",
+      "field": "body.content.heading.h3.1",
       "contexts": [
         {
           "record": "std/article/community-conservation"
@@ -436,7 +436,7 @@
     },
     "0bc3d5a0": {
       "source": "The Tangjiahe Community Forest program has trained 25 local rangers who patrol panda habitat and collect monitoring data. These community rangers have detected three new panda territories and reduced illegal activities by 80%.",
-      "field": "article_body.content.paragraph.3",
+      "field": "body.content.paragraph.3",
       "contexts": [
         {
           "record": "std/article/community-conservation"
@@ -445,7 +445,7 @@
     },
     "4934e796": {
       "source": "Lessons Learned",
-      "field": "article_body.content.heading.h2.2",
+      "field": "body.content.heading.h2.2",
       "contexts": [
         {
           "record": "std/article/community-conservation"
@@ -454,7 +454,7 @@
     },
     "3e3d9b23": {
       "source": "After 15 years of community conservation work, we have learned that:",
-      "field": "article_body.content.paragraph.4",
+      "field": "body.content.paragraph.4",
       "contexts": [
         {
           "record": "std/article/community-conservation"
@@ -463,7 +463,7 @@
     },
     "b57d4346": {
       "source": "Local ownership is essential for long-term success",
-      "field": "article_body.content.list.0",
+      "field": "body.content.list.0",
       "contexts": [
         {
           "record": "std/article/community-conservation"
@@ -472,7 +472,7 @@
     },
     "b07e4dd5": {
       "source": "Economic benefits must be tangible and immediate",
-      "field": "article_body.content.list.1",
+      "field": "body.content.list.1",
       "contexts": [
         {
           "record": "std/article/community-conservation"
@@ -481,7 +481,7 @@
     },
     "c9aaff3a": {
       "source": "Traditional knowledge is invaluable for conservation planning",
-      "field": "article_body.content.list.2",
+      "field": "body.content.list.2",
       "contexts": [
         {
           "record": "std/article/community-conservation"
@@ -490,7 +490,7 @@
     },
     "cdc83aeb": {
       "source": "Youth engagement is critical for sustainability",
-      "field": "article_body.content.list.3",
+      "field": "body.content.list.3",
       "contexts": [
         {
           "record": "std/article/community-conservation"
@@ -499,7 +499,7 @@
     },
     "9c5d5744": {
       "source": "Looking Forward",
-      "field": "article_body.content.heading.h2.3",
+      "field": "body.content.heading.h2.3",
       "contexts": [
         {
           "record": "std/article/community-conservation"
@@ -508,7 +508,7 @@
     },
     "85c664ef": {
       "source": "We are expanding our community programs to reach 50 additional villages over the next five years. Your support makes this growth possible.",
-      "field": "article_body.content.paragraph.5",
+      "field": "body.content.paragraph.5",
       "contexts": [
         {
           "record": "std/article/community-conservation"

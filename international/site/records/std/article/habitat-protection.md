@@ -1,5 +1,5 @@
 ---
-article:
+brief:
   title: Protecting Panda Habitats in Sichuan
   excerpt: New corridors connect fragmented bamboo forests across mountain ranges.
   date: 2024-01-15

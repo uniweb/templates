@@ -1,5 +1,5 @@
 ---
-article:
+brief:
   title: Community-Led Conservation Success
   excerpt: Local communities driving panda protection through sustainable partnerships.
   date: 2024-01-05

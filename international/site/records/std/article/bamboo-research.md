@@ -1,5 +1,5 @@
 ---
-article:
+brief:
   title: Understanding Bamboo Cycles
   excerpt: How climate change affects panda food sources and what we can do about it.
   date: 2024-01-10

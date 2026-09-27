@@ -1,5 +1,5 @@
 ---
-article:
+brief:
   title: Designing with Constraints
   excerpt: Constraints aren't the enemy of good design — they're where it comes from.
   date: 2026-04-30
