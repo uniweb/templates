@@ -38,9 +38,9 @@ queries:
     schema: '@std/article'
     sort: date desc
 
-  # `team` reads records/team/. A JSON file holding a top-level array is one
-  # record per entry — records like the markdown articles above, so they get
-  # i18n extraction too.
+  # `team` reads records/team/, one JSON file per member, named by its file —
+  # records like the markdown articles above, so they get i18n extraction too.
+  # Their type is the Team section's `data: { team: '@/member' }`.
   team:
 
 # Build options
