@@ -1,7 +1,6 @@
 ---
 article:
   title: Designing with Constraints
-  slug: designing-with-constraints
   excerpt: Constraints aren't the enemy of good design — they're where it comes from.
   date: 2026-04-30
   tags: [design, craft]

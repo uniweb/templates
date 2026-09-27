@@ -1,7 +1,6 @@
 ---
 article:
   title: Community-Led Conservation Success
-  slug: community-conservation
   excerpt: Local communities driving panda protection through sustainable partnerships.
   date: 2024-01-05
   tags: [community, partnerships, sustainable]

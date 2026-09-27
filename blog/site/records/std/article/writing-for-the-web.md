@@ -1,7 +1,6 @@
 ---
 article:
   title: Writing for the Web
-  slug: writing-for-the-web
   excerpt: People don't read web pages, they scan them. Write so the scan still makes sense.
   date: 2026-05-12
   tags: [writing, content]

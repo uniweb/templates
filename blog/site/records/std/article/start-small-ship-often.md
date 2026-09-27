@@ -1,7 +1,6 @@
 ---
 article:
   title: Start Small, Ship Often
-  slug: start-small-ship-often
   excerpt: The fastest way to build the right thing is to put a small version of it in front of people.
   date: 2026-05-28
   tags: [process, shipping]

@@ -34,7 +34,7 @@ function JournalList({ content, params, block }) {
       <div className={`grid grid-cols-1 ${gridCols[columns] || gridCols[2]} gap-12`}>
         {articles.map((article, i) => (
           <ArticleCard
-            key={article.slug || i}
+            key={article.$name || i}
             article={article}
           />
         ))}

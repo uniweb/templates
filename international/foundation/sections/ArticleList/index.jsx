@@ -58,7 +58,7 @@ function ArticleList({ content, params, block }) {
           <div className={`grid gap-8 ${gridCols[columns] || gridCols[3]}`}>
             {articles.map((article, i) => (
               <ArticleCard
-                key={article.slug || i}
+                key={article.$name || i}
                 article={article}
                 showExcerpt={showExcerpt}
                 showDate={showDate}
