@@ -4,9 +4,11 @@ export default {
 
   // The `content.data` key this section reads. On the [slug] parametric page it
   // holds a list of one: content.data.articles[0] is the article the URL names.
-  // Field defaults come from the '@std/article' standard schema (shipped in
-  // @uniweb/schemas).
-  data: { articles: '@std/article' },
+  // `/*` asks for the article WHOLE — each section under its name, the card in
+  // `brief` and the body in `body` — where '@std/article' alone would give the
+  // card's fields at the top and no body. Field defaults come from the
+  // '@std/article' standard schema (shipped in @uniweb/schemas).
+  data: { articles: '@std/article/*' },
 
   content: {
     // The article comes from content.data.articles, not from the section's markdown

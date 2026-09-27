@@ -24,10 +24,10 @@ function Article({ content, params }) {
     )
   }
 
-  // The card's fields sit at the top of the record; the body is its own section,
-  // `body`, whose `content` is the markdown body as ProseMirror JSON — the
-  // same shape on a static site and a hosted one.
-  const { title, excerpt, date, image, tags } = article
+  // The article whole, as stored — a key per section, the same on a static site
+  // and a hosted one: the card in `brief`, and the body in `body`, whose `content`
+  // is the markdown body as ProseMirror JSON.
+  const { title, excerpt, date, image, tags } = article.brief || {}
   const articleContent = article.body?.content
 
   // Get locale-aware date formatting
