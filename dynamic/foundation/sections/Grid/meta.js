@@ -1,7 +1,17 @@
 export default {
   title: 'Grid',
   description: 'Renders child sections in a responsive grid layout',
-  children: true,
+
+  // The layouts an author may choose with the section's `grid:` key — a column count,
+  // or relative widths whose part count is the column count. The first is the one a
+  // section gets when it chooses none.
+  children: {
+    grid: [
+      3, 2, 4,
+      '67/33', '33/67', '60/40', '40/60', '75/25', '25/75',
+      '25/50/25', '50/25/25', '25/25/50',
+    ],
+  },
 
   content: {
     title: 'Optional heading above the grid',
@@ -9,28 +19,10 @@ export default {
   },
 
   params: {
-    columns: {
-      type: 'number',
-      label: 'Columns',
-      default: 3,
-      min: 2,
-      max: 4,
-    },
-    layout: {
-      type: 'select',
-      label: 'Column widths',
-      hint: 'Relative widths, one part per column. A ratio whose part count differs from Columns is ignored in favour of equal widths.',
-      options: [
-        '50/50', '67/33', '33/67', '60/40', '40/60', '75/25', '25/75',
-        '33/33/33', '25/50/25', '50/25/25', '25/25/50',
-        '25/25/25/25',
-      ],
-      default: '33/33/33',
-    },
     headerRow: {
       type: 'boolean',
       label: 'Full-width first item',
-      hint: 'The first child spans every column; the rest follow the column widths.',
+      hint: 'The first child spans every column; the rest follow the layout.',
       default: false,
     },
     gap: {

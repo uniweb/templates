@@ -1,5 +1,5 @@
 import React from 'react'
-import { H1, P, ChildBlocks, cn } from '@uniweb/kit'
+import { H1, P, ChildGrid } from '@uniweb/kit'
 
 const GAPS = {
   none: 'gap-0',
@@ -9,18 +9,11 @@ const GAPS = {
   xl: 'gap-12',
 }
 
-// '40/60' → '40fr 60fr'. A ratio with a different part count than `columns`
-// falls back to equal widths, so a stale ratio never breaks the grid.
-function templateColumns(columns, layout) {
-  const parts = String(layout || '').split('/').map(Number)
-  const valid = parts.length === columns && parts.every((n) => n > 0)
-  return valid ? parts.map((n) => `${n}fr`).join(' ') : `repeat(${columns}, minmax(0, 1fr))`
-}
-
+// The columns come from the section's `grid:` (one of the layouts meta.js offers);
+// kit's ChildGrid lays the children out from it, and falls back to three.
 function Grid({ content, block, params }) {
   const { title, paragraphs } = content
-  const { columns, layout, headerRow, gap } = params
-  const children = block.childBlocks || []
+  const { headerRow, gap } = params
 
   return (
     <div className="max-w-6xl mx-auto px-4">
@@ -31,21 +24,7 @@ function Grid({ content, block, params }) {
         </div>
       )}
 
-      {children.length > 0 && (
-        <div
-          className={cn('grid grid-cols-1 lg:grid-cols-[var(--grid-cols)]', GAPS[gap] || GAPS.lg)}
-          style={{ '--grid-cols': templateColumns(columns, layout) }}
-        >
-          {children.map((childBlock, index) => (
-            <div
-              key={childBlock.id || index}
-              className={headerRow && index === 0 ? 'lg:col-span-full' : ''}
-            >
-              <ChildBlocks blocks={[childBlock]} />
-            </div>
-          ))}
-        </div>
-      )}
+      <ChildGrid from={block} fallback={3} headerRow={headerRow} className={GAPS[gap] || GAPS.lg} />
     </div>
   )
 }
