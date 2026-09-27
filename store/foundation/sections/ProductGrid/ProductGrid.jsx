@@ -41,7 +41,7 @@ function ProductGrid({ content, params, block }) {
       <div className={`grid grid-cols-1 ${gridCols[columns] || gridCols[4]} gap-12`}>
         {products.map((product, i) => (
           <ProductCard
-            key={product.slug || i}
+            key={product.$name || i}
             product={product}
             onQuickView={() => setSelectedProduct(product)}
             onAddToCart={() => addToCart(product)}
@@ -95,7 +95,7 @@ function ProductCard({ product, onQuickView, onAddToCart }) {
 
       <p className="text-sm text-neutral-400 mb-4">{product.category}</p>
 
-      <ShopifyBuyButton productId={product.slug || product.id} variant="outline" />
+      <ShopifyBuyButton productId={product.$name || product.id} variant="outline" />
     </div>
   )
 }

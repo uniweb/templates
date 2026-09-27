@@ -7,7 +7,7 @@ import { FolderOpen } from 'lucide-react'
  *
  * Every record carries `path`, the folder `records/folder.yml` put it in (`''` at the
  * root), and `$route`, its own URL — filled by the framework from that placement and
- * the record's slug, because the entries' page is a `[...path]` page:
+ * the record's name (`$name`), because the entries' page is a `[...path]` page:
  * `/logbook/field/river-survey`. Read `$route`; never rebuild it.
  */
 function LogbookList({ content, block }) {
@@ -44,7 +44,7 @@ function LogbookList({ content, block }) {
           </h2>
           <ul className="space-y-3">
             {items.map((entry) => (
-              <li key={entry.slug} className="rounded-xl bg-card p-4 shadow-sm">
+              <li key={entry.$name} className="rounded-xl bg-card p-4 shadow-sm">
                 <Link href={entry.$route} className="text-lg font-semibold text-link">
                   {entry.title}
                 </Link>

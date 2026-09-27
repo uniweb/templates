@@ -45,7 +45,7 @@ export function collectPublications(members, options = {}) {
   for (const m of members) {
     const pubs = filterPublications(m?.publications, options)
     for (const p of pubs) {
-      out.push({ ...p, _author: m?.name || m?.slug || 'Unknown' })
+      out.push({ ...p, _author: m?.name || m?.$name || 'Unknown' })
     }
   }
   return out

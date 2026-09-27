@@ -1,6 +1,5 @@
 ---
 title: Obsidian Pathlight
-slug: obsidian-pathlight
 excerpt: Matte black aluminum casing designed for architectural walkways.
 longDescription: The Obsidian uses industrial-grade 6061 aluminum with a powder-coated finish. It features a downward-firing LED to prevent light pollution.
 price: 124.00

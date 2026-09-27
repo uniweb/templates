@@ -1,6 +1,5 @@
 ---
 title: Ethereal Globe
-slug: ethereal-globe
 excerpt: Floating solar orb for pools and water features with RGB transitions.
 longDescription: Turn your pool into a nebula. These globes are ultrasonically welded to be completely waterproof and feature a weighted base.
 price: 56.00

@@ -1,6 +1,5 @@
 ---
 title: Copper Zenith
-slug: copper-zenith
 excerpt: Traditional lantern silhouette finished in hammered recycled copper.
 longDescription: A statement piece for any entrance. The Zenith ages beautifully, developing a natural patina over time. Houses a high-capacity battery.
 price: 145.00

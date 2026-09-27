@@ -43,8 +43,8 @@ const STORAGE_KEY = 'academic-metrics/options'
 const ALL_MEMBERS_SLUG = 'all-members'
 export const ALL_MEMBERS = ALL_MEMBERS_SLUG
 
-/** A saved view's handle: `$name` on every record, `slug` on one compiled before it existed. */
-export const handleOf = (record) => record?.$name ?? record?.slug
+/** A saved view's handle: its record's `$name`. */
+export const handleOf = (record) => record?.$name
 
 export const SECTION_KEYS = [
   'members',

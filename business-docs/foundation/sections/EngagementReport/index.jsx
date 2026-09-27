@@ -142,7 +142,7 @@ export default function EngagementReport({ content, block }) {
         <tbody>
           {enriched.map((r) =>
             isInvoices ? (
-              <tr key={r.slug || r.number}>
+              <tr key={r.$name || r.number}>
                 <td>{r.number}</td>
                 <td>{fmtDate(r.issued)}</td>
                 <td>{r.client?.organization || ''}</td>
@@ -153,7 +153,7 @@ export default function EngagementReport({ content, block }) {
                 <td>{r._percentBilled != null ? `${r._percentBilled.toFixed(1)}%` : ''}</td>
               </tr>
             ) : (
-              <tr key={r.slug || r.number}>
+              <tr key={r.$name || r.number}>
                 <td>{r.number}</td>
                 <td>{fmtDate(r.issued)}</td>
                 <td>{r.client?.organization || ''}</td>
@@ -182,7 +182,7 @@ function buildSowIndex(sows) {
   const idx = new Map()
   if (!Array.isArray(sows)) return idx
   for (const s of sows) {
-    if (s?.slug) idx.set(s.slug, s)
+    if (s?.$name) idx.set(s.$name, s)
     if (s?.number != null) idx.set(String(s.number), s)
   }
   return idx

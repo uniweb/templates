@@ -109,7 +109,7 @@ export default function Members({ content, block }) {
           </thead>
           <tbody>
             {sorted.map((m) => (
-              <tr key={m.slug || m.name}>
+              <tr key={m.$name || m.name}>
                 <td>{m.name}</td>
                 <td>{m.rank}</td>
                 <td>{m.department}</td>

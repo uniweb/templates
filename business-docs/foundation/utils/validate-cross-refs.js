@@ -28,7 +28,7 @@ function isIssuedOrLater(invoice) {
 
 function findSow(sows, ref) {
   if (!Array.isArray(sows) || !ref) return null
-  return sows.find((s) => s?.slug === ref || String(s?.number) === String(ref)) || null
+  return sows.find((s) => s?.$name === ref || String(s?.number) === String(ref)) || null
 }
 
 function periodOverlapsExpiry(period, expires) {
@@ -38,7 +38,7 @@ function periodOverlapsExpiry(period, expires) {
 
 /**
  * @param {Object} args
- * @param {Array}  args.invoices  Resolved invoice records (each carries its slug / number / status / sow_ref / items / etc.)
+ * @param {Array}  args.invoices  Resolved invoice records (each carries its $name / number / status / sow_ref / items / etc.)
  * @param {Array}  args.sows      Resolved SOW records.
  * @returns {Array<{ severity, code, recordType, recordSlug, message }>}
  */
@@ -48,7 +48,7 @@ export function validateCrossRefs({ invoices = [], sows = [] } = {}) {
     findings.push({ severity, code, recordType: 'invoice', recordSlug, message })
 
   for (const inv of invoices) {
-    const slug = inv?.slug || inv?.number || '(unknown)'
+    const slug = inv?.$name || inv?.number || '(unknown)'
     const issued = isIssuedOrLater(inv)
 
     // Rule: invoice has no sow_ref at all.

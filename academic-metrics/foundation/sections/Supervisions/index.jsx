@@ -210,7 +210,7 @@ function aggregate(members) {
       counts[level] = (counts[level] || 0) + 1
     }
     rows.push({
-      member: m.name || m.slug || 'Unknown',
+      member: m.name || m.$name || 'Unknown',
       counts,
       total: sups.length,
     })

@@ -1,6 +1,5 @@
 ---
 title: Why Solar is the Future of Luxury
-slug: solar-luxury
 excerpt: Debunking the myth that renewable energy means compromising on aesthetics.
 date: 2024-09-28
 readTime: 4 min read

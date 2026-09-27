@@ -1,6 +1,5 @@
 ---
 title: The Art of Outdoor Hygge
-slug: outdoor-hygge
 excerpt: How to create a sanctuary in your backyard using light and texture.
 date: 2024-10-12
 readTime: 6 min read
