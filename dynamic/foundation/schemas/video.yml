@@ -1,5 +1,5 @@
 # A video in the gallery. Referenced from VideoGallery's meta.js `data:` as '@/video' — the
-# records of the `videos` query, kept as one list in records/videos/videos.json.
+# records of the `videos` query, one file per video in records/videos/.
 name: video
 label: Video
 description: A video shown in the gallery.
