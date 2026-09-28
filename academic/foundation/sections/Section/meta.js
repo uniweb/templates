@@ -13,18 +13,6 @@ export default {
   },
 
   params: {
-    background: {
-      type: 'select',
-      label: 'Background',
-      options: [
-        { value: 'white', label: 'White' },
-        { value: 'gray', label: 'Gray' },
-        { value: 'dark', label: 'Dark' },
-        { value: 'primary', label: 'Primary' },
-        { value: 'gradient', label: 'Subtle Gradient' },
-      ],
-      default: 'white',
-    },
     padding: {
       type: 'select',
       label: 'Vertical Padding',
@@ -53,15 +41,15 @@ export default {
   presets: {
     default: {
       label: 'Standard',
-      params: { background: 'white', padding: 'lg', maxWidth: 'regular' },
+      params: { padding: 'lg', maxWidth: 'regular' },
     },
     highlight: {
       label: 'Highlighted',
-      params: { background: 'gray', padding: 'lg', maxWidth: 'regular' },
+      params: { theme: 'medium', padding: 'lg', maxWidth: 'regular' },
     },
     dark: {
       label: 'Dark',
-      params: { background: 'dark', padding: 'lg', maxWidth: 'regular' },
+      params: { theme: 'dark', padding: 'lg', maxWidth: 'regular' },
     },
   },
 }

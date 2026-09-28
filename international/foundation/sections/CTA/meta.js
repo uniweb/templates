@@ -15,26 +15,16 @@ export default {
   },
 
   params: {
-    theme: {
-      type: 'select',
-      label: 'Theme',
-      options: [
-        { value: 'primary', label: 'Primary' },
-        { value: 'dark', label: 'Dark' },
-        { value: 'light', label: 'Light' },
-      ],
-      default: 'primary',
-    },
   },
 
   presets: {
     default: {
-      label: 'Primary',
-      params: { theme: 'primary' },
-    },
-    dark: {
       label: 'Dark',
       params: { theme: 'dark' },
+    },
+    medium: {
+      label: 'Dim',
+      params: { theme: 'medium' },
     },
     light: {
       label: 'Light',

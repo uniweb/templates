@@ -21,12 +21,6 @@ export default {
   },
 
   params: {
-    theme: {
-      type: 'select',
-      label: 'Theme',
-      options: ['light', 'gray'],
-      default: 'light',
-    },
     columns: {
       type: 'select',
       label: 'Columns',
@@ -44,9 +38,9 @@ export default {
       label: 'Light Grid',
       params: { theme: 'light', columns: 4 },
     },
-    gray: {
-      label: 'Gray Background',
-      params: { theme: 'gray', columns: 4 },
+    medium: {
+      label: 'Dim Background',
+      params: { theme: 'medium', columns: 4 },
     },
   },
 }

@@ -39,18 +39,6 @@ export default {
       ],
       default: 'auto',
     },
-    background: {
-      type: 'select',
-      label: 'Background',
-      description: 'Footer background style',
-      options: [
-        { value: 'dark', label: 'Dark' },
-        { value: 'light', label: 'Light' },
-        { value: 'primary', label: 'Primary Color' },
-        { value: 'white', label: 'White' },
-      ],
-      default: 'dark',
-    },
     showCopyright: {
       type: 'boolean',
       label: 'Show Copyright',
@@ -67,15 +55,15 @@ export default {
   presets: {
     default: {
       label: 'Auto Navigation',
-      params: { mode: 'auto', background: 'dark' },
+      params: { mode: 'auto', theme: 'dark' },
     },
     light: {
       label: 'Light Footer',
-      params: { mode: 'auto', background: 'light' },
+      params: { mode: 'auto', theme: 'light' },
     },
     multiColumn: {
       label: 'Multi-Column',
-      params: { mode: 'manual', columns: '4', background: 'dark' },
+      params: { mode: 'manual', columns: '4', theme: 'dark' },
     },
   },
 }

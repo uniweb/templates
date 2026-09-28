@@ -14,16 +14,6 @@ export default {
   },
 
   params: {
-    theme: {
-      type: 'select',
-      label: 'Theme',
-      options: [
-        { value: 'light', label: 'Light' },
-        { value: 'gray', label: 'Gray' },
-        { value: 'dark', label: 'Dark' },
-      ],
-      default: 'light',
-    },
   },
 
   presets: {
@@ -31,9 +21,9 @@ export default {
       label: 'Light',
       params: { theme: 'light' },
     },
-    gray: {
-      label: 'Gray Background',
-      params: { theme: 'gray' },
+    medium: {
+      label: 'Dim',
+      params: { theme: 'medium' },
     },
     dark: {
       label: 'Dark',

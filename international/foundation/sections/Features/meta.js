@@ -15,15 +15,6 @@ export default {
   },
 
   params: {
-    theme: {
-      type: 'select',
-      label: 'Theme',
-      options: [
-        { value: 'light', label: 'Light' },
-        { value: 'gray', label: 'Gray' },
-      ],
-      default: 'light',
-    },
     columns: {
       type: 'select',
       label: 'Columns',
@@ -47,7 +38,7 @@ export default {
     },
     fourColumn: {
       label: '4 Columns',
-      params: { theme: 'gray', columns: '4' },
+      params: { theme: 'medium', columns: '4' },
     },
   },
 }

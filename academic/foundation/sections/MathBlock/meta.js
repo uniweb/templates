@@ -32,31 +32,20 @@ export default {
       description: 'Display numbered labels for equations',
       default: true,
     },
-    background: {
-      type: 'select',
-      label: 'Background',
-      description: 'Section background color',
-      options: [
-        { value: 'white', label: 'White' },
-        { value: 'gray', label: 'Light Gray' },
-        { value: 'dark', label: 'Dark' },
-      ],
-      default: 'white',
-    },
   },
 
   presets: {
     default: {
       label: 'Default',
-      params: { layout: 'standard', showNumbers: true, background: 'white' },
+      params: { layout: 'standard', showNumbers: true },
     },
     highlight: {
       label: 'Highlighted',
-      params: { layout: 'standard', showNumbers: true, background: 'gray' },
+      params: { layout: 'standard', showNumbers: true, theme: 'medium' },
     },
     compact: {
       label: 'Compact',
-      params: { layout: 'compact', showNumbers: false, background: 'white' },
+      params: { layout: 'compact', showNumbers: false },
     },
   },
 }
