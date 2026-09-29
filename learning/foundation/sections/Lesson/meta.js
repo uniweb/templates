@@ -7,6 +7,9 @@ export default {
     title: 'Lesson heading (optional)',
     paragraphs: 'Lesson prose content',
     snippets: 'Code snippets (triggers code challenge variant)',
+    // It renders the lesson as written, through kit's <Prose> — images, tables, equations and
+    // embedded components included, wherever the author put them.
+    sequence: 'The lesson, as written',
   },
 
   // The data blocks a lesson reads — from content.sequence, by tag. Declared, they are in
