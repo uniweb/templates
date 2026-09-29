@@ -11,7 +11,6 @@ export default {
   content: {
     title: 'Endpoint name',
     paragraphs: 'Endpoint description',
-    data: 'API definition (yaml:api block)',
   },
 
   params: {
@@ -40,7 +39,8 @@ export default {
     },
   },
 
-  // Schema for the inline `yaml:api` data block. Uses the data-schema format:
+  // Schema for the API definition the author writes as a `yaml:api` block. Uses the
+  // data-schema format:
   // object → `fields`, array of
   // objects → `items: { type: object, fields }`, picklist → `enum`.
   data: {

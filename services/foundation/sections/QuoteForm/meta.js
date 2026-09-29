@@ -22,13 +22,13 @@ export default {
     'Renders a form designed by the author and sends it to the destination the site declares. Draws whatever fields it is given.',
 
   data: {
+    // A `yaml:form` block the author writes — a list of controls to draw.
     form: '@std/form',
   },
 
   content: {
     title: 'Section heading',
     paragraphs: 'Short introduction [0-1]',
-    data: 'A `yaml:form` block — a list of controls to draw',
   },
 
   params: {},
