@@ -39,7 +39,11 @@ function Article({ content, params, block }) {
   const { title, excerpt, date, image, tags } = article.brief || {}
   const articleContent = article.body?.content
 
-  // Get locale-aware date formatting
+  // Get locale-aware date formatting.
+  // A date written as `2026-05-28` is a calendar day, not an instant: JavaScript
+  // reads it as midnight UTC, so formatting it in the visitor's zone showed the
+  // day before anywhere west of UTC. Such a date is formatted in UTC; a date with
+  // a time keeps the visitor's zone.
   const formatDate = (dateStr) => {
     if (!dateStr) return null
     const locale = website.getActiveLocale()
@@ -48,10 +52,12 @@ function Article({ content, params, block }) {
       es: 'es-ES',
       fr: 'fr-FR',
     }
+    const dayOnly = /^\d{4}-\d{2}-\d{2}$/.test(dateStr)
     return new Date(dateStr).toLocaleDateString(localeMap[locale] || 'en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
+      ...(dayOnly && { timeZone: 'UTC' }),
     })
   }
 
