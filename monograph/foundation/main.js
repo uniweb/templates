@@ -28,5 +28,4 @@ export const vars = {
 
 export default {
   defaultLayout: 'MonographLayout',
-  props: {},
 }

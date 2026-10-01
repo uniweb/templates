@@ -14,5 +14,4 @@ export const vars = {
 }
 
 export default {
-  props: {},
 }

@@ -89,7 +89,6 @@ function buildVars(data) {
 
 export default {
   defaultLayout: 'MetricsLayout',
-  props: {},
   // ⭐ The keys every section receives — what the Loom handlers read (`buildVars`) and what
   // useFilteredMembers reads in the report sections: the members and the saved views.
   data: { members: {}, queries: {} },

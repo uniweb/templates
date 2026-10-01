@@ -3,7 +3,7 @@
  *
  * This file defines foundation-level configuration:
  * - vars: CSS custom properties that sites can override in theme.yml
- * - Layout: Custom layout component (optional)
+ * - defaultLayout: the layout a page uses when it names none (optional)
  *
  * Name: `uniweb create` adds `name` to the default export — what this
  * foundation registers as (@org/<name>). The version comes from package.json.
@@ -52,12 +52,9 @@ export const vars = {
   },
 }
 /**
- * Runtime exports (Layout and props)
+ * The foundation's declarations
  */
 export default {
   // Optional: Create custom layouts in src/layouts/
   // Then set defaultLayout: 'MyLayout' below
-
-  // Foundation-wide props (accessible via website.foundationProps):
-  props: {},
 }

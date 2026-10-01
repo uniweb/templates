@@ -53,7 +53,4 @@ export default {
   // names across layouts morph automatically (e.g., a shared header stays put
   // while the body content crossfades). No-op in browsers without support.
   viewTransitions: true,
-
-  // Foundation-wide props (accessible via website.foundationProps):
-  props: {},
 }
