@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "defaultLocale": "en",
-  "extracted": "2026-01-31T05:35:22.865Z",
+  "extracted": "2026-10-02T12:15:05.424Z",
   "units": {
     "73922133": {
       "source": "Advancing panda conservation through rigorous scientific research.",
@@ -9,7 +9,7 @@
       "contexts": [
         {
           "page": "/research",
-          "section": "1"
+          "section": "hero"
         }
       ]
     },
@@ -49,7 +49,7 @@
       "contexts": [
         {
           "page": "/about",
-          "section": "1"
+          "section": "hero"
         }
       ]
     },
@@ -59,7 +59,7 @@
       "contexts": [
         {
           "page": "/about",
-          "section": "1"
+          "section": "hero"
         }
       ]
     },
@@ -69,7 +69,7 @@
       "contexts": [
         {
           "page": "/about",
-          "section": "2"
+          "section": "story"
         }
       ]
     },
@@ -79,7 +79,7 @@
       "contexts": [
         {
           "page": "/about",
-          "section": "2"
+          "section": "story"
         }
       ]
     },
@@ -89,7 +89,7 @@
       "contexts": [
         {
           "page": "/about",
-          "section": "2"
+          "section": "story"
         }
       ]
     },
@@ -99,7 +99,7 @@
       "contexts": [
         {
           "page": "/about",
-          "section": "2"
+          "section": "story"
         }
       ]
     },
@@ -109,7 +109,7 @@
       "contexts": [
         {
           "page": "/about",
-          "section": "3"
+          "section": "team"
         }
       ]
     },
@@ -119,7 +119,7 @@
       "contexts": [
         {
           "page": "/about",
-          "section": "3"
+          "section": "team"
         }
       ]
     },
@@ -133,7 +133,7 @@
         },
         {
           "page": "/research",
-          "section": "1"
+          "section": "hero"
         }
       ]
     },
@@ -163,7 +163,7 @@
       "contexts": [
         {
           "page": "/research",
-          "section": "2"
+          "section": "services"
         }
       ]
     },
@@ -173,7 +173,7 @@
       "contexts": [
         {
           "page": "/research",
-          "section": "2"
+          "section": "services"
         }
       ]
     },
@@ -183,7 +183,7 @@
       "contexts": [
         {
           "page": "/research",
-          "section": "2"
+          "section": "services"
         }
       ]
     },
@@ -193,7 +193,7 @@
       "contexts": [
         {
           "page": "/research",
-          "section": "2"
+          "section": "services"
         }
       ]
     },
@@ -203,7 +203,7 @@
       "contexts": [
         {
           "page": "/research",
-          "section": "2"
+          "section": "services"
         }
       ]
     },
@@ -213,7 +213,7 @@
       "contexts": [
         {
           "page": "/research",
-          "section": "2"
+          "section": "services"
         }
       ]
     },
@@ -223,7 +223,7 @@
       "contexts": [
         {
           "page": "/research",
-          "section": "2"
+          "section": "services"
         }
       ]
     },
@@ -233,7 +233,7 @@
       "contexts": [
         {
           "page": "/research",
-          "section": "2"
+          "section": "services"
         }
       ]
     },
@@ -243,7 +243,7 @@
       "contexts": [
         {
           "page": "/research",
-          "section": "2"
+          "section": "services"
         }
       ]
     },
@@ -253,7 +253,7 @@
       "contexts": [
         {
           "page": "/research",
-          "section": "2"
+          "section": "services"
         }
       ]
     },
@@ -263,7 +263,7 @@
       "contexts": [
         {
           "page": "/research",
-          "section": "3"
+          "section": "cta"
         }
       ]
     },
@@ -273,17 +273,18 @@
       "contexts": [
         {
           "page": "/research",
-          "section": "3"
+          "section": "cta"
         }
       ]
     },
     "86e867be": {
       "source": "Donate Now",
-      "field": "link.label",
+      "markup": "[Donate Now](/contact)",
+      "field": "paragraph.1",
       "contexts": [
         {
           "page": "/research",
-          "section": "3"
+          "section": "cta"
         }
       ]
     },
@@ -313,7 +314,7 @@
       "contexts": [
         {
           "page": "/blog",
-          "section": "1"
+          "section": "list"
         }
       ]
     },
@@ -323,7 +324,7 @@
       "contexts": [
         {
           "page": "/blog",
-          "section": "1"
+          "section": "list"
         }
       ]
     },
@@ -357,17 +358,18 @@
         },
         {
           "page": "/contact",
-          "section": "1"
+          "section": "hero"
         },
         {
           "page": "/",
-          "section": "3"
+          "section": "cta"
         },
         {
           "page": "/layout/header",
-          "section": "1"
+          "section": "header"
         }
-      ]
+      ],
+      "markup": "[Support Us](/contact)"
     },
     "be91940b": {
       "source": "Support",
@@ -395,7 +397,7 @@
       "contexts": [
         {
           "page": "/contact",
-          "section": "1"
+          "section": "hero"
         }
       ]
     },
@@ -405,7 +407,7 @@
       "contexts": [
         {
           "page": "/contact",
-          "section": "2"
+          "section": "info"
         }
       ]
     },
@@ -415,7 +417,7 @@
       "contexts": [
         {
           "page": "/contact",
-          "section": "2"
+          "section": "info"
         }
       ]
     },
@@ -425,7 +427,7 @@
       "contexts": [
         {
           "page": "/contact",
-          "section": "2"
+          "section": "info"
         }
       ]
     },
@@ -435,27 +437,17 @@
       "contexts": [
         {
           "page": "/contact",
-          "section": "2"
+          "section": "info"
         }
       ]
     },
-    "397b179a": {
-      "source": "donate@pandawatch.org",
-      "field": "link.label",
-      "contexts": [
-        {
-          "page": "/contact",
-          "section": "2"
-        }
-      ]
-    },
-    "b40f47ce": {
-      "source": "Make a contribution at  to support habitat protection and research programs.",
+    "9d48b943": {
+      "source": "Make a contribution at donate@pandawatch.org to support habitat protection and research programs.",
       "field": "paragraph.1",
       "contexts": [
         {
           "page": "/contact",
-          "section": "2"
+          "section": "info"
         }
       ]
     },
@@ -465,27 +457,17 @@
       "contexts": [
         {
           "page": "/contact",
-          "section": "2"
+          "section": "info"
         }
       ]
     },
-    "4ec51d0f": {
-      "source": "volunteer@pandawatch.org",
-      "field": "link.1.label",
-      "contexts": [
-        {
-          "page": "/contact",
-          "section": "2"
-        }
-      ]
-    },
-    "c8e1fffc": {
-      "source": "Join our field research teams or help with outreach. Contact  for opportunities.",
+    "3c6bac11": {
+      "source": "Join our field research teams or help with outreach. Contact volunteer@pandawatch.org for opportunities.",
       "field": "paragraph.2",
       "contexts": [
         {
           "page": "/contact",
-          "section": "2"
+          "section": "info"
         }
       ]
     },
@@ -495,27 +477,17 @@
       "contexts": [
         {
           "page": "/contact",
-          "section": "2"
+          "section": "info"
         }
       ]
     },
-    "6bd869af": {
-      "source": "partnerships@pandawatch.org",
-      "field": "link.2.label",
-      "contexts": [
-        {
-          "page": "/contact",
-          "section": "2"
-        }
-      ]
-    },
-    "03aa4174": {
-      "source": "Organizations interested in collaboration can reach us at .",
+    "83ac61b9": {
+      "source": "Organizations interested in collaboration can reach us at partnerships@pandawatch.org.",
       "field": "paragraph.3",
       "contexts": [
         {
           "page": "/contact",
-          "section": "2"
+          "section": "info"
         }
       ]
     },
@@ -541,21 +513,21 @@
     },
     "1ed8658b": {
       "source": "Giant Panda Conservation",
-      "field": "heading.h3.0",
+      "field": "title",
       "contexts": [
         {
           "page": "/",
-          "section": "1"
+          "section": "hero"
         }
       ]
     },
     "be50065a": {
       "source": "Protecting Pandas for Future Generations",
-      "field": "title",
+      "field": "heading.1",
       "contexts": [
         {
           "page": "/",
-          "section": "1"
+          "section": "hero"
         }
       ]
     },
@@ -565,27 +537,18 @@
       "contexts": [
         {
           "page": "/",
-          "section": "1"
+          "section": "hero"
         }
       ]
     },
-    "92b54ef2": {
-      "source": "Support Our Work",
-      "field": "link.label",
+    "583e9a06": {
+      "source": "Support Our Work\nLearn More",
+      "markup": "[Support Our Work](/contact)\n[Learn More](/about)",
+      "field": "paragraph.1",
       "contexts": [
         {
           "page": "/",
-          "section": "1"
-        }
-      ]
-    },
-    "8d8cd546": {
-      "source": "Learn More",
-      "field": "link.1.label",
-      "contexts": [
-        {
-          "page": "/",
-          "section": "1"
+          "section": "hero"
         }
       ]
     },
@@ -595,7 +558,7 @@
       "contexts": [
         {
           "page": "/",
-          "section": "2"
+          "section": "services"
         }
       ]
     },
@@ -605,7 +568,7 @@
       "contexts": [
         {
           "page": "/",
-          "section": "2"
+          "section": "services"
         }
       ]
     },
@@ -615,7 +578,7 @@
       "contexts": [
         {
           "page": "/",
-          "section": "2"
+          "section": "services"
         }
       ]
     },
@@ -625,7 +588,7 @@
       "contexts": [
         {
           "page": "/",
-          "section": "2"
+          "section": "services"
         }
       ]
     },
@@ -635,7 +598,7 @@
       "contexts": [
         {
           "page": "/",
-          "section": "2"
+          "section": "services"
         }
       ]
     },
@@ -645,7 +608,7 @@
       "contexts": [
         {
           "page": "/",
-          "section": "2"
+          "section": "services"
         }
       ]
     },
@@ -655,7 +618,7 @@
       "contexts": [
         {
           "page": "/",
-          "section": "2"
+          "section": "services"
         }
       ]
     },
@@ -665,7 +628,7 @@
       "contexts": [
         {
           "page": "/",
-          "section": "2"
+          "section": "services"
         }
       ]
     },
@@ -675,7 +638,7 @@
       "contexts": [
         {
           "page": "/",
-          "section": "3"
+          "section": "cta"
         }
       ]
     },
@@ -685,7 +648,7 @@
       "contexts": [
         {
           "page": "/",
-          "section": "3"
+          "section": "cta"
         }
       ]
     },
@@ -699,7 +662,7 @@
         },
         {
           "page": "/404",
-          "section": "1"
+          "section": "hero"
         }
       ]
     },
@@ -719,7 +682,7 @@
       "contexts": [
         {
           "page": "/404",
-          "section": "1"
+          "section": "hero"
         }
       ]
     },
@@ -729,17 +692,18 @@
       "contexts": [
         {
           "page": "/404",
-          "section": "1"
+          "section": "hero"
         }
       ]
     },
     "82bc39f6": {
       "source": "Go Home",
-      "field": "link.label",
+      "markup": "[Go Home](/)",
+      "field": "paragraph.1",
       "contexts": [
         {
           "page": "/404",
-          "section": "1"
+          "section": "hero"
         }
       ]
     },
@@ -748,12 +712,12 @@
       "field": "title",
       "contexts": [
         {
-          "page": "/layout/header",
-          "section": "1"
+          "page": "/layout/footer",
+          "section": "footer"
         },
         {
-          "page": "/layout/footer",
-          "section": "1"
+          "page": "/layout/header",
+          "section": "header"
         }
       ]
     },
@@ -763,7 +727,7 @@
       "contexts": [
         {
           "page": "/layout/footer",
-          "section": "1"
+          "section": "footer"
         }
       ]
     },
@@ -773,7 +737,7 @@
       "contexts": [
         {
           "page": "/layout/footer",
-          "section": "1"
+          "section": "footer"
         }
       ]
     },
@@ -783,7 +747,7 @@
       "contexts": [
         {
           "page": "/layout/footer",
-          "section": "1"
+          "section": "footer"
         }
       ]
     },
@@ -793,7 +757,7 @@
       "contexts": [
         {
           "page": "/layout/footer",
-          "section": "1"
+          "section": "footer"
         }
       ]
     }
