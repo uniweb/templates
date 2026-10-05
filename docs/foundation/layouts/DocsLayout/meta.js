@@ -1,10 +1,12 @@
 /**
  * DocsLayout Metadata
  *
- * Layout meta.js declares capabilities the runtime needs to know about.
+ * Layout meta.js describes the layout to an editor, and declares the few
+ * settings the runtime reads (scroll, transitions, param defaults).
  *
- * - areas: Which named content areas the layout renders. Content authors
- *   place section files in site/layout/ to fill these areas.
+ * - areas: Which named content areas the layout renders — for an editor to
+ *   offer. Content authors place section files in site/layout/ to fill them;
+ *   the runtime renders whatever that folder holds.
  *
  * - scroll: Controls how the runtime manages scroll restoration on
  *   back/forward navigation. Values:

@@ -4,10 +4,10 @@ name: post
 label: Journal post
 description: A post in the store's journal.
 fields:
-  title:    { type: string, required: true, default: '' }
-  excerpt:  { type: text, default: '' }
+  title:    { type: string, required: true }
+  excerpt:  { type: text }
   date:     { type: date }
-  readTime: { type: string, default: '' }
-  author:   { type: string, default: '' }
-  image:    { type: image, default: '' }
+  readTime: { type: string }
+  author:   { type: string }
+  image:    { type: image }
   content:  { type: richtext }   # the post's markdown body
