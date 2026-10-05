@@ -6,8 +6,9 @@ export default {
   description: 'Display team members with photos and roles.',
 
   // The `content.data` key this section reads — team-member records
-  // (content.data.team); a section receives only the keys it declares. Field
-  // defaults come from the '@/member' schema.
+  // (content.data.team); a section receives only the keys it declares. Their
+  // shape is the '@/member' schema; a record arrives as it is stored, and a
+  // field it lacks is absent.
   data: { team: '@/member' },
 
   content: {

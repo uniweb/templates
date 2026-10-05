@@ -6,8 +6,9 @@ export default {
   // holds a list of one: content.data.articles[0] is the article the URL names.
   // `/*` asks for the article WHOLE — each section under its name, the card in
   // `brief` and the body in `body` — where '@std/article' alone would give the
-  // card's fields at the top and no body. Field defaults come from the
-  // '@std/article' standard schema (shipped in @uniweb/schemas).
+  // card's fields at the top and no body. The shape is the '@std/article'
+  // standard schema (shipped in @uniweb/schemas); a record arrives as it is
+  // stored, and a field it lacks is absent.
   data: { articles: '@std/article/*' },
 
   content: {

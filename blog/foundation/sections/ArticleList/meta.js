@@ -5,8 +5,9 @@ export default {
 
   // The `content.data` key this section reads — article records
   // (content.data.articles); a section receives only the keys it declares.
-  // Field defaults come from the '@std/article' standard schema (shipped in
-  // @uniweb/schemas).
+  // Their shape is the '@std/article' standard schema (shipped in
+  // @uniweb/schemas). A record arrives as it is stored: a field it lacks is
+  // absent.
   data: { articles: '@std/article' },
 
   content: {
