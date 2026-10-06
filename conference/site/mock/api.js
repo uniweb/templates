@@ -1,13 +1,14 @@
 /**
  * The site's app backend, for local development.
  *
- * `site.yml::$devApi` points here and the dev server mounts what this exports at
- * the site's own `api:` address — so the site is a real app on your machine with
- * nothing installed, no account, and no network.
+ * `site.yml::$devApi` points here, and in `uniweb dev` the dev server answers the
+ * site's `api` service with what this exports — at an address of its own — so the
+ * site is a real app on your machine with nothing installed, no account, and no
+ * network.
  *
- * ⭐ **The address is the same in development and in production.** `site.yml` says
- * `api: /_api` either way; only what answers it changes. Nothing in the foundation
- * knows which one it is talking to, which is the point.
+ * ⭐ **The site never names the address.** In development the dev server supplies it;
+ * in production the host does, for the `api` service `site.yml` asks for. Nothing in
+ * the foundation knows which one it is talking to, which is the point.
  *
  * ⛔ **This file is development only.** `$devApi` is stripped from the published
  * site — the `$` says so — so a build cannot carry it and a visitor can never reach

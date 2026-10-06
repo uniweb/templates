@@ -10,10 +10,11 @@ index: home
 build:
   prerender: true
 
-# Search (kit's search client — the foundation installs nothing for it)
-search:
-  enabled: true
-  include:
-    pages: true
-    sections: true
-    headings: true
+# Services — search on (kit's search client; the foundation installs nothing for it),
+# and what it indexes
+services:
+  search:
+    include:
+      pages: true
+      sections: true
+      headings: true
