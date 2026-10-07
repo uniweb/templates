@@ -1,7 +1,7 @@
 {
   "name": "Conference \u2014 a site that is also an app",
   "description": "A conference programme that works as a static site and becomes a web app when the site has a backend. Attendees sign in and record what they attended; organisers edit and reorder the programme in place. Ships a local backend, so it runs with nothing installed.",
-  "compatible": ">=0.9.4",
+  "compatible": ">=0.86.0",
   "format": 2,
   "tags": [
     "app",

@@ -8,13 +8,13 @@ pages: [home, programme]
 # Services — ask your host for an app backend: accounts, and what each attendee
 # keeps. Its address comes from the host.
 services:
-  api: true
+  backend: true
 
 # What answers it in `uniweb dev`, where the dev server supplies the address.
 # `$`-prefixed, so it is never published: a build cannot carry it and a visitor can
 # never reach it. Delete this line and the site still works in development — it
 # simply has no backend there, and every signed-in feature disappears.
-$devApi: ./mock/api.js
+$devBackend: ./mock/api.js
 
 build:
   prerender: true
