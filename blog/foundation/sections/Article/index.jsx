@@ -4,7 +4,7 @@ import { useWebsite, useReadingDepth, Article as ArticleBody } from '@uniweb/kit
 /**
  * Article Component
  *
- * Renders a full article: content.data.articles[0]. Used on a parametric
+ * Renders a full article: content.data.article, one record, whole. Used on a parametric
  * page ([slug]) — one URL for each article of the parent page's query —
  * where it receives the article its URL names.
  *
@@ -17,7 +17,7 @@ import { useWebsite, useReadingDepth, Article as ArticleBody } from '@uniweb/kit
  * the same thing when the page around it changes.
  */
 function Article({ content, params, block }) {
-  const article = content.data.articles?.[0]
+  const article = content.data.article
   const { showImage, showDate, showTags } = params
   const { website } = useWebsite()
   const bodyRef = useRef(null)
