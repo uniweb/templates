@@ -42,7 +42,7 @@ export default function KeyWorks({ content, params, block }) {
   const ids = parseIds(params?.ids)
   if (!ids.length) return null
 
-  const publications = content?.data?.profile?.[0]?.publications || []
+  const publications = content?.data?.profile?.publications || []
   const picked = ids
     .map((id) => findPublication(publications, id))
     .filter(Boolean)

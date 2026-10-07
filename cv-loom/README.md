@@ -27,7 +27,7 @@ Section markdown files contain {Loom expressions}
     │
     ▼
 Content handler (createLoomHandlers) runs instantiateContent()
-or instantiateRepeated() against data.profile[0]
+or instantiateRepeated() against data.profile (one record: single: true)
     │
     ▼
 Framework re-parses through semantic parser

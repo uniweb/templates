@@ -4,13 +4,13 @@ import { ChevronLeft, Share2, Instagram } from 'lucide-react'
 /**
  * Article Component
  *
- * Full article view: content.data.articles[0], the article the URL of the
- * journal's [slug] page names.
+ * Full article view: content.data.articles — one record, the article the URL of
+ * the journal's [slug] page names (its key is declared `single: true`).
  * Renders author info, featured image, blockquote, body content,
  * and a bottom CTA section.
  */
 function Article({ content, block }) {
-  const article = content.data?.articles?.[0]
+  const article = content.data?.articles
 
   if (!article) {
     return (

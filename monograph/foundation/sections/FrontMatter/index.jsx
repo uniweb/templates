@@ -29,7 +29,7 @@ export default function FrontMatter({ content, block, params }) {
   const [options] = useDocumentOptions()
   const chapterIncluded = options.includedChapters[CHAPTER_KEY] !== false
 
-  const mono = content?.data?.monograph?.[0] || {}
+  const mono = content?.data?.monograph || {}
   const {
     title: dataTitle,
     author,

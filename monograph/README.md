@@ -30,7 +30,7 @@ Most templates produce websites. This one produces **a document that lives on th
 
 ## Data model
 
-Structured data lives in `site/records/monograph/beagle.yml`. Section components read from `content.data.monograph[0]`. Narrative prose lives in markdown files under `site/pages/monograph/`, one per section:
+Structured data lives in `site/records/monograph/beagle.yml`. Section components read the one record from `content.data.monograph` — each declares the key with `single: true`. Narrative prose lives in markdown files under `site/pages/monograph/`, one per section:
 
 ```
 site/pages/monograph/

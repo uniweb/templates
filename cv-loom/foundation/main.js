@@ -69,9 +69,11 @@ export default {
   defaultLayout: 'CvLayout',
   // ⭐ The keys every section receives — what the Loom handlers below read (`vars`), so
   // a section whose component declares nothing still has its placeholders filled.
-  data: { profile: {} },
+  // `single: true` holds the one profile record rather than a list of one — the same
+  // declaration Publications and KeyWorks make, so the key has one shape everywhere.
+  data: { profile: { schema: '@/profile', single: true } },
   handlers: createLoomHandlers({
     engine,
-    vars: (data) => data?.profile?.[0],
+    vars: (data) => data?.profile,
   }),
 }

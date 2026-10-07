@@ -5,8 +5,9 @@ import { ArrowLeft } from 'lucide-react'
 /**
  * One logbook entry, rendered on the `[...path]` page.
  *
- * The record the URL names arrives under the same key the logbook's list reads — a
- * list of one, `content.data.logbook[0]` — exactly as it would under a `[slug]` page.
+ * The record the URL names arrives under the same key the logbook's list reads — as one
+ * record, `content.data.logbook`, since this section declares the key `single: true` —
+ * exactly as it would under a `[slug]` page.
  * An entry's own URL is its name (`/logbook/river-survey`), as under `[slug]`. What
  * `[...path]` adds is that a URL may carry more segments: `block.dynamicContext.params`
  * carries `path` (the whole capture), `dir` (all but the last segment) and `slug` (the
@@ -14,7 +15,7 @@ import { ArrowLeft } from 'lucide-react'
  * `scope: :dir` makes the `dir` part choose the folder.
  */
 function LogbookEntry({ content, block }) {
-  const entry = content.data?.logbook?.[0]
+  const entry = content.data?.logbook
   const { dir = '', slug = '' } = block.dynamicContext?.params || {}
 
   if (block.dataLoading) {

@@ -1,7 +1,7 @@
 /**
  * SpecimenTable — bordered table of tortoise specimens collected.
  *
- * Reads from `content.data.monograph[0].specimens`. Uses Press's
+ * Reads from `content.data.monograph.specimens`. Uses Press's
  * <Table>/<Tr>/<Td> builders so the same JSX serves the flex-layout
  * web preview and the docx table walker. Columns: Island | Species
  * | Count | Notes.
@@ -26,7 +26,7 @@ export default function SpecimenTable({ content, block }) {
   const chapterIncluded =
     options.includedChapters[CHAPTER_KEY] !== false
 
-  const specimens = content?.data?.monograph?.[0]?.specimens || []
+  const specimens = content?.data?.monograph?.specimens || []
   const heading = content?.title || 'Specimens collected'
   const totalCount = specimens.reduce(
     (sum, s) => sum + (Number(s.count) || 0),

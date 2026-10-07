@@ -7,7 +7,7 @@
  * with hanging indent — so it reads the profile directly and lets
  * citestyle do the heavy lifting.
  *
- * Reads CSL-JSON-normalized items from `content.data.profile[0]`,
+ * Reads CSL-JSON-normalized items from `content.data.profile`,
  * formats them with citestyle's `formatAll(style, items)` (APA baked
  * in — this template doesn't expose a style switcher), and renders
  * two ways:
@@ -34,7 +34,7 @@ import { publicationsToCsl } from '#utils/to-csl.js'
 import { SP } from '#utils/docx-spacing.js'
 
 export default function Publications({ content, block }) {
-  const profile = content?.data?.profile?.[0] || {}
+  const profile = content?.data?.profile || {}
   const rawItems = profile.publications || []
 
   const items = publicationsToCsl(rawItems)

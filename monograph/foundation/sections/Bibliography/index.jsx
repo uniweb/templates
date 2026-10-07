@@ -1,7 +1,7 @@
 /**
  * Bibliography — citestyle-formatted reference list.
  *
- * Reads CSL-JSON items from `content.data.monograph[0].references`,
+ * Reads CSL-JSON items from `content.data.monograph.references`,
  * formats them with citestyle's formatAll(style, items), and renders
  * the structured output two ways:
  *
@@ -56,7 +56,7 @@ export default function Bibliography({ content, block }) {
   const chapterIncluded =
     options.includedChapters[CHAPTER_KEY] !== false
 
-  const rawItems = content?.data?.monograph?.[0]?.references || []
+  const rawItems = content?.data?.monograph?.references || []
   // Stable string key for the effect deps — list identity may change every
   // render even when contents don't (runtime rebuilds parsedContent).
   const refsKey = rawItems.map((r) => r.id || r.text).join('|')

@@ -1,7 +1,7 @@
 /**
  * FinchMeasurements — a numeric table of beak morphometrics.
  *
- * Reads `content.data.monograph[0].finchMeasurements`. Columns:
+ * Reads `content.data.monograph.finchMeasurements`. Columns:
  * Species (italic) | Island | Beak depth (mm) | Beak length (mm) | Count.
  * Renders in both the web preview and the docx.
  */
@@ -26,7 +26,7 @@ export default function FinchMeasurements({ content, block }) {
   const chapterIncluded =
     options.includedChapters[CHAPTER_KEY] !== false
 
-  const measurements = content?.data?.monograph?.[0]?.finchMeasurements || []
+  const measurements = content?.data?.monograph?.finchMeasurements || []
   const heading = content?.title || 'Finch beak morphometrics'
 
   const body = chapterIncluded && measurements.length > 0 ? (
