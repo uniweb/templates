@@ -9,6 +9,11 @@ foundation: foundation
 # Homepage - specifies which page folder becomes the root route (/)
 index: home
 
+# Services — `records` asks your host to deliver the site's records to its
+# published pages. A static build reads them from the files it writes instead.
+services:
+  records: true
+
 # Queries — each selects a set of records: `products` reads records/products/,
 # `articles` reads records/articles/ (every file in those folders is a record)
 queries:

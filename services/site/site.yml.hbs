@@ -10,27 +10,24 @@ foundation: foundation
 index: home
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Where the quote form sends submissions.
+# Where the quote form sends submissions — the `submit` service.
 #
-# It is commented out on purpose, and until you decide, the form on the homepage
-# renders DISABLED with a short explanation instead of collecting answers it
-# cannot deliver. That is the intended behaviour, not a broken template: a form
-# posting into an endpoint that does not exist loses what a visitor typed and
-# looks like it worked.
+# Until it has somewhere to send them, the form on the homepage renders DISABLED
+# with a short explanation instead of collecting answers it cannot deliver. That
+# is the intended behaviour, not a broken template: a form posting into an
+# endpoint that does not exist loses what a visitor typed and looks like it
+# worked.
 #
-# Two ways to give it one:
+# `submit: true` asks your host for its form service, where it offers one. To
+# use an endpoint of your own instead, give its address — a relative path is
+# resolved against the site's `base:`, and an absolute URL works for a form
+# service on another origin:
 #
-#   1. Uncomment and point it at your own endpoint. It is resolved against the
-#      site's `base:`, so a relative path works from a subdirectory too, and an
-#      absolute URL works for a form service on another origin.
-#
-#   2. Publish to a host that handles submissions, which supplies one itself —
-#      in that case leave this commented out, because setting it here would
-#      override what the host provides.
-#
-# submit: /forms
-# submit: https://forms.example.com/intake
+#   submit: /forms
+#   submit: https://forms.example.com/intake
 # ─────────────────────────────────────────────────────────────────────────────
+services:
+  submit: true
 
 # Build options
 build:

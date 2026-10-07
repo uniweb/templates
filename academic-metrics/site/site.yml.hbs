@@ -8,6 +8,11 @@ foundation: foundation
 
 index: report
 
+# Services — `records` asks your host to deliver the site's records to its
+# published pages. A static build reads them from the files it writes instead.
+services:
+  records: true
+
 queries:
   members:
     # Queryable surface — declares which fields a foundation can offer
