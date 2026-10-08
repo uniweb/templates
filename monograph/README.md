@@ -5,7 +5,7 @@ A richly illustrated long-form document rendered as a **docusite** — a URL who
 Ships with Charles Darwin's 1835 Galapagos observations as sample content — a short monograph in the form of a naturalist's field report, with a cover portrait, an archipelago plate, specimens collected by island, finch beak measurements, observations on biogeography, a plates appendix, and a period-appropriate bibliography.
 
 ```bash
-npx uniweb create my-monograph --template monograph
+npx uniweb@latest create my-monograph --template monograph
 cd my-monograph && pnpm dev
 ```
 

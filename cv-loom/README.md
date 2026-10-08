@@ -7,7 +7,7 @@ The template also shows three ways to reach beyond plain Loom into a full third 
 Ships with Charles Darwin's CV as sample data: 10 page sections, 18 publications with stable ids, 6 awards, a full career timeline, and a branded Word document with custom header, footer, and page numbering.
 
 ```bash
-npx uniweb create my-cv --template cv-loom
+npx uniweb@latest create my-cv --template cv-loom
 cd my-cv && pnpm dev
 ```
 

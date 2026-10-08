@@ -10,7 +10,7 @@ done.
 ## Use it
 
 ```bash
-uniweb create my-site --template paste
+npx uniweb@latest create my-site --template paste
 cd my-site
 pnpm install
 pnpm dev

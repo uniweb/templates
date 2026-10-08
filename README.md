@@ -28,7 +28,7 @@ See the templates in action: **[View all demos](https://uniweb.github.io/templat
 ## Quick Start
 
 ```bash
-uniweb create my-project --template marketing
+npx uniweb@latest create my-project --template marketing
 ```
 
 Any name in the table works in place of `marketing`. `uniweb template list` prints the official templates your CLI knows.

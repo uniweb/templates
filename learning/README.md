@@ -70,7 +70,7 @@ site/pages/
 ## Quick Start
 
 ```bash
-uniweb create my-courses --template learning
+npx uniweb@latest create my-courses --template learning
 cd my-courses
 pnpm install
 pnpm dev

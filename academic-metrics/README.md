@@ -5,7 +5,7 @@ A **docusite** whose primary output is an Excel workbook. Reports aggregate metr
 Ships with three 19th-century naturalists (Darwin, Wallace, Lyell) as sample members.
 
 ```bash
-npx uniweb create my-metrics --template academic-metrics
+npx uniweb@latest create my-metrics --template academic-metrics
 cd my-metrics && pnpm dev
 ```
 

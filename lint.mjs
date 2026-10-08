@@ -15,11 +15,14 @@
  *     that is neither a template nor a file in this repo
  *   - A template with a sample site gives it a name, a description and tags,
  *     which is what a site card shows
+ *   - template.json says how to scaffold; the listing is manifest.json's
+ *   - README.md's table has a row for every template
+ *   - Links in this repo's own docs stay in this repo
  */
 
 import { readFileSync, readdirSync, existsSync, statSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
-import { dirname, join } from 'node:path'
+import { dirname, join, resolve, sep } from 'node:path'
 
 const ROOT = dirname(fileURLToPath(import.meta.url))
 
@@ -80,6 +83,70 @@ for (const name of templateNames) {
           `${name}/template.json (${pkgType}): "${depName}" = "${v}" differs from standard-deps.json ("${standardDeps[depName]}")`
         )
       }
+    }
+  }
+}
+
+// template.json says how to scaffold; the listing is manifest.json's
+//
+// A template's name, description and tags were kept in both files, and by
+// 2026-10-08 they disagreed in fifteen of sixteen templates. manifest.json holds
+// the listing — the `create` picker, `uniweb template list` and the release
+// notes read it. template.json keeps what the scaffold reads, `name` included:
+// every CLI's validator requires one, so it must be the manifest's.
+for (const name of templateNames) {
+  const tpl = readJson(join(ROOT, name, 'template.json'), null)
+  if (!tpl) continue
+  const listed = manifest.templates[name]?.name
+  if (tpl.name !== listed) {
+    errors.push(`${name}/template.json: name "${tpl.name}" differs from manifest.json ("${listed}")`)
+  }
+  for (const key of ['description', 'tags']) {
+    if (key in tpl) {
+      errors.push(`${name}/template.json: "${key}" belongs in manifest.json, where the listing is read`)
+    }
+  }
+  for (const key of ['compatible', 'uniweb']) {
+    if (key in tpl) {
+      errors.push(
+        `${name}/template.json: "${key}" is not read — a CLI downloads the templates release it was published with`
+      )
+    }
+  }
+}
+
+// README.md's table has a row for every template
+//
+// It listed eight of sixteen until 2026-10-08: nothing failed when a template
+// was added without one.
+const readme = existsSync(join(ROOT, 'README.md')) ? readFileSync(join(ROOT, 'README.md'), 'utf8') : ''
+for (const name of templateNames) {
+  if (!new RegExp(`^\\| ${name} \\|`, 'm').test(readme)) {
+    errors.push(`README.md: the templates table has no row for "${name}"`)
+  }
+}
+
+// Links in this repo's own docs stay in this repo
+//
+// The repo is published on its own, so a relative link that climbs out of it
+// (`../../unipress/…`) points at a sibling checkout no reader has: link a public
+// URL. Code is skipped, and so is a site's content (pages, records, layout),
+// whose paths the site build resolves.
+const docFiles = ['README.md', 'creating-templates.md', ...templateNames.map((n) => `${n}/README.md`)]
+for (const file of docFiles.filter((f) => existsSync(join(ROOT, f)))) {
+  const prose = readFileSync(join(ROOT, file), 'utf8')
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`[^`\n]*`/g, '')
+  for (const [, target] of prose.matchAll(/\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g)) {
+    // A URL, an anchor, a site-root path, an @Component inset
+    if (/^(?:[a-z][a-z0-9+.-]*:|#|\/|@)/i.test(target)) continue
+    const path = target.split('#')[0]
+    if (!path) continue
+    const at = resolve(dirname(join(ROOT, file)), decodeURI(path))
+    if (!at.startsWith(ROOT + sep)) {
+      errors.push(`${file}: link "${target}" leaves this repo — link a public URL instead`)
+    } else if (!existsSync(at)) {
+      errors.push(`${file}: link "${target}" points at nothing in this repo`)
     }
   }
 }

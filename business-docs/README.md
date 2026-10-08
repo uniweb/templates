@@ -1,15 +1,15 @@
 # `business-docs` template
 
 A complete site for **statements of work, invoices, and engagement
-reports**, backed by the [`@uniweb/business-docs`](../../unipress/foundations/business-docs/)
+reports**, backed by the [`@uniweb/business-docs`](https://github.com/uniweb/unipress/tree/main/foundations/business-docs)
 foundation. The same foundation source ships in two surfaces: this
 uniweb site (multi-page, filterable, XLSX export) and a unipress doc
-template (`documents/invoice/`, single-record PDF/DOCX compile).
+template ([`documents/invoice/`](https://github.com/uniweb/unipress/tree/main/documents/invoice), single-record PDF/DOCX compile).
 
 ## Quick start
 
 ```bash
-uniweb create my-billing-site --template business-docs
+npx uniweb@latest create my-billing-site --template business-docs
 cd my-billing-site
 pnpm dev
 ```

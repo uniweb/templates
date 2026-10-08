@@ -87,29 +87,25 @@ one namespace, and two schemas of one name collide there.
 
 ## template.json
 
-Required metadata file at the template root:
+Required file at the template root. It says how to scaffold the template:
 
 ```json
 {
-  "name": "Marketing Starter",
-  "description": "A complete marketing site with landing page components",
-  "compatible": ">=0.7.0",
+  "name": "Marketing",
   "format": 2,
-  "tags": ["marketing", "landing-page", "saas"],
   "components": ["Hero", "Features", "Pricing", "Testimonials", "CTA"]
 }
 ```
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| `name` | Yes | Human-readable template name |
-| `description` | No | Longer description for discovery |
-| `compatible` | No | Semver range for CLI compatibility |
+| `name` | Yes | Human-readable template name — the same as its `name` in `manifest.json` |
 | `format` | Yes | Must be `2` for content templates |
-| `tags` | No | Keywords for discovery |
-| `components` | No | List of included section types |
+| `components` | No | The section types the site uses; `uniweb add site --from` names them |
 | `packages` | No | Multi-package declaration (see below) |
 | `dependencies` | No | Extra dependencies to merge into scaffolded `package.json` files (see below) |
+
+**How the template is listed** — its `name`, `description` and `tags` — is its entry in `manifest.json`, which the `create` picker, `uniweb template list` and the release notes read. `template.json` carries no description or tags, and `node lint.mjs` keeps the two names equal. A CLI scaffolds the templates of the release it was published with, so a template declares no CLI version range.
 
 ### Dependencies
 
@@ -169,13 +165,12 @@ The CLI reads this array to scaffold the correct package structure, workspace co
 
 Files ending in `.hbs` are processed through Handlebars. The `.hbs` extension is removed in the output.
 
-**Available variables:**
-- `{{projectName}}` — project name from CLI
-- `{{year}}` — current year
+**Available variable:**
+- `{{projectName}}` — the project name given to `create`
 
 **Version helper:**
 ```handlebars
-{{version "@uniweb/build"}}    → "^0.7.0" (current published version)
+{{version "@uniweb/build"}}    → "^0.80.3" (the version the CLI running create pins)
 {{version "build"}}            → same, @uniweb/ prefix auto-added
 ```
 
@@ -190,11 +185,11 @@ Binary files (images, fonts, etc.) are copied as-is.
 
 ## Testing Templates
 
-Test with the CLI's `create` command, naming the template by its path — a bare name such as `marketing` downloads the latest release instead of your copy. Run it from outside your clone, so the test project does not land in the repo:
+Test with the CLI's `create` command, naming the template by its path — a bare name such as `marketing` downloads the release your CLI was published with, not your copy. Run it from outside your clone, so the test project does not land in the repo:
 
 ```bash
 # From the folder that holds your clone of this repo (cloned as templates/)
-uniweb create test-project --template ./templates/marketing
+npx uniweb@latest create test-project --template ./templates/marketing
 
 cd test-project
 pnpm install
@@ -206,9 +201,9 @@ The CLI detects format 2 from `template.json`, scaffolds the project structure f
 You can also test the `add --from` flow:
 
 ```bash
-uniweb create test-project
+npx uniweb@latest create test-project
 cd test-project
-uniweb add foundation --from ../templates/marketing
+npx uniweb@latest add foundation --from ../templates/marketing
 ```
 
 Key testing points:
@@ -257,17 +252,17 @@ The CLI downloads and extracts tarballs on demand when users run `create --templ
 
 ## Checklist for New Templates
 
-- [ ] Create `<name>/template.json` with `name` and `format: 2`
+- [ ] Create `<name>/template.json` with `name` (as in `manifest.json`) and `format: 2`
 - [ ] Create `<name>/foundation/` with `main.js`, `styles.css`, and `sections/`
 - [ ] Create `<name>/site/` with `site.yml.hbs`, pages, and layout
 - [ ] Give the site its own `name`, a `description` and standard `tags` in `site.yml.hbs`
 - [ ] Section types in `foundation/sections/` with components and optional `meta.js`
 - [ ] Records? A data schema in `foundation/schemas/` for each kind, and the key that reads them typed in `meta.js`
 - [ ] Add `.hbs` extension to files needing variable substitution
-- [ ] Add the template to `manifest.json`
+- [ ] Add the template to `manifest.json` — its `name`, `description` and `tags`
 - [ ] If using `@uniweb/*` extras, declare them with `{{version "@uniweb/X"}}` in `template.json` `dependencies`
 - [ ] If using a third-party package from `standard-deps.json`, match the canonical version
-- [ ] Test locally, from outside the clone: `uniweb create test --template ./templates/<name>` → install → build
+- [ ] Test locally, from outside the clone: `npx uniweb@latest create test --template ./templates/<name>` → install → build
 - [ ] Verify no structural files are included (no `package.json`, `vite.config.js`, etc.)
 - [ ] Add the template folder name to the `files` array in the repo-root `package.json` (keep the same order as `manifest.json`)
 - [ ] Add the template to the table and the list in `README.md`
