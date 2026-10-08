@@ -4,10 +4,11 @@ export default {
 
   content: {},
 
-  // The `content.data` key this section reads — the record of the `logbook` query that the URL
-  // names, of '@/logentry'. The key is the query's name, so the query fills it by name;
-  // `single: true` holds that one record rather than a list of one — null when there is none.
-  data: { logbook: { schema: '@/logentry', single: true } },
+  // The `content.data` key this section reads — the logbook record the URL names: one record
+  // (`single: true`), null when there is none. The page's `logbook` query fills it by its records'
+  // type — the logbook's list declares them '@/logentry' (`data: { logbook: '@/logentry' }`), and so
+  // does this key.
+  data: { entry: { schema: '@/logentry', single: true } },
 
   params: {},
 
