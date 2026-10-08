@@ -1,9 +1,6 @@
 {
-  "name": "PandaWatch - International",
-  "description": "A multilingual conservation organization website demonstrating Uniweb's i18n capabilities with blog, search, and translated records. Includes English, Spanish, and French translations and a parametric article page.",
-  "compatible": ">=0.7.0",
+  "name": "International",
   "format": 2,
-  "tags": ["i18n", "multilingual", "blog", "collections", "search", "localization", "conservation"],
   "components": ["Hero", "Features", "Team", "CTA", "Header", "Footer", "ArticleList", "Article"],
   "dependencies": {
     "foundation": {

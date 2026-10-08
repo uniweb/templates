@@ -1,9 +1,6 @@
 {
-  "name": "Solis Artisans - Store",
-  "description": "An artisan e-commerce template with solar-powered lighting products, Shopify Buy Button integration, journal blog, and a warm stone-amber design system.",
-  "compatible": ">=0.87.0",
+  "name": "Store",
   "format": 2,
-  "tags": ["store", "e-commerce", "shopify", "artisan", "products"],
   "components": ["Hero", "ProductGrid", "Story", "Values", "TechFeatures", "CTA", "JournalList", "Article", "Header", "Footer"],
   "dependencies": {
     "foundation": {

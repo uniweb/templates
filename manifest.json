@@ -95,8 +95,8 @@
       ]
     },
     "cv-loom": {
-      "name": "CV (Loom)",
-      "description": "A single-page narrative CV whose prose is written with {placeholder} expressions and instantiated at render time via the foundation content handler and @uniweb/loom. Reference implementation of the handler hook.",
+      "name": "CV (Loom + Press)",
+      "description": "An academic CV whose sections are written with Loom {placeholder} expressions, filled in from a single profile at render time by the foundation's content handler, and downloadable as a branded Word document through Press. Ships with Charles Darwin's CV as sample data.",
       "tags": [
         "cv",
         "loom",

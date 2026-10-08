@@ -1,19 +1,6 @@
 {
-  "name": "Monograph (Press showcase)",
-  "description": "A richly illustrated long-form document rendered as a docusite — numbered chapters with nested subsections, figures with captions, data-driven specimen and measurement tables, citestyle-formatted references, and compile-time options (figure inclusion, citation style, chapter toggles). The same JSX tree powers the themed web preview and a branded .docx with headers, footers, page numbers, and a table of contents. Ships with Charles Darwin's Galapagos observations as sample content.",
-  "compatible": ">=0.9.4",
+  "name": "Monograph",
   "format": 2,
-  "tags": [
-    "monograph",
-    "docusite",
-    "press",
-    "docx",
-    "figures",
-    "tables",
-    "bibliography",
-    "citestyle",
-    "academic"
-  ],
   "components": [
     "FrontMatter",
     "Chapter",

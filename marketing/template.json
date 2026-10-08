@@ -1,8 +1,5 @@
 {
-  "name": "Marketing Starter",
-  "description": "Clean marketing site showcasing CCA best practices — semantic tokens, multi-line headings, inline styling, insets, and grid layouts.",
-  "compatible": ">=0.8.0",
+  "name": "Marketing",
   "format": 2,
-  "tags": ["marketing", "landing-page", "saas", "showcase"],
   "components": ["Hero", "Features", "SplitContent", "Grid", "Testimonials", "Pricing", "CTA"]
 }
