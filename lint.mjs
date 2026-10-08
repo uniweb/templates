@@ -11,7 +11,8 @@
  *   - Every manifest entry has a folder with template.json
  *   - @uniweb/* dependencies in template.json use {{version "X"}} helper
  *   - Third-party dependencies match standard-deps.json when listed
- *   - package.json "files" array matches manifest order
+ *   - package.json "files" array matches manifest order, and names nothing
+ *     that is neither a template nor a file in this repo
  *   - A template with a sample site gives it a name, a description and tags,
  *     which is what a site card shows
  */
@@ -120,8 +121,19 @@ for (const name of templateNames) {
 }
 
 // package.json files array order
+//
+// Entries that are not templates (manifest.json) trail the templates. A trailing
+// entry must exist: otherwise a removed template's name stays in the array
+// unnoticed, because the order check compares templates only.
 const templateSet = new Set(templateNames)
 const trailing = (pkg.files || []).filter((f) => !templateSet.has(f))
+for (const f of trailing) {
+  if (!existsSync(join(ROOT, f))) {
+    errors.push(
+      `package.json "files" lists "${f}", which is neither a template in manifest.json nor a file in this repo`
+    )
+  }
+}
 const expected = [...templateNames, ...trailing]
 if (JSON.stringify(pkg.files) !== JSON.stringify(expected)) {
   errors.push(
