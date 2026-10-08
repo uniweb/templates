@@ -190,11 +190,11 @@ Binary files (images, fonts, etc.) are copied as-is.
 
 ## Testing Templates
 
-Test with the CLI's `create` command using a local path:
+Test with the CLI's `create` command, naming the template by its path — a bare name such as `marketing` downloads the latest release instead of your copy. Run it from outside your clone, so the test project does not land in the repo:
 
 ```bash
-# From the workspace root
-uniweb create test-project --template ./packages/templates/marketing
+# From the folder that holds your clone of this repo (cloned as templates/)
+uniweb create test-project --template ./templates/marketing
 
 cd test-project
 pnpm install
@@ -208,7 +208,7 @@ You can also test the `add --from` flow:
 ```bash
 uniweb create test-project
 cd test-project
-uniweb add foundation --from ../packages/templates/marketing
+uniweb add foundation --from ../templates/marketing
 ```
 
 Key testing points:
@@ -267,7 +267,8 @@ The CLI downloads and extracts tarballs on demand when users run `create --templ
 - [ ] Add the template to `manifest.json`
 - [ ] If using `@uniweb/*` extras, declare them with `{{version "@uniweb/X"}}` in `template.json` `dependencies`
 - [ ] If using a third-party package from `standard-deps.json`, match the canonical version
-- [ ] Test locally: `uniweb create test --template ./<name>` → install → build
+- [ ] Test locally, from outside the clone: `uniweb create test --template ./templates/<name>` → install → build
 - [ ] Verify no structural files are included (no `package.json`, `vite.config.js`, etc.)
 - [ ] Add the template folder name to the `files` array in the repo-root `package.json` (keep the same order as `manifest.json`)
+- [ ] Add the template to the table and the list in `README.md`
 - [ ] Run `node lint.mjs` to verify everything is in sync
