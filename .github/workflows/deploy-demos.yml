@@ -43,7 +43,43 @@ jobs:
       - name: Lint templates
         run: node lint.mjs
 
+      # A templates release reaches users with the uniweb CLI published after it,
+      # whose bundled index records this templates version — and that CLI pins the
+      # packages these templates were released with. `uniweb@latest` at tag time
+      # is the PREVIOUS CLI, or one still publishing: until 2026-10-08 that paired
+      # this content with older packages (a kit export missing) or hit a version
+      # npm did not serve yet (ETARGET), and 28 of 30 runs failed. So wait for the
+      # CLI that carries this release, then build with exactly it.
+      - name: Find the CLI that carries this release
+        id: cli
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "push" ]; then WANT="${GITHUB_REF_NAME#v}"; else WANT=$(jq -r .version package.json); fi
+          echo "Waiting for a published uniweb that carries @uniweb/templates $WANT"
+          for attempt in $(seq 1 60); do
+            V=$(npm view uniweb version --prefer-online 2>/dev/null || true)
+            if [ -n "$V" ] && npm pack "uniweb@$V" --prefer-online --pack-destination "$RUNNER_TEMP" >/dev/null 2>&1; then
+              HAS=$(tar -xzOf "$RUNNER_TEMP/uniweb-$V.tgz" package/src/framework-index.json | jq -r '.packages["@uniweb/templates"].version // empty')
+              if [ "$HAS" = "$WANT" ]; then
+                echo "uniweb $V carries @uniweb/templates $WANT"
+                echo "version=$V" >> "$GITHUB_OUTPUT"
+                exit 0
+              fi
+              if [ -n "$HAS" ] && [ "$(printf '%s\n%s\n' "$HAS" "$WANT" | sort -V | tail -1)" = "$HAS" ]; then
+                echo "::error::uniweb $V carries @uniweb/templates $HAS, newer than $WANT; that release's own run deploys the demos"
+                exit 1
+              fi
+              echo "uniweb $V carries @uniweb/templates ${HAS:-nothing}; waiting ($attempt/60)"
+            else
+              echo "uniweb ${V:-?} is not served by npm yet; waiting ($attempt/60)"
+            fi
+            sleep 60
+          done
+          echo "::error::No published uniweb carries @uniweb/templates $WANT after 60 minutes"
+          exit 1
+
       - name: Build all template demos
+        env:
+          UNIWEB_CLI: ${{ steps.cli.outputs.version }}
         run: |
           mkdir -p demos
 
@@ -62,9 +98,9 @@ jobs:
               continue
             fi
 
-            # Use CLI's create command with local template path
-            # CLI detects format 2, scaffolds structure, overlays content
-            npx uniweb@latest create "$WORK_DIR" --template "./$template" --no-git
+            # The CLI that carries this release, with the local template path:
+            # it detects format 2, scaffolds the structure, overlays the content
+            npx "uniweb@$UNIWEB_CLI" create "$WORK_DIR" --template "./$template" --no-git
 
             cd "$WORK_DIR"
 
