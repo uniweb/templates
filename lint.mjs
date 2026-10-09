@@ -10,7 +10,8 @@
  *   - Every folder with template.json is listed in manifest.json
  *   - Every manifest entry has a folder with template.json
  *   - @uniweb/* dependencies in template.json use {{version "X"}} helper
- *   - Third-party dependencies match standard-deps.json when listed
+ *   - Third-party dependencies match standard-deps.json when listed — and,
+ *     as a warning, one declared by two templates is suggested for it
  *   - A template with a sample site gives it a name, a description and tags,
  *     which is what a site card shows
  *   - template.json says how to scaffold; the listing is manifest.json's
@@ -38,6 +39,8 @@ const standardDeps = readJson(join(ROOT, 'standard-deps.json'), {})
 
 const templateNames = Object.keys(manifest.templates || {})
 const errors = []
+// Suggestions: printed, never failing.
+const warnings = []
 
 const folderNames = readdirSync(ROOT, { withFileTypes: true })
   .filter((e) => e.isDirectory())
@@ -62,6 +65,7 @@ for (const name of folderNames) {
 }
 
 // Dependency conventions
+const thirdPartyUses = {} // depName → [{ template, version }]
 for (const name of templateNames) {
   const tpl = readJson(join(ROOT, name, 'template.json'), null)
   if (!tpl || !tpl.dependencies) continue
@@ -75,13 +79,28 @@ for (const name of templateNames) {
             `${name}/template.json (${pkgType}): "${depName}" = "${v}" must use {{version "${depName}"}} helper`
           )
         }
-      } else if (depName in standardDeps && v !== standardDeps[depName]) {
+        continue
+      }
+      if (!thirdPartyUses[depName]) thirdPartyUses[depName] = []
+      thirdPartyUses[depName].push({ template: name, version: v })
+      if (depName in standardDeps && v !== standardDeps[depName]) {
         errors.push(
           `${name}/template.json (${pkgType}): "${depName}" = "${v}" differs from standard-deps.json ("${standardDeps[depName]}")`
         )
       }
     }
   }
+}
+
+// A third-party package two templates declare, and standard-deps.json does not
+// list, has a version nothing keeps the same in both: suggest listing it.
+for (const [depName, uses] of Object.entries(thirdPartyUses)) {
+  if (uses.length < 2 || depName in standardDeps) continue
+  const versions = [...new Set(uses.map((u) => u.version))]
+  warnings.push(
+    `"${depName}" appears in ${uses.length} templates (${uses.map((u) => u.template).join(', ')}); ` +
+      `consider adding it to standard-deps.json (${versions.length > 1 ? `versions differ: ${versions.join(', ')}` : `all ${versions[0]}`})`
+  )
 }
 
 // template.json says how to scaffold; the listing is manifest.json's
@@ -231,6 +250,12 @@ for (const name of templateNames) {
   }
 }
 
+if (warnings.length > 0) {
+  console.log('Template lint warnings:')
+  for (const w of warnings) console.log(`  ! ${w}`)
+  console.log('')
+}
+
 if (errors.length > 0) {
   console.error('Template lint errors:')
   for (const e of errors) console.error(`  x ${e}`)
@@ -239,4 +264,6 @@ if (errors.length > 0) {
   process.exit(1)
 }
 
-console.log(`All templates valid (${templateNames.length} checked)`)
+console.log(
+  `All templates valid (${templateNames.length} checked${warnings.length ? `, ${warnings.length} warning(s)` : ''})`
+)
