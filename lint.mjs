@@ -112,6 +112,29 @@ for (const name of templateNames) {
   }
 }
 
+// A package folder keeps its code at its root
+//
+// The CLI copies a foundation's or an extension's folder over the package it
+// scaffolds, as it is: main.js, sections/ and styles.css at the root. A folder
+// keeping them under src/ — the v0.7 layout — lands as src/ beside the scaffold's
+// own empty sections/, and the build finds no section types. Measured
+// 2026-10-08: extensions/effects/ was still nested, and since uniweb 0.88.0 stopped
+// unwrapping it, every project made from `extensions` failed to build.
+for (const name of templateNames) {
+  const tpl = readJson(join(ROOT, name, 'template.json'), null)
+  if (!tpl) continue
+  const codeFolders = tpl.packages
+    ? tpl.packages.filter((p) => p.type === 'foundation' || p.type === 'extension').map((p) => p.name)
+    : ['foundation']
+  for (const folder of codeFolders) {
+    for (const file of ['main.js', 'foundation.js']) {
+      if (existsSync(join(ROOT, name, folder, 'src', file))) {
+        errors.push(`${name}/${folder}/ keeps its code in src/ — move src/'s contents up into ${folder}/`)
+      }
+    }
+  }
+}
+
 // README.md's table has a row for every template
 //
 // It listed eight of sixteen until 2026-10-08: nothing failed when a template
