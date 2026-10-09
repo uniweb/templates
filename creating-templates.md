@@ -264,6 +264,5 @@ The CLI downloads and extracts tarballs on demand when users run `create --templ
 - [ ] If using a third-party package from `standard-deps.json`, match the canonical version
 - [ ] Test locally, from outside the clone: `npx uniweb@latest create test --template ./templates/<name>` → install → build
 - [ ] Verify no structural files are included (no `package.json`, `vite.config.js`, etc.)
-- [ ] Add the template folder name to the `files` array in the repo-root `package.json` (keep the same order as `manifest.json`)
 - [ ] Add the template to the table and the list in `README.md`
 - [ ] Run `node lint.mjs` to verify everything is in sync

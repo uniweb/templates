@@ -11,8 +11,6 @@
  *   - Every manifest entry has a folder with template.json
  *   - @uniweb/* dependencies in template.json use {{version "X"}} helper
  *   - Third-party dependencies match standard-deps.json when listed
- *   - package.json "files" array matches manifest order, and names nothing
- *     that is neither a template nor a file in this repo
  *   - A template with a sample site gives it a name, a description and tags,
  *     which is what a site card shows
  *   - template.json says how to scaffold; the listing is manifest.json's
@@ -36,7 +34,6 @@ function readJson(path, fallback = null) {
 }
 
 const manifest = readJson(join(ROOT, 'manifest.json'), { templates: {} })
-const pkg = readJson(join(ROOT, 'package.json'), {})
 const standardDeps = readJson(join(ROOT, 'standard-deps.json'), {})
 
 const templateNames = Object.keys(manifest.templates || {})
@@ -185,27 +182,6 @@ for (const name of templateNames) {
       if (!/^[a-z][a-z0-9]*(-[a-z0-9]+)*$/.test(id)) errors.push(`${name}/site: tag "${id}" is not a kebab-case id`)
     }
   }
-}
-
-// package.json files array order
-//
-// Entries that are not templates (manifest.json) trail the templates. A trailing
-// entry must exist: otherwise a removed template's name stays in the array
-// unnoticed, because the order check compares templates only.
-const templateSet = new Set(templateNames)
-const trailing = (pkg.files || []).filter((f) => !templateSet.has(f))
-for (const f of trailing) {
-  if (!existsSync(join(ROOT, f))) {
-    errors.push(
-      `package.json "files" lists "${f}", which is neither a template in manifest.json nor a file in this repo`
-    )
-  }
-}
-const expected = [...templateNames, ...trailing]
-if (JSON.stringify(pkg.files) !== JSON.stringify(expected)) {
-  errors.push(
-    `package.json "files" drifts from manifest.\n    expected: ${JSON.stringify(expected)}\n    actual:   ${JSON.stringify(pkg.files)}`
-  )
 }
 
 if (errors.length > 0) {
