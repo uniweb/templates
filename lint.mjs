@@ -135,6 +135,30 @@ for (const name of templateNames) {
   }
 }
 
+// A site's content does not show the project's folder name
+//
+// `{{projectName}}` is the folder `create` was given — `my-site`. Seven headers and
+// footers showed it until 2026-10-08: every site made from those templates was
+// titled after a folder, and a template pushed to a backend handed its folder's
+// name to every site cloned from it. A site's name is `name` in its site.yml,
+// which a header shows (`website.name`) when it has no title of its own.
+function filesUnder(dir) {
+  if (!existsSync(dir)) return []
+  return readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
+    e.isDirectory() ? filesUnder(join(dir, e.name)) : [join(dir, e.name)]
+  )
+}
+for (const name of templateNames) {
+  for (const file of filesUnder(join(ROOT, name, 'site'))) {
+    if (!/\.(hbs|md|ya?ml)$/.test(file)) continue
+    if (readFileSync(file, 'utf8').includes('{{projectName}}')) {
+      errors.push(
+        `${file.slice(ROOT.length + 1)}: shows {{projectName}}, the project's folder name — let the site's name show (site.yml \`name\`)`
+      )
+    }
+  }
+}
+
 // README.md's table has a row for every template
 //
 // It listed eight of sixteen until 2026-10-08: nothing failed when a template

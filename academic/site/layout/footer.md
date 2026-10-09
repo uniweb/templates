@@ -5,8 +5,6 @@ theme: dark
 showCopyright: true
 ---
 
-# {{projectName}}
-
 Research Lab
 
 [GitHub](https://github.com)

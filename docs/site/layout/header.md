@@ -5,6 +5,4 @@ categories: true
 showVersion: auto
 ---
 
-# {{projectName}}
-
 [GitHub](https://github.com)

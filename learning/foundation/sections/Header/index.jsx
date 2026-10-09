@@ -1,8 +1,9 @@
 import { Link, useAppearance } from '@uniweb/kit'
 
-function Header({ content }) {
+function Header({ content, block }) {
   const { scheme, toggle, canToggle } = useAppearance()
-  const logo = content.title
+  // The header's own title, else the site's name (site.yml `name`)
+  const logo = content.title || block.website.name
 
   return (
     <div className="flex items-center justify-between px-6 py-3">

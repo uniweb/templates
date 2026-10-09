@@ -4,5 +4,3 @@ mode: auto
 sticky: true
 showLocale: auto
 ---
-
-# {{projectName}}

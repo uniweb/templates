@@ -166,7 +166,7 @@ The CLI reads this array to scaffold the correct package structure, workspace co
 Files ending in `.hbs` are processed through Handlebars. The `.hbs` extension is removed in the output.
 
 **Available variable:**
-- `{{projectName}}` — the project name given to `create`
+- `{{projectName}}` — the project name given to `create`, which is its folder's name (`my-site`). Keep it out of what a site shows: a site's name is `name` in its `site.yml`, which a header shows (`website.name`) when it has no title of its own. `node lint.mjs` refuses `{{projectName}}` in a site's content.
 
 **Version helper:**
 ```handlebars
