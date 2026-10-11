@@ -9,9 +9,9 @@ import { useRecords, useEntity, useEntityWriter, useSession, createEntity, Signe
  *
  * | the visitor | what they get |
  * |---|---|
- * | no app backend at all | the authored programme below the fold — a static site |
- * | signed out, or an attendee | the live programme, read-only |
- * | an organiser | the same, plus editing and reordering |
+ * | no app backend at all, or nobody signed in | the authored programme — what a static site serves |
+ * | an attendee | the live programme, read-only, and their own check-ins |
+ * | the organiser | the same, plus editing and reordering |
  *
  * Nothing here asks *which deployment am I on*. It asks what the data layer says,
  * and the data layer answers from the site's own config.

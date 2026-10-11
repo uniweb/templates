@@ -5,12 +5,13 @@ type: Programme
 # Programme
 
 <!--
-This body is what a visitor sees when the site has NO app backend — the published
-programme, as authored. It is a complete, useful page on its own: a static host
-serves it and nobody is told anything is missing.
+This body is the published programme, as authored — what a visitor sees when the
+site has NO app backend, and when nobody is signed in. It is a complete, useful page
+on its own: a static host serves it and nobody is told anything is missing.
 
-With a backend, the same section renders the live tracks instead, and an organiser
-edits them in place. The section chooses between them; the site does not.
+Signed in on a site with a backend, the same section renders the live tracks
+instead, and the organiser edits them in place. The section chooses between them;
+the site does not.
 -->
 
 ### Main hall
