@@ -264,7 +264,8 @@ function AddSession({ writer, onChanged }) {
  */
 function CheckIn({ session }) {
   const { viewer } = useSession()
-  // `mine`: the organiser may read everyone's records, and this is the viewer's own.
+  // `mine`: the viewer's own record — the one to write to, even on a service that lets
+  // members read each other's.
   const { records, refresh } = useRecords(viewer ? { schema: '@/attendance', scope: 'mine' } : null)
   const mine = records[0]
   // The check-ins are the record's items — read from the record, as a track's are.
