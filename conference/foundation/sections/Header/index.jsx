@@ -29,7 +29,7 @@ export default function Header({ content, block }) {
 }
 
 function Account() {
-  const { viewer } = useSession()
+  const { viewer, adminHref } = useSession()
   // ⚠️ `signIn`, not `submit` — the hook's own name for the action.
   const { signIn, status, error } = useSignIn()
 
@@ -40,6 +40,14 @@ function Account() {
             The package normalizes the response, so a component reads its shape and
             not the wire's. Reaching for `.account` renders nothing, silently. */}
         <span className="opacity-70">{viewer?.handle || viewer?.username}</span>
+        {/* ⭐ Set only for an account the backend's administration admits — the
+            organiser — and null for everyone else, so it is drawn only when set.
+            A plain link: a navigation, never a fetch. */}
+        {adminHref && (
+          <a href={adminHref} className="rounded border border-[var(--border)] px-3 py-1 no-underline">
+            Admin
+          </a>
+        )}
         <SignOutButton />
       </SignedIn>
 
