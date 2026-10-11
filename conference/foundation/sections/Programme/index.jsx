@@ -105,17 +105,17 @@ function Track({ track, onChanged }) {
   const { entity } = useEntity({ schema: '@/track', uuid: track.uuid })
   const sessions = (entity?.hydrated?.items || []).filter((item) => item.section === 'sessions')
   const writer = useEntityWriter({ schema: '@/track', uuid: track.uuid })
-  const { viewer } = useSession()
 
   // ⛔ This decides what to DRAW, never what is allowed. A track is the organiser's
   // entry, and the store refuses a write to it by anyone else, so an attendee who
   // calls the write anyway is refused there. Showing the controls to the wrong person
   // would be untidy; relying on hiding them would be a security model made of CSS.
   //
-  // ⭐ The organiser is the site's operator, who holds `system_admin` — the package's
-  // own answer to "who runs this site". (`viewer.workspace` is the same for every
-  // member, so it cannot tell them apart.)
-  const mayEdit = viewer?.roles?.some((r) => r.role === 'system_admin') === true
+  // ⭐ Ask the track, not the viewer: `can_edit` is the backend's own answer for this
+  // viewer and this entity — yes for the organiser whose track it is, no for an
+  // attendee. ⛔ Not a role: which roles a session carries is the backend's to decide,
+  // and `viewer.workspace` is the same for every member.
+  const mayEdit = entity?.can_edit === true
 
   return (
     <article className="rounded-[var(--radius-lg)] border border-[var(--border)] p-5">
