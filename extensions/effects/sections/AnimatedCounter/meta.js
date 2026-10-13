@@ -6,8 +6,11 @@ export default {
     title: 'Section title',
     subtitle: 'Section subtitle',
     items: {
-      title: 'Number (e.g., "500+")',
-      subtitle: 'Label',
+      label: 'Counters',
+      content: {
+        title: 'Number (e.g., "500+")',
+        paragraphs: 'Label [1]',
+      },
     },
   },
 
