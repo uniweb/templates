@@ -81,6 +81,46 @@ jobs:
         env:
           UNIWEB_CLI: ${{ steps.cli.outputs.version }}
         run: |
+          # npm can serve the CLI found above before the packages it installs: a release's
+          # packages appear minutes apart. On 2026-10-13 this step started 26 seconds after
+          # uniweb 1.0.1 appeared and stopped on ETARGET for @uniweb/theming ~1.0.1, which
+          # the CLI pulls in through @uniweb/core. So before each install, wait until npm can
+          # make it: the probe is an install that writes nothing, which resolves the whole
+          # tree as the real one will, not a lookup of the names alone. A missing version
+          # (ETARGET) or package (E404) is waited for; any other failure stops the step here.
+          installable() {
+            label="$1"; shift
+            for attempt in $(seq 1 30); do
+              probe=$(mktemp -d)
+              out=$(npm install --dry-run --prefer-online --legacy-peer-deps --ignore-scripts \
+                --no-audit --no-fund --prefix "$probe" "$@" 2>&1) && status=0 || status=$?
+              rm -rf "$probe"
+              if [ "$status" = 0 ]; then return 0; fi
+              why=$(printf '%s\n' "$out" | grep -m1 -E 'No matching version|404 Not Found' || true)
+              if [ -z "$why" ]; then
+                printf '%s\n' "$out"
+                echo "::error::$label: npm cannot install it, and not for a missing version"
+                return 1
+              fi
+              echo "$label: ${why#npm error } — waiting ($attempt/30)"
+              sleep 60
+            done
+            echo "::error::$label: npm still cannot install it after 30 minutes"
+            return 1
+          }
+
+          # Every @uniweb package — and uniweb — the project in the current directory pins.
+          pinned() {
+            find . -name package.json -not -path '*/node_modules/*' -print0 \
+              | xargs -0 jq -r '[.dependencies, .devDependencies, .peerDependencies]
+                  | map(select(. != null) | to_entries[]) | .[]
+                  | select((.key == "uniweb" or (.key | startswith("@uniweb/"))) and (.value | test("^[~^]?[0-9]")))
+                  | "\(.key)@\(.value)"' \
+              | sort -u
+          }
+
+          installable "uniweb $UNIWEB_CLI" "uniweb@$UNIWEB_CLI"
+
           mkdir -p demos
 
           # Get list of templates from manifest
@@ -103,6 +143,9 @@ jobs:
             npx "uniweb@$UNIWEB_CLI" create "$WORK_DIR" --template "./$template" --no-git
 
             cd "$WORK_DIR"
+
+            # The versions this demo pins come from the CLI's table — this release's
+            installable "$template" $(pinned)
 
             # Install dependencies
             pnpm install
