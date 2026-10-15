@@ -8,8 +8,9 @@ export default {
     paragraphs: 'Lesson prose content',
     snippets: 'Code snippets (triggers code challenge variant)',
     // It renders the lesson as written, through kit's <Prose> — images, tables, equations and
-    // embedded components included, wherever the author put them.
-    sequence: 'The lesson, as written',
+    // embedded components included, wherever the author put them — and honours every placement
+    // an author gives an image, a video or a table: kit's <Render> lays out all four.
+    sequence: { label: 'The lesson, as written', placement: true },
   },
 
   // The data blocks a lesson reads — from content.sequence, by tag. Declared, they are in

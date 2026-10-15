@@ -27,8 +27,10 @@ export default function LearnLayout({ header, body, footer, left, params }) {
           </aside>
         )}
 
+        {/* A size container (`@container`), so a block an author placed `full`
+            spans this panel rather than the viewport (kit's prose-tokens.css). */}
         <main
-          className="flex-1 bg-card shadow-lg border border-border overflow-y-auto overflow-x-hidden transition-all duration-300"
+          className="@container flex-1 bg-card shadow-lg border border-border overflow-y-auto overflow-x-hidden transition-all duration-300"
           style={{ borderRadius: radius }}
         >
           {body}
