@@ -21,7 +21,7 @@ background: '#fbf7ee'    # cream, printed-paper
 fonts:
   heading: "'Cormorant Garamond', 'Times New Roman', Georgia, serif"
   body: "'Crimson Text', Georgia, 'Times New Roman', serif"
-  mono: "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace"
+  code: "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace"
   import:
     - url: https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap
     - url: https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap

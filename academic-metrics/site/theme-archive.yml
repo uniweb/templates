@@ -27,7 +27,7 @@ background: '#fbf8f1'    # Soft cream — printed-paper feel
 fonts:
   heading: "'Merriweather', 'Times New Roman', Georgia, serif"
   body: "'Source Sans Pro', ui-sans-serif, system-ui, sans-serif"
-  mono: "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace"
+  code: "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace"
   import:
     - url: https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap
     - url: https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap
