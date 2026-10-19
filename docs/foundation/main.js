@@ -16,12 +16,18 @@
  * so no foundation-level scroll override is needed.
  */
 
+import { proseVars } from '@uniweb/kit/prose-vars'
+
 /**
  * CSS custom properties — sites override these in theme.yml under `vars:`.
  * These become CSS variables (e.g., var(--header-height)) available to
  * all components in the foundation.
  */
 export const vars = {
+  // Long-form text: the reading size, line height, line length, spacing and
+  // heading sizes kit's prose layer reads (`@uniweb/kit/prose-vars`).
+  ...proseVars,
+
   // Layout
   'header-height': {
     default: '4rem',
@@ -34,12 +40,6 @@ export const vars = {
   'content-max-width': {
     default: '48rem',
     description: 'Maximum content width (768px)',
-  },
-
-  // Typography
-  'prose-font-size': {
-    default: '1rem',
-    description: 'Base font size for prose content',
   },
 }
 

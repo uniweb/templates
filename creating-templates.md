@@ -131,7 +131,7 @@ Each inner object keys by package type (`foundation`, `site`, or a named package
 
 1. **`@uniweb/*` packages MUST use the `{{version "@uniweb/X"}}` helper.** Version strings are processed through Handlebars before being written. The helper resolves to the current workspace version at scaffold time, so templates never drift out of sync with framework releases. Never hardcode a version like `"^0.2.0"` for `@uniweb/*` packages.
 
-2. **Third-party packages used across multiple templates must match `standard-deps.json`.** The repo-root `standard-deps.json` lists canonical versions for shared third-party dependencies (e.g., `@tailwindcss/typography`, `lucide-react`, `citestyle`). If your template uses one of these, copy the exact version string. If you need a newer version, update `standard-deps.json` and every template using it in the same change.
+2. **Third-party packages used across multiple templates must match `standard-deps.json`.** The repo-root `standard-deps.json` lists canonical versions for shared third-party dependencies (e.g., `lucide-react`, `citestyle`). If your template uses one of these, copy the exact version string. If you need a newer version, update `standard-deps.json` and every template using it in the same change.
 
 3. **Third-party packages used by only your template** may be pinned however you like.
 

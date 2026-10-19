@@ -17,7 +17,7 @@
  */
 @import "@uniweb/kit/theme-tokens.css";
 
-/* Documentation is long-form prose, so the typography plugin does the rhythm. */
+/* Documentation is long-form prose, so kit's prose layer does the rhythm. */
 
 @source "./sections/**/*.{js,jsx}";
 @source "./components/**/*.{js,jsx}";
@@ -25,11 +25,10 @@
 @source "./node_modules/@uniweb/kit/src/**/*.{js,jsx}";
 
 /*
- * Typography, wired to the theme.
+ * Prose typography, wired to the theme.
  *
- * Imported after the plugin so it wins on equal specificity. This is what makes
- * body copy answer to the site's theme.yml like everything else — without it,
- * `prose` paints its own greys and long-form content is the one part of the
- * page a site cannot restyle.
+ * kit's rules for long-form content: colored by each section's theme tokens,
+ * sized by the site's `prose-*` vars (declared in main.js), and beneath every
+ * utility, so a class on an element still wins.
  */
 @import "@uniweb/kit/prose-tokens.css";
