@@ -7,8 +7,6 @@ brief:
   image: https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=400&fit=crop
 ---
 
-# Designing with Constraints
-
 A blank canvas is paralyzing. A canvas with edges is an invitation. The limits you're given — or the ones you impose — are what turn a vague idea into a specific one.
 
 ## Limits force decisions

@@ -7,8 +7,6 @@ brief:
   image: /images/researcher-showing-panda-research-poster.jpg
 ---
 
-# Community-Led Conservation Success
-
 Working with local villages to create sustainable livelihoods that support panda conservation has been central to our mission since PandaWatch was founded.
 
 ## The Model

@@ -7,8 +7,6 @@ brief:
   image: https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&h=400&fit=crop
 ---
 
-# Understanding Bamboo Cycles
-
 Bamboo flowering cycles present unique challenges for panda conservation. Our research team has been studying how climate change is affecting these cycles and what it means for panda food security.
 
 ## Why Bamboo Matters

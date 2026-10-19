@@ -1,6 +1,20 @@
 import { useWebsite, Article as ArticleBody } from '@uniweb/kit'
 
 /**
+ * The body without a first heading that only repeats the article's title.
+ *
+ * A markdown article often opens with `# Its title`, and this section already
+ * prints the title above the body — so a heading whose text is the title, at the
+ * very start, is left out. Any other heading stays.
+ */
+function withoutRepeatedTitle(doc, title) {
+  const first = doc?.content?.[0]
+  if (!title || first?.type !== 'heading') return doc
+  const text = (first.content || []).map((node) => node.text || '').join('').trim()
+  return text === String(title).trim() ? { ...doc, content: doc.content.slice(1) } : doc
+}
+
+/**
  * Article Component
  *
  * Renders a full article: content.data.article, one record, whole. Used on a parametric
@@ -102,7 +116,7 @@ function Article({ content, params }) {
 
         {/* Body Content - rendered from ProseMirror JSON */}
         {articleContent && (
-          <ArticleBody content={articleContent} />
+          <ArticleBody content={withoutRepeatedTitle(articleContent, title)} />
         )}
       </div>
     </article>

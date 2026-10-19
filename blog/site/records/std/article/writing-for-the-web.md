@@ -7,8 +7,6 @@ brief:
   image: https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=400&fit=crop
 ---
 
-# Writing for the Web
-
 Good web writing respects the reader's time. They arrived with a question; your job is to answer it before they give up looking.
 
 ## Front-load the point

@@ -7,8 +7,6 @@ brief:
   image: https://images.unsplash.com/photo-1564349683136-77e08dba1ef3?w=800&h=400&fit=crop
 ---
 
-# Protecting Panda Habitats in Sichuan
-
 Our latest initiative in Sichuan province has successfully established three new wildlife corridors connecting previously isolated bamboo forests. These corridors are critical for allowing pandas to move between territories, find mates, and access diverse bamboo species.
 
 ## The Challenge

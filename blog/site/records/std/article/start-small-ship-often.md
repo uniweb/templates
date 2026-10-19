@@ -7,8 +7,6 @@ brief:
   image: https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&h=400&fit=crop
 ---
 
-# Start Small, Ship Often
-
 The hardest part of any project isn't the code — it's deciding what *not* to build yet. A small thing in someone's hands beats a big thing in your head.
 
 ## Why small wins
