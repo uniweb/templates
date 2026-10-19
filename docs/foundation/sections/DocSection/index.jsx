@@ -1,23 +1,34 @@
 import React from 'react'
-import { H1, H2, H3, P, Link, cn, useWebsite } from '@uniweb/kit'
+import { H1, Link, Render, cn, useWebsite } from '@uniweb/kit'
+
+/**
+ * The section as written, after the header this section draws itself — the
+ * pretitle, title and subtitle, which the parser reads from its leading headings.
+ */
+function bodyOf(sequence = [], { pretitle, title, subtitle }) {
+  const header = [pretitle, title, subtitle].filter(Boolean).length
+  let i = 0
+  while (i < header && sequence[i]?.type === 'heading') i++
+  return sequence.slice(i)
+}
 
 /**
  * DocSection Component
  *
- * Main documentation content component that displays markdown content
- * with proper typography, code blocks, and navigation.
+ * Main documentation content component: a page header, then the page as
+ * written, in prose typography, then previous/next page navigation.
  *
- * Features:
- * - Clean typography for documentation
- * - Support for headings, paragraphs, lists, links
- * - Previous/Next page navigation
- * - Responsive design
+ * The body is the section's content in the order the author wrote it — headings,
+ * paragraphs, lists, code, tables, images, quotes, callouts — drawn by kit's
+ * <Render>. ⛔ Until 2026-10-19 it was rebuilt from the grouped fields
+ * (paragraphs, then lists, then links), which put text out of order, dropped
+ * code, tables and images, and drew no list at all.
  */
 function DocSection({ content, params, block }) {
   const { website } = useWebsite()
 
   // Runtime guarantees: content fields exist, params have defaults from meta.js
-  const { title, pretitle, subtitle, paragraphs, links, lists, items } = content
+  const { title, pretitle, subtitle, sequence } = content
 
   const { show_navigation, max_width } = params
 
@@ -60,68 +71,8 @@ function DocSection({ content, params, block }) {
       {/* This section owns the reading typography, so it renders correctly
           under any layout. Its colors are the section's theme tokens, so it
           needs no palette class, and none exists to add. */}
-      <div className="prose max-w-none">
-        {/* First paragraph as lead */}
-        {paragraphs[0] && (
-          <P
-            text={paragraphs[0]}
-            className="text-lg text-subtle leading-relaxed mb-6"
-          />
-        )}
-
-        {/* Remaining paragraphs */}
-        {paragraphs.slice(1).map((para, index) => (
-          <P
-            key={index}
-            text={para}
-            className="text-body leading-relaxed mb-4"
-          />
-        ))}
-
-        {/* Lists */}
-        {lists.map((list, index) => (
-          <RenderList key={index} list={list} />
-        ))}
-
-        {/* Links as a link list */}
-        {links.length > 0 && (
-          <div className="my-6">
-            {links.map((link, index) => (
-              <Link
-                key={index}
-                href={link.href}
-                className="inline-flex items-center gap-1 text-primary hover:text-primary-dark mr-4 mb-2"
-              >
-                {link.label}
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </Link>
-            ))}
-          </div>
-        )}
-
-        {/* Items (H3 sections) */}
-        {items.map((item, index) => (
-          <section key={index} className="mt-10">
-            {item.title && (
-              <H3
-                text={item.title}
-                className="text-xl font-semibold text-heading mb-4"
-              />
-            )}
-            {item.paragraphs?.map((para, pIndex) => (
-              <P
-                key={pIndex}
-                text={para}
-                className="text-body leading-relaxed mb-4"
-              />
-            ))}
-            {item.lists?.map((list, lIndex) => (
-              <RenderList key={lIndex} list={list} />
-            ))}
-          </section>
-        ))}
+      <div className="prose max-w-none [&>p:first-child]:text-lg [&>p:first-child]:text-subtle">
+        <Render content={{ sequence: bodyOf(sequence, content) }} block={block} />
       </div>
 
       {/* Page navigation */}
@@ -165,28 +116,6 @@ function DocSection({ content, params, block }) {
         </nav>
       )}
     </article>
-  )
-}
-
-/**
- * Render a list (ordered or unordered)
- */
-function RenderList({ list }) {
-  if (!list?.items?.length) return null
-
-  const ListTag = list.ordered ? 'ol' : 'ul'
-  const listClass = list.ordered
-    ? 'list-decimal list-inside space-y-2 mb-4'
-    : 'list-disc list-inside space-y-2 mb-4'
-
-  return (
-    <ListTag className={listClass}>
-      {list.items.map((item, index) => (
-        <li key={index} className="text-body">
-          {typeof item === 'string' ? item : item.text || item.content}
-        </li>
-      ))}
-    </ListTag>
   )
 }
 

@@ -15,9 +15,10 @@ export default {
     pretitle: 'Category label',
     title: 'Page title',
     subtitle: 'Brief description',
-    paragraphs: 'Documentation text',
-    lists: 'Bullet or numbered lists',
-    links: 'External or internal links',
+    // After its header, the page renders as written, through kit's <Render> — lists, code,
+    // tables, images and callouts included, wherever the author put them — and honours every
+    // placement an author gives an image, a video or a table: <Render> lays out all four.
+    sequence: { label: 'The page, as written', placement: true },
   },
 
   params: {
