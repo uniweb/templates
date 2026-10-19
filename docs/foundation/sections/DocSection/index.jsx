@@ -3,10 +3,13 @@ import { H1, Link, Render, cn, useWebsite } from '@uniweb/kit'
 
 /**
  * The section as written, after the header this section draws itself — the
- * pretitle, title and subtitle, which the parser reads from its leading headings.
+ * pretitle, title and subtitle, which the parser reads from its leading headings,
+ * one heading per line: a slot of several lines (`# Getting` / `# Started`) is
+ * a list of them. ⛔ Until 2026-10-19 a slot counted once, and its other lines
+ * showed again in the body.
  */
 function bodyOf(sequence = [], { pretitle, title, subtitle }) {
-  const header = [pretitle, title, subtitle].filter(Boolean).length
+  const header = [pretitle, title, subtitle].flat().filter(Boolean).length
   let i = 0
   while (i < header && sequence[i]?.type === 'heading') i++
   return sequence.slice(i)

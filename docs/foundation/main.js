@@ -18,15 +18,19 @@
 
 import { proseVars } from '@uniweb/kit/prose-vars'
 
+// A doc page's column is DocSection's `max_width`, so the line-length variable
+// would reach nothing here, and an editor would offer it all the same.
+const { 'prose-measure': _measure, ...prose } = proseVars
+
 /**
  * CSS custom properties — sites override these in theme.yml under `vars:`.
  * These become CSS variables (e.g., var(--header-height)) available to
  * all components in the foundation.
  */
 export const vars = {
-  // Long-form text: the reading size, line height, line length, spacing and
-  // heading sizes kit's prose layer reads (`@uniweb/kit/prose-vars`).
-  ...proseVars,
+  // Long-form text: the reading size, line height, spacing and heading sizes
+  // kit's prose layer reads (`@uniweb/kit/prose-vars`).
+  ...prose,
 
   // Layout
   'header-height': {
