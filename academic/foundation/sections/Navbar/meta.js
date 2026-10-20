@@ -5,6 +5,11 @@
  */
 export default {
   family: 'header',
+
+  // Stays in view as the page scrolls — the runtime makes sticky the box that can (a
+  // section's own markup cannot). An author turns it off with `sticky: false`, a setting of
+  // the section rather than one of this component's params.
+  sticky: true,
   title: 'Navbar',
   description: 'Site navigation header with automatic page detection and locale switcher',
 
@@ -24,12 +29,6 @@ export default {
         { value: 'manual', label: 'Manual (from content)' },
       ],
       default: 'auto',
-    },
-    sticky: {
-      type: 'boolean',
-      label: 'Sticky Header',
-      description: 'Keep navbar fixed at top while scrolling',
-      default: true,
     },
     showLocale: {
       type: 'select',
@@ -68,11 +67,11 @@ export default {
   presets: {
     default: {
       label: 'Auto Navigation',
-      params: { mode: 'auto', sticky: true },
+      params: { mode: 'auto' },
     },
     manual: {
       label: 'Manual Navigation',
-      params: { mode: 'manual', sticky: true },
+      params: { mode: 'manual' },
     },
     centered: {
       label: 'Centered Logo',
