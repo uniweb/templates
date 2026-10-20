@@ -35,7 +35,7 @@ function Header({ content, params, block }) {
   const [versionMenuOpen, setVersionMenuOpen] = useState(false)
 
   // Runtime guarantees: content fields exist, params have defaults from meta.js
-  const { sticky, categories, transparency, showSearch, showLocale, showVersion } = params
+  const { categories, transparency, showSearch, showLocale, showVersion } = params
   const { title, images, links } = content
 
   // Get logo and links from content

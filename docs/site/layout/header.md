@@ -1,6 +1,5 @@
 ---
 type: Header
-sticky: true
 categories: true
 showVersion: auto
 ---

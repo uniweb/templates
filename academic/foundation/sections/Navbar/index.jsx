@@ -135,98 +135,105 @@ function Navbar({ content, params }) {
     )
   }
 
+  // When it sticks: `fixed`, with a spacer holding its place in the page — the bar's
+  // height and its border, so `box-content`. A section renders inside boxes as tall as
+  // itself, so `sticky` here would have no room to move
+  // (docs/development/component-patterns.md, "Header positioning").
   return (
-    <header
-      className={cn(
-        'bg-section border-b border-border z-50',
-        sticky && 'sticky top-0'
-      )}
-    >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo / Site Name */}
-          <Link
-            href="/"
-            className={cn(
-              'flex items-center gap-3 font-semibold text-lg text-heading hover:text-primary transition-colors',
-              logoPosition === 'center' && 'md:absolute md:left-1/2 md:-translate-x-1/2'
-            )}
-          >
-            {logo && (
-              <img
-                src={logo.url || logo.src}
-                alt={siteName}
-                className="h-8 w-auto"
-              />
-            )}
-            {siteName && <span>{siteName}</span>}
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6">
-            <NavLinks
-              className="flex items-center gap-6"
-              itemClassName="text-sm font-medium transition-colors"
-            />
-            {shouldShowSearch && (
-              <SearchButton
-                onClick={() => setSearchOpen(true)}
-                onMouseEnter={triggerPreload}
-                onFocus={triggerPreload}
-              />
-            )}
-            <LocaleSwitcher />
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="flex items-center gap-2 md:hidden">
-            {shouldShowSearch && (
-              <button
-                onClick={() => setSearchOpen(true)}
-                onMouseEnter={triggerPreload}
-                onFocus={triggerPreload}
-                className="p-2 text-body hover:text-primary rounded-md hover:bg-muted"
-                aria-label="Search"
-              >
-                <SearchIcon className="w-5 h-5" />
-              </button>
-            )}
-            <LocaleSwitcher />
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-body hover:text-primary rounded-md hover:bg-muted"
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? (
-                <CloseIcon className="w-6 h-6" />
-              ) : (
-                <MenuIcon className="w-6 h-6" />
+    <>
+      <header
+        className={cn(
+          'bg-section border-b border-border z-50',
+          sticky && 'fixed inset-x-0 top-0'
+        )}
+      >
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo / Site Name */}
+            <Link
+              href="/"
+              className={cn(
+                'flex items-center gap-3 font-semibold text-lg text-heading hover:text-primary transition-colors',
+                logoPosition === 'center' && 'md:absolute md:left-1/2 md:-translate-x-1/2'
               )}
-            </button>
+            >
+              {logo && (
+                <img
+                  src={logo.url || logo.src}
+                  alt={siteName}
+                  className="h-8 w-auto"
+                />
+              )}
+              {siteName && <span>{siteName}</span>}
+            </Link>
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-6">
+              <NavLinks
+                className="flex items-center gap-6"
+                itemClassName="text-sm font-medium transition-colors"
+              />
+              {shouldShowSearch && (
+                <SearchButton
+                  onClick={() => setSearchOpen(true)}
+                  onMouseEnter={triggerPreload}
+                  onFocus={triggerPreload}
+                />
+              )}
+              <LocaleSwitcher />
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="flex items-center gap-2 md:hidden">
+              {shouldShowSearch && (
+                <button
+                  onClick={() => setSearchOpen(true)}
+                  onMouseEnter={triggerPreload}
+                  onFocus={triggerPreload}
+                  className="p-2 text-body hover:text-primary rounded-md hover:bg-muted"
+                  aria-label="Search"
+                >
+                  <SearchIcon className="w-5 h-5" />
+                </button>
+              )}
+              <LocaleSwitcher />
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2 text-body hover:text-primary rounded-md hover:bg-muted"
+                aria-label="Toggle menu"
+              >
+                {mobileMenuOpen ? (
+                  <CloseIcon className="w-6 h-6" />
+                ) : (
+                  <MenuIcon className="w-6 h-6" />
+                )}
+              </button>
+            </div>
           </div>
+
+          {/* Mobile Navigation */}
+          {mobileMenuOpen && (
+            <div className="md:hidden border-t border-border py-4">
+              <NavLinks
+                className="flex flex-col gap-1"
+                itemClassName="px-3 py-2 text-base font-medium rounded-md hover:bg-card"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+            </div>
+          )}
         </div>
 
-        {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <div className="md:hidden border-t border-border py-4">
-            <NavLinks
-              className="flex flex-col gap-1"
-              itemClassName="px-3 py-2 text-base font-medium rounded-md hover:bg-card"
-              onClick={() => setMobileMenuOpen(false)}
-            />
-          </div>
+        {/* Search Modal */}
+        {shouldShowSearch && (
+          <SearchModal
+            isOpen={searchOpen}
+            onClose={() => setSearchOpen(false)}
+            searchClient={searchClient}
+          />
         )}
-      </div>
-
-      {/* Search Modal */}
-      {shouldShowSearch && (
-        <SearchModal
-          isOpen={searchOpen}
-          onClose={() => setSearchOpen(false)}
-          searchClient={searchClient}
-        />
-      )}
-    </header>
+      </header>
+      {sticky && <div aria-hidden="true" className="box-content h-16 border-b border-transparent" />}
+    </>
   )
 }
 

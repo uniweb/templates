@@ -22,13 +22,10 @@ export default {
     links: 'Links: first internal link becomes CTA, external links (http...) shown as icons [0+]',
   },
 
+  // No "sticky" setting: DocsLayout scrolls only <main>, so the header stays in
+  // view whatever this section does. A toggle here could turn nothing off — the
+  // one it had was read and never used.
   params: {
-    sticky: {
-      type: 'boolean',
-      label: 'Sticky Header',
-      description: 'Header stays fixed at top while scrolling',
-      default: true,
-    },
     categories: {
       type: 'boolean',
       label: 'Category Tabs',
@@ -67,11 +64,11 @@ export default {
   presets: {
     default: {
       label: 'Simple Header',
-      params: { sticky: true, transparency: true },
+      params: { transparency: true },
     },
     categories: {
       label: 'With Category Tabs',
-      params: { sticky: true, categories: true },
+      params: { categories: true },
     },
   },
 }

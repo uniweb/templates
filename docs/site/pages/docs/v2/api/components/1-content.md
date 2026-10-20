@@ -21,7 +21,6 @@ The main documentation content component.
 
 Site navigation header component with search, version, and locale support.
 
-- sticky (boolean): Keep header fixed on scroll (default: true)
 - categories (boolean): Show top-level pages as category tabs (default: false)
 - transparency (boolean): Use blur effect when scrolled (default: true)
 - showSearch (auto|always|never): When to show search button (default: auto)
