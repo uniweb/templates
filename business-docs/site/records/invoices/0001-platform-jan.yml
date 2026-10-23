@@ -32,4 +32,4 @@ notes: |
 payment:
   paid_on: null
   remittance_ref: null
-foundation_version: '@uniweb/business-docs@0.1.0'
+foundation_version: '@unipress/business-docs@0.1.0'

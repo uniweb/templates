@@ -1,7 +1,7 @@
 # `business-docs` template
 
 A complete site for **statements of work, invoices, and engagement
-reports**, backed by the [`@uniweb/business-docs`](https://github.com/uniweb/unipress/tree/main/foundations/business-docs)
+reports**, backed by the [`@unipress/business-docs`](https://github.com/uniweb/unipress/tree/main/foundations/business-docs)
 foundation. The same foundation source ships in two surfaces: this
 uniweb site (multi-page, filterable, XLSX export) and a unipress doc
 template ([`documents/invoice/`](https://github.com/uniweb/unipress/tree/main/documents/invoice), single-record PDF/DOCX compile).
@@ -29,7 +29,7 @@ Then visit:
 
 | Path | What it is |
 |---|---|
-| `foundation/` | A copy of the `@uniweb/business-docs` foundation source. Authors are free to fork it for site-specific extensions. |
+| `foundation/` | A copy of the `@unipress/business-docs` foundation source. Authors are free to fork it for site-specific extensions. |
 | `site/site.yml.hbs` | Vendor identity, default currency, default tax jurisdiction, locale, and the queryable surface for both queries. |
 | `site/theme.yml` | Default colors and fonts. The foundation declares no hard-coded colors; everything maps through CSS variables. |
 | `site/records/sows/` | 3 sample SOWs: two signed (Globex platform redesign, Initech mobile app) and one in-review (Pied Piper data migration). |

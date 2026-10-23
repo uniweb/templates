@@ -26,4 +26,4 @@ tax:
   jurisdiction: NONE
 notes: |
   Reissued with overdue status — second reminder sent 2026-01-15.
-foundation_version: '@uniweb/business-docs@0.1.0'
+foundation_version: '@unipress/business-docs@0.1.0'

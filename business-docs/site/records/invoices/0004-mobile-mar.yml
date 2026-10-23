@@ -20,4 +20,4 @@ items:
     period: { from: 2026-03-01, to: 2026-03-31 }
 tax:
   jurisdiction: NONE
-foundation_version: '@uniweb/business-docs@0.1.0'
+foundation_version: '@unipress/business-docs@0.1.0'

@@ -25,4 +25,4 @@ tax:
 payment:
   paid_on: 2026-03-10
   remittance_ref: WIRE-20260310-9912
-foundation_version: '@uniweb/business-docs@0.1.0'
+foundation_version: '@unipress/business-docs@0.1.0'

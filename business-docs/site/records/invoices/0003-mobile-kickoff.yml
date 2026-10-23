@@ -20,4 +20,4 @@ tax:
 payment:
   paid_on: 2026-02-28
   remittance_ref: ACH-7733
-foundation_version: '@uniweb/business-docs@0.1.0'
+foundation_version: '@unipress/business-docs@0.1.0'
