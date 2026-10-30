@@ -27,10 +27,10 @@ export default {
   // each area in a thin div with this name, so the browser can animate them
   // independently. Areas with the same name across layouts morph between them
   // (position + size interpolation); areas unique to one layout fade in/out.
-  // Only active when the foundation sets viewTransitions: true.
+  // The body has no name and crossfades with the page: Safari captures a named
+  // element whole, and a long page would freeze a phone on every navigation.
   transitions: {
     header: 'header',   // Stays put during same-layout navigation
-    body: 'main',       // Crossfades to new page content
     left: 'sidebar',    // Stays put (same sidebar across pages)
     footer: 'footer',   // Stays put
   },
