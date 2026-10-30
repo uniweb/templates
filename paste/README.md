@@ -16,7 +16,7 @@ pnpm install
 pnpm dev
 ```
 
-Then open `foundation/sections/App.jsx` and **replace the whole file** with your
+Then open `src/sections/App.jsx` and **replace the whole file** with your
 design. Keep a default export:
 
 ```jsx
@@ -43,8 +43,8 @@ Save — the dev server hot-reloads. That's it.
 
 Level 0 gets the design live with zero rewiring, but everything is still one
 monolithic component with hardcoded content and colors. When you're ready, the
-**"Converting Existing Designs"** guide (in your project's `AGENTS.md`) walks the
-path from here:
+**"Converting Existing Designs"** guide (`development/converting-existing.md`,
+listed in your project's `AGENTS.md`) walks the path from here:
 
 - **Level 1** — split the monolith into named section types.
 - **Level 2** — move text out of JSX into markdown; components read `content`.
