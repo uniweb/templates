@@ -15,6 +15,7 @@
  *   - A template with a sample site gives it a name, a description and tags,
  *     which is what a site card shows
  *   - template.json says how to scaffold; the listing is manifest.json's
+ *   - No foundation writes a component inside a string
  *   - README.md's table has a row for every template
  *   - Links in this repo's own docs stay in this repo
  */
@@ -174,6 +175,18 @@ for (const name of templateNames) {
       errors.push(
         `${file.slice(ROOT.length + 1)}: shows {{projectName}}, the project's folder name — let the site's name show (site.yml \`name\`)`
       )
+    }
+  }
+}
+
+// A component written inside a string is not a component: it reaches a page as a tag the browser
+// doesn't know, which shows nothing, so a footer's `© ${year} $<Span text={name} />` read "© 2026 $."
+// A content field goes into a string as it is (`${name}`), for a component to render as HTML.
+for (const name of templateNames) {
+  for (const file of filesUnder(join(ROOT, name, 'foundation'))) {
+    if (!/\.jsx$/.test(file)) continue
+    if (/\$<[A-Z]/.test(readFileSync(file, 'utf8'))) {
+      errors.push(`${file.slice(ROOT.length + 1)}: a component written inside a string — put the content field in the string as \${field}`)
     }
   }
 }

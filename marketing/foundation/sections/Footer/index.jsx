@@ -5,7 +5,7 @@ function Footer({ content }) {
 
   const { title, paragraphs, links, items } = content
   const siteName = title || website?.name || 'Site'
-  const copyright = paragraphs[0] || `\u00A9 ${new Date().getFullYear()} $<Span text={siteName} />. All rights reserved.`
+  const copyright = paragraphs[0] || `\u00A9 ${new Date().getFullYear()} ${siteName}. All rights reserved.`
 
   const footerPages = website.getPageHierarchy({ for: 'footer' })
   const socialLinks = links.filter(link => isSocialLink(link.href))

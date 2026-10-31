@@ -45,7 +45,7 @@ function Footer({ content, params }) {
 
   // Copyright
   const currentYear = new Date().getFullYear()
-  const copyright = copyrightText || `© ${currentYear} $<Span text={siteName} />. All rights reserved.`
+  const copyright = copyrightText || `© ${currentYear} ${siteName}. All rights reserved.`
 
   // Determine column layout
   const hasItems = items.length > 0
