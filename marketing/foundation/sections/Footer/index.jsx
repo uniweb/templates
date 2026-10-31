@@ -1,11 +1,11 @@
-import { Link, cn, useWebsite, SocialIcon, isSocialLink } from '@uniweb/kit'
+import { Link, cn, useWebsite, SocialIcon, isSocialLink, H3, P, Span } from '@uniweb/kit'
 
 function Footer({ content }) {
   const { website } = useWebsite()
 
   const { title, paragraphs, links, items } = content
   const siteName = title || website?.name || 'Site'
-  const copyright = paragraphs[0] || `\u00A9 ${new Date().getFullYear()} ${siteName}. All rights reserved.`
+  const copyright = paragraphs[0] || `\u00A9 ${new Date().getFullYear()} $<Span text={siteName} />. All rights reserved.`
 
   const footerPages = website.getPageHierarchy({ for: 'footer' })
   const socialLinks = links.filter(link => isSocialLink(link.href))
@@ -16,8 +16,8 @@ function Footer({ content }) {
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
           <div className="col-span-2 md:col-span-1 lg:col-span-2">
-            <Link href="/" className="text-xl font-bold text-heading">{siteName}</Link>
-            {paragraphs[1] && <p className="mt-4 text-sm text-subtle">{paragraphs[1]}</p>}
+            <Link href="/" className="text-xl font-bold text-heading"><Span text={siteName} /></Link>
+            {paragraphs[1] && <P text={paragraphs[1]} className="mt-4 text-sm text-subtle" />}
             {socialLinks.length > 0 && (
               <div className="flex items-center gap-4 mt-6">
                 {socialLinks.map((link, i) => (
@@ -30,7 +30,7 @@ function Footer({ content }) {
           </div>
           {items.map((column, i) => (
             <div key={i}>
-              {column.title && <h3 className="text-sm font-semibold text-heading mb-4">{column.title}</h3>}
+              {column.title && <H3 text={column.title} className="text-sm font-semibold text-heading mb-4" />}
               {column.links?.length > 0 && (
                 <ul className="space-y-3">
                   {column.links.map((link, j) => (
@@ -45,7 +45,7 @@ function Footer({ content }) {
         </div>
         <div className="pt-8 border-t border-border">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-subtle">{copyright}</p>
+            <P text={copyright} className="text-sm text-subtle" />
             {legalLinks.length > 0 && (
               <div className="flex items-center gap-4">
                 {legalLinks.map((link, i) => (
@@ -62,7 +62,7 @@ function Footer({ content }) {
   return (
     <div className="max-w-6xl mx-auto">
       <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-        <Link href="/" className="text-xl font-bold text-heading">{siteName}</Link>
+        <Link href="/" className="text-xl font-bold text-heading"><Span text={siteName} /></Link>
         {footerPages.length > 0 && (
           <nav className="flex flex-wrap items-center justify-center gap-6">
             {footerPages.map((page) => (
@@ -84,7 +84,7 @@ function Footer({ content }) {
       </div>
       <div className="mt-8 pt-8 border-t border-border">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-subtle">{copyright}</p>
+          <P text={copyright} className="text-sm text-subtle" />
           {legalLinks.length > 0 && (
             <div className="flex items-center gap-4">
               {legalLinks.map((link, i) => (

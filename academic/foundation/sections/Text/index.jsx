@@ -103,13 +103,11 @@ function Text({ content, params }) {
     <section className={cn('px-6', d.section)}>
       <div className={cn('mx-auto', w, a)}>
         {pretitle && (
-          <p className={cn(
+          <P text={pretitle} className={cn(
             'uppercase tracking-wide text-primary font-medium',
             s.eyebrow,
             d.titleGap
-          )}>
-            {pretitle}
-          </p>
+          )} />
         )}
 
         {title && (
@@ -120,9 +118,7 @@ function Text({ content, params }) {
         )}
 
         {subtitle && (
-          <p className={cn(s.subtitle, 'text-body', d.titleGap)}>
-            {subtitle}
-          </p>
+          <P text={subtitle} className={cn(s.subtitle, 'text-body', d.titleGap)} />
         )}
 
         {paragraphs.length > 0 && (

@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { Link, cn, useScrolled, useMobileMenu, useWebsite, useActiveRoute } from '@uniweb/kit'
+import { Link, cn, useScrolled, useMobileMenu, useWebsite, useActiveRoute, Span } from '@uniweb/kit'
 
 function Header({ content, block }) {
   const { website } = useWebsite()
@@ -49,7 +49,7 @@ function Header({ content, block }) {
                       <path d="M8 12L16 8L24 12V20L16 24L8 20V12Z" className="stroke-white" strokeWidth="2" strokeLinejoin="round" />
                       <path d="M16 8V24M8 12L24 20M24 12L8 20" className="stroke-white/60" strokeWidth="1.5" strokeLinecap="round" />
                     </svg>
-                    <span className="text-xl font-bold">{siteName}</span>
+                    <Span text={siteName} className="text-xl font-bold" />
                   </>
                 )}
               </Link>

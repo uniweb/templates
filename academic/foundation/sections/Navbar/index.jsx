@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Link, useWebsite, cn, getLocaleLabel, useShortcut, useSearchPrefetch, isSearchEnabled } from '@uniweb/kit'
+import { Link, useWebsite, cn, getLocaleLabel, useShortcut, useSearchPrefetch, isSearchEnabled, Span, stripTags } from '@uniweb/kit'
 import { SearchModal, SearchButton } from '../SearchModal'
 
 /**
@@ -150,11 +150,11 @@ function Navbar({ content, params }) {
             {logo && (
               <img
                 src={logo.url || logo.src}
-                alt={siteName}
+                alt={stripTags(siteName)}
                 className="h-8 w-auto"
               />
             )}
-            {siteName && <span>{siteName}</span>}
+            {siteName && <Span text={siteName} />}
           </Link>
 
           {/* Desktop Navigation */}

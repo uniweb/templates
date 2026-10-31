@@ -1,5 +1,5 @@
 import React from 'react'
-import { cn, Text } from '@uniweb/kit'
+import { cn, Text, H2, P } from '@uniweb/kit'
 import { Equation, EquationProvider } from '@uniweb/scholar/math'
 
 /**
@@ -42,12 +42,10 @@ function MathBlock({ content, params }) {
           {(pretitle || title) && (
             <div className="mb-8">
               {pretitle && (
-                <p className="text-sm uppercase tracking-wide text-primary font-medium mb-2">
-                  {pretitle}
-                </p>
+                <P text={pretitle} className="text-sm uppercase tracking-wide text-primary font-medium mb-2" />
               )}
               {title && (
-                <h2 className="text-2xl font-bold mb-4 text-heading">{title}</h2>
+                <H2 text={title} className="text-2xl font-bold mb-4 text-heading" />
               )}
             </div>
           )}

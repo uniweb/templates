@@ -1,5 +1,6 @@
 import React from 'react'
 import { Database } from 'lucide-react'
+import { Span } from '@uniweb/kit'
 
 function Skeleton() {
   return [1, 2, 3, 4, 5, 6].map((n) => (
@@ -17,7 +18,7 @@ function OccurrenceRecords({ content, params, block }) {
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
           <Database className="text-accent-600 w-5 h-5" />
-          <span className="text-xl font-bold text-heading">{title || 'Occurrence Records'}</span>
+          <Span text={title || 'Occurrence Records'} className="text-xl font-bold text-heading" />
         </div>
       </div>
 

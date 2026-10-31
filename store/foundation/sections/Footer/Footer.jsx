@@ -1,5 +1,5 @@
 import { Sun, ArrowRight, Instagram, Mail } from 'lucide-react'
-import { Link, H3, useWebsite } from '@uniweb/kit'
+import { Link, H3, useWebsite, H5, P, Span } from '@uniweb/kit'
 
 /**
  * Footer Component
@@ -25,12 +25,10 @@ function Footer({ content }) {
         <div className="space-y-4">
           <div className="flex items-center gap-2 text-white">
             <Sun className="text-primary-500" size={24} />
-            <span className="font-black uppercase tracking-tighter">
-              {siteName}
-            </span>
+            <Span text={siteName} className="font-black uppercase tracking-tighter" />
           </div>
           {paragraphs[0] && (
-            <p className="text-sm leading-relaxed">{paragraphs[0]}</p>
+            <P text={paragraphs[0]} className="text-sm leading-relaxed" />
           )}
         </div>
 
@@ -57,9 +55,7 @@ function Footer({ content }) {
         {items.map((item, i) => (
           <div key={i}>
             {item.title && (
-              <h5 className="text-white font-bold mb-6 uppercase text-xs tracking-widest">
-                {item.title}
-              </h5>
+              <H5 text={item.title} className="text-white font-bold mb-6 uppercase text-xs tracking-widest" />
             )}
             {item.links && item.links.length > 0 ? (
               <ul className="space-y-4 text-sm">

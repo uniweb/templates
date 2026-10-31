@@ -7,7 +7,7 @@ export default function Hero({ content, block }) {
   return (
     <div className={cn('max-w-[var(--max-content-width)] mx-auto flex flex-col items-center text-center gap-12', visual && 'lg:flex-row lg:text-left')}>
       <div className="flex-1 max-w-2xl">
-        {pretitle && <p className="text-xs font-bold uppercase tracking-widest text-subtle mb-4">{pretitle}</p>}
+        {pretitle && <P text={pretitle} className="text-xs font-bold uppercase tracking-widest text-subtle mb-4" />}
         <H1 text={title} className="text-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight" />
         {paragraphs[0] && <P text={paragraphs[0]} className="text-subtle text-lg mt-6 max-w-xl" />}
         {links.length > 0 && (

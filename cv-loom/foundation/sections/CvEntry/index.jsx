@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { useDocumentOutput } from '@uniweb/press'
 import { H2, H3, Paragraph } from '@uniweb/press/docx'
-import { getChildBlockRenderer } from '@uniweb/kit'
+import { getChildBlockRenderer, Text } from '@uniweb/kit'
 import { SP } from '#utils/docx-spacing.js'
 
 /**
@@ -78,7 +78,7 @@ export default function CvEntry({ content, block }) {
   return (
     <div className="cv-entry">
       {title && (
-        <h2 className="text-heading text-2xl font-bold mb-4">{title}</h2>
+        <Text as="h2" text={title} className="text-heading text-2xl font-bold mb-4" />
       )}
       {preItems.map((el, i) => {
         if (el.type === 'paragraph') {

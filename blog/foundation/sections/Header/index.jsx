@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Link, cn, useScrolled, useMobileMenu, useWebsite, useActiveRoute, useRouting, useShortcut, useSearchPrefetch, isSearchEnabled } from '@uniweb/kit'
+import { Link, cn, useScrolled, useMobileMenu, useWebsite, useActiveRoute, useRouting, useShortcut, useSearchPrefetch, isSearchEnabled, Span } from '@uniweb/kit'
 import { ChevronDown, Search, X } from 'lucide-react'
 
 /**
@@ -250,7 +250,7 @@ function Header({ content, params, block }) {
             {/* Logo / Site Name */}
             <div className="flex-shrink-0">
               <Link href="/" className="text-xl font-bold">
-                {siteName}
+                <Span text={siteName} />
               </Link>
             </div>
 

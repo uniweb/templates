@@ -100,9 +100,7 @@ function ParticleHero({ content, params }) {
           />
         )}
         {subtitle && (
-          <p className="text-xl sm:text-2xl font-medium mb-4 text-slate-300">
-            {subtitle}
-          </p>
+          <P text={subtitle} className="text-xl sm:text-2xl font-medium mb-4 text-slate-300" />
         )}
         {paragraphs[0] && (
           <P

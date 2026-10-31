@@ -1,5 +1,5 @@
 import React from 'react'
-import { H2, P } from '@uniweb/kit'
+import { H2, P, Span } from '@uniweb/kit'
 import { BookOpen } from 'lucide-react'
 
 function Skeleton() {
@@ -21,7 +21,7 @@ function Publications({ content, params, block }) {
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
           <BookOpen className="text-primary-600 w-5 h-5" />
-          <span className="text-xl font-bold text-heading">{title || 'Recent Publications'}</span>
+          <Span text={title || 'Recent Publications'} className="text-xl font-bold text-heading" />
         </div>
       </div>
 

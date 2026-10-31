@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, cn } from '@uniweb/kit'
+import { Link, cn, Span } from '@uniweb/kit'
 
 function Header({ content, block }) {
   const { title, links = [] } = content
@@ -9,7 +9,7 @@ function Header({ content, block }) {
     <header className="bg-white/80 backdrop-blur-md border-b border-gray-200">
       <nav className="max-w-7xl mx-auto px-6 h-[var(--header-height)] flex items-center justify-between">
         <Link href="/" className="text-lg font-bold text-gray-900">
-          {title || website?.title || 'Site'}
+          <Span text={title || website?.title || 'Site'} />
         </Link>
         {links.length > 0 && (
           <div className="flex items-center gap-6">

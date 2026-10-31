@@ -1,5 +1,5 @@
 import React from 'react'
-import { cn, Link } from '@uniweb/kit'
+import { cn, Link, H2, H3, P, stripTags } from '@uniweb/kit'
 
 /**
  * TeamGrid Component
@@ -70,29 +70,25 @@ function TeamGrid({ content, params }) {
         )}>
           <img
             src={member.photo.url || member.photo.src}
-            alt={member.name}
+            alt={stripTags(member.name)}
             className="w-full h-full object-cover"
           />
         </div>
       )}
 
       <div className={cardStyle === 'compact' ? 'flex-1 min-w-0' : ''}>
-        <h3 className={cn(
+        <H3 text={member.name} className={cn(
           'font-semibold text-heading',
           cardStyle === 'photo' && 'text-lg',
           cardStyle === 'compact' && 'text-base truncate',
           cardStyle === 'detailed' && 'text-lg mb-1',
-        )}>
-          {member.name}
-        </h3>
+        )} />
 
         {!groupByRole && member.role && (
-          <p className={cn(
+          <P text={member.role} className={cn(
             'text-primary text-sm',
             cardStyle === 'compact' && 'truncate',
-          )}>
-            {member.role}
-          </p>
+          )} />
         )}
 
         {cardStyle === 'detailed' && member.bio && (
@@ -125,10 +121,10 @@ function TeamGrid({ content, params }) {
         {(title || paragraphs[0]) && (
           <div className="mb-10">
             {title && (
-              <h2 className="text-2xl font-bold text-heading mb-2">{title}</h2>
+              <H2 text={title} className="text-2xl font-bold text-heading mb-2" />
             )}
             {paragraphs[0] && (
-              <p className="text-body">{paragraphs[0]}</p>
+              <P text={paragraphs[0]} className="text-body" />
             )}
           </div>
         )}
@@ -136,9 +132,7 @@ function TeamGrid({ content, params }) {
         {sortedRoles.map(role => (
           <div key={role} className="mb-10 last:mb-0">
             {role && groupByRole && (
-              <h3 className="text-lg font-semibold text-body mb-6 pb-2 border-b border-border">
-                {role}
-              </h3>
+              <H3 text={role} className="text-lg font-semibold text-body mb-6 pb-2 border-b border-border" />
             )}
 
             <div className={cn('grid gap-8', gridCols[columns] || gridCols[3])}>

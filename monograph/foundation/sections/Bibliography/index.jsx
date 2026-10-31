@@ -15,7 +15,7 @@
  * toggles between styles in the options panel.
  */
 import React, { useEffect, useState } from 'react'
-import { SafeHtml } from '@uniweb/kit'
+import { SafeHtml, H1 } from '@uniweb/kit'
 import { useDocumentOutput } from '@uniweb/press'
 import { Paragraph } from '@uniweb/press/docx'
 import { useDocumentOptions } from '#components/document-options.jsx'
@@ -131,7 +131,7 @@ export default function Bibliography({ content, block }) {
 
   return (
     <section className="chapter">
-      <h1 className="chapter-title">{heading}</h1>
+      <H1 text={heading} className="chapter-title" />
 
       {loading && (
         <p className="chapter-body mono-narrow text-subtle italic">

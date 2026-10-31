@@ -22,6 +22,7 @@ import {
 } from '@uniweb/press/docx'
 import { useDocumentOptions } from '#components/document-options.jsx'
 import { SP } from '#utils/docx-spacing.js'
+import { stripTags } from '@uniweb/kit'
 
 const CHAPTER_KEY = 'front-matter'
 
@@ -88,7 +89,7 @@ export default function FrontMatter({ content, block, params }) {
             .filter(Boolean)
             .map((text, i, all) => (
               <Fragment key={i}>
-                <TextRun>{text}</TextRun>
+                <TextRun>{stripTags(text)}</TextRun>
                 {i < all.length - 1 ? <TextRun> · </TextRun> : null}
               </Fragment>
             ))}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useWebsite, cn, SocialIcon, filterSocialLinks } from '@uniweb/kit'
+import { Link, useWebsite, cn, SocialIcon, filterSocialLinks, Div, H3, P, Span, stripTags } from '@uniweb/kit'
 
 /**
  * Footer Component
@@ -45,7 +45,7 @@ function Footer({ content, params }) {
 
   // Copyright
   const currentYear = new Date().getFullYear()
-  const copyright = copyrightText || `© ${currentYear} ${siteName}. All rights reserved.`
+  const copyright = copyrightText || `© ${currentYear} $<Span text={siteName} />. All rights reserved.`
 
   // Determine column layout
   const hasItems = items.length > 0
@@ -69,26 +69,24 @@ function Footer({ content, params }) {
               {logo && (
                 <img
                   src={logo.url || logo.src}
-                  alt={siteName}
+                  alt={stripTags(siteName)}
                   className="h-10 w-auto"
                 />
               )}
               {siteName && (
-                <span className="text-xl font-semibold text-heading">
-                  {siteName}
-                </span>
+                <Span text={siteName} className="text-xl font-semibold text-heading" />
               )}
             </Link>
 
             {tagline && (
-              <p className="text-sm max-w-xs text-subtle">{tagline}</p>
+              <P text={tagline} className="text-sm max-w-xs text-subtle" />
             )}
 
             {/* Contact info from paragraphs */}
             {paragraphs.length > 0 && (
               <div className="text-sm space-y-1 text-subtle">
                 {paragraphs.map((p, i) => (
-                  <p key={i}>{typeof p === 'string' ? p : p.text}</p>
+                  <P key={i} text={typeof p === 'string' ? p : p.text} />
                 ))}
               </div>
             )}
@@ -134,9 +132,7 @@ function Footer({ content, params }) {
           {items.map((item, i) => (
             <div key={i}>
               {item.title && (
-                <h3 className="font-semibold mb-4 text-heading">
-                  {item.title}
-                </h3>
+                <H3 text={item.title} className="font-semibold mb-4 text-heading" />
               )}
               {item.links?.length > 0 && (
                 <nav className="space-y-2">
@@ -154,7 +150,7 @@ function Footer({ content, params }) {
               {item.paragraphs?.length > 0 && (
                 <div className="text-sm space-y-1 text-subtle">
                   {item.paragraphs.map((p, j) => (
-                    <p key={j}>{typeof p === 'string' ? p : p.text}</p>
+                    <P key={j} text={typeof p === 'string' ? p : p.text} />
                   ))}
                 </div>
               )}
@@ -164,9 +160,7 @@ function Footer({ content, params }) {
 
         {/* Copyright Bar */}
         {showCopyright && (
-          <div className="pt-8 border-t border-border text-sm text-center text-subtle">
-            {copyright}
-          </div>
+          <Div text={copyright} className="pt-8 border-t border-border text-sm text-center text-subtle" />
         )}
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { useDocumentOutput } from '@uniweb/press'
 import { Paragraph, TextRun } from '@uniweb/press/docx'
+import { stripTags } from '@uniweb/kit'
 
 /**
  * Registers the docx document header from layout content. The content
@@ -14,7 +15,7 @@ export default function PageBranding({ content, block }) {
 
   const header = (
     <Paragraph>
-      {title && <TextRun bold>{title}</TextRun>}
+      {title && <TextRun bold>{stripTags(title)}</TextRun>}
       <TextRun
         data-positionaltab-alignment="right"
         data-positionaltab-relativeto="margin"
@@ -22,7 +23,7 @@ export default function PageBranding({ content, block }) {
       >
         {'\t'}
       </TextRun>
-      {subtitle && <TextRun italics>{subtitle}</TextRun>}
+      {subtitle && <TextRun italics>{stripTags(subtitle)}</TextRun>}
     </Paragraph>
   )
 

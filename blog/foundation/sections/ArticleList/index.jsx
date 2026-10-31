@@ -1,4 +1,4 @@
-import { Link, useWebsite } from '@uniweb/kit'
+import { Link, useWebsite, H2, P } from '@uniweb/kit'
 
 /**
  * ArticleList Component
@@ -46,15 +46,13 @@ function ArticleList({ content, params, block }) {
         {(title || subtitle || paragraphs.length > 0) && (
           <header className="text-center mb-12">
             {title && (
-              <h2 className="text-3xl font-bold text-heading mb-4">{title}</h2>
+              <H2 text={title} className="text-3xl font-bold text-heading mb-4" />
             )}
             {subtitle && (
-              <p className="text-xl text-subtle mb-4">{subtitle}</p>
+              <P text={subtitle} className="text-xl text-subtle mb-4" />
             )}
             {paragraphs.map((p, i) => (
-              <p key={i} className="text-subtle max-w-2xl mx-auto">
-                {p}
-              </p>
+              <P key={i} text={p} className="text-subtle max-w-2xl mx-auto" />
             ))}
           </header>
         )}

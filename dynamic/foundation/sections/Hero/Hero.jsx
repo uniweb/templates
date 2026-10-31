@@ -1,5 +1,5 @@
 import React from 'react'
-import { H1, P, Link, Icon, cn } from '@uniweb/kit'
+import { H1, P, Link, Icon, cn, Span } from '@uniweb/kit'
 import { Activity } from 'lucide-react'
 import WeatherCard from '#components/WeatherCard.jsx'
 
@@ -18,7 +18,7 @@ function Hero({ content, params, block }) {
         {pretitle && (
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-100 text-primary-800 text-xs font-bold uppercase tracking-wide">
             <Activity className="w-3 h-3" />
-            {pretitle}
+            <Span text={pretitle} />
           </span>
         )}
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Text } from '@uniweb/kit'
+import { Link, Text, H1 } from '@uniweb/kit'
 
 /**
  * Logbook list — every entry, in the order the `logbook` query sorts them.
@@ -22,7 +22,7 @@ function LogbookList({ content, block }) {
 
   return (
     <div className="max-w-3xl mx-auto px-4">
-      {content.title && <h1 className="text-3xl font-bold mb-3">{content.title}</h1>}
+      {content.title && <H1 text={content.title} className="text-3xl font-bold mb-3" />}
       {content.paragraphs?.length > 0 && (
         <div className="text-subtle mb-8">
           <Text content={content.paragraphs} />

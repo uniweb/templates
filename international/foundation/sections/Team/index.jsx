@@ -1,5 +1,5 @@
 import React from 'react'
-import { H2, P, cn } from '@uniweb/kit'
+import { H2, P, cn, H3 } from '@uniweb/kit'
 
 /**
  * Team Component
@@ -25,6 +25,7 @@ function Team({ content, params }) {
     // Check if it's fetched data format (has 'name' property)
     if (member.name !== undefined) {
       return {
+        html: false,
         name: member.name,
         role: member.role,
         bio: member.bio,
@@ -33,6 +34,7 @@ function Team({ content, params }) {
     }
     // Markdown items format (H3 = name, the H4 below it = role)
     return {
+      html: true,
       name: member.title,
       role: member.subtitle,
       bio: member.paragraphs?.[0],
@@ -52,7 +54,7 @@ function Team({ content, params }) {
         {(title || subtitle) && (
           <div className="text-center mb-12">
             {title && <H2 text={title} className="text-3xl sm:text-4xl font-bold mb-4 text-heading" />}
-            {subtitle && <p className="text-lg text-subtle">{subtitle}</p>}
+            {subtitle && <P text={subtitle} className="text-lg text-subtle" />}
             {paragraphs[0] && <P text={paragraphs[0]} className="text-lg mt-4 max-w-2xl mx-auto text-subtle" />}
           </div>
         )}
@@ -68,9 +70,9 @@ function Team({ content, params }) {
                     className="w-32 h-32 mx-auto mb-4 rounded-full object-cover"
                   />
                 )}
-                {member.name && <h3 className="text-lg font-semibold text-heading">{member.name}</h3>}
-                {member.role && <p className="text-primary-600 text-sm">{member.role}</p>}
-                {member.bio && <P text={member.bio} className="text-subtle text-sm mt-2" />}
+                {member.name && <H3 text={member.name} html={member.html} className="text-lg font-semibold text-heading" />}
+                {member.role && <P text={member.role} html={member.html} className="text-primary-600 text-sm" />}
+                {member.bio && <P text={member.bio} html={member.html} className="text-subtle text-sm mt-2" />}
               </div>
             ))}
           </div>

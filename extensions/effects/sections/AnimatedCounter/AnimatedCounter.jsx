@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { H1, H2, cn } from '@uniweb/kit'
+import { H1, H2, cn, P } from '@uniweb/kit'
 
 /**
  * AnimatedCounter — Extension section type
@@ -122,7 +122,7 @@ function CounterCard({ target, label, visible, duration, delay }) {
         {display}
       </div>
       {label && (
-        <p className="text-gray-600 text-sm">{label}</p>
+        <P text={label} className="text-gray-600 text-sm" />
       )}
     </div>
   )

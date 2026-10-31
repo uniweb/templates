@@ -1,5 +1,5 @@
 import React from 'react'
-import { cn } from '@uniweb/kit'
+import { cn, H2, H3, P } from '@uniweb/kit'
 
 /**
  * Timeline Component
@@ -34,7 +34,7 @@ function Timeline({ content, params }) {
       <section className="py-12 px-6 overflow-x-auto">
         <div className="max-w-6xl mx-auto">
           {title && (
-            <h2 className="text-2xl font-bold text-heading mb-8">{title}</h2>
+            <H2 text={title} className="text-2xl font-bold text-heading mb-8" />
           )}
 
           <div className="relative min-w-max">
@@ -48,17 +48,13 @@ function Timeline({ content, params }) {
                   <div className="w-3 h-3 rounded-full bg-primary z-10 mb-4" />
 
                   {entry.date && (
-                    <p className="text-sm font-medium text-primary mb-2">{entry.date}</p>
+                    <P text={entry.date} className="text-sm font-medium text-primary mb-2" />
                   )}
 
-                  <h3 className="text-base font-semibold text-heading text-center">
-                    {entry.title}
-                  </h3>
+                  <H3 text={entry.title} className="text-base font-semibold text-heading text-center" />
 
                   {entry.institution && (
-                    <p className="text-sm text-body text-center mt-1">
-                      {entry.institution}
-                    </p>
+                    <P text={entry.institution} className="text-sm text-body text-center mt-1" />
                   )}
                 </div>
               ))}
@@ -76,10 +72,10 @@ function Timeline({ content, params }) {
         {(title || paragraphs[0]) && (
           <div className="mb-8">
             {title && (
-              <h2 className="text-2xl font-bold text-heading mb-2">{title}</h2>
+              <H2 text={title} className="text-2xl font-bold text-heading mb-2" />
             )}
             {paragraphs[0] && (
-              <p className="text-body">{paragraphs[0]}</p>
+              <P text={paragraphs[0]} className="text-body" />
             )}
           </div>
         )}
@@ -92,24 +88,22 @@ function Timeline({ content, params }) {
               )}
 
               {datePosition === 'left' && entry.date && (
-                <p className="text-sm font-medium text-primary mb-1">{entry.date}</p>
+                <P text={entry.date} className="text-sm font-medium text-primary mb-1" />
               )}
 
               {datePosition === 'inline' && entry.date && (
-                <p className="text-sm font-medium text-primary w-auto min-w-[6rem] flex-shrink-0 pt-0.5">
-                  {entry.date}
-                </p>
+                <P text={entry.date} className="text-sm font-medium text-primary w-auto min-w-[6rem] flex-shrink-0 pt-0.5" />
               )}
 
               <div className={datePosition === 'inline' ? 'flex-1' : ''}>
-                <h3 className="text-lg font-semibold text-heading">{entry.title}</h3>
+                <H3 text={entry.title} className="text-lg font-semibold text-heading" />
 
                 {entry.institution && (
-                  <p className="text-body mt-1">{entry.institution}</p>
+                  <P text={entry.institution} className="text-body mt-1" />
                 )}
 
                 {entry.description && (
-                  <p className="text-sm text-subtle mt-2">{entry.description}</p>
+                  <P text={entry.description} className="text-sm text-subtle mt-2" />
                 )}
               </div>
             </div>

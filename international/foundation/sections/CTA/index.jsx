@@ -17,7 +17,7 @@ function CTA({ content }) {
     <div className="py-16 sm:py-20 px-6">
       <div className="max-w-3xl mx-auto text-center">
         {title && <H2 text={title} className="text-3xl sm:text-4xl font-bold mb-4 text-heading" />}
-        {subtitle && <p className="text-xl mb-4 text-subtle">{subtitle}</p>}
+        {subtitle && <P text={subtitle} className="text-xl mb-4 text-subtle" />}
         {paragraphs[0] && <P text={paragraphs[0]} className="text-lg mb-8 text-subtle" />}
         {(cta || secondaryCta) && (
           <div className="flex gap-4 flex-wrap justify-center">

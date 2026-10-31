@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useWebsite } from '@uniweb/kit'
+import { Link, useWebsite, P, Span } from '@uniweb/kit'
 import { Leaf } from 'lucide-react'
 
 function Footer({ content }) {
@@ -13,10 +13,10 @@ function Footer({ content }) {
     <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
       <Link href="/" className="flex items-center gap-2">
         <Leaf className="w-6 h-6 text-primary-500" />
-        <span className="font-bold text-lg text-heading">{siteName}</span>
+        <Span text={siteName} className="font-bold text-lg text-heading" />
       </Link>
       {copyright ? (
-        <p className="text-sm text-subtle">{copyright}</p>
+        <P text={copyright} className="text-sm text-subtle" />
       ) : (
         <p className="text-sm text-subtle">
           &copy; {new Date().getFullYear()} Uniweb Demo Templates.

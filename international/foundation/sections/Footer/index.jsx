@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, cn, useWebsite, useRouting, getLocaleLabel } from '@uniweb/kit'
+import { Link, cn, useWebsite, useRouting, getLocaleLabel, H3, H4, P, Span } from '@uniweb/kit'
 
 /**
  * Footer Component
@@ -36,13 +36,13 @@ function Footer({ content, params }) {
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div className="md:col-span-2">
-            <h3 className="text-xl font-bold mb-4 text-heading">{siteName}</h3>
-            {description && <p className="text-subtle max-w-md">{description}</p>}
+            <H3 text={siteName} className="text-xl font-bold mb-4 text-heading" />
+            {description && <P text={description} className="text-subtle max-w-md" />}
           </div>
 
           {/* Navigation */}
           <div>
-            <h4 className="font-semibold mb-4 text-heading">{pagesLabel}</h4>
+            <H4 text={pagesLabel} className="font-semibold mb-4 text-heading" />
             <ul className="space-y-2">
               {navPages.map((page) => (
                 <li key={page.route}>
@@ -57,7 +57,7 @@ function Footer({ content, params }) {
           {/* Language */}
           {hasMultipleLocales && (
             <div>
-              <h4 className="font-semibold mb-4 text-heading">{languageLabel}</h4>
+              <H4 text={languageLabel} className="font-semibold mb-4 text-heading" />
               <ul className="space-y-2">
                 {locales.map((locale) => (
                   <li key={locale.code}>
@@ -81,7 +81,7 @@ function Footer({ content, params }) {
         </div>
 
         <div className="border-t border-border pt-8 text-center text-subtle text-sm">
-          <p>&copy; {year} {siteName}. {copyrightText}</p>
+          <p>&copy; {year} <Span text={siteName} />. <Span text={copyrightText} /></p>
         </div>
       </div>
     </div>

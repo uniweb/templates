@@ -1,5 +1,5 @@
 import React from 'react'
-import { cn, Text } from '@uniweb/kit'
+import { cn, Text, H2 } from '@uniweb/kit'
 
 /**
  * Section Component
@@ -41,7 +41,7 @@ function Section({ content, params }) {
         {(title || paragraphs[0]) && (
           <div className="mb-10">
             {title && (
-              <h2 className="text-2xl font-bold mb-3 text-heading">{title}</h2>
+              <H2 text={title} className="text-2xl font-bold mb-3 text-heading" />
             )}
             {paragraphs[0] && (
               <Text as="p" text={paragraphs[0]} className="text-lg text-body" />

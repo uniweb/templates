@@ -7,6 +7,7 @@ import {
   useMobileMenu,
   useWebsite,
   useActiveRoute,
+  Span,
 } from '@uniweb/kit'
 import { useCartCount, openCart } from '#components/cart-store.js'
 import { CartDrawer } from '#components/CartDrawer.jsx'
@@ -83,9 +84,7 @@ function Header({ content, block }) {
               <div className="bg-primary-600 p-2 rounded-xl text-white">
                 <Sun size={24} />
               </div>
-              <span className="text-xl font-black tracking-tighter uppercase">
-                {siteName}
-              </span>
+              <Span text={siteName} className="text-xl font-black tracking-tighter uppercase" />
             </Link>
 
             {/* Desktop nav */}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { H1, P, Link, cn } from '@uniweb/kit'
+import { H1, P, Link, cn, Span } from '@uniweb/kit'
 
 /**
  * Hero Component
@@ -28,12 +28,10 @@ function Hero({ content, params, block }) {
     >
       <div className="relative max-w-4xl mx-auto text-center">
         {pretitle && (
-          <span className={cn(
+          <Span text={pretitle} className={cn(
             'inline-block px-4 py-1.5 rounded-full text-sm font-medium mb-6',
             'bg-primary-100/20 text-body border border-border/50'
-          )}>
-            {pretitle}
-          </span>
+          )} />
         )}
 
         {title && (
@@ -44,9 +42,7 @@ function Hero({ content, params, block }) {
         )}
 
         {subtitle && (
-          <p className="text-xl sm:text-2xl font-medium mb-4 text-subtle">
-            {subtitle}
-          </p>
+          <P text={subtitle} className="text-xl sm:text-2xl font-medium mb-4 text-subtle" />
         )}
 
         {description && (

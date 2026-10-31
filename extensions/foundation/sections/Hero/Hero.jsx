@@ -1,5 +1,5 @@
 import React from 'react'
-import { H1, P, Link, cn } from '@uniweb/kit'
+import { H1, P, Link, cn, Span } from '@uniweb/kit'
 
 function Hero({ content, params }) {
   const { title, pretitle, subtitle, paragraphs, links } = content
@@ -8,9 +8,7 @@ function Hero({ content, params }) {
     <section className="py-20 sm:py-28 px-6 bg-gradient-to-br from-primary via-blue-600 to-indigo-700 text-white">
       <div className="max-w-4xl mx-auto text-center">
         {pretitle && (
-          <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium mb-6 bg-white/20 backdrop-blur-sm border border-white/20">
-            {pretitle}
-          </span>
+          <Span text={pretitle} className="inline-block px-4 py-1.5 rounded-full text-sm font-medium mb-6 bg-white/20 backdrop-blur-sm border border-white/20" />
         )}
         {title && (
           <H1
@@ -19,9 +17,7 @@ function Hero({ content, params }) {
           />
         )}
         {subtitle && (
-          <p className="text-xl sm:text-2xl font-medium mb-4 text-blue-100">
-            {subtitle}
-          </p>
+          <P text={subtitle} className="text-xl sm:text-2xl font-medium mb-4 text-blue-100" />
         )}
         {paragraphs[0] && (
           <P

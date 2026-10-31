@@ -1,5 +1,5 @@
 import React from 'react'
-import { H2, P, Icon, cn } from '@uniweb/kit'
+import { H2, P, Icon, cn, H3 } from '@uniweb/kit'
 
 /**
  * Section Component
@@ -15,7 +15,7 @@ function Section({ content }) {
         {(title || subtitle) && (
           <div className="text-center mb-12">
             {title && <H2 text={title} className="text-3xl sm:text-4xl font-bold mb-4 text-heading" />}
-            {subtitle && <p className="text-lg text-subtle">{subtitle}</p>}
+            {subtitle && <P text={subtitle} className="text-lg text-subtle" />}
             {paragraphs[0] && <P text={paragraphs[0]} className="text-lg mt-4 max-w-2xl mx-auto text-subtle" />}
           </div>
         )}
@@ -31,7 +31,7 @@ function Section({ content }) {
                       <Icon icon={icon} size={20} />
                     </div>
                   )}
-                  {item.title && <h3 className="text-xl font-semibold mb-2 text-heading">{item.title}</h3>}
+                  {item.title && <H3 text={item.title} className="text-xl font-semibold mb-2 text-heading" />}
                   {item.paragraphs?.[0] && <P text={item.paragraphs[0]} className="text-subtle" />}
                 </div>
               )

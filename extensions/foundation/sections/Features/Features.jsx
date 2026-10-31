@@ -1,5 +1,5 @@
 import React from 'react'
-import { H1, H2, P, cn } from '@uniweb/kit'
+import { H1, H2, P, cn, H3 } from '@uniweb/kit'
 
 function Features({ content }) {
   const { title, subtitle, items = [] } = content
@@ -20,7 +20,7 @@ function Features({ content }) {
             {items.map((item, i) => (
               <div key={i} className="p-6 rounded-xl border border-gray-200 hover:shadow-lg transition-shadow">
                 {item.title && (
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
+                  <H3 text={item.title} className="text-lg font-semibold text-gray-900 mb-2" />
                 )}
                 {item.paragraphs?.[0] && (
                   <P text={item.paragraphs[0]} className="text-gray-600" />

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icon, Link, cn, useScrolled, useMobileMenu, useWebsite, useActiveRoute } from '@uniweb/kit'
+import { Icon, Link, cn, useScrolled, useMobileMenu, useWebsite, useActiveRoute, Span } from '@uniweb/kit'
 import { Leaf } from 'lucide-react'
 
 function Header({ content, params, block }) {
@@ -81,7 +81,7 @@ function Header({ content, params, block }) {
               <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center shadow-lg shadow-primary-200">
                 <Leaf className="text-white w-5 h-5" />
               </div>
-              <span className="font-bold text-xl tracking-tight">{siteName}</span>
+              <Span text={siteName} className="font-bold text-xl tracking-tight" />
             </Link>
 
             {/* Desktop Navigation */}

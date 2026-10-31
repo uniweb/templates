@@ -1,5 +1,5 @@
 import React from 'react'
-import { cn, Link, P } from '@uniweb/kit'
+import { cn, Link, P, H3 } from '@uniweb/kit'
 
 /**
  * ContactCard Component
@@ -94,7 +94,7 @@ function ContactCard({ content, params }) {
 
   return (
     <div className={l.container}>
-      {title && <h3 className={l.title}>{title}</h3>}
+      {title && <H3 text={title} className={l.title} />}
 
       <div className={layout === 'inline' ? 'flex flex-wrap gap-6' : 'space-y-1'}>
         {contactItems.map((item, i) => (

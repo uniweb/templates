@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react'
-import { cn, Link } from '@uniweb/kit'
+import { cn, Link, H2, H3, P, stripTags } from '@uniweb/kit'
 import { formatReference, CiteButton, DoiLink, AuthorList } from '@uniweb/scholar'
 
 /**
@@ -26,7 +26,9 @@ const PUBLICATION_TYPES = {
 }
 
 function parsePublication(item) {
-  const { title, pretitle, paragraphs = [], links = [] } = item || {}
+  const { title, pretitle, links = [] } = item || {}
+  // These are split and passed on as data, so they are read as text: a content field is an HTML string.
+  const paragraphs = (item?.paragraphs || []).map(stripTags)
 
   // Parse authors into structured format if possible
   const authorsStr = paragraphs[0] || ''
@@ -46,7 +48,7 @@ function parsePublication(item) {
     })
 
   return {
-    id: title?.toLowerCase().replace(/\s+/g, '-').slice(0, 30) || 'pub',
+    id: stripTags(title).toLowerCase().replace(/\s+/g, '-').slice(0, 30) || 'pub',
     title,
     authors,
     authorsStr,
@@ -67,7 +69,7 @@ function PublicationCard({ pub, citationStyle, showType, showCiteButton }) {
     () => ({
       id: pub.id,
       type: pub.type === 'conference' ? 'inproceedings' : pub.type,
-      title: pub.title,
+      title: stripTags(pub.title),
       authors: pub.authors,
       journal: pub.journal,
       year: pub.year,
@@ -109,9 +111,7 @@ function PublicationCard({ pub, citationStyle, showType, showCiteButton }) {
           ) : (
             // Detailed format (title prominent)
             <>
-              <h3 className="text-lg font-semibold text-heading mb-1">
-                {pub.title}
-              </h3>
+              <H3 text={pub.title} className="text-lg font-semibold text-heading mb-1" />
               {pub.authors.length > 0 && (
                 <p className="text-body mb-1">
                   <AuthorList authors={pub.authors} style="apa" />
@@ -219,12 +219,10 @@ function PublicationList({ content, params }) {
         {(title || paragraphs[0]) && (
           <div className="mb-8">
             {title && (
-              <h2 className="text-2xl font-bold text-heading mb-2">
-                {title}
-              </h2>
+              <H2 text={title} className="text-2xl font-bold text-heading mb-2" />
             )}
             {paragraphs[0] && (
-              <p className="text-body">{paragraphs[0]}</p>
+              <P text={paragraphs[0]} className="text-body" />
             )}
           </div>
         )}

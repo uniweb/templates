@@ -25,7 +25,7 @@ export default function Hero({ content }) {
             {points.map((item, i) => (
               <li key={i} className="flex items-center gap-2.5 text-body">
                 <Icon name="check" size="20" className="text-success shrink-0" />
-                <span>{item.paragraphs?.[0]}</span>
+                <Span text={item.paragraphs?.[0]} />
               </li>
             ))}
           </ul>

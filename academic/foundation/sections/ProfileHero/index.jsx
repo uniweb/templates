@@ -1,5 +1,5 @@
 import React from 'react'
-import { H1, P, Link, cn } from '@uniweb/kit'
+import { H1, P, Link, cn, stripTags } from '@uniweb/kit'
 
 /**
  * ProfileHero Component
@@ -61,7 +61,7 @@ function ProfileHero({ content, params }) {
       <div className="flex-shrink-0">
         <img
           src={photo.url || photo.src}
-          alt={title || 'Profile photo'}
+          alt={stripTags(title) || 'Profile photo'}
           className={cn(v.photoStyle, v.photoSize)}
         />
       </div>
@@ -71,7 +71,7 @@ function ProfileHero({ content, params }) {
   const ContentBlock = () => (
     <div className="flex-1 min-w-0">
       {showAffiliation && affiliation && (
-        <p className={cn('mb-2', v.affiliationStyle)}>{affiliation}</p>
+        <P text={affiliation} className={cn('mb-2', v.affiliationStyle)} />
       )}
 
       {title && (
@@ -79,7 +79,7 @@ function ProfileHero({ content, params }) {
       )}
 
       {role && (
-        <p className={cn('text-xl mb-4', v.roleStyle)}>{role}</p>
+        <P text={role} className={cn('text-xl mb-4', v.roleStyle)} />
       )}
 
       {bio && (

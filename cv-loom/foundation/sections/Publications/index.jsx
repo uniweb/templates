@@ -25,7 +25,7 @@
  * uses them for the CITE custom Loom function. No async loading,
  * no style cache — keep the escape hatch simple.
  */
-import { SafeHtml } from '@uniweb/kit'
+import { SafeHtml, H2 } from '@uniweb/kit'
 import { useDocumentOutput } from '@uniweb/press'
 import { H2 as DocxH2, Paragraph } from '@uniweb/press/docx'
 import { formatAll } from 'citestyle'
@@ -69,7 +69,7 @@ export default function Publications({ content, block }) {
 
   return (
     <div className="cv-entry">
-      <h2 className="text-heading text-2xl font-bold mb-4">{heading}</h2>
+      <H2 text={heading} className="text-heading text-2xl font-bold mb-4" />
 
       {entries.length === 0 && (
         <p className="text-subtle italic">No publications to display.</p>

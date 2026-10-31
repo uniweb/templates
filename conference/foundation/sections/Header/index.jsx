@@ -1,4 +1,4 @@
-import { Link, isBackendEnabled } from '@uniweb/kit'
+import { Link, isBackendEnabled, Span } from '@uniweb/kit'
 import { useSession, useSignIn, SignedIn, SignedOut } from '@uniweb/api'
 
 /**
@@ -20,7 +20,7 @@ export default function Header({ content, block }) {
     <header className="border-b border-[var(--border)]">
       <div className="mx-auto flex h-[var(--header-height)] max-w-[var(--max-content-width)] items-center justify-between px-[var(--section-padding-x)]">
         <Link href="/" className="font-semibold text-heading no-underline">
-          {content?.title || website?.name || 'Conference'}
+          <Span text={content?.title || website?.name || 'Conference'} />
         </Link>
         {backend && <Account />}
       </div>

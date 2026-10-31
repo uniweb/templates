@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { SafeHtml } from '@uniweb/kit'
+import { SafeHtml, H2, H3 } from '@uniweb/kit'
 import { useRecords, useEntity, useEntityWriter, useSession, createEntity, SignedIn } from '@uniweb/api'
 
 /**
@@ -58,7 +58,7 @@ function Frame({ content, children }) {
   return (
     <section className="px-[var(--section-padding-x)] py-[var(--section-padding-y)]">
       <div className="mx-auto max-w-[var(--max-content-width)] space-y-8">
-        {content.title && <h2 className="text-3xl font-semibold text-heading">{content.title}</h2>}
+        {content.title && <H2 text={content.title} className="text-3xl font-semibold text-heading" />}
         {children}
       </div>
     </section>
@@ -79,7 +79,7 @@ function Authored({ content, bare = false }) {
     <div className="space-y-6">
       {content.items?.map((item, i) => (
         <article key={i} className="rounded-[var(--radius-lg)] border border-[var(--border)] p-5">
-          {item.title && <h3 className="mb-3 text-xl font-semibold text-heading">{item.title}</h3>}
+          {item.title && <H3 text={item.title} className="mb-3 text-xl font-semibold text-heading" />}
           <ol className="space-y-2">
             {(item.lists?.[0] || []).map((entry, j) => (
               <li key={j} className="flex items-start gap-3 rounded-[var(--radius-md)] bg-[var(--section)] p-3">

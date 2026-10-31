@@ -1,5 +1,5 @@
 import React from 'react'
-import { cn, Link } from '@uniweb/kit'
+import { cn, Link, H2, H3, P, Span } from '@uniweb/kit'
 
 /**
  * ResearchAreas Component
@@ -46,10 +46,10 @@ function ResearchAreas({ content, params }) {
         {(title || paragraphs[0]) && (
           <div className="mb-8">
             {title && (
-              <h2 className="text-2xl font-bold text-heading mb-2">{title}</h2>
+              <H2 text={title} className="text-2xl font-bold text-heading mb-2" />
             )}
             {paragraphs[0] && (
-              <p className="text-body max-w-2xl">{paragraphs[0]}</p>
+              <P text={paragraphs[0]} className="text-body max-w-2xl" />
             )}
           </div>
         )}
@@ -63,7 +63,7 @@ function ResearchAreas({ content, params }) {
             if (layout === 'compact') {
               return (
                 <div key={index} className={l.item}>
-                  <span className={l.title}>{areaTitle}</span>
+                  <Span text={areaTitle} className={l.title} />
                 </div>
               )
             }
@@ -88,10 +88,10 @@ function ResearchAreas({ content, params }) {
                     <div className="w-12 h-1 bg-primary rounded-full mb-3" />
                   )}
 
-                  <h3 className={l.title}>{areaTitle}</h3>
+                  <H3 text={areaTitle} className={l.title} />
 
                   {areaDesc && (
-                    <p className={l.description}>{areaDesc}</p>
+                    <P text={areaDesc} className={l.description} />
                   )}
 
                   {areaLinks.length > 0 && (
