@@ -185,11 +185,6 @@ function SearchModal({ isOpen, onClose, searchClient }) {
                       )}
                     >
                       <div className="flex items-center gap-2 mb-1">
-                        {result.type === 'section' && (
-                          <span className="text-xs text-primary font-medium">
-                            {result.component}
-                          </span>
-                        )}
                         <span className="text-sm font-medium text-heading">
                           {result.title}
                         </span>

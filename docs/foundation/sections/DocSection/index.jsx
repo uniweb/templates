@@ -35,8 +35,9 @@ function DocSection({ content, params, block }) {
 
   const { show_navigation, max_width } = params
 
-  // Get adjacent pages for navigation
-  const allPages = website.getPageHierarchy({ nested: false })
+  // Get adjacent pages for navigation. A folder with no content of its own only redirects to its
+  // first page, so it is no stop in the reading order: as "Previous" it would lead straight back.
+  const allPages = website.getPageHierarchy({ nested: false }).filter((p) => p.hasContent)
   const currentRoute = website.activePage?.route || ''
   const currentIndex = allPages.findIndex((p) => p.route === currentRoute)
   const prevPage = currentIndex > 0 ? allPages[currentIndex - 1] : null
