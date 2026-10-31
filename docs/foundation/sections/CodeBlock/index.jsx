@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { cn, Code } from '@uniweb/kit'
+import { Span, cn, Code } from '@uniweb/kit'
 
 /**
  * CodeBlock Component
@@ -44,7 +44,7 @@ function CodeBlock({ content, params }) {
               </span>
             )}
             {title && (
-              <span className="text-sm text-subtle">{title}</span>
+              <Span text={title} className="text-sm text-subtle" />
             )}
           </div>
           {show_copy && (

@@ -1,5 +1,5 @@
 import React from 'react'
-import { H1, P, Link, Icon } from '@uniweb/kit'
+import { H1, P, Span, Link, Icon } from '@uniweb/kit'
 
 export default function Hero({ content }) {
   const { title, pretitle, paragraphs, links, lists } = content
@@ -9,9 +9,7 @@ export default function Hero({ content }) {
     <div className="max-w-[var(--max-content-width)] mx-auto px-6 py-[var(--section-padding-y)]">
       <div className="max-w-2xl">
         {pretitle && (
-          <span className="inline-block px-3 py-1 rounded-full text-sm font-semibold bg-primary-50 text-primary-700 mb-5">
-            {pretitle}
-          </span>
+          <Span text={pretitle} className="inline-block px-3 py-1 rounded-full text-sm font-semibold bg-primary-50 text-primary-700 mb-5" />
         )}
 
         {title && (

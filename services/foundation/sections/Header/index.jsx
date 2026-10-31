@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Icon, useMobileMenu, cn } from '@uniweb/kit'
+import { Link, Icon, Span, useMobileMenu, cn } from '@uniweb/kit'
 
 function Header({ content }) {
   const logo = content.title
@@ -11,7 +11,7 @@ function Header({ content }) {
     <div className="bg-section/95 backdrop-blur border-b border-border">
       <div className="max-w-[var(--max-content-width)] mx-auto px-6 h-[var(--header-height)] flex items-center justify-between gap-6">
         <Link href="/" className="text-xl font-bold text-heading no-underline">
-          {logo}
+          <Span text={logo} />
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">

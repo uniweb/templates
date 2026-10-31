@@ -1,5 +1,5 @@
 import React from 'react'
-import { H1, Link, Render, cn, useWebsite } from '@uniweb/kit'
+import { H1, P, Span, Link, Render, cn, useWebsite } from '@uniweb/kit'
 
 /**
  * The section as written, after the header this section draws itself — the
@@ -56,7 +56,7 @@ function DocSection({ content, params, block }) {
       {(pretitle || title || subtitle) && (
         <header className="mb-8 pb-6 border-b border-border">
           {pretitle && (
-            <p className="text-sm font-medium text-primary mb-2">{pretitle}</p>
+            <Span text={pretitle} className="block text-sm font-medium text-primary mb-2" />
           )}
           {title && (
             <H1
@@ -65,7 +65,7 @@ function DocSection({ content, params, block }) {
             />
           )}
           {subtitle && (
-            <p className="mt-3 text-lg text-subtle">{subtitle}</p>
+            <P text={subtitle} className="mt-3 text-lg text-subtle" />
           )}
         </header>
       )}

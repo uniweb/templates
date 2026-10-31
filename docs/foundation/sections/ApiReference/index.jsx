@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { cn, Code } from '@uniweb/kit'
+import { H2, P, cn, Code } from '@uniweb/kit'
 
 /**
  * ApiReference Component
@@ -73,7 +73,7 @@ function ApiReference({ content, params }) {
       {/* Header: Method + Path */}
       <div className="mb-6">
         {title && (
-          <h2 className="text-2xl font-bold text-heading mb-3">{title}</h2>
+          <H2 text={title} className="text-2xl font-bold text-heading mb-3" />
         )}
 
         <div className="flex items-center gap-3 p-4 bg-section rounded-lg font-mono text-sm">
@@ -94,7 +94,7 @@ function ApiReference({ content, params }) {
         </div>
 
         {paragraphs[0] && (
-          <p className="mt-4 text-subtle">{paragraphs[0]}</p>
+          <P text={paragraphs[0]} className="mt-4 text-subtle" />
         )}
       </div>
 

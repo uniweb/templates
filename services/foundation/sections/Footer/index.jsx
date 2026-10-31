@@ -1,5 +1,5 @@
 import React from 'react'
-import { P, Link } from '@uniweb/kit'
+import { P, Span, Link } from '@uniweb/kit'
 
 function Footer({ content }) {
   const { title, paragraphs, lists } = content
@@ -9,7 +9,7 @@ function Footer({ content }) {
     <div className="border-t border-border">
       <div className="max-w-[var(--max-content-width)] mx-auto px-6 py-12 grid gap-10 sm:grid-cols-2">
         <div>
-          {title && <p className="text-lg font-bold text-heading mb-2">{title}</p>}
+          {title && <P text={title} className="text-lg font-bold text-heading mb-2" />}
           {paragraphs[0] && <P text={paragraphs[0]} className="text-sm text-subtle max-w-sm" />}
         </div>
 
@@ -24,7 +24,7 @@ function Footer({ content }) {
                       {link.label}
                     </Link>
                   ) : (
-                    <span className="text-subtle">{item.paragraphs?.[0]}</span>
+                    <Span text={item.paragraphs?.[0]} className="text-subtle" />
                   )}
                 </li>
               )
@@ -34,7 +34,7 @@ function Footer({ content }) {
       </div>
 
       <div className="max-w-[var(--max-content-width)] mx-auto px-6 pb-8 text-sm text-subtle">
-        © {new Date().getFullYear()} {title}
+        © {new Date().getFullYear()} <Span text={title} />
       </div>
     </div>
   )

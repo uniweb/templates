@@ -23,7 +23,7 @@ export default function Testimonials({ content, params }) {
               <figcaption className="mt-4 text-sm font-semibold text-heading">
                 <Span text={item.title} />
                 {item.subtitle && (
-                  <span className="block font-normal text-subtle">{item.subtitle}</span>
+                  <Span text={item.subtitle} className="block font-normal text-subtle" />
                 )}
               </figcaption>
             )}
