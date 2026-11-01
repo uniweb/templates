@@ -89,7 +89,7 @@ function DocSection({ content, params, block }) {
                 className="group flex flex-col"
               >
                 <span className="text-sm text-subtle mb-1">Previous</span>
-                <span className="text-primary group-hover:text-primary-dark font-medium flex items-center gap-1">
+                <span className="text-primary group-hover:text-primary-hover font-medium flex items-center gap-1">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                   </svg>
@@ -106,7 +106,7 @@ function DocSection({ content, params, block }) {
                 className="group flex flex-col text-right"
               >
                 <span className="text-sm text-subtle mb-1">Next</span>
-                <span className="text-primary group-hover:text-primary-dark font-medium flex items-center gap-1">
+                <span className="text-primary group-hover:text-primary-hover font-medium flex items-center gap-1">
                   {nextPage.label || nextPage.title}
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

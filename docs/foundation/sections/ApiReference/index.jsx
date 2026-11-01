@@ -87,7 +87,7 @@ function ApiReference({ content, params }) {
           </span>
           <code className="text-heading">{renderPath(path)}</code>
           {show_try_it && (
-            <button className="ml-auto px-3 py-1 text-xs bg-primary hover:bg-primary-dark text-primary-foreground rounded transition-colors">
+            <button className="ml-auto px-3 py-1 text-xs bg-primary hover:bg-primary-hover text-primary-foreground rounded transition-colors">
               Try it
             </button>
           )}
