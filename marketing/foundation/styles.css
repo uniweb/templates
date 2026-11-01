@@ -2,6 +2,7 @@
 @import "@uniweb/kit/theme-tokens.css";
 
 @source "./sections/**/*.{js,jsx}";
+@source "./components/**/*.{js,jsx}";
 
 @theme inline {
   --font-heading: var(--heading-font, inherit);

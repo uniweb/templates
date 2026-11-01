@@ -3,6 +3,7 @@
 @import "@uniweb/kit/prose-tokens.css";
 
 @source "./sections/**/*.{js,jsx}";
+@source "./components/**/*.{js,jsx}";
 
 @theme inline {
   /* Foundation-specific: use white or primary-50 instead of bg for surface */
