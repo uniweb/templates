@@ -4,4 +4,3 @@
 /* Scan your pasted design (and any helpers you later extract) for Tailwind classes. */
 @source "./sections/**/*.{js,jsx}";
 @source "./components/**/*.{js,jsx}";
-@source "./node_modules/@uniweb/kit/src/**/*.{js,jsx}";

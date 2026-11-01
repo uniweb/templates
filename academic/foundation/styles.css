@@ -8,7 +8,6 @@
 @import "@uniweb/kit/math-tokens.css";
 
 @source "./sections/**/*.{js,jsx}";
-@source "./node_modules/@uniweb/kit/src/**/*.{js,jsx}";
 
 /* Academic typography enhancements */
 .prose-academic {

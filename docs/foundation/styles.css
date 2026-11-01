@@ -22,7 +22,6 @@
 @source "./sections/**/*.{js,jsx}";
 @source "./components/**/*.{js,jsx}";
 @source "./layouts/**/*.{js,jsx}";
-@source "./node_modules/@uniweb/kit/src/**/*.{js,jsx}";
 
 /*
  * Prose typography, wired to the theme.
