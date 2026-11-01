@@ -28,6 +28,8 @@ function Header({ content, params, block }) {
   const scrolled = useScrolled(0)
   const { isOpen: mobileMenuOpen, toggle: toggleMobileMenu, close: closeMobileMenu } = useMobileMenu()
   const { isActiveOrAncestor, route: currentRoute } = useActiveRoute()
+  // By its pages too: a folder promoted to `/` holds them under its own name, not under `/`.
+  const isCurrent = (page) => isActiveOrAncestor(page) || page.children?.some(isCurrent)
 
   // Local state
   const [searchOpen, setSearchOpen] = useState(false)
@@ -398,7 +400,7 @@ function Header({ content, params, block }) {
                   href={page.navigableRoute}
                   className={cn(
                     'px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap',
-                    isActiveOrAncestor(page)
+                    isCurrent(page)
                       ? 'border-primary text-primary'
                       : 'border-transparent text-subtle hover:text-heading hover:border-border'
                   )}
@@ -418,7 +420,7 @@ function Header({ content, params, block }) {
                   href={page.navigableRoute}
                   className={cn(
                     'px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap',
-                    isActiveOrAncestor(page)
+                    isCurrent(page)
                       ? 'border-primary text-primary'
                       : 'border-transparent text-subtle hover:text-heading hover:border-border'
                   )}
@@ -455,7 +457,7 @@ function Header({ content, params, block }) {
                   href={page.navigableRoute}
                   className={cn(
                     'block px-3 py-2 text-base font-medium rounded-md',
-                    isActiveOrAncestor(page)
+                    isCurrent(page)
                       ? 'text-primary bg-primary/5'
                       : 'text-body hover:text-heading hover:bg-muted'
                   )}

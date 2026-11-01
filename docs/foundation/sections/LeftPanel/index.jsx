@@ -7,12 +7,9 @@ import { Link, cn, useAccordion, useActiveRoute, useVersion, useWebsite } from '
  * markdown file added anywhere under the docs appears here with no change to
  * this foundation.
  *
- * Three things this component deliberately does *not* do, because the
- * framework already does them:
+ * Two things this component deliberately does *not* do, because the framework
+ * already does them:
  *
- * - **Narrow to the current section.** `getBranchHierarchy` answers the branch
- *   the visitor is in — under `/docs` it returns the docs, under `/guides` the
- *   guides. No route arithmetic here.
  * - **Sort.** `pages:` lists in site.yml / folder.yml resolve at build time, so
  *   the tree arrives in the order the site asked for.
  * - **Track open sections.** `useAccordion` holds that state.
@@ -21,9 +18,10 @@ import { Link, cn, useAccordion, useActiveRoute, useVersion, useWebsite } from '
  * tested against it — so an author can keep a page in the header menu while
  * leaving it out of this rail, or the reverse.
  *
- * What it does do is keep to one version. The tree holds every version of a
- * versioned site, each page saying which is its own: left alone, a reader on v2
- * gets v1's pages too, under the same names.
+ * What it does do is keep to one version, and with `categories`, to the section
+ * being read. The tree holds every version of a versioned site, each page saying
+ * which is its own: left alone, a reader on v2 gets v1's pages too, under the
+ * same names.
  */
 
 function normalizeRoute(route) {
@@ -35,6 +33,25 @@ function inVersion(items, id) {
   return (items || [])
     .filter((page) => !page.version || page.version.id === id)
     .map((page) => ({ ...page, children: inVersion(page.children, id) }))
+}
+
+/**
+ * The section being read: the top-level page holding the route, then its pages.
+ * It lists itself, so the rail always shows where the reader is.
+ *
+ * Not `getBranchHierarchy`, which reads a route's first segment as the branch. In
+ * `/v1/guide` that segment is the version, and a folder promoted to `/` isn't found
+ * under its own name, so on those pages it answers the whole tree.
+ */
+function sectionOf(pages, activeRoute) {
+  const holds = (page) => {
+    const route = normalizeRoute(page.route)
+    return route === activeRoute || (route && activeRoute.startsWith(route + '/')) || page.children?.some(holds)
+  }
+  const section = pages.find(holds)
+  // A home page with no pages of its own isn't a section, so it gets the whole tree.
+  if (!section || (!activeRoute && !section.children?.length)) return pages
+  return [{ ...section, children: [] }, ...section.children]
 }
 
 /** Every branch id in the tree — the "start expanded" case. */
@@ -142,16 +159,19 @@ function NavigationTree({ items, activeRoute, collapsible, isOpen, toggle, level
 export default function LeftPanel({ params }) {
   const { website } = useWebsite()
   const { route } = useActiveRoute()
-  const { currentVersion } = useVersion()
+  const { currentVersion, versionedScopes } = useVersion()
   const { collapsible, categories, default_open } = params
 
   const activeRoute = normalizeRoute(route)
 
+  // The version being read. Outside the versioned pages, such as a home page beside them, the latest.
+  const scopes = Object.values(versionedScopes)
+  const version = currentVersion?.id ?? (scopes.length === 1 ? scopes[0].latestId : null)
+
+  const tree = website.getPageHierarchy({ for: 'left' })
+  const pages = version ? inVersion(tree, version) : tree
   // `categories` narrows to the section being read; otherwise the whole tree.
-  const tree = categories
-    ? website.getBranchHierarchy({ route, for: 'left' })
-    : website.getPageHierarchy({ for: 'left' })
-  const navigation = currentVersion ? inVersion(tree, currentVersion.id) : tree
+  const navigation = categories ? sectionOf(pages, activeRoute) : pages
 
   const { isOpen, toggle } = useAccordion({
     multiple: true,
