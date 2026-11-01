@@ -75,7 +75,7 @@ function Article({ content, params }) {
         <header className="mb-8">
           {/* Tags */}
           {showTags && tags && tags.length > 0 && (
-            <div className="flex gap-2 mb-4">
+            <div className="flex flex-wrap gap-2 mb-4">
               {tags.map((tag, i) => (
                 <span
                   key={i}
