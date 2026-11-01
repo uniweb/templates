@@ -1,5 +1,5 @@
 import React from 'react'
-import { H1, P, Span, Link, Render, cn, useWebsite } from '@uniweb/kit'
+import { H1, P, Span, Link, Render, cn, useVersion, useWebsite } from '@uniweb/kit'
 
 /**
  * The section as written, after the header this section draws itself — the
@@ -29,6 +29,7 @@ function bodyOf(sequence = [], { pretitle, title, subtitle }) {
  */
 function DocSection({ content, params, block }) {
   const { website } = useWebsite()
+  const { currentVersion } = useVersion()
 
   // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { title, pretitle, subtitle, sequence } = content
@@ -37,7 +38,10 @@ function DocSection({ content, params, block }) {
 
   // Get adjacent pages for navigation. A folder with no content of its own only redirects to its
   // first page, so it is no stop in the reading order: as "Previous" it would lead straight back.
-  const allPages = website.getPageHierarchy({ nested: false }).filter((p) => p.hasContent)
+  // And a version is read on its own: v2's first page has no "Previous", not v1's last.
+  const allPages = website
+    .getPageHierarchy({ nested: false })
+    .filter((p) => p.hasContent && (p.version?.id ?? null) === (currentVersion?.id ?? null))
   const currentRoute = website.activePage?.route || ''
   const currentIndex = allPages.findIndex((p) => p.route === currentRoute)
   const prevPage = currentIndex > 0 ? allPages[currentIndex - 1] : null

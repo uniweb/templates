@@ -1,4 +1,4 @@
-import { Link, cn, useAccordion, useActiveRoute, useWebsite } from '@uniweb/kit'
+import { Link, cn, useAccordion, useActiveRoute, useVersion, useWebsite } from '@uniweb/kit'
 
 /**
  * LeftPanel — documentation navigation
@@ -20,10 +20,21 @@ import { Link, cn, useAccordion, useActiveRoute, useWebsite } from '@uniweb/kit'
  * `for: 'left'` names the layout area being filled, and a page's `hideIn:` is
  * tested against it — so an author can keep a page in the header menu while
  * leaving it out of this rail, or the reverse.
+ *
+ * What it does do is keep to one version. The tree holds every version of a
+ * versioned site, each page saying which is its own: left alone, a reader on v2
+ * gets v1's pages too, under the same names.
  */
 
 function normalizeRoute(route) {
   return (route || '').replace(/^\//, '').replace(/\/$/, '')
+}
+
+/** One version's pages, and any outside a version, at every level of the tree. */
+function inVersion(items, id) {
+  return (items || [])
+    .filter((page) => !page.version || page.version.id === id)
+    .map((page) => ({ ...page, children: inVersion(page.children, id) }))
 }
 
 /** Every branch id in the tree — the "start expanded" case. */
@@ -131,14 +142,16 @@ function NavigationTree({ items, activeRoute, collapsible, isOpen, toggle, level
 export default function LeftPanel({ params }) {
   const { website } = useWebsite()
   const { route } = useActiveRoute()
+  const { currentVersion } = useVersion()
   const { collapsible, categories, default_open } = params
 
   const activeRoute = normalizeRoute(route)
 
   // `categories` narrows to the section being read; otherwise the whole tree.
-  const navigation = categories
+  const tree = categories
     ? website.getBranchHierarchy({ route, for: 'left' })
     : website.getPageHierarchy({ for: 'left' })
+  const navigation = currentVersion ? inVersion(tree, currentVersion.id) : tree
 
   const { isOpen, toggle } = useAccordion({
     multiple: true,
