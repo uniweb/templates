@@ -16,6 +16,7 @@
  *     which is what a site card shows
  *   - template.json says how to scaffold; the listing is manifest.json's
  *   - No foundation writes a component inside a string
+ *   - No section registers one format twice, which loses the first
  *   - README.md's table has a row for every template
  *   - Links in this repo's own docs stay in this repo
  */
@@ -187,6 +188,21 @@ for (const name of templateNames) {
     if (!/\.jsx$/.test(file)) continue
     if (/\$<[A-Z]/.test(readFileSync(file, 'utf8'))) {
       errors.push(`${file.slice(ROOT.length + 1)}: a component written inside a string — put the content field in the string as \${field}`)
+    }
+  }
+}
+
+// A block holds one registration per format, so a second useDocumentOutput for the same format
+// replaces the first and says nothing: business-docs lost its Records sheet that way, from the day
+// it was written. Several sheets are one registration, an array. A different `role` is its own.
+for (const name of templateNames) {
+  for (const file of filesUnder(join(ROOT, name, 'foundation'))) {
+    if (!/\.jsx$/.test(file)) continue
+    const text = readFileSync(file, 'utf8')
+    if (/\brole:/.test(text)) continue
+    const formats = [...text.matchAll(/useDocumentOutput\(\s*\w+,\s*'(\w+)'/g)].map((m) => m[1])
+    for (const format of new Set(formats.filter((f, i) => formats.indexOf(f) !== i))) {
+      errors.push(`${file.slice(ROOT.length + 1)}: registers '${format}' twice, and the second replaces the first — for several sheets, register one array`)
     }
   }
 }
