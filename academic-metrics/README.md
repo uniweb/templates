@@ -94,7 +94,7 @@ The narrative describes the **unit as a whole** (unfiltered totals); the live st
 
 ## Dependencies
 
-- **`@uniweb/press`** — document compilation (registered outputs → xlsx Blob via exceljs, dynamic-imported).
+- **`@uniweb/press`** — document compilation (registered outputs → xlsx Blob, dynamic-imported).
 - **`@uniweb/core`** — provides `matchWhere`, the where-object evaluator `useFilteredMembers` filters with.
 - **`@uniweb/kit`** — provides `usePageState` (the selection lives on `page.state`), `useQueryable` (used by `FilterPanel` to read the queryable surface from the named query) and `useFetched` (used by the options panel to read the saved views).
 - **`@uniweb/loom`** — text weaving for the Cover narrative.
