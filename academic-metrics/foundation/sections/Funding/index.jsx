@@ -22,6 +22,7 @@ import {
 import { useDocumentOutput } from '@uniweb/press'
 import { Paragraph, Table, Tr, Td } from '@uniweb/press/docx'
 import { useSectionIncluded, useFilteredMembers } from '#components/query-context.jsx'
+import { useNarrowScreen } from '#components/use-narrow-screen.js'
 
 const SECTION_KEY = 'funding'
 
@@ -125,6 +126,7 @@ export default function Funding({ content, block }) {
 }
 
 function FundingBars({ rows }) {
+  const narrow = useNarrowScreen()
   const [mounted, setMounted] = useState(false)
   useEffect(() => {
     setMounted(true)
@@ -143,7 +145,7 @@ function FundingBars({ rows }) {
         <BarChart
           data={data}
           layout="vertical"
-          margin={{ top: 8, right: 80, bottom: 8, left: 16 }}
+          margin={{ top: 8, right: narrow ? 56 : 80, bottom: 8, left: narrow ? 0 : 16 }}
         >
           <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
           <XAxis
@@ -154,10 +156,13 @@ function FundingBars({ rows }) {
           <YAxis
             type="category"
             dataKey="name"
-            width={200}
+            // On a phone a label this wide would leave the bars no room.
+            width={narrow ? 110 : 200}
             tick={{ fontSize: 12 }}
           />
           <Tooltip
+            // The bars are too narrow on a phone for a tooltip beside them to stay in the card.
+            position={narrow ? { x: 8 } : undefined}
             formatter={(v) => POUND.format(v)}
             contentStyle={{
               background: 'var(--card)',

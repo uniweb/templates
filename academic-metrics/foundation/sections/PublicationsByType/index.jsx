@@ -160,7 +160,6 @@ function PublicationsPie({ counts }) {
             paddingAngle={2}
             stroke="var(--card)"
             strokeWidth={2}
-            label={({ name, value }) => `${name} (${value})`}
           >
             {data.map((_, i) => (
               <Cell key={i} fill={PALETTE[i % PALETTE.length]} />
@@ -173,10 +172,13 @@ function PublicationsPie({ counts }) {
               borderRadius: '0.375rem',
             }}
           />
+          {/* The counts go here, not on the slices: a label beside the pie is cut off on a phone,
+              where the pie takes the chart's whole width. */}
           <Legend
             verticalAlign="bottom"
             height={36}
             wrapperStyle={{ fontSize: '0.875rem' }}
+            formatter={(name, entry) => `${name} (${entry.payload.value})`}
           />
         </PieChart>
       </ResponsiveContainer>

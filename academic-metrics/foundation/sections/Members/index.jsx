@@ -99,28 +99,32 @@ export default function Members({ content, block }) {
       {members.length === 0 ? (
         <p className="members-empty">No members match the selected population.</p>
       ) : (
-        <table className="members-table">
-          <thead>
-            <tr>
-              {HEADERS.map((h) => (
-                <th key={h}>{h}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {sorted.map((m) => (
-              <tr key={m.$name || m.name}>
-                <td>{m.name}</td>
-                <td>{m.rank}</td>
-                <td>{m.department}</td>
-                <td className={m.tenured ? 'status-yes' : 'status-no'}>
-                  {m.tenured ? 'Yes' : 'No'}
-                </td>
-                <td className="numeric">{m.start_year || ''}</td>
+        // A table wider than the screen scrolls in this box, not the page. It can be focused so a
+        // keyboard can scroll it too.
+        <div className="members-table-scroll" role="region" aria-label={heading} tabIndex={0}>
+          <table className="members-table">
+            <thead>
+              <tr>
+                {HEADERS.map((h) => (
+                  <th key={h}>{h}</th>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {sorted.map((m) => (
+                <tr key={m.$name || m.name}>
+                  <td>{m.name}</td>
+                  <td>{m.rank}</td>
+                  <td>{m.department}</td>
+                  <td className={m.tenured ? 'status-yes' : 'status-no'}>
+                    {m.tenured ? 'Yes' : 'No'}
+                  </td>
+                  <td className="numeric">{m.start_year || ''}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </section>
   )

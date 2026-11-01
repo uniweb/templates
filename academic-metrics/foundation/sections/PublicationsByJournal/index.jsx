@@ -29,6 +29,7 @@ import {
   useSectionIncluded,
   useFilteredMembers,
 } from '#components/query-context.jsx'
+import { useNarrowScreen } from '#components/use-narrow-screen.js'
 import { filterPublications } from '#utils/publication-filters.js'
 
 const SECTION_KEY = 'publications-by-journal'
@@ -118,6 +119,7 @@ export default function PublicationsByJournal({ content, block }) {
 }
 
 function JournalBars({ counts }) {
+  const narrow = useNarrowScreen()
   const [mounted, setMounted] = useState(false)
   useEffect(() => {
     setMounted(true)
@@ -128,8 +130,8 @@ function JournalBars({ counts }) {
   }
 
   const data = counts.map((c) => ({ name: c.venue, value: c.count }))
-  // Height scales with bar count so labels don't crowd.
-  const height = Math.max(240, data.length * 44)
+  // Height scales with bar count so labels don't crowd. On a phone they wrap to more lines.
+  const height = Math.max(240, data.length * (narrow ? 60 : 44))
 
   return (
     <div className="chart-container">
@@ -137,17 +139,20 @@ function JournalBars({ counts }) {
         <BarChart
           data={data}
           layout="vertical"
-          margin={{ top: 8, right: 32, bottom: 8, left: 16 }}
+          margin={{ top: 8, right: 32, bottom: 8, left: narrow ? 0 : 16 }}
         >
           <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
           <XAxis type="number" allowDecimals={false} />
           <YAxis
             type="category"
             dataKey="name"
-            width={240}
+            // On a phone a label this wide would leave the bars no room.
+            width={narrow ? 120 : 240}
             tick={{ fontSize: 12 }}
           />
           <Tooltip
+            // The bars are too narrow on a phone for a tooltip beside them to stay in the card.
+            position={narrow ? { x: 8 } : undefined}
             contentStyle={{
               background: 'var(--card)',
               border: '1px solid var(--border)',

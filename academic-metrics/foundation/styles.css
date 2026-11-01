@@ -75,6 +75,13 @@ kbd {
   padding-block: var(--section-padding-y, 3rem);
 }
 
+/* On a phone the floating toolbar spans the top of the screen: the report starts below it. */
+@media (max-width: 40rem) {
+  .metrics-body {
+    padding-top: 3.5rem;
+  }
+}
+
 .metrics-report > * + * {
   margin-top: var(--report-gap, 3rem);
 }
@@ -120,13 +127,24 @@ kbd {
 
 .cover-meta {
   display: inline-flex;
-  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 2rem;
+  max-width: 100%;
   padding: 0.75rem 1.5rem;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 0.5rem;
   font-size: 0.875rem;
   color: var(--body);
+}
+
+@media (max-width: 40rem) {
+  .cover-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem 1rem;
+  }
 }
 
 .cover-meta-label {
@@ -473,6 +491,21 @@ kbd {
   padding: 1.5rem 1rem;
 }
 
+/* A chart stays inside its card. Recharts keeps each tooltip laid out, hidden, wherever it last
+   was, and draws it on one line: past the chart's edge, either widens a phone's page, on some
+   loads and not others. */
+.chart-container {
+  overflow: hidden;
+}
+
+.chart-container .recharts-tooltip-wrapper {
+  max-width: 100%;
+}
+
+.chart-container .recharts-default-tooltip {
+  white-space: normal !important; /* over the inline style Recharts sets */
+}
+
 .chart-container-placeholder {
   /* Reserve the chart footprint during SSR / prerender so hydration
    * doesn't cause layout shift when the chart mounts. */
@@ -508,6 +541,12 @@ kbd {
   border: 1px dashed var(--border);
   border-radius: 0.5rem;
   font-style: italic;
+}
+
+/* Wider than a phone: it scrolls here. A table that widened the page would take
+   the page's right edge with it, and the toolbar fixed to that edge. */
+.members-table-scroll {
+  overflow-x: auto;
 }
 
 .members-table {
