@@ -29,7 +29,7 @@ function bodyOf(sequence = [], { pretitle, title, subtitle }) {
  */
 function DocSection({ content, params, block }) {
   const { website } = useWebsite()
-  const { currentVersion } = useVersion()
+  const { holds } = useVersion()
 
   // Runtime guarantees: content fields exist, params have defaults from meta.js
   const { title, pretitle, subtitle, sequence } = content
@@ -41,7 +41,7 @@ function DocSection({ content, params, block }) {
   // And a version is read on its own: v2's first page has no "Previous", not v1's last.
   const allPages = website
     .getPageHierarchy({ nested: false })
-    .filter((p) => p.hasContent && (p.version?.id ?? null) === (currentVersion?.id ?? null))
+    .filter((p) => p.hasContent && holds(p.route))
   const currentRoute = website.activePage?.route || ''
   const currentIndex = allPages.findIndex((p) => p.route === currentRoute)
   const prevPage = currentIndex > 0 ? allPages[currentIndex - 1] : null

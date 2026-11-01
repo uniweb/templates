@@ -7,7 +7,7 @@
     "DocSection",
     "CodeBlock",
     "ApiReference",
-    "DeprecationBanner",
+    "VersionNotice",
     "SearchModal",
     "Footer"
   ]

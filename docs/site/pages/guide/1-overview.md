@@ -18,6 +18,7 @@ Whether you're building a simple project documentation or a complex API referenc
 - Component customization
 - Navigation and routing
 - Deployment and hosting
+- [Older versions](page:versions) of your docs
 
 ### Who is this for?
 

@@ -55,9 +55,15 @@ export default {
     showVersion: {
       type: 'select',
       label: 'Show Version Switcher',
-      description: 'When to show the version switcher (auto shows only when page is in versioned content)',
+      description: 'When to show the version switcher (auto shows it on docs with an older version)',
       options: ['auto', 'always', 'never'],
       default: 'auto',
+    },
+    latestLabel: {
+      type: 'text',
+      label: 'Name of the Latest Version',
+      description: 'What the version switcher calls the current docs, such as 3.x',
+      default: 'Latest',
     },
   },
 

@@ -1,4 +1,4 @@
-import { Link, cn, useAccordion, useActiveRoute, useVersion, useWebsite } from '@uniweb/kit'
+import { Link, cn, useAccordion, useActiveRoute, useVersion } from '@uniweb/kit'
 
 /**
  * LeftPanel — documentation navigation
@@ -19,20 +19,12 @@ import { Link, cn, useAccordion, useActiveRoute, useVersion, useWebsite } from '
  * leaving it out of this rail, or the reverse.
  *
  * What it does do is keep to one version, and with `categories`, to the section
- * being read. The tree holds every version of a versioned site, each page saying
- * which is its own: left alone, a reader on v2 gets v1's pages too, under the
- * same names.
+ * being read. `useVersion` gives the tree for that, whether or not the site has
+ * older versions, so this rail needs no change on the day one is added.
  */
 
 function normalizeRoute(route) {
   return (route || '').replace(/^\//, '').replace(/\/$/, '')
-}
-
-/** One version's pages, and any outside a version, at every level of the tree. */
-function inVersion(items, id) {
-  return (items || [])
-    .filter((page) => !page.version || page.version.id === id)
-    .map((page) => ({ ...page, children: inVersion(page.children, id) }))
 }
 
 /**
@@ -49,8 +41,8 @@ function sectionOf(pages, activeRoute) {
     return route === activeRoute || (route && activeRoute.startsWith(route + '/')) || page.children?.some(holds)
   }
   const section = pages.find(holds)
-  // A home page with no pages of its own isn't a section, so it gets the whole tree.
-  if (!section || (!activeRoute && !section.children?.length)) return pages
+  // A top-level page with no pages of its own isn't a section, so it gets the whole tree.
+  if (!section?.children?.length) return pages
   return [{ ...section, children: [] }, ...section.children]
 }
 
@@ -157,19 +149,13 @@ function NavigationTree({ items, activeRoute, collapsible, isOpen, toggle, level
 }
 
 export default function LeftPanel({ params }) {
-  const { website } = useWebsite()
   const { route } = useActiveRoute()
-  const { currentVersion, versionedScopes } = useVersion()
+  const { hierarchy } = useVersion()
   const { collapsible, categories, default_open } = params
 
   const activeRoute = normalizeRoute(route)
 
-  // The version being read. Outside the versioned pages, such as a home page beside them, the latest.
-  const scopes = Object.values(versionedScopes)
-  const version = currentVersion?.id ?? (scopes.length === 1 ? scopes[0].latestId : null)
-
-  const tree = website.getPageHierarchy({ for: 'left' })
-  const pages = version ? inVersion(tree, version) : tree
+  const pages = hierarchy({ for: 'left' })
   // `categories` narrows to the section being read; otherwise the whole tree.
   const navigation = categories ? sectionOf(pages, activeRoute) : pages
 

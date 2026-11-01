@@ -37,7 +37,7 @@ function Header({ content, params, block }) {
   const [versionMenuOpen, setVersionMenuOpen] = useState(false)
 
   // Runtime guarantees: content fields exist, params have defaults from meta.js
-  const { categories, transparency, showSearch, showLocale, showVersion } = params
+  const { categories, transparency, showSearch, showLocale, showVersion, latestLabel } = params
   const { title, images, links } = content
 
   // Get logo and links from content
@@ -48,9 +48,6 @@ function Header({ content, params, block }) {
   // First link is CTA, rest are external links (GitHub, etc.)
   const ctaLink = links.find(l => !l.href?.startsWith('http'))
   const externalLinks = links.filter(l => l.href?.startsWith('http'))
-
-  // Get page hierarchy for navigation
-  const allPages = website.getPageHierarchy({ for: 'header' })
 
   // Search configuration
   const searchEnabled = isSearchEnabled()
@@ -78,14 +75,13 @@ function Header({ content, params, block }) {
   const useInlineLocales = locales.length >= 2 && locales.length <= 4
 
   // Version configuration
-  const { isVersioned, currentVersion, versions, getVersionUrl, hasVersionedContent } = useVersion()
+  const { isVersioned, currentVersion, isOlderVersion, versions, hierarchy } = useVersion()
   const shouldShowVersion = showVersion === 'always' || (showVersion === 'auto' && isVersioned && versions.length > 1)
+  // The pages beside the version folders have no page of their own to name them, so it's this section's to say.
+  const versionLabel = (version) => version.label ?? latestLabel
 
-  // When using category tabs on a versioned site, filter pages to only show
-  // those matching the current version (otherwise both v1 and v2 pages appear)
-  const pages = (categories && isVersioned && currentVersion)
-    ? allPages.filter(p => p.version?.id === currentVersion.id)
-    : allPages
+  // The tabs of the version being read
+  const pages = hierarchy({ for: 'header' })
 
   // Auto-navigate to first page on root route if no content at root
   useEffect(() => {
@@ -127,11 +123,11 @@ function Header({ content, params, block }) {
           className={cn(
             'flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-md transition-colors',
             'bg-primary/10 text-primary hover:bg-primary/20',
-            currentVersion?.deprecated && 'bg-warning-subtle text-warning hover:bg-warning-subtle/70'
+            isOlderVersion && 'bg-warning-subtle text-warning hover:bg-warning-subtle/70'
           )}
           aria-label="Change version"
         >
-          <span>{currentVersion?.label || currentVersion?.id || 'Version'}</span>
+          <span>{currentVersion ? versionLabel(currentVersion) : 'Version'}</span>
           <ChevronIcon className={cn('w-3 h-3 transition-transform', versionMenuOpen && 'rotate-180')} />
         </button>
 
@@ -143,9 +139,9 @@ function Header({ content, params, block }) {
             />
             <div className="absolute left-0 top-full mt-1 z-50 bg-section rounded-lg shadow-lg border border-border py-1 min-w-[180px]">
               {versions.map(version => (
-                <a
+                <Link
                   key={version.id}
-                  href={getVersionUrl(version.id)}
+                  href={version.href}
                   className={cn(
                     'flex items-center justify-between px-3 py-2 text-sm transition-colors',
                     version.id === currentVersion?.id
@@ -154,18 +150,8 @@ function Header({ content, params, block }) {
                   )}
                   onClick={() => setVersionMenuOpen(false)}
                 >
-                  <span>{version.label || version.id}</span>
-                  {version.latest && (
-                    <span className="text-[10px] px-1.5 py-0.5 bg-success-subtle text-success rounded-full font-medium">
-                      latest
-                    </span>
-                  )}
-                  {version.deprecated && (
-                    <span className="text-[10px] px-1.5 py-0.5 bg-warning-subtle text-warning rounded-full font-medium">
-                      deprecated
-                    </span>
-                  )}
-                </a>
+                  {versionLabel(version)}
+                </Link>
               ))}
             </div>
           </>
@@ -474,9 +460,9 @@ function Header({ content, params, block }) {
                     Version
                   </div>
                   {versions.map(version => (
-                    <a
+                    <Link
                       key={version.id}
-                      href={getVersionUrl(version.id)}
+                      href={version.href}
                       className={cn(
                         'flex items-center justify-between px-3 py-2 text-base rounded-md',
                         version.id === currentVersion?.id
@@ -485,18 +471,8 @@ function Header({ content, params, block }) {
                       )}
                       onClick={closeMobileMenu}
                     >
-                      <span>{version.label || version.id}</span>
-                      {version.latest && (
-                        <span className="text-[10px] px-1.5 py-0.5 bg-success-subtle text-success rounded-full font-medium">
-                          latest
-                        </span>
-                      )}
-                      {version.deprecated && (
-                        <span className="text-[10px] px-1.5 py-0.5 bg-warning-subtle text-warning rounded-full font-medium">
-                          deprecated
-                        </span>
-                      )}
-                    </a>
+                      {versionLabel(version)}
+                    </Link>
                   ))}
                 </div>
               )}

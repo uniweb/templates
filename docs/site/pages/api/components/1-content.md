@@ -26,11 +26,12 @@ Site navigation header component with search, version, and locale support.
 - showSearch (auto|always|never): When to show search button (default: auto)
 - showLocale (auto|always|never): When to show locale switcher (default: auto)
 - showVersion (auto|always|never): When to show version switcher (default: auto)
+- latestLabel (text): What the version switcher calls the current docs (default: Latest)
 
 When `showSearch`, `showLocale`, or `showVersion` is set to `auto`:
 - Search appears when `search.enabled: true` in site.yml
 - Locale switcher appears when multiple locales are configured
-- Version switcher appears when page is in versioned content
+- Version switcher appears when the docs have an [older version](page:versions)
 
 ### LeftPanel
 
