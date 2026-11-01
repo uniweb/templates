@@ -26,3 +26,5 @@ export default function Testimonials({ content, params }) {
     </div>
   )
 }
+
+Testimonials.className = 'py-[var(--section-padding-y)] px-[var(--section-padding-x)]'
