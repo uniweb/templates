@@ -117,8 +117,9 @@ function Header({ content, params, block }) {
   const VersionBadge = () => {
     if (!shouldShowVersion) return null
 
+    // On a phone there's no room beside the name, and the mobile menu holds the version switcher.
     return (
-      <div className="relative">
+      <div className="relative hidden sm:block">
         <button
           onClick={() => setVersionMenuOpen(!versionMenuOpen)}
           className={cn(
@@ -324,9 +325,9 @@ function Header({ content, params, block }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Main header row */}
           <div className="flex items-center h-16 gap-4">
-            {/* Left: Logo + Version */}
-            <div className="flex items-center gap-3 flex-shrink-0">
-              <Link href="/" className="flex items-center gap-2">
+            {/* Left: Logo + Version. Below md a long name gives way, so the controls stay on screen. */}
+            <div className="flex items-center gap-3 min-w-0 md:flex-shrink-0">
+              <Link href="/" className="flex items-center gap-2 min-w-0">
                 {logo ? (
                   <img
                     src={logo.url || logo.src}
@@ -334,19 +335,19 @@ function Header({ content, params, block }) {
                     className="h-8 w-auto"
                   />
                 ) : (
-                  <span className="text-xl font-bold text-heading">{siteName}</span>
+                  <span className="text-xl font-bold text-heading truncate">{siteName}</span>
                 )}
               </Link>
               <VersionBadge />
             </div>
 
             {/* Center: Search (grows to fill space) */}
-            <div className="flex-1 flex justify-center px-4">
+            <div className="hidden md:flex flex-1 justify-center px-4">
               <SearchInput />
             </div>
 
             {/* Right: Controls */}
-            <div className="flex items-center gap-2 flex-shrink-0">
+            <div className="flex items-center gap-2 flex-shrink-0 ml-auto">
               <SearchButtonMobile />
               <LocaleSwitcherInline />
               <LocaleSwitcherDropdown />
