@@ -8,10 +8,10 @@ import { installReportStatePersistence } from '#components/query-context.jsx'
  * BusinessDocLayout — frame for SOW / invoice / report pages.
  *
  * Wraps page body in <DocumentProvider> so sections register Press
- * fragments via useDocumentOutput. Floating DownloadBar offers PDF +
- * DOCX (single-record pages) and XLSX (report page). Filter-state
+ * fragments via useDocumentOutput. Floating DownloadBar offers each
+ * format the foundation declares, for the page on screen. Filter-state
  * persistence is installed unconditionally — it's a no-op on
- * single-record pages and only matters on the report page.
+ * single-record pages.
  */
 
 export default function BusinessDocLayout({ body, page }) {
@@ -29,7 +29,7 @@ export default function BusinessDocLayout({ body, page }) {
       <main className="business-docs-body">
         <div className="business-docs-document">{body}</div>
       </main>
-      <DownloadBar title={pageTitle} filename={filename} />
+      <DownloadBar title={pageTitle} filename={filename} rootPath={page?.route} />
     </DocumentProvider>
   )
 }

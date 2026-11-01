@@ -3,8 +3,9 @@
  *
  * Mirrors useFilteredMembers in academic-metrics
  * (framework/templates/academic-metrics/foundation/components/query-context.jsx).
- * Takes the block's `content` object and reads filter state internally
- * via usePageState. The page's query (`query: [invoices, sows]`) delivers
+ * Takes the block's `content` object and which records the section reports
+ * on, and reads filter state internally via usePageState. The page's query
+ * (`query: [invoices, sows]`) delivers
  * every invoice and SOW to the section as `content.data.invoices` and
  * `content.data.sows` (main.js declares both keys), and the active
  * where-object narrows the active source's list right here, with
@@ -35,7 +36,6 @@ import { matchWhere } from '@uniweb/core'
 import { computeInvoiceTotals } from '#utils/compute-totals.js'
 import {
   composeReportWhere,
-  useReportSource,
   useReportDateRange,
   useReportClient,
   useReportStatus,
@@ -88,8 +88,7 @@ function aggregate(records, source, taxDefaults, taxRegistry) {
   }
 }
 
-export function useFilteredEngagement(content, block) {
-  const [source] = useReportSource()
+export function useFilteredEngagement(content, block, source = 'invoices') {
   const [dateRange] = useReportDateRange()
   const [client] = useReportClient()
   const [status] = useReportStatus()

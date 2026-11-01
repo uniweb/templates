@@ -3,7 +3,7 @@
 A complete site for **statements of work, invoices, and engagement
 reports**, backed by the [`@unipress/business-docs`](https://github.com/uniweb/unipress/tree/main/foundations/business-docs)
 foundation. The same foundation source ships in two surfaces: this
-uniweb site (multi-page, filterable, XLSX export) and a unipress doc
+uniweb site (multi-page, each page downloadable) and a unipress doc
 template ([`documents/invoice/`](https://github.com/uniweb/unipress/tree/main/documents/invoice), single-record PDF/DOCX compile).
 
 ## Quick start
@@ -18,12 +18,17 @@ Then visit:
 
 - `/` — overview, with `{COUNT OF invoices}` / `{COUNT OF sows}`
   Loom-rendered narrative.
-- `/invoices` — list of all invoices, with the same filter UI as the
-  report page.
-- `/sows` — list of all SOWs.
-- `/reports` — filtered engagement report with date-range / client /
-  status controls. The Download menu emits an XLSX with two sheets
-  (Records, Summary) reflecting the current filter.
+- `/invoices` — list of all invoices.
+- `/sows` — list of all SOWs. Its section says `records: sows`.
+- `/reports` — totals across all invoices.
+
+Each page's Download menu compiles that page, in the formats under
+[Outputs](#outputs).
+
+The report section reads date-range, client and status filters from
+`page.state` (`foundation/components/query-context.jsx`), and every
+output follows them. The template ships no control that sets them: add
+one with the setters there.
 
 ## What's in the box
 
@@ -54,12 +59,12 @@ Then visit:
 ## Outputs
 
 - **Browser preview** — full SPA, foundation rendered into the page.
-- **PDF (for printing)** — the report page's Download menu emits an
-  HTML+Paged.js artifact. Open in a browser and use Print → Save as
-  PDF; Paged.js handles paginated print layout.
-- **DOCX** — direct file download from the report page.
-- **XLSX** — download from the report page; two sheets (Records,
-  Summary) reflect the current filter.
+- **PDF (for printing)** — the Download menu emits an HTML+Paged.js
+  artifact. Open in a browser and use Print → Save as PDF; Paged.js
+  handles paginated print layout.
+- **DOCX** — direct file download, with the page's text, totals and table.
+- **XLSX** — direct file download, with two sheets: Records, and a
+  Summary by client and status.
 
 A native PDF adapter (Paged.js server-side or Typst) is on the v2
 roadmap. Today's PDF path is browser-print.

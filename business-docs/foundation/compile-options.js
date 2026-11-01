@@ -27,6 +27,13 @@ th, td { border-bottom: 1px solid #ddd; padding: 0.4em 0.5em; text-align: left; 
 th { font-weight: 600; }
 .totals-row td { border-bottom: none; padding-top: 0.6em; }
 .totals-row.grand td { border-top: 2px solid #111; font-weight: 700; }
+.engagement-report-subtitle, .engagement-report-population { color: #555; margin: 0.2em 0; }
+.engagement-report-narrative { margin: 1em 0; }
+.engagement-report-cards { display: flex; gap: 2em; margin: 1.25em 0 1.5em; }
+.engagement-report-card { display: flex; flex-direction: column; }
+.engagement-report-card-label { font-size: 8pt; text-transform: uppercase; letter-spacing: 0.04em; color: #666; }
+.engagement-report-card-value { font-size: 12pt; font-weight: 600; }
+.engagement-report-table td:first-child { white-space: nowrap; }
 .signature-block { margin-top: 2.5em; page-break-inside: avoid; }
 .unsigned { color: #888; font-style: italic; }
 `
@@ -58,6 +65,15 @@ const DOCX_PARAGRAPH_STYLES = [
     quickFormat: true,
     run: { size: 22, bold: true },
     paragraph: { spacing: { before: 80, after: 80 } },
+  },
+  {
+    id: 'report-cell',
+    name: 'ReportCell',
+    basedOn: 'Normal',
+    next: 'Normal',
+    quickFormat: true,
+    run: { size: 18 }, // 9pt
+    paragraph: { spacing: { before: 0, after: 0 } },
   },
 ]
 

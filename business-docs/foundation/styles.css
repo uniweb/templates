@@ -80,10 +80,20 @@
   color: var(--heading, #111);
 }
 
+.engagement-report-narrative {
+  margin: 0.75rem 0 0;
+}
+
+/* Wider than a phone: it scrolls here. A table that widened the page would take
+   the page's right edge with it, and the Download button fixed to that edge. */
+.engagement-report-table-scroll {
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
 .engagement-report-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1rem 0;
 }
 
 .engagement-report-table th,
@@ -93,6 +103,10 @@
   text-align: left;
   vertical-align: top;
   font-size: 0.95rem;
+}
+
+.engagement-report-table td:first-child {
+  white-space: nowrap;
 }
 
 .engagement-report-table th {

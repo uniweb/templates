@@ -67,7 +67,7 @@ pnpm dev
 
 **Academic Metrics** — A report whose content is also a downloadable Excel workbook: publications, funding and supervisions aggregated across the members of a university unit, shown as charts and tables on the web and as flat sheets in Excel. Ships with three 19th-century naturalists as sample members.
 
-**Business Documents** — Invoice and statement-of-work records, pages that list them, and a filtered engagement report with XLSX export.
+**Business Documents** — Invoice and statement-of-work records, pages that list them, and an engagement report, each page downloadable as Word, Excel or a print page.
 
 **Paste a Design** — The fastest way to see an existing React design running in Uniweb: replace `sections/App.jsx` with your design and run. `lucide-react`, the icon set most AI tools emit, comes preinstalled.
 

@@ -11,6 +11,10 @@ import foundation from '../main.js'
  *
  * Filename is `<filename>.<ext>` where ext comes from
  * foundation.outputs[format].extension.
+ *
+ * `rootPath` is the page on screen. compileDocument takes every page of the
+ * website when it isn't told otherwise, which would make a download named
+ * after this page out of all of them.
  */
 
 const FORMAT_LABELS = {
@@ -20,7 +24,7 @@ const FORMAT_LABELS = {
   xlsx: { label: 'Excel', ext: 'xlsx' },
 }
 
-export default function DownloadBar({ title = 'Document', filename = 'document' }) {
+export default function DownloadBar({ title = 'Document', filename = 'document', rootPath }) {
   const { website } = useWebsite()
   const [busy, setBusy] = useState(null)
   const [error, setError] = useState(null)
@@ -43,7 +47,7 @@ export default function DownloadBar({ title = 'Document', filename = 'document' 
     setBusy(format)
     setOpen(false)
     try {
-      const blob = await compileDocument(website, { format, foundation, title })
+      const blob = await compileDocument(website, { format, foundation, title, rootPath })
       const ext = foundation.outputs?.[format]?.extension || FORMAT_LABELS[format]?.ext || format
       triggerDownload(blob, `${filename}.${ext}`)
     } catch (err) {

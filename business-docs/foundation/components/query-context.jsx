@@ -7,14 +7,18 @@
  * report page subscribe per-key (only the subscribing component
  * re-renders when one slot changes). Mirrors the academic-metrics
  * pattern in framework/templates/academic-metrics/foundation/components/query-context.jsx.
+ *
+ * The template ships no control that sets these: a page shows everything
+ * until a foundation adds one, which calls the setters below.
  */
 
 import { usePageState } from '@uniweb/kit'
 
 const STORAGE_KEY = 'business-docs/report-options'
 
+// What a reader has narrowed to, kept across visits. Which records a page lists
+// is the page's own (`records:` on its section), so it is not among them.
 const DEFAULTS = {
-  source: 'invoices',
   dateRange: { from: null, to: null },
   client: null,
   status: null,
@@ -29,7 +33,6 @@ function readPersisted() {
     if (!raw) return null
     const parsed = JSON.parse(raw)
     return {
-      source: parsed.source || DEFAULTS.source,
       dateRange: parsed.dateRange && typeof parsed.dateRange === 'object'
         ? { from: parsed.dateRange.from || null, to: parsed.dateRange.to || null }
         : DEFAULTS.dateRange,
@@ -70,8 +73,8 @@ export function installReportStatePersistence(page) {
   return () => unsubs.forEach((fn) => fn())
 }
 
-export function useReportSource() {
-  return usePageState('source', DEFAULTS.source)
+export function useReportSource(initial = 'invoices') {
+  return usePageState('source', initial)
 }
 
 export function useReportDateRange() {

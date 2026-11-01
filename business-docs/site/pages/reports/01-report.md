@@ -4,4 +4,4 @@ title: Engagement report
 theme: light
 ---
 
-Filtered report across invoices or SOWs. Adjust the active source, date range, client, or status from the controls; aggregates and the XLSX export track the current selection.
+Totals across all invoices. The spreadsheet from the Download menu adds a Summary sheet, broken down by client and by status.
