@@ -1,6 +1,6 @@
 {
   "name": "@uniweb/templates",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Official templates for the Uniweb CLI",
   "type": "module",
   "keywords": [
