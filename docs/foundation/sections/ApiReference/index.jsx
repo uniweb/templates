@@ -106,7 +106,7 @@ function ApiReference({ content, params }) {
               <h3 className="text-lg font-semibold text-heading mb-3">
                 {locationLabels[location] || location}
               </h3>
-              <div className="border border-border rounded-lg overflow-hidden">
+              <div className="border border-border rounded-lg overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead className="bg-muted">
                     <tr>
