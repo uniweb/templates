@@ -1,5 +1,16 @@
 import React from 'react'
-import { H1, P, Span, Link, Render, cn, useVersion, useWebsite } from '@uniweb/kit'
+import { H1, P, Span, Link, Render, Code, Mermaid, cn, useVersion, useWebsite } from '@uniweb/kit'
+
+/** A fence in the body: a ```mermaid one is drawn as a diagram, any other is code. */
+function Fence({ element: { text, attrs } }) {
+  return attrs?.language === 'mermaid' ? (
+    <Mermaid source={text} />
+  ) : (
+    <Code content={text} language={attrs?.language} />
+  )
+}
+
+const BODY = { codeBlock: Fence }
 
 /**
  * The section as written, after the header this section draws itself — the
@@ -80,7 +91,7 @@ function DocSection({ content, params, block }) {
           under any layout. Its colors are the section's theme tokens, so it
           needs no palette class, and none exists to add. */}
       <div className="prose max-w-none [&>p:first-child]:text-lg [&>p:first-child]:text-subtle">
-        <Render content={{ sequence: bodyOf(sequence, content) }} block={block} />
+        <Render content={{ sequence: bodyOf(sequence, content) }} block={block} components={BODY} />
       </div>
 
       {/* Page navigation */}

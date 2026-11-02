@@ -30,6 +30,18 @@ At the top of each file, you can include YAML frontmatter to configure the page:
 - title: Override the page title
 - description: Page description for SEO
 
+### Diagrams
+
+A code block in the `mermaid` language is drawn as a diagram, in the colors of the section around it:
+
+```mermaid
+flowchart LR
+  write[Write Markdown] --> preview[Preview the page]
+  preview --> publish[Publish the site]
+```
+
+The same block shows as readable text in a plain Markdown viewer that doesn't draw it.
+
 ### Best practices
 
 Write clear, concise documentation that helps users accomplish their goals. Use headings to organize content and code examples to illustrate concepts.
