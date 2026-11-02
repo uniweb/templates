@@ -24,6 +24,7 @@ function SearchModal({ isOpen, onClose, searchClient }) {
   const [client, setClient] = useState(searchClient || null)
 
   const inputRef = useRef(null)
+  const listRef = useRef(null)
   const resultsRef = useRef(null)
 
   // Initialize search client if not provided via props
@@ -101,10 +102,8 @@ function SearchModal({ isOpen, onClose, searchClient }) {
           break
         case 'Enter':
           e.preventDefault()
-          if (results[selectedIndex]) {
-            window.location.href = results[selectedIndex].href
-            onClose()
-          }
+          // Through its link, so the language and the site's base path apply as on a click.
+          listRef.current?.querySelector(`[data-result="${selectedIndex}"]`)?.click()
           break
         case 'Escape':
           e.preventDefault()
@@ -170,9 +169,10 @@ function SearchModal({ isOpen, onClose, searchClient }) {
                   No results found for "{query}"
                 </div>
               ) : (
-                <div className="py-2">
+                <div ref={listRef} className="py-2">
                   {results.map((result, index) => (
                     <Link
+                      data-result={index}
                       key={result.id}
                       href={result.href}
                       onClick={onClose}
