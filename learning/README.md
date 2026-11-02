@@ -21,7 +21,7 @@ Content authors switch between lesson types by changing what they write in markd
 
 - **Deep page hierarchy** (3+ levels) — course → module → lesson, navigated via `getPageHierarchy()`
 - **Tagged YAML data blocks** — structured data (`yaml:quiz`, `yaml:rubric`, `yaml:resources`) embedded in fenced code blocks, extracted at the component level
-- **Custom layout with sidebar** — `LearnLayout` with header + collapsible sidebar + scrollable main canvas
+- **Custom layout with sidebar** — `LearnLayout` with header + sidebar (a drawer on a phone) + scrollable main canvas
 - **Course-aware navigation** — sidebar auto-groups lessons by module, footer provides prev/next across the flattened lesson sequence
 - **Interactive content** — quizzes with immediate feedback (no backend needed)
 
