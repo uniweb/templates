@@ -12,8 +12,7 @@
  *
  * Optionally, a foundation-level `scroll` property can be set here to
  * control scroll restoration for all layouts that don't declare their own.
- * This foundation's DocsLayout declares scroll: 'main' in its own meta.js,
- * so no foundation-level scroll override is needed.
+ * This foundation's DocsLayout lets the page scroll, so it needs none.
  */
 
 import { proseVars } from '@uniweb/kit/prose-vars'

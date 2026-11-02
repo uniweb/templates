@@ -99,17 +99,11 @@ function Header({ content, params, block }) {
     }
   }, []) // Only run once on mount
 
-  // Header styles based on scroll state
-  const getHeaderStyles = () => {
-    const base = 'transition-all duration-300 border-b border-border'
-    if (scrolled) {
-      if (transparency) {
-        return cn(base, 'bg-section/95 backdrop-blur-lg shadow-sm')
-      }
-      return cn(base, 'bg-section shadow-sm')
-    }
-    return cn(base, 'bg-section')
-  }
+  // The header's surface, by scroll state. On a layer of its own behind the
+  // contents: a backdrop filter holds any `fixed` element inside its box, so on
+  // the header itself it would leave an open menu's click-away area no bigger
+  // than the header.
+  const surface = scrolled && transparency ? 'bg-section/95 backdrop-blur-lg' : 'bg-section'
 
   // Version Badge Component (shows next to logo)
   const VersionBadge = () => {
@@ -204,8 +198,9 @@ function Header({ content, params, block }) {
     return (
       <div className="hidden sm:flex items-center gap-0.5 p-1 bg-muted rounded-lg">
         {locales.map(locale => (
-          <a
+          <Link
             key={locale.code}
+            reload
             href={website.getLocaleUrl(locale.code)}
             className={cn(
               'px-2 py-1 text-xs font-medium rounded-md transition-colors uppercase',
@@ -216,7 +211,7 @@ function Header({ content, params, block }) {
             title={getLocaleLabel(locale)}
           >
             {locale.code}
-          </a>
+          </Link>
         ))}
       </div>
     )
@@ -248,8 +243,9 @@ function Header({ content, params, block }) {
             />
             <div className="absolute right-0 top-full mt-1 z-50 bg-section rounded-lg shadow-lg border border-border py-1 min-w-[140px]">
               {locales.map(locale => (
-                <a
+                <Link
                   key={locale.code}
+                  reload
                   href={website.getLocaleUrl(locale.code)}
                   className={cn(
                     'block px-4 py-2 text-sm transition-colors',
@@ -260,7 +256,7 @@ function Header({ content, params, block }) {
                   onClick={() => setLocaleMenuOpen(false)}
                 >
                   {getLocaleLabel(locale)}
-                </a>
+                </Link>
               ))}
             </div>
           </>
@@ -305,11 +301,8 @@ function Header({ content, params, block }) {
 
   return (
     <>
-      <div
-        className={cn(
-          getHeaderStyles()
-        )}
-      >
+      <div className={cn('relative border-b border-border transition-shadow duration-300', scrolled && 'shadow-sm')}>
+        <div aria-hidden="true" className={cn('absolute inset-0 -z-10', surface)} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Main header row */}
           <div className="flex items-center h-16 gap-4">
@@ -418,9 +411,9 @@ function Header({ content, params, block }) {
           )}
         </div>
 
-        {/* Mobile menu */}
+        {/* Mobile menu: over the page, and scrolling on its own when it's taller than the room there is. */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-section border-t border-border">
+          <div className="absolute inset-x-0 top-full max-h-[calc(100dvh-var(--uw-sticky-top,4rem))] overflow-y-auto lg:hidden bg-section border-y border-border shadow-lg">
             <div className="px-4 py-4 space-y-2">
               {/* Mobile search */}
               {shouldShowSearch && (
@@ -484,8 +477,9 @@ function Header({ content, params, block }) {
                     Language
                   </div>
                   {locales.map(locale => (
-                    <a
+                    <Link
                       key={locale.code}
+                      reload
                       href={website.getLocaleUrl(locale.code)}
                       className={cn(
                         'block px-3 py-2 text-base rounded-md',
@@ -496,7 +490,7 @@ function Header({ content, params, block }) {
                       onClick={closeMobileMenu}
                     >
                       {getLocaleLabel(locale)}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               )}
@@ -605,5 +599,8 @@ const MoonIcon = ({ className }) => (
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
   </svg>
 )
+
+// The wrapper the runtime draws around this section, so the page has its landmark.
+Header.as = 'header'
 
 export default Header

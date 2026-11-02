@@ -106,7 +106,7 @@ function MobileNav({ isOpen, onClose, children }) {
 
       <div
         className={cn(
-          'fixed bottom-0 left-0 top-[var(--header-height,4rem)] z-50 w-72 md:hidden',
+          'fixed bottom-0 left-0 top-[var(--uw-sticky-top,var(--header-height,4rem))] z-50 w-72 md:hidden',
           'border-r border-border bg-section transition-transform duration-300',
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
@@ -122,20 +122,28 @@ function MobileNav({ isOpen, onClose, children }) {
 
 // ─── Layout ──────────────────────────────────────────────────────────────────
 
+const RAIL =
+  'sticky top-[var(--uw-sticky-top,0px)] h-[calc(100dvh-var(--uw-sticky-top,0px))] flex-shrink-0 self-start overflow-y-auto'
+
 /**
  * Three columns on desktop, one on mobile:
  *
  *   ┌──────────────────────────────────────────────────────┐
  *   │  header                                              │
  *   ├────────┬────────────────────────────┬────────────────┤
- *   │  left  │  <main> (scrolls)          │  contents      │
+ *   │  left  │  <main>                    │  contents      │
  *   │  (md+) │  body + footer             │  (xl+)         │
  *   └────────┴────────────────────────────┴────────────────┘
  *
- * The outer element is `h-screen`, so only <main> scrolls and the rails stay
- * put. meta.js declares `scroll: 'main'` to tell the runtime which element to
- * track for scroll restoration — without it, back/forward would restore the
- * window's scroll position, which never moves here.
+ * The page itself scrolls, and the rest stays in view beside it. That is what
+ * `useHeadings` follows, what a phone folds its address bar for, and what the
+ * runtime restores on back and forward.
+ *
+ * The header stays because its section says `sticky: true`, and it sits directly
+ * in the page column, so the runtime can make it stick and lift it above what
+ * scrolls under it. The rails stick below it: `--uw-sticky-top` is how far down
+ * whatever is stuck reaches, measured by the runtime, and absent when nothing is.
+ * A rail is as tall as the room left under the header and scrolls on its own.
  */
 export default function DocsLayout({ header, body, footer, left, right }) {
   const { isOpen, open, close } = useMobileMenu()
@@ -144,13 +152,10 @@ export default function DocsLayout({ header, body, footer, left, right }) {
   // surface only when it wants one *different* from the page — otherwise it
   // covers whatever the site set in theme.yml's `background:`.
   return (
-    <div className="flex h-screen flex-col text-body">
-      {/* No z-index here. The runtime already orders the layout areas, and a
-          z-index on a flex item creates a stacking context even when static —
-          which would seal the header area's own layer inside this element and
-          make a foundation's `layers` setting do nothing. `flex-shrink-0` is
-          geometry, and stays. */}
-      <header className="flex-shrink-0">{header}</header>
+    <div className="flex min-h-screen flex-col text-body">
+      {/* No element of ours around it: one as tall as the header would give it
+          no room to stick in. */}
+      {header}
 
       {left && (
         <MobileNav isOpen={isOpen} onClose={close}>
@@ -158,15 +163,14 @@ export default function DocsLayout({ header, body, footer, left, right }) {
         </MobileNav>
       )}
 
-      <div className="mx-auto flex w-full max-w-[90rem] flex-1 overflow-hidden">
+      <div className="mx-auto flex w-full max-w-[90rem] flex-1">
         {left && (
-          <aside className="hidden w-64 flex-shrink-0 overflow-y-auto border-r border-border md:block">
+          <aside className={cn(RAIL, 'hidden w-64 border-r border-border md:block')}>
             {left}
           </aside>
         )}
 
-        {/* The scroll container named by meta.js `scroll: 'main'`. */}
-        <main className="min-w-0 flex-1 overflow-y-auto">
+        <main className="min-w-0 flex-1">
           <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
             {/* Column geometry only — no `prose` wrapper here. The sections
                 own their own typography, which keeps them renderable under any
@@ -179,7 +183,7 @@ export default function DocsLayout({ header, body, footer, left, right }) {
         </main>
 
         {/* An explicit `right` area wins; otherwise the page indexes itself. */}
-        <aside className="hidden w-56 flex-shrink-0 overflow-y-auto xl:block">
+        <aside className={cn(RAIL, 'hidden w-56 xl:block')}>
           {right || <TableOfContents />}
         </aside>
       </div>
@@ -189,7 +193,7 @@ export default function DocsLayout({ header, body, footer, left, right }) {
           type="button"
           onClick={open}
           aria-label="Open navigation"
-          className="fixed bottom-4 left-4 z-30 rounded-full bg-primary p-3 text-primary-foreground shadow-lg transition-colors hover:bg-primary-hover md:hidden"
+          className="fixed bottom-4 left-4 z-[1] rounded-full bg-primary p-3 text-primary-foreground shadow-lg transition-colors hover:bg-primary-hover md:hidden"
         >
           <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />

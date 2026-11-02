@@ -16,15 +16,16 @@ export default {
   description: 'Documentation header with category tabs, search, version, and locale switchers',
   background: 'self',
 
+  // The header stays in view while the page scrolls. An author can say
+  // `sticky: false` in the header's frontmatter.
+  sticky: true,
+
   content: {
     title: 'Site name (when no logo)',
     images: 'Site logo image [1]',
     links: 'Links: first internal link becomes CTA, external links (http...) shown as icons [0+]',
   },
 
-  // No "sticky" setting: DocsLayout scrolls only <main>, so the header stays in
-  // view whatever this section does. A toggle here could turn nothing off — the
-  // one it had was read and never used.
   params: {
     categories: {
       type: 'boolean',

@@ -8,19 +8,13 @@
  *   offer. Content authors place section files in site/layout/ to fill them;
  *   the runtime renders whatever that folder holds.
  *
- * - scroll: Controls how the runtime manages scroll restoration on
- *   back/forward navigation. Values:
- *     - (not set): runtime manages scroll on window (default)
- *     - 'self':    layout handles its own scrolling, runtime disables
- *     - 'main':    runtime manages scroll on the <main> element
- *   This layout uses overflow-based scrolling on <main>, so we tell the
- *   runtime to track scroll on that element instead of window.
+ * - scroll: Which element the runtime restores on back/forward navigation. This
+ *   layout lets the page itself scroll, which is the default, so it sets none.
  */
 export default {
   title: 'Documentation',
   description: 'Three-column layout with sidebar navigation for documentation pages',
   areas: ['header', 'footer', 'left', 'right'],
-  scroll: 'main',
 
   // View transition names for animated page navigation.
   // Maps layout areas to view-transition-name CSS values. The runtime wraps
