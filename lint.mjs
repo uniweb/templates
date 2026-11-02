@@ -17,6 +17,7 @@
  *   - template.json says how to scaffold; the listing is manifest.json's
  *   - No foundation writes a component inside a string
  *   - No section registers one format twice, which loses the first
+ *   - A language link is a <Link reload>, which keeps the site's base
  *   - README.md's table has a row for every template
  *   - Links in this repo's own docs stay in this repo
  */
@@ -203,6 +204,17 @@ for (const name of templateNames) {
     const formats = [...text.matchAll(/useDocumentOutput\(\s*\w+,\s*'(\w+)'/g)].map((m) => m[1])
     for (const format of new Set(formats.filter((f, i) => formats.indexOf(f) !== i))) {
       errors.push(`${file.slice(ROOT.length + 1)}: registers '${format}' twice, and the second replaces the first — for several sheets, register one array`)
+    }
+  }
+}
+
+// A plain <a> doesn't take the site's `base:`, so a language link written as one led out of the site:
+// `/es/guide`, not `/handbook/es/guide`, on docs and academic. `<Link reload>` does.
+for (const name of templateNames) {
+  for (const file of filesUnder(join(ROOT, name, 'foundation'))) {
+    if (!/\.jsx$/.test(file)) continue
+    if (/<a\b[^<>]*href=\{[^}]*getLocaleUrl/.test(readFileSync(file, 'utf8'))) {
+      errors.push(`${file.slice(ROOT.length + 1)}: a language link as a plain <a>, which loses the site's base — use <Link reload>`)
     }
   }
 }

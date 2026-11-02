@@ -114,8 +114,9 @@ function Navbar({ content, params }) {
             />
             <div className="absolute right-0 top-full mt-1 z-50 bg-section rounded-lg shadow-lg border border-border py-1 min-w-[140px]">
               {locales.map(locale => (
-                <a
+                <Link
                   key={locale.code}
+                  reload
                   href={website.getLocaleUrl(locale.code)}
                   className={cn(
                     'block px-4 py-2 text-sm transition-colors',
@@ -126,7 +127,7 @@ function Navbar({ content, params }) {
                   onClick={() => setLocaleMenuOpen(false)}
                 >
                   {getLocaleLabel(locale)}
-                </a>
+                </Link>
               ))}
             </div>
           </>
