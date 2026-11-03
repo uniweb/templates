@@ -1,5 +1,5 @@
 import React from 'react'
-import { H1, P, Span, Link, Render, Code, Mermaid, cn, useVersion, useWebsite } from '@uniweb/kit'
+import { H1, P, Span, Link, Render, Code, Mermaid, EnlargeableImage, cn, useVersion, useWebsite } from '@uniweb/kit'
 
 /** A fence in the body: a ```mermaid one is drawn as a diagram, any other is code. */
 function Fence({ element: { text, attrs } }) {
@@ -10,7 +10,7 @@ function Fence({ element: { text, attrs } }) {
   )
 }
 
-const BODY = { codeBlock: Fence }
+const BODY = { codeBlock: Fence, image: EnlargeableImage }
 
 /**
  * The section as written, after the header this section draws itself — the
