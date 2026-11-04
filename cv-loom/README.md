@@ -94,7 +94,7 @@ source: education
 The content handler (powered by `createLoomHandlers` from `@uniweb/loom`) resolves the header against the full profile, then loops the body template per record in the named array (each item's fields are merged into the Loom namespace). A second `---` starts a footer, rendered once after all items.
 
 ### Filtered iteration with `where`
-`05b-books.md` — combines `source` and `where` to iterate only book-type publications:
+`05.1-books.md` — combines `source` and `where` to iterate only book-type publications:
 ```
 ---
 type: CvEntry
