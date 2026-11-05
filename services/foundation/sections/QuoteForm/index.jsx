@@ -56,7 +56,7 @@ export default function QuoteForm({ content, block }) {
   const { controls, values, setValue, reset, missing, formData, files } =
     useFormValues(definition)
 
-  const { submit, status, error, canSubmit, canUploadFiles } = useFormSubmit({
+  const { submit, prepare, status, error, canSubmit, canUploadFiles } = useFormSubmit({
     block,
     context: { formId: 'quote' },
     // Built from the values just submitted, so whoever reads these can tell
@@ -107,6 +107,8 @@ export default function QuoteForm({ content, block }) {
       )}
 
       <form
+        // Solves the host's spam puzzle (when it sets one) while the visitor types.
+        onFocus={prepare}
         onSubmit={handleSubmit}
         className="bg-card border border-border rounded-2xl p-6 sm:p-8 shadow-sm space-y-6"
       >
