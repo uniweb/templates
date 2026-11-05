@@ -4,6 +4,8 @@
  * Navigation header with auto/manual modes and locale support.
  */
 export default {
+  // Placed in a layout area: an editor leaves it out of a page's sections.
+  area: true,
   family: 'header',
 
   // Stays in view as the page scrolls — the runtime makes sticky the box that can (a

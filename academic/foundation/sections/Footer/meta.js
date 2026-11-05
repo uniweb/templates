@@ -4,6 +4,8 @@
  * Site footer with auto/manual navigation modes.
  */
 export default {
+  // Placed in a layout area: an editor leaves it out of a page's sections.
+  area: true,
   title: 'Footer',
   description: 'Site footer with navigation, contact info, and copyright',
 

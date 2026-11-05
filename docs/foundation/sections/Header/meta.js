@@ -12,6 +12,8 @@
  * (gradients, images, glassmorphism, etc.).
  */
 export default {
+  // Placed in a layout area: an editor leaves it out of a page's sections.
+  area: true,
   title: 'Header',
   description: 'Documentation header with category tabs, search, version, and locale switchers',
   background: 'self',
