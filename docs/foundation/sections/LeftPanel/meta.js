@@ -8,8 +8,8 @@
  * themed section background underneath, and the seam would show.
  */
 export default {
-  // Placed in a layout area: an editor leaves it out of a page's sections.
-  area: true,
+  // Meant for the layout's left area: an editor offers it there, not among a page's sections.
+  area: 'left',
   family: 'toc',
   title: 'Left Panel',
   description: 'Sidebar navigation with collapsible sections and category filtering',

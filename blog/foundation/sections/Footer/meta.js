@@ -4,8 +4,8 @@
  * A site footer with navigation and language switcher.
  */
 export default {
-  // Placed in a layout area: an editor leaves it out of a page's sections.
-  area: true,
+  // Meant for the layout's footer area: an editor offers it there, not among a page's sections.
+  area: 'footer',
   title: 'Footer',
   description: 'A site footer with navigation and language switcher',
 

@@ -1,6 +1,6 @@
 export default {
-  // Placed in a layout area: an editor leaves it out of a page's sections.
-  area: true,
+  // Meant for the layout's header area: an editor offers it there, not among a page's sections.
+  area: 'header',
   title: 'Header',
   description: 'Navigation header with logo, nav links, and shopping cart',
 

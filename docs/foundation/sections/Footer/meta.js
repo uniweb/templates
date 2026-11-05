@@ -5,8 +5,8 @@
  * `background: 'self'` — layout area component, manages own background.
  */
 export default {
-  // Placed in a layout area: an editor leaves it out of a page's sections.
-  area: true,
+  // Meant for the layout's footer area: an editor offers it there, not among a page's sections.
+  area: 'footer',
   title: 'Footer',
   description: 'Simple documentation footer with copyright and links',
   background: 'self',
