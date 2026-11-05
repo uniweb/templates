@@ -49,6 +49,10 @@ export const vars = {
 export default {
   defaultLayout: 'DocsLayout',
 
+  // The section type a markdown file that names no `type:` renders with, and the one an editor
+  // starts a new single-section page with. DocSection renders the whole file, in order.
+  defaultSection: 'DocSection',
+
   // Enable animated page transitions using the browser's View Transitions API.
   // When true, SPA navigation is wrapped in document.startViewTransition(),
   // producing a smooth crossfade between pages. Each layout can declare which

@@ -4,4 +4,8 @@ export const vars = {
 
 export default {
   defaultLayout: 'LearnLayout',
+
+  // The section type a markdown file that names no `type:` renders with, and the one an editor
+  // starts a new single-section page with. A Lesson picks its variant from what the file holds.
+  defaultSection: 'Lesson',
 }

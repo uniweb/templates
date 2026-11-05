@@ -31,6 +31,10 @@ export const vars = {
  * The foundation's declarations
  */
 export default {
+  // The section type a markdown file that names no `type:` renders with, and the one an editor
+  // starts a new single-section page with: this foundation's general content section.
+  defaultSection: 'Section',
+
   // Optional: Create custom layouts in src/layouts/
   // Then set defaultLayout: 'MyLayout' below
 }
