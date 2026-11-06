@@ -7,11 +7,8 @@ export default {
   title: 'Hero Banner',
   description: 'A bold hero section with headline, description, and call-to-action buttons',
 
-  // Static capabilities for cross-block coordination
-  // Header reads this to know Hero supports translucent/floating navbar
-  context: {
-    allowTranslucentTop: true,
-  },
+  // The header lies over this section when it opens a page, see-through until the page scrolls.
+  underHeader: true,
 
   content: {
     pretitle: 'Eyebrow text',

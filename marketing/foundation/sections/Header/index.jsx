@@ -9,7 +9,7 @@ function Header({ content, block }) {
   const { isActiveOrAncestor } = useActiveRoute()
 
   const nextBlockInfo = block.getNextBlockInfo()
-  const isFloating = nextBlockInfo?.context?.allowTranslucentTop || false
+  const isFloating = Boolean(nextBlockInfo?.underHeader)
   const isDarkBg = isFloating && ['gradient', 'glass', 'dark'].includes(nextBlockInfo?.theme || 'light')
 
   const { title, images, links } = content
@@ -35,7 +35,7 @@ function Header({ content, block }) {
 
   return (
     <>
-      <div ref={headerRef} className={cn('fixed top-0 left-0 right-0 z-50 transition-all duration-300', headerClass)}>
+      <div ref={headerRef} className={cn('relative z-50 transition-all duration-300', headerClass)}>
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
             <div className="shrink-0">
@@ -109,7 +109,7 @@ function Header({ content, block }) {
         </nav>
 
         {mobileOpen && (
-          <div className="lg:hidden bg-section border-t border-border">
+          <div className={cn('lg:hidden absolute inset-x-0 top-full bg-section border-t border-border', scrolled && 'shadow-sm')}>
             <div className="px-4 py-4 space-y-2">
               {navPages.map((page) => (
                 <Link key={page.route} href={page.navigableRoute} className={cn(
@@ -147,7 +147,6 @@ function Header({ content, block }) {
           </div>
         )}
       </div>
-      {!isFloating && <div className="h-16 lg:h-20" />}
     </>
   )
 }

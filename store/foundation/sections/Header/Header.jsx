@@ -36,10 +36,8 @@ function Header({ content, block }) {
   const cartCount = useCartCount()
 
   const nextBlockInfo = block.getNextBlockInfo()
-  const allowTranslucentTop =
-    nextBlockInfo?.context?.allowTranslucentTop || false
   const nextBlockTheme = nextBlockInfo?.theme || 'light'
-  const isFloating = allowTranslucentTop
+  const isFloating = Boolean(nextBlockInfo?.underHeader)
   const isDarkBg = isFloating && ['dark'].includes(nextBlockTheme)
 
   const siteName = content.title || website.name || 'Solis Artisans'
@@ -73,7 +71,7 @@ function Header({ content, block }) {
       <div
         ref={headerRef}
         className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+          'relative z-50 transition-all duration-300',
           getHeaderStyles()
         )}
       >
@@ -158,7 +156,7 @@ function Header({ content, block }) {
 
         {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-white border-t border-neutral-200">
+          <div className={cn('md:hidden absolute inset-x-0 top-full bg-white border-t border-neutral-200', (scrolled || !isFloating) && 'border-b')}>
             <div className="px-4 py-4 space-y-2">
               {navPages.map((page) => (
                 <Link
@@ -181,7 +179,6 @@ function Header({ content, block }) {
       </div>
 
       {/* Spacer */}
-      {!isFloating && <div className="h-20" />}
 
       {/* Global overlays */}
       <CartDrawer />

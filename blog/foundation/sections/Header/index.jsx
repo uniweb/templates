@@ -72,9 +72,8 @@ function Header({ content, params, block }) {
 
   // Get context from the next block
   const nextBlockInfo = block.getNextBlockInfo()
-  const allowTranslucentTop = nextBlockInfo?.context?.allowTranslucentTop || false
   const nextBlockTheme = nextBlockInfo?.theme || 'light'
-  const isFloating = allowTranslucentTop
+  const isFloating = Boolean(nextBlockInfo?.underHeader)
   const isDarkBackground = isFloating && ['dark'].includes(nextBlockTheme)
 
   // Runtime guarantees: content is flat
@@ -242,7 +241,7 @@ function Header({ content, params, block }) {
   return (
     <>
       <div className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        'relative z-50 transition-all duration-300',
         getHeaderStyles()
       )}>
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -337,7 +336,7 @@ function Header({ content, params, block }) {
 
         {/* Mobile menu — always light overlay */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-white border-t">
+          <div className={cn('lg:hidden absolute inset-x-0 top-full bg-white border-t', scrolled && 'shadow-sm')}>
             <div className="px-4 py-4 space-y-1">
               {navPages.map((page) => (
                 <MobileNavItem key={page.route} page={page} />
@@ -367,7 +366,6 @@ function Header({ content, params, block }) {
         )}
       </div>
 
-      {!isFloating && <div className="h-16 lg:h-20" />}
 
       {/* Search Modal — always light overlay */}
       {searchOpen && (

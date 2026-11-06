@@ -15,7 +15,7 @@ function Header({ content, params, block }) {
   const manualNav = content.data?.nav
   const autoPages = website.getPageHierarchy({ for: 'header' })
 
-  const isFloating = params.floating
+  const isFloating = Boolean(block.getNextBlockInfo()?.underHeader)
   const nextBlockTheme = isFloating ? (block.getNextBlockInfo()?.theme || 'light') : 'light'
   const isDarkBackground = isFloating && ['dark'].includes(nextBlockTheme)
 
@@ -71,7 +71,7 @@ function Header({ content, params, block }) {
   return (
     <>
       <div className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        'relative z-50 transition-all duration-300',
         getHeaderStyles()
       )}>
         <nav className="max-w-6xl mx-auto px-4">
@@ -130,7 +130,7 @@ function Header({ content, params, block }) {
 
         {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-section border-t border-border">
+          <div className={cn('md:hidden absolute inset-x-0 top-full bg-section border-t border-border', scrolled && 'shadow-sm', !isFloating && 'border-b')}>
             <div className="px-4 py-4 space-y-1">
               {navItems.map((item, i) => {
                 const href = item.href || item.navigableRoute
@@ -163,7 +163,6 @@ function Header({ content, params, block }) {
         )}
       </div>
 
-      {!isFloating && <div className="h-16" />}
     </>
   )
 }

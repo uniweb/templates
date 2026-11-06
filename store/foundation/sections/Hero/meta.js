@@ -2,9 +2,8 @@ export default {
   title: 'Hero Banner',
   description: 'Full-width hero with background image, headline, and call-to-action',
 
-  context: {
-    allowTranslucentTop: true,
-  },
+  // The header lies over this section when it opens a page, see-through until the page scrolls.
+  underHeader: true,
 
   content: {
     title: 'Main headline',

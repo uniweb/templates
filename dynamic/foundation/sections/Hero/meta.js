@@ -2,10 +2,6 @@ export default {
   title: 'Hero',
   description: 'Split hero with live data widget',
 
-  context: {
-    allowTranslucentTop: true,
-  },
-
   content: {
     pretitle: 'Eyebrow text',
     title: 'Main headline',

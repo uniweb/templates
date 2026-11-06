@@ -2,10 +2,6 @@ export default {
   title: 'Hero',
   description: 'Opening section with a headline, a short pitch, reassurance points and calls to action',
 
-  context: {
-    allowTranslucentTop: true,
-  },
-
   content: {
     pretitle: 'Small label above the headline',
     title: 'Headline',
