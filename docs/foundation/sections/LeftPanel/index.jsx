@@ -183,3 +183,6 @@ export default function LeftPanel({ params }) {
     </aside>
   )
 }
+
+// `background: 'self'` leaves the section's wrapper to this component: it keeps its band.
+LeftPanel.className = 'bg-section'

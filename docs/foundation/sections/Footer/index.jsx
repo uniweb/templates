@@ -63,3 +63,6 @@ function Footer({ content, params }) {
 }
 
 export default Footer
+
+// `background: 'self'` leaves the section's wrapper to this component: it keeps its band.
+Footer.className = 'bg-section'

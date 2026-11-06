@@ -604,3 +604,6 @@ const MoonIcon = ({ className }) => (
 Header.as = 'header'
 
 export default Header
+
+// `background: 'self'` leaves the section's wrapper to this component: it keeps its band.
+Header.className = 'bg-section'

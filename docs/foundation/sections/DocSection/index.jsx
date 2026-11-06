@@ -139,3 +139,6 @@ function DocSection({ content, params, block }) {
 }
 
 export default DocSection
+
+// `background: 'self'` leaves the section's wrapper to this component: it keeps its band.
+DocSection.className = 'bg-section'

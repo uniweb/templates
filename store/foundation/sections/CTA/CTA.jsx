@@ -50,3 +50,6 @@ function CTA({ content }) {
 }
 
 export default CTA
+
+// `background: 'self'` leaves the section's wrapper to this component: it keeps its band.
+CTA.className = 'bg-section'
