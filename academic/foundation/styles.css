@@ -1,4 +1,5 @@
-@import "tailwindcss";
+/* Tailwind reads this whole foundation, in its own build and in a site's, so no folder can be left out. */
+@import "tailwindcss" source("./");
 @import "@uniweb/kit/theme-tokens.css";
 /* This template's research page carries real equations, and MathML needs CSS
    to lay out — without it a matrix's rows touch and an aligned environment's
@@ -6,8 +7,6 @@
    design tokens, and not via prose-tokens because this foundation styles its
    own sections rather than using a prose column. */
 @import "@uniweb/kit/math-tokens.css";
-
-@source "./sections/**/*.{js,jsx}";
 
 /* Academic typography enhancements */
 .prose-academic {
