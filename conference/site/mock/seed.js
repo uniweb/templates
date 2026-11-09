@@ -17,13 +17,10 @@ export const seed = {
     { username: 'attendee', password: 'attendee', handle: 'Alex (attendee)' },
   ],
 
-  // ⭐ Every member reads the organiser's tracks — and nothing else of anyone's.
-  // A member's entities are private to their owner unless the site's service lets
-  // members read them; this one opens `@/track` only, so the programme reaches
-  // every attendee while each attendee's check-ins stay theirs alone.
-  // ⛔ Without it a signed-in attendee lists no tracks, and is told the programme
-  // is empty.
-  memberFloor: { '@/track': 'read' },
+  // Who reads the organiser's tracks, and who may record attending, is `blueprint.yml`'s,
+  // beside `site.yml`: the same lines start a backend started from this site. ⛔ Without its
+  // `members: read` on `@/track`, a signed-in attendee lists no tracks, and is told the
+  // programme is empty; without its `add: open` on `@/attendance`, they cannot record attending.
 
   // The Models' sections, as `foundation/schemas/` declares them — so a write names
   // the same sections here as in production, and the store checks it against them,

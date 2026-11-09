@@ -1,0 +1,16 @@
+# How a backend started from this site begins: who may sign up, who adds each type, and who
+# reads what. In `uniweb dev`, the local backend starts from it (mock/api.js).
+#
+# Every type starts closed: only the site's owner — here the organiser — adds entries of one,
+# until a line here opens it.
+
+signup: open                 # anyone may create an account and keep their attendance
+
+access:
+  # The programme: the organiser adds tracks, and every member reads them.
+  '@/track':
+    all: { members: read }
+
+  # Attendance: every signed-in attendee keeps their own, and nobody else reads it.
+  '@/attendance':
+    add: open

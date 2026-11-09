@@ -15,7 +15,14 @@
  * this. Delete the key and the site still works: it just has no backend, and every
  * signed-in feature disappears rather than breaking.
  */
+import { fileURLToPath } from 'node:url'
 import { createMockBackend } from '@uniweb/api/mock'
+import { readBlueprint } from '@uniweb/build/blueprint'
 import { seed } from './seed.js'
 
-export default createMockBackend({ seed }).fetch
+// ⭐ It begins as a backend started from this site does: `blueprint.yml`, beside `site.yml`, says
+// who may sign up, who adds each type and who reads what — the organiser's tracks for every member,
+// and each attendee's own attendance.
+const blueprint = readBlueprint(fileURLToPath(new URL('..', import.meta.url)))
+
+export default createMockBackend({ seed, blueprint }).fetch
