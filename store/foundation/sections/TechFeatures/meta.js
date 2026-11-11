@@ -8,7 +8,7 @@ export default {
     paragraphs: 'Description [1]',
     items: {
       label: 'Feature cards [3-6]',
-      hint: 'Each H3 becomes a feature card. Add an icon before the heading.',
+      content: { icon: 'Icon [1]', title: 'Feature', paragraphs: 'Description [1]' },
     },
   },
 
