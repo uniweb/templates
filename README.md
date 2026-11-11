@@ -100,4 +100,4 @@ See [creating-templates.md](creating-templates.md) for the full guide on templat
 
 ## License
 
-MIT
+Apache-2.0
