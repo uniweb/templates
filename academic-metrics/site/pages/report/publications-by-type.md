@@ -1,5 +1,6 @@
 ---
 type: PublicationsByType
-title: Publications by type
 theme: light
 ---
+
+# Publications by type

@@ -1,5 +1,6 @@
 ---
 type: PublicationsByYear
-title: Publications by year
 theme: light
 ---
+
+# Publications by year

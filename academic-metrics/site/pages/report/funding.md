@@ -1,5 +1,6 @@
 ---
 type: Funding
-title: Funding received
 theme: light
 ---
+
+# Funding received
