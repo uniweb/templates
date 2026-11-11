@@ -25,7 +25,6 @@ function TeamGrid({ content, params }) {
       name,
       role: pretitle || 'Member', // e.g., "PhD Student", "Postdoc"
       bio: paragraphs[0],
-      email: paragraphs[1],
       photo: images[0],
       links,
     }
@@ -92,7 +91,7 @@ function TeamGrid({ content, params }) {
         )}
 
         {cardStyle === 'detailed' && member.bio && (
-          <p className="text-sm text-body mt-2 clear-both">{member.bio}</p>
+          <P text={member.bio} className="text-sm text-body mt-2 clear-both" />
         )}
 
         {member.links.length > 0 && cardStyle !== 'compact' && (
