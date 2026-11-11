@@ -1,5 +1,5 @@
 import React from 'react'
-import { H2, P, cn, H3 } from '@uniweb/kit'
+import { H2, P, cn, H3, Icon } from '@uniweb/kit'
 
 /**
  * Features Component
@@ -30,7 +30,7 @@ function Features({ content, params }) {
               <div key={i} className="text-center p-6">
                 {item.icons?.[0] && (
                   <div className="w-12 h-12 mx-auto mb-4 bg-primary-100/50 text-primary-600 rounded-xl flex items-center justify-center">
-                    <span className="text-2xl">{item.icons[0]}</span>
+                    <Icon {...item.icons[0]} size={24} />
                   </div>
                 )}
                 {item.title && <H3 text={item.title} className="text-xl font-semibold mb-2 text-heading" />}
