@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { useDocumentOutput } from '@uniweb/press'
 import { H1, H2, Paragraph } from '@uniweb/press/docx'
-import { getChildBlockRenderer } from '@uniweb/kit'
+import { getChildBlockRenderer, Text } from '@uniweb/kit'
 
 /**
  * Invoice slice — generic section for invoice documents. Same shape as
@@ -54,7 +54,7 @@ export default function Invoice({ content, block }) {
 
   const sectionJsx = (
     <section className="invoice-section">
-      {title && <h1 className="invoice-title">{title}</h1>}
+      {title && <Text as="h1" className="invoice-title" text={title} />}
       {preItems.map((el, i) => {
         if (el.type === 'paragraph') {
           return <p key={`p${i}`} dangerouslySetInnerHTML={{ __html: el.text }} />
@@ -70,7 +70,7 @@ export default function Invoice({ content, block }) {
         <div className="invoice-items">
           {items.map((item, i) => (
             <Fragment key={i}>
-              {item.title && <h2 className="invoice-item-title">{item.title}</h2>}
+              {item.title && <Text as="h2" className="invoice-item-title" text={item.title} />}
               {item.paragraphs.map((p, j) => (
                 <p key={`${i}-${j}`} className="invoice-item-detail" dangerouslySetInnerHTML={{ __html: p }} />
               ))}

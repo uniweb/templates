@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { useDocumentOutput } from '@uniweb/press'
 import { H1, H2, H3, Paragraph } from '@uniweb/press/docx'
-import { getChildBlockRenderer } from '@uniweb/kit'
+import { getChildBlockRenderer, Text } from '@uniweb/kit'
 
 /**
  * SOW slice — generic section for statement-of-work documents. Renders
@@ -56,7 +56,7 @@ export default function SOW({ content, block }) {
   // it straight through to the Paged.js polyfill.
   const sectionJsx = (
     <section className="sow-section">
-      {title && <h1 className="sow-title">{title}</h1>}
+      {title && <Text as="h1" className="sow-title" text={title} />}
       {preItems.map((el, i) => {
         if (el.type === 'paragraph') {
           return <p key={`p${i}`} dangerouslySetInnerHTML={{ __html: el.text }} />
@@ -72,17 +72,10 @@ export default function SOW({ content, block }) {
         <div className="sow-items">
           {items.map((item, i) => (
             <Fragment key={i}>
-              {item.title && <h2 className="sow-item-title">{item.title}</h2>}
+              {item.title && <Text as="h2" className="sow-item-title" text={item.title} />}
               {item.paragraphs.map((p, j) => (
                 <p key={`${i}-${j}`} className="sow-item-detail" dangerouslySetInnerHTML={{ __html: p }} />
               ))}
-              {Array.isArray(item.items) && item.items.length > 0 && (
-                <ul className="sow-item-sublist">
-                  {item.items.map((sub, k) => (
-                    <li key={k} dangerouslySetInnerHTML={{ __html: sub.title || sub.paragraphs?.[0] || '' }} />
-                  ))}
-                </ul>
-              )}
             </Fragment>
           ))}
         </div>
