@@ -6,7 +6,11 @@ export default {
   content: {
     items: {
       label: 'Value columns [2]',
-      hint: 'Each H3 becomes a column. Second column can have icon lists.',
+      content: {
+        title: 'Heading',
+        paragraphs: 'Text',
+        icons: { label: 'Icons', hint: 'Start each paragraph with an icon to show the column as a list.' },
+      },
     },
   },
 

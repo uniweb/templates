@@ -5,7 +5,10 @@ export default {
   content: {
     title: 'Optional heading above the quotes',
     paragraphs: 'Optional description [0-1]',
-    items: 'Testimonial quotes — each item has a heading (name + role) and a paragraph (the quote) [2-6]',
+    items: {
+      label: 'Testimonials [2-6]',
+      content: { title: 'Name and role', paragraphs: 'Quote [1]' },
+    },
   },
 
   params: {

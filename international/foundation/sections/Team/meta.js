@@ -17,7 +17,8 @@ export default {
     paragraphs: 'Description [1]',
     items: {
       label: 'Team members [2-8]',
-      hint: 'Each H3 is a name, the H4 below it the role. Or use query: team',
+      hint: 'Or show the team records instead.',
+      content: { title: 'Name', subtitle: 'Role', image: 'Portrait [0-1]', paragraphs: 'Short bio [0-1]' },
     },
   },
 

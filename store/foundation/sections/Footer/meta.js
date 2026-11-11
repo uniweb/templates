@@ -9,7 +9,11 @@ export default {
     paragraphs: 'Brand description [1]',
     items: {
       label: 'Footer columns [0-4]',
-      hint: 'Each H3 becomes a column heading with links below.',
+      content: {
+        title: 'Column heading',
+        links: 'Links',
+        icons: { label: 'Icons', hint: 'A column without links shows its icons in a row.' },
+      },
     },
   },
 

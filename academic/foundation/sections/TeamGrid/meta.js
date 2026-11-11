@@ -11,7 +11,16 @@ export default {
   content: {
     title: 'Section heading',
     paragraphs: 'Introductory description',
-    items: 'Team members (H3 = name, H4 before = role, paragraph = bio/email, image = photo, links = profiles)',
+    items: {
+      label: 'Team members',
+      content: {
+        pretitle: 'Role',
+        title: 'Name',
+        image: 'Photo [0-1]',
+        paragraphs: 'Short bio [0-1]',
+        links: 'Profile links',
+      },
+    },
   },
 
   params: {

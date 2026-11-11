@@ -11,7 +11,10 @@ export default {
     title: 'Section heading',
     subtitle: 'Secondary heading',
     paragraphs: 'Description text',
-    items: 'Feature cards (H3 = title, paragraph = description, icon = visual)',
+    items: {
+      label: 'Feature cards',
+      content: { icon: 'Icon [0-1]', title: 'Feature', paragraphs: 'Description [1]' },
+    },
   },
 
   params: {

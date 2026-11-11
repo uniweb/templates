@@ -11,7 +11,10 @@ export default {
   content: {
     title: 'Section heading',
     paragraphs: 'Introductory description',
-    items: 'Research areas (H3 = area name, paragraph = description, links = related pages)',
+    items: {
+      label: 'Research areas',
+      content: { title: 'Area', paragraphs: 'Description [1]', links: 'Related pages' },
+    },
   },
 
   params: {

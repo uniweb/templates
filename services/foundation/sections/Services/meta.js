@@ -6,7 +6,10 @@ export default {
   content: {
     title: 'Section heading',
     paragraphs: 'Introduction [0-1]',
-    items: 'One per service: icon, name, description',
+    items: {
+      label: 'Services',
+      content: { icon: 'Icon [1]', title: 'Service', paragraphs: 'Description [1]' },
+    },
   },
 
   params: {

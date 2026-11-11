@@ -11,6 +11,9 @@ export default {
       hint: 'The first paragraph is the copyright line (a default is shown without one); the second is an optional tagline',
     },
     links: 'Footer links (social + legal)',
-    items: 'Footer columns with links [0-4]',
+    items: {
+      label: 'Footer columns [0-4]',
+      content: { title: 'Column heading', links: 'Links' },
+    },
   },
 }

@@ -6,7 +6,11 @@ export default {
   content: {
     title: 'Section heading (H1)',
     paragraphs: 'Introductory text',
-    items: 'Repeated entries — each with title (H2) and detail paragraphs',
+    items: {
+      label: 'Entries',
+      hint: 'With a source set, one entry for each item of that profile field.',
+      content: { title: 'Entry heading', paragraphs: 'Details' },
+    },
   },
 
   params: {

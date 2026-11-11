@@ -15,7 +15,10 @@ export default {
     image: 'Site logo',
     paragraphs: 'Contact information or address',
     links: 'Footer links including social media',
-    items: 'Additional columns (H3 = column heading, links below)',
+    items: {
+      label: 'Additional columns',
+      content: { title: 'Column heading', links: 'Links', paragraphs: 'Text' },
+    },
   },
 
   params: {

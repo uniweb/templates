@@ -10,7 +10,17 @@ export default {
   content: {
     title: 'Section heading',
     paragraphs: 'Introductory description',
-    items: 'Timeline entries (H3 = event title, H4 before = date/period, paragraphs = institution/description)',
+    items: {
+      label: 'Timeline entries',
+      content: {
+        pretitle: 'Date or period',
+        title: 'Event',
+        paragraphs: {
+          label: 'Place and description [1-2]',
+          hint: 'The first paragraph is the institution or place, the second a description.',
+        },
+      },
+    },
   },
 
   params: {

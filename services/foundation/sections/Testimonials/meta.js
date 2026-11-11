@@ -4,7 +4,10 @@ export default {
 
   content: {
     title: 'Section heading',
-    items: 'One per quote: the quote as text, the person as the heading',
+    items: {
+      label: 'Quotes',
+      content: { title: 'Name', subtitle: 'Role or company', paragraphs: 'Quote [1]' },
+    },
   },
 
   params: {

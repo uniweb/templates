@@ -6,7 +6,11 @@ export default {
   content: {
     title: 'Section heading',
     paragraphs: 'Body paragraphs (Loom expressions allowed)',
-    items: 'Repeated entries when the section uses source: <field>',
+    items: {
+      label: 'Repeated entries',
+      hint: 'With a source set, one entry for each record of that field.',
+      content: { title: 'Heading', paragraphs: 'Details' },
+    },
   },
 
   params: {

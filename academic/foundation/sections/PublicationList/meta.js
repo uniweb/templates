@@ -12,7 +12,18 @@ export default {
   content: {
     title: 'Section heading',
     paragraphs: 'Introductory text about the publications',
-    items: 'Publications (H3 = title, paragraphs = authors/venue/year/doi, H4 before = type)',
+    items: {
+      label: 'Publications',
+      content: {
+        pretitle: { label: 'Type', hint: 'journal, conference, book or preprint' },
+        title: 'Title',
+        paragraphs: {
+          label: 'Details [1-4]',
+          hint: 'One paragraph each, in this order: the authors, the venue, the year and the DOI.',
+        },
+        links: 'Links',
+      },
+    },
   },
 
   params: {
