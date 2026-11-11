@@ -12,7 +12,10 @@ export default {
     title: 'Section heading',
     pretitle: 'Eyebrow text above title',
     paragraphs: 'Text content with inline math ($...$) and display math ($$...$$)',
-    items: 'Named equations (H3 = label, first paragraph = LaTeX, second = description)',
+    math: {
+      label: 'Equations',
+      hint: 'An equation given an id is numbered, and other text can refer to it by that id.',
+    },
   },
 
   params: {
