@@ -26,11 +26,11 @@
  *   - Subsection headings are level 1 ("1.1", "1.2", ...).
  *   - The web preview matches via CSS counters in styles.css.
  *
- * Lists (optional via the `lists` param in frontmatter):
- *   - Passing `lists: { bullets: ['...', '...'] }` or
- *     `lists: { observations: ['...', '...'] }` injects a BulletList or
- *     NumberedList at the end of the chapter body. Foundation-specific
- *     styling wraps them in .bullets / .observations for the web preview.
+ * Lists (optional, each its own param in frontmatter):
+ *   - `bullets: ['...', '...']` or `observations: ['...', '...']` adds a
+ *     BulletList or a NumberedList at the end of the chapter body.
+ *     Foundation-specific styling wraps them in .bullets / .observations
+ *     for the web preview.
  *
  * Lead-drop-cap:
  *   - The first paragraph of every chapter renders with .chapter-lead
